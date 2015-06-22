@@ -32,10 +32,4 @@ public class Index extends UI {
     public static DashboardEventBus getDashboardEventbus() {
         return ((Index) getCurrent()).dashboardEventbus;
     }
-
-
-
-
-
-
 }
