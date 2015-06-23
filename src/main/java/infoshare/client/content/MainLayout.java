@@ -23,7 +23,7 @@ public class MainLayout extends VerticalLayout{
         content.setMaxSplitPosition(20, Unit.PERCENTAGE);
         content.setHeight("1000px");
         content.setLocked(true);
-        content.setFirstComponent(new Sidebar());
+        content.setFirstComponent(new Sidebar(this));
         content.setSecondComponent(new Button("This Landing Page"));
 
         addComponent(new Header());
