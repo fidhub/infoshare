@@ -6,8 +6,7 @@ import com.vaadin.server.VaadinRequest;
 import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.ui.UI;
 import infoshare.App;
-import infoshare.client.admin.event.DashboardEventBus;
-import infoshare.client.admin.view.LoginView;
+import infoshare.client.content.login.LoginView;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -17,19 +16,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 @SpringUI(path = "")
 public class Index extends UI {
 
-    private final DashboardEventBus dashboardEventbus = new DashboardEventBus();
     @Autowired
     App.MyService myService;
 
     @Override
 
     protected void init(VaadinRequest request) {
+        getPage().setTitle("Login Page");
         Responsive.makeResponsive(this);
-        setContent(new LoginView());
+        setContent(new LoginView(this));
+        setOverlayContainerLabel(" Events");
 
     }
 
-    public static DashboardEventBus getDashboardEventbus() {
-        return ((Index) getCurrent()).dashboardEventbus;
-    }
+
 }

@@ -1,6 +1,5 @@
 package infoshare.client.admin;
 
-import com.google.common.eventbus.Subscribe;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.server.VaadinSession;
@@ -11,8 +10,6 @@ import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.MenuBar.Command;
 import com.vaadin.ui.MenuBar.MenuItem;
 import com.vaadin.ui.themes.ValoTheme;
-import infoshare.client.admin.event.DashboardEvent;
-import infoshare.client.admin.event.DashboardEventBus;
 import infoshare.domain.User;
 
 /**
@@ -35,7 +32,7 @@ public final class DashboardMenu extends CustomComponent {
 
         // There's only one DashboardMenu per UI so this doesn't need to be
         // unregistered from the UI-scoped DashboardEventBus.
-        DashboardEventBus.register(this);
+
 
         setCompositionRoot(buildContent());
     }
@@ -78,7 +75,7 @@ public final class DashboardMenu extends CustomComponent {
         final User user = getCurrentUser();
         settingsItem = settings.addItem("", new ThemeResource(
                 "img/profile-pic-300px.jpg"), null);
-        updateUserName(null);
+
         settingsItem.addItem("Edit Profile", new Command() {
 
             public void menuSelected(final MenuItem selectedItem) {
@@ -95,7 +92,7 @@ public final class DashboardMenu extends CustomComponent {
         settingsItem.addItem("Sign Out", new Command() {
 
             public void menuSelected(final MenuItem selectedItem) {
-                DashboardEventBus.post(new DashboardEvent.UserLoggedOutEvent());
+
             }
         });
         return settings;
@@ -142,17 +139,7 @@ public final class DashboardMenu extends CustomComponent {
         return dashboardWrapper;
     }
 
-    @Subscribe
-    public void updateReportsCount(final DashboardEvent.ReportsCountUpdatedEvent event) {
-        reportsBadge.setValue(String.valueOf(event.getCount()));
-        reportsBadge.setVisible(event.getCount() > 0);
-    }
 
-    @Subscribe
-    public void updateUserName(final DashboardEvent.ProfileUpdatedEvent event) {
-        User user = getCurrentUser();
-        settingsItem.setText(user.getFirstName() + " " + user.getLastName());
-    }
 
 
 }

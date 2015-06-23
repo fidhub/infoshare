@@ -1,4 +1,4 @@
-package infoshare.client.admin.view;
+package infoshare.client.content.login;
 
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.server.FontAwesome;
@@ -7,15 +7,17 @@ import com.vaadin.server.Responsive;
 import com.vaadin.shared.Position;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
-import infoshare.client.admin.event.DashboardEvent;
-import infoshare.client.admin.event.DashboardEventBus;
+import infoshare.client.content.MainLayout;
+import infoshare.client.home.Index;
 
 /**
  * Created by hashcode on 2015/04/15.
  */
 public class LoginView extends VerticalLayout {
+    final Index main;
 
-    public LoginView() {
+    public LoginView(final Index index) {
+        main=index;
         setSizeFull();
 
         Component loginForm = buildLoginForm();
@@ -69,8 +71,8 @@ public class LoginView extends VerticalLayout {
         signin.addClickListener(new Button.ClickListener() {
 
             public void buttonClick(final Button.ClickEvent event) {
-                DashboardEventBus.post(new DashboardEvent.UserLoginRequestedEvent(username
-                        .getValue(), password.getValue()));
+                main.setContent(new MainLayout(main));
+
             }
         });
         return fields;
