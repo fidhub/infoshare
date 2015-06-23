@@ -1,8 +1,6 @@
 package infoshare.client.admin;
 
 import com.vaadin.navigator.Navigator;
-import com.vaadin.navigator.View;
-import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.navigator.ViewProvider;
 import com.vaadin.ui.ComponentContainer;
 import com.vaadin.ui.UI;
@@ -26,9 +24,6 @@ public class DashboardNavigator extends Navigator {
 
 
     }
-
-
-
 
 
 
