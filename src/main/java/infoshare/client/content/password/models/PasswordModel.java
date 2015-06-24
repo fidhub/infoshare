@@ -6,7 +6,7 @@ import java.io.Serializable;
 /**
  * Created by hashcode on 2015/06/23.
  */
-public class PasswordBean implements Serializable {
+public class PasswordModel implements Serializable {
 
     @NotNull
     private String oldpassword;

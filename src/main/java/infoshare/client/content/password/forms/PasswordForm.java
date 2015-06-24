@@ -5,21 +5,21 @@ import com.vaadin.data.util.BeanItem;
 import com.vaadin.data.validator.BeanValidator;
 import com.vaadin.server.Sizeable;
 import com.vaadin.ui.*;
-import infoshare.client.content.password.models.PasswordBean;
+import infoshare.client.content.password.models.PasswordModel;
 
 /**
  * Created by hashcode on 2015/06/23.
  */
 public class PasswordForm extends FormLayout{
-    private final PasswordBean bean;
-    public final BeanItem<PasswordBean> item;
+    private final PasswordModel model;
+    public final BeanItem<PasswordModel> item;
     public final FieldGroup binder;
     public final Button changePasswordButton = new Button("Change Password");
     public final Button cancelButton = new Button("Cancel");
 
     public PasswordForm() {
-        bean = new PasswordBean();
-        item = new BeanItem<>(bean);
+        model = new PasswordModel();
+        item = new BeanItem<>(model);
         binder = new FieldGroup(item);
         final HorizontalLayout buttons = getButtons();
         changePasswordButton.setStyleName("default");
@@ -31,11 +31,9 @@ public class PasswordForm extends FormLayout{
 
         final GridLayout grid = new GridLayout(3, 10);
         grid.setSizeFull();
-
         grid.addComponent(oldpassword, 0, 0);
         grid.addComponent(repeatPassword, 1, 0);
         grid.addComponent(newPassword, 2, 0);
-
         grid.addComponent(buttons, 0, 3, 2, 3);
 
         addComponent(grid);
@@ -45,7 +43,7 @@ public class PasswordForm extends FormLayout{
         PasswordField textField = new PasswordField(label);
         textField.setWidth(250, Sizeable.Unit.PIXELS);
         textField.setNullRepresentation("");
-        textField.addValidator(new BeanValidator(PasswordBean.class, field));
+        textField.addValidator(new BeanValidator(PasswordModel.class, field));
         textField.setImmediate(true);
         binder.bind(textField, field);
         return textField;

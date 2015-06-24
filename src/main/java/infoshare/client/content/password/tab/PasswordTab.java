@@ -9,7 +9,7 @@ import com.vaadin.ui.VerticalLayout;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.password.PasswordMenu;
 import infoshare.client.content.password.forms.PasswordForm;
-import infoshare.client.content.password.models.PasswordBean;
+import infoshare.client.content.password.models.PasswordModel;
 
 /**
  * Created by hashcode on 2015/06/23.
@@ -41,7 +41,7 @@ public class PasswordTab extends VerticalLayout implements
     }
 
     private void saveForm(FieldGroup binder) {
-        final PasswordBean bean = ((BeanItem<PasswordBean>) form.binder.getItemDataSource()).getBean();
+        final PasswordModel bean = ((BeanItem<PasswordModel>) form.binder.getItemDataSource()).getBean();
         try {
             binder.commit();
             if (true) {
