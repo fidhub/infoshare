@@ -16,6 +16,7 @@ public class SetupMenu  extends VerticalLayout {
     public SetupMenu(MainLayout main,String selectedTab) {
 
         this.main = main;
+
         final VerticalLayout userView = new VerticalLayout();
         userView.setMargin(true);
         userView.addComponent(new UserView(main));

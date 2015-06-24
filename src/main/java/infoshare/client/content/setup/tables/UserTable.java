@@ -2,7 +2,7 @@ package infoshare.client.content.setup.tables;
 
 import com.vaadin.ui.Table;
 import infoshare.client.content.MainLayout;
-import infoshare.client.content.setup.models.UserModel;
+import infoshare.domain.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,13 +24,14 @@ public class UserTable extends Table {
         addContainerProperty("Enabled", Boolean.class, null);
 
 
-        List<UserModel> personlist = new ArrayList<>(); // From REST API
-        for (UserModel user : personlist) {
-            addItem(new Object[]{user.getUsername(),
+        List<User> users= new ArrayList<>(); // From REST API
+        for (User user : users) {
+            addItem(new Object[]{
+                    user.getUsername(),
                     user.getFirstname(),
                     user.getLastname(),
-                    user.isEnabled()
-            }, user.getId());
+                    user.isEnable()
+                    }, user.getId());
         }
 //         Allow selecting items from the table.
         setNullSelectionAllowed(false);
@@ -39,4 +40,6 @@ public class UserTable extends Table {
         // Send changes in selection immediately to server.
         setImmediate(true);
     }
+
+
 }

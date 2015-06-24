@@ -11,8 +11,8 @@ import infoshare.client.content.setup.forms.RoleForm;
 import infoshare.client.content.setup.models.RoleModel;
 import infoshare.client.content.setup.tables.RoleTable;
 import infoshare.domain.Role;
+import infoshare.services.roles.Impl.RoleServiceImpl;
 import infoshare.services.roles.RoleService;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Created by hashcode on 2015/06/24.
@@ -20,8 +20,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class RoleView extends VerticalLayout implements
         Button.ClickListener, Property.ValueChangeListener {
 
-    @Autowired
-    private RoleService roleService;
+
+    private RoleService roleService = new RoleServiceImpl();
 
     private final MainLayout main;
     private final RoleForm form;
