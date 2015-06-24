@@ -1,109 +1,193 @@
 package infoshare.domain;
 
+import com.google.common.collect.ImmutableSet;
+
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Created by hashcode on 2015/04/15.
  */
-public class User {
+public class User implements Serializable, Comparable<User> {
 
-        private String role;
-        private String firstName;
-        private String lastName;
-        private String title;
-        private boolean male;
-        private String email;
-        private String location;
-        private String phone;
-        private Integer newsletterSubscription;
-        private String website;
-        private String bio;
+    private String id;
+    private String firstname;
+    private String lastname;
+    private String othername;
+    private String password;
+    private Set<Role> role = new HashSet<>();
+    private String username;
+    private boolean enable;
 
-    public String getEmail() {
-        return email;
+
+    private User() {
     }
 
-    public void setEmail(final String email) {
-        this.email = email;
+    private User(Builder builder) {
+        this.id = builder.id;
+        this.firstname = builder.firstname;
+        this.lastname = builder.lastname;
+        this.othername = builder.othername;
+        this.password = builder.password;
+        this.role = builder.role;
+        this.username = builder.username;
+//        this.demography = builder.demography;
+        this.enable = builder.enable;
+
     }
 
-    public String getLocation() {
-        return location;
+    @Override
+    public int compareTo(User o) {
+        return firstname.compareToIgnoreCase(o.firstname);
     }
 
-    public void setLocation(final String location) {
-        this.location = location;
+    public static class Builder {
+        private String id;
+        private String firstname;
+        private final String lastname;
+        private String othername;
+
+        private boolean enable;
+        private String password;
+        private Set<Role> role = new HashSet<>();
+        private String username;
+
+        public Builder(String lastname) {
+            this.lastname = lastname;
+        }
+
+        public Builder user(User person) {
+            this.id = person.id;
+            this.firstname = person.getFirstname();
+            this.othername = person.getOthername();
+            this.password = person.getPassword();
+            this.role = person.getRole();
+            this.username = person.getUsername();
+            this.enable = person.isEnable();
+            return this;
+        }
+
+        public Builder id(String value) {
+            this.id = value;
+            return this;
+        }
+
+        public Builder firstname(String value) {
+            this.firstname = value;
+            return this;
+        }
+
+
+        public Builder othername(String value) {
+            this.othername = value;
+            return this;
+        }
+
+
+        public Builder enable(boolean value) {
+            this.enable = value;
+            return this;
+        }
+
+        public Builder password(String value) {
+            this.password = value;
+            return this;
+        }
+
+        public Builder role(Set<Role> value) {
+            this.role = value;
+            return this;
+        }
+
+
+        public Builder username(String value) {
+            this.username = value;
+            return this;
+        }
+
+
+
+        public User build() {
+            return new User(this);
+        }
     }
 
-    public String getPhone() {
-        return phone;
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
     }
 
-    public void setPhone(final String phone) {
-        this.phone = phone;
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof User)) {
+            return false;
+        }
+        User other = (User) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
     }
 
-    public Integer getNewsletterSubscription() {
-        return newsletterSubscription;
+    public String getId() {
+        return id;
     }
 
-    public void setNewsletterSubscription(final Integer newsletterSubscription) {
-        this.newsletterSubscription = newsletterSubscription;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public String getWebsite() {
-        return website;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setWebsite(final String website) {
-        this.website = website;
+    public String getOthername() {
+        return othername;
     }
 
-    public String getBio() {
-        return bio;
+
+
+    public String getPassword() {
+        return password;
     }
 
-    public void setBio(final String bio) {
-        this.bio = bio;
+    public Set<Role> getRole() {
+        return ImmutableSet.copyOf(role);
     }
 
-    public boolean isMale() {
-        return male;
+    public String getUsername() {
+        return username;
     }
 
-    public void setMale(final boolean male) {
-        this.male = male;
+
+
+    //    public PersonDemography getDemography() {
+//        return demography;
+//    }
+    public boolean isEnable() {
+        return enable;
     }
 
-    public String getTitle() {
-        return title;
+
+
+
+    private boolean isNullObject(Object object) {
+        if (object == null) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    public void setTitle(final String title) {
-        this.title = title;
-    }
 
-    public String getRole() {
-        return role;
+    @Override
+    public String toString() {
+        return "User{" +
+                "id='" + id + '\'' +
+                '}';
     }
-
-    public void setRole(final String role) {
-        this.role = role;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(final String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(final String lastName) {
-        this.lastName = lastName;
-    }
-
 }
-
