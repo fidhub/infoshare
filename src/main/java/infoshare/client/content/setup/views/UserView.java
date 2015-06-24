@@ -13,9 +13,10 @@ import infoshare.client.content.setup.models.UserModel;
 import infoshare.client.content.setup.tables.UserTable;
 import infoshare.domain.Role;
 import infoshare.domain.User;
+import infoshare.services.roles.Impl.RoleServiceImpl;
 import infoshare.services.roles.RoleService;
+import infoshare.services.users.Impl.UserServiceImpl;
 import infoshare.services.users.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -30,10 +31,8 @@ public class UserView extends VerticalLayout implements
     private final UserForm form;
     private final UserTable table;
 
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private RoleService roleService;
+    private UserService userService = new UserServiceImpl();
+    private RoleService roleService = new RoleServiceImpl();
 
     public UserView(MainLayout app) {
         main = app;
