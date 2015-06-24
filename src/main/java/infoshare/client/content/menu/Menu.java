@@ -12,7 +12,6 @@ public class Menu extends VerticalLayout{
     private  TabSheet tab;
 
 
-
     public Menu(MainLayout app, String selectedTab) {
         main = app;
         tab = new TabSheet();
