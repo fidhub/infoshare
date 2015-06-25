@@ -8,33 +8,49 @@ import com.vaadin.ui.Table;
 import com.vaadin.ui.themes.ValoTheme;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.content.models.EditModel;
+import infoshare.domain.Content;
+import infoshare.services.Content.ContentService;
+import infoshare.services.Content.Impl.ContentServiceImp;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
  * Created by hashcode on 2015/06/24.
  */
 public class EditTable extends Table{
-   // private final MainLayout main;
 
-    public EditTable(/*MainLayout mainApp*/){
-        //this.main = mainApp;
+    @Autowired
+    private ContentService contentService = new ContentServiceImp();
+    private final MainLayout main;
+    public Button editBtn = new Button();
+    public Button deleteBtn = new Button();
+
+    public EditTable(MainLayout mainApp){
+        this.main = mainApp;
         setSizeFull();
         addContainerProperty("Title",String.class,null);
         addContainerProperty("Content Type",String.class,null);
         addContainerProperty("Category",String.class,null);
         addContainerProperty("Creator",String.class,null);
         addContainerProperty("Description",String.class,null);
-        addContainerProperty("Date Created",String.class,null);
+        addContainerProperty("Date Created",Date.class,null);
         addContainerProperty("",Component.class,null);
-        List<EditModel> contents = new ArrayList<>();
+        addStyleName(ValoTheme.TABLE_BORDERLESS);
+        List<Content> contents = contentService.findAll();
 
-       // for (EditModel content: contents){
+       for (Content content: contents){
             addItem(new Object[]{
-                                "1","2","3","4","5","6",buttons()
-                                },1);
-       // }
+                    content.getTitle(),
+                    content.getContentType(),"Category",
+                    content.getCreator(),
+                    content.getDescription(),
+                    content.getDateCreated(),
+                    buttons()
+                },content.getId());
+       }
         setNullSelectionAllowed(false);
         setSelectable(true);
         setImmediate(true);
@@ -43,13 +59,11 @@ public class EditTable extends Table{
         final HorizontalLayout buttonsLayout = new HorizontalLayout();
         buttonsLayout.setSpacing(true);
 
-        final Button editBtn = new Button();
         editBtn.setIcon(FontAwesome.EDIT);
         editBtn.addStyleName(ValoTheme.BUTTON_TINY);
         editBtn.addStyleName(ValoTheme.BUTTON_ICON_ONLY);
         editBtn.addStyleName(ValoTheme.TEXTFIELD_INLINE_ICON);
 
-        final Button deleteBtn = new Button();
         deleteBtn.setIcon(FontAwesome.TRASH_O);
         deleteBtn.addStyleName(ValoTheme.BUTTON_TINY);
         deleteBtn.addStyleName(ValoTheme.BUTTON_ICON_ONLY);

@@ -26,9 +26,9 @@ public class Header extends VerticalLayout {
         headerPanel.setWidth("100%");
         headerPanel.setHeight("150px");
 
-        Component logo = logo();
+        /*Component logo = logo();
         headLayout.addComponent(logo);
-        headLayout.setComponentAlignment(logo,Alignment.TOP_LEFT);
+        headLayout.setComponentAlignment(logo,Alignment.TOP_LEFT);*/
 
         Component menuItems = menuItems();
         headLayout.addComponent(menuItems);

@@ -15,6 +15,8 @@ public class EditModel implements Serializable {
     @NotNull
     private String title;
     @NotNull
+    private String Description;
+    @NotNull
     private String content;
     @NotNull
     private String contentType;
@@ -24,6 +26,14 @@ public class EditModel implements Serializable {
     }
     public void setId(String id){
         this.id = id;
+    }
+
+    public String getDescription() {
+        return Description;
+    }
+
+    public void setDescription(String description) {
+        Description = description;
     }
 
     public Date getDateCreated(){
