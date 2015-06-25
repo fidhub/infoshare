@@ -32,9 +32,9 @@ public class ContentMenu extends VerticalLayout {
         tab = new TabSheet();
         tab.setHeight("100%");
         tab.setWidth("100%");
-        tab.addTab(rawView,"Raw View",null);
-        tab.addTab(editorView,"Editor View",null);
-        tab.addTab(publisherView,"Publisher View",null);
+        tab.addTab(rawView,"Raw Content View",null);
+        tab.addTab(editorView,"Edited Content View",null);
+        tab.addTab(publisherView,"Published Content View",null);
 
 
         if(selectedTab.equalsIgnoreCase("Editor")){

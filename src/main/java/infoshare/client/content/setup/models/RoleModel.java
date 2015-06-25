@@ -11,7 +11,7 @@ public class RoleModel implements Serializable {
     @NotNull
     private String rolename;
     @NotNull
-    private String dscription;
+    private String description;
 
     public String getId() {
         return id;
@@ -29,11 +29,11 @@ public class RoleModel implements Serializable {
         this.rolename = rolename;
     }
 
-    public String getDscription() {
-        return dscription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDscription(String dscription) {
-        this.dscription = dscription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

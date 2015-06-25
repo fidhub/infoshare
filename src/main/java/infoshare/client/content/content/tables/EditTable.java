@@ -1,5 +1,7 @@
 package infoshare.client.content.content.tables;
 
+import com.vaadin.data.fieldgroup.FieldGroup;
+import com.vaadin.data.util.BeanItem;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
@@ -13,7 +15,6 @@ import infoshare.services.Content.ContentService;
 import infoshare.services.Content.Impl.ContentServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -30,26 +31,28 @@ public class EditTable extends Table{
 
     public EditTable(MainLayout mainApp){
         this.main = mainApp;
+
         setSizeFull();
         addContainerProperty("Title",String.class,null);
-        addContainerProperty("Content Type",String.class,null);
         addContainerProperty("Category",String.class,null);
         addContainerProperty("Creator",String.class,null);
-        addContainerProperty("Description",String.class,null);
+        addContainerProperty("Source",String.class,null);
         addContainerProperty("Date Created",Date.class,null);
         addContainerProperty("",Component.class,null);
         addStyleName(ValoTheme.TABLE_BORDERLESS);
         List<Content> contents = contentService.findAll();
 
        for (Content content: contents){
-            addItem(new Object[]{
-                    content.getTitle(),
-                    content.getContentType(),"Category",
-                    content.getCreator(),
-                    content.getDescription(),
-                    content.getDateCreated(),
-                    buttons()
-                },content.getId());
+           if(content.getContentType().equalsIgnoreCase("edited")) {
+               addItem(new Object[]{
+                       content.getTitle(),
+                       content.getCategory(),
+                       content.getCreator(),
+                       content.getSource(),
+                       content.getDateCreated(),
+                       buttons()
+               }, content.getId());
+           }
        }
         setNullSelectionAllowed(false);
         setSelectable(true);
@@ -68,8 +71,6 @@ public class EditTable extends Table{
         deleteBtn.addStyleName(ValoTheme.BUTTON_TINY);
         deleteBtn.addStyleName(ValoTheme.BUTTON_ICON_ONLY);
         deleteBtn.addStyleName(ValoTheme.TEXTFIELD_INLINE_ICON);
-
-        //deleteBtn.addClickListener();
 
         buttonsLayout.addComponent(editBtn);
         buttonsLayout.addComponent(deleteBtn);

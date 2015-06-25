@@ -24,7 +24,7 @@ public class RoleTable extends Table {
         this.main = main;
         setSizeFull();
         addContainerProperty("Role Name", String.class, null);
-        addContainerProperty("Description", String.class, null);
+        addContainerProperty("category", String.class, null);
         List<Role> roles = roleService.findAll();
         for (Role role : roles) {
             addItem(new Object[]{role.getRolename(),

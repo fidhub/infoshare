@@ -1,13 +1,19 @@
 package infoshare.client.content.content.views;
 
 import com.vaadin.data.Property;
+import com.vaadin.server.FontAwesome;
+import com.vaadin.server.Responsive;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 import infoshare.client.content.MainLayout;
+import infoshare.client.content.content.models.EditModel;
 import infoshare.client.content.content.tables.EditTable;
+import infoshare.domain.Content;
 import infoshare.services.Content.ContentService;
 import infoshare.services.Content.Impl.ContentServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.swing.text.html.parser.ContentModel;
 
 /**
  * Created by hashcode on 2015/06/24.
@@ -18,9 +24,10 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
 
     private final MainLayout main;
     private final EditTable table;
-    private RichTextArea textEditor = new RichTextArea();
-    private Button popUpSavebtn = new Button();
-    private Button popUpCancelbtn = new Button();
+
+    public RichTextArea textEditor = new RichTextArea();
+    public Button popUpSaveBtn = new Button();
+    public Button popUpCancelBtn = new Button();
 
    public EditView( MainLayout mainApp) {
        this.main = mainApp;
@@ -48,45 +55,62 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
 
         popup.setContent(form);
         popup.setModal(true);
-
         UI.getCurrent().addWindow(popup);
-
         return popup;
     }
-    public Component popUpButtons(){
-        final HorizontalLayout buttons = new HorizontalLayout();
-        buttons.setSpacing(true);
 
-        popUpSavebtn.setCaption("update");
-        popUpCancelbtn.setCaption("Cancel");
+   public HorizontalLayout popUpButtons(){
+       final HorizontalLayout buttons = new HorizontalLayout();
+       buttons.setSpacing(true);
 
-        buttons.addComponent(popUpSavebtn);
-        buttons.addComponent(popUpCancelbtn);
+       popUpSaveBtn.setCaption("update");
+       popUpSaveBtn.setIcon(FontAwesome.SAVE);
+       popUpSaveBtn.setStyleName(ValoTheme.TEXTFIELD_INLINE_ICON);
+       popUpCancelBtn.setCaption("Cancel");
+       popUpCancelBtn.setIcon(FontAwesome.CROSSHAIRS);
+       popUpCancelBtn.setStyleName(ValoTheme.TEXTFIELD_INLINE_ICON);
 
-        return buttons;
-    }
+       buttons.addComponent(popUpSaveBtn);
+       buttons.addComponent(popUpCancelBtn);
+
+       return buttons;
+   }
    @Override
     public void buttonClick(Button.ClickEvent clickEvent) {
        final Button source = clickEvent.getButton();
        if(source==table.editBtn){
-         modelWindow();
-       }else if (source ==popUpSavebtn){
-           UI.getCurrent().removeWindow( modelWindow());
+          modelWindow();
+       }else if (source ==popUpSaveBtn){
+           UI.getCurrent().removeWindow(modelWindow());
            Notification.show("The button was clicked",
                    Notification.Type.TRAY_NOTIFICATION);
-       }else if (source ==popUpCancelbtn){
-           UI.getCurrent().removeWindow( modelWindow());
+       }else if (source ==popUpCancelBtn){
+           UI.getCurrent().removeWindow(modelWindow());
        }
 
     }
     @Override
     public void valueChange(Property.ValueChangeEvent valueChangeEvent) {
+        final Property property = valueChangeEvent.getProperty();
+        if (property==table){
+            final Content content = contentService.find(table.getId().toString());
+            final EditModel bean = getMododel(content);
+        }
+    }
+
+    private EditModel getMododel(Content value){
+        final EditModel model = new EditModel();
+        final Content content =contentService.find(value.getId());
+        model.setContent(content.getContent());
+
+        return model;
     }
 
     public void addListeners(){
         table.editBtn.addClickListener((Button.ClickListener)this);
         table.deleteBtn.addClickListener((Button.ClickListener) this);
-        popUpSavebtn.addClickListener((Button.ClickListener) this);
+        popUpSaveBtn.addClickListener((Button.ClickListener) this);
+        popUpCancelBtn.addClickListener((Button.ClickListener) this);
     }
 
 }

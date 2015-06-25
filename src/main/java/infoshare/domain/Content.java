@@ -12,7 +12,7 @@ public class Content implements Serializable, Comparable<Content> {
     private Date dateCreated;
     private String creator;
     private String source;
-    private String description;
+    private String category;
     private String title;
     private String content;
     private String contentType;
@@ -23,7 +23,7 @@ public class Content implements Serializable, Comparable<Content> {
         this.dateCreated = builder.dateCreated;
         this.creator = builder.creator;
         this.source = builder.source;
-        this.description = builder.description;
+        this.category = builder.category;
         this.title = builder.title;
         this.content = builder.content;
         this.contentType = builder.contentType;
@@ -53,8 +53,8 @@ public class Content implements Serializable, Comparable<Content> {
         return content;
     }
 
-    public String getDescription() {
-        return description;
+    public String getCategory() {
+        return category;
     }
 
     public String getContentType() {
@@ -66,13 +66,13 @@ public class Content implements Serializable, Comparable<Content> {
         private Date dateCreated;
         private String creator;
         private String source;
-        private String description;
+        private String category;
         private String title;
         private String content;
         private String contentType;
 
-        public Builder(String source){
-            this.source = source;
+        public Builder(String title){
+            this.title = title;
         }
         public Builder id(String id){
             this.id =id;
@@ -86,12 +86,12 @@ public class Content implements Serializable, Comparable<Content> {
             this.creator = creator;
             return  this;
         }
-        public Builder title(String title){
-            this.title = title;
+        public Builder source(String source){
+            this.source = source;
             return this;
         }
-        public Builder Description(String description){
-            this.description = description;
+        public Builder category(String category){
+            this.category = category;
             return this;
         }
         public Builder content(String content){
@@ -126,6 +126,6 @@ public class Content implements Serializable, Comparable<Content> {
 
     @Override
     public int compareTo(Content content) {
-        return 0;
+        return title.compareTo(content.title);
     }
 }

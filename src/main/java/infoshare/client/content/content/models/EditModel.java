@@ -13,9 +13,9 @@ public class EditModel implements Serializable {
     @NotNull
     private String source;
     @NotNull
-    private String title;
+    private String category;
     @NotNull
-    private String Description;
+    private String title;
     @NotNull
     private String content;
     @NotNull
@@ -28,12 +28,12 @@ public class EditModel implements Serializable {
         this.id = id;
     }
 
-    public String getDescription() {
-        return Description;
+    public String getCategory() {
+        return category;
     }
 
-    public void setDescription(String description) {
-        Description = description;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public Date getDateCreated(){

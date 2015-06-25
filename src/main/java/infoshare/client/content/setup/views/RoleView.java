@@ -97,7 +97,7 @@ public class RoleView extends VerticalLayout implements
     private Role getEntity(FieldGroup binder) {
         final RoleModel bean = ((BeanItem<RoleModel>) binder.getItemDataSource()).getBean();
         final Role role = new Role.Builder(bean.getRolename())
-                .description(bean.getDscription())
+                .description(bean.getDescription())
                 .id(bean.getId())
                 .build();
         return role;
@@ -140,7 +140,7 @@ public class RoleView extends VerticalLayout implements
     private RoleModel getModel(Role val) {
         final RoleModel model = new RoleModel();
         final Role role = roleService.find(val.getId());
-        model.setDscription(role.getDescription());
+        model.setDescription(role.getDescription());
         model.setId(role.getId());
         model.setRolename(role.getRolename());
         return model;

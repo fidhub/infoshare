@@ -7,9 +7,9 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>za.ac.cput.infoshare</name>
+    <contentName>za.ac.cput.infoshare</contentName>
     <url>http://maven.apache.org</url>
-    <description>Inforshare Web UI for Admins</description>
+    <contentTyeDescription>Inforshare Web UI for Admins</contentTyeDescription>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>

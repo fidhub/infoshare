@@ -108,7 +108,7 @@ public class UserForm extends FormLayout {
         rolesList.setCaption(label);
         List<RoleModel> roles = new ArrayList<>(); // GET THIS FROM REST API
         for (RoleModel role : roles) {
-            rolesList.setItemCaption(role.getId(), role.getRolename() + " " + role.getDscription());
+            rolesList.setItemCaption(role.getId(), role.getRolename() + " " + role.getDescription());
             rolesList.setNullSelectionAllowed(false);
             rolesList.setMultiSelect(true);
             rolesList.addItem(role.getId());

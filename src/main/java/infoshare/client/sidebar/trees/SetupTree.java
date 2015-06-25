@@ -2,6 +2,7 @@ package infoshare.client.sidebar.trees;
 
 import com.vaadin.event.ItemClickEvent;
 import com.vaadin.ui.Tree;
+import infoshare.client.content.ContentType.ContentTypeMenu;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.setup.SetupMenu;
 
@@ -12,6 +13,7 @@ public class SetupTree extends Tree implements ItemClickEvent.ItemClickListener 
     private final MainLayout main;
     private static final Object USERS="Users";
     private static final Object COURSES="Courses";
+    private static final Object CONTENTTYPE="Content Type";
     private static final String LANDING_TAB = "LANDING";
 
 
@@ -19,6 +21,7 @@ public class SetupTree extends Tree implements ItemClickEvent.ItemClickListener 
         this.main = main;
         addItem(USERS);
         addItem(COURSES);
+        addItem(CONTENTTYPE);
         //Add Listerners
         addItemClickListener((ItemClickEvent.ItemClickListener) this);
     }
@@ -31,6 +34,8 @@ public class SetupTree extends Tree implements ItemClickEvent.ItemClickListener 
         if (COURSES.equals(event.getItemId())) {
             main.content.setSecondComponent(new SetupMenu(main, LANDING_TAB));
         }
-
+        if (CONTENTTYPE.equals(event.getItemId())) {
+            main.content.setSecondComponent(new ContentTypeMenu(main, LANDING_TAB));
+        }
     }
 }
