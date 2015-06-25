@@ -103,7 +103,7 @@ public class RoleView extends VerticalLayout implements
     }
 
     private void getHome() {
-//        main.content.setSecondComponent(new SetupMenu((main, "ROLES"));
+//        main.Content.setSecondComponent(new SetupMenu((main, "ROLES"));
     }
 
     private void setEditFormProperties() {

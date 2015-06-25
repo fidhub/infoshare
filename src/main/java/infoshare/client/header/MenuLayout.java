@@ -20,7 +20,7 @@ public class MenuLayout extends HorizontalLayout {
 
         menuArea.setPrimaryStyleName("valo-menu");
 
-        contentArea.setPrimaryStyleName("valo-content");
+        contentArea.setPrimaryStyleName("valo-Content");
         contentArea.addStyleName("v-scrollable");
         contentArea.setSizeFull();
 

@@ -27,8 +27,8 @@ public class DialobBoxWindow extends Window {
      * @param windowTitle
      */
     public DialobBoxWindow(String windowTitle) {
-         // Create a sub-window and set the content
-            
+         // Create a sub-window and set the Content
+
         setClosable(false);
 
         // Set window size.
@@ -42,44 +42,44 @@ public class DialobBoxWindow extends Window {
         // Center it in the browser window
         //  dialogBox.center();
     }
-    
-    
+
+
     public HorizontalLayout getOKButtons() {
         HorizontalLayout buttons = new HorizontalLayout();
-        btnOkDialog.setSizeFull();        
+        btnOkDialog.setSizeFull();
         buttons.addComponent(btnOkDialog);
         return buttons;
     }
-    
+
     public HorizontalLayout getOKCancelButtons() {
         HorizontalLayout buttons = new HorizontalLayout();
-        btnOkDialog.setSizeFull(); 
-        btnCancelDialog.setSizeFull();       
-        buttons.addComponent(btnOkDialog);   
+        btnOkDialog.setSizeFull();
+        btnCancelDialog.setSizeFull();
+        buttons.addComponent(btnOkDialog);
         buttons.addComponent(btnCancelDialog);
         return buttons;
     }
-    
+
      public HorizontalLayout getYesNoButtons() {
         HorizontalLayout buttons = new HorizontalLayout();
         btnYesDialog.setSizeFull();
-        btnNoDialog.setSizeFull();      
-        buttons.addComponent(btnYesDialog);   
+        btnNoDialog.setSizeFull();
+        buttons.addComponent(btnYesDialog);
         buttons.addComponent(btnNoDialog);
         return buttons;
     }
-     
+
       public HorizontalLayout getYesNoCancelButtons() {
         HorizontalLayout buttons = new HorizontalLayout();
         btnYesDialog.setSizeFull();
-        btnNoDialog.setSizeFull();      
-        btnCancelDialog.setSizeFull();     
-        buttons.addComponent(btnYesDialog);   
+        btnNoDialog.setSizeFull();
+        btnCancelDialog.setSizeFull();
+        buttons.addComponent(btnYesDialog);
         buttons.addComponent(btnNoDialog);
         buttons.addComponent(btnCancelDialog);
         return buttons;
     }
-    
+
 //       private HorizontalLayout buttons() {
 //        HorizontalLayout buttons = new HorizontalLayout();
 //        btnYesDialog.setSizeFull();
@@ -89,7 +89,7 @@ public class DialobBoxWindow extends Window {
 //        btnConfirmDialog.setSizeFull();
 //        btnIgnoreDialog.setSizeFull();
 //        btnOkDialog.setSizeFull();
-//        
+//
 //        buttons.addComponent(save);
 //        buttons.addComponent(edit);
 //        buttons.addComponent(cancel);
