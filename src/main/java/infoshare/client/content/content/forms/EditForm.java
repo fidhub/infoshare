@@ -20,50 +20,48 @@ public class EditForm extends FormLayout {
     public final BeanItem<EditModel> item;
     public final FieldGroup binder;
 
-    public Button popUpSaveBtn = new Button();
-    public Button popUpCancelBtn = new Button();
-
+    public Button editBtn = new Button("EDIT");
+    public Button deleteBtn = new Button("DELETE");
     public EditForm() {
-        this.model = new EditModel();
-        this.item = new BeanItem<>(model);
-        this.binder = new FieldGroup(item);
+        model = new EditModel();
+        item = new BeanItem<>(model);
+        binder = new FieldGroup(item);
 
-        RichTextArea textEditor =  getRichTextArea("Edit Content","textEditor");
+        final HorizontalLayout buttonsLayout = new HorizontalLayout();
+        buttonsLayout.setSpacing(true);
+        buttonsLayout.addComponent(editBtn);
+        buttonsLayout.addComponent(deleteBtn);
 
-        GridLayout grid = new GridLayout(4,8);
-        grid.setSizeFull();
-        grid.addComponent(textEditor,0,1,8,1);
-        grid.addComponent(popUpButtons(),0,2);
-
-        addComponent(grid);
+        addComponent(buttonsLayout);
     }
 
-    private RichTextArea getRichTextArea(String label, String field){
-        final RichTextArea textEditor = new RichTextArea(label);
-        textEditor.setImmediate(true);
-        textEditor.setWidth(98.0f,Unit.PERCENTAGE);
-        textEditor.setHeight(400.0f, Unit.PIXELS);
-        textEditor.setNullRepresentation("");
-        textEditor.addValidator(new BeanValidator(EditModel.class,field));
-        textEditor.setImmediate(true);
-        binder.bind(textEditor,field);
-        return textEditor;
+
+ /* private RichTextArea getRichTextArea(String label, String field){
+        final RichTextArea textArea = new RichTextArea(label);
+        textArea.setImmediate(true);
+        textArea.setWidth(98.0f,Unit.PERCENTAGE);
+        textArea.setHeight(400.0f, Unit.PIXELS);
+        textArea.setNullRepresentation("");
+        textArea.addValidator(new BeanValidator(EditModel.class,field));
+        textArea.setImmediate(true);
+        binder.bind(textArea,field);
+        return textArea;
     }
 
     public HorizontalLayout popUpButtons(){
         final HorizontalLayout buttons = new HorizontalLayout();
         buttons.setSpacing(true);
 
-        popUpSaveBtn.setCaption("update");
-        popUpSaveBtn.setIcon(FontAwesome.SAVE);
-        popUpSaveBtn.setStyleName(ValoTheme.TEXTFIELD_INLINE_ICON);
-        popUpCancelBtn.setCaption("Cancel");
-        popUpCancelBtn.setIcon(FontAwesome.CROSSHAIRS);
-        popUpCancelBtn.setStyleName(ValoTheme.TEXTFIELD_INLINE_ICON);
+        popUpEditBtn.setCaption("update");
+        popUpEditBtn.setIcon(FontAwesome.SAVE);
+        popUpEditBtn.setStyleName(ValoTheme.TEXTFIELD_INLINE_ICON);
+        popUpCloseBtn.setCaption("Cancel");
+        popUpCloseBtn.setIcon(FontAwesome.CROSSHAIRS);
+        popUpCloseBtn.setStyleName(ValoTheme.TEXTFIELD_INLINE_ICON);
 
-        buttons.addComponent(popUpSaveBtn);
-        buttons.addComponent(popUpCancelBtn);
+        buttons.addComponent(popUpEditBtn);
+        buttons.addComponent(popUpCloseBtn);
 
         return buttons;
-    }
+    }*/
 }

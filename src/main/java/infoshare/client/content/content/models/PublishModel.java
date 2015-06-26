@@ -1,12 +1,13 @@
 package infoshare.client.content.content.models;
 
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by hashcode on 2015/06/24.
  */
-public class PublishModel {
+public class PublishModel implements Serializable {
     private String id;
     @NotNull
     private Date dateCreated;

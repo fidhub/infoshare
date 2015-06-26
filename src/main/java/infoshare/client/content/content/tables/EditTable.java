@@ -26,8 +26,6 @@ public class EditTable extends Table{
     @Autowired
     private ContentService contentService = new ContentServiceImp();
     private final MainLayout main;
-    public Button editBtn = new Button();
-    public Button deleteBtn = new Button();
 
     public EditTable(MainLayout mainApp){
         this.main = mainApp;
@@ -38,8 +36,6 @@ public class EditTable extends Table{
         addContainerProperty("Creator",String.class,null);
         addContainerProperty("Source",String.class,null);
         addContainerProperty("Date Created",Date.class,null);
-        addContainerProperty("",Component.class,null);
-        addStyleName(ValoTheme.TABLE_BORDERLESS);
         List<Content> contents = contentService.findAll();
 
        for (Content content: contents){
@@ -49,8 +45,7 @@ public class EditTable extends Table{
                        content.getCategory(),
                        content.getCreator(),
                        content.getSource(),
-                       content.getDateCreated(),
-                       buttons()
+                       content.getDateCreated()
                }, content.getId());
            }
        }
@@ -58,25 +53,6 @@ public class EditTable extends Table{
         setSelectable(true);
         setImmediate(true);
     }
-    private Component buttons(){
-        final HorizontalLayout buttonsLayout = new HorizontalLayout();
-        buttonsLayout.setSpacing(true);
 
-        editBtn.setIcon(FontAwesome.EDIT);
-        editBtn.addStyleName(ValoTheme.BUTTON_TINY);
-        editBtn.addStyleName(ValoTheme.BUTTON_ICON_ONLY);
-        editBtn.addStyleName(ValoTheme.TEXTFIELD_INLINE_ICON);
-
-        deleteBtn.setIcon(FontAwesome.TRASH_O);
-        deleteBtn.addStyleName(ValoTheme.BUTTON_TINY);
-        deleteBtn.addStyleName(ValoTheme.BUTTON_ICON_ONLY);
-        deleteBtn.addStyleName(ValoTheme.TEXTFIELD_INLINE_ICON);
-
-        buttonsLayout.addComponent(editBtn);
-        buttonsLayout.addComponent(deleteBtn);
-
-        return buttonsLayout;
-
-    }
 
 }

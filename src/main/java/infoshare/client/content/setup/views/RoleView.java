@@ -80,7 +80,7 @@ public class RoleView extends VerticalLayout implements
     private void saveEditedForm(FieldGroup binder) {
         try {
             binder.commit();
-//            RoleFacade.getRoleService().merge(getEntity(binder));
+            roleService.merge(getEntity(binder));
             getHome();
             Notification.show("Record UPDATED!", Notification.Type.TRAY_NOTIFICATION);
         } catch (FieldGroup.CommitException e) {

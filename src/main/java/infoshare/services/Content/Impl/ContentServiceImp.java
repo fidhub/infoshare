@@ -15,9 +15,68 @@ import java.util.List;
 @Service
 @SpringComponent
 public class ContentServiceImp implements ContentService {
+    List<Content> contents = new ArrayList<>();
+
+    public void addValues(){
+
+        Content content1 = new Content.Builder("HIV").category("treatment")
+                .contentType("edited").creator("thule")
+                .source("jozi")
+                .content("psum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\n" +
+                        "tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\n" +
+                        "quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\n" +
+                        "consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\n" +
+                        "cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\n" +
+                        "proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
+                .dateCreated(new Date()).id("5").build();
+
+        Content content2 = new Content.Builder("TB").category("treatment")
+                .contentType("raw").creator("thule")
+                .source("jozi")
+                .content("psum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\n" +
+                        "tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\n" +
+                        "quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\n" +
+                        "consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\n" +
+                        "cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\n" +
+                        "proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
+                .dateCreated(new Date()).id("6").build();
+
+        Content content3 = new Content.Builder("CANCER").category("treatment")
+                .contentType("published").creator("thule")
+                .source("jozi")
+                .content("psum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\n" +
+                        "tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\n" +
+                        "quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\n" +
+                        "consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\n" +
+                        "cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\n" +
+                        "tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\n" +
+                        "quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\n" +
+                        "consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\n" +
+                        "cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\n" +
+                        "tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\n" +
+                        "quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\n" +
+                        "consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\n" +
+                        "cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\n" +
+                        "tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\n" +
+                        "quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\n" +
+                        "consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\n" +
+                        "cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\n" +
+                        "proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
+                .dateCreated(new Date()).id("7").build();
+
+        contents.add(content1);
+        contents.add(content2);
+        contents.add(content3);
+    }
     @Override
     public Content find(String s) {
-        return null;
+        addValues();
+        Content content = null;
+        for(Content cont: contents )
+            if (cont.getId().equalsIgnoreCase(s))
+                content = cont;
+
+        return content;
     }
 
     @Override
@@ -37,26 +96,7 @@ public class ContentServiceImp implements ContentService {
 
     @Override
     public List<Content> findAll() {
-        List<Content> contents = new ArrayList<>();
-
-        Content content1 = new Content.Builder("HIV").category("treatment")
-                                .contentType("Raw").creator("thule")
-                                .source("jozi").content("fffffffffffffffffffffffffffff")
-                                .dateCreated(new Date()).build();
-
-        Content content2 = new Content.Builder("TB").category("treatment")
-                .contentType("edited").creator("thule")
-                .source("jozi").content("fffffffffffffffffffffffffffff")
-                .dateCreated(new Date()).build();
-
-        Content content3 = new Content.Builder("CANCER").category("treatment")
-                .contentType("published").creator("thule")
-                .source("jozi").content("fffffffffffffffffffffffffffff")
-                .dateCreated(new Date()).build();
-
-        contents.add(content1);
-        contents.add(content2);
-        contents.add(content3);
+        addValues();
         return contents;
     }
 }

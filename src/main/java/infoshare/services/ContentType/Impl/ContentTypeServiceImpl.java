@@ -40,7 +40,9 @@ public class ContentTypeServiceImpl implements ContentTypeService{
 
         List<ContentType> contentTypes = new ArrayList<>();
 
-        ContentType contentType = new ContentType.Builder("raw").description("22555").build();
+        ContentType contentType = new ContentType.Builder("Edited")
+                .description("psum dolor sit amet, consectetur adipisicing elit, sed do eiusmod")
+                .build();
         contentTypes.add(contentType);
         return contentTypes;
     }
