@@ -1,4 +1,4 @@
-package infoshare.client.content.ContentType.tables;
+package infoshare.client.content.systemValues.tables;
 
 import com.vaadin.ui.Table;
 import infoshare.client.content.MainLayout;
@@ -13,7 +13,6 @@ import java.util.List;
  * Created by codex on 2015/06/25.
  */
 public class ContentTypeTable extends Table {
-
 
     @Autowired
     private ContentTypeService contentTypeService = new ContentTypeServiceImpl();
@@ -30,7 +29,7 @@ public class ContentTypeTable extends Table {
         for(ContentType contentType: contentTypes){
             addItem(new Object[]{
                     contentType.getContentTyeName(),
-                    contentType.getContentTypeDescription()
+                    contentType.getContentTyeDescription()
             },contentType.getId());
         }
 

@@ -1,15 +1,7 @@
 package infoshare.client.content.content.tables;
 
-import com.vaadin.data.fieldgroup.FieldGroup;
-import com.vaadin.data.util.BeanItem;
-import com.vaadin.server.FontAwesome;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.Component;
-import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Table;
-import com.vaadin.ui.themes.ValoTheme;
 import infoshare.client.content.MainLayout;
-import infoshare.client.content.content.models.EditModel;
 import infoshare.domain.Content;
 import infoshare.services.Content.ContentService;
 import infoshare.services.Content.Impl.ContentServiceImp;
@@ -38,8 +30,8 @@ public class EditTable extends Table{
         addContainerProperty("Date Created",Date.class,null);
         List<Content> contents = contentService.findAll();
 
-       for (Content content: contents){
-           if(content.getContentType().equalsIgnoreCase("edited")) {
+       for (Content content: contents) {
+           if (content.getContentType().equalsIgnoreCase("edited")) {
                addItem(new Object[]{
                        content.getTitle(),
                        content.getCategory(),

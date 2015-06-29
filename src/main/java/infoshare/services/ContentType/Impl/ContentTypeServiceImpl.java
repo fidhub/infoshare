@@ -22,6 +22,7 @@ public class ContentTypeServiceImpl implements ContentTypeService{
 
     @Override
     public ContentType save(ContentType entity) {
+
         return null;
     }
 
@@ -41,7 +42,7 @@ public class ContentTypeServiceImpl implements ContentTypeService{
         List<ContentType> contentTypes = new ArrayList<>();
 
         ContentType contentType = new ContentType.Builder("Edited")
-                .description("psum dolor sit amet, consectetur adipisicing elit, sed do eiusmod")
+                .contentTyeDescription("psum dolor sit amet, consectetur adipisicing elit, sed do eiusmod")
                 .build();
         contentTypes.add(contentType);
         return contentTypes;

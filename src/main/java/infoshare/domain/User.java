@@ -173,8 +173,6 @@ public class User implements Serializable, Comparable<User> {
     }
 
 
-
-
     private boolean isNullObject(Object object) {
         if (object == null) {
             return true;
@@ -182,7 +180,6 @@ public class User implements Serializable, Comparable<User> {
             return false;
         }
     }
-
 
     @Override
     public String toString() {

@@ -23,7 +23,6 @@ public class UserTable extends Table {
         addContainerProperty("Last Name", String.class, null);
         addContainerProperty("Enabled", Boolean.class, null);
 
-
         List<User> users= new ArrayList<>(); // From REST API
         for (User user : users) {
             addItem(new Object[]{

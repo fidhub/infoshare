@@ -9,12 +9,12 @@ public class ContentType implements Serializable, Comparable<ContentType> {
 
     private String id;
     private String contentTyeName;
-    private String contentTypeDescription;
+    private String contentTyeDescription;
 
     private ContentType(Builder builder) {
         this.id = builder.id;
         this.contentTyeName = builder.contentTyeName;
-        this.contentTypeDescription = builder.contentTyeDescription;
+        this.contentTyeDescription = builder.contentTyeDescription;
     }
 
     public String getId() {
@@ -25,8 +25,8 @@ public class ContentType implements Serializable, Comparable<ContentType> {
         return contentTyeName;
     }
 
-    public String getContentTypeDescription() {
-        return contentTypeDescription;
+    public String getContentTyeDescription() {
+        return contentTyeDescription;
     }
     @Override
     public int compareTo(ContentType contentType) {
@@ -45,7 +45,7 @@ public class ContentType implements Serializable, Comparable<ContentType> {
             this.id = id;
             return this;
         }
-        public Builder description(String description){
+        public Builder contentTyeDescription(String description){
             this.contentTyeDescription = description;
             return this;
         }

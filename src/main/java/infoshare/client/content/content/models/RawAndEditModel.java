@@ -4,7 +4,7 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 
-public class EditModel implements Serializable {
+public class RawAndEditModel implements Serializable {
     private String id;
     @NotNull
     private Date dateCreated;

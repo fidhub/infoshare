@@ -1,10 +1,10 @@
-package infoshare.client.content.ContentType.models;
+package infoshare.client.content.systemValues.models;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
- * Created by codex on 2015/06/25.
+ * Created by codex on 2015/06/27.
  */
 public class ContentTypeModel implements Serializable {
 

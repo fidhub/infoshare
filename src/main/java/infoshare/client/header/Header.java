@@ -22,11 +22,12 @@ public class Header extends VerticalLayout {
         final HorizontalLayout headLayout = new HorizontalLayout();
         headLayout.setWidth("100%");
 
+
         final Panel headerPanel = new Panel("Info Share");
         headerPanel.setWidth("100%");
         headerPanel.setHeight("150px");
-
-        /*Component logo = logo();
+      /*headerPanel.setIcon(new FileResource( new File("src/main/webapp/VAADIN/themes/dashboard/header.PNG")));
+        Component logo = logo();
         headLayout.addComponent(logo);
         headLayout.setComponentAlignment(logo,Alignment.TOP_LEFT);*/
 
@@ -35,15 +36,12 @@ public class Header extends VerticalLayout {
         headLayout.setComponentAlignment(menuItems,Alignment.TOP_RIGHT);
 
         headerPanel.setContent(headLayout);
-
         return headerPanel;
     }
 
     private Component logo(){
         final HorizontalLayout logo = new HorizontalLayout();
-
-        String basePath = VaadinService.getCurrent().getBaseDirectory().getAbsolutePath();
-        FileResource resource = new FileResource(new File(basePath+"dashboard/views/favicon"));
+        FileResource resource = new FileResource(new File("src/main/webapp/VAADIN/themes/dashboard/favicon.ico"));
         Image logoImage = new Image(null,resource);
         logo.addComponent(logoImage);
         return logo;

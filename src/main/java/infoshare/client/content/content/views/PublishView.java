@@ -1,10 +1,13 @@
 package infoshare.client.content.content.views;
 
 import com.vaadin.data.Property;
+import com.vaadin.data.util.BeanItem;
 import com.vaadin.ui.*;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.content.forms.PublishForm;
+import infoshare.client.content.content.models.PublishModel;
 import infoshare.client.content.content.tables.PublishTable;
+import infoshare.domain.Content;
 import infoshare.services.Content.ContentService;
 import infoshare.services.Content.Impl.ContentServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +23,7 @@ public class PublishView extends VerticalLayout implements Button.ClickListener,
     private final PublishTable table;
     private final PublishForm form;
     private final Window popUp ;
-
-    public TextArea textArea = new TextArea();
-    public Button popUpCloseBtn = new Button();
-
+    private Button viewContent = new Button("View Content");
 
     public PublishView( MainLayout mainApp) {
         this.main = mainApp;
@@ -31,43 +31,28 @@ public class PublishView extends VerticalLayout implements Button.ClickListener,
         this.form = new PublishForm();
         this.popUp = modelWindow();
         setSizeFull();
-        addComponent(form);
+        setSpacing(true);
+        addComponent(viewContent);
         addComponent(table);
         addListeners();
     }
     private Window modelWindow(){
-        final Window popup = new Window("Edit");
+        final Window popup = new Window("VIEW Content");
         popup.setWidth(80.0f,Unit.PERCENTAGE);
         popup.setHeight(90.0f, Unit.PERCENTAGE);
-        final  FormLayout form = new FormLayout();
-
-        textArea.setImmediate(true);
-        textArea.setWidth(98.0f, Unit.PERCENTAGE);
-        textArea.setHeight(400.0f, Unit.PIXELS);
-        textArea.setEnabled(false);
-        textArea.setWordwrap(true);
-        form.addComponent(textArea);
-        form.addComponent(popUpButtons());
         popup.setContent(form);
-
         return popup;
     }
 
-    public HorizontalLayout popUpButtons(){
-        final HorizontalLayout buttons = new HorizontalLayout();
-        popUpCloseBtn.setCaption("Close");
-        buttons.addComponent(popUpCloseBtn);
-
-        return buttons;
-    }
     @Override
     public void buttonClick(Button.ClickEvent clickEvent) {
         final Button source = clickEvent.getButton();
-        if(source==form.viewContent){
+        if(source==viewContent){
             ViewContentButton();
-        }else if (source ==popUpCloseBtn){
+        }else if (source ==form.popUpCloseBtn){
             popUp.setModal(false);
             UI.getCurrent().removeWindow(popUp);
+            table.setValue(null);
         }
 
     }
@@ -75,20 +60,38 @@ public class PublishView extends VerticalLayout implements Button.ClickListener,
     private void ViewContentButton(){
         try {
             Object rowId = table.getValue();
-            textArea.setValue(contentService.find(rowId + "").getContent().toString());
+            form.textArea.setValue(contentService.find(rowId + "").getContent().toString());
             UI.getCurrent().addWindow(popUp);
             popUp.setModal(true);
         }catch (Exception e){
-            Notification.show("Select the content you wanna Edit",
-                    Notification.Type.TRAY_NOTIFICATION);
+            Notification.show("Select the content you wanna view",
+                    Notification.Type.HUMANIZED_MESSAGE);
         }
     }
     @Override
     public void valueChange(Property.ValueChangeEvent valueChangeEvent) {
+        final Property property = valueChangeEvent.getProperty();
+        if (property == table) {
+            final Content content = contentService.find(table.getValue().toString());
+            final PublishModel bean = getModel(content);
+            form.binder.setItemDataSource(new BeanItem<>(bean));
+        }
+    }
+    private PublishModel getModel(Content val) {
+        final PublishModel model = new PublishModel();
+        final Content content = contentService.find(val.getId());
+        model.setTitle(content.getTitle());
+        model.setId(content.getId());
+        model.setCategory(content.getCategory());
+        model.setCreator(content.getCreator());
+        model.setContent(content.getContent());
+        model.setContentType(content.getContentType());
+        model.setSource(content.getSource());
+        return model;
     }
 
     public void addListeners(){
-        form.viewContent.addClickListener((Button.ClickListener) this);
-        popUpCloseBtn.addClickListener((Button.ClickListener) this);
+        form.popUpCloseBtn.addClickListener((Button.ClickListener) this);
+        viewContent.addClickListener((Button.ClickListener) this);
     }
 }
