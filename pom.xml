@@ -7,9 +7,9 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <contentName>za.ac.cput.infoshare</contentName>
+    <name>za.ac.cput.infoshare</name>
     <url>http://maven.apache.org</url>
-    <contentTyeDescription>Inforshare Web UI for Admins</contentTyeDescription>
+    <description>Inforshare Web UI for Admins</description>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -33,8 +33,8 @@
             <artifactId>spring-boot-starter-hateoas</artifactId>
         </dependency>
         <!--<dependency>-->
-            <!--<groupId>org.springframework.boot</groupId>-->
-            <!--<artifactId>spring-boot-starter-security</artifactId>-->
+        <!--<groupId>org.springframework.boot</groupId>-->
+        <!--<artifactId>spring-boot-starter-security</artifactId>-->
         <!--</dependency>-->
         <dependency>
             <groupId>com.vaadin</groupId>
