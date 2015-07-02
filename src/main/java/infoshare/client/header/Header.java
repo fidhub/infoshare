@@ -1,11 +1,13 @@
 package infoshare.client.header;
 
-import com.vaadin.server.*;
+import com.vaadin.server.ExternalResource;
+import com.vaadin.server.FileResource;
+import com.vaadin.server.FontAwesome;
+import com.vaadin.server.Responsive;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 
 import java.io.File;
-import java.util.*;
 
 /**
  * Created by hashcode on 2015/06/23.
@@ -26,14 +28,14 @@ public class Header extends VerticalLayout {
         final Panel headerPanel = new Panel("Info Share");
         headerPanel.setWidth("100%");
         headerPanel.setHeight("150px");
-      /*headerPanel.setIcon(new FileResource( new File("src/main/webapp/VAADIN/themes/dashboard/header.PNG")));
+
         Component logo = logo();
         headLayout.addComponent(logo);
-        headLayout.setComponentAlignment(logo,Alignment.TOP_LEFT);*/
+        headLayout.setComponentAlignment(logo,Alignment.TOP_LEFT);
 
         Component menuItems = menuItems();
         headLayout.addComponent(menuItems);
-        headLayout.setComponentAlignment(menuItems,Alignment.TOP_RIGHT);
+        headLayout.setComponentAlignment(menuItems,Alignment.MIDDLE_RIGHT);
 
         headerPanel.setContent(headLayout);
         return headerPanel;
@@ -41,15 +43,16 @@ public class Header extends VerticalLayout {
 
     private Component logo(){
         final HorizontalLayout logo = new HorizontalLayout();
-        FileResource resource = new FileResource(new File("src/main/webapp/VAADIN/themes/dashboard/favicon.ico"));
+        FileResource resource = new FileResource(
+                new File("src/main/webapp/VAADIN/themes/dashboard/favicon.ico"));
         Image logoImage = new Image(null,resource);
+        logoImage.setHeight("50px");
         logo.addComponent(logoImage);
         return logo;
     }
     private Component menuItems(){
 
         final HorizontalLayout menuItems = new HorizontalLayout();
-        //menuItems.setSpacing(true);
         menuItems.addStyleName("fields");
         Responsive.makeResponsive(menuItems);
         menuItems.setSizeUndefined();
@@ -68,11 +71,6 @@ public class Header extends VerticalLayout {
         MenuBar.MenuItem messages = barMenu.addItem("Notification",null);
         messages.setIcon(FontAwesome.BELL);
         messages.addItem("",null);
-
-        final ListSelect note = new ListSelect();
-       /* List<String> notes = new ArrayList<>(); // rest Api
-        notes.add("thulebina hadebe");
-        notes.forEach(note::addItem);*/
 
         final MenuBar.MenuItem  UserDetails = barMenu.addItem(" User name",null); // from rest api
         UserDetails.setIcon(FontAwesome.USER);

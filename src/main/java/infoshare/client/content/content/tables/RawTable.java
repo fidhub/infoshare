@@ -1,11 +1,6 @@
 package infoshare.client.content.content.tables;
 
-import com.vaadin.server.FontAwesome;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.Component;
-import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Table;
-import com.vaadin.ui.themes.ValoTheme;
 import infoshare.client.content.MainLayout;
 import infoshare.domain.Content;
 import infoshare.services.Content.ContentService;
@@ -46,9 +41,10 @@ public class RawTable extends Table {
                 }, content.getId());
             }
         }
-        setNullSelectionAllowed(false);
-        setSelectable(true);
-        setImmediate(true);
+
+         setNullSelectionAllowed(false);
+         setSelectable(true);
+         setImmediate(true);
     }
 
 }

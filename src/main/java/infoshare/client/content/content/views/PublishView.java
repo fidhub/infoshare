@@ -4,6 +4,7 @@ import com.vaadin.data.Property;
 import com.vaadin.data.util.BeanItem;
 import com.vaadin.ui.*;
 import infoshare.client.content.MainLayout;
+import infoshare.client.content.content.ContentMenu;
 import infoshare.client.content.content.forms.PublishForm;
 import infoshare.client.content.content.models.PublishModel;
 import infoshare.client.content.content.tables.PublishTable;
@@ -23,13 +24,15 @@ public class PublishView extends VerticalLayout implements Button.ClickListener,
     private final PublishTable table;
     private final PublishForm form;
     private final Window popUp ;
-    private Button viewContent = new Button("View Content");
+    private Button viewContent ;
 
     public PublishView( MainLayout mainApp) {
         this.main = mainApp;
         this.table = new PublishTable(main);
         this.form = new PublishForm();
         this.popUp = modelWindow();
+        viewContent = new Button("View Content");
+        viewContent.setVisible(false);
         setSizeFull();
         setSpacing(true);
         addComponent(viewContent);
@@ -53,14 +56,16 @@ public class PublishView extends VerticalLayout implements Button.ClickListener,
             popUp.setModal(false);
             UI.getCurrent().removeWindow(popUp);
             table.setValue(null);
+            getHome();
         }
 
     }
 
     private void ViewContentButton(){
         try {
-            Object rowId = table.getValue();
-            form.textArea.setValue(contentService.find(rowId + "").getContent().toString());
+            final Content content = contentService.find(table.getValue().toString());
+            final PublishModel bean = getModel(content);
+            form.binder.setItemDataSource(new BeanItem<>(bean));
             UI.getCurrent().addWindow(popUp);
             popUp.setModal(true);
         }catch (Exception e){
@@ -72,9 +77,7 @@ public class PublishView extends VerticalLayout implements Button.ClickListener,
     public void valueChange(Property.ValueChangeEvent valueChangeEvent) {
         final Property property = valueChangeEvent.getProperty();
         if (property == table) {
-            final Content content = contentService.find(table.getValue().toString());
-            final PublishModel bean = getModel(content);
-            form.binder.setItemDataSource(new BeanItem<>(bean));
+           viewContent.setVisible(true);
         }
     }
     private PublishModel getModel(Content val) {
@@ -89,9 +92,12 @@ public class PublishView extends VerticalLayout implements Button.ClickListener,
         model.setSource(content.getSource());
         return model;
     }
-
+    private void getHome() {
+        main.content.setSecondComponent(new ContentMenu(main, "PUBLISHER"));
+    }
     public void addListeners(){
         form.popUpCloseBtn.addClickListener((Button.ClickListener) this);
         viewContent.addClickListener((Button.ClickListener) this);
+        table.addValueChangeListener((Property.ValueChangeListener)this);
     }
 }

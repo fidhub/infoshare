@@ -37,8 +37,12 @@ public class ContentMenu extends VerticalLayout {
         tab.addTab(publisherView,"Published Content View",null);
 
 
-        if(selectedTab.equalsIgnoreCase("Editor")){
+        if(selectedTab.equalsIgnoreCase("LANDING")){
+            tab.setSelectedTab(rawView);
+        }else if(selectedTab.equalsIgnoreCase("EDITOR")){
             tab.setSelectedTab(editorView);
+        }else if(selectedTab.equalsIgnoreCase("PUBLISHER")){
+            tab.setSelectedTab(publisherView);
         }
         addComponent(tab);
     }

@@ -1,15 +1,9 @@
 package infoshare.services.Content.Impl;
 
-import com.vaadin.server.ExternalResource;
-import com.vaadin.server.ThemeResource;
 import com.vaadin.spring.annotation.SpringComponent;
-import com.vaadin.ui.Embedded;
-import com.vaadin.ui.Image;
-import com.vaadin.ui.Link;
 import infoshare.domain.Content;
 import infoshare.services.Content.ContentService;
 import org.springframework.stereotype.Service;
-import sun.awt.image.ImageWatched;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,8 +19,8 @@ public class ContentServiceImp implements ContentService {
 
     public void addValues(){
 
-        Content content1 = new Content.Builder("HIV").category("treatment")
-                .contentType("edited").creator("thule")
+        Content content1 = new Content.Builder("HIV").category("Pregnancy")
+                .contentType("raw").creator("thule")
                 .source("jozi")
                 .content("psum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt" +
                         " ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud" +
@@ -36,8 +30,8 @@ public class ContentServiceImp implements ContentService {
                         " qui officia deserunt mollit anim id est laborum.")
                 .dateCreated(new Date()).id("5").build();
 
-        Content content2 = new Content.Builder("TB").category("treatment")
-                .contentType("raw").creator("thule")
+        Content content2 = new Content.Builder("TB").category("Pharmacy")
+                .contentType("published").creator("thule")
                 .source("jozi")
                 .content("psum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\n" +
                         "tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\n" +
@@ -47,8 +41,8 @@ public class ContentServiceImp implements ContentService {
                         "proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
                 .dateCreated(new Date()).id("6").build();
 
-        Content content3 = new Content.Builder("CANCER").category("treatment")
-                .contentType("published").creator("thule")
+        Content content3 = new Content.Builder("CANCER").category("Circumcision")
+                .contentType("edited").creator("thule")
                 .source("jozi")
                 .content("psum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\n" +
                         "tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\n" +
@@ -99,8 +93,6 @@ public class ContentServiceImp implements ContentService {
                 .contentType(entity.getContentType())
                 .category(entity.getCategory())
                 .content(entity.getContent()).build();
-
-        System.out.println(entity.getContent()+ "\n"+entity.getContentType());
                 return content;
     }
 

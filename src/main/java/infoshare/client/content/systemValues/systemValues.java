@@ -41,6 +41,10 @@ public class systemValues extends VerticalLayout {
 
         if (selectedTab.equals("LANDING")) {
             tab.setSelectedTab(contentTypeView);
+        }else if(selectedTab.equals("SOURCE")){
+            tab.addComponent(contentSourceView);
+        }else if(selectedTab.equals("CATEGORY")){
+            tab.addComponent(categoryView);
         }
 
         addComponent(tab);

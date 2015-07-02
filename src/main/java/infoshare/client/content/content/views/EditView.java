@@ -5,15 +5,20 @@ import com.vaadin.data.fieldgroup.FieldGroup;
 import com.vaadin.data.util.BeanItem;
 import com.vaadin.ui.*;
 import infoshare.client.content.MainLayout;
+import infoshare.client.content.content.ContentMenu;
 import infoshare.client.content.content.forms.RawAndEditForm;
 import infoshare.client.content.content.models.RawAndEditModel;
 import infoshare.client.content.content.tables.EditTable;
+import infoshare.domain.Category;
 import infoshare.domain.Content;
+import infoshare.domain.ContentType;
 import infoshare.services.Content.ContentService;
 import infoshare.services.Content.Impl.ContentServiceImp;
+import infoshare.services.ContentType.ContentTypeService;
+import infoshare.services.ContentType.Impl.ContentTypeServiceImpl;
+import infoshare.services.category.CategoryService;
+import infoshare.services.category.Impl.CategoryServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.lang.Object;
 
 /**
  * Created by hashcode on 2015/06/24.
@@ -21,7 +26,8 @@ import java.lang.Object;
 public class EditView extends VerticalLayout implements Button.ClickListener, Property.ValueChangeListener{
     @Autowired
     private ContentService contentService = new ContentServiceImp();
-
+    private CategoryService categoryService = new CategoryServiceImpl();
+    private ContentTypeService contentTypeService = new ContentTypeServiceImpl();
 
     private final MainLayout main;
     private final EditTable table;
@@ -38,6 +44,7 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
        setSizeFull();
        setSpacing(true);
        addComponent(editBtn);
+       editBtn.setVisible(false);
        addComponent(table);
        addListeners();
    }
@@ -59,24 +66,38 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
            popUp.setModal(false);
            UI.getCurrent().removeWindow(popUp);
            table.setValue(null);
+           getHome();
        }
     }
     @Override
     public void valueChange(Property.ValueChangeEvent valueChangeEvent) {
         final Property property = valueChangeEvent.getProperty();
         if (property == table) {
+             editBtn.setVisible(true);
+        }
+    }
+    private void loadComboBoxs(){
+        for(Category category:categoryService.findAll()){
+            if(category!= null)
+                form.popUpCategoryCmb.addItem(category.getName());
+        }
+
+        for(ContentType category:contentTypeService.findAll()){
+            if(category!= null)
+                form.popUpContentTypeCmb.addItem(category.getContentTyeName());
+        }
+
+    }
+    private void getHome() {
+        main.content.setSecondComponent(new ContentMenu(main, "EDITOR"));
+    }
+    private void EditButton(){
+        loadComboBoxs();
+        try {
             final Content content = contentService.find(table.getValue().toString());
             final RawAndEditModel bean = getModel(content);
             form.binder.setItemDataSource(new BeanItem<>(bean));
-        }
-    }
-    private void getHome() {
-        //main.content.setSecondComponent(new SetupMenu(main, "LANDING"));
-    }
-    private void EditButton(){
-        try {
-            Object rowId = table.getValue();
-            form.textEditor.setValue(contentService.find(rowId + "").getContent().toString());
+
             UI.getCurrent().addWindow(popUp);
             popUp.setModal(true);
         }catch (Exception e){
@@ -87,7 +108,7 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
     private void saveEditedForm(FieldGroup binder) {
         try {
             binder.commit();
-            contentService.merge(getEntity(binder));
+            contentService.merge(getUpdateEntity(binder));
             popUp.setModal(false);
             table.setValue(null);
             UI.getCurrent().removeWindow(popUp);
@@ -98,7 +119,7 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
             getHome();
         }
     }
-    private Content getEntity(FieldGroup binder) {
+    private Content getUpdateEntity(FieldGroup binder) {
         final RawAndEditModel bean = ((BeanItem<RawAndEditModel>) binder.getItemDataSource()).getBean();
         final Content content = new Content.Builder(bean.getTitle())
                 .category(bean.getCategory())
@@ -127,6 +148,6 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
         form.popUpUpdateBtn.addClickListener((Button.ClickListener)this);
         form.popUpCancelBtn.addClickListener((Button.ClickListener) this);
         editBtn.addClickListener((Button.ClickListener) this);
+        table.addValueChangeListener((Property.ValueChangeListener)this);
     }
-
 }

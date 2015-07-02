@@ -14,14 +14,29 @@ import java.util.List;
 @Service
 @SpringComponent
 public class SourceServiceImpl implements SourceService {
+    List<Source> sources = new ArrayList<>();
+    public void addList(){
+        Source source = new Source.Builder("source name")
+                .description("psum dolor sit amet, consectetur adipisicing elit, sed do eiusmod")
+                .id("1")
+                .build();
+        sources.add(source);
+    }
     @Override
     public Source find(String s) {
-        return null;
+        Source source = null;
+        for(Source source1: sources )
+            if (source1.getId().equalsIgnoreCase(s))
+                source  = source1;
+
+        return source;
     }
 
     @Override
     public Source save(Source entity) {
-        return null;
+        return new Source.Builder(entity.getName())
+                    .description(entity.getDescription())
+                    .id(entity.getId()).build();
     }
 
     @Override
@@ -36,12 +51,7 @@ public class SourceServiceImpl implements SourceService {
 
     @Override
     public List<Source> findAll() {
-        List<Source> sources = new ArrayList<>();
-
-        Source source = new Source.Builder("Edited")
-                .description("psum dolor sit amet, consectetur adipisicing elit, sed do eiusmod")
-                .build();
-        sources.add(source);
+        addList();
         return sources;
     }
 }

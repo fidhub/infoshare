@@ -20,18 +20,16 @@ public class RawAndEditForm extends FormLayout {
 
     public Button popUpUpdateBtn = new Button("UPDATE");
     public Button popUpCancelBtn = new Button("CANCEL");
-    public RichTextArea textEditor;
-    public ComboBox popUpContentTypeCmb;
-    public ComboBox popUpCategoryCmb;
-
+    public final ComboBox popUpContentTypeCmb;
+    public final ComboBox popUpCategoryCmb;
     public RawAndEditForm() {
         model = new RawAndEditModel();
         item = new BeanItem<>(model);
         binder = new FieldGroup(item);
         popUpContentTypeCmb = getComboBox("Content Type","contentType");
-        popUpCategoryCmb    = getComboBox("Category","category");
+        popUpCategoryCmb = getComboBox("Category","category");
 
-        textEditor = getRichTextArea("Content","content");
+        final RichTextArea textEditor = getRichTextArea("Content","content");
 
         final HorizontalLayout buttons = new HorizontalLayout();
         buttons.setSpacing(true);

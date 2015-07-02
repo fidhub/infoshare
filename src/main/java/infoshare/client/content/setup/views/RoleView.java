@@ -7,6 +7,7 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.VerticalLayout;
 import infoshare.client.content.MainLayout;
+import infoshare.client.content.setup.SetupMenu;
 import infoshare.client.content.setup.forms.RoleForm;
 import infoshare.client.content.setup.models.RoleModel;
 import infoshare.client.content.setup.tables.RoleTable;
@@ -58,9 +59,13 @@ public class RoleView extends VerticalLayout implements
     public void valueChange(Property.ValueChangeEvent event) {
         final Property property = event.getProperty();
         if (property == table) {
-            final Role role = roleService.find(table.getValue().toString());
-            final RoleModel bean = getModel(role);
-            form.binder.setItemDataSource(new BeanItem<>(bean));
+            try {
+                final Role role = roleService.find(table.getValue().toString());
+                final RoleModel bean = getModel(role);
+                form.binder.setItemDataSource(new BeanItem<>(bean));
+            }catch (Exception e){
+                    Notification.show(e.toString(), Notification.Type.WARNING_MESSAGE);
+            }
             setReadFormProperties();
         }
     }
@@ -104,7 +109,7 @@ public class RoleView extends VerticalLayout implements
     }
 
     private void getHome() {
-//        main.content.setSecondComponent(new SetupMenu((main, "ROLES"));
+        main.content.setSecondComponent(new SetupMenu(main, "ROLES"));
     }
 
     private void setEditFormProperties() {

@@ -15,17 +15,18 @@ import java.util.List;
 @SpringComponent
 public class ContentTypeServiceImpl implements ContentTypeService{
 
+    private List<ContentType> contentTypes = new ArrayList<>();
     @Override
     public ContentType find(String s) {
-        return null;
+     return null;
     }
 
     @Override
     public ContentType save(ContentType entity) {
-
-        return null;
+        return new ContentType.Builder(entity.getContentTyeName())
+                    .contentTyeDescription(entity.getContentTyeDescription())
+                    .id(entity.getId()).build();
     }
-
     @Override
     public ContentType merge(ContentType entity) {
         return null;
@@ -38,13 +39,21 @@ public class ContentTypeServiceImpl implements ContentTypeService{
 
     @Override
     public List<ContentType> findAll() {
-
-        List<ContentType> contentTypes = new ArrayList<>();
-
-        ContentType contentType = new ContentType.Builder("Edited")
-                .contentTyeDescription("psum dolor sit amet, consectetur adipisicing elit, sed do eiusmod")
-                .build();
+        ContentType contentType = new ContentType.Builder("edited")
+                    .contentTyeDescription("un edited content posted by thule")
+                    .id("1")
+                    .build();
+        ContentType contentType1 = new ContentType.Builder("raw")
+                    .contentTyeDescription("un edited content posted by thule")
+                    .id("1")
+                    .build();
+          ContentType contentType2 = new ContentType.Builder("published")
+                    .contentTyeDescription("un edited content posted by thule")
+                    .id("1")
+                    .build();
         contentTypes.add(contentType);
+        contentTypes.add(contentType1);
+        contentTypes.add(contentType2);
         return contentTypes;
     }
 }

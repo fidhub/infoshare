@@ -8,43 +8,47 @@ import infoshare.client.content.MainLayout;
 import infoshare.client.content.content.ContentMenu;
 import infoshare.client.content.content.forms.RawAndEditForm;
 import infoshare.client.content.content.models.RawAndEditModel;
-import infoshare.client.content.content.tables.EditTable;
 import infoshare.client.content.content.tables.RawTable;
+import infoshare.domain.Category;
 import infoshare.domain.Content;
+import infoshare.domain.ContentType;
 import infoshare.services.Content.ContentService;
 import infoshare.services.Content.Impl.ContentServiceImp;
+import infoshare.services.ContentType.ContentTypeService;
+import infoshare.services.ContentType.Impl.ContentTypeServiceImpl;
+import infoshare.services.category.CategoryService;
+import infoshare.services.category.Impl.CategoryServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Created by hashcode on 2015/06/24.
  */
-public class RawView extends VerticalLayout implements Button.ClickListener, Property.ValueChangeListener{
+public class RawView extends VerticalLayout implements
+        Button.ClickListener,Property.ValueChangeListener{
     @Autowired
     private ContentService contentService = new ContentServiceImp();
+    private ContentTypeService contentTypeService = new ContentTypeServiceImpl();
+    private CategoryService categoryService = new CategoryServiceImpl();
 
     private final MainLayout main;
     private final RawTable table;
     private final RawAndEditForm form;
 
     private Window popUp ;
-    private Button editBtn = new Button("EDIT");
-
+    private Button editBtn;
     public RawView( MainLayout mainApp) {
         this.main = mainApp;
         this.table = new RawTable(main);
         this.form = new RawAndEditForm();
         this.popUp = modelWindow();
+        editBtn = new Button("EDIT");
+
         setSizeFull();
         setSpacing(true);
         addComponent(editBtn);
         addComponent(table);
         addListeners();
-    }
-    private Window modelWindow(){
-        final Window popup = new Window("EDIT RAW CONTENT");
-        popup.setWidth(80.0f, Unit.PERCENTAGE);
-        popup.setContent(form);
-        return popup;
+        editBtn.setVisible(false);
     }
 
     @Override
@@ -58,26 +62,43 @@ public class RawView extends VerticalLayout implements Button.ClickListener, Pro
             popUp.setModal(false);
             UI.getCurrent().removeWindow(popUp);
             table.setValue(null);
+            getHome();
         }
     }
     @Override
-    public void valueChange(Property.ValueChangeEvent valueChangeEvent) {
-        final Property property = valueChangeEvent.getProperty();
+    public void valueChange(Property.ValueChangeEvent event) {
+        final Property property = event.getProperty();
         if (property == table) {
-            final Content content = contentService.find(table.getValue().toString());
-            final RawAndEditModel bean = getModel(content);
-            form.binder.setItemDataSource(new BeanItem<>(bean));
+            editBtn.setVisible(true);
         }
+    }
+    private Window modelWindow(){
+        final Window popup = new Window("EDIT RAW CONTENT");
+        popup.setWidth(80.0f, Unit.PERCENTAGE);
+        popup.setContent(form);
+        return popup;
+    }
+    private void loadComboBoxs(){
+          for(Category category:categoryService.findAll()){
+                if(category!= null)
+                form.popUpCategoryCmb.addItem(category.getName());
+            }
+
+        for(ContentType category:contentTypeService.findAll()){
+                if(category!= null)
+                form.popUpContentTypeCmb.addItem(category.getContentTyeName());
+            }
+
     }
     private void getHome() {
         main.content.setSecondComponent(new ContentMenu(main, "LANDING"));
     }
     private void EditButton(){
+        loadComboBoxs();
         try {
-            Object rowId = table.getValue();
-            form.textEditor.setValue(contentService.find(rowId + "").getContent().toString());
-            form.popUpCategoryCmb.addItem("thulebona");
-            form.popUpContentTypeCmb.addItem("Edited");
+            final Content content = contentService.find(table.getValue().toString());
+            final RawAndEditModel bean = getModel(content);
+            form.binder.setItemDataSource(new BeanItem<>(bean));
             UI.getCurrent().addWindow(popUp);
             popUp.setModal(true);
         }catch (Exception e){
@@ -88,6 +109,7 @@ public class RawView extends VerticalLayout implements Button.ClickListener, Pro
     private void saveEditedForm(FieldGroup binder) {
         try {
             binder.commit();
+            contentService.merge(updateEntity(binder));
             popUp.setModal(false);
             table.setValue(null);
             UI.getCurrent().removeWindow(popUp);
@@ -98,14 +120,15 @@ public class RawView extends VerticalLayout implements Button.ClickListener, Pro
             getHome();
         }
     }
-    private Content getEntity(FieldGroup binder) {
+    private Content updateEntity(FieldGroup binder){
         final RawAndEditModel bean = ((BeanItem<RawAndEditModel>) binder.getItemDataSource()).getBean();
-        final Content content = new Content.Builder(bean.getContent())
-                .category(bean.getCategory())
-                .contentType(bean.getContentType())
-                .creator(bean.getCreator())
+        final Content content = new Content.Builder(bean.getTitle())
                 .dateCreated(bean.getDateCreated())
+                .creator(bean.getCreator())
                 .source(bean.getSource())
+                .category(bean.getCategory())
+                .content(bean.getContent())
+                .contentType(bean.getContentType())
                 .id(bean.getId())
                 .build();
         return content;
@@ -125,6 +148,7 @@ public class RawView extends VerticalLayout implements Button.ClickListener, Pro
     public void addListeners(){
         form.popUpUpdateBtn.addClickListener((Button.ClickListener)this);
         form.popUpCancelBtn.addClickListener((Button.ClickListener) this);
+        table.addValueChangeListener((Property.ValueChangeListener) this);
         editBtn.addClickListener((Button.ClickListener) this);
     }
 
