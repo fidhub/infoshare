@@ -8,6 +8,7 @@ import com.vaadin.ui.Notification;
 import com.vaadin.ui.VerticalLayout;
 import infoshare.client.content.systemValues.forms.ContentTypeForm;
 import infoshare.client.content.systemValues.models.ContentTypeModel;
+import infoshare.client.content.systemValues.SystemValues;
 import infoshare.client.content.systemValues.tables.ContentTypeTable;
 import infoshare.client.content.MainLayout;
 import infoshare.domain.ContentType;
@@ -102,7 +103,7 @@ public class ContentTypeView extends VerticalLayout implements Button.ClickListe
     }
 
     private void getHome() {
-//        main.content.setSecondComponent(new SetupMenu((main, "ROLES"));
+      main.content.setSecondComponent(new SystemValues(main, "LANDING"));
     }
 
     private void setEditFormProperties() {

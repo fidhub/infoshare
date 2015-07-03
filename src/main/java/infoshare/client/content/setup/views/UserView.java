@@ -42,6 +42,7 @@ public class UserView extends VerticalLayout implements
         addComponent(form);
         addComponent(table);
         addListeners();
+        loadList();
     }
 
     @Override
@@ -68,6 +69,11 @@ public class UserView extends VerticalLayout implements
             final UserModel bean = getModel(user);
             form.binder.setItemDataSource(new BeanItem<>(bean));
             setReadFormProperties();
+        }
+    }
+    private void loadList(){
+        for(User role: userService.findAll()){
+            form.rolesList.setValue(role.getFirstname());
         }
     }
     private void saveForm(FieldGroup binder) {

@@ -7,7 +7,7 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.VerticalLayout;
 import infoshare.client.content.MainLayout;
-import infoshare.client.content.content.ContentMenu;
+import infoshare.client.content.systemValues.SystemValues;
 import infoshare.client.content.systemValues.forms.ContentSourceForm;
 import infoshare.client.content.systemValues.models.SourceModel;
 import infoshare.client.content.systemValues.tables.ContentSourceTable;
@@ -103,7 +103,7 @@ public class ContentSourceView extends VerticalLayout implements Button.ClickLis
     }
 
     private void getHome() {
-      main.content.setSecondComponent(new ContentMenu(main, "SOURCE"));
+      main.content.setSecondComponent(new SystemValues(main, "SOURCE"));
     }
 
     private void setEditFormProperties() {

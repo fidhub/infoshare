@@ -57,6 +57,7 @@ public class RawAndEditForm extends FormLayout {
       final RichTextArea richTextArea = new RichTextArea(label);
       richTextArea.setImmediate(true);
       richTextArea.setWidth(98.0f, Unit.PERCENTAGE);
+      richTextArea.setHeight(400.0f,Unit.PIXELS);
       richTextArea.setNullRepresentation("");
       richTextArea.addValidator(new BeanValidator(RawAndEditModel.class, field));
       richTextArea.setImmediate(true);

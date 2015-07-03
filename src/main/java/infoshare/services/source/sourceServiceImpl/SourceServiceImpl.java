@@ -6,7 +6,9 @@ import infoshare.services.source.SourceService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by codex on 2015/06/27.
@@ -14,44 +16,42 @@ import java.util.List;
 @Service
 @SpringComponent
 public class SourceServiceImpl implements SourceService {
-    List<Source> sources = new ArrayList<>();
-    public void addList(){
-        Source source = new Source.Builder("source name")
-                .description("psum dolor sit amet, consectetur adipisicing elit, sed do eiusmod")
-                .id("1")
-                .build();
-        sources.add(source);
+    static Map<String,Source> sources = null;
+
+    public SourceServiceImpl() {
+        if(sources == null) {
+            sources = new HashMap<>();
+            Source source = new Source.Builder("source name")
+                    .description("psum dolor sit amet, consectetur adipisicing elit, sed do eiusmod")
+                    .id("1")
+                    .build();
+            sources.put(source.getId(), source);
+        }
     }
     @Override
     public Source find(String s) {
-        Source source = null;
-        for(Source source1: sources )
-            if (source1.getId().equalsIgnoreCase(s))
-                source  = source1;
-
-        return source;
+        return sources.get(s);
     }
 
     @Override
     public Source save(Source entity) {
-        return new Source.Builder(entity.getName())
-                    .description(entity.getDescription())
-                    .id(entity.getId()).build();
+        sources.put(entity.getId(),entity);
+        return sources.get(entity.getId());
     }
 
     @Override
     public Source merge(Source entity) {
-        return null;
+        sources.put(entity.getId(),entity);
+        return sources.get(entity.getId());
     }
 
     @Override
     public void remove(Source entity) {
-
+        sources.remove(entity.getId());
     }
 
     @Override
     public List<Source> findAll() {
-        addList();
-        return sources;
+        return new ArrayList<>(sources.values());
     }
 }

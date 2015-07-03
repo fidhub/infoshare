@@ -5,9 +5,9 @@ import com.vaadin.data.fieldgroup.FieldGroup;
 import com.vaadin.data.util.BeanItem;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Notification;
-import com.vaadin.ui.Table;
 import com.vaadin.ui.VerticalLayout;
 import infoshare.client.content.MainLayout;
+import infoshare.client.content.systemValues.SystemValues;
 import infoshare.client.content.systemValues.forms.CategoryForm;
 import infoshare.client.content.systemValues.models.CategoryModel;
 import infoshare.client.content.systemValues.tables.CategoryTable;
@@ -83,7 +83,7 @@ public class CategoryView extends VerticalLayout implements Button.ClickListener
     private void saveEditedForm(FieldGroup binder) {
         try {
             binder.commit();
-//            RoleFacade.getRoleService().merge(getEntity(binder));
+            categoryService.merge(getEntity(binder));
             getHome();
             Notification.show("Record UPDATED!", Notification.Type.TRAY_NOTIFICATION);
         } catch (FieldGroup.CommitException e) {
@@ -100,15 +100,15 @@ public class CategoryView extends VerticalLayout implements Button.ClickListener
 
     private Category getEntity(FieldGroup binder) {
         final CategoryModel bean = ((BeanItem<CategoryModel>) binder.getItemDataSource()).getBean();
-        final Category ctgry = new Category.Builder(bean.getName())
+        final Category category = new Category.Builder(bean.getName())
                 .description(bean.getDescription())
                 .id(bean.getId())
                 .build();
-        return ctgry;
+        return category;
     }
 
     private void getHome() {
-//        main.Content.setSecondComponent(new SetupMenu((main, "ROLES"));
+       main.content.setSecondComponent(new SystemValues(main, "CATEGORY"));
     }
 
     private void setEditFormProperties() {

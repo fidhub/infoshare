@@ -44,9 +44,9 @@ public class Header extends VerticalLayout {
     private Component logo(){
         final HorizontalLayout logo = new HorizontalLayout();
         FileResource resource = new FileResource(
-                new File("src/main/webapp/VAADIN/themes/dashboard/favicon.ico"));
+                new File("src/main/webapp/VAADIN/themes/dashboard/kujali.jpg"));
         Image logoImage = new Image(null,resource);
-        logoImage.setHeight("50px");
+        logoImage.setHeight("60px");
         logo.addComponent(logoImage);
         return logo;
     }

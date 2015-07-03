@@ -5,9 +5,7 @@ import infoshare.domain.Content;
 import infoshare.services.Content.ContentService;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by codex on 2015/06/24.
@@ -15,10 +13,12 @@ import java.util.List;
 @Service
 @SpringComponent
 public class ContentServiceImp implements ContentService {
-    List<Content> contents = new ArrayList<>();
 
-    public void addValues(){
+    static Map<String,Content> contents = null;
 
+    public ContentServiceImp() {
+    if(contents == null) {
+        contents = new HashMap<>();
         Content content1 = new Content.Builder("HIV").category("Pregnancy")
                 .contentType("raw").creator("thule")
                 .source("jozi")
@@ -64,46 +64,35 @@ public class ContentServiceImp implements ContentService {
                         "proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
                 .dateCreated(new Date()).id("7").build();
 
-        contents.add(content1);
-        contents.add(content2);
-        contents.add(content3);
+        contents.put(content1.getId(),content1);
+        contents.put(content2.getId(),content2);
+        contents.put(content3.getId(),content3);
+    }
     }
     @Override
     public Content find(String s) {
-        Content content = null;
-        addValues();
-        for(Content cont: contents )
-            if (cont.getId().equalsIgnoreCase(s))
-                content = cont;
-
-        return content;
+        return contents.get(s);
     }
 
     @Override
     public Content save(Content entity) {
-        return new Content.Builder(entity.getTitle())
-                   .contentType(entity.getContentType())
-                   .category(entity.getCategory())
-                   .content(entity.getContent()).build();
+        contents.put(entity.getId(),entity);
+        return contents.get(entity.getId());
     }
 
     @Override
     public Content merge(Content entity) {
-        Content content = new Content.Builder(entity.getTitle())
-                .contentType(entity.getContentType())
-                .category(entity.getCategory())
-                .content(entity.getContent()).build();
-                return content;
+        contents.put(entity.getId(),entity);
+        return contents.get(entity.getId());
     }
 
     @Override
     public void remove(Content entity) {
-
+            contents.remove(entity.getId());
     }
 
     @Override
     public List<Content> findAll() {
-        addValues();
-        return contents;
+        return new ArrayList<>(contents.values());
     }
 }

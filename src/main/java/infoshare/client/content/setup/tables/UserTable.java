@@ -5,7 +5,6 @@ import infoshare.client.content.MainLayout;
 import infoshare.domain.User;
 import infoshare.services.users.Impl.UserServiceImpl;
 import infoshare.services.users.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
@@ -15,7 +14,7 @@ import java.util.List;
 public class UserTable extends Table {
 
     private final MainLayout main;
-    @Autowired
+
     private UserService userService = new UserServiceImpl();
 
     public UserTable(MainLayout main) {

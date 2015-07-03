@@ -6,7 +6,9 @@ import infoshare.services.ContentType.ContentTypeService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by codex on 2015/06/25.
@@ -15,45 +17,53 @@ import java.util.List;
 @SpringComponent
 public class ContentTypeServiceImpl implements ContentTypeService{
 
-    private List<ContentType> contentTypes = new ArrayList<>();
+    static Map<String,ContentType>  contentTypes = null;
+
+    public ContentTypeServiceImpl() {
+        if(contentTypes == null){
+            contentTypes = new HashMap<>();
+            ContentType contentType = new ContentType.Builder("edited")
+                    .contentTyeDescription("un edited content posted by thule")
+                    .id("1")
+                    .build();
+            ContentType contentType1 = new ContentType.Builder("raw")
+                    .contentTyeDescription("un edited content posted by thule")
+                    .id("1")
+                    .build();
+            ContentType contentType2 = new ContentType.Builder("Published")
+                    .contentTyeDescription("un edited content posted by thule")
+                    .id("1")
+                    .build();
+            contentTypes.put(contentType .getId(),contentType );
+            contentTypes.put(contentType1.getId(),contentType1);
+            contentTypes.put(contentType2.getId(),contentType2);
+        }
+    }
+
     @Override
     public ContentType find(String s) {
-     return null;
+     return contentTypes.get(s);
     }
 
     @Override
     public ContentType save(ContentType entity) {
-        return new ContentType.Builder(entity.getContentTyeName())
-                    .contentTyeDescription(entity.getContentTyeDescription())
-                    .id(entity.getId()).build();
+        contentTypes.put(entity.getId(),entity);
+        return contentTypes.get(entity.getId());
     }
     @Override
     public ContentType merge(ContentType entity) {
-        return null;
+        contentTypes.put(entity.getId(),entity);
+        return contentTypes.get(entity.getId());
     }
 
     @Override
     public void remove(ContentType entity) {
-
+        contentTypes.remove(entity.getId());
     }
 
     @Override
     public List<ContentType> findAll() {
-        ContentType contentType = new ContentType.Builder("edited")
-                    .contentTyeDescription("un edited content posted by thule")
-                    .id("1")
-                    .build();
-        ContentType contentType1 = new ContentType.Builder("raw")
-                    .contentTyeDescription("un edited content posted by thule")
-                    .id("1")
-                    .build();
-          ContentType contentType2 = new ContentType.Builder("published")
-                    .contentTyeDescription("un edited content posted by thule")
-                    .id("1")
-                    .build();
-        contentTypes.add(contentType);
-        contentTypes.add(contentType1);
-        contentTypes.add(contentType2);
-        return contentTypes;
+
+        return new ArrayList<>(contentTypes.values());
     }
 }

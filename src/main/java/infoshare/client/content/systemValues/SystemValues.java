@@ -10,12 +10,12 @@ import infoshare.client.content.MainLayout;
 /**
  * Created by codex on 2015/06/25.
  */
-public class systemValues extends VerticalLayout {
+public class SystemValues extends VerticalLayout {
 
     private MainLayout main;
     private TabSheet tab;
 
-    public systemValues(MainLayout main, String selectedTab) {
+    public SystemValues(MainLayout main, String selectedTab) {
 
         this.main = main;
 
@@ -39,12 +39,12 @@ public class systemValues extends VerticalLayout {
         tab.addTab(contentSourceView, "Add content Source", null);
         tab.addTab(categoryView, "Add Content Category", null);
 
-        if (selectedTab.equals("LANDING")) {
+        if (selectedTab.equalsIgnoreCase("LANDING")) {
             tab.setSelectedTab(contentTypeView);
-        }else if(selectedTab.equals("SOURCE")){
-            tab.addComponent(contentSourceView);
-        }else if(selectedTab.equals("CATEGORY")){
-            tab.addComponent(categoryView);
+        }else if(selectedTab.equalsIgnoreCase("SOURCE")){
+            tab.setSelectedTab(contentSourceView);
+        }else if(selectedTab.equalsIgnoreCase("CATEGORY")){
+            tab.setSelectedTab(categoryView);
         }
 
         addComponent(tab);
