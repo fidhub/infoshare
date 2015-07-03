@@ -17,9 +17,26 @@ import java.util.Set;
 public class UserServiceImpl implements UserService{
 
     List<User> users = new ArrayList<>();
-
+    public  void addValues(){
+        Set<Role> roles = new HashSet<>();
+        Role role = new Role.Builder("CareGiver")
+                .description("care giver").id("1").build();
+        Role role1 = new Role.Builder("Editor")
+                .description("Content Editor").id("2").build();
+        roles.add(role);
+        roles.add(role1);
+        User user = new User.Builder("Hadebe")
+                .firstname("Thulebona")
+                .othername("Emmanuel")
+                .role(roles)
+                .id("1")
+                .username("thuleh")
+                .build();
+        users.add(user);
+    }
     @Override
     public User find(String s) {
+        addValues();
         User user = null;
         for(User user1 : users){
             if(user1.getId().equals(s))
@@ -55,15 +72,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public List<User> findAll() {
-        Set<Role> roles = new HashSet<>();
-        User user = new User.Builder("Hadebe")
-                            .firstname("Thulebona")
-                            .othername("Emmanuel")
-                            .role(roles)
-                            .id("1")
-                            .username("thuleh")
-                            .build();
-        users.add(user);
+        addValues();
         return users;
     }
 }

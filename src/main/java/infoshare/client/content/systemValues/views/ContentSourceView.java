@@ -5,16 +5,12 @@ import com.vaadin.data.fieldgroup.FieldGroup;
 import com.vaadin.data.util.BeanItem;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Notification;
-import com.vaadin.ui.Table;
 import com.vaadin.ui.VerticalLayout;
 import infoshare.client.content.MainLayout;
+import infoshare.client.content.content.ContentMenu;
 import infoshare.client.content.systemValues.forms.ContentSourceForm;
-import infoshare.client.content.systemValues.forms.ContentTypeForm;
-import infoshare.client.content.systemValues.models.ContentTypeModel;
 import infoshare.client.content.systemValues.models.SourceModel;
 import infoshare.client.content.systemValues.tables.ContentSourceTable;
-import infoshare.client.content.systemValues.tables.ContentTypeTable;
-import infoshare.domain.ContentType;
 import infoshare.domain.Source;
 import infoshare.services.source.SourceService;
 import infoshare.services.source.sourceServiceImpl.SourceServiceImpl;
@@ -71,7 +67,7 @@ public class ContentSourceView extends VerticalLayout implements Button.ClickLis
     private void saveForm(FieldGroup binder) {
         try {
             binder.commit();
-            sourceService.save(getEntity(binder));
+            sourceService.save(getUpdateEntity(binder));
             getHome();
             Notification.show("Record ADDED!", Notification.Type.TRAY_NOTIFICATION);
         } catch (FieldGroup.CommitException e) {
@@ -83,7 +79,7 @@ public class ContentSourceView extends VerticalLayout implements Button.ClickLis
     private void saveEditedForm(FieldGroup binder) {
         try {
             binder.commit();
-            sourceService.merge(getEntity(binder));
+            sourceService.merge(getUpdateEntity(binder));
             getHome();
             Notification.show("Record UPDATED!", Notification.Type.TRAY_NOTIFICATION);
         } catch (FieldGroup.CommitException e) {
@@ -93,11 +89,11 @@ public class ContentSourceView extends VerticalLayout implements Button.ClickLis
     }
 
     private void deleteForm(FieldGroup binder) {
-        final Source source = getEntity(binder);
+        final Source source = getUpdateEntity(binder);
         sourceService.remove(source);
         getHome();
     }
-    private Source getEntity(FieldGroup binder) {
+    private Source getUpdateEntity(FieldGroup binder) {
         final SourceModel bean = ((BeanItem<SourceModel>) binder.getItemDataSource()).getBean();
         final Source source = new Source.Builder(bean.getName())
                 .description(bean.getDescription())
@@ -107,7 +103,7 @@ public class ContentSourceView extends VerticalLayout implements Button.ClickLis
     }
 
     private void getHome() {
-//        main.content.setSecondComponent(new SetupMenu((main, "ROLES"));
+      main.content.setSecondComponent(new ContentMenu(main, "SOURCE"));
     }
 
     private void setEditFormProperties() {

@@ -125,9 +125,9 @@ public class UserView extends VerticalLayout implements
         return user;
     }
     private User getUpdateEntity(FieldGroup binder) {
+
         final UserModel bean = ((BeanItem<UserModel>) binder.getItemDataSource()).getBean();
         Set<Role> userRoles = new HashSet<>();
-
         if (bean.getRoleIds()!= null) {
             for (String roleId : bean.getRoleIds()) {
                 Role role = roleService.find(roleId);
@@ -193,4 +193,5 @@ public class UserView extends VerticalLayout implements
         model.setPassword(user.getPassword());
         return model;
     }
+
 }

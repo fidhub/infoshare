@@ -163,8 +163,6 @@ public class User implements Serializable, Comparable<User> {
         return username;
     }
 
-
-
     //    public PersonDemography getDemography() {
 //        return demography;
 //    }

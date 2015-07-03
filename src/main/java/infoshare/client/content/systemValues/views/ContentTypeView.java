@@ -66,7 +66,7 @@ public class ContentTypeView extends VerticalLayout implements Button.ClickListe
     private void saveForm(FieldGroup binder) {
         try {
             binder.commit();
-            contentTypeService.save(getEntity(binder));
+            contentTypeService.save(getUpdateEntity(binder));
             getHome();
             Notification.show("Record ADDED!", Notification.Type.HUMANIZED_MESSAGE);
         } catch (FieldGroup.CommitException e) {
@@ -78,7 +78,7 @@ public class ContentTypeView extends VerticalLayout implements Button.ClickListe
     private void saveEditedForm(FieldGroup binder) {
         try {
             binder.commit();
-            contentTypeService.merge(getEntity(binder));
+            contentTypeService.merge(getUpdateEntity(binder));
             getHome();
             Notification.show("Record UPDATED!", Notification.Type.HUMANIZED_MESSAGE);
         } catch (FieldGroup.CommitException e) {
@@ -88,11 +88,11 @@ public class ContentTypeView extends VerticalLayout implements Button.ClickListe
     }
 
     private void deleteForm(FieldGroup binder) {
-        final ContentType contentType = getEntity(binder);
+        final ContentType contentType = getUpdateEntity(binder);
         contentTypeService.remove(contentType);
         getHome();
     }
-    private ContentType getEntity(FieldGroup binder) {
+    private ContentType getUpdateEntity(FieldGroup binder) {
         final ContentTypeModel bean = ((BeanItem<ContentTypeModel>) binder.getItemDataSource()).getBean();
         final ContentType contentType = new ContentType.Builder(bean.getContentTyeName())
                 .contentTyeDescription(bean.getContentTyeDescription())
