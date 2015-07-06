@@ -5,8 +5,8 @@ import com.vaadin.server.Responsive;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.ui.UI;
-import infoshare.client.content.login.LoginView;
 import infoshare.App;
+import infoshare.client.content.login.LoginView;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -28,6 +28,7 @@ public class Index extends UI {
         setOverlayContainerLabel(" Events");
 
     }
+
 
 
 }

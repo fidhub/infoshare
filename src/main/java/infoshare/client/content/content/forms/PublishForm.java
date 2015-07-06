@@ -26,7 +26,7 @@ public class PublishForm extends FormLayout{
         binder = new FieldGroup(item);
 
         popUpCloseBtn = new Button("CLOSE");
-        final TextArea textArea = getTextArea("Content","content");
+        final RichTextArea richTextArea = getTextArea("Content","content");
         final HorizontalLayout buttons = new HorizontalLayout();
         buttons.setSpacing(true);
         buttons.addComponent(popUpCloseBtn);
@@ -35,25 +35,23 @@ public class PublishForm extends FormLayout{
         gridLayout.setSizeFull();
         gridLayout.setSpacing(true);
         Responsive.makeResponsive(gridLayout);
-        gridLayout.addComponent(textArea, 0, 0, 3, 2);
+        gridLayout.addComponent(richTextArea, 0, 0, 3, 2);
         gridLayout.addComponent(buttons,2,6);
         addComponent(gridLayout);
     }
 
 
-    private TextArea getTextArea(String label,String field){
-        final TextArea textArea = new TextArea(label);
-        textArea.setImmediate(true);
-        textArea.setWordwrap(true);
-        textArea.setHeight(400.0f,Unit.PIXELS);
-        textArea.setWidth(98.0f,Unit.PERCENTAGE);
-        textArea.setNullRepresentation("");
-        textArea.setNullRepresentation("");
-        textArea.addValidator(new BeanValidator(RawAndEditModel.class, field));
-        textArea.setImmediate(true);
-        binder.bind(textArea,field);
+    private RichTextArea getTextArea(String label,String field){
+        final RichTextArea richTextArea = new RichTextArea(label);
+        richTextArea.setImmediate(true);
+        richTextArea.setHeight(400.0f, Unit.PIXELS);
+        richTextArea.setWidth(98.0f, Unit.PERCENTAGE);
+        richTextArea.setNullRepresentation("");
+        richTextArea.addValidator(new BeanValidator(RawAndEditModel.class, field));
+        richTextArea.setImmediate(true);
+        binder.bind(richTextArea,field);
 
-        return textArea;
+        return richTextArea;
     }
 
 }

@@ -1,9 +1,9 @@
 package infoshare.client.content;
 
-import com.vaadin.ui.Button;
 import com.vaadin.ui.HorizontalSplitPanel;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.themes.ValoTheme;
 import infoshare.client.footer.Footer;
 import infoshare.client.header.Header;
 import infoshare.client.home.Index;
@@ -25,6 +25,7 @@ public class MainLayout extends VerticalLayout{
         content.setFirstComponent(new Sidebar(this));
         Panel landingPanel = new Panel();
         landingPanel.setSizeFull();
+        landingPanel.addStyleName(ValoTheme.PANEL_BORDERLESS);
         landingPanel.setHeight(500.0f,Unit.PIXELS);
 
         content.setSecondComponent(landingPanel);
@@ -34,5 +35,4 @@ public class MainLayout extends VerticalLayout{
         addComponent(new Footer());
 
     }
-
 }

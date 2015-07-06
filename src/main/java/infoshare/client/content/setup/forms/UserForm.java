@@ -4,12 +4,11 @@ import com.vaadin.data.fieldgroup.FieldGroup;
 import com.vaadin.data.util.BeanItem;
 import com.vaadin.data.validator.BeanValidator;
 import com.vaadin.ui.*;
-import infoshare.client.content.setup.models.RoleModel;
 import infoshare.client.content.setup.models.UserModel;
 import infoshare.conf.util.UIComboBoxHelper;
-
-import java.util.ArrayList;
-import java.util.List;
+import infoshare.domain.Role;
+import infoshare.services.roles.Impl.RoleServiceImpl;
+import infoshare.services.roles.RoleService;
 
 /**
  * Created by hashcode on 2015/06/24.
@@ -21,6 +20,8 @@ public class UserForm extends FormLayout {
     private final UserModel model;
     public final BeanItem<UserModel> item;
     public final FieldGroup binder;
+
+    private RoleService roleService = new RoleServiceImpl();
     public ListSelect rolesList = new ListSelect();
     // Define Buttons
     public final Button save = new Button("Save");
@@ -106,8 +107,7 @@ public class UserForm extends FormLayout {
 
     private ListSelect getRoles(String label, String field) {
         rolesList.setCaption(label);
-        List<RoleModel> roles = new ArrayList<>(); // GET THIS FROM REST API
-        for (RoleModel role : roles) {
+        for (Role role : roleService.findAll()) {
             rolesList.setItemCaption(role.getId(), role.getRolename() + " " + role.getDescription());
             rolesList.setNullSelectionAllowed(false);
             rolesList.setMultiSelect(true);

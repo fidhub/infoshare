@@ -5,7 +5,6 @@ import com.vaadin.data.util.BeanItem;
 import com.vaadin.data.validator.BeanValidator;
 import com.vaadin.ui.*;
 import infoshare.client.content.systemValues.models.ContentTypeModel;
-import infoshare.client.content.systemValues.models.SourceModel;
 
 
 /**
@@ -54,6 +53,7 @@ public class ContentTypeForm extends FormLayout {
         comboBox.setWidth(250, Unit.PIXELS);
         comboBox.addValidator(new BeanValidator(ContentTypeModel.class, field));
         comboBox.setImmediate(true);
+        comboBox.setNullSelectionAllowed(false);
         binder.bind(comboBox, field);
         return comboBox;
     }

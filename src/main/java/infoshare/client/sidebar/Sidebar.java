@@ -21,7 +21,7 @@ public class Sidebar extends Accordion implements ItemClickEvent.ItemClickListen
     public Sidebar(MainLayout main) {
         setSizeFull();
         this.main = main;
-        setHeight("350px");
+        setHeight("250px");
 
         VerticalLayout rawMenu = new VerticalLayout();
         ContentTree contentTree = new ContentTree(main);

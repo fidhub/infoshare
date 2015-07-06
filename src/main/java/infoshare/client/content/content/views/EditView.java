@@ -24,6 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * Created by hashcode on 2015/06/24.
  */
 public class EditView extends VerticalLayout implements Button.ClickListener, Property.ValueChangeListener{
+
     @Autowired
     private ContentService contentService = new ContentServiceImp();
     private CategoryService categoryService = new CategoryServiceImpl();
@@ -37,6 +38,7 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
     private Button editBtn = new Button("UPDATE");
 
    public EditView( MainLayout mainApp) {
+
        this.main = mainApp;
        this.table = new EditTable(main);
        this.form = new RawAndEditForm();

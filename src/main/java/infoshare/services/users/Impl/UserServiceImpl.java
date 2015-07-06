@@ -46,6 +46,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public User save(User entity) {
         users.put(entity.getId(),entity);
+        System.out.println(entity.getRole());
         return users.get(entity.getId());
     }
 

@@ -17,17 +17,14 @@ import org.springframework.stereotype.Service;
 @Configuration
 @EnableAutoConfiguration
 public class App{
-
     private RoleService roleService = new RoleServiceImpl();
 
     @Service
     public static class MyService {
-
         public String sampleService() {
             return "Application Started";
         }
     }
-
     public static void main( String[] args ){
         SpringApplication.run(App.class, args);
     }

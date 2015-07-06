@@ -42,7 +42,6 @@ public class UserView extends VerticalLayout implements
         addComponent(form);
         addComponent(table);
         addListeners();
-        loadList();
     }
 
     @Override
@@ -71,11 +70,7 @@ public class UserView extends VerticalLayout implements
             setReadFormProperties();
         }
     }
-    private void loadList(){
-        for(User role: userService.findAll()){
-            form.rolesList.setValue(role.getFirstname());
-        }
-    }
+
     private void saveForm(FieldGroup binder) {
         try {
             binder.commit();
