@@ -68,7 +68,6 @@ public class RawAndEditForm extends FormLayout {
         final ComboBox comboBox = new ComboBox(label);
         comboBox.setImmediate(true);
         comboBox.addValidator(new BeanValidator(RawAndEditModel.class, field));
-        comboBox.setImmediate(true);
         comboBox.setNullSelectionAllowed(false);
         binder.bind(comboBox,field);
         return comboBox;

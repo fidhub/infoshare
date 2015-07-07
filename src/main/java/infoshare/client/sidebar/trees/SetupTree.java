@@ -2,9 +2,10 @@ package infoshare.client.sidebar.trees;
 
 import com.vaadin.event.ItemClickEvent;
 import com.vaadin.ui.Tree;
-import infoshare.client.content.systemValues.SystemValues;
 import infoshare.client.content.MainLayout;
+import infoshare.client.content.courseSetup.CoursesMenu;
 import infoshare.client.content.setup.SetupMenu;
+import infoshare.client.content.systemValues.SystemValues;
 
 /**
  * Created by hashcode on 2015/06/23.
@@ -32,7 +33,7 @@ public class SetupTree extends Tree implements ItemClickEvent.ItemClickListener 
             main.content.setSecondComponent(new SetupMenu(main, LANDING_TAB));
         }
         if (COURSES.equals(event.getItemId())) {
-            main.content.setSecondComponent(new SetupMenu(main, LANDING_TAB));
+            main.content.setSecondComponent(new CoursesMenu(main, LANDING_TAB));
         }
         if (SYSTEM_VALUES.equals(event.getItemId())) {
             main.content.setSecondComponent(new SystemValues(main, LANDING_TAB));
