@@ -5,7 +5,7 @@ import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 import infoshare.client.footer.Footer;
-import infoshare.client.header.Header;
+import infoshare.client.header.view.Header;
 import infoshare.client.home.Index;
 import infoshare.client.sidebar.Sidebar;
 

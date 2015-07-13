@@ -5,6 +5,7 @@ import com.vaadin.data.fieldgroup.FieldGroup;
 import com.vaadin.data.util.BeanItem;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.*;
+import com.vaadin.ui.themes.ChameleonTheme;
 import com.vaadin.ui.themes.ValoTheme;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.courseSetup.CoursesMenu;
@@ -134,12 +135,14 @@ public class LessonView extends VerticalLayout implements Button.ClickListener, 
                 courseCmb.addItem(course.getId());
                 courseCmb.setItemCaption(course.getId(),
                         course.getCourseLevel() + " " +
-                                course.getCourseDescription());
+                        course.getCourseDescription());
                 courseCmb.setNullSelectionAllowed(false);
                 courseCmb.setImmediate(true);
             }
         }
-        courseCmb.setWidth(350.0f, Unit.PIXELS);
+        courseCmb.setWidth(330.0f, Unit.PIXELS);
+        courseCmb.addStyleName(ChameleonTheme.COMBOBOX_SELECT_BUTTON);
+        courseCmb.setIcon(FontAwesome.BOOK);
         return courseCmb;
     }
     private void getHome(){

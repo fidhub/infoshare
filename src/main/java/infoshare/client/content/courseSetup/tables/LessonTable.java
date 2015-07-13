@@ -17,7 +17,6 @@ public class LessonTable extends Table {
         addContainerProperty("Lesson",String.class,null);
         addContainerProperty("Description ",String.class,null);
 
-
         setSelectable(true);
         setNullSelectionAllowed(false);
         setImmediate(true);
