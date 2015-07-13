@@ -69,9 +69,8 @@ public class Header extends VerticalLayout implements
 
         home =new Button("HOME");
         home.setIcon(FontAwesome.HOME);
-        home.setStyleName("header-panel");
-       /* home.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
-        home.addStyleName(ValoTheme.BUTTON_SMALL);*/
+        home.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
+        home.addStyleName(ValoTheme.BUTTON_SMALL);
         menuItems.addComponent(home);
 
         final  MenuBar barMenu = new MenuBar();
