@@ -2,13 +2,11 @@ package infoshare.client.content.setup.tables;
 
 import com.vaadin.ui.Table;
 import infoshare.client.content.MainLayout;
-import infoshare.client.content.setup.models.RoleModel;
 import infoshare.domain.Role;
 import infoshare.services.roles.Impl.RoleServiceImpl;
 import infoshare.services.roles.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

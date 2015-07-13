@@ -99,6 +99,7 @@ public class RoleView extends VerticalLayout implements
         roleService.remove(role);
         getHome();
     }
+
     private Role getEntity(FieldGroup binder) {
         final RoleModel bean = ((BeanItem<RoleModel>) binder.getItemDataSource()).getBean();
         final Role role = new Role.Builder(bean.getRolename())

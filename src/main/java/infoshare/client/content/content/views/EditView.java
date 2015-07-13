@@ -3,7 +3,9 @@ package infoshare.client.content.content.views;
 import com.vaadin.data.Property;
 import com.vaadin.data.fieldgroup.FieldGroup;
 import com.vaadin.data.util.BeanItem;
+import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.*;
+import com.vaadin.ui.themes.ValoTheme;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.content.ContentMenu;
 import infoshare.client.content.content.forms.RawAndEditForm;
@@ -43,6 +45,8 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
        this.table = new EditTable(main);
        this.form = new RawAndEditForm();
        this.popUp = modelWindow();
+       editBtn.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
+       editBtn.setIcon(FontAwesome.EDIT);
        setSizeFull();
        setSpacing(true);
        addComponent(editBtn);

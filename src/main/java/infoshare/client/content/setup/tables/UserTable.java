@@ -20,7 +20,6 @@ public class UserTable extends Table {
     public UserTable(MainLayout main) {
         this.main = main;
         setSizeFull();
-
         addContainerProperty("Username", String.class, null);
         addContainerProperty("First Name", String.class, null);
         addContainerProperty("Last Name", String.class, null);

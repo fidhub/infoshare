@@ -3,7 +3,9 @@ package infoshare.client.content.content.views;
 import com.vaadin.data.Property;
 import com.vaadin.data.fieldgroup.FieldGroup;
 import com.vaadin.data.util.BeanItem;
+import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.*;
+import com.vaadin.ui.themes.ValoTheme;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.content.ContentMenu;
 import infoshare.client.content.content.forms.RawAndEditForm;
@@ -35,14 +37,14 @@ public class RawView extends VerticalLayout implements
     private final RawAndEditForm form;
 
     private Window popUp ;
-    private Button editBtn;
+    private Button editBtn = new Button("EDIT");
     public RawView( MainLayout mainApp) {
         this.main = mainApp;
         this.table = new RawTable(main);
         this.form = new RawAndEditForm();
         this.popUp = modelWindow();
-        editBtn = new Button("EDIT");
-
+        editBtn.setIcon(FontAwesome.EDIT);
+        editBtn.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
         setSizeFull();
         setSpacing(true);
         addComponent(editBtn);

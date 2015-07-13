@@ -7,13 +7,14 @@ import java.io.Serializable;
  * Created by codex on 2015/07/07.
  */
 public class LessonModel implements Serializable {
+
     private String id;
     @NotNull
     private String lesson;
     @NotNull
     private String description;
     @NotNull
-    private String lessonContent;
+    private String content;
 
     public String getId() {
         return id;
@@ -39,11 +40,11 @@ public class LessonModel implements Serializable {
         this.description = description;
     }
 
-    public String getLessonContent() {
-        return lessonContent;
+    public String getContent() {
+        return content;
     }
 
-    public void setLessonContent(String lessonContent) {
-        this.lessonContent = lessonContent;
+    public void setContent(String content) {
+        this.content = content;
     }
 }

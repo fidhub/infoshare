@@ -3,8 +3,10 @@ package infoshare.client.content.content.forms;
 import com.vaadin.data.fieldgroup.FieldGroup;
 import com.vaadin.data.util.BeanItem;
 import com.vaadin.data.validator.BeanValidator;
+import com.vaadin.server.FontAwesome;
 import com.vaadin.server.Responsive;
 import com.vaadin.ui.*;
+import com.vaadin.ui.themes.ValoTheme;
 import infoshare.client.content.content.models.RawAndEditModel;
 
 /**
@@ -29,6 +31,8 @@ public class PublishForm extends FormLayout{
         final RichTextArea richTextArea = getTextArea("Content","content");
         final HorizontalLayout buttons = new HorizontalLayout();
         buttons.setSpacing(true);
+        popUpCloseBtn.setIcon(FontAwesome.POWER_OFF);
+        popUpCloseBtn.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
         buttons.addComponent(popUpCloseBtn);
 
         GridLayout gridLayout = new  GridLayout(4,7);

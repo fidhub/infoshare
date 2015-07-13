@@ -6,6 +6,7 @@ import infoshare.domain.User;
 import infoshare.services.roles.Impl.RoleServiceImpl;
 import infoshare.services.roles.RoleService;
 import infoshare.services.users.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -18,7 +19,8 @@ import java.util.*;
 public class UserServiceImpl implements UserService{
 
     static Map<String,User> users = null ;
-    RoleService roleService = new RoleServiceImpl();
+    @Autowired
+    private RoleService roleService = new RoleServiceImpl();
 
     public UserServiceImpl() {
         Set<Role> roles = new HashSet<>();
@@ -46,7 +48,6 @@ public class UserServiceImpl implements UserService{
     @Override
     public User save(User entity) {
         users.put(entity.getId(),entity);
-        System.out.println(entity.getRole());
         return users.get(entity.getId());
     }
 

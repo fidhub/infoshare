@@ -29,12 +29,12 @@ public class CoursesMenu extends VerticalLayout {
         tab.setHeight("100%");
         tab.setWidth("100%");
 
-        tab.addTab(addLesson, "Add Lessons", null);
-        tab.addTab(addCourse, "Add Courses", null);
+        tab.addTab(addLesson, "Add Lesson", null);
+        tab.addTab(addCourse, "Add Course", null);
 
         if (selectedTab.equalsIgnoreCase("LANDING")) {
             tab.setSelectedTab(addLesson);
-        }else if(selectedTab.equalsIgnoreCase("addCourse")){
+        }else if(selectedTab.equalsIgnoreCase("Course")){
             tab.setSelectedTab(addCourse);
         }
         addComponent(tab);

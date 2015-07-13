@@ -3,9 +3,11 @@ package infoshare.client.content.content.forms;
 import com.vaadin.data.fieldgroup.FieldGroup;
 import com.vaadin.data.util.BeanItem;
 import com.vaadin.data.validator.BeanValidator;
+import com.vaadin.server.FontAwesome;
 import com.vaadin.server.Responsive;
 import com.vaadin.ui.*;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.themes.ValoTheme;
 import infoshare.client.content.content.models.RawAndEditModel;
 
 /**
@@ -33,6 +35,10 @@ public class RawAndEditForm extends FormLayout {
 
         final HorizontalLayout buttons = new HorizontalLayout();
         buttons.setSpacing(true);
+        popUpUpdateBtn.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
+        popUpUpdateBtn.setIcon(FontAwesome.SAVE);
+        popUpCancelBtn.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
+        popUpCancelBtn.setIcon(FontAwesome.BACKWARD);
         buttons.addComponent(popUpUpdateBtn);
         buttons.addComponent(popUpCancelBtn);
 

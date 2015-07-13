@@ -2,7 +2,9 @@ package infoshare.client.content.content.views;
 
 import com.vaadin.data.Property;
 import com.vaadin.data.util.BeanItem;
+import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.*;
+import com.vaadin.ui.themes.ValoTheme;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.content.ContentMenu;
 import infoshare.client.content.content.forms.PublishForm;
@@ -24,14 +26,16 @@ public class PublishView extends VerticalLayout implements Button.ClickListener,
     private final PublishTable table;
     private final PublishForm form;
     private final Window popUp ;
-    private Button viewContent ;
+    private Button viewContent = new Button("View Content");
 
     public PublishView( MainLayout mainApp) {
         this.main = mainApp;
         this.table = new PublishTable(main);
         this.form = new PublishForm();
         this.popUp = modelWindow();
-        viewContent = new Button("View Content");
+
+        viewContent.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
+        viewContent.setIcon(FontAwesome.EDIT);
         viewContent.setVisible(false);
         setSizeFull();
         setSpacing(true);

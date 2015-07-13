@@ -13,8 +13,7 @@ import java.net.URLConnection;
 /**
  * Created by codex on 2015/06/30.
  */
-public class RestApiCon{
-
+public class RestApiCon {
      URLConnection urlConnection ;
     public void openCon(String fetchUrl ){
 

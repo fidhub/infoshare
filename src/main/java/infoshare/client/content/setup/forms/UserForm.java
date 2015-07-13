@@ -5,7 +5,6 @@ import com.vaadin.data.util.BeanItem;
 import com.vaadin.data.validator.BeanValidator;
 import com.vaadin.ui.*;
 import infoshare.client.content.setup.models.UserModel;
-import infoshare.conf.util.UIComboBoxHelper;
 import infoshare.domain.Role;
 import infoshare.services.roles.Impl.RoleServiceImpl;
 import infoshare.services.roles.RoleService;
@@ -16,7 +15,6 @@ import infoshare.services.roles.RoleService;
 public class UserForm extends FormLayout {
 
 
-    private UIComboBoxHelper UIComboBox = new UIComboBoxHelper();
     private final UserModel model;
     public final BeanItem<UserModel> item;
     public final FieldGroup binder;
@@ -96,13 +94,6 @@ public class UserForm extends FormLayout {
         checkBox.setImmediate(true);
         binder.bind(checkBox, field);
         return checkBox;
-    }
-
-    private ComboBox getComboBox(String label, String field) {
-        ComboBox comboBox = new ComboBox(label);
-
-        binder.bind(comboBox, field);
-        return comboBox;
     }
 
     private ListSelect getRoles(String label, String field) {

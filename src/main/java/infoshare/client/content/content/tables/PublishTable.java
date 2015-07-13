@@ -1,9 +1,5 @@
 package infoshare.client.content.content.tables;
 
-import com.vaadin.server.FontAwesome;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.Component;
-import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.themes.ValoTheme;
 import infoshare.client.content.MainLayout;
@@ -27,6 +23,7 @@ public class PublishTable extends Table{
     public PublishTable(MainLayout mainApp){
         this.main = mainApp;
         setSizeFull();
+        addStyleName(ValoTheme.TABLE_NO_HORIZONTAL_LINES);
         addContainerProperty("Title",String.class,null);
         addContainerProperty("Category",String.class,null);
         addContainerProperty("Creator",String.class,null);

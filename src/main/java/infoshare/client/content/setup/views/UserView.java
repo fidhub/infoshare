@@ -59,7 +59,6 @@ public class UserView extends VerticalLayout implements
             deleteForm(form.binder);
         }
     }
-
     @Override
     public void valueChange(Property.ValueChangeEvent event) {
         final Property property = event.getProperty();
@@ -70,7 +69,6 @@ public class UserView extends VerticalLayout implements
             setReadFormProperties();
         }
     }
-
     private void saveForm(FieldGroup binder) {
         try {
             binder.commit();
@@ -137,6 +135,7 @@ public class UserView extends VerticalLayout implements
                 }
             }
         }
+
         final User user = new User.Builder(bean.getLastname())
                 .firstname(bean.getFirstname())
                 .role(userRoles)

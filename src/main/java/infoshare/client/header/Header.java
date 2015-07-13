@@ -1,5 +1,6 @@
 package infoshare.client.header;
 
+import com.vaadin.annotations.Theme;
 import com.vaadin.server.FileResource;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.server.Responsive;
@@ -7,21 +8,25 @@ import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 import infoshare.client.content.MainLayout;
 import infoshare.client.home.Index;
+import infoshare.services.Content.ContentService;
+import infoshare.services.Content.Impl.ContentServiceImp;
 
 import java.io.File;
 
 /**
  * Created by hashcode on 2015/06/23.
  */
+@Theme("mytheme")
 public class Header extends VerticalLayout implements
         Button.ClickListener {
 
+    private ContentService content = new ContentServiceImp();
     private MainLayout main ;
     private Button home;
     public Header() {
         this.setSizeFull();
-        Component header = headerPanel();
-        this.addComponent(header);
+        setSpacing(true);
+        this.addComponent(headerPanel());
         addEvent();
     }
 
@@ -29,14 +34,14 @@ public class Header extends VerticalLayout implements
         final HorizontalLayout headLayout = new HorizontalLayout();
         headLayout.setWidth("100%");
 
-
-        final Panel headerPanel = new Panel("Info share");
+        final Panel headerPanel = new Panel();
         headerPanel.setWidth("100%");
+        headerPanel.setHeight(120.0f,Unit.PIXELS);
         headerPanel.addStyleName(ValoTheme.PANEL_BORDERLESS);
 
         Component logo = logo();
         headLayout.addComponent(logo);
-        headLayout.setComponentAlignment(logo,Alignment.TOP_LEFT);
+        headLayout.setComponentAlignment(logo,Alignment.BOTTOM_CENTER);
         Component menuItems = menuItems();
         headLayout.addComponent(menuItems);
         headLayout.setComponentAlignment(menuItems,Alignment.MIDDLE_RIGHT);
@@ -51,7 +56,7 @@ public class Header extends VerticalLayout implements
                 new File("src/main/webapp/VAADIN/themes/dashboard/header.png"));
         Image logoImage = new Image(null,resource);
         Responsive.makeResponsive(logoImage);
-        logoImage.setHeight("60px");
+        logoImage.setHeight(80.0f,Unit.PIXELS);
         logoImage.setWidth(100.0f,Unit.PERCENTAGE);
         logo.addComponent(logoImage);
         return logo;
@@ -64,8 +69,9 @@ public class Header extends VerticalLayout implements
 
         home =new Button("HOME");
         home.setIcon(FontAwesome.HOME);
-        home.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
-        home.addStyleName(ValoTheme.BUTTON_SMALL);
+        home.setStyleName("header-panel");
+       /* home.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
+        home.addStyleName(ValoTheme.BUTTON_SMALL);*/
         menuItems.addComponent(home);
 
         final  MenuBar barMenu = new MenuBar();
@@ -74,10 +80,16 @@ public class Header extends VerticalLayout implements
 
         MenuBar.MenuItem messages = barMenu.addItem("Notification",null);
         messages.setIcon(FontAwesome.BELL);
+
         messages.addItem("",null);
+        /*for (Content cont: content.findAll()){
+             messages.addItem(cont.getCategory()+"      "+cont.getTitle(),null);
+             messages.addSeparator();
+        }*/
+
 
         final MenuBar.MenuItem  UserDetails = barMenu.addItem(" User name",null); // from rest api
-        UserDetails.setIcon(FontAwesome.USER);
+        UserDetails.setIcon(FontAwesome.USER_MD);
         UserDetails.addItem("",null);
         UserDetails.addItem("My Account",null);
         UserDetails.addItem("Sing out",null);

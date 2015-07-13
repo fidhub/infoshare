@@ -1,6 +1,7 @@
 package infoshare.client.content.content.tables;
 
 import com.vaadin.ui.Table;
+import com.vaadin.ui.themes.ValoTheme;
 import infoshare.client.content.MainLayout;
 import infoshare.domain.Content;
 import infoshare.services.Content.ContentService;
@@ -23,6 +24,7 @@ public class RawTable extends Table {
     public RawTable(MainLayout mainApp){
         this.main = mainApp;
         setSizeFull();
+        addStyleName(ValoTheme.TABLE_NO_HORIZONTAL_LINES);
         addContainerProperty("Title",String.class,null);
         addContainerProperty("Category",String.class,null);
         addContainerProperty("Creator",String.class,null);

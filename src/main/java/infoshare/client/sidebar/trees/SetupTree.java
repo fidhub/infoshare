@@ -13,7 +13,7 @@ import infoshare.client.content.systemValues.SystemValues;
 public class SetupTree extends Tree implements ItemClickEvent.ItemClickListener {
     private final MainLayout main;
     private static final Object USERS="Users";
-    private static final Object COURSES="Courses";
+    private static final Object COURSES="Course";
     private static final Object SYSTEM_VALUES ="System Values";
     private static final String LANDING_TAB = "LANDING";
 
