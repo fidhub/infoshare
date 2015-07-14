@@ -18,16 +18,13 @@ public class PublishForm extends FormLayout{
     private final RawAndEditModel model;
     public final BeanItem<RawAndEditModel> item;
     public final FieldGroup binder;
-
-
-    public Button popUpCloseBtn;
+    public Button popUpCloseBtn =new Button("CLOSE");
 
     public PublishForm() {
         model = new RawAndEditModel();
         item = new BeanItem<>(model);
         binder = new FieldGroup(item);
 
-        popUpCloseBtn = new Button("CLOSE");
         final RichTextArea richTextArea = getTextArea("Content","content");
         final HorizontalLayout buttons = new HorizontalLayout();
         buttons.setSpacing(true);
@@ -43,7 +40,6 @@ public class PublishForm extends FormLayout{
         gridLayout.addComponent(buttons,2,6);
         addComponent(gridLayout);
     }
-
 
     private RichTextArea getTextArea(String label,String field){
         final RichTextArea richTextArea = new RichTextArea(label);

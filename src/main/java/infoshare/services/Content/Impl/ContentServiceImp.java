@@ -41,7 +41,7 @@ public class ContentServiceImp implements ContentService {
                         "proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
                 .dateCreated(new Date()).id("6").build();
 
-        Content content3 = new Content.Builder("CANCER").category("Circumcision")
+        Content content3 = new Content.Builder("Cancer").category("Circumcision")
                 .contentType("edited").creator("thule")
                 .source("jozi")
                 .content("psum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\n" +

@@ -9,7 +9,6 @@ import infoshare.services.Content.Impl.ContentServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by hashcode on 2015/06/24.
@@ -24,29 +23,31 @@ public class EditTable extends Table{
         this.main = mainApp;
 
         setSizeFull();
-        addStyleName(ValoTheme.TABLE_NO_HORIZONTAL_LINES);
+        addStyleName(ValoTheme.TABLE_BORDERLESS);
         addContainerProperty("Title",String.class,null);
         addContainerProperty("Category",String.class,null);
         addContainerProperty("Creator",String.class,null);
         addContainerProperty("Source",String.class,null);
         addContainerProperty("Date Created",Date.class,null);
-        List<Content> contents = contentService.findAll();
 
-       for (Content content: contents) {
-           if (content.getContentType().equalsIgnoreCase("edited")) {
-               addItem(new Object[]{
-                       content.getTitle(),
-                       content.getCategory(),
-                       content.getCreator(),
-                       content.getSource(),
-                       content.getDateCreated()
-               }, content.getId());
-           }
+       for (Content content:contentService.findAll()) {
+           loadTable(content);
        }
         setNullSelectionAllowed(false);
         setSelectable(true);
         setImmediate(true);
     }
 
+    public void loadTable(Content content) {
+        if (content.getContentType().equalsIgnoreCase("edited")) {
+            addItem(new Object[]{
+                    content.getTitle(),
+                    content.getCategory(),
+                    content.getCreator(),
+                    content.getSource(),
+                    content.getDateCreated()
+            }, content.getId());
+        }
+    }
 
 }

@@ -3,6 +3,7 @@ package infoshare.client.content.content.views;
 import com.vaadin.data.Property;
 import com.vaadin.data.fieldgroup.FieldGroup;
 import com.vaadin.data.util.BeanItem;
+import com.vaadin.event.FieldEvents;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
@@ -14,12 +15,16 @@ import infoshare.client.content.content.tables.RawTable;
 import infoshare.domain.Category;
 import infoshare.domain.Content;
 import infoshare.domain.ContentType;
+import infoshare.domain.Source;
+import infoshare.filterSearch.ContentFilter;
 import infoshare.services.Content.ContentService;
 import infoshare.services.Content.Impl.ContentServiceImp;
 import infoshare.services.ContentType.ContentTypeService;
 import infoshare.services.ContentType.Impl.ContentTypeServiceImpl;
 import infoshare.services.category.CategoryService;
 import infoshare.services.category.Impl.CategoryServiceImpl;
+import infoshare.services.source.SourceService;
+import infoshare.services.source.sourceServiceImpl.SourceServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -31,6 +36,7 @@ public class RawView extends VerticalLayout implements
     private ContentService contentService = new ContentServiceImp();
     private ContentTypeService contentTypeService = new ContentTypeServiceImpl();
     private CategoryService categoryService = new CategoryServiceImpl();
+    private SourceService sourceService = new SourceServiceImpl();
 
     private final MainLayout main;
     private final RawTable table;
@@ -38,21 +44,37 @@ public class RawView extends VerticalLayout implements
 
     private Window popUp ;
     private Button editBtn = new Button("EDIT");
+    private ContentFilter contentFilter = new ContentFilter();
+
     public RawView( MainLayout mainApp) {
         this.main = mainApp;
         this.table = new RawTable(main);
         this.form = new RawAndEditForm();
         this.popUp = modelWindow();
-        editBtn.setIcon(FontAwesome.EDIT);
-        editBtn.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
         setSizeFull();
         setSpacing(true);
-        addComponent(editBtn);
+        addComponent(getLayout());
         addComponent(table);
         addListeners();
-        editBtn.setVisible(false);
     }
-
+    private HorizontalLayout getLayout(){
+        final HorizontalLayout layout = new HorizontalLayout();
+        layout.setSpacing(false);
+        editBtn.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
+        editBtn.addStyleName(ValoTheme.BUTTON_SMALL);
+        editBtn.setIcon(FontAwesome.EDIT);
+        layout.addComponent(contentFilter.field);
+        layout.addComponent(editBtn);
+        return layout;
+    }
+    private void refreshContacts(String stringFilter ) {
+        try {
+            table.removeAllItems();
+            for(Content content: contentFilter.findAll(stringFilter))
+                table.loadTable(content);
+        }catch (Exception e){
+        }
+    }
     @Override
     public void buttonClick(Button.ClickEvent clickEvent) {
         final Button source = clickEvent.getButton();
@@ -90,6 +112,11 @@ public class RawView extends VerticalLayout implements
                 if(category!= null)
                 form.popUpContentTypeCmb.addItem(category.getContentTyeName());
             }
+        for(Source source:sourceService.findAll()){
+                if(source!= null)
+                form.popUpSourceCmb.addItem(source.getName());
+            }
+
 
     }
     private void getHome() {
@@ -124,6 +151,7 @@ public class RawView extends VerticalLayout implements
     }
     private Content updateEntity(FieldGroup binder){
         final RawAndEditModel bean = ((BeanItem<RawAndEditModel>) binder.getItemDataSource()).getBean();
+        bean.setDateCreated(contentService.find(bean.getId()).getDateCreated());
         final Content content = new Content.Builder(bean.getTitle())
                 .dateCreated(bean.getDateCreated())
                 .creator(bean.getCreator())
@@ -131,6 +159,7 @@ public class RawView extends VerticalLayout implements
                 .category(bean.getCategory())
                 .content(bean.getContent())
                 .contentType(bean.getContentType())
+                .dateCreated(bean.getDateCreated())
                 .id(bean.getId())
                 .build();
         return content;
@@ -152,6 +181,12 @@ public class RawView extends VerticalLayout implements
         form.popUpCancelBtn.addClickListener((Button.ClickListener) this);
         table.addValueChangeListener((Property.ValueChangeListener) this);
         editBtn.addClickListener((Button.ClickListener) this);
+        contentFilter.field.addTextChangeListener(new FieldEvents.TextChangeListener() {
+            @Override
+            public void textChange(FieldEvents.TextChangeEvent textChangeEvent) {
+                refreshContacts(textChangeEvent.getText());
+            }
+        });
     }
 
 }

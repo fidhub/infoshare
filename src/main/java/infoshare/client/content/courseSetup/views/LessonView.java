@@ -129,7 +129,6 @@ public class LessonView extends VerticalLayout implements Button.ClickListener, 
     private ComboBox getComboBox() {
         if (courseCmb == null)
             courseCmb = new ComboBox("Select Course");
-
         for (Course course : courseService.findAll()) {
             if (course.getId() != null) {
                 courseCmb.addItem(course.getId());
