@@ -4,7 +4,10 @@ import com.vaadin.event.ItemClickEvent;
 import com.vaadin.ui.Accordion;
 import com.vaadin.ui.VerticalLayout;
 import infoshare.client.content.MainLayout;
-import infoshare.client.sidebar.trees.*;
+import infoshare.client.sidebar.trees.ContentTree;
+import infoshare.client.sidebar.trees.CourseTree;
+import infoshare.client.sidebar.trees.PasswordTree;
+import infoshare.client.sidebar.trees.SetupTree;
 
 /**
  * Created by hashcode on 2015/06/23.
@@ -21,8 +24,7 @@ public class Sidebar extends Accordion implements ItemClickEvent.ItemClickListen
     public Sidebar(MainLayout main) {
         setSizeFull();
         this.main = main;
-        setHeight("350px");
-
+        setHeight("250px");
         VerticalLayout rawMenu = new VerticalLayout();
         ContentTree contentTree = new ContentTree(main);
         rawMenu.addComponent(contentTree);
@@ -44,7 +46,6 @@ public class Sidebar extends Accordion implements ItemClickEvent.ItemClickListen
         addTab(passwordTree, PASSWORD, null);
 
     }
-
     @Override
     public void itemClick(ItemClickEvent itemClickEvent) {
 

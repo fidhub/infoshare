@@ -59,7 +59,6 @@ public class UserView extends VerticalLayout implements
             deleteForm(form.binder);
         }
     }
-
     @Override
     public void valueChange(Property.ValueChangeEvent event) {
         final Property property = event.getProperty();
@@ -70,7 +69,6 @@ public class UserView extends VerticalLayout implements
             setReadFormProperties();
         }
     }
-
     private void saveForm(FieldGroup binder) {
         try {
             binder.commit();
@@ -85,27 +83,24 @@ public class UserView extends VerticalLayout implements
             getHome();
         }
     }
-
     private void saveEditedForm(FieldGroup binder) {
         try {
             binder.commit();
             userService.merge(getUpdateEntity(binder));
             getHome();
-            Notification.show("Record UPDATED!", Notification.Type.TRAY_NOTIFICATION);
+            Notification.show("Record UPDATED!", Notification.Type.HUMANIZED_MESSAGE);
         } catch (FieldGroup.CommitException e) {
-            Notification.show("Values MISSING!", Notification.Type.TRAY_NOTIFICATION);
+            Notification.show("Values MISSING!", Notification.Type.HUMANIZED_MESSAGE);
             getHome();
         }catch(Exception dp){
-            Notification.show("Username is already taken!", Notification.Type.TRAY_NOTIFICATION);
+            Notification.show("Username is already taken!", Notification.Type.HUMANIZED_MESSAGE);
             getHome();
         }
     }
-
     private void deleteForm(FieldGroup binder) {
         userService.remove(getUpdateEntity(binder));
         getHome();
     }
-
     private User getNewEntity(FieldGroup binder) {
 
         final UserModel bean = ((BeanItem<UserModel>) binder.getItemDataSource()).getBean();
@@ -128,11 +123,10 @@ public class UserView extends VerticalLayout implements
                 .build();
         return user;
     }
-
     private User getUpdateEntity(FieldGroup binder) {
+
         final UserModel bean = ((BeanItem<UserModel>) binder.getItemDataSource()).getBean();
         Set<Role> userRoles = new HashSet<>();
-
         if (bean.getRoleIds()!= null) {
             for (String roleId : bean.getRoleIds()) {
                 Role role = roleService.find(roleId);
@@ -151,11 +145,9 @@ public class UserView extends VerticalLayout implements
                 .build();
         return user;
     }
-
     private void getHome() {
         main.content.setSecondComponent(new SetupMenu(main, "LANDING"));
     }
-
     private void setEditFormProperties() {
         form.binder.setReadOnly(false);
         form.save.setVisible(false);
@@ -164,7 +156,6 @@ public class UserView extends VerticalLayout implements
         form.delete.setVisible(false);
         form.update.setVisible(true);
     }
-
     private void setReadFormProperties() {
         form.binder.setReadOnly(true);
         //Buttons Behaviou
@@ -174,7 +165,6 @@ public class UserView extends VerticalLayout implements
         form.delete.setVisible(true);
         form.update.setVisible(false);
     }
-
     private void addListeners() {
         //Register Button Listeners
         form.save.addClickListener((Button.ClickListener) this);
@@ -187,16 +177,13 @@ public class UserView extends VerticalLayout implements
         table.addValueChangeListener((Property.ValueChangeListener) this);
         form.rolesList.addValueChangeListener((Property.ValueChangeListener) this);
     }
-
     public UserModel getModel(User user) {
         Set<String> userRolesId = new HashSet<>();
-
         if (user.getRole() != null) {
             for (Role role : user.getRole()) {
                 userRolesId.add(role.getId());
             }
         }
-
         UserModel model = new UserModel();
         model.setFirstname(user.getFirstname());
         model.setLastname(user.getLastname());
@@ -206,4 +193,5 @@ public class UserView extends VerticalLayout implements
         model.setPassword(user.getPassword());
         return model;
     }
+
 }

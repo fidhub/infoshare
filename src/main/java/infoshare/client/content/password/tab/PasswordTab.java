@@ -27,8 +27,6 @@ public class PasswordTab extends VerticalLayout implements
         addListeners();
     }
 
-
-
     @Override
     public void buttonClick(Button.ClickEvent event) {
         final Button source = event.getButton();

@@ -5,37 +5,29 @@ import infoshare.client.content.MainLayout;
 import infoshare.domain.Role;
 import infoshare.services.roles.Impl.RoleServiceImpl;
 import infoshare.services.roles.RoleService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 /**
  * Created by hashcode on 2015/06/24.
  */
-
 public class RoleTable extends Table {
 
-    RoleService roleService= new RoleServiceImpl();
-
-    public RoleTable() {
-    }
-
-    private  MainLayout main;
-
-
+    private final MainLayout main;
+    @Autowired
+    private RoleService roleService = new RoleServiceImpl();
 
     public RoleTable(MainLayout main) {
         this.main = main;
         setSizeFull();
         addContainerProperty("Role Name", String.class, null);
-        addContainerProperty("Description", String.class, null);
-        System.out.println(" The ROLE FOR THE TABLE "+ roleService);
-        List<Role> roles = roleService.findAll(); // FROM REST
+        addContainerProperty("category", String.class, null);
+        List<Role> roles = roleService.findAll();
         for (Role role : roles) {
-            addItem(new Object[]{
-                    role.getRolename(),
+            addItem(new Object[]{role.getRolename(),
                     role.getDescription()
-                    },
-                    role.getId());
+            }, role.getId());
         }
         // Allow selecting items from the table.
         setNullSelectionAllowed(false);
@@ -44,6 +36,4 @@ public class RoleTable extends Table {
         // Send changes in selection immediately to server.
         setImmediate(true);
     }
-
-
 }

@@ -6,9 +6,7 @@ import com.vaadin.server.VaadinRequest;
 import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.ui.UI;
 import infoshare.App;
-import infoshare.client.content.content.tables.EditTable;
 import infoshare.client.content.login.LoginView;
-import infoshare.client.header.Header;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -30,6 +28,7 @@ public class Index extends UI {
         setOverlayContainerLabel(" Events");
 
     }
+
 
 
 }
