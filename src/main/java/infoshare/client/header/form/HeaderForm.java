@@ -5,6 +5,8 @@ import com.vaadin.server.FontAwesome;
 import com.vaadin.server.Responsive;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
+import infoshare.client.content.MainLayout;
+import infoshare.client.header.HeaderMenu;
 
 import java.io.File;
 
@@ -14,6 +16,7 @@ import java.io.File;
  */
 public class HeaderForm extends HorizontalLayout {
 
+    private MainLayout main;
     public MenuBar menuBar = new MenuBar();
     public MenuBar.MenuItem home ;
     public MenuBar.MenuItem notif;
@@ -67,9 +70,14 @@ public class HeaderForm extends HorizontalLayout {
     private MenuBar getBar(){
         menuBar.addStyleName(ValoTheme.MENUBAR_SMALL);
         menuBar.addStyleName(ValoTheme.MENUBAR_BORDERLESS);
-
-        home = menuBar.addItem("Home", FontAwesome.HOME, null);
+        home = menuBar.addItem("Home", FontAwesome.HOME, new MenuBar.Command() {
+            @Override
+            public void menuSelected(MenuBar.MenuItem menuItem) {
+                main.content.setSecondComponent(new HeaderMenu(main));
+            }
+        });
         notif = menuBar.addItem("Notifications",FontAwesome.BELL_O,null);
+
         user = menuBar.addItem("User name",FontAwesome.USER_MD,null);
 
         return menuBar;

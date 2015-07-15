@@ -1,6 +1,9 @@
 package infoshare.services.Content.Impl;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import com.vaadin.spring.annotation.SpringComponent;
+import infoshare.RestConnector.RestApiCon;
 import infoshare.domain.Content;
 import infoshare.services.Content.ContentService;
 import org.springframework.stereotype.Service;
@@ -15,8 +18,9 @@ import java.util.*;
 public class ContentServiceImp implements ContentService {
 
     static Map<String,Content> contents = null;
-
+    RestApiCon restApiCon= new RestApiCon();
     public ContentServiceImp() {
+        restApiCon.openCon("http://10.47.2.247:9000/api/cont/conts");
     if(contents == null) {
         contents = new HashMap<>();
         Content content1 = new Content.Builder("HIV").category("Pregnancy")
@@ -93,6 +97,15 @@ public class ContentServiceImp implements ContentService {
 
     @Override
     public List<Content> findAll() {
-        return new ArrayList<>(contents.values());
+        List<Content> cont = new ArrayList();
+       Gson myGson = new Gson();
+        try {
+            for (JsonElement contentElement : restApiCon.readAll()) {
+                Content content = myGson.fromJson(contentElement, Content.class);
+                cont.add(content);
+            }
+        }catch(Exception e){
+        }
+      return /*new ArrayList<>(contents.values());*/ cont;
     }
 }

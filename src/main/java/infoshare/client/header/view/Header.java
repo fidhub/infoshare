@@ -1,8 +1,6 @@
 package infoshare.client.header.view;
 
-import com.vaadin.ui.Button;
-import com.vaadin.ui.Panel;
-import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ChameleonTheme;
 import com.vaadin.ui.themes.ValoTheme;
 import infoshare.client.content.MainLayout;
@@ -13,8 +11,7 @@ import infoshare.services.Content.Impl.ContentServiceImp;
 /**
  * Created by hashcode on 2015/06/23.
  */
-public class Header extends VerticalLayout implements
-        Button.ClickListener {
+public class Header extends VerticalLayout {
 
     private ContentService content = new ContentServiceImp();
     private MainLayout main ;
@@ -37,10 +34,6 @@ public class Header extends VerticalLayout implements
         headerPanel.setContent(form);
         return headerPanel;
     }
-    @Override
-    public void buttonClick(Button.ClickEvent clickEvent) {
-        final Button source = clickEvent.getButton();
 
-    }
 
 }
