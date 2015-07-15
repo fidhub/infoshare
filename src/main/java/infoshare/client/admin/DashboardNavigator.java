@@ -21,8 +21,6 @@ public class DashboardNavigator extends Navigator {
 
         String host = getUI().getPage().getLocation().getHost();
 
-
-
     }
 
 

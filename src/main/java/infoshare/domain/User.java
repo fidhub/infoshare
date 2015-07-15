@@ -163,16 +163,12 @@ public class User implements Serializable, Comparable<User> {
         return username;
     }
 
-
-
     //    public PersonDemography getDemography() {
 //        return demography;
 //    }
     public boolean isEnable() {
         return enable;
     }
-
-
 
 
     private boolean isNullObject(Object object) {
@@ -182,7 +178,6 @@ public class User implements Serializable, Comparable<User> {
             return false;
         }
     }
-
 
     @Override
     public String toString() {

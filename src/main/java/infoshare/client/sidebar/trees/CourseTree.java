@@ -3,15 +3,14 @@ package infoshare.client.sidebar.trees;
 import com.vaadin.event.ItemClickEvent;
 import com.vaadin.ui.Tree;
 import infoshare.client.content.MainLayout;
-import infoshare.client.content.courses.CoursesMenu;
-import infoshare.client.content.password.PasswordMenu;
+import infoshare.client.content.courseSetup.CoursesMenu;
 
 /**
  * Created by hashcode on 2015/06/23.
  */
 public class CourseTree extends Tree implements ItemClickEvent.ItemClickListener {
     private final MainLayout main;
-    private static final Object COURSES="Courses";
+    private static final Object COURSES="Course";
     private static final String LANDING_TAB = "LANDING";
 
     public CourseTree(MainLayout main) {

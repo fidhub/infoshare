@@ -3,8 +3,9 @@ package infoshare.client.content.setup.tables;
 import com.vaadin.ui.Table;
 import infoshare.client.content.MainLayout;
 import infoshare.domain.User;
+import infoshare.services.users.Impl.UserServiceImpl;
+import infoshare.services.users.UserService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,17 +15,16 @@ public class UserTable extends Table {
 
     private final MainLayout main;
 
+    private UserService userService = new UserServiceImpl();
+
     public UserTable(MainLayout main) {
         this.main = main;
         setSizeFull();
-
         addContainerProperty("Username", String.class, null);
         addContainerProperty("First Name", String.class, null);
         addContainerProperty("Last Name", String.class, null);
         addContainerProperty("Enabled", Boolean.class, null);
-
-
-        List<User> users= new ArrayList<>(); // From REST API
+        List<User> users= userService.findAll(); // From REST API
         for (User user : users) {
             addItem(new Object[]{
                     user.getUsername(),

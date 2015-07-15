@@ -38,6 +38,7 @@ public class SetupMenu  extends VerticalLayout {
         } else if (selectedTab.equals("ROLES")) {
             tab.setSelectedTab(roleView);
         }
+
         addComponent(tab);
 
     }
