@@ -13,7 +13,7 @@ import java.util.Date;
 /**
  * Created by hashcode on 2015/06/24.
  */
-public class RawTable extends Table {
+public final class RawTable extends Table {
 
     @Autowired
     private ContentService contentService = new ContentServiceImp();
@@ -24,6 +24,9 @@ public class RawTable extends Table {
         this.main = mainApp;
         setSizeFull();
         addStyleName(ValoTheme.TABLE_BORDERLESS);
+        addStyleName(ValoTheme.TABLE_NO_STRIPES);
+        addStyleName(ValoTheme.TABLE_NO_VERTICAL_LINES);
+        addStyleName(ValoTheme.TABLE_SMALL);
         addContainerProperty("Title",String.class,null);
         addContainerProperty("Category",String.class,null);
         addContainerProperty("Creator",String.class,null);

@@ -106,6 +106,6 @@ public class ContentServiceImp implements ContentService {
             }
         }catch(Exception e){
         }
-      return /*new ArrayList<>(contents.values());*/ cont;
+      return new ArrayList<>(contents.values()); /*cont;*/
     }
 }

@@ -3,15 +3,15 @@ package infoshare.client.content;
 import com.vaadin.ui.HorizontalSplitPanel;
 import com.vaadin.ui.VerticalLayout;
 import infoshare.client.footer.Footer;
+import infoshare.client.header.landing_page.LandingHome;
 import infoshare.client.header.view.Header;
-import infoshare.client.header.view.LandingHome;
 import infoshare.client.home.Index;
 import infoshare.client.sidebar.Sidebar;
 
 /**
  * Created by hashcode on 2015/06/22.
  */
-public class MainLayout extends VerticalLayout{
+public class MainLayout extends VerticalLayout {
 
     private final Index main;
     public final HorizontalSplitPanel content = new HorizontalSplitPanel();
@@ -24,9 +24,10 @@ public class MainLayout extends VerticalLayout{
         content.setFirstComponent(new Sidebar(this));
         content.setSecondComponent(new LandingHome(this));
 
-        addComponent(new Header());
+        addComponent(new Header(this));
         addComponent(content);
         addComponent(new Footer());
 
     }
+
 }

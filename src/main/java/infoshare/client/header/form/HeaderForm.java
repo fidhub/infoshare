@@ -6,7 +6,6 @@ import com.vaadin.server.Responsive;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 import infoshare.client.content.MainLayout;
-import infoshare.client.header.HeaderMenu;
 
 import java.io.File;
 
@@ -17,11 +16,12 @@ import java.io.File;
 public class HeaderForm extends HorizontalLayout {
 
     private MainLayout main;
-    public MenuBar menuBar = new MenuBar();
-    public MenuBar.MenuItem home ;
-    public MenuBar.MenuItem notif;
-    public MenuBar.MenuItem user;
-    public HeaderForm() {
+    public Button home = new Button();
+    public Button notify = new Button();
+    public Button user = new Button();
+
+    public HeaderForm(MainLayout main) {
+        this.main = main;
         setSizeFull();
         addComponent(getLayout());
     }
@@ -34,15 +34,12 @@ public class HeaderForm extends HorizontalLayout {
         layout.addComponent(logo);
         layout.setComponentAlignment(logo,Alignment.MIDDLE_LEFT);
 
-        final HorizontalLayout horizontalLayout = new HorizontalLayout();
-        MenuBar barMenu = getBar();
-        horizontalLayout.addComponent(barMenu);
-
+        final HorizontalLayout buttons = getBar() ;
         final TextField textField = getSearch();
-        horizontalLayout.addComponent(textField);
+        buttons.addComponent(textField);
 
-        layout.addComponent(horizontalLayout);
-        layout.setComponentAlignment(horizontalLayout,Alignment.MIDDLE_RIGHT);
+        layout.addComponent(buttons);
+        layout.setComponentAlignment(buttons,Alignment.MIDDLE_RIGHT);
 
         return layout;
     }
@@ -67,20 +64,36 @@ public class HeaderForm extends HorizontalLayout {
         searchBox.addStyleName(ValoTheme.TEXTAREA_SMALL);
         return searchBox;
     }
-    private MenuBar getBar(){
-        menuBar.addStyleName(ValoTheme.MENUBAR_SMALL);
-        menuBar.addStyleName(ValoTheme.MENUBAR_BORDERLESS);
-        home = menuBar.addItem("Home", FontAwesome.HOME, new MenuBar.Command() {
-            @Override
-            public void menuSelected(MenuBar.MenuItem menuItem) {
-                main.content.setSecondComponent(new HeaderMenu(main));
-            }
-        });
-        notif = menuBar.addItem("Notifications",FontAwesome.BELL_O,null);
+    private HorizontalLayout getBar(){
+        final  HorizontalLayout layout = new HorizontalLayout();
+        layout.setSpacing(false);
+        home.setCaption("Home");
+        home.setDescription("Home/Landing Page");
+        home.setIcon(FontAwesome.HOME);
+        home.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
+        home.addStyleName(ValoTheme.BUTTON_SMALL);
 
-        user = menuBar.addItem("User name",FontAwesome.USER_MD,null);
+        notify.setCaption("Notifications");
+        notify.setDescription("Notifications (2 unread)");
+        notify.setIcon(FontAwesome.BELL_O);
+        notify.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
+        notify.addStyleName(ValoTheme.NOTIFICATION_BAR);
+        notify.addStyleName("unread");
+        notify.addStyleName("notifications");
+        notify.addStyleName(ValoTheme.BUTTON_SMALL);
 
-        return menuBar;
+        user.setCaption("User name");
+        user.setDescription("Your user name)");
+        user.setIcon(FontAwesome.USER_MD);
+        user.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
+        user.addStyleName(ValoTheme.BUTTON_SMALL);
+
+        layout.addComponent(home);
+        layout.addComponent(notify);
+        layout.addComponent(user);
+        return layout;
     }
+
+
 
 }

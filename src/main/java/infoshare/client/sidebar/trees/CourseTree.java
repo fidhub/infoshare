@@ -25,7 +25,5 @@ public class CourseTree extends Tree implements ItemClickEvent.ItemClickListener
         if (COURSES.equals(event.getItemId())) {
             main.content.setSecondComponent(new CoursesMenu(main, LANDING_TAB));
         }
-
-
     }
 }

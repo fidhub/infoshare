@@ -1,6 +1,8 @@
 package infoshare.client.content.setup.tables;
 
+import com.vaadin.server.Responsive;
 import com.vaadin.ui.Table;
+import com.vaadin.ui.themes.ValoTheme;
 import infoshare.client.content.MainLayout;
 import infoshare.domain.Role;
 import infoshare.services.roles.Impl.RoleServiceImpl;
@@ -21,6 +23,11 @@ public class RoleTable extends Table {
     public RoleTable(MainLayout main) {
         this.main = main;
         setSizeFull();
+        Responsive.makeResponsive(this);
+        addStyleName(ValoTheme.TABLE_BORDERLESS);
+        addStyleName(ValoTheme.TABLE_NO_STRIPES);
+        addStyleName(ValoTheme.TABLE_NO_VERTICAL_LINES);
+        addStyleName(ValoTheme.TABLE_SMALL);
         addContainerProperty("Role Name", String.class, null);
         addContainerProperty("category", String.class, null);
         List<Role> roles = roleService.findAll();

@@ -86,6 +86,8 @@ public class PublishView extends VerticalLayout implements Button.ClickListener,
         final Window popup = new Window("VIEW Content");
         popup.setWidth(80.0f,Unit.PERCENTAGE);
         popup.setHeight(90.0f, Unit.PERCENTAGE);
+        popup.setClosable(false);
+        popup.setResizable(false);
         popup.setContent(form);
         return popup;
     }

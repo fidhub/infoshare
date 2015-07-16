@@ -5,7 +5,6 @@ import com.vaadin.data.fieldgroup.FieldGroup;
 import com.vaadin.data.util.BeanItem;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.*;
-import com.vaadin.ui.themes.ChameleonTheme;
 import com.vaadin.ui.themes.ValoTheme;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.courseSetup.CoursesMenu;
@@ -114,6 +113,8 @@ public class LessonView extends VerticalLayout implements Button.ClickListener, 
     private Window modelWindow(){
         final Window popup = new Window();
         popup.setWidth(80.0f, Unit.PERCENTAGE);
+        popup.setClosable(false);
+        popup.setResizable(false);
         popup.setContent(form);
         return popup;
     }
@@ -128,7 +129,7 @@ public class LessonView extends VerticalLayout implements Button.ClickListener, 
     }
     private ComboBox getComboBox() {
         if (courseCmb == null)
-            courseCmb = new ComboBox("Select Course");
+            courseCmb = new ComboBox();
         for (Course course : courseService.findAll()) {
             if (course.getId() != null) {
                 courseCmb.addItem(course.getId());
@@ -139,9 +140,9 @@ public class LessonView extends VerticalLayout implements Button.ClickListener, 
                 courseCmb.setImmediate(true);
             }
         }
-        courseCmb.setWidth(330.0f, Unit.PIXELS);
-        courseCmb.addStyleName(ChameleonTheme.COMBOBOX_SELECT_BUTTON);
-        courseCmb.setIcon(FontAwesome.BOOK);
+        courseCmb.setWidth(300.0f, Unit.PIXELS);
+        courseCmb.setInputPrompt("Select Course.....");
+        courseCmb.addStyleName(ValoTheme.COMBOBOX_SMALL);
         return courseCmb;
     }
     private void getHome(){
@@ -197,7 +198,6 @@ public class LessonView extends VerticalLayout implements Button.ClickListener, 
                                         .lessons(lessons).id(courseBean.getId()).build();
         return course;
     }
-
     private Course getNewEntity(FieldGroup binder) {
 
         final Course courseBean = courseService.find(courseCmb.getValue().toString());
@@ -215,7 +215,6 @@ public class LessonView extends VerticalLayout implements Button.ClickListener, 
                                         .lessons(lessons).id(courseBean.getId()).build();
         return course;
     }
-
     public LessonModel getLessonModel(Lesson lesson) {
 
         LessonModel  model = new LessonModel();

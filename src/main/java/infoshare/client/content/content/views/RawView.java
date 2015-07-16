@@ -99,6 +99,8 @@ public class RawView extends VerticalLayout implements
     private Window modelWindow(){
         final Window popup = new Window("EDIT RAW CONTENT");
         popup.setWidth(80.0f, Unit.PERCENTAGE);
+        popup.setClosable(false);
+        popup.setResizable(false);
         popup.setContent(form);
         return popup;
     }
