@@ -82,7 +82,7 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
         final Window popup = new Window("UPDATE EDITED CONTENT");
         popup.setWidth(80.0f,Unit.PERCENTAGE);
         popup.setClosable(false);
-        popup.setClosable(false);
+        popup.setResizable(false);
         popup.setContent(form);
         return popup;
     }

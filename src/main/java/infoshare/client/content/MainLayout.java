@@ -23,7 +23,6 @@ public class MainLayout extends VerticalLayout {
         content.setLocked(true);
         content.setFirstComponent(new Sidebar(this));
         content.setSecondComponent(new LandingHome(this));
-
         addComponent(new Header(this));
         addComponent(content);
         addComponent(new Footer());

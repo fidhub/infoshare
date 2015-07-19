@@ -12,6 +12,7 @@ import infoshare.client.content.content.ContentMenu;
 import infoshare.client.content.content.forms.RawAndEditForm;
 import infoshare.client.content.content.models.RawAndEditModel;
 import infoshare.client.content.content.tables.RawTable;
+import infoshare.client.header.view.Header;
 import infoshare.domain.Category;
 import infoshare.domain.Content;
 import infoshare.domain.ContentType;
@@ -41,7 +42,7 @@ public class RawView extends VerticalLayout implements
     private final MainLayout main;
     private final RawTable table;
     private final RawAndEditForm form;
-
+    private  Header header;
     private Window popUp ;
     private Button editBtn = new Button("EDIT");
     private ContentFilter contentFilter = new ContentFilter();
@@ -51,6 +52,7 @@ public class RawView extends VerticalLayout implements
         this.table = new RawTable(main);
         this.form = new RawAndEditForm();
         this.popUp = modelWindow();
+        header = new Header(main);
         setSizeFull();
         setSpacing(true);
         addComponent(getLayout());
@@ -82,6 +84,7 @@ public class RawView extends VerticalLayout implements
             EditButton();
         }else if (source ==form.popUpUpdateBtn){
             saveEditedForm(form.binder);
+            header.refreshNotification();
         }else if (source ==form.popUpCancelBtn){
             popUp.setModal(false);
             UI.getCurrent().removeWindow(popUp);

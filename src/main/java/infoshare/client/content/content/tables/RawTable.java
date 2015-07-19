@@ -13,7 +13,7 @@ import java.util.Date;
 /**
  * Created by hashcode on 2015/06/24.
  */
-public final class RawTable extends Table {
+public class RawTable extends Table {
 
     @Autowired
     private ContentService contentService = new ContentServiceImp();

@@ -142,6 +142,7 @@ public class UserView extends VerticalLayout implements
                 .enable(bean.isEnabled())
                 .username(bean.getUsername())
                 .password(bean.getPassword())
+                .id(bean.getId())
                 .build();
         return user;
     }

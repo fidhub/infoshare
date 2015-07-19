@@ -95,8 +95,7 @@ public class RoleView extends VerticalLayout implements
     }
 
     private void deleteForm(FieldGroup binder) {
-        final Role role = getEntity(binder);
-        roleService.remove(role);
+        roleService.remove(getEntity(binder));
         getHome();
     }
 
