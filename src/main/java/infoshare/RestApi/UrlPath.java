@@ -31,13 +31,13 @@ public class UrlPath {
         public static final String PUT     = URL+"/api/role/update ";   // @controllers.RoleController.update
         public static final String GETALL  = URL+"/api/role/roles  ";   // @controllers.RoleController.getAll
     }
- public static class SourceLinks {
+    public static class SourceLinks {
         public static final String POST    = URL+"/api/src/create  ";    //@controllers.SourceController.create
         public static final String GET_ID  = URL+"/api/src/:id     ";    //@controllers.SourceController.getSource(id)
         public static final String PUT     = URL+"/api/src/update  ";    //@controllers.SourceController.update
         public static final String GETALL  = URL+"/api/src/srcs    ";    //@controllers.SourceController.getAll
     }
- public static class UserLinks {
+    public static class UserLinks {
         public static final String POST    = URL+"/api/user/create ";    //@controllers.UserController.create
         public static final String GET_ID  = URL+"/api/user/:id    ";    //@controllers.UserController.getUser(id)
         public static final String PUT     = URL+"/api/user/update ";    //@controllers.UserController.update
