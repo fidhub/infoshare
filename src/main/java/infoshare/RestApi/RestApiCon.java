@@ -52,15 +52,13 @@ public class RestApiCon {
         }
         return list;
     }
-    public static <T> Class<T> create(String url,Class<T> classType){
+    public static <T> void create(String url,Class<T> classType){
         RestTemplate restTemplate = new RestTemplate();
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<T> entity = new HttpEntity<>((T) classType,headers);
 
-        classType = restTemplate.postForObject(url, entity, String.class);
-
-        return classType;
+         restTemplate.postForObject(url, entity, String.class);
     }
 }
