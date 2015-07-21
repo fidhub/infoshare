@@ -8,19 +8,13 @@ import java.io.Serializable;
  */
 public class ContentTypeModel implements Serializable {
 
-    private String id;
+
     @NotNull
     private String contentTyeName;
     @NotNull
     private String contentTyeDescription;
 
-    public String getId() {
-        return id;
-    }
 
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getContentTyeName() {
         return contentTyeName;

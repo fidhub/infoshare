@@ -1,9 +1,7 @@
 package infoshare.services.Content.Impl;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
 import com.vaadin.spring.annotation.SpringComponent;
-import infoshare.RestConnector.RestApiCon;
+import infoshare.RestApi.RestApiCon;
 import infoshare.domain.Content;
 import infoshare.services.Content.ContentService;
 import org.springframework.stereotype.Service;
@@ -97,15 +95,7 @@ public class ContentServiceImp implements ContentService {
 
     @Override
     public List<Content> findAll() {
-        List<Content> cont = new ArrayList();
-       Gson myGson = new Gson();
-        try {
-            for (JsonElement contentElement : restApiCon.readAll()) {
-                Content content = myGson.fromJson(contentElement, Content.class);
-                cont.add(content);
-            }
-        }catch(Exception e){
-        }
+
       return new ArrayList<>(contents.values()); /*cont;*/
     }
 }

@@ -73,7 +73,7 @@ public class RoleView extends VerticalLayout implements
     private void saveForm(FieldGroup binder) {
         try {
             binder.commit();
-            roleService.save(getEntity(binder));
+            roleService.save(getNewEntity(binder));
             getHome();
             Notification.show("Record ADDED!", Notification.Type.TRAY_NOTIFICATION);
         } catch (FieldGroup.CommitException e) {
@@ -99,11 +99,20 @@ public class RoleView extends VerticalLayout implements
         getHome();
     }
 
+
+
     private Role getEntity(FieldGroup binder) {
         final RoleModel bean = ((BeanItem<RoleModel>) binder.getItemDataSource()).getBean();
         final Role role = new Role.Builder(bean.getRolename())
                 .description(bean.getDescription())
-                .id(bean.getId())
+                .build();
+        return role;
+    }
+
+    private Role getNewEntity(FieldGroup binder) {
+        final RoleModel bean = ((BeanItem<RoleModel>) binder.getItemDataSource()).getBean();
+        final Role role = new Role.Builder(bean.getRolename())
+                .description(bean.getDescription())
                 .build();
         return role;
     }
@@ -146,7 +155,6 @@ public class RoleView extends VerticalLayout implements
         final RoleModel model = new RoleModel();
         final Role role = roleService.find(val.getId());
         model.setDescription(role.getDescription());
-        model.setId(role.getId());
         model.setRolename(role.getRolename());
         return model;
     }

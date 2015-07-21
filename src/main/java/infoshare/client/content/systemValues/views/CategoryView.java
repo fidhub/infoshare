@@ -102,7 +102,6 @@ public class CategoryView extends VerticalLayout implements Button.ClickListener
         final CategoryModel bean = ((BeanItem<CategoryModel>) binder.getItemDataSource()).getBean();
         final Category category = new Category.Builder(bean.getName())
                 .description(bean.getDescription())
-                .id(bean.getId())
                 .build();
         return category;
     }
@@ -145,7 +144,6 @@ public class CategoryView extends VerticalLayout implements Button.ClickListener
         final CategoryModel model = new CategoryModel();
         final Category ctgry = categoryService.find(val.getId());
         model.setDescription(ctgry.getDescription());
-        model.setId(ctgry.getId());
         model.setName(ctgry.getName());
         return model;
     }

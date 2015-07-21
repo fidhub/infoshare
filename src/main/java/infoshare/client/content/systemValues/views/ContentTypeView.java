@@ -97,7 +97,6 @@ public class ContentTypeView extends VerticalLayout implements Button.ClickListe
         final ContentTypeModel bean = ((BeanItem<ContentTypeModel>) binder.getItemDataSource()).getBean();
         final ContentType contentType = new ContentType.Builder(bean.getContentTyeName())
                 .contentTyeDescription(bean.getContentTyeDescription())
-                .id(bean.getId())
                 .build();
         return contentType;
     }
@@ -140,7 +139,6 @@ public class ContentTypeView extends VerticalLayout implements Button.ClickListe
         final ContentTypeModel model = new ContentTypeModel();
         final ContentType contentType = contentTypeService.find(val.getId());
         model.setContentTyeName(contentType.getContentTyeName());
-        model.setId(contentType.getId());
         model.setContentTyeDescription(contentType.getContentTyeDescription());
         return model;
     }

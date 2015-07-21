@@ -1,4 +1,4 @@
-package infoshare;
+package infoshare.service;
 
 import infoshare.domain.Category;
 import infoshare.services.category.CategoryService;
@@ -6,7 +6,6 @@ import infoshare.services.category.Impl.CategoryServiceImpl;
 import junit.framework.TestCase;
 import org.junit.Assert;
 import org.junit.Test;
-import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 
 import java.util.List;
 

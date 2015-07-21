@@ -169,6 +169,12 @@ public class Header extends VerticalLayout implements Button.ClickListener {
         signOut.setIcon(FontAwesome.SIGN_OUT);
         signOut.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
         signOut.setSizeFull();
+        signOut.addClickListener(new Button.ClickListener() {
+            @Override
+            public void buttonClick(ClickEvent clickEvent) {
+
+            }
+        });
 
         layout.addComponent(profile);
         layout.addComponent(signOut);
@@ -176,7 +182,6 @@ public class Header extends VerticalLayout implements Button.ClickListener {
         userProfile.setContent(layout);
         userProfile.setWidth("80px");
         userProfile.addStyleName("notifications");
-       // userProfile.setHeight(100.0f, Unit.PIXELS);
         userProfile.setResizable(false);
         userProfile.setClosable(false);
         userProfile.setDraggable(false);

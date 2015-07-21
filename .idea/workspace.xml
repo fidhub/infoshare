@@ -5,381 +5,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e90d9adc-412d-4446-ab3a-2e74a34bb89b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/infoshare/categoryTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/App$MyService.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/App$MyService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/App.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/App.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/test-classes/infoshare/AppTest.class" afterPath="$PROJECT_DIR$/target/test-classes/infoshare/AppTest.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/conf/util/BigDecimalConverter.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/conf/util/BigDecimalConverter.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/conf/util/BigDecimalConverterVer2.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/conf/util/BigDecimalConverterVer2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/domain/Category$1.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/domain/Category$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/domain/Category$Builder.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/domain/Category$Builder.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/domain/Category.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/domain/Category.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/systemValues/forms/CategoryForm.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/systemValues/forms/CategoryForm.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/infoshare/RestApi/RestApiCon.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/infoshare/restApi/RestpApi.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/infoshare/RestApi/UrlPath.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/infoshare/RestConnector/RestApiCon.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/infoshare/RestConnector/RestApiCon.class" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/test/java/infoshare/categoryTest.java" afterPath="$PROJECT_DIR$/src/test/java/infoshare/service/categoryTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/systemValues/models/CategoryModel.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/systemValues/models/CategoryModel.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/services/category/CategoryService.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/services/category/CategoryService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/services/category/Impl/CategoryServiceImpl.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/services/category/Impl/CategoryServiceImpl.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/systemValues/tables/CategoryTable.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/systemValues/tables/CategoryTable.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/systemValues/views/CategoryView.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/systemValues/views/CategoryView.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/Check-icon-16.png" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/Check-icon-16.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/Check-icon-24.png" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/Check-icon-24.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/Check-icon-32.png" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/Check-icon-32.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/Check-icon-48.png" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/Check-icon-48.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/domain/Content$1.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/domain/Content$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/domain/Content$Builder.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/domain/Content$Builder.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/domain/Content.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/domain/Content.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/content/ContentMenu.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/content/ContentMenu.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/services/Content/ContentService.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/services/Content/ContentService.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/services/Content/Impl/ContentServiceImp.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/services/Content/Impl/ContentServiceImp.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/systemValues/forms/ContentSourceForm.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/systemValues/forms/ContentSourceForm.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/systemValues/tables/ContentSourceTable.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/systemValues/tables/ContentSourceTable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/systemValues/views/ContentSourceView.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/systemValues/views/ContentSourceView.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/sidebar/trees/ContentTree.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/sidebar/trees/ContentTree.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/domain/ContentType$1.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/domain/ContentType$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/domain/ContentType$Builder.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/domain/ContentType$Builder.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/domain/ContentType.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/domain/ContentType.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/systemValues/forms/ContentTypeForm.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/systemValues/forms/ContentTypeForm.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/systemValues/models/ContentTypeModel.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/systemValues/models/ContentTypeModel.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/services/ContentType/ContentTypeService.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/services/ContentType/ContentTypeService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/services/ContentType/Impl/ContentTypeServiceImpl.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/services/ContentType/Impl/ContentTypeServiceImpl.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/systemValues/tables/ContentTypeTable.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/systemValues/tables/ContentTypeTable.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/systemValues/views/ContentTypeView.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/systemValues/views/ContentTypeView.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/domain/Course$Builder.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/domain/Course$Builder.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/domain/Course.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/domain/Course.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/courseSetup/models/CourseModel.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/courseSetup/models/CourseModel.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/services/courses/CourseService.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/services/courses/CourseService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/services/courses/Impl/CourseServiceImpl.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/services/courses/Impl/CourseServiceImpl.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/sidebar/trees/CourseTree.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/sidebar/trees/CourseTree.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/courseSetup/views/CourseView.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/courseSetup/views/CourseView.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/courseSetup/forms/CoursesForm.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/courseSetup/forms/CoursesForm.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/courseSetup/CoursesMenu.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/courseSetup/CoursesMenu.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/courseSetup/tables/CoursesTable.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/courseSetup/tables/CoursesTable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/admin/DashboardMenu$1.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/admin/DashboardMenu$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/admin/DashboardMenu$2.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/admin/DashboardMenu$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/admin/DashboardMenu$3.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/admin/DashboardMenu$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/admin/DashboardMenu$4.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/admin/DashboardMenu$4.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/admin/DashboardMenu.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/admin/DashboardMenu.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/admin/DashboardNavigator.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/admin/DashboardNavigator.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/conf/util/DateTimeFormatHelper.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/conf/util/DateTimeFormatHelper.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/conf/util/DialobBoxWindow.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/conf/util/DialobBoxWindow.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/content/views/EditView.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/content/views/EditView.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/footer/Footer.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/footer/Footer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/home/Index.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/home/Index.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/domain/Keys$1.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/domain/Keys$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/domain/Keys$Builder.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/domain/Keys$Builder.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/domain/Keys.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/domain/Keys.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/conf/util/validation/LabelErrorMessageManipulator.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/conf/util/validation/LabelErrorMessageManipulator.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/domain/Lesson$Builder.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/domain/Lesson$Builder.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/domain/Lesson.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/domain/Lesson.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/courseSetup/forms/LessonForm.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/courseSetup/forms/LessonForm.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/courseSetup/models/LessonModel.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/courseSetup/models/LessonModel.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/login/LoginView$1.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/login/LoginView$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/login/LoginView.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/login/LoginView.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/admin/view/MainView.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/admin/view/MainView.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/menu/Menu.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/menu/Menu.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/header/MenuLayout.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/header/MenuLayout.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/conf/util/validation/MobileNumberValidator.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/conf/util/validation/MobileNumberValidator.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/conf/util/validation/OnSubmitValidationHelper.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/conf/util/validation/OnSubmitValidationHelper.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/password/forms/PasswordForm.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/password/forms/PasswordForm.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/password/PasswordMenu.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/password/PasswordMenu.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/password/models/PasswordModel.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/password/models/PasswordModel.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/password/tab/PasswordTab.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/password/tab/PasswordTab.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/sidebar/trees/PasswordTree.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/sidebar/trees/PasswordTree.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/content/forms/PublishForm.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/content/forms/PublishForm.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/content/models/PublishModel.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/content/models/PublishModel.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/content/views/PublishView.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/content/views/PublishView.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/content/forms/RawAndEditForm.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/content/forms/RawAndEditForm.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/content/models/RawAndEditModel.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/content/models/RawAndEditModel.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/RestConnector/RestApiCon.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/RestConnector/RestApiCon.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/domain/Role$1.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/domain/Role$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/domain/Role$Builder.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/domain/Role$Builder.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/domain/Role.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/domain/Role.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/setup/forms/RoleForm.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/setup/forms/RoleForm.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/setup/models/RoleModel.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/setup/models/RoleModel.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/services/roles/RoleService.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/services/roles/RoleService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/services/roles/Impl/RoleServiceImpl.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/services/roles/Impl/RoleServiceImpl.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/setup/tables/RoleTable.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/setup/tables/RoleTable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/services/Service.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/services/Service.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/setup/SetupMenu.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/setup/SetupMenu.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/sidebar/trees/SetupTree.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/sidebar/trees/SetupTree.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/domain/Source$Builder.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/domain/Source$Builder.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/domain/Source.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/domain/Source.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/systemValues/models/SourceModel.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/systemValues/models/SourceModel.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/services/source/SourceService.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/services/source/SourceService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/services/source/sourceServiceImpl/SourceServiceImpl.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/services/source/sourceServiceImpl/SourceServiceImpl.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/systemValues/SystemValues.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/systemValues/SystemValues.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/domain/Token$1.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/domain/Token$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/domain/Token$Builder.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/domain/Token$Builder.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/domain/Token.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/domain/Token.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/setup/views/RoleView.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/setup/views/RoleView.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/conf/util/UIComboBoxHelper.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/conf/util/UIComboBoxHelper.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/conf/util/UIComponentHelper.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/conf/util/UIComponentHelper.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/conf/util/UIDialogBoxHelper.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/conf/util/UIDialogBoxHelper.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/conf/util/UITableIconHelper.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/conf/util/UITableIconHelper.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/conf/util/validation/UIValidatorHelper.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/conf/util/validation/UIValidatorHelper.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/domain/User$1.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/domain/User$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/domain/User$Builder.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/domain/User$Builder.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/domain/User.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/domain/User.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/setup/forms/UserForm.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/setup/forms/UserForm.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/setup/models/UserModel.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/setup/models/UserModel.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/services/users/UserService.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/services/users/UserService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/services/users/Impl/UserServiceImpl.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/services/users/Impl/UserServiceImpl.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/setup/tables/UserTable.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/setup/tables/UserTable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/img/app-icon.png" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/img/app-icon.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/delete-icon-16.png" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/delete-icon-16.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/delete-icon-24.png" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/delete-icon-24.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/delete-icon-32.png" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/delete-icon-32.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/delete-icon-48.png" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/delete-icon-48.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/img/draft-report-thumb.png" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/img/draft-report-thumb.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/img/empty-poster.png" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/img/empty-poster.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/img/event-title-bg.png" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/img/event-title-bg.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/favicon.ico" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/favicon.ico" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/mytheme/favicon.ico" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/mytheme/favicon.ico" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/flag_black_16.png" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/flag_black_16.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/flag_black_32.png" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/flag_black_32.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/flag_blue_16.png" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/flag_blue_16.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/flag_blue_32.png" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/flag_blue_32.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/flag_green_16.png" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/flag_green_16.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/flag_green_32.png" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/flag_green_32.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/flag_red_16.png" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/flag_red_16.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/flag_red_32.png" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/flag_red_32.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/flag_yellow_16.png" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/flag_yellow_16.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/flag_yellow_32.png" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/flag_yellow_32.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/imagefiles-location_map_pin_home_red.PNG" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/imagefiles-location_map_pin_home_red.PNG" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/kujali.jpg" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/kujali.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/map_pin_black_20.PNG" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/map_pin_black_20.PNG" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/map_pin_black_32.PNG" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/map_pin_black_32.PNG" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/map_pin_gray_20.PNG" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/map_pin_gray_20.PNG" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/map_pin_gray_32.PNG" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/map_pin_gray_32.PNG" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/map_pin_green_20.PNG" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/map_pin_green_20.PNG" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/map_pin_green_32.PNG" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/map_pin_green_32.PNG" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/map_pin_red_20.PNG" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/map_pin_red_20.PNG" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/map_pin_red_32.PNG" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/map_pin_red_32.PNG" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/img/notes-bg.png" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/img/notes-bg.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/img/palette-chart.png" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/img/palette-chart.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/img/palette-grid.png" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/img/palette-grid.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/img/palette-text.png" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/img/palette-text.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/img/poster-gloss.png" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/img/poster-gloss.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/img/profile-pic-300px.jpg" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/img/profile-pic-300px.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/tests-valo/img/profile-pic-300px.jpg" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/tests-valo/img/profile-pic-300px.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/scorecard.png" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/scorecard.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/.name" afterPath="$PROJECT_DIR$/.idea/.name" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/App.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/App.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/infoshare/AppTest.java" afterPath="$PROJECT_DIR$/src/test/java/infoshare/AppTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/conf/util/BigDecimalConverter.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/conf/util/BigDecimalConverter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/conf/util/BigDecimalConverterVer2.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/conf/util/BigDecimalConverterVer2.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/domain/Category.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/domain/Category.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/systemValues/forms/CategoryForm.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/systemValues/forms/CategoryForm.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/systemValues/models/CategoryModel.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/systemValues/models/CategoryModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/services/category/CategoryService.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/services/category/CategoryService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/services/category/Impl/CategoryServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/services/category/Impl/CategoryServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/systemValues/tables/CategoryTable.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/systemValues/tables/CategoryTable.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/systemValues/views/CategoryView.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/systemValues/views/CategoryView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/domain/Content.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/domain/Content.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/filterSearch/ContentFilter.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/filterSearch/ContentFilter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/content/ContentMenu.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/content/ContentMenu.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/services/Content/ContentService.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/services/Content/ContentService.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/services/Content/Impl/ContentServiceImp.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/services/Content/Impl/ContentServiceImp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/systemValues/forms/ContentSourceForm.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/systemValues/forms/ContentSourceForm.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/systemValues/tables/ContentSourceTable.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/systemValues/tables/ContentSourceTable.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/systemValues/views/ContentSourceView.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/systemValues/views/ContentSourceView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/sidebar/trees/ContentTree.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/sidebar/trees/ContentTree.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/domain/ContentType.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/domain/ContentType.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/systemValues/forms/ContentTypeForm.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/systemValues/forms/ContentTypeForm.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/systemValues/models/ContentTypeModel.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/systemValues/models/ContentTypeModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/services/ContentType/ContentTypeService.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/services/ContentType/ContentTypeService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/services/ContentType/Impl/ContentTypeServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/services/ContentType/Impl/ContentTypeServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/systemValues/tables/ContentTypeTable.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/systemValues/tables/ContentTypeTable.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/systemValues/views/ContentTypeView.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/systemValues/views/ContentTypeView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/domain/Course.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/domain/Course.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/courseSetup/models/CourseModel.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/courseSetup/models/CourseModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/services/courses/CourseService.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/services/courses/CourseService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/services/courses/Impl/CourseServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/services/courses/Impl/CourseServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/sidebar/trees/CourseTree.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/sidebar/trees/CourseTree.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/courseSetup/views/CourseView.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/courseSetup/views/CourseView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/courseSetup/forms/CoursesForm.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/courseSetup/forms/CoursesForm.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/courseSetup/CoursesMenu.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/courseSetup/CoursesMenu.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/courseSetup/tables/CoursesTable.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/courseSetup/tables/CoursesTable.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/admin/DashboardMenu.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/admin/DashboardMenu.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/admin/DashboardNavigator.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/admin/DashboardNavigator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/conf/util/DateTimeFormatHelper.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/conf/util/DateTimeFormatHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/conf/util/DialobBoxWindow.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/conf/util/DialobBoxWindow.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/content/tables/EditTable.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/content/tables/EditTable.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/content/views/EditView.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/content/views/EditView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/footer/Footer.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/footer/Footer.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/header/view/Header.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/header/view/Header.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/home/Index.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/home/Index.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/domain/Keys.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/domain/Keys.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/conf/util/validation/LabelErrorMessageManipulator.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/conf/util/validation/LabelErrorMessageManipulator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/header/landing_page/LandingHome.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/header/landing_page/LandingHome.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/domain/Lesson.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/domain/Lesson.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/courseSetup/forms/LessonForm.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/courseSetup/forms/LessonForm.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/courseSetup/models/LessonModel.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/courseSetup/models/LessonModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/courseSetup/tables/LessonTable.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/courseSetup/tables/LessonTable.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/courseSetup/views/LessonView.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/courseSetup/views/LessonView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/login/LoginView.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/login/LoginView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/MainLayout.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/MainLayout.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/admin/view/MainView.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/admin/view/MainView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__aopalliance_aopalliance_1_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__aopalliance_aopalliance_1_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__ch_qos_logback_logback_classic_1_1_3.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__ch_qos_logback_logback_classic_1_1_3.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__ch_qos_logback_logback_core_1_1_3.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__ch_qos_logback_logback_core_1_1_3.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_classmate_1_0_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_classmate_1_0_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_4_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_4_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_4_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_4_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_4_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_4_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_gson_gson_2_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_gson_gson_2_3_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_guava_guava_18_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_guava_guava_18_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_vaadin_external_flute_flute_1_3_0_gg2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_vaadin_external_flute_flute_1_3_0_gg2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_vaadin_external_google_guava_16_0_1_vaadin1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_vaadin_external_google_guava_16_0_1_vaadin1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_vaadin_external_streamhtmlparser_streamhtmlparser_jsilver_0_0_10_vaadin1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_vaadin_external_streamhtmlparser_streamhtmlparser_jsilver_0_0_10_vaadin1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_vaadin_vaadin_client_compiled_7_4_5.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_vaadin_vaadin_client_compiled_7_4_5.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_vaadin_vaadin_sass_compiler_0_9_12.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_vaadin_vaadin_sass_compiler_0_9_12.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_vaadin_vaadin_server_7_4_5.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_vaadin_vaadin_server_7_4_5.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_vaadin_vaadin_shared_7_4_5.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_vaadin_vaadin_shared_7_4_5.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_vaadin_vaadin_spring_1_0_0_beta3.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_vaadin_vaadin_spring_1_0_0_beta3.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_vaadin_vaadin_spring_boot_1_0_0_beta3.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_vaadin_vaadin_spring_boot_1_0_0_beta3.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_vaadin_vaadin_spring_boot_starter_1_0_0_beta3.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_vaadin_vaadin_spring_boot_starter_1_0_0_beta3.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_vaadin_vaadin_themes_7_4_5.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_vaadin_vaadin_themes_7_4_5.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_validation_validation_api_1_1_0_Final.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_validation_validation_api_1_1_0_Final.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__joda_time_joda_time_2_8_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__joda_time_joda_time_2_8_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_4_12.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_4_12.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_core_8_0_23.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_core_8_0_23.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_el_8_0_23.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_el_8_0_23.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_logging_juli_8_0_23.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_logging_juli_8_0_23.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_websocket_8_0_23.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_websocket_8_0_23.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_3.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_3.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_library_1_3.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_library_1_3.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_hibernate_validator_5_1_3_Final.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_hibernate_validator_5_1_3_Final.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_logging_jboss_logging_3_1_3_GA.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_logging_jboss_logging_3_1_3_GA.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jsoup_jsoup_1_8_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jsoup_jsoup_1_8_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_mockito_mockito_core_1_10_19.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mockito_mockito_core_1_10_19.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_objenesis_objenesis_2_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_objenesis_objenesis_2_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_jcl_over_slf4j_1_7_12.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_jcl_over_slf4j_1_7_12.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_jul_to_slf4j_1_7_12.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_jul_to_slf4j_1_7_12.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_log4j_over_slf4j_1_7_12.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_log4j_over_slf4j_1_7_12.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_12.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_12.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_1_2_4_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_1_2_4_RELEASE.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_autoconfigure_1_2_4_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_autoconfigure_1_2_4_RELEASE.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_1_2_4_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_1_2_4_RELEASE.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_hateoas_1_2_4_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_hateoas_1_2_4_RELEASE.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_logging_1_2_4_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_logging_1_2_4_RELEASE.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_test_1_2_4_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_test_1_2_4_RELEASE.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_tomcat_1_2_4_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_tomcat_1_2_4_RELEASE.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_web_1_2_4_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_web_1_2_4_RELEASE.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_websocket_1_2_4_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_websocket_1_2_4_RELEASE.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_hateoas_spring_hateoas_0_16_0_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_hateoas_spring_hateoas_0_16_0_RELEASE.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_plugin_spring_plugin_core_1_1_0_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_plugin_spring_plugin_core_1_1_0_RELEASE.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_aop_4_1_6_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_aop_4_1_6_RELEASE.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_beans_4_1_6_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_beans_4_1_6_RELEASE.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_context_4_1_6_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_context_4_1_6_RELEASE.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_core_4_1_6_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_core_4_1_6_RELEASE.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_expression_4_1_6_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_expression_4_1_6_RELEASE.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_messaging_4_1_6_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_messaging_4_1_6_RELEASE.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_test_4_1_6_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_test_4_1_6_RELEASE.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_web_4_1_6_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_web_4_1_6_RELEASE.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_webmvc_4_1_6_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_webmvc_4_1_6_RELEASE.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_websocket_4_1_6_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_websocket_4_1_6_RELEASE.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_w3c_css_sac_1_3.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_w3c_css_sac_1_3.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_yaml_snakeyaml_1_14.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_yaml_snakeyaml_1_14.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/menu/Menu.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/menu/Menu.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/header/MenuLayout.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/header/MenuLayout.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/conf/util/validation/MobileNumberValidator.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/conf/util/validation/MobileNumberValidator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/conf/util/validation/OnSubmitValidationHelper.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/conf/util/validation/OnSubmitValidationHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/password/forms/PasswordForm.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/password/forms/PasswordForm.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/password/PasswordMenu.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/password/PasswordMenu.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/password/models/PasswordModel.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/password/models/PasswordModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/password/tab/PasswordTab.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/password/tab/PasswordTab.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/sidebar/trees/PasswordTree.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/sidebar/trees/PasswordTree.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/content/forms/PublishForm.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/content/forms/PublishForm.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/content/models/PublishModel.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/content/models/PublishModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/content/tables/PublishTable.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/content/tables/PublishTable.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/content/views/PublishView.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/content/views/PublishView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/content/forms/RawAndEditForm.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/content/forms/RawAndEditForm.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/content/models/RawAndEditModel.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/content/models/RawAndEditModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/content/tables/RawTable.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/content/tables/RawTable.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/content/views/RawView.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/content/views/RawView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/RestConnector/RestApiCon.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/RestConnector/RestApiCon.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/domain/Role.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/domain/Role.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/forms/RoleForm.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/forms/RoleForm.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/models/RoleModel.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/models/RoleModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/services/roles/RoleService.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/services/roles/RoleService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/services/roles/Impl/RoleServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/services/roles/Impl/RoleServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/tables/RoleTable.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/tables/RoleTable.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/views/RoleView.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/views/RoleView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/services/Service.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/services/Service.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/SetupMenu.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/SetupMenu.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/sidebar/trees/SetupTree.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/sidebar/trees/SetupTree.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/sidebar/Sidebar.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/sidebar/Sidebar.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/domain/Source.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/domain/Source.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/systemValues/models/SourceModel.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/systemValues/models/SourceModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/services/source/SourceService.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/services/source/SourceService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/services/source/sourceServiceImpl/SourceServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/services/source/sourceServiceImpl/SourceServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/systemValues/SystemValues.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/systemValues/SystemValues.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/domain/Token.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/domain/Token.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/conf/util/UIComboBoxHelper.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/conf/util/UIComboBoxHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/conf/util/UIComponentHelper.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/conf/util/UIComponentHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/conf/util/UIDialogBoxHelper.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/conf/util/UIDialogBoxHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/conf/util/UITableIconHelper.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/conf/util/UITableIconHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/conf/util/validation/UIValidatorHelper.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/conf/util/validation/UIValidatorHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/domain/User.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/domain/User.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/forms/UserForm.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/forms/UserForm.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/models/UserModel.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/models/UserModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/services/users/UserService.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/services/users/UserService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/services/users/Impl/UserServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/services/users/Impl/UserServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/tables/UserTable.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/tables/UserTable.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/views/UserView.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/views/UserView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/tests-valo/_valotest.scss" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/tests-valo/_valotest.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/tests-valo/_variables.scss" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/tests-valo/_variables.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/tests-valo-blueprint/_variables.scss" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/tests-valo-blueprint/_variables.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/tests-valo-dark/_variables.scss" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/tests-valo-dark/_variables.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/tests-valo-facebook/_variables.scss" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/tests-valo-facebook/_variables.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/tests-valo-flat/_variables.scss" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/tests-valo-flat/_variables.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/tests-valo-flatdark/_variables.scss" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/tests-valo-flatdark/_variables.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/tests-valo-light/_variables.scss" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/tests-valo-light/_variables.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/tests-valo-metro/_variables.scss" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/tests-valo-metro/_variables.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/mytheme/addons.scss" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/mytheme/addons.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/tests-valo/addons.scss" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/tests-valo/addons.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/tests-valo-blueprint/addons.scss" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/tests-valo-blueprint/addons.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/tests-valo-dark/addons.scss" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/tests-valo-dark/addons.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/tests-valo-facebook/addons.scss" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/tests-valo-facebook/addons.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/tests-valo-flat/addons.scss" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/tests-valo-flat/addons.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/tests-valo-flatdark/addons.scss" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/tests-valo-flatdark/addons.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/tests-valo-light/addons.scss" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/tests-valo-light/addons.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/tests-valo-metro/addons.scss" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/tests-valo-metro/addons.scss" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/lang/annotations.xml" afterPath="$PROJECT_DIR$/java/lang/annotations.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/codex.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/codex.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/common.scss" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/common.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/dashboard.scss" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/dashboard.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/views/dashboardview.scss" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/views/dashboardview.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/infoshare.iml" afterPath="$PROJECT_DIR$/infoshare.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/views/login.scss" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/views/login.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/mytheme/mytheme.scss" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/mytheme/mytheme.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" afterPath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/rebel_project.xml" afterPath="$PROJECT_DIR$/.idea/rebel_project.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/views/reports.scss" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/views/reports.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/views/sales.scss" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/views/sales.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/views/schedule.scss" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/views/schedule.scss" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/styles.scss.cache" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/styles.scss.cache" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/mytheme/styles.scss.cache" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/mytheme/styles.scss.cache" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/tests-valo/styles.scss.cache" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/tests-valo/styles.scss.cache" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/tests-valo-dark/styles.scss.cache" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/tests-valo-dark/styles.scss.cache" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/tests-valo-facebook/styles.scss.cache" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/tests-valo-facebook/styles.scss.cache" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/styles.scss" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/styles.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/mytheme/styles.scss" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/mytheme/styles.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/tests-valo/styles.scss" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/tests-valo/styles.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/tests-valo-blueprint/styles.scss" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/tests-valo-blueprint/styles.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/tests-valo-dark/styles.scss" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/tests-valo-dark/styles.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/tests-valo-facebook/styles.scss" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/tests-valo-facebook/styles.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/tests-valo-flat/styles.scss" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/tests-valo-flat/styles.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/tests-valo-flatdark/styles.scss" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/tests-valo-flatdark/styles.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/tests-valo-light/styles.scss" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/tests-valo-light/styles.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/tests-valo-metro/styles.scss" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/tests-valo-metro/styles.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/views/transactions.scss" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/views/transactions.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="infoshare.iws" />
@@ -413,28 +63,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Header.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/infoshare/client/header/view/Header.java">
+      <file leaf-file-name="RestpApi.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/infoshare/restApi/RestpApi.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="175" column="22" selection-start-line="175" selection-start-column="22" selection-end-line="175" selection-end-column="22" />
-              <folding>
-                <element signature="method#buildNotifications#0;class#Header#0" expanded="false" />
-                <element signature="method#refreshNotification#0;class#Header#0" expanded="false" />
-                <element signature="method#getLayout#0;class#Header#0" expanded="false" />
-                <element signature="method#getLogo#0;class#Header#0" expanded="false" />
-                <element signature="method#getSearch#0;class#Header#0" expanded="false" />
-                <element signature="method#getBar#0;class#Header#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="categoryTest.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/test/java/infoshare/categoryTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.81669694">
-              <caret line="25" column="4" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="4" />
+              <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -442,11 +75,83 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AppTest.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/infoshare/AppTest.java">
+      <file leaf-file-name="categoryTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/infoshare/service/categoryTest.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="35" column="18" selection-start-line="35" selection-start-column="8" selection-end-line="35" selection-end-column="18" />
+              <caret line="16" column="57" selection-start-line="16" selection-start-column="57" selection-end-line="16" selection-end-column="57" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RestApiCon.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/infoshare/RestApi/RestApiCon.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.28076255">
+              <caret line="45" column="18" selection-start-line="45" selection-start-column="18" selection-end-line="57" selection-end-column="35" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UrlPath.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/infoshare/RestApi/UrlPath.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="38" column="5" selection-start-line="38" selection-start-column="5" selection-end-line="38" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RoleModel.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/models/RoleModel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RoleView.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/views/RoleView.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="85" column="13" selection-start-line="85" selection-start-column="13" selection-end-line="85" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserView.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/views/UserView.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="168" column="33" selection-start-line="168" selection-start-column="33" selection-end-line="168" selection-end-column="33" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CategoryView.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/infoshare/client/content/systemValues/views/CategoryView.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="145" column="53" selection-start-line="145" selection-start-column="53" selection-end-line="145" selection-end-column="53" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ContentTypeView.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/infoshare/client/content/systemValues/views/ContentTypeView.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="98" column="71" selection-start-line="98" selection-start-column="71" selection-end-line="98" selection-end-column="71" />
               <folding />
             </state>
           </provider>
@@ -480,24 +185,12 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/infoshare/services/lesson/LessonService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/infoshare/domain/Lesson.java" />
-        <option value="$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/forms/UserForm.java" />
-        <option value="$PROJECT_DIR$/src/main/java/infoshare/services/lesson/Impl/LessonServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/infoshare/client/content/courseSetup/forms/CoursesForm.java" />
-        <option value="$PROJECT_DIR$/src/main/java/infoshare/client/content/courseSetup/models/CourseModel.java" />
-        <option value="$PROJECT_DIR$/src/main/java/infoshare/client/content/courseSetup/models/LessonModel.java" />
-        <option value="$PROJECT_DIR$/src/main/java/infoshare/client/admin/DashboardNavigator.java" />
-        <option value="$PROJECT_DIR$/src/main/java/infoshare/client/content/courseSetup/views/CourseView.java" />
-        <option value="$PROJECT_DIR$/src/main/java/infoshare/services/courses/Impl/CourseServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/mytheme/styles.scss" />
         <option value="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/mytheme/mytheme.scss" />
         <option value="$PROJECT_DIR$/src/main/java/infoshare/client/header/Header.java" />
         <option value="$PROJECT_DIR$/src/main/java/infoshare/client/content/content/forms/PublishForm.java" />
         <option value="$PROJECT_DIR$/src/main/java/infoshare/filterSearch/Filter.java" />
         <option value="$PROJECT_DIR$/src/main/java/infoshare/client/content/content/forms/RawAndEditForm.java" />
         <option value="$PROJECT_DIR$/src/main/java/infoshare/filterSearch/ContentFilter.java" />
-        <option value="$PROJECT_DIR$/src/main/java/infoshare/RestConnector/RestApiCon.java" />
         <option value="$PROJECT_DIR$/src/main/java/infoshare/client/header/HeaderMenu.java" />
         <option value="$PROJECT_DIR$/src/main/java/infoshare/client/sidebar/trees/CourseTree.java" />
         <option value="$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/SetupMenu.java" />
@@ -515,22 +208,34 @@
         <option value="$PROJECT_DIR$/src/main/java/infoshare/client/header/Generator.java" />
         <option value="$PROJECT_DIR$/src/main/java/infoshare/client/content/content/views/PublishView.java" />
         <option value="$PROJECT_DIR$/src/main/java/infoshare/client/content/content/views/EditView.java" />
-        <option value="$PROJECT_DIR$/src/main/java/infoshare/services/Content/Impl/ContentServiceImp.java" />
         <option value="$PROJECT_DIR$/src/main/java/infoshare/client/header/landing_page/DashboardView.java" />
         <option value="$PROJECT_DIR$/src/main/java/infoshare/client/content/MainLayout.java" />
         <option value="$PROJECT_DIR$/src/main/java/infoshare/client/sidebar/trees/PasswordTree.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/views/dashboardview.scss" />
         <option value="$PROJECT_DIR$/src/main/java/infoshare/client/sidebar/Sidebar.java" />
         <option value="$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/views/UserView.java" />
-        <option value="$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/views/RoleView.java" />
         <option value="$PROJECT_DIR$/src/main/java/infoshare/client/content/courseSetup/views/LessonView.java" />
         <option value="$PROJECT_DIR$/src/main/java/infoshare/client/header/form/HeaderForm.java" />
         <option value="$PROJECT_DIR$/src/main/java/infoshare/client/content/content/views/RawView.java" />
         <option value="$PROJECT_DIR$/src/main/java/infoshare/client/content/content/tables/RawTable.java" />
         <option value="$PROJECT_DIR$/src/main/java/infoshare/client/content/content/tables/EditTable.java" />
         <option value="$PROJECT_DIR$/src/main/java/infoshare/client/content/content/tables/PublishTable.java" />
-        <option value="$PROJECT_DIR$/src/main/java/infoshare/client/header/view/Header.java" />
         <option value="$PROJECT_DIR$/src/test/java/infoshare/categoryTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/infoshare/services/Content/Impl/ContentServiceImp.java" />
+        <option value="$PROJECT_DIR$/src/main/java/infoshare/client/header/view/Header.java" />
+        <option value="$PROJECT_DIR$/src/main/java/infoshare/RestConnector/RestApiCon.java" />
+        <option value="$PROJECT_DIR$/src/main/java/infoshare/RestConnector/urls.java" />
+        <option value="$PROJECT_DIR$/src/main/java/infoshare/client/content/systemValues/models/ContentTypeModel.java" />
+        <option value="$PROJECT_DIR$/src/main/java/infoshare/client/content/systemValues/models/CategoryModel.java" />
+        <option value="$PROJECT_DIR$/src/main/java/infoshare/client/content/systemValues/views/CategoryView.java" />
+        <option value="$PROJECT_DIR$/src/main/java/infoshare/client/content/systemValues/views/ContentTypeView.java" />
+        <option value="$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/models/RoleModel.java" />
+        <option value="$PROJECT_DIR$/src/main/java/infoshare/conf/util/UIComboBoxHelper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/views/RoleView.java" />
+        <option value="$PROJECT_DIR$/src/main/java/infoshare/RestApi/urls.java" />
+        <option value="$PROJECT_DIR$/src/main/java/infoshare/RestApi/Urls.java" />
+        <option value="$PROJECT_DIR$/src/test/java/infoshare/restApi/RestpApi.java" />
+        <option value="$PROJECT_DIR$/src/main/java/infoshare/RestApi/RestApiCon.java" />
       </list>
     </option>
   </component>
@@ -564,8 +269,8 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="width" value="1280" />
-    <option name="height" value="1000" />
+    <option name="width" value="1366" />
+    <option name="height" value="744" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -645,8 +350,8 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -705,6 +410,66 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="infoshare" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="service" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="infoshare" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="infoshare" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="infoshare" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="restApi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="infoshare" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="infoshare" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="main" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -795,7 +560,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="users" />
+              <option name="myItemId" value="Content" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -825,7 +590,75 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="filterSearch" />
+              <option name="myItemId" value="services" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Content" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Impl" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="infoshare" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="infoshare" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="infoshare" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RestApi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="infoshare" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="infoshare" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="infoshare" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="domain" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -856,78 +689,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="infoshare" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="infoshare" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="infoshare" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="header" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="infoshare" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="infoshare" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="infoshare" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="header" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="view" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -961,11 +722,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="header" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="landing_page" />
+              <option name="myItemId" value="home" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1037,41 +794,45 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="systemValues" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="infoshare" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="infoshare" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="infoshare" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="content" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-          </PATH>
-          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="infoshare" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="infoshare" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="infoshare" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="admin" />
+              <option name="myItemId" value="setup" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1105,11 +866,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="admin" />
+              <option name="myItemId" value="content" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="view" />
+              <option name="myItemId" value="login" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1150,7 +911,7 @@
       <recent name="infoshare.client.content.systemValues.models" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.categoryTest.testfindOne">
+  <component name="RunManager" selected="JUnit.RestpApi.testRest">
     <configuration default="false" name="App" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="infoshare.App" />
@@ -1168,8 +929,8 @@
       <module name="infoshare" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="infoshare" />
-      <option name="MAIN_CLASS_NAME" value="infoshare.categoryTest" />
+      <option name="PACKAGE_NAME" value="infoshare.service" />
+      <option name="MAIN_CLASS_NAME" value="infoshare.service.categoryTest" />
       <option name="METHOD_NAME" value="testName" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
@@ -1194,8 +955,8 @@
       <module name="infoshare" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="infoshare" />
-      <option name="MAIN_CLASS_NAME" value="infoshare.categoryTest" />
+      <option name="PACKAGE_NAME" value="infoshare.service" />
+      <option name="MAIN_CLASS_NAME" value="infoshare.service.categoryTest" />
       <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" value="-ea" />
@@ -1220,9 +981,35 @@
       <module name="infoshare" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="infoshare" />
-      <option name="MAIN_CLASS_NAME" value="infoshare.categoryTest" />
+      <option name="PACKAGE_NAME" value="infoshare.service" />
+      <option name="MAIN_CLASS_NAME" value="infoshare.service.categoryTest" />
       <option name="METHOD_NAME" value="testfindOne" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="false" name="RestpApi.testRest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="infoshare.restApi.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="infoshare" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="infoshare.restApi" />
+      <option name="MAIN_CLASS_NAME" value="infoshare.restApi.RestpApi" />
+      <option name="METHOD_NAME" value="testRest" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -1486,18 +1273,20 @@
     <configuration default="true" type="osgi.bnd.run" factoryName="Test Launcher (JUnit)">
       <method />
     </configuration>
-    <list size="4">
+    <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Spring Boot.App" />
       <item index="1" class="java.lang.String" itemvalue="JUnit.categoryTest.testName" />
       <item index="2" class="java.lang.String" itemvalue="JUnit.categoryTest" />
       <item index="3" class="java.lang.String" itemvalue="JUnit.categoryTest.testfindOne" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.RestpApi.testRest" />
     </list>
     <recent_temporary>
-      <list size="4">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.categoryTest.testfindOne" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.categoryTest.testName" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.categoryTest" />
-        <item index="3" class="java.lang.String" itemvalue="Spring Boot.App" />
+      <list size="5">
+        <item index="0" class="java.lang.String" itemvalue="JUnit.RestpApi.testRest" />
+        <item index="1" class="java.lang.String" itemvalue="Spring Boot.App" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.categoryTest.testfindOne" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.categoryTest.testName" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.categoryTest" />
       </list>
     </recent_temporary>
   </component>
@@ -1560,6 +1349,10 @@
       <workItem from="1437308301523" duration="15025000" />
       <workItem from="1437371977734" duration="656000" />
       <workItem from="1437400700089" duration="922000" />
+      <workItem from="1437460615263" duration="953000" />
+      <workItem from="1437461617256" duration="17853000" />
+      <workItem from="1437485439556" duration="602000" />
+      <workItem from="1437486524994" duration="55000" />
     </task>
     <task id="LOCAL-00001" summary="header sample, with no action Listeners">
       <created>1435155152131</created>
@@ -1673,7 +1466,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="554188000" />
+    <option name="totallyTimeSpent" value="573651000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1685,35 +1478,35 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1280" height="1000" extended-state="6" />
+    <frame x="0" y="0" width="1366" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32890365" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32867134" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25747508" sideWeight="0.5120846" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32930514" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32890365" sideWeight="0.49697885" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32634032" sideWeight="0.4879154" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32890365" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32724252" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26979" sideWeight="0.48098433" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2907855" sideWeight="0.48098433" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32930514" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32930514" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2794562" sideWeight="0.51901567" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3986711" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="JRebel Executor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32890365" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3986711" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32724252" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3986711" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.68604654" sideWeight="0.4879154" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32930514" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="JRebel" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2326284" sideWeight="0.5181237" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32890365" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1794,120 +1587,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/tables/UserTable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8016529">
-          <caret line="26" column="27" selection-start-line="26" selection-start-column="27" selection-end-line="26" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/styles.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.3333333">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/dashboard.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.5535714">
-          <caret line="14" column="40" selection-start-line="14" selection-start-column="40" selection-end-line="14" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/vaadin/vaadin-server/7.4.5/vaadin-server-7.4.5.jar!/com/vaadin/ui/Button.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/views/transactions.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/views/schedule.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.3333335">
-          <caret line="11" column="14" selection-start-line="11" selection-start-column="14" selection-end-line="11" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/views/sales.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.9583334">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/views/reports.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.805195">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/views/login.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6103896">
-          <caret line="12" column="16" selection-start-line="12" selection-start-column="16" selection-end-line="12" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/infoshare/client/content/content/views/EditView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="84" column="8" selection-start-line="84" selection-start-column="8" selection-end-line="84" selection-end-column="34" />
-          <folding>
-            <element signature="method#buttonClick#0;class#EditView#0" expanded="false" />
-            <element signature="method#valueChange#0;class#EditView#0" expanded="false" />
-            <element signature="method#loadComboBoxs#0;class#EditView#0" expanded="false" />
-            <element signature="e#6201#6202#0" expanded="false" />
-            <element signature="method#EditButton#0;class#EditView#0" expanded="false" />
-            <element signature="method#saveEditedForm#0;class#EditView#0" expanded="false" />
-            <element signature="method#getModel#0;class#EditView#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/infoshare/client/content/content/views/PublishView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="89" column="34" selection-start-line="89" selection-start-column="34" selection-end-line="89" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/vaadin/vaadin-shared/7.4.5/vaadin-shared-7.4.5.jar!/com/vaadin/shared/MouseEventDetails.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.19672132">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/vaadin/vaadin-server/7.4.5/vaadin-server-7.4.5.jar!/com/vaadin/ui/AbstractOrderedLayout.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.27639157">
-          <caret line="11" column="31" selection-start-line="11" selection-start-column="31" selection-end-line="11" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/infoshare/client/content/MainLayout.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="24" column="58" selection-start-line="24" selection-start-column="58" selection-end-line="24" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/infoshare/client/sidebar/trees/ContentTree.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.54140127">
-          <caret line="24" column="25" selection-start-line="24" selection-start-column="25" selection-end-line="24" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/infoshare/client/sidebar/trees/CourseTree.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.656051">
@@ -1984,34 +1663,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/infoshare/services/users/Impl/UserServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="56" column="23" selection-start-line="56" selection-start-column="23" selection-end-line="56" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/views/UserView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="168" column="33" selection-start-line="168" selection-start-column="33" selection-end-line="168" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/views/RoleView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="89" column="84" selection-start-line="89" selection-start-column="67" selection-end-line="89" selection-end-column="84" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/infoshare/client/content/courseSetup/views/LessonView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/infoshare/client/header/MenuLayout.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -2033,13 +1684,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/infoshare/client/content/login/LoginView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.04761905">
-          <caret line="77" column="15" selection-start-line="77" selection-start-column="15" selection-end-line="77" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/infoshare/services/users/UserService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -2054,25 +1698,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/infoshare/RestConnector/RestApiCon.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="15" column="37" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/infoshare/services/Content/ContentService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/infoshare/services/Content/Impl/ContentServiceImp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="104" column="30" selection-start-line="104" selection-start-column="30" selection-end-line="104" selection-end-column="30" />
         </state>
       </provider>
     </entry>
@@ -2125,28 +1755,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/infoshare/client/admin/view/MainView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.14285715">
-          <caret line="15" column="30" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/infoshare/client/header/view/Header.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="175" column="22" selection-start-line="175" selection-start-column="22" selection-end-line="175" selection-end-column="22" />
-          <folding>
-            <element signature="method#buildNotifications#0;class#Header#0" expanded="false" />
-            <element signature="method#refreshNotification#0;class#Header#0" expanded="false" />
-            <element signature="method#getLayout#0;class#Header#0" expanded="false" />
-            <element signature="method#getLogo#0;class#Header#0" expanded="false" />
-            <element signature="method#getSearch#0;class#Header#0" expanded="false" />
-            <element signature="method#getBar#0;class#Header#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/infoshare/AppTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -2155,13 +1763,192 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/infoshare/categoryTest.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/infoshare/client/admin/view/MainView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.81669694">
-          <caret line="25" column="4" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="4" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="15" column="30" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/infoshare/domain/Lesson.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-beans/4.1.6.RELEASE/spring-beans-4.1.6.RELEASE.jar!/org/springframework/beans/factory/support/SimpleInstantiationStrategy.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3583815">
+          <caret line="62" column="0" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/infoshare/client/content/courseSetup/views/LessonView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/infoshare/services/users/Impl/UserServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="56" column="23" selection-start-line="56" selection-start-column="23" selection-end-line="56" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/4.1.6.RELEASE/spring-web-4.1.6.RELEASE.jar!/org/springframework/http/converter/json/AbstractJackson2HttpMessageConverter.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3583815">
+          <caret line="137" column="0" selection-start-line="137" selection-start-column="0" selection-end-line="137" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/infoshare/services/Content/Impl/ContentServiceImp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="99" column="0" selection-start-line="99" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/infoshare/client/content/MainLayout.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="18" column="11" selection-start-line="18" selection-start-column="11" selection-end-line="18" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/infoshare/client/content/login/LoginView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="3.1451614">
+          <caret line="73" column="51" selection-start-line="73" selection-start-column="47" selection-end-line="73" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/infoshare/client/home/Index.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.61290324">
+          <caret line="26" column="32" selection-start-line="26" selection-start-column="23" selection-end-line="26" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/infoshare/client/header/view/Header.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="37" column="16" selection-start-line="37" selection-start-column="16" selection-end-line="37" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/infoshare/domain/Category.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="9" column="3" selection-start-line="9" selection-start-column="3" selection-end-line="9" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/infoshare/client/content/systemValues/models/ContentTypeModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/infoshare/client/content/systemValues/models/CategoryModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="26" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/infoshare/client/content/systemValues/views/CategoryView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="145" column="53" selection-start-line="145" selection-start-column="53" selection-end-line="145" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/infoshare/client/content/systemValues/views/ContentTypeView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="98" column="71" selection-start-line="98" selection-start-column="71" selection-end-line="98" selection-end-column="71" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/models/RoleModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/infoshare/conf/util/UIComboBoxHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="50" column="11" selection-start-line="50" selection-start-column="11" selection-end-line="50" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/infoshare/service/categoryTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="16" column="57" selection-start-line="16" selection-start-column="57" selection-end-line="16" selection-end-column="57" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/4.1.6.RELEASE/spring-web-4.1.6.RELEASE.jar!/org/springframework/web/client/RestTemplate.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.3172414">
+          <caret line="51" column="13" selection-start-line="51" selection-start-column="13" selection-end-line="51" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/views/UserView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="168" column="33" selection-start-line="168" selection-start-column="33" selection-end-line="168" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/views/RoleView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="85" column="13" selection-start-line="85" selection-start-column="13" selection-end-line="85" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/infoshare/RestApi/UrlPath.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="38" column="5" selection-start-line="38" selection-start-column="5" selection-end-line="38" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/infoshare/restApi/RestpApi.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/infoshare/RestApi/RestApiCon.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.28076255">
+          <caret line="45" column="18" selection-start-line="45" selection-start-column="18" selection-end-line="57" selection-end-column="35" />
+          <folding />
         </state>
       </provider>
     </entry>
