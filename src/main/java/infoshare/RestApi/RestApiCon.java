@@ -5,6 +5,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
+import infoshare.domain.Category;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -41,6 +42,7 @@ public class RestApiCon{
             JsonParser jsonParser = new JsonParser();
             JsonArray json = jsonParser.parse(reader).getAsJsonArray();
             Gson myGson = new Gson();
+
             for (JsonElement Element : json) {
                 classType = (Class<T>) myGson.fromJson(Element, classType);
                 list.add((T) classType);
@@ -50,6 +52,7 @@ public class RestApiCon{
         }
         return list;
     }
+
     public static JsonElement read(String fetchUrl, String ID){
         JsonElement element= null;
         try {
