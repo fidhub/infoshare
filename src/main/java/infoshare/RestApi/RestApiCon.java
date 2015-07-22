@@ -5,7 +5,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
-import infoshare.client.content.systemValues.models.CategoryModel;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -37,6 +36,7 @@ public class RestApiCon{
 
         List<T> list = new ArrayList<>();
         try {
+
             JsonReader reader = new JsonReader(new InputStreamReader(openConnection(fetchUrl).getInputStream()));
             JsonParser jsonParser = new JsonParser();
             JsonArray json = jsonParser.parse(reader).getAsJsonArray();
@@ -50,21 +50,16 @@ public class RestApiCon{
         }
         return list;
     }
-    public static CategoryModel read(String fetchUrl, String ID){
-        CategoryModel n = null;
+    public static JsonElement read(String fetchUrl, String ID){
+        JsonElement element= null;
         try {
-
             JsonParser jsonParser = new JsonParser();
-            Gson myGson = new Gson();
-
             JsonReader reader = new JsonReader(new InputStreamReader(openConnection(fetchUrl+ID).getInputStream()));
-            JsonElement element = jsonParser.parse(reader);
-            n  = myGson.fromJson(element, CategoryModel.class);
-
+            element = jsonParser.parse(reader);
         }catch (Exception e){
             e.getMessage();
         }
-        return n;
+        return element;
 
     }
     public static <T> void create(String url,Class<T> classType){
@@ -73,9 +68,17 @@ public class RestApiCon{
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<T> entity = new HttpEntity<>((T) classType,headers);
+        restTemplate.postForObject(url, entity, String.class);
 
-        String  n= restTemplate.postForObject(url, entity, String.class);
+    }
 
-        System.out.println(n);
+    public static <T> void update(String url, Class<T> classType){
+        RestTemplate restTemplate = new RestTemplate();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<T> entity = new HttpEntity<>((T) classType,headers);
+        restTemplate.put(url,entity);
+
     }
 }
