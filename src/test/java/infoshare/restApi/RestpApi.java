@@ -17,8 +17,6 @@ public class RestpApi {
     @Test
     public void testPost() throws Exception {
 
-
-
         CategoryModel model  = new CategoryModel();
 
         model.setName("kjkjdjk");
