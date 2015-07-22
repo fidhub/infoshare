@@ -14,7 +14,6 @@ public class CategoryModel implements Serializable {
     @NotNull
     private String description;
 
-
     public String getName() {
         return name;
     }

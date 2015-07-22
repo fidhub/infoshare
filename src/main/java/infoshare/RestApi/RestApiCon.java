@@ -5,7 +5,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
-import com.vaadin.ui.Notification;
+import infoshare.client.content.systemValues.models.CategoryModel;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -21,36 +21,51 @@ import java.util.List;
 /**
  * Created by codex on 2015/06/30.
  */
-public class RestApiCon {
+public class RestApiCon{
 
-    public static URLConnection openCon(String fetchUrl){
+    private static URLConnection openConnection(String fetchUrl){
         URLConnection urlConnection = null;
         try {
             urlConnection =  new URL(fetchUrl).openConnection();
             urlConnection.connect();
         } catch (IOException e) {
-            Notification.show("Connection could not be opened", Notification.Type.HUMANIZED_MESSAGE);
+             e.getMessage();
         }
         return urlConnection;
     }
-    public static <T> List<T> read(String fetchUrl,Class<T> classType) {
+    public static <T> List<T> readAll(String fetchUrl,Class<T> classType) {
 
         List<T> list = new ArrayList<>();
         try {
-            JsonReader reader = new JsonReader(new InputStreamReader(openCon(fetchUrl).getInputStream()));
+            JsonReader reader = new JsonReader(new InputStreamReader(openConnection(fetchUrl).getInputStream()));
             JsonParser jsonParser = new JsonParser();
-             JsonArray json = jsonParser.parse(reader).getAsJsonArray();
-
+            JsonArray json = jsonParser.parse(reader).getAsJsonArray();
             Gson myGson = new Gson();
             for (JsonElement Element : json) {
                 classType = (Class<T>) myGson.fromJson(Element, classType);
                 list.add((T) classType);
             }
         } catch (Exception e) {
-            Notification.show(e.getMessage(), Notification.Type.TRAY_NOTIFICATION);
-
+            e.getMessage();
         }
         return list;
+    }
+    public static CategoryModel read(String fetchUrl, String ID){
+        CategoryModel n = null;
+        try {
+
+            JsonParser jsonParser = new JsonParser();
+            Gson myGson = new Gson();
+
+            JsonReader reader = new JsonReader(new InputStreamReader(openConnection(fetchUrl+ID).getInputStream()));
+            JsonElement element = jsonParser.parse(reader);
+            n  = myGson.fromJson(element, CategoryModel.class);
+
+        }catch (Exception e){
+            e.getMessage();
+        }
+        return n;
+
     }
     public static <T> void create(String url,Class<T> classType){
         RestTemplate restTemplate = new RestTemplate();
@@ -59,6 +74,8 @@ public class RestApiCon {
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<T> entity = new HttpEntity<>((T) classType,headers);
 
-         restTemplate.postForObject(url, entity, String.class);
+        String  n= restTemplate.postForObject(url, entity, String.class);
+
+        System.out.println(n);
     }
 }
