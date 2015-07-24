@@ -115,7 +115,7 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
 
         for(ContentType category:contentTypeService.findAll()){
             if(category!= null)
-                form.popUpContentTypeCmb.addItem(category.getContentTyeName());
+                form.popUpContentTypeCmb.addItem(category.getName());
         }
         for(Source source:sourceService.findAll()){
             if(source!= null)

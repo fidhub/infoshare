@@ -29,11 +29,11 @@ public class ContentTypeForm extends FormLayout {
         item = new BeanItem<>(model);
         binder = new FieldGroup(item);
 
-        ComboBox name = getComboBox("Content Type", "contentTyeName");
+        ComboBox name = getComboBox("Content Type", "name");
         name.addItem("Raw");
         name.addItem("Edited");
         name.addItem("Published");
-        TextArea description = getTextArea("Description", "contentTyeDescription");
+        TextArea description = getTextArea("Description", "description");
         GridLayout grid = new GridLayout(4, 8);
         grid.setSizeFull();
 

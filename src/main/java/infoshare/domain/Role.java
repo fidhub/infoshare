@@ -9,15 +9,27 @@ public class Role implements Serializable, Comparable<Role> {
 
 
     private String id;
-    private String rolename;
+    private String roleName;
     private String description;
 
     private Role() {
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
     private Role(Builder builder) {
         this.id = builder.id;
-        this.rolename = builder.rolename;
+        this.roleName = builder.rolename;
         this.description = builder.description;
     }
 
@@ -68,18 +80,7 @@ public class Role implements Serializable, Comparable<Role> {
 
     @Override
     public int compareTo(Role o) {
-        return rolename.compareToIgnoreCase(o.rolename);
+        return roleName.compareToIgnoreCase(o.roleName);
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public String getRolename() {
-        return rolename;
-    }
-
-    public String getDescription() {
-        return description;
-    }
 }

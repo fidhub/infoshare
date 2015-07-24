@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * Created by codex on 2015/06/30.
  */
-public class RestApiCon{
+public class RestApiConnectorClass {
 
     private static URLConnection openConnection(String fetchUrl){
         URLConnection urlConnection = null;
@@ -64,23 +64,25 @@ public class RestApiCon{
             return null;
         }
     }
-    public static <T> void create(String url,Class<T> classType){
+    public static <T> void create(String url,T classType){
         RestTemplate restTemplate = new RestTemplate();
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<T> entity = new HttpEntity<>((T) classType,headers);
-        restTemplate.postForObject(url, entity, String.class);
+        HttpEntity<T> entity = new HttpEntity<>(classType,headers);
+        String n =  restTemplate.postForObject(url, entity, String.class);
+
+        System.out.println(n);
 
     }
-
-    public static <T> void update(String url, Class<T> classType){
+    public static <T> void update(String url, T classType){
         RestTemplate restTemplate = new RestTemplate();
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<T> entity = new HttpEntity<>((T) classType,headers);
+        HttpEntity<T> entity = new HttpEntity<>( classType,headers);
         restTemplate.put(url,entity);
 
     }
+
 }

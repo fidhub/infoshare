@@ -26,7 +26,6 @@ import infoshare.services.category.CategoryService;
 import infoshare.services.category.Impl.CategoryServiceImpl;
 import infoshare.services.source.SourceService;
 import infoshare.services.source.sourceServiceImpl.SourceServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Created by hashcode on 2015/06/24.
@@ -116,7 +115,7 @@ public class RawView extends VerticalLayout implements
 
         for(ContentType category:contentTypeService.findAll()){
                 if(category!= null)
-                form.popUpContentTypeCmb.addItem(category.getContentTyeName());
+                form.popUpContentTypeCmb.addItem(category.getName());
             }
         for(Source source:sourceService.findAll()){
                 if(source!= null)

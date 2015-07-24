@@ -47,7 +47,7 @@ public class UIComboBoxHelper<T> implements Serializable {
 //
        /* for (RoleModel role : roles) {
             comboBox.addItem(role.getId());
-            comboBox.setItemCaption(role.getId(), role.getRolename());
+            comboBox.setItemCaption(role.getId(), role.getRoleName());
         }*/
         comboBox.addValidator(new BeanValidator(fieldClass, fieldName));
         comboBox.setImmediate(true);

@@ -13,6 +13,7 @@ public class CategoryModel implements Serializable {
     @NotNull
     private String description;
 
+
     public String getName() {
         return name;
     }
@@ -21,12 +22,11 @@ public class CategoryModel implements Serializable {
         this.name = name;
     }
 
-    public String getDescription() {
+   public String getDescription() {
         return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
     }
-
 }

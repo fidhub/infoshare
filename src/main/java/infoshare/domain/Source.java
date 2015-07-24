@@ -51,6 +51,12 @@ public class Source implements Serializable, Comparable<Source> {
             return this;
         }
 
+        public Builder copy(Source source){
+            this.id = source.id;
+            this.name = source.name;
+            this.description = source.description;
+            return this;
+        }
         public Source build(){
             return new Source(this);
         }

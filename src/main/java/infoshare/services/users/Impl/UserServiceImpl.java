@@ -24,9 +24,9 @@ public class UserServiceImpl implements UserService{
 
     public UserServiceImpl() {
         Set<Role> roles = new HashSet<>();
-        for(Role role: roleService.findAll()) {
-            roles.add(role);
-        }
+            roles.add(roleService.find("1"));
+            roles.add(roleService.find("2"));
+
         if(users == null) {
             users = new HashMap<>();
             User user = new User.Builder("Hadebe")

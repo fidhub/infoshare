@@ -12,9 +12,9 @@ import java.util.Set;
 public class User implements Serializable, Comparable<User> {
 
     private String id;
-    private String firstname;
-    private String lastname;
-    private String othername;
+    private String firstName;
+    private String lastName;
+    private String otherName;
     private String password;
     private Set<Role> role = new HashSet<>();
     private String username;
@@ -26,45 +26,76 @@ public class User implements Serializable, Comparable<User> {
 
     private User(Builder builder) {
         this.id = builder.id;
-        this.firstname = builder.firstname;
-        this.lastname = builder.lastname;
-        this.othername = builder.othername;
+        this.firstName = builder.firstName;
+        this.lastName = builder.lastName;
+        this.otherName = builder.otherName;
         this.password = builder.password;
         this.role = builder.role;
         this.username = builder.username;
-//        this.demography = builder.demography;
         this.enable = builder.enable;
 
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getOtherName() {
+        return otherName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public Set<Role> getRole() {
+        return role;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public boolean isEnable() {
+        return enable;
+    }
+
     @Override
     public int compareTo(User o) {
-        return firstname.compareToIgnoreCase(o.firstname);
+        return firstName.compareToIgnoreCase(o.firstName);
     }
 
     public static class Builder {
         private String id;
-        private String firstname;
-        private final String lastname;
-        private String othername;
+        private String firstName;
+        private final String lastName;
+        private String otherName;
 
         private boolean enable;
         private String password;
         private Set<Role> role = new HashSet<>();
         private String username;
 
-        public Builder(String lastname) {
-            this.lastname = lastname;
+        public Builder(String lastName) {
+            this.lastName = lastName;
         }
 
         public Builder user(User person) {
             this.id = person.id;
-            this.firstname = person.getFirstname();
-            this.othername = person.getOthername();
-            this.password = person.getPassword();
-            this.role = person.getRole();
-            this.username = person.getUsername();
-            this.enable = person.isEnable();
+            this.firstName = person.firstName;
+            this.otherName = person.otherName;
+            this.password = person.password;
+            this.role = person.role;
+            this.username = person.username;
+            this.enable = person.enable;
             return this;
         }
 
@@ -74,13 +105,13 @@ public class User implements Serializable, Comparable<User> {
         }
 
         public Builder firstname(String value) {
-            this.firstname = value;
+            this.firstName = value;
             return this;
         }
 
 
         public Builder othername(String value) {
-            this.othername = value;
+            this.otherName = value;
             return this;
         }
 
@@ -133,56 +164,5 @@ public class User implements Serializable, Comparable<User> {
         return true;
     }
 
-    public String getId() {
-        return id;
-    }
 
-    public String getFirstname() {
-        return firstname;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public String getOthername() {
-        return othername;
-    }
-
-
-
-    public String getPassword() {
-        return password;
-    }
-
-    public Set<Role> getRole() {
-        return ImmutableSet.copyOf(role);
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    //    public PersonDemography getDemography() {
-//        return demography;
-//    }
-    public boolean isEnable() {
-        return enable;
-    }
-
-
-    private boolean isNullObject(Object object) {
-        if (object == null) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id='" + id + '\'' +
-                '}';
-    }
 }

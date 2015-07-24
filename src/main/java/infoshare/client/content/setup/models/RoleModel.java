@@ -9,16 +9,16 @@ import java.io.Serializable;
 public class RoleModel implements Serializable {
 
     @NotNull
-    private String rolename;
+    private String roleName;
     @NotNull
     private String description;
 
-    public String getRolename() {
-        return rolename;
+    public String getRoleName() {
+        return roleName;
     }
 
-    public void setRolename(String rolename) {
-        this.rolename = rolename;
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 
     public String getDescription() {

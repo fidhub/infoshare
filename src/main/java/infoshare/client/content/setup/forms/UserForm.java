@@ -38,11 +38,11 @@ public class UserForm extends FormLayout {
         delete.setVisible(false);
 
 
-        final TextField firstname = getTextField("First Name", "firstname");
-        final TextField lastname = getTextField("Last Name", "lastname");
+        final TextField firstname = getTextField("First Name", "firstName");
+        final TextField lastname = getTextField("Last Name", "lastName");
         final TextField username = getTextField("Username", "username");
         final CheckBox enable = getCheckBoxField("Activate Account", "enabled");
-        final ListSelect roles = getRoles("Select Roles", "roleIds");
+        final ListSelect roles = getRoles("Select Roles", "role");
 
 
 
@@ -64,17 +64,6 @@ public class UserForm extends FormLayout {
         grid.addComponent(buttons, 0, 3, 2, 3);
 
         addComponent(grid);
-    }
-
-    private TextArea getTextArea(String label, String field) {
-        TextArea textArea = new TextArea(label);
-        textArea.setWidth(250, Unit.PIXELS);
-        textArea.setNullRepresentation("");
-        textArea.addValidator(new BeanValidator(UserModel.class, field));
-        textArea.setImmediate(true);
-        binder.bind(textArea, field);
-        return textArea;
-
     }
 
     private TextField getTextField(String label, String field) {
@@ -100,7 +89,7 @@ public class UserForm extends FormLayout {
         rolesList.setCaption(label);
           for (Role role : roleService.findAll()) {
               if (role.getId() != null) {
-                  rolesList.setItemCaption(role.getId(), role.getRolename() + " " + role.getDescription());
+                  rolesList.setItemCaption(role.getId(), role.getRoleName() + " " + role.getDescription());
                   rolesList.setNullSelectionAllowed(false);
                   rolesList.setMultiSelect(true);
                   rolesList.addItem(role.getId());

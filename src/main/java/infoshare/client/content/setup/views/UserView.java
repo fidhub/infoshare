@@ -110,16 +110,16 @@ public class UserView extends VerticalLayout implements
         final UserModel bean = ((BeanItem<UserModel>) binder.getItemDataSource()).getBean();
         Set<Role> userRoles = new HashSet<>();
 
-        if (bean.getRoleIds() != null) {
-            for (String roleId : bean.getRoleIds()) {
+        if (bean.getRole() != null) {
+            for (String roleId : bean.getRole()) {
                 Role role = roleService.find(roleId);
                 if (role != null) {
                     userRoles.add(role);
                 }
             }
         }
-        final User user = new User.Builder(bean.getLastname())
-                .firstname(bean.getFirstname())
+        final User user = new User.Builder(bean.getLastName())
+                .firstname(bean.getFirstName())
                 .role(userRoles)
                 .enable(bean.isEnabled())
                 .password(bean.getPassword())
@@ -131,8 +131,8 @@ public class UserView extends VerticalLayout implements
 
         final UserModel bean = ((BeanItem<UserModel>) binder.getItemDataSource()).getBean();
         Set<Role> userRoles = new HashSet<>();
-        if (bean.getRoleIds()!= null) {
-            for (String roleId : bean.getRoleIds()) {
+        if (bean.getRole()!= null) {
+            for (String roleId : bean.getRole()) {
                 Role role = roleService.find(roleId);
                 if (role != null) {
                     userRoles.add(role);
@@ -140,8 +140,8 @@ public class UserView extends VerticalLayout implements
             }
         }
 
-        final User user = new User.Builder(bean.getLastname())
-                .firstname(bean.getFirstname())
+        final User user = new User.Builder(bean.getLastName())
+                .firstname(bean.getFirstName())
                 .role(userRoles)
                 .enable(bean.isEnabled())
                 .username(bean.getUsername())
@@ -190,11 +190,11 @@ public class UserView extends VerticalLayout implements
             }
         }
         UserModel model = new UserModel();
-        model.setFirstname(user.getFirstname());
-        model.setLastname(user.getLastname());
+        model.setFirstName(user.getFirstName());
+        model.setLastName(user.getLastName());
         model.setUsername(user.getUsername());
         model.setEnabled(user.isEnable());
-        model.setRoleIds(userRolesId);
+        model.setRole(userRolesId);
         model.setPassword(user.getPassword());
         return model;
     }

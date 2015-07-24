@@ -35,8 +35,8 @@ public class UserTable extends Table {
         for (User user : users) {
             addItem(new Object[]{
                     user.getUsername(),
-                    user.getFirstname(),
-                    user.getLastname(),
+                    user.getFirstName(),
+                    user.getLastName(),
                     user.isEnable()
                     }, user.getId());
         }

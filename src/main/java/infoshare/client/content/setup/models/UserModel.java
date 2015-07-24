@@ -2,6 +2,9 @@ package infoshare.client.content.setup.models;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -10,41 +13,43 @@ import java.util.Set;
 public class UserModel implements Serializable, Comparable<UserModel> {
 
     @NotNull
-    private String firstname;
+    private String firstName;
     @NotNull
-    private String lastname;
-    private String othername;
+    private String lastName;
+    private String otherName;
     private String password;
     @NotNull
     private String email;
     private boolean enabled;
     @NotNull
-    private Set<String> roleIds;
+    private Set<String> role = new HashSet<>();
     @NotNull
     private String username;
+    private List<String> contact = new ArrayList<>();
+    private List<String> address = new ArrayList<>();
 
-    public String getFirstname() {
-        return firstname;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public String getOthername() {
-        return othername;
+    public String getOtherName() {
+        return otherName;
     }
 
-    public void setOthername(String othername) {
-        this.othername = othername;
+    public void setOtherName(String otherName) {
+        this.otherName = otherName;
     }
 
     public String getPassword() {
@@ -55,6 +60,30 @@ public class UserModel implements Serializable, Comparable<UserModel> {
         this.password = password;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public Set<String> getRole() {
+        return role;
+    }
+
+    public void setRole(Set<String> role) {
+        this.role = role;
+    }
+
     public String getUsername() {
         return username;
     }
@@ -63,52 +92,27 @@ public class UserModel implements Serializable, Comparable<UserModel> {
         this.username = username;
     }
 
+    public List<String> getContact() {
+        return contact;
+    }
+
+    public void setContact(List<String> contact) {
+        this.contact = contact;
+    }
+
+    public List<String> getAddress() {
+        return address;
+    }
+
+    public void setAddress(List<String> address) {
+        this.address = address;
+    }
+
     @Override
     public int compareTo(UserModel o) {
-        return this.getLastname().compareTo(o.getLastname());
-    }
-
-    /**
-     * @return the email
-     */
-    public String getEmail() {
-        return email;
-    }
-
-    /**
-     * @param email the email to set
-     */
-    public void setEmail(String email) {
-        this.email = email;
+        return this.getLastName().compareTo(o.getLastName());
     }
 
 
-    /**
-     * @return the enabled
-     */
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    /**
-     * @param enabled the enabled to set
-     */
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-
-    /**
-     * @return the roleIds
-     */
-    public Set<String> getRoleIds() {
-        return roleIds;
-    }
-
-    /**
-     * @param roleIds the roleIds to set
-     */
-    public void setRoleIds(Set<String> roleIds) {
-        this.roleIds = roleIds;
-    }
 
 }

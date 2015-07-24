@@ -35,8 +35,8 @@ public class ContentTypeTable extends Table {
 
         for(ContentType contentType: contentTypes){
             addItem(new Object[]{
-                    contentType.getContentTyeName(),
-                    contentType.getContentTyeDescription()
+                    contentType.getName(),
+                    contentType.getDescription()
             },contentType.getId());
         }
 

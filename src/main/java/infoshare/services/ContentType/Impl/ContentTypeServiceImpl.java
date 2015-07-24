@@ -23,15 +23,15 @@ public class ContentTypeServiceImpl implements ContentTypeService{
         if(contentTypes == null){
             contentTypes = new HashMap<>();
             ContentType contentType = new ContentType.Builder("edited")
-                    .contentTyeDescription("un edited content posted by thule")
+                    .description("un edited content posted by thule")
                     .id("1")
                     .build();
             ContentType contentType1 = new ContentType.Builder("raw")
-                    .contentTyeDescription("un edited content posted by thule")
+                    .description("un edited content posted by thule")
                     .id("1")
                     .build();
             ContentType contentType2 = new ContentType.Builder("Published")
-                    .contentTyeDescription("un edited content posted by thule")
+                    .description("un edited content posted by thule")
                     .id("1")
                     .build();
             contentTypes.put(contentType .getId(),contentType );

@@ -32,7 +32,7 @@ public class RoleTable extends Table {
         addContainerProperty("category", String.class, null);
         List<Role> roles = roleService.findAll();
         for (Role role : roles) {
-            addItem(new Object[]{role.getRolename(),
+            addItem(new Object[]{role.getRoleName(),
                     role.getDescription()
             }, role.getId());
         }

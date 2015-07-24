@@ -30,7 +30,7 @@ public class RoleForm extends FormLayout {
         update.setVisible(false);
         delete.setVisible(false);
 
-        TextField rolename = getTextField("Role Name", "rolename");
+        TextField rolename = getTextField("Role Name", "roleName");
         TextField description = getTextField("category", "description");
 
         GridLayout grid = new GridLayout(4, 10);

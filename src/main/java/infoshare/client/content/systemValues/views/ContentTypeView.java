@@ -94,16 +94,16 @@ public class ContentTypeView extends VerticalLayout implements Button.ClickListe
     }
     private ContentType getUpdateEntity(FieldGroup binder) {
         final ContentTypeModel bean = ((BeanItem<ContentTypeModel>) binder.getItemDataSource()).getBean();
-        final ContentType contentType = new ContentType.Builder(bean.getContentTyeName())
-                .contentTyeDescription(bean.getContentTyeDescription())
+        final ContentType contentType = new ContentType.Builder(bean.getName())
+                .description(bean.getDescription())
                 .id(table.getValue().toString())
                 .build();
         return contentType;
     }
     private ContentType getNewEntity(FieldGroup binder) {
         final ContentTypeModel bean = ((BeanItem<ContentTypeModel>) binder.getItemDataSource()).getBean();
-        final ContentType contentType = new ContentType.Builder(bean.getContentTyeName())
-                .contentTyeDescription(bean.getContentTyeDescription())
+        final ContentType contentType = new ContentType.Builder(bean.getName())
+                .description(bean.getDescription())
                 .build();
         return contentType;
     }
@@ -139,8 +139,8 @@ public class ContentTypeView extends VerticalLayout implements Button.ClickListe
     }
     private ContentTypeModel getModel(ContentType contentType) {
         final ContentTypeModel model = new ContentTypeModel();
-        model.setContentTyeName(contentType.getContentTyeName());
-        model.setContentTyeDescription(contentType.getContentTyeDescription());
+        model.setName(contentType.getName());
+        model.setDescription(contentType.getDescription());
         return model;
     }
 }

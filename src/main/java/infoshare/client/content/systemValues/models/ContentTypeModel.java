@@ -9,23 +9,23 @@ import java.io.Serializable;
 public class ContentTypeModel implements Serializable {
 
     @NotNull
-    private String contentTyeName;
+    private String name;
     @NotNull
-    private String contentTyeDescription;
+    private String description;
 
-    public String getContentTyeName() {
-        return contentTyeName;
+    public String getName() {
+        return name;
     }
 
-    public void setContentTyeName(String contentTyeName) {
-        this.contentTyeName = contentTyeName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getContentTyeDescription() {
-        return contentTyeDescription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setContentTyeDescription(String contentTyeDescription) {
-        this.contentTyeDescription = contentTyeDescription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
