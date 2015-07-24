@@ -5,118 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e90d9adc-412d-4446-ab3a-2e74a34bb89b" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__aopalliance_aopalliance_1_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__ch_qos_logback_logback_classic_1_1_3.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__ch_qos_logback_logback_core_1_1_3.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_classmate_1_0_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_4_6.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_4_6.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_4_6.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_gson_gson_2_3_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_guava_guava_18_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_vaadin_external_flute_flute_1_3_0_gg2.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_vaadin_external_google_guava_16_0_1_vaadin1.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_vaadin_external_streamhtmlparser_streamhtmlparser_jsilver_0_0_10_vaadin1.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_vaadin_vaadin_client_compiled_7_4_5.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_vaadin_vaadin_sass_compiler_0_9_12.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_vaadin_vaadin_server_7_4_5.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_vaadin_vaadin_shared_7_4_5.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_vaadin_vaadin_spring_1_0_0_beta3.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_vaadin_vaadin_spring_boot_1_0_0_beta3.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_vaadin_vaadin_spring_boot_starter_1_0_0_beta3.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_vaadin_vaadin_themes_7_4_5.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_validation_validation_api_1_1_0_Final.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__joda_time_joda_time_2_8_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_4_12.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_core_8_0_23.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_el_8_0_23.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_logging_juli_8_0_23.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_websocket_8_0_23.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_3.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_library_1_3.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_hibernate_validator_5_1_3_Final.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_logging_jboss_logging_3_1_3_GA.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jsoup_jsoup_1_8_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_mockito_mockito_core_1_10_19.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_objenesis_objenesis_2_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_jcl_over_slf4j_1_7_12.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_jul_to_slf4j_1_7_12.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_log4j_over_slf4j_1_7_12.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_12.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_1_2_4_RELEASE.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_autoconfigure_1_2_4_RELEASE.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_1_2_4_RELEASE.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_hateoas_1_2_4_RELEASE.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_logging_1_2_4_RELEASE.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_test_1_2_4_RELEASE.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_tomcat_1_2_4_RELEASE.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_web_1_2_4_RELEASE.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_websocket_1_2_4_RELEASE.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_hateoas_spring_hateoas_0_16_0_RELEASE.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_plugin_spring_plugin_core_1_1_0_RELEASE.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_aop_4_1_6_RELEASE.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_beans_4_1_6_RELEASE.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_context_4_1_6_RELEASE.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_core_4_1_6_RELEASE.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_expression_4_1_6_RELEASE.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_messaging_4_1_6_RELEASE.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_test_4_1_6_RELEASE.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_web_4_1_6_RELEASE.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_webmvc_4_1_6_RELEASE.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_websocket_4_1_6_RELEASE.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_w3c_css_sac_1_3.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_yaml_snakeyaml_1_14.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/systemValues/models/CategoryModel.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/systemValues/models/CategoryModel.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/systemValues/views/CategoryView.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/systemValues/views/CategoryView.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/services/Content/Impl/ContentServiceImp.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/services/Content/Impl/ContentServiceImp.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/systemValues/views/ContentSourceView.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/systemValues/views/ContentSourceView.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/systemValues/models/ContentTypeModel.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/systemValues/models/ContentTypeModel.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/systemValues/views/ContentTypeView.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/systemValues/views/ContentTypeView.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/courseSetup/models/CourseModel.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/courseSetup/models/CourseModel.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/courseSetup/views/CourseView.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/courseSetup/views/CourseView.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/content/views/EditView.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/content/views/EditView.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/courseSetup/views/LessonView.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/courseSetup/views/LessonView.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/password/tab/PasswordTab.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/password/tab/PasswordTab.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/content/forms/PublishForm.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/content/forms/PublishForm.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/content/models/PublishModel.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/content/models/PublishModel.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/content/views/PublishView.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/content/views/PublishView.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/content/models/RawAndEditModel.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/content/models/RawAndEditModel.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/content/views/RawView.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/content/views/RawView.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/setup/views/RoleView.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/setup/views/RoleView.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/sidebar/Sidebar.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/sidebar/Sidebar.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/systemValues/models/SourceModel.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/systemValues/models/SourceModel.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/setup/forms/UserForm.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/setup/forms/UserForm.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/setup/models/UserModel.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/setup/models/UserModel.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/setup/views/UserView.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/setup/views/UserView.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/headeredited.jpg" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/headeredited.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/img/notifications.png" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/img/notifications.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/systemValues/models/CategoryModel.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/systemValues/models/CategoryModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/systemValues/views/CategoryView.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/systemValues/views/CategoryView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/services/Content/Impl/ContentServiceImp.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/services/Content/Impl/ContentServiceImp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/systemValues/views/ContentSourceView.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/systemValues/views/ContentSourceView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/systemValues/models/ContentTypeModel.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/systemValues/models/ContentTypeModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/systemValues/views/ContentTypeView.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/systemValues/views/ContentTypeView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/courseSetup/models/CourseModel.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/courseSetup/models/CourseModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/courseSetup/views/CourseView.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/courseSetup/views/CourseView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/content/views/EditView.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/content/views/EditView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/header/view/Header.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/header/view/Header.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/courseSetup/views/LessonView.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/courseSetup/views/LessonView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/password/tab/PasswordTab.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/password/tab/PasswordTab.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/content/forms/PublishForm.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/content/forms/PublishForm.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/content/models/PublishModel.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/content/models/PublishModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/content/views/PublishView.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/content/views/PublishView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/content/models/RawAndEditModel.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/content/models/RawAndEditModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/content/views/RawView.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/content/views/RawView.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/RestApi/RestApiCon.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/RestApi/RestApiCon.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/infoshare/restApi/RestpApi.java" afterPath="$PROJECT_DIR$/src/test/java/infoshare/restApi/RestpApi.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/views/RoleView.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/views/RoleView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/sidebar/Sidebar.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/sidebar/Sidebar.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/systemValues/models/SourceModel.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/systemValues/models/SourceModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/forms/UserForm.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/forms/UserForm.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/models/UserModel.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/models/UserModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/views/UserView.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/views/UserView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/views/dashboardview.scss" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/views/dashboardview.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/styles.scss.cache" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/styles.scss.cache" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="infoshare.iws" />
@@ -262,8 +151,8 @@
       <file leaf-file-name="RestApiCon.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/infoshare/RestApi/RestApiCon.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.43217286">
-              <caret line="63" column="12" selection-start-line="63" selection-start-column="12" selection-end-line="63" selection-end-column="12" />
+            <state vertical-scroll-proportion="1.3646209">
+              <caret line="78" column="0" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -867,7 +756,7 @@
     <property name="OverrideImplement.overriding.sorted" value="false" />
     <property name="restartRequiresConfirmation" value="true" />
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file:///home/codex/IdeaProjects/infoshare/src/main/webapp/VAADIN/themes/dashboard/favicon.ico" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.appearance" />
+    <property name="settings.editor.selected.configurable" value="http.proxy" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="FullScreen" value="false" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/main/java/infoshare" />
@@ -1372,7 +1261,7 @@
       <workItem from="1437671467079" duration="396000" />
       <workItem from="1437672795213" duration="2424000" />
       <workItem from="1437726845417" duration="4333000" />
-      <workItem from="1437732372418" duration="81000" />
+      <workItem from="1437732372418" duration="371000" />
     </task>
     <task id="LOCAL-00001" summary="header sample, with no action Listeners">
       <created>1435155152131</created>
@@ -1500,11 +1389,17 @@
       <option name="project" value="LOCAL" />
       <updated>1437547953117</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="rest connection code added">
+      <created>1437732493501</created>
+      <option name="number" value="00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1437732493501</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="622629000" />
+    <option name="totallyTimeSpent" value="622919000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1517,10 +1412,11 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="-1" width="1282" height="1005" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32890365" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3270809" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.29660022" sideWeight="0.51537216" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -1542,7 +1438,6 @@
       <window_info id="JRebel Executor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32890365" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3985932" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3270809" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3986711" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28671327" sideWeight="0.48462784" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32930514" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
@@ -1782,6 +1677,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="21" column="42" selection-start-line="21" selection-start-column="42" selection-end-line="21" selection-end-column="42" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1789,6 +1685,37 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#527#528#0" expanded="false" />
+            <element signature="e#558#559#0" expanded="false" />
+            <element signature="e#606#607#0" expanded="false" />
+            <element signature="e#646#647#0" expanded="false" />
+            <element signature="e#681#682#0" expanded="false" />
+            <element signature="e#715#716#0" expanded="false" />
+            <element signature="e#765#766#0" expanded="false" />
+            <element signature="e#811#812#0" expanded="false" />
+            <element signature="e#844#845#0" expanded="false" />
+            <element signature="e#874#875#0" expanded="false" />
+            <element signature="e#918#919#0" expanded="false" />
+            <element signature="e#956#957#0" expanded="false" />
+            <element signature="e#988#989#0" expanded="false" />
+            <element signature="e#1017#1018#0" expanded="false" />
+            <element signature="e#1059#1060#0" expanded="false" />
+            <element signature="e#1095#1096#0" expanded="false" />
+            <element signature="e#1126#1127#0" expanded="false" />
+            <element signature="e#1154#1155#0" expanded="false" />
+            <element signature="e#1194#1195#0" expanded="false" />
+            <element signature="e#1228#1229#0" expanded="false" />
+            <element signature="e#1261#1262#0" expanded="false" />
+            <element signature="e#1291#1292#0" expanded="false" />
+            <element signature="e#1335#1336#0" expanded="false" />
+            <element signature="e#1373#1374#0" expanded="false" />
+            <element signature="e#1410#1411#0" expanded="false" />
+            <element signature="e#1444#1445#0" expanded="false" />
+            <element signature="e#1496#1497#0" expanded="false" />
+            <element signature="e#1542#1543#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1810,6 +1737,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1817,6 +1745,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1824,6 +1753,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.364151">
           <caret line="164" column="4" selection-start-line="164" selection-start-column="4" selection-end-line="164" selection-end-column="4" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1831,6 +1761,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.092307694">
           <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1838,6 +1769,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5846154">
           <caret line="26" column="31" selection-start-line="26" selection-start-column="22" selection-end-line="26" selection-end-column="31" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1845,6 +1777,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1852,6 +1785,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.4">
           <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1880,6 +1814,21 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="114" column="54" selection-start-line="114" selection-start-column="54" selection-end-line="114" selection-end-column="54" />
+          <folding>
+            <element signature="method#Header#0;class#Header#0" expanded="false" />
+            <element signature="method#getHeaderPanel#0;class#Header#0" expanded="false" />
+            <element signature="method#buttonClick#0;class#Header#0" expanded="false" />
+            <element signature="method#notificationButton#0;class#Header#0" expanded="false" />
+            <element signature="method#userButton#0;class#Header#0" expanded="false" />
+            <element signature="method#buildNotifications#0;class#Header#0" expanded="false" />
+            <element signature="method#buildUser#0;class#Header#0" expanded="false" />
+            <element signature="method#addListener#0;class#Header#0" expanded="false" />
+            <element signature="method#refreshNotification#0;class#Header#0" expanded="false" />
+            <element signature="method#getLayout#0;class#Header#0" expanded="false" />
+            <element signature="method#getLogo#0;class#Header#0" expanded="false" />
+            <element signature="method#getSearch#0;class#Header#0" expanded="false" />
+            <element signature="method#getBar#0;class#Header#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1887,6 +1836,18 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="141" column="2" selection-start-line="141" selection-start-column="2" selection-end-line="141" selection-end-column="2" />
+          <folding>
+            <element signature="method#ContentTypeView#0;class#ContentTypeView#0" expanded="false" />
+            <element signature="method#buttonClick#0;class#ContentTypeView#0" expanded="false" />
+            <element signature="method#saveForm#0;class#ContentTypeView#0" expanded="false" />
+            <element signature="method#saveEditedForm#0;class#ContentTypeView#0" expanded="false" />
+            <element signature="method#deleteForm#0;class#ContentTypeView#0" expanded="false" />
+            <element signature="method#getUpdateEntity#0;class#ContentTypeView#0" expanded="false" />
+            <element signature="method#getNewEntity#0;class#ContentTypeView#0" expanded="false" />
+            <element signature="method#setEditFormProperties#0;class#ContentTypeView#0" expanded="false" />
+            <element signature="method#setReadFormProperties#0;class#ContentTypeView#0" expanded="false" />
+            <element signature="method#addListeners#0;class#ContentTypeView#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1894,6 +1855,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="140" column="8" selection-start-line="140" selection-start-column="8" selection-end-line="140" selection-end-column="8" />
+          <folding>
+            <element signature="method#buttonClick#0;class#ContentSourceView#0" expanded="false" />
+            <element signature="method#saveForm#0;class#ContentSourceView#0" expanded="false" />
+            <element signature="method#saveEditedForm#0;class#ContentSourceView#0" expanded="false" />
+            <element signature="method#deleteForm#0;class#ContentSourceView#0" expanded="false" />
+            <element signature="method#getUpdateEntity#0;class#ContentSourceView#0" expanded="false" />
+            <element signature="method#setEditFormProperties#0;class#ContentSourceView#0" expanded="false" />
+            <element signature="method#setReadFormProperties#0;class#ContentSourceView#0" expanded="false" />
+            <element signature="method#addListeners#0;class#ContentSourceView#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1901,6 +1872,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="39" column="5" selection-start-line="39" selection-start-column="5" selection-end-line="39" selection-end-column="5" />
+          <folding>
+            <element signature="method#CategoryView#0;class#CategoryView#0" expanded="false" />
+            <element signature="method#buttonClick#0;class#CategoryView#0" expanded="false" />
+            <element signature="method#valueChange#0;class#CategoryView#0" expanded="false" />
+            <element signature="method#saveForm#0;class#CategoryView#0" expanded="false" />
+            <element signature="method#saveEditedForm#0;class#CategoryView#0" expanded="false" />
+            <element signature="method#deleteForm#0;class#CategoryView#0" expanded="false" />
+            <element signature="method#getNewEntity#0;class#CategoryView#0" expanded="false" />
+            <element signature="method#getUpdateEntity#0;class#CategoryView#0" expanded="false" />
+            <element signature="method#setEditFormProperties#0;class#CategoryView#0" expanded="false" />
+            <element signature="method#setReadFormProperties#0;class#CategoryView#0" expanded="false" />
+            <element signature="method#addListeners#0;class#CategoryView#0" expanded="false" />
+            <element signature="method#getModel#0;class#CategoryView#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1908,6 +1893,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="99" column="36" selection-start-line="99" selection-start-column="36" selection-end-line="99" selection-end-column="36" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2067,8 +2053,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/infoshare/RestApi/RestApiCon.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.43217286">
-          <caret line="63" column="12" selection-start-line="63" selection-start-column="12" selection-end-line="63" selection-end-column="12" />
+        <state vertical-scroll-proportion="1.3646209">
+          <caret line="78" column="0" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
           <folding />
         </state>
       </provider>
