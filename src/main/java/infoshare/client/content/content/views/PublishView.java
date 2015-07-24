@@ -85,7 +85,6 @@ public class PublishView extends VerticalLayout implements Button.ClickListener,
     private Window modelWindow(){
         final Window popup = new Window("VIEW Content");
         popup.setWidth(80.0f,Unit.PERCENTAGE);
-        popup.setHeight(90.0f, Unit.PERCENTAGE);
         popup.setClosable(false);
         popup.setResizable(false);
         popup.setContent(form);
@@ -107,7 +106,6 @@ public class PublishView extends VerticalLayout implements Button.ClickListener,
         final PublishModel model = new PublishModel();
         final Content content = contentService.find(val.getId());
         model.setTitle(content.getTitle());
-        model.setId(content.getId());
         model.setCategory(content.getCategory());
         model.setCreator(content.getCreator());
         model.setContent(content.getContent());

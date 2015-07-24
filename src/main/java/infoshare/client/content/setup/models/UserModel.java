@@ -8,7 +8,7 @@ import java.util.Set;
  * Created by hashcode on 2015/06/23.
  */
 public class UserModel implements Serializable, Comparable<UserModel> {
-    private String id;
+
     @NotNull
     private String firstname;
     @NotNull
@@ -22,13 +22,6 @@ public class UserModel implements Serializable, Comparable<UserModel> {
     private Set<String> roleIds;
     @NotNull
     private String username;
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getFirstname() {
         return firstname;

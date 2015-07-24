@@ -26,7 +26,6 @@ public class PasswordTab extends VerticalLayout implements
         addComponent(form);
         addListeners();
     }
-
     @Override
     public void buttonClick(Button.ClickEvent event) {
         final Button source = event.getButton();
@@ -37,7 +36,6 @@ public class PasswordTab extends VerticalLayout implements
         }
 
     }
-
     private void saveForm(FieldGroup binder) {
         final PasswordModel bean = ((BeanItem<PasswordModel>) form.binder.getItemDataSource()).getBean();
         try {
@@ -59,23 +57,16 @@ public class PasswordTab extends VerticalLayout implements
             getHome();
         }
     }
-
     private void getHome() {
         main.content.setSecondComponent(new PasswordMenu(main, "LANDING"));
     }
-
     private void changePassword(String newPassword) {
-
     }
-
     @Override
     public void valueChange(Property.ValueChangeEvent event) {
         final Property property = event.getProperty();
 
     }
-
-
-
     private void addListeners() {
         //Register Button Listeners
         form.cancelButton.addClickListener((Button.ClickListener) this);

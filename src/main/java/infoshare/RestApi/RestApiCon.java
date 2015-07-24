@@ -42,25 +42,28 @@ public class RestApiCon{
             JsonArray json = jsonParser.parse(reader).getAsJsonArray();
             Gson myGson = new Gson();
             for (JsonElement Element : json) {
-                classType = (Class<T>) myGson.fromJson(Element, classType);
-                list.add((T) classType);
+                list.add(myGson.fromJson(Element, classType));
             }
         } catch (Exception e) {
             e.getMessage();
         }
         return list;
     }
-    public static JsonElement read(String fetchUrl, String ID){
-        JsonElement element= null;
-        try {
+    public static <T> T read(String fetchUrl, String ID, Class<T> classType){
+
+        try
+        {
             JsonParser jsonParser = new JsonParser();
             JsonReader reader = new JsonReader(new InputStreamReader(openConnection(fetchUrl+ID).getInputStream()));
-            element = jsonParser.parse(reader);
-        }catch (Exception e){
-            e.getMessage();
+            JsonElement element = jsonParser.parse(reader);
+            Gson gson = new Gson();
+            return (gson.fromJson(element,  classType));
         }
-        return element;
-
+        catch (Exception e)
+        {
+            e.getMessage();
+            return null;
+        }
     }
     public static <T> void create(String url,Class<T> classType){
         RestTemplate restTemplate = new RestTemplate();

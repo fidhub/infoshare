@@ -8,7 +8,6 @@ import java.io.Serializable;
  */
 public class CategoryModel implements Serializable {
 
-
     @NotNull
     private String name;
     @NotNull

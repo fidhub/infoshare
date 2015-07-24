@@ -8,7 +8,6 @@ import java.util.Date;
  * Created by hashcode on 2015/06/24.
  */
 public class PublishModel implements Serializable {
-    private String id;
     @NotNull
     private Date dateCreated;
     @NotNull
@@ -23,14 +22,6 @@ public class PublishModel implements Serializable {
     private String content;
     @NotNull
     private String contentType;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public Date getDateCreated() {
         return dateCreated;

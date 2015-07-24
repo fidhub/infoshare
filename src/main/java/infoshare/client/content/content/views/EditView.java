@@ -157,7 +157,7 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
     private Content getUpdateEntity(FieldGroup binder) {
 
         final RawAndEditModel bean = ((BeanItem<RawAndEditModel>) binder.getItemDataSource()).getBean();
-        bean.setDateCreated(contentService.find(bean.getId()).getDateCreated());
+        bean.setDateCreated(contentService.find(table.getValue().toString()).getDateCreated());
         final Content content = new Content.Builder(bean.getTitle())
                 .category(bean.getCategory())
                 .content(bean.getContent())
@@ -165,7 +165,7 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
                 .creator(bean.getCreator())
                 .dateCreated(bean.getDateCreated())
                 .source(bean.getSource())
-                .id(bean.getId())
+                .id(table.getValue().toString())
                 .build();
         return content;
     }
@@ -173,7 +173,6 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
         final RawAndEditModel model = new RawAndEditModel();
         final Content content = contentService.find(val.getId());
         model.setTitle(content.getTitle());
-        model.setId(content.getId());
         model.setCategory(content.getCategory());
         model.setCreator(content.getCreator());
         model.setContent(content.getContent());

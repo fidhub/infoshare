@@ -44,9 +44,10 @@ public class PublishForm extends FormLayout{
     private RichTextArea getTextArea(String label,String field){
         final RichTextArea richTextArea = new RichTextArea(label);
         richTextArea.setImmediate(true);
-        richTextArea.setHeight(400.0f, Unit.PIXELS);
+        richTextArea.setHeight(450.0f, Unit.PIXELS);
         richTextArea.setWidth(98.0f, Unit.PERCENTAGE);
         richTextArea.setNullRepresentation("");
+        richTextArea.setReadOnly(true);
         richTextArea.addValidator(new BeanValidator(RawAndEditModel.class, field));
         richTextArea.setImmediate(true);
         binder.bind(richTextArea,field);

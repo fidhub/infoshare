@@ -25,15 +25,12 @@ public class RestpApi {
 
        }
     @Test
-    public void testGet() throws Exception {
-        Gson gson = new Gson();
-        Category category = gson.fromJson(RestApiCon.read(UrlPath.CategoryLinks.GET_ID,
-                "9673d201a00487f061351d12fe4d7d10"), Category.class);
-        System.out.println(
-                category.getDescription() + "\n" +
-                        category.getName() + "\n" +
-                        category.getId()
-        );
+    public  void testGet() throws Exception {
+
+     Category category =   RestApiCon.read(UrlPath.CategoryLinks.GET_ID,
+                "9673d201a00487f061351d12fe4d7d10", Category.class);
+         System.out.println(category.getDescription() + "\n" + category.getName() + "\n" + category.getId());
+
         List<Category> categories = RestApiCon.readAll(UrlPath.CategoryLinks.GETALL, Category.class);
         System.out.println(categories.isEmpty());
     }

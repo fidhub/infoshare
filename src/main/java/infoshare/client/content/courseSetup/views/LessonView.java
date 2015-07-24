@@ -190,17 +190,19 @@ public class LessonView extends VerticalLayout implements Button.ClickListener, 
         List<Lesson> lessons = courseBean.getLessons();
 
         final Lesson lesson = new Lesson.Builder(lessonBean.getLesson())
-                                        .description(lessonBean.getDescription())
-                                        .content(lessonBean.getContent())
-                                        .id(table.getValue().toString()).build();
+                            .description(lessonBean.getDescription())
+                            .content(lessonBean.getContent())
+                            .id(table.getValue().toString())
+                            .build();
+
         for(int i=0; i<lessons.size(); i++)
             if(lessons.get(i).getId().equals(lesson.getId()))
                 lessons.remove(i);
 
         lessons.add(lesson);
         final Course course = new Course.Builder(courseBean.getCourseLevel())
-                                        .description(courseBean.getCourseDescription())
-                                        .lessons(lessons).id(courseBean.getId()).build();
+                             .description(courseBean.getCourseDescription())
+                             .lessons(lessons).id(courseBean.getId()).build();
         return course;
     }
     private Course getNewEntity(FieldGroup binder) {
@@ -211,17 +213,16 @@ public class LessonView extends VerticalLayout implements Button.ClickListener, 
 
         int size = lessons.size();
         final Lesson lesson = new Lesson.Builder(lessonBean.getLesson())
-                                        .description(lessonBean.getDescription())
-                                        .content(lessonBean.getContent())
-                                        .id((size+1)+"").build();
+                             .description(lessonBean.getDescription())
+                             .content(lessonBean.getContent())
+                             .id((size+1)+"").build();
         lessons.add(lesson);
         final Course course = new Course.Builder(courseBean.getCourseLevel())
-                                        .description(courseBean.getCourseDescription())
-                                        .lessons(lessons).id(courseBean.getId()).build();
+                            .description(courseBean.getCourseDescription())
+                            .lessons(lessons).id(courseBean.getId()).build();
         return course;
     }
     public LessonModel getLessonModel(Lesson lesson) {
-
         LessonModel  model = new LessonModel();
         model.setLesson(lesson.getLesson());
         model.setDescription(lesson.getDescription());

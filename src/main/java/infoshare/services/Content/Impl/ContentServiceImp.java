@@ -5,6 +5,7 @@ import infoshare.domain.Content;
 import infoshare.services.Content.ContentService;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
 import java.util.*;
 
 /**
@@ -30,7 +31,7 @@ public class ContentServiceImp implements ContentService {
                 .dateCreated(new Date()).id("5").build();
 
         Content content2 = new Content.Builder("TB").category("Pharmacy")
-                .contentType("published").creator("thule")
+                .contentType("raw").creator("thule")
                 .source("jozi")
                 .content("psum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\n" +
                         "tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\n" +

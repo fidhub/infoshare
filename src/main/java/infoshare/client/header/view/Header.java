@@ -1,10 +1,9 @@
 package infoshare.client.header.view;
 
+import com.vaadin.event.ItemClickEvent;
 import com.vaadin.event.LayoutEvents;
 import com.vaadin.event.ShortcutAction;
-import com.vaadin.server.FileResource;
-import com.vaadin.server.FontAwesome;
-import com.vaadin.server.Responsive;
+import com.vaadin.server.*;
 import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.*;
 import com.vaadin.ui.Button.ClickEvent;
@@ -12,12 +11,14 @@ import com.vaadin.ui.themes.ChameleonTheme;
 import com.vaadin.ui.themes.ValoTheme;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.content.ContentMenu;
+import infoshare.client.content.content.views.RawView;
 import infoshare.client.header.landing_page.LandingHome;
 import infoshare.domain.Content;
 import infoshare.services.Content.ContentService;
 import infoshare.services.Content.Impl.ContentServiceImp;
 
 import java.io.File;
+import java.util.Collection;
 
 /**
  * Created by hashcode on 2015/06/23.
@@ -45,7 +46,7 @@ public class Header extends VerticalLayout implements Button.ClickListener {
     private Panel getHeaderPanel(){
         final Panel headerPanel = new Panel();
         headerPanel.setSizeFull();
-        headerPanel.setHeight(150.0f,Unit.PIXELS);
+        headerPanel.setHeight(150.0f, Unit.PIXELS);
         headerPanel.addStyleName(ChameleonTheme.PANEL_LIGHT);
         headerPanel.addStyleName(ChameleonTheme.PANEL_BUBBLE);
         headerPanel.addStyleName(ValoTheme.PANEL_BORDERLESS);
@@ -57,42 +58,58 @@ public class Header extends VerticalLayout implements Button.ClickListener {
     public void buttonClick(ClickEvent clickEvent) {
         Button source = clickEvent.getButton();
         if(source == home){
-            if (notifications != null && notifications.getUI() != null)
+            if (notifications != null && notifications.getUI() != null) {
                 notifications.close();
-
-            main.content.setSecondComponent(new LandingHome(main));
-        }else if(source == notify){
-           if (notifications != null && notifications.getUI() != null) {
-               notifications.close();
-           }
-                 else {
-                    refreshNotification();
-                    buildNotifications(clickEvent);
-                    getUI().addWindow(notifications);
-                    notifications.focus();
-                    main.addLayoutClickListener(new LayoutEvents.LayoutClickListener() {
-                        @Override
-                        public void layoutClick(LayoutEvents.LayoutClickEvent layoutClickEvent) {
-                            notifications.close();
-                            main.removeLayoutClickListener(this);
-                        }
-                    });
-                }
-        }else if(source ==user){
+            }
             if (userProfile != null && userProfile.getUI() !=null) {
                 userProfile.close();
-            }else {
-                buildUser(clickEvent);
-                getUI().addWindow(userProfile);
-                userProfile.focus();
-                main.addLayoutClickListener(new LayoutEvents.LayoutClickListener() {
-                    @Override
-                    public void layoutClick(LayoutEvents.LayoutClickEvent layoutClickEvent) {
-                        userProfile.close();
-                        main.removeLayoutClickListener(this);
-                    }
-                });
             }
+
+            main.content.setSecondComponent(new LandingHome(main));
+            home.getUI();
+        }else if(source == notify){
+          notificationButton(clickEvent);
+        }else if(source ==user){
+        userButton(clickEvent);
+        }
+    }
+    private void notificationButton(ClickEvent clickEvent ){
+        if (userProfile != null && userProfile.getUI() !=null) {
+            userProfile.close();
+        }
+        if (notifications != null && notifications.getUI() != null) {
+            notifications.close();
+        } else {
+            refreshNotification();
+            buildNotifications(clickEvent);
+            getUI().addWindow(notifications);
+            notifications.focus();
+            main.addLayoutClickListener(new LayoutEvents.LayoutClickListener() {
+                @Override
+                public void layoutClick(LayoutEvents.LayoutClickEvent layoutClickEvent) {
+                    notifications.close();
+                    main.removeLayoutClickListener(this);
+                }
+            });
+        }
+    }
+    private void userButton(ClickEvent clickEvent){
+        if (notifications != null && notifications.getUI() != null) {
+            notifications.close();
+        }
+        if (userProfile != null && userProfile.getUI() !=null) {
+            userProfile.close();
+        }else {
+            buildUser(clickEvent);
+            getUI().addWindow(userProfile);
+            userProfile.focus();
+            main.addLayoutClickListener(new LayoutEvents.LayoutClickListener() {
+                @Override
+                public void layoutClick(LayoutEvents.LayoutClickEvent layoutClickEvent) {
+                    userProfile.close();
+                    main.removeLayoutClickListener(this);
+                }
+            });
         }
     }
     public void buildNotifications( ClickEvent event) {
@@ -125,6 +142,9 @@ public class Header extends VerticalLayout implements Button.ClickListener {
         notificationTable.addStyleName(ValoTheme.TABLE_NO_VERTICAL_LINES);
         notificationTable.addStyleName(ValoTheme.TABLE_SMALL);
         notificationTable.setSelectable(true);
+        notificationTable.setNullSelectionAllowed(false);
+        notificationTable.setImmediate(true);
+
 
         for (Content content : contentService.findAll()){
             if(content.getContentType().equalsIgnoreCase("raw")) {
@@ -135,6 +155,18 @@ public class Header extends VerticalLayout implements Button.ClickListener {
                 }, content.getId());
             }
         }
+        notificationTable.addItemClickListener(new ItemClickEvent.ItemClickListener() {
+            @Override
+            public void itemClick(ItemClickEvent event) {
+                if (event.isDoubleClick())
+                {
+                    RawView rawView = new RawView(main);
+                    notifications.close();
+                    main.content.setSecondComponent(new ContentMenu(main, "LANDING"));
+                    rawView.EditButton(notificationTable.getValue().toString());
+                }
+            }
+        });
         layout.addComponent(notificationTable);
         layout.setComponentAlignment(notificationTable, Alignment.TOP_CENTER);
         layout.addComponent(footer);
@@ -172,7 +204,8 @@ public class Header extends VerticalLayout implements Button.ClickListener {
         signOut.addClickListener(new Button.ClickListener() {
             @Override
             public void buttonClick(ClickEvent clickEvent) {
-
+                VaadinSession.getCurrent().close();
+                Page.getCurrent().reload();
             }
         });
 

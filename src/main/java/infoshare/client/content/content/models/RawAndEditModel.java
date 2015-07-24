@@ -5,7 +5,6 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class RawAndEditModel implements Serializable {
-    private String id;
     @NotNull
     private Date dateCreated;
     @NotNull
@@ -20,13 +19,6 @@ public class RawAndEditModel implements Serializable {
     private String content;
     @NotNull
     private String contentType;
-
-    public String getId(){
-        return id;
-    }
-    public void setId(String id){
-        this.id = id;
-    }
 
     public String getCategory() {
         return category;

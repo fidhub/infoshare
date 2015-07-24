@@ -52,22 +52,24 @@ public class ContentTypeView extends VerticalLayout implements Button.ClickListe
             deleteForm(form.binder);
         }
     }
-
     @Override
     public void valueChange(Property.ValueChangeEvent event) {
         final Property property = event.getProperty();
         if (property == table) {
-            final ContentType contentType = contentTypeService.find(table.getValue().toString());
-            final ContentTypeModel bean = getModel(contentType);
-            form.binder.setItemDataSource(new BeanItem<>(bean));
-            setReadFormProperties();
+            try {
+                final ContentType contentType = contentTypeService.find(table.getValue().toString());
+                final ContentTypeModel bean = getModel(contentType);
+                form.binder.setItemDataSource(new BeanItem<>(bean));
+                setReadFormProperties();
+            }catch (Exception r){
+
+            }
         }
     }
-
     private void saveForm(FieldGroup binder) {
         try {
             binder.commit();
-            contentTypeService.save(getUpdateEntity(binder));
+            contentTypeService.save(getNewEntity(binder));
             getHome();
             Notification.show("Record ADDED!", Notification.Type.HUMANIZED_MESSAGE);
         } catch (FieldGroup.CommitException e) {
@@ -75,7 +77,6 @@ public class ContentTypeView extends VerticalLayout implements Button.ClickListe
             getHome();
         }
     }
-
     private void saveEditedForm(FieldGroup binder) {
         try {
             binder.commit();
@@ -87,24 +88,28 @@ public class ContentTypeView extends VerticalLayout implements Button.ClickListe
             getHome();
         }
     }
-
     private void deleteForm(FieldGroup binder) {
-        final ContentType contentType = getUpdateEntity(binder);
-        contentTypeService.remove(contentType);
+        contentTypeService.remove(getUpdateEntity(binder));
         getHome();
     }
     private ContentType getUpdateEntity(FieldGroup binder) {
         final ContentTypeModel bean = ((BeanItem<ContentTypeModel>) binder.getItemDataSource()).getBean();
         final ContentType contentType = new ContentType.Builder(bean.getContentTyeName())
                 .contentTyeDescription(bean.getContentTyeDescription())
+                .id(table.getValue().toString())
                 .build();
         return contentType;
     }
-
+    private ContentType getNewEntity(FieldGroup binder) {
+        final ContentTypeModel bean = ((BeanItem<ContentTypeModel>) binder.getItemDataSource()).getBean();
+        final ContentType contentType = new ContentType.Builder(bean.getContentTyeName())
+                .contentTyeDescription(bean.getContentTyeDescription())
+                .build();
+        return contentType;
+    }
     private void getHome() {
       main.content.setSecondComponent(new SystemValues(main, "LANDING"));
     }
-
     private void setEditFormProperties() {
         form.binder.setReadOnly(false);
         form.save.setVisible(false);
@@ -113,7 +118,6 @@ public class ContentTypeView extends VerticalLayout implements Button.ClickListe
         form.delete.setVisible(false);
         form.update.setVisible(true);
     }
-
     private void setReadFormProperties() {
         form.binder.setReadOnly(true);
         //Buttons Behaviou
@@ -123,7 +127,6 @@ public class ContentTypeView extends VerticalLayout implements Button.ClickListe
         form.delete.setVisible(true);
         form.update.setVisible(false);
     }
-
     private void addListeners() {
         //Register Button Listeners
         form.save.addClickListener((Button.ClickListener) this);
@@ -134,13 +137,10 @@ public class ContentTypeView extends VerticalLayout implements Button.ClickListe
         //Register Table Listerners
         table.addValueChangeListener((Property.ValueChangeListener) this);
     }
-
-    private ContentTypeModel getModel(ContentType val) {
+    private ContentTypeModel getModel(ContentType contentType) {
         final ContentTypeModel model = new ContentTypeModel();
-        final ContentType contentType = contentTypeService.find(val.getId());
         model.setContentTyeName(contentType.getContentTyeName());
         model.setContentTyeDescription(contentType.getContentTyeDescription());
         return model;
     }
-
 }

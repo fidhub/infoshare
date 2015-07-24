@@ -33,7 +33,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public class RawView extends VerticalLayout implements
         Button.ClickListener,Property.ValueChangeListener{
-    @Autowired
+
     private ContentService contentService = new ContentServiceImp();
     private ContentTypeService contentTypeService = new ContentTypeServiceImpl();
     private CategoryService categoryService = new CategoryServiceImpl();
@@ -69,7 +69,7 @@ public class RawView extends VerticalLayout implements
         layout.addComponent(editBtn);
         return layout;
     }
-    private void refreshContacts(String stringFilter ) {
+    public void refreshContacts(String stringFilter ) {
         try {
             table.removeAllItems();
             for(Content content: contentFilter.findAll(stringFilter))
@@ -81,7 +81,7 @@ public class RawView extends VerticalLayout implements
     public void buttonClick(Button.ClickEvent clickEvent) {
         final Button source = clickEvent.getButton();
         if(source==editBtn){
-            EditButton();
+            EditButton(table.getValue().toString());
         }else if (source ==form.popUpUpdateBtn){
             saveEditedForm(form.binder);
             header.refreshNotification();
@@ -104,6 +104,7 @@ public class RawView extends VerticalLayout implements
         popup.setWidth(80.0f, Unit.PERCENTAGE);
         popup.setClosable(false);
         popup.setResizable(false);
+        loadComboBoxs();
         popup.setContent(form);
         return popup;
     }
@@ -127,10 +128,10 @@ public class RawView extends VerticalLayout implements
     private void getHome() {
         main.content.setSecondComponent(new ContentMenu(main, "LANDING"));
     }
-    private void EditButton(){
-        loadComboBoxs();
+    public void EditButton(String id ){
+
         try {
-            final Content content = contentService.find(table.getValue().toString());
+            final Content content = contentService.find(id);
             final RawAndEditModel bean = getModel(content);
             form.binder.setItemDataSource(new BeanItem<>(bean));
             UI.getCurrent().addWindow(popUp);
@@ -148,7 +149,7 @@ public class RawView extends VerticalLayout implements
             table.setValue(null);
             UI.getCurrent().removeWindow(popUp);
             getHome();
-            Notification.show("Record EDITED!", Notification.Type.HUMANIZED_MESSAGE);
+            Notification.show("Record "+binder.getField("contentType").getValue()+" !!", Notification.Type.HUMANIZED_MESSAGE);
         } catch (FieldGroup.CommitException e) {
             Notification.show("Fill in all Fields!!", Notification.Type.HUMANIZED_MESSAGE);
             getHome();
@@ -156,7 +157,7 @@ public class RawView extends VerticalLayout implements
     }
     private Content updateEntity(FieldGroup binder){
         final RawAndEditModel bean = ((BeanItem<RawAndEditModel>) binder.getItemDataSource()).getBean();
-        bean.setDateCreated(contentService.find(bean.getId()).getDateCreated());
+        bean.setDateCreated(contentService.find(table.getValue().toString()).getDateCreated());
         final Content content = new Content.Builder(bean.getTitle())
                 .dateCreated(bean.getDateCreated())
                 .creator(bean.getCreator())
@@ -165,7 +166,7 @@ public class RawView extends VerticalLayout implements
                 .content(bean.getContent())
                 .contentType(bean.getContentType())
                 .dateCreated(bean.getDateCreated())
-                .id(bean.getId())
+                .id(table.getValue().toString())
                 .build();
         return content;
     }
@@ -173,7 +174,6 @@ public class RawView extends VerticalLayout implements
         final RawAndEditModel model = new RawAndEditModel();
         final Content content = contentService.find(val.getId());
         model.setTitle(content.getTitle());
-        model.setId(content.getId());
         model.setCategory(content.getCategory());
         model.setCreator(content.getCreator());
         model.setContent(content.getContent());

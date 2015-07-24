@@ -98,12 +98,15 @@ public class UserForm extends FormLayout {
 
     private ListSelect getRoles(String label, String field) {
         rolesList.setCaption(label);
-        for (Role role : roleService.findAll()) {
-            rolesList.setItemCaption(role.getId(), role.getRolename() + " " + role.getDescription());
-            rolesList.setNullSelectionAllowed(false);
-            rolesList.setMultiSelect(true);
-            rolesList.addItem(role.getId());
-        }
+          for (Role role : roleService.findAll()) {
+              if (role.getId() != null) {
+                  rolesList.setItemCaption(role.getId(), role.getRolename() + " " + role.getDescription());
+                  rolesList.setNullSelectionAllowed(false);
+                  rolesList.setMultiSelect(true);
+                  rolesList.addItem(role.getId());
+              }
+          }
+
         rolesList.setWidth("250px");
         binder.bind(rolesList, field);
 

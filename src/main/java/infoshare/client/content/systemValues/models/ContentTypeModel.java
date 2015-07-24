@@ -8,13 +8,10 @@ import java.io.Serializable;
  */
 public class ContentTypeModel implements Serializable {
 
-
     @NotNull
     private String contentTyeName;
     @NotNull
     private String contentTyeDescription;
-
-
 
     public String getContentTyeName() {
         return contentTyeName;

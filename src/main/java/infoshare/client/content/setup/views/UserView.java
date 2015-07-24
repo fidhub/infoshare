@@ -43,7 +43,6 @@ public class UserView extends VerticalLayout implements
         addComponent(table);
         addListeners();
     }
-
     @Override
     public void buttonClick(Button.ClickEvent event) {
         final Button source = event.getButton();
@@ -63,10 +62,15 @@ public class UserView extends VerticalLayout implements
     public void valueChange(Property.ValueChangeEvent event) {
         final Property property = event.getProperty();
         if (property == table) {
-            final User user = userService.find(table.getValue().toString());
-            final UserModel bean = getModel(user);
-            form.binder.setItemDataSource(new BeanItem<>(bean));
-            setReadFormProperties();
+            try {
+                final User user = userService.find(table.getValue().toString());
+                final UserModel bean = getModel(user);
+                form.binder.setItemDataSource(new BeanItem<>(bean));
+                setReadFormProperties();
+            }catch (Exception r){
+
+            }
+
         }
     }
     private void saveForm(FieldGroup binder) {
@@ -142,7 +146,7 @@ public class UserView extends VerticalLayout implements
                 .enable(bean.isEnabled())
                 .username(bean.getUsername())
                 .password(bean.getPassword())
-                .id(bean.getId())
+                .id(table.getValue().toString())
                 .build();
         return user;
     }
