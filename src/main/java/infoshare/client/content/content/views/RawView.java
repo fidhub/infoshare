@@ -45,6 +45,7 @@ public class RawView extends VerticalLayout implements
     private Window popUp ;
     private Button editBtn = new Button("EDIT");
     private ContentFilter contentFilter = new ContentFilter();
+    public String tableId = null;
 
     public RawView( MainLayout mainApp) {
         this.main = mainApp;
@@ -80,7 +81,13 @@ public class RawView extends VerticalLayout implements
     public void buttonClick(Button.ClickEvent clickEvent) {
         final Button source = clickEvent.getButton();
         if(source==editBtn){
-            EditButton(table.getValue().toString());
+            try {
+                if(table.getValue().toString() == null)
+                    tableId = table.getValue().toString();
+                EditButton();
+            }catch (Exception e){
+
+            }
         }else if (source ==form.popUpUpdateBtn){
             saveEditedForm(form.binder);
             header.refreshNotification();
@@ -127,14 +134,14 @@ public class RawView extends VerticalLayout implements
     private void getHome() {
         main.content.setSecondComponent(new ContentMenu(main, "LANDING"));
     }
-    public void EditButton(String id ){
-
+    public void EditButton(){
         try {
-            final Content content = contentService.find(id);
+            final Content content = contentService.find(tableId);
             final RawAndEditModel bean = getModel(content);
             form.binder.setItemDataSource(new BeanItem<>(bean));
             UI.getCurrent().addWindow(popUp);
             popUp.setModal(true);
+            getHome();
         }catch (Exception e){
             Notification.show("Select the row you wanna edit",
                     Notification.Type.HUMANIZED_MESSAGE);
@@ -156,7 +163,7 @@ public class RawView extends VerticalLayout implements
     }
     private Content updateEntity(FieldGroup binder){
         final RawAndEditModel bean = ((BeanItem<RawAndEditModel>) binder.getItemDataSource()).getBean();
-        bean.setDateCreated(contentService.find(table.getValue().toString()).getDateCreated());
+        bean.setDateCreated(contentService.find(tableId).getDateCreated());
         final Content content = new Content.Builder(bean.getTitle())
                 .dateCreated(bean.getDateCreated())
                 .creator(bean.getCreator())
@@ -165,8 +172,9 @@ public class RawView extends VerticalLayout implements
                 .content(bean.getContent())
                 .contentType(bean.getContentType())
                 .dateCreated(bean.getDateCreated())
-                .id(table.getValue().toString())
+                .id(tableId)
                 .build();
+        tableId = null;
         return content;
     }
     private RawAndEditModel getModel(Content val) {

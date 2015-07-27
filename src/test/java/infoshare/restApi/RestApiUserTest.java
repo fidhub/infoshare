@@ -46,6 +46,7 @@ public class RestApiUserTest {
         model.setPhone("222");
         model.setEmail("111");
         model.setContactType("jhdjyhuwe");
+        contacts.add(model.getPhone());
         user.setContact(contacts);
 
         List<String> address = new ArrayList<>();
@@ -54,6 +55,7 @@ public class RestApiUserTest {
         addressModel.setPhysicalAddress("4455555");
         addressModel.setPostalAddress("djhf");
         addressModel.setPostalCode("35656");
+        address.add(addressModel.getPhysicalAddress());
         user.setAddress(address);
 
         RestApiConnectorClass.create(UrlPath.UserLinks.POST, user);

@@ -53,6 +53,12 @@ public class Role implements Serializable, Comparable<Role> {
             return this;
         }
 
+    /*    public Builder copy(Role role){
+            this.id = role.id;
+            this.rolename = role.roleName;
+            this.description = role.description;
+            return  this;
+        }*/
         public Role build() {
             return new Role(this);
         }

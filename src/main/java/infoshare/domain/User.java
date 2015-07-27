@@ -3,7 +3,9 @@ package infoshare.domain;
 import com.google.common.collect.ImmutableSet;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -19,6 +21,8 @@ public class User implements Serializable, Comparable<User> {
     private Set<Role> role = new HashSet<>();
     private String username;
     private boolean enable;
+    private List<Contact> contact = new ArrayList<>();
+    private List<Address> address = new ArrayList<>();
 
 
     private User() {
@@ -68,6 +72,14 @@ public class User implements Serializable, Comparable<User> {
         return enable;
     }
 
+    public List<Contact> getContact() {
+        return contact;
+    }
+
+    public List<Address> getAddress() {
+        return address;
+    }
+
     @Override
     public int compareTo(User o) {
         return firstName.compareToIgnoreCase(o.firstName);
@@ -83,12 +95,22 @@ public class User implements Serializable, Comparable<User> {
         private String password;
         private Set<Role> role = new HashSet<>();
         private String username;
+        private List<Contact> contact = new ArrayList<>();
+        private List<Address> address = new ArrayList<>();
 
         public Builder(String lastName) {
             this.lastName = lastName;
         }
 
-        public Builder user(User person) {
+        public Builder contact(List<Contact> contacts){
+            this.contact = contacts;
+            return  this;
+        }
+        public Builder address(List<Address> address){
+            this.address = address;
+            return  this;
+        }
+        public Builder copy(User person) {
             this.id = person.id;
             this.firstName = person.firstName;
             this.otherName = person.otherName;
@@ -96,6 +118,8 @@ public class User implements Serializable, Comparable<User> {
             this.role = person.role;
             this.username = person.username;
             this.enable = person.enable;
+            this.address = person.address;
+            this.contact = person.contact;
             return this;
         }
 

@@ -162,8 +162,8 @@ public class Header extends VerticalLayout implements Button.ClickListener {
                 {
                     RawView rawView = new RawView(main);
                     notifications.close();
-                    main.content.setSecondComponent(new ContentMenu(main, "LANDING"));
-                    rawView.EditButton(notificationTable.getValue().toString());
+                    rawView.tableId = notificationTable.getValue().toString();
+                    rawView.EditButton();
                 }
             }
         });

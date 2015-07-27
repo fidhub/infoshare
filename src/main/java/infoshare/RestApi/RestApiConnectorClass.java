@@ -33,10 +33,8 @@ public class RestApiConnectorClass {
         return urlConnection;
     }
     public static <T> List<T> readAll(String fetchUrl,Class<T> classType) {
-
         List<T> list = new ArrayList<>();
         try {
-
             JsonReader reader = new JsonReader(new InputStreamReader(openConnection(fetchUrl).getInputStream()));
             JsonParser jsonParser = new JsonParser();
             JsonArray json = jsonParser.parse(reader).getAsJsonArray();

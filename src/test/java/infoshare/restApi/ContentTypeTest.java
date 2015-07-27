@@ -4,6 +4,7 @@ import infoshare.RestApi.RestApiConnectorClass;
 import infoshare.RestApi.UrlPath;
 import infoshare.client.content.systemValues.models.ContentTypeModel;
 import infoshare.domain.ContentType;
+import junit.framework.TestCase;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -12,7 +13,7 @@ import java.util.List;
 /**
  * Created by user9 on 2015/07/24.
  */
-public class ContentTypeTest {
+public class ContentTypeTest extends TestCase {
 
     //id 1 :83312a3616830b5ebba284e3635f2d13
     @Test
@@ -30,8 +31,7 @@ public class ContentTypeTest {
         ContentType contentType1 = new ContentType.Builder("Edited")
                     .description("edited content type").id(contentType.getId()).build();
 
-        RestApiConnectorClass.update(UrlPath.ContentTypeLinks.PUT,contentType1);
-        System.out.println(contentType.getName()+"\n"+contentType1.getName());
+        RestApiConnectorClass.update(UrlPath.ContentTypeLinks.PUT, contentType1);
         Assert.assertEquals(contentType.getName(), contentType1.getName());
 
     }

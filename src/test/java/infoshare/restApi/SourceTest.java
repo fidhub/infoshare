@@ -7,6 +7,8 @@ import infoshare.domain.Source;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.List;
+
 /**
  * Created by user9 on 2015/07/24.
  */
@@ -44,6 +46,8 @@ public class SourceTest {
 
     @Test
     public void testGetAll() throws Exception {
+        List<Source> sources = RestApiConnectorClass.readAll(UrlPath.SourceLinks.GETALL,Source.class);
 
+        Assert.assertTrue(sources.isEmpty());
     }
 }
