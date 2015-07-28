@@ -1,5 +1,7 @@
 package infoshare.services.category.Impl;
 
+import infoshare.RestApi.RestApiConnectorClass;
+import infoshare.RestApi.UrlPath;
 import infoshare.domain.Category;
 import infoshare.services.category.CategoryService;
 
@@ -33,19 +35,17 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Category find(String s) {
-       return categories.get(s);
+       return RestApiConnectorClass.read(UrlPath.CategoryLinks.GET_ID,s,Category.class);
     }
 
     @Override
     public Category save(Category entity) {
-        categories.put(entity.getId(),entity);
-        return categories.get(entity.getId());
+        return RestApiConnectorClass.create(UrlPath.CategoryLinks.POST, entity);
     }
 
     @Override
     public Category merge(Category entity) {
-        categories.put(entity.getId(),entity);
-        return categories.get(entity.getId());
+        return RestApiConnectorClass.update(UrlPath.CategoryLinks.PUT,entity);
     }
 
     @Override
@@ -55,6 +55,6 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public List<Category> findAll() {
-        return new ArrayList<>(categories.values());
+        return  RestApiConnectorClass.readAll(UrlPath.CategoryLinks.GETALL,Category.class);
     }
 }

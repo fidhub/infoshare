@@ -8,6 +8,7 @@ import infoshare.domain.Category;
 import infoshare.domain.Role;
 import infoshare.services.roles.Impl.RoleServiceImpl;
 import infoshare.services.roles.RoleService;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.HashSet;
@@ -29,7 +30,7 @@ public class RestApiCategoryTest {
         CategoryModel model  = new CategoryModel();
         model.setName("kjkjdjk");
         model.setDescription("sddsdsdsdsd");
-        RestApiConnectorClass.create(UrlPath.CategoryLinks.POST, model);
+        RestApiConnectorClass.create(UrlPath.CategoryLinks.POST, model.getClass());
 
        }
     @Test
@@ -52,6 +53,6 @@ public class RestApiCategoryTest {
     @Test
     public void testGetAll() throws Exception {
         List<Category> categories = RestApiConnectorClass.readAll(UrlPath.CategoryLinks.GETALL, Category.class);
-        System.out.println(categories.isEmpty());
+        Assert.assertFalse(categories.isEmpty());
     }
 }

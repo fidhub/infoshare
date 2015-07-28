@@ -1,6 +1,8 @@
 package infoshare.domain;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
+import jdk.nashorn.internal.ir.annotations.Immutable;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -18,11 +20,11 @@ public class User implements Serializable, Comparable<User> {
     private String lastName;
     private String otherName;
     private String password;
-    private Set<Role> role = new HashSet<>();
+    private Set<String> roles = new HashSet<>();
     private String username;
     private boolean enable;
-    private List<Contact> contact = new ArrayList<>();
-    private List<Address> address = new ArrayList<>();
+    private List<String> contact = new ArrayList<>();
+    private List<String> address = new ArrayList<>();
 
 
     private User() {
@@ -34,50 +36,11 @@ public class User implements Serializable, Comparable<User> {
         this.lastName = builder.lastName;
         this.otherName = builder.otherName;
         this.password = builder.password;
-        this.role = builder.role;
+        this.roles = builder.roles;
         this.username = builder.username;
+//        this.demography = builder.demography;
         this.enable = builder.enable;
 
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public String getOtherName() {
-        return otherName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public Set<Role> getRole() {
-        return role;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public boolean isEnable() {
-        return enable;
-    }
-
-    public List<Contact> getContact() {
-        return contact;
-    }
-
-    public List<Address> getAddress() {
-        return address;
     }
 
     @Override
@@ -93,33 +56,25 @@ public class User implements Serializable, Comparable<User> {
 
         private boolean enable;
         private String password;
-        private Set<Role> role = new HashSet<>();
+        private Set<String> roles = new HashSet<>();
         private String username;
-        private List<Contact> contact = new ArrayList<>();
-        private List<Address> address = new ArrayList<>();
+        private List<String> contact = new ArrayList<>();
+        private List<String> address = new ArrayList<>();
 
         public Builder(String lastName) {
             this.lastName = lastName;
         }
 
-        public Builder contact(List<Contact> contacts){
-            this.contact = contacts;
-            return  this;
-        }
-        public Builder address(List<Address> address){
-            this.address = address;
-            return  this;
-        }
-        public Builder copy(User person) {
+        public Builder user(User person) {
             this.id = person.id;
-            this.firstName = person.firstName;
-            this.otherName = person.otherName;
-            this.password = person.password;
-            this.role = person.role;
-            this.username = person.username;
-            this.enable = person.enable;
-            this.address = person.address;
+            this.firstName = person.getFirstName();
+            this.otherName = person.getOtherName();
+            this.password = person.getPassword();
+            this.roles = person.getRoles();
+            this.username = person.getUsername();
+            this.enable = person.isEnable();
             this.contact = person.contact;
+            this.address = person.address;
             return this;
         }
 
@@ -150,18 +105,25 @@ public class User implements Serializable, Comparable<User> {
             return this;
         }
 
-        public Builder role(Set<Role> value) {
-            this.role = value;
+        public Builder role(Set<String> value) {
+            this.roles = value;
             return this;
         }
 
+        public Builder contact(List<String> value){
+            this.contact = value;
+            return this;
+        }
+
+        public Builder address(List<String> address){
+            this.address = address;
+            return this;
+        }
 
         public Builder username(String value) {
             this.username = value;
             return this;
         }
-
-
 
         public User build() {
             return new User(this);
@@ -188,5 +150,61 @@ public class User implements Serializable, Comparable<User> {
         return true;
     }
 
+    public String getId() {
+        return id;
+    }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getOtherName() {
+        return otherName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public Set<String> getRoles() {
+        return ImmutableSet.copyOf(roles);
+    }
+
+    public List<String> getContact(){
+        return ImmutableList.copyOf(contact);
+    }
+    public List<String> getAddress(){
+        return ImmutableList.copyOf(address);
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    //    public PersonDemography getDemography() {
+//        return demography;
+//    }
+    public boolean isEnable() {
+        return enable;
+    }
+
+
+    private boolean isNullObject(Object object) {
+        if (object == null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id='" + id + '\'' +
+                '}';
+    }
 }

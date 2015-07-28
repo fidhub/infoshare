@@ -16,6 +16,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by codex on 2015/06/30.
@@ -54,7 +55,7 @@ public class RestApiConnectorClass {
             JsonReader reader = new JsonReader(new InputStreamReader(openConnection(fetchUrl+ID).getInputStream()));
             JsonElement element = jsonParser.parse(reader);
             Gson gson = new Gson();
-            return (gson.fromJson(element,  classType));
+            return (gson.fromJson(element,classType));
         }
         catch (Exception e)
         {
@@ -62,15 +63,14 @@ public class RestApiConnectorClass {
             return null;
         }
     }
-    public static <T> void create(String url,T classType){
-        RestTemplate restTemplate = new RestTemplate();
+    public static <T> Class<T> create(String url,T classType){
 
+        RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<T> entity = new HttpEntity<>(classType,headers);
-        String n =  restTemplate.postForObject(url, entity, String.class);
 
-        System.out.println(n);
+        return restTemplate.postForObject(url, entity,classType);
 
     }
     public static <T> void update(String url, T classType){
@@ -79,7 +79,7 @@ public class RestApiConnectorClass {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<T> entity = new HttpEntity<>( classType,headers);
-        restTemplate.put(url,entity);
+        restTemplate.put(url, entity);
 
     }
 

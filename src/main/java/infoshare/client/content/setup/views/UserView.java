@@ -108,13 +108,13 @@ public class UserView extends VerticalLayout implements
     private User getNewEntity(FieldGroup binder) {
 
         final UserModel bean = ((BeanItem<UserModel>) binder.getItemDataSource()).getBean();
-        Set<Role> userRoles = new HashSet<>();
+        Set<String> userRoles = new HashSet<>();
 
         if (bean.getRole() != null) {
             for (String roleId : bean.getRole()) {
                 Role role = roleService.find(roleId);
                 if (role != null) {
-                    userRoles.add(role);
+                    userRoles.add(role.getId());
                 }
             }
         }
@@ -130,12 +130,12 @@ public class UserView extends VerticalLayout implements
     private User getUpdateEntity(FieldGroup binder) {
 
         final UserModel bean = ((BeanItem<UserModel>) binder.getItemDataSource()).getBean();
-        Set<Role> userRoles = new HashSet<>();
+        Set<String> userRoles = new HashSet<>();
         if (bean.getRole()!= null) {
             for (String roleId : bean.getRole()) {
                 Role role = roleService.find(roleId);
                 if (role != null) {
-                    userRoles.add(role);
+                    userRoles.add(role.getId());
                 }
             }
         }
@@ -163,7 +163,7 @@ public class UserView extends VerticalLayout implements
     }
     private void setReadFormProperties() {
         form.binder.setReadOnly(true);
-        //Buttons Behaviou
+        //Buttons Behaviour
         form.save.setVisible(false);
         form.edit.setVisible(true);
         form.cancel.setVisible(true);
@@ -184,9 +184,9 @@ public class UserView extends VerticalLayout implements
     }
     public UserModel getModel(User user) {
         Set<String> userRolesId = new HashSet<>();
-        if (user.getRole() != null) {
-            for (Role role : user.getRole()) {
-                userRolesId.add(role.getId());
+        if (user.getRoles() != null) {
+            for (String role : user.getRoles()) {
+                userRolesId.add(role);
             }
         }
         UserModel model = new UserModel();

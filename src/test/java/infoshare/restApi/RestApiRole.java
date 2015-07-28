@@ -21,7 +21,7 @@ public class RestApiRole extends TestCase {
         RoleModel roleModel = new RoleModel();
         roleModel.setRoleName("Editor");
         roleModel.setDescription("editor of the system");
-        RestApiConnectorClass.create(UrlPath.RoleLinks.POST, roleModel);
+        RestApiConnectorClass.create(UrlPath.RoleLinks.POST, roleModel.getClass());
 
 
     }
@@ -43,6 +43,6 @@ public class RestApiRole extends TestCase {
     @Test
     public void testGetAll() throws Exception {
         List<Role> roles = RestApiConnectorClass.readAll(UrlPath.RoleLinks.GETALL,Role.class);
-        Assert.assertTrue(roles.isEmpty());
+        Assert.assertFalse(roles.isEmpty());
     }
 }

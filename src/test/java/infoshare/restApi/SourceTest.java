@@ -14,11 +14,12 @@ import java.util.List;
  */
 public class SourceTest {
     //ID1:fcc51af60b794e9a83bd0fcdaff661fd
+    //ID1:f737d27fc2d4f303e318f8ac6ef95702
     @Test
     public void testPut() throws Exception {
         SourceModel model = new SourceModel();
 
-        model.setName("fin");
+        model.setName("bbb");
         model.setDescription("fdhfdff");
 
         RestApiConnectorClass.create(UrlPath.SourceLinks.POST,model);
@@ -47,7 +48,6 @@ public class SourceTest {
     @Test
     public void testGetAll() throws Exception {
         List<Source> sources = RestApiConnectorClass.readAll(UrlPath.SourceLinks.GETALL,Source.class);
-
-        Assert.assertTrue(sources.isEmpty());
+        Assert.assertFalse(sources.isEmpty());
     }
 }

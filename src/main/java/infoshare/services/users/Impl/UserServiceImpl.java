@@ -23,9 +23,9 @@ public class UserServiceImpl implements UserService{
     private RoleService roleService = new RoleServiceImpl();
 
     public UserServiceImpl() {
-        Set<Role> roles = new HashSet<>();
-            roles.add(roleService.find("1"));
-            roles.add(roleService.find("2"));
+        Set<String> roles = new HashSet<>();
+            roles.add(roleService.find("1").getId());
+            roles.add(roleService.find("2").getId());
 
         if(users == null) {
             users = new HashMap<>();

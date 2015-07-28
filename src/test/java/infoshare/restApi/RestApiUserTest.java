@@ -8,8 +8,10 @@ import infoshare.client.content.setup.models.UserModel;
 import infoshare.domain.Address;
 import infoshare.domain.Contact;
 import infoshare.domain.Role;
+import infoshare.domain.User;
 import infoshare.services.roles.Impl.RoleServiceImpl;
 import infoshare.services.roles.RoleService;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -35,31 +37,23 @@ public class RestApiUserTest {
 
         Set<String> roles = new HashSet<>();
         RoleService roleServ = new RoleServiceImpl();
-        for (Role role:roleServ.findAll() )
-        {
+        for (Role role : roleServ.findAll()) {
             roles.add(role.getId());
         }
         user.setRole(roles);
 
         List<String> contacts = new ArrayList<>();
-        ContactModel model = new ContactModel();
-        model.setPhone("222");
-        model.setEmail("111");
-        model.setContactType("jhdjyhuwe");
-        contacts.add(model.getPhone());
+        Contact model = new Contact.Builder("54554544545").id("f737d27fc2d4f303e318f8ac6ef95702").build();
+        contacts.add(model.getId());
         user.setContact(contacts);
 
         List<String> address = new ArrayList<>();
-        AddressModel addressModel = new AddressModel();
-        addressModel.setAddressType("4547");
-        addressModel.setPhysicalAddress("4455555");
-        addressModel.setPostalAddress("djhf");
-        addressModel.setPostalCode("35656");
-        address.add(addressModel.getPhysicalAddress());
+        Address addressModel = new Address.Builder("shjdhsjjhdas").id("f737d27fc2d4f303e318f8ac6ef95702").build();
+        address.add(addressModel.getId());
         user.setAddress(address);
 
+        System.out.println(user.getFirstName());
         RestApiConnectorClass.create(UrlPath.UserLinks.POST, user);
-
 
     }
     @Test
@@ -76,6 +70,7 @@ public class RestApiUserTest {
 
     @Test
     public void testGetAll() throws Exception {
-
+        List<User> users = RestApiConnectorClass.readAll(UrlPath.UserLinks.GETALL, User.class);
+        Assert.assertTrue(users.isEmpty());
     }
 }
