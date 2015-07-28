@@ -53,7 +53,7 @@ public class RestApiUserTest {
         user.setAddress(address);
 
         System.out.println(user.getFirstName());
-        RestApiConnectorClass.create(UrlPath.UserLinks.POST, user);
+        RestApiConnectorClass.create(UrlPath.UserLinks.POST, user,UserModel.class);
 
     }
     @Test

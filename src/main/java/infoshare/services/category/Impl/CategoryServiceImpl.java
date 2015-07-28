@@ -2,6 +2,7 @@ package infoshare.services.category.Impl;
 
 import infoshare.RestApi.RestApiConnectorClass;
 import infoshare.RestApi.UrlPath;
+import infoshare.client.content.systemValues.models.CategoryModel;
 import infoshare.domain.Category;
 import infoshare.services.category.CategoryService;
 
@@ -14,24 +15,6 @@ import java.util.Map;
  * Created by codex on 2015/06/29.
  */
 public class CategoryServiceImpl implements CategoryService {
-    static Map<String,Category> categories = null;
-
-    public CategoryServiceImpl() {
-        if(categories == null){
-            categories = new HashMap<>();
-            Category category1 = new Category.Builder("Pregnancy").description("What pregnant people should eat").id("1").build();
-            Category category2 = new Category.Builder("Emergency").description("How to attend to emergency patients").id("2").build();
-            Category category3 = new Category.Builder("Pharmacy").description("How patients should be given treatment").id("3").build();
-            Category category4 = new Category.Builder("Dental Care").description("How to handle patients with sore teeth").id("4").build();
-            Category category5 = new Category.Builder("Circumcision").description("How Long must the patients stay to complete the process").id("5").build();
-
-            categories.put(category1.getId(),category1);
-            categories.put(category2.getId(),category2);
-            categories.put(category3.getId(),category3);
-            categories.put(category4.getId(),category4);
-            categories.put(category5.getId(),category5);
-        }
-    }
 
     @Override
     public Category find(String s) {
@@ -40,17 +23,14 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Category save(Category entity) {
-        return RestApiConnectorClass.create(UrlPath.CategoryLinks.POST, entity);
+        return RestApiConnectorClass.create(UrlPath.CategoryLinks.POST, entity, Category.class);
     }
-
     @Override
     public Category merge(Category entity) {
         return RestApiConnectorClass.update(UrlPath.CategoryLinks.PUT,entity);
     }
-
     @Override
     public void remove(Category entity) {
-        categories.remove(entity.getId());
     }
 
     @Override

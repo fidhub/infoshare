@@ -232,11 +232,11 @@ public class Header extends VerticalLayout implements Button.ClickListener {
         int i = 0 ;
         for(Content content:contentService.findAll())
         {
-            if(content.getContentType().equalsIgnoreCase("raw")) {
+          /*  if(content.getContentType().equalsIgnoreCase("raw")) {
                 i++;
                 notify.setCaption(i + "");
                 notify.setDescription(i + " un-edited tips content");
-            }
+            }*/
         }
         if(i==0){
             notify.removeStyleName("unread");

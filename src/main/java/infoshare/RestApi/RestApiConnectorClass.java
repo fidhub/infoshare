@@ -63,24 +63,30 @@ public class RestApiConnectorClass {
             return null;
         }
     }
-    public static <T> Class<T> create(String url,T classType){
+
+    public static <T> T create(String url,T classTypeObject, Class<T> classType){
 
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<T> entity = new HttpEntity<>(classType,headers);
+        HttpEntity<T> entity = new HttpEntity<>(classTypeObject,headers);
 
-        return restTemplate.postForObject(url, entity,classType);
+        JsonParser parser = new JsonParser();
+        JsonElement element = parser.parse(restTemplate.postForObject(url, entity, String.class)).getAsJsonObject();
+        Gson gson = new Gson();
 
+        return gson.fromJson(element,classType);
     }
-    public static <T> void update(String url, T classType){
+    public static <T> T update(String url, T classType){
         RestTemplate restTemplate = new RestTemplate();
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<T> entity = new HttpEntity<>( classType,headers);
+        
         restTemplate.put(url, entity);
 
+        return classType;
     }
 
 }

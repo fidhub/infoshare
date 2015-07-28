@@ -1,6 +1,8 @@
 package infoshare.services.users.Impl;
 
 import com.vaadin.spring.annotation.SpringComponent;
+import infoshare.RestApi.RestApiConnectorClass;
+import infoshare.RestApi.UrlPath;
 import infoshare.domain.Role;
 import infoshare.domain.User;
 import infoshare.services.roles.Impl.RoleServiceImpl;
@@ -18,52 +20,28 @@ import java.util.*;
 @SpringComponent
 public class UserServiceImpl implements UserService{
 
-    static Map<String,User> users = null ;
-    @Autowired
-    private RoleService roleService = new RoleServiceImpl();
-
-    public UserServiceImpl() {
-        Set<String> roles = new HashSet<>();
-            roles.add(roleService.find("1").getId());
-            roles.add(roleService.find("2").getId());
-
-        if(users == null) {
-            users = new HashMap<>();
-            User user = new User.Builder("Hadebe")
-                    .firstname("Thulebona")
-                    .othername("Emmanuel")
-                    .role(roles)
-                    .id("1")
-                    .enable(true)
-                    .username("thuleh")
-                    .build();
-            users.put(user.getId(),user);
-        }
-    }
     @Override
     public User find(String s) {
-        return users.get(s);
+        return RestApiConnectorClass.read(UrlPath.UserLinks.GET_ID,s,User.class);
     }
 
     @Override
     public User save(User entity) {
-        users.put(entity.getId(),entity);
-        return users.get(entity.getId());
+       return RestApiConnectorClass.create(UrlPath.UserLinks.POST,entity,User.class);
     }
 
     @Override
     public User merge(User entity) {
-        users.put(entity.getId(),entity);
-        return users.get(entity.getId());
+        return RestApiConnectorClass.update(UrlPath.UserLinks.PUT,entity);
     }
 
     @Override
     public void remove(User entity) {
-        users.remove(entity.getId());
+
     }
 
     @Override
     public List<User> findAll() {
-        return new ArrayList<>(users.values());
+        return RestApiConnectorClass.readAll(UrlPath.UserLinks.GETALL,User.class);
     }
 }

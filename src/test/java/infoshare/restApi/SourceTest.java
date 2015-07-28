@@ -21,8 +21,10 @@ public class SourceTest {
 
         model.setName("bbb");
         model.setDescription("fdhfdff");
-
-        RestApiConnectorClass.create(UrlPath.SourceLinks.POST,model);
+        SourceModel sourceModel = RestApiConnectorClass.create(UrlPath.SourceLinks.POST, model, SourceModel.class);
+        System.out.println(
+              sourceModel.getName()+"\n"+sourceModel.getDescription()
+       );
     }
     @Test
     public void testPost() throws Exception {

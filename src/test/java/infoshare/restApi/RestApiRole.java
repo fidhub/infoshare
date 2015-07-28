@@ -21,7 +21,7 @@ public class RestApiRole extends TestCase {
         RoleModel roleModel = new RoleModel();
         roleModel.setRoleName("Editor");
         roleModel.setDescription("editor of the system");
-        RestApiConnectorClass.create(UrlPath.RoleLinks.POST, roleModel.getClass());
+        RestApiConnectorClass.create(UrlPath.RoleLinks.POST, roleModel,RoleModel.class);
 
 
     }

@@ -30,7 +30,7 @@ public class RestApiCategoryTest {
         CategoryModel model  = new CategoryModel();
         model.setName("kjkjdjk");
         model.setDescription("sddsdsdsdsd");
-        RestApiConnectorClass.create(UrlPath.CategoryLinks.POST, model.getClass());
+        RestApiConnectorClass.create(UrlPath.CategoryLinks.POST, model,CategoryModel.class);
 
        }
     @Test

@@ -22,7 +22,7 @@ public class ContentTypeTest extends TestCase {
         ContentTypeModel model = new ContentTypeModel();
         model.setName("Raw");
         model.setDescription("raw content");
-        RestApiConnectorClass.create(UrlPath.ContentTypeLinks.POST,model);
+        RestApiConnectorClass.create(UrlPath.ContentTypeLinks.POST,model,ContentTypeModel.class);
     }
     @Test
     public void testPost() throws Exception {
