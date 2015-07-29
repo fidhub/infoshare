@@ -26,7 +26,7 @@ public class ContentTypeServiceImpl implements ContentTypeService{
 
     @Override
     public ContentType save(ContentType entity) {
-        return RestApiConnectorClass.update(UrlPath.ContentTypeLinks.POST,entity);
+        return RestApiConnectorClass.create(UrlPath.ContentTypeLinks.POST, entity, ContentType.class);
     }
     @Override
     public ContentType merge(ContentType entity) {
