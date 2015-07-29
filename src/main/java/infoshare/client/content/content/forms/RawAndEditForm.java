@@ -8,15 +8,15 @@ import com.vaadin.server.Responsive;
 import com.vaadin.ui.*;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.themes.ValoTheme;
-import infoshare.client.content.content.models.RawAndEditModel;
+import infoshare.client.content.content.models.ContentModel;
 
 /**
  * Created by hashcode on 2015/06/24.
  */
 public class RawAndEditForm extends FormLayout {
 
-    private final RawAndEditModel model;
-    public final BeanItem<RawAndEditModel> item;
+    private final ContentModel model;
+    public final BeanItem<ContentModel> item;
     public final FieldGroup binder;
 
 
@@ -26,7 +26,7 @@ public class RawAndEditForm extends FormLayout {
     public final ComboBox popUpCategoryCmb;
     public final ComboBox popUpSourceCmb;
     public RawAndEditForm() {
-        model = new RawAndEditModel();
+        model = new ContentModel();
         item = new BeanItem<>(model);
         binder = new FieldGroup(item);
         popUpContentTypeCmb = getComboBox("Content Type","contentType");
@@ -68,7 +68,7 @@ public class RawAndEditForm extends FormLayout {
       richTextArea.setWidth(98.0f, Unit.PERCENTAGE);
       richTextArea.setHeight(400.0f,Unit.PIXELS);
       richTextArea.setNullRepresentation("");
-      richTextArea.addValidator(new BeanValidator(RawAndEditModel.class, field));
+      richTextArea.addValidator(new BeanValidator(ContentModel.class, field));
       richTextArea.setImmediate(true);
       binder.bind(richTextArea,field);
       return richTextArea;
@@ -76,7 +76,7 @@ public class RawAndEditForm extends FormLayout {
     private ComboBox getComboBox(String label, String field){
         final ComboBox comboBox = new ComboBox(label);
         comboBox.setImmediate(true);
-        comboBox.addValidator(new BeanValidator(RawAndEditModel.class, field));
+        comboBox.addValidator(new BeanValidator(ContentModel.class, field));
         comboBox.setNullSelectionAllowed(false);
         binder.bind(comboBox,field);
         return comboBox;

@@ -46,12 +46,12 @@ public class ContentFilter {
                 Logger.getLogger(ex.getLocalizedMessage());
             }
         }
-        Collections.sort(arrayList, new Comparator<Content>() {
+     /*   Collections.sort(arrayList, new Comparator<Content>() {
             @Override
             public int compare(Content content, Content t1) {
                 return (Integer.parseInt(t1.getId())-Integer.parseInt(content.getId())) ;
             }
-        });
+        });*/
         return arrayList;
     }
     private TextField getField(){

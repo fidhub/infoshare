@@ -8,6 +8,8 @@ import infoshare.services.Content.ContentService;
 import infoshare.services.Content.Impl.ContentServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -31,25 +33,31 @@ public class RawTable extends Table {
         addContainerProperty("Category",String.class,null);
         addContainerProperty("Creator",String.class,null);
         addContainerProperty("Source",String.class,null);
-        addContainerProperty("Date Created",Date.class,null);
+        addContainerProperty("Date Created",String.class,null);
 
-        for (Content content: contentService.findAll()){
-           loadTable(content);
+        try {
+            contentService.findAll().stream().filter(content -> content != null).forEach(this::loadTable);
+        }catch (Exception e){
+
         }
          setNullSelectionAllowed(false);
          setSelectable(true);
          setImmediate(true);
     }
 
-    public void loadTable(Content content){
-        if(content.getContentType().equalsIgnoreCase("Raw")) {
-            addItem(new Object[]{
-                    content.getTitle(),
-                    content.getCategory(),
-                    content.getCreator(),
-                    content.getSource(),
-                    content.getDateCreated()
-            }, content.getId());
+    public void loadTable(Content content) {
+        DateFormat formatter = new SimpleDateFormat("dd - MMMMMMM - yyyy");
+            if (!content.getContentType().equalsIgnoreCase("edited") &&
+                !content.getContentType().equalsIgnoreCase("published")) {
+
+                addItem(new Object[]{
+                        content.getTitle(),
+                        content.getCategory(),
+                        content.getCreator(),
+                        content.getSource(),
+                        formatter.format(content.getDateCreated())
+                }, content.getId());
+            }
         }
-    }
+
 }

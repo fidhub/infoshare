@@ -8,6 +8,8 @@ import infoshare.services.Content.ContentService;
 import infoshare.services.Content.Impl.ContentServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -31,24 +33,31 @@ public class EditTable extends Table{
         addContainerProperty("Category",String.class,null);
         addContainerProperty("Creator",String.class,null);
         addContainerProperty("Source",String.class,null);
-        addContainerProperty("Date Created",Date.class,null);
+        addContainerProperty("Date Created",String.class,null);
 
-       for (Content content:contentService.findAll()) {
-           loadTable(content);
-       }
+        try {
+            for (Content content : contentService.findAll()) {
+                if (content != null)
+                    loadTable(content);
+            }
+        }catch (Exception e){
+
+        }
         setNullSelectionAllowed(false);
         setSelectable(true);
         setImmediate(true);
     }
 
+
     public void loadTable(Content content) {
+        DateFormat formatter = new SimpleDateFormat("dd - MMMMMMM - yyyy");
         if (content.getContentType().equalsIgnoreCase("edited")) {
             addItem(new Object[]{
                     content.getTitle(),
                     content.getCategory(),
                     content.getCreator(),
                     content.getSource(),
-                    content.getDateCreated()
+                    formatter.format(content.getDateCreated())
             }, content.getId());
         }
     }

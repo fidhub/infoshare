@@ -55,7 +55,7 @@ public class Header extends VerticalLayout implements Button.ClickListener {
         return headerPanel;
     }
     @Override
-    public void buttonClick(ClickEvent clickEvent) {
+    public  void buttonClick(ClickEvent clickEvent) {
         Button source = clickEvent.getButton();
         if(source == home){
             if (notifications != null && notifications.getUI() != null) {
@@ -64,7 +64,6 @@ public class Header extends VerticalLayout implements Button.ClickListener {
             if (userProfile != null && userProfile.getUI() !=null) {
                 userProfile.close();
             }
-
             main.content.setSecondComponent(new LandingHome(main));
             home.getUI();
         }else if(source == notify){
@@ -112,7 +111,7 @@ public class Header extends VerticalLayout implements Button.ClickListener {
             });
         }
     }
-    public void buildNotifications( ClickEvent event) {
+    public  void buildNotifications( ClickEvent event) {
         notifications = new Window();
         final VerticalLayout layout = new VerticalLayout();
         layout.setHeight(100.0f, Unit.PERCENTAGE);
@@ -145,16 +144,20 @@ public class Header extends VerticalLayout implements Button.ClickListener {
         notificationTable.setNullSelectionAllowed(false);
         notificationTable.setImmediate(true);
 
-
-        for (Content content : contentService.findAll()){
-            if(content.getContentType().equalsIgnoreCase("raw")) {
+    try {
+        for (Content content : contentService.findAll()) {
+            if (!content.getContentType().equalsIgnoreCase("edited") &&
+                    !content.getContentType().equalsIgnoreCase("published")) {
                 notificationTable.addItem(new Object[]{new Label(
                         "<b>" + content.getCreator()
-                                + " created a new report</b><br><span>25 minutes ago</span><br>"
-                                + content.getContent().substring(0, 50), ContentMode.HTML)
+                                + " created a new Tip</b><br><span>25 minutes ago</span><br>"
+                                + content.getContent().substring(0,10), ContentMode.HTML)
                 }, content.getId());
             }
         }
+    }catch (Exception e) {
+
+    }
         notificationTable.addItemClickListener(new ItemClickEvent.ItemClickListener() {
             @Override
             public void itemClick(ItemClickEvent event) {
@@ -228,15 +231,17 @@ public class Header extends VerticalLayout implements Button.ClickListener {
         notify.addClickListener((Button.ClickListener) this);
         user.addClickListener((Button.ClickListener)this);
     }
-    public void refreshNotification(){
+    public  void refreshNotification(){
         int i = 0 ;
         for(Content content:contentService.findAll())
         {
-          /*  if(content.getContentType().equalsIgnoreCase("raw")) {
+            if(content.getContentType().equalsIgnoreCase("raw")) {
                 i++;
+                notify.addStyleName("notifications");
+                notify.addStyleName("unread");
                 notify.setCaption(i + "");
                 notify.setDescription(i + " un-edited tips content");
-            }*/
+            }
         }
         if(i==0){
             notify.removeStyleName("unread");

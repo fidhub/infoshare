@@ -119,7 +119,7 @@ public class ContentSourceView extends VerticalLayout implements Button.ClickLis
     }
     private void setReadFormProperties() {
         form.binder.setReadOnly(true);
-        //Buttons Behaviou
+        //Buttons Behaviour
         form.save.setVisible(false);
         form.edit.setVisible(true);
         form.cancel.setVisible(true);

@@ -10,7 +10,7 @@ import com.vaadin.ui.themes.ValoTheme;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.content.ContentMenu;
 import infoshare.client.content.content.forms.RawAndEditForm;
-import infoshare.client.content.content.models.RawAndEditModel;
+import infoshare.client.content.content.models.ContentModel;
 import infoshare.client.content.content.tables.EditTable;
 import infoshare.domain.Category;
 import infoshare.domain.Content;
@@ -79,7 +79,7 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
         }
     }
     private Window modelWindow(){
-        final Window popup = new Window("UPDATE EDITED CONTENT");
+        final Window popup = new Window();
         popup.setWidth(80.0f,Unit.PERCENTAGE);
         popup.setClosable(false);
         popup.setResizable(false);
@@ -130,7 +130,7 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
         loadComboBoxs();
         try {
             final Content content = contentService.find(table.getValue().toString());
-            final RawAndEditModel bean = getModel(content);
+            final ContentModel bean = getModel(content);
             form.binder.setItemDataSource(new BeanItem<>(bean));
 
             UI.getCurrent().addWindow(popUp);
@@ -156,7 +156,7 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
     }
     private Content getUpdateEntity(FieldGroup binder) {
 
-        final RawAndEditModel bean = ((BeanItem<RawAndEditModel>) binder.getItemDataSource()).getBean();
+        final ContentModel bean = ((BeanItem<ContentModel>) binder.getItemDataSource()).getBean();
         bean.setDateCreated(contentService.find(table.getValue().toString()).getDateCreated());
         final Content content = new Content.Builder(bean.getTitle())
                 .category(bean.getCategory())
@@ -169,8 +169,8 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
                 .build();
         return content;
     }
-    private RawAndEditModel getModel(Content val) {
-        final RawAndEditModel model = new RawAndEditModel();
+    private ContentModel getModel(Content val) {
+        final ContentModel model = new ContentModel();
         final Content content = contentService.find(val.getId());
         model.setTitle(content.getTitle());
         model.setCategory(content.getCategory());

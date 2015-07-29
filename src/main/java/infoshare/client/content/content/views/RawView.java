@@ -10,7 +10,7 @@ import com.vaadin.ui.themes.ValoTheme;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.content.ContentMenu;
 import infoshare.client.content.content.forms.RawAndEditForm;
-import infoshare.client.content.content.models.RawAndEditModel;
+import infoshare.client.content.content.models.ContentModel;
 import infoshare.client.content.content.tables.RawTable;
 import infoshare.client.header.view.Header;
 import infoshare.domain.Category;
@@ -45,7 +45,7 @@ public class RawView extends VerticalLayout implements
     private Window popUp ;
     private Button editBtn = new Button("EDIT");
     private ContentFilter contentFilter = new ContentFilter();
-    public String tableId = null;
+    public String tableId ;
 
     public RawView( MainLayout mainApp) {
         this.main = mainApp;
@@ -72,8 +72,7 @@ public class RawView extends VerticalLayout implements
     public void refreshContacts(String stringFilter ) {
         try {
             table.removeAllItems();
-            for(Content content: contentFilter.findAll(stringFilter))
-                table.loadTable(content);
+            contentFilter.findAll(stringFilter).forEach(table::loadTable);
         }catch (Exception e){
         }
     }
@@ -82,7 +81,6 @@ public class RawView extends VerticalLayout implements
         final Button source = clickEvent.getButton();
         if(source==editBtn){
             try {
-                if(table.getValue().toString() == null)
                     tableId = table.getValue().toString();
                 EditButton();
             }catch (Exception e){
@@ -106,7 +104,7 @@ public class RawView extends VerticalLayout implements
         }
     }
     private Window modelWindow(){
-        final Window popup = new Window("EDIT RAW CONTENT");
+        final Window popup = new Window();
         popup.setWidth(80.0f, Unit.PERCENTAGE);
         popup.setClosable(false);
         popup.setResizable(false);
@@ -115,19 +113,9 @@ public class RawView extends VerticalLayout implements
         return popup;
     }
     private void loadComboBoxs(){
-          for(Category category:categoryService.findAll()){
-                if(category!= null)
-                form.popUpCategoryCmb.addItem(category.getName());
-            }
-
-        for(ContentType category:contentTypeService.findAll()){
-                if(category!= null)
-                form.popUpContentTypeCmb.addItem(category.getName());
-            }
-        for(Source source:sourceService.findAll()){
-                if(source!= null)
-                form.popUpSourceCmb.addItem(source.getName());
-            }
+        categoryService.findAll().stream().filter(category -> category != null).forEach(category -> form.popUpCategoryCmb.addItem(category.getName()));
+        contentTypeService.findAll().stream().filter(category -> category != null).forEach(category -> form.popUpContentTypeCmb.addItem(category.getName()));
+        sourceService.findAll().stream().filter(source -> source != null).forEach(source -> form.popUpSourceCmb.addItem(source.getName()));
 
 
     }
@@ -137,7 +125,7 @@ public class RawView extends VerticalLayout implements
     public void EditButton(){
         try {
             final Content content = contentService.find(tableId);
-            final RawAndEditModel bean = getModel(content);
+            final ContentModel bean = getModel(content);
             form.binder.setItemDataSource(new BeanItem<>(bean));
             UI.getCurrent().addWindow(popUp);
             popUp.setModal(true);
@@ -162,10 +150,9 @@ public class RawView extends VerticalLayout implements
         }
     }
     private Content updateEntity(FieldGroup binder){
-        final RawAndEditModel bean = ((BeanItem<RawAndEditModel>) binder.getItemDataSource()).getBean();
+        final ContentModel bean = ((BeanItem<ContentModel>) binder.getItemDataSource()).getBean();
         bean.setDateCreated(contentService.find(tableId).getDateCreated());
         final Content content = new Content.Builder(bean.getTitle())
-                .dateCreated(bean.getDateCreated())
                 .creator(bean.getCreator())
                 .source(bean.getSource())
                 .category(bean.getCategory())
@@ -177,8 +164,8 @@ public class RawView extends VerticalLayout implements
         tableId = null;
         return content;
     }
-    private RawAndEditModel getModel(Content val) {
-        final RawAndEditModel model = new RawAndEditModel();
+    private ContentModel getModel(Content val) {
+        final ContentModel model = new ContentModel();
         final Content content = contentService.find(val.getId());
         model.setTitle(content.getTitle());
         model.setCategory(content.getCategory());

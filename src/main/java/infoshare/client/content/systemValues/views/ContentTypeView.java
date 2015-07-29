@@ -100,6 +100,7 @@ public class ContentTypeView extends VerticalLayout implements Button.ClickListe
                 .build();
         return contentType;
     }
+
     private ContentType getNewEntity(FieldGroup binder) {
         final ContentTypeModel bean = ((BeanItem<ContentTypeModel>) binder.getItemDataSource()).getBean();
         final ContentType contentType = new ContentType.Builder(bean.getName())
@@ -120,7 +121,7 @@ public class ContentTypeView extends VerticalLayout implements Button.ClickListe
     }
     private void setReadFormProperties() {
         form.binder.setReadOnly(true);
-        //Buttons Behaviou
+        //Buttons Behaviour
         form.save.setVisible(false);
         form.edit.setVisible(true);
         form.cancel.setVisible(true);

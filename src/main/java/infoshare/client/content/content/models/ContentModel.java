@@ -4,10 +4,7 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- * Created by hashcode on 2015/06/24.
- */
-public class PublishModel implements Serializable {
+public class ContentModel implements Serializable {
     @NotNull
     private Date dateCreated;
     @NotNull
@@ -23,30 +20,6 @@ public class PublishModel implements Serializable {
     @NotNull
     private String contentType;
 
-    public Date getDateCreated() {
-        return dateCreated;
-    }
-
-    public void setDateCreated(Date dateCreated) {
-        this.dateCreated = dateCreated;
-    }
-
-    public String getCreator() {
-        return creator;
-    }
-
-    public void setCreator(String creator) {
-        this.creator = creator;
-    }
-
-    public String getSource() {
-        return source;
-    }
-
-    public void setSource(String source) {
-        this.source = source;
-    }
-
     public String getCategory() {
         return category;
     }
@@ -55,27 +28,45 @@ public class PublishModel implements Serializable {
         this.category = category;
     }
 
-    public String getTitle() {
-        return title;
+    public Date getDateCreated(){
+        return dateCreated;
+    }
+    public void setDateCreated(Date dateCreated){
+        this.dateCreated = dateCreated;
     }
 
-    public void setTitle(String title) {
+    public String getCreator(){
+        return creator;
+    }
+    public void setCreator(String creator){
+        this.creator = creator;
+    }
+
+    public String getSource(){
+        return source;
+    }
+    public void setSource(String source){
+        this.source = source;
+    }
+
+    public String getTitle(){
+        return title;
+    }
+    public void setTitle(String title){
         this.title = title;
     }
 
-    public String getContent() {
+    public String getContent(){
         return content;
     }
-
-    public void setContent(String content) {
+    public void setContent(String content){
         this.content = content;
     }
 
-    public String getContentType() {
+    public String getContentType(){
         return contentType;
     }
-
-    public void setContentType(String contentType) {
+    public void setContentType(String contentType){
         this.contentType = contentType;
     }
 }

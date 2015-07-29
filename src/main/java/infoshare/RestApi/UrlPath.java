@@ -7,18 +7,18 @@ public class UrlPath {
 
     public static final  String URL ="http://10.47.2.247:9000";
 
-    public static class ContentLinks {
-        public static final String POST    = URL+"/api/cat/create";    //@controllers.CategoryController.create
-        public static final String GET_ID  = URL+"/api/cat/";    //@controllers.CategoryController.getCategory(id)
-        public static final String PUT     = URL+"/api/cat/update";    //@controllers.CategoryController.update
-        public static final String GETALL  = URL+"/api/cat/get/cats";      //@controllers.CategoryController.getAll
-    }
-
-     public static class CategoryLinks {
+    public static class CategoryLinks {
         public static final String POST    = URL+"/api/cat/create" ;  //@controllers.CategoryController.create
-        public static final String GET_ID  = URL+"/api/cat/" ;  //@controllers.CategoryController.getCategory(id)
+        public static final String GET_ID  = URL+"/api/cat/" ;        //@controllers.CategoryController.getCategory(id)
         public static final String PUT     = URL+"/api/cat/update" ;  //@controllers.CategoryController.update
         public static final String GETALL  = URL+"/api/cat/get/cats" ;  //@controllers.CategoryController.getAll
+    }
+
+    public static class ContentLinks {
+        public static final String POST    = URL+"/api/cont/create";    //@controllers.CategoryController.create
+        public static final String GET_ID  = URL+"/api/cont/";          //@controllers.CategoryController.getCategory(id)
+        public static final String PUT     = URL+"/api/cont/update";    //@controllers.CategoryController.update
+        public static final String GETALL  = URL+"/api/cont/get/conts";      //@controllers.CategoryController.getAll
     }
 
      public static class ContentTypeLinks {
