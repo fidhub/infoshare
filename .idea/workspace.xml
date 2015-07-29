@@ -5,10 +5,130 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e90d9adc-412d-4446-ab3a-2e74a34bb89b" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/App$MyService.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/App$MyService.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/App.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/App.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/test-classes/infoshare/AppTest.class" afterPath="$PROJECT_DIR$/target/test-classes/infoshare/AppTest.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/conf/util/BigDecimalConverter.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/conf/util/BigDecimalConverter.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/conf/util/BigDecimalConverterVer2.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/conf/util/BigDecimalConverterVer2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/domain/Category$1.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/domain/Category$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/domain/Category$Builder.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/domain/Category$Builder.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/domain/Category.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/domain/Category.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/systemValues/forms/CategoryForm.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/systemValues/forms/CategoryForm.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/systemValues/models/CategoryModel.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/systemValues/models/CategoryModel.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/services/category/CategoryService.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/services/category/CategoryService.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/systemValues/tables/CategoryTable.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/systemValues/tables/CategoryTable.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/systemValues/views/CategoryView.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/systemValues/views/CategoryView.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/Check-icon-16.png" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/Check-icon-16.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/Check-icon-24.png" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/Check-icon-24.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/Check-icon-32.png" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/Check-icon-32.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/Check-icon-48.png" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/Check-icon-48.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/domain/Content$1.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/domain/Content$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/domain/Content$Builder.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/domain/Content$Builder.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/domain/Content.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/domain/Content.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/content/ContentMenu.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/content/ContentMenu.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/services/Content/ContentService.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/services/Content/ContentService.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/services/Content/Impl/ContentServiceImp.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/services/Content/Impl/ContentServiceImp.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/systemValues/forms/ContentSourceForm.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/systemValues/forms/ContentSourceForm.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/systemValues/tables/ContentSourceTable.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/systemValues/tables/ContentSourceTable.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/systemValues/views/ContentSourceView.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/systemValues/views/ContentSourceView.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/sidebar/trees/ContentTree.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/sidebar/trees/ContentTree.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/domain/ContentType$1.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/domain/ContentType$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/domain/ContentType$Builder.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/domain/ContentType$Builder.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/domain/ContentType.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/domain/ContentType.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/systemValues/forms/ContentTypeForm.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/systemValues/forms/ContentTypeForm.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/systemValues/models/ContentTypeModel.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/systemValues/models/ContentTypeModel.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/services/ContentType/ContentTypeService.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/services/ContentType/ContentTypeService.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/services/ContentType/Impl/ContentTypeServiceImpl.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/services/ContentType/Impl/ContentTypeServiceImpl.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/systemValues/tables/ContentTypeTable.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/systemValues/tables/ContentTypeTable.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/systemValues/views/ContentTypeView.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/systemValues/views/ContentTypeView.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/domain/Course$Builder.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/domain/Course$Builder.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/domain/Course.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/domain/Course.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/courseSetup/models/CourseModel.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/courseSetup/models/CourseModel.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/services/courses/CourseService.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/services/courses/CourseService.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/services/courses/Impl/CourseServiceImpl.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/services/courses/Impl/CourseServiceImpl.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/sidebar/trees/CourseTree.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/sidebar/trees/CourseTree.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/courseSetup/views/CourseView.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/courseSetup/views/CourseView.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/courseSetup/forms/CoursesForm.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/courseSetup/forms/CoursesForm.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/courseSetup/CoursesMenu.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/courseSetup/CoursesMenu.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/courseSetup/tables/CoursesTable.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/courseSetup/tables/CoursesTable.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/admin/DashboardMenu$1.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/admin/DashboardMenu$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/admin/DashboardMenu$2.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/admin/DashboardMenu$2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/admin/DashboardMenu$3.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/admin/DashboardMenu$3.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/admin/DashboardMenu$4.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/admin/DashboardMenu$4.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/admin/DashboardMenu.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/admin/DashboardMenu.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/admin/DashboardNavigator.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/admin/DashboardNavigator.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/conf/util/DateTimeFormatHelper.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/conf/util/DateTimeFormatHelper.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/conf/util/DialobBoxWindow.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/conf/util/DialobBoxWindow.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/content/tables/EditTable.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/content/tables/EditTable.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/content/views/EditView.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/content/views/EditView.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/footer/Footer.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/footer/Footer.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/home/Index.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/home/Index.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/domain/Keys$1.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/domain/Keys$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/domain/Keys$Builder.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/domain/Keys$Builder.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/domain/Keys.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/domain/Keys.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/conf/util/validation/LabelErrorMessageManipulator.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/conf/util/validation/LabelErrorMessageManipulator.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/domain/Lesson$Builder.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/domain/Lesson$Builder.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/domain/Lesson.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/domain/Lesson.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/courseSetup/forms/LessonForm.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/courseSetup/forms/LessonForm.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/courseSetup/models/LessonModel.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/courseSetup/models/LessonModel.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/courseSetup/views/LessonView.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/courseSetup/views/LessonView.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/login/LoginView$1.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/login/LoginView$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/login/LoginView.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/login/LoginView.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/MainLayout.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/MainLayout.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/admin/view/MainView.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/admin/view/MainView.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/menu/Menu.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/menu/Menu.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/header/MenuLayout.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/header/MenuLayout.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/conf/util/validation/MobileNumberValidator.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/conf/util/validation/MobileNumberValidator.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/conf/util/validation/OnSubmitValidationHelper.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/conf/util/validation/OnSubmitValidationHelper.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/password/forms/PasswordForm.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/password/forms/PasswordForm.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/password/PasswordMenu.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/password/PasswordMenu.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/password/models/PasswordModel.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/password/models/PasswordModel.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/password/tab/PasswordTab.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/password/tab/PasswordTab.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/sidebar/trees/PasswordTree.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/sidebar/trees/PasswordTree.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/content/forms/PublishForm.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/content/forms/PublishForm.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/content/models/PublishModel.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/content/models/PublishModel.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/content/tables/PublishTable.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/content/tables/PublishTable.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/content/views/PublishView.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/content/views/PublishView.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/content/forms/RawAndEditForm.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/content/forms/RawAndEditForm.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/content/models/RawAndEditModel.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/content/models/RawAndEditModel.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/content/tables/RawTable.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/content/tables/RawTable.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/content/views/RawView.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/content/views/RawView.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/domain/Role$1.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/domain/Role$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/domain/Role$Builder.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/domain/Role$Builder.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/domain/Role.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/domain/Role.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/setup/forms/RoleForm.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/setup/forms/RoleForm.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/setup/models/RoleModel.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/setup/models/RoleModel.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/services/roles/RoleService.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/services/roles/RoleService.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/services/roles/Impl/RoleServiceImpl.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/services/roles/Impl/RoleServiceImpl.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/setup/tables/RoleTable.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/setup/tables/RoleTable.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/setup/views/RoleView.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/setup/views/RoleView.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/services/Service.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/services/Service.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/setup/SetupMenu.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/setup/SetupMenu.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/sidebar/trees/SetupTree.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/sidebar/trees/SetupTree.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/sidebar/Sidebar.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/sidebar/Sidebar.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/domain/Source$Builder.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/domain/Source$Builder.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/domain/Source.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/domain/Source.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/systemValues/models/SourceModel.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/systemValues/models/SourceModel.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/services/source/SourceService.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/services/source/SourceService.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/services/source/sourceServiceImpl/SourceServiceImpl.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/services/source/sourceServiceImpl/SourceServiceImpl.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/systemValues/SystemValues.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/systemValues/SystemValues.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/domain/Token$1.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/domain/Token$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/domain/Token$Builder.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/domain/Token$Builder.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/domain/Token.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/domain/Token.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/conf/util/UIComboBoxHelper.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/conf/util/UIComboBoxHelper.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/conf/util/UIComponentHelper.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/conf/util/UIComponentHelper.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/conf/util/UIDialogBoxHelper.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/conf/util/UIDialogBoxHelper.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/conf/util/UITableIconHelper.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/conf/util/UITableIconHelper.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/conf/util/validation/UIValidatorHelper.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/conf/util/validation/UIValidatorHelper.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/domain/User$1.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/domain/User$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/domain/User$Builder.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/domain/User$Builder.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/domain/User.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/domain/User.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/setup/forms/UserForm.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/setup/forms/UserForm.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/setup/models/UserModel.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/setup/models/UserModel.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/services/users/UserService.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/services/users/UserService.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/services/users/Impl/UserServiceImpl.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/services/users/Impl/UserServiceImpl.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/setup/tables/UserTable.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/setup/tables/UserTable.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/setup/views/UserView.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/setup/views/UserView.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/img/app-icon.png" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/img/app-icon.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/delete-icon-16.png" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/delete-icon-16.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/delete-icon-24.png" afterPath="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/dashboard/delete-icon-24.png" />
@@ -54,6 +174,8 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/.name" afterPath="$PROJECT_DIR$/.idea/.name" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/domain/Address.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/domain/Address.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/models/AddressModel.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/models/AddressModel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/services/Address/AddressService.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/services/Address/AddressService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/services/Address/Impl/AddressServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/services/Address/Impl/AddressServiceImpl.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/App.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/App.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/infoshare/AppTest.java" afterPath="$PROJECT_DIR$/src/test/java/infoshare/AppTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/conf/util/BigDecimalConverter.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/conf/util/BigDecimalConverter.java" />
@@ -67,6 +189,8 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/systemValues/views/CategoryView.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/systemValues/views/CategoryView.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/domain/Contact.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/domain/Contact.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/models/ContactModel.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/models/ContactModel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/services/Contact/ContactService.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/services/Contact/ContactService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/services/Contact/Impl/ContactServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/services/Contact/Impl/ContactServiceImpl.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/domain/Content.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/domain/Content.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/filterSearch/ContentFilter.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/filterSearch/ContentFilter.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/content/ContentMenu.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/content/ContentMenu.java" />
@@ -297,8 +421,8 @@
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/infoshare$App.coverage" NAME="App Coverage Results" MODIFIED="1437161617707" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/infoshare$All_in_infoshare.coverage" NAME="All in infoshare Coverage Results" MODIFIED="1435573198377" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/infoshare$App.coverage" NAME="App Coverage Results" MODIFIED="1437161617707" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
@@ -406,7 +530,9 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="22" column="27" selection-start-line="22" selection-start-column="15" selection-end-line="22" selection-end-column="27" />
-              <folding />
+              <folding>
+                <element signature="imports" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -424,7 +550,7 @@
       <file leaf-file-name="EditTable.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/infoshare/client/content/content/tables/EditTable.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.33333334">
+            <state vertical-scroll-proportion="0.73655915">
               <caret line="44" column="6" selection-start-line="44" selection-start-column="6" selection-end-line="44" selection-end-column="6" />
               <folding />
             </state>
@@ -436,7 +562,9 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="42" column="0" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
-              <folding />
+              <folding>
+                <element signature="imports" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -459,6 +587,7 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="UPDATE_TYPE" value="MERGE" />
     <option name="PUSH_AUTO_UPDATE" value="true" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -554,9 +683,10 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="22" />
-    <option name="width" value="1374" />
-    <option name="height" value="776" />
+    <option name="x" value="-1" />
+    <option name="y" value="-1" />
+    <option name="width" value="1368" />
+    <option name="height" value="749" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -1164,9 +1294,9 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1720,6 +1850,7 @@
       <workItem from="1438072362471" duration="9213000" />
       <workItem from="1438108702657" duration="5492000" />
       <workItem from="1438117790341" duration="3121000" />
+      <workItem from="1438184523706" duration="447000" />
     </task>
     <task id="LOCAL-00001" summary="header sample, with no action Listeners">
       <created>1435155152131</created>
@@ -1857,7 +1988,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="672396000" />
+    <option name="totallyTimeSpent" value="672843000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1869,35 +2000,35 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="22" width="1374" height="776" extended-state="0" />
+    <frame x="-1" y="-1" width="1368" height="749" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32890365" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32160804" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.29660022" sideWeight="0.51537216" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32930514" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32867134" sideWeight="0.49697885" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.38486314" sideWeight="0.48462784" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3279743" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33835846" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3372093" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2579425" sideWeight="0.48098433" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25755286" sideWeight="0.48098433" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32930514" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32930514" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2794562" sideWeight="0.51901567" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3985932" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="JRebel Executor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32890365" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3985932" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32160804" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3986711" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.38486314" sideWeight="0.48462784" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32930514" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="JRebel" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2326284" sideWeight="0.5181237" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32855567" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1959,7 +2090,8 @@
     <MESSAGE value="user popup window added" />
     <MESSAGE value="rest connection code added" />
     <MESSAGE value="rest test case add" />
-    <option name="LAST_COMMIT_MESSAGE" value="rest test case add" />
+    <MESSAGE value="my stash" />
+    <option name="LAST_COMMIT_MESSAGE" value="my stash" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2252,9 +2384,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.19824561">
           <caret line="24" column="84" selection-start-line="24" selection-start-column="84" selection-end-line="24" selection-end-column="84" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2278,9 +2408,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.47368422">
           <caret line="31" column="5" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2413,7 +2541,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="22" column="27" selection-start-line="22" selection-start-column="15" selection-end-line="22" selection-end-column="27" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -2429,13 +2559,15 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="42" column="0" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/infoshare/client/content/content/tables/EditTable.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334">
+        <state vertical-scroll-proportion="0.73655915">
           <caret line="44" column="6" selection-start-line="44" selection-start-column="6" selection-end-line="44" selection-end-column="6" />
           <folding />
         </state>
