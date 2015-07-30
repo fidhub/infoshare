@@ -5,36 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e90d9adc-412d-4446-ab3a-2e74a34bb89b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/forms/ContactForm.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/tables/ContactTable.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/views/ContactView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/content/tables/EditTable.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/content/tables/EditTable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/content/tables/PublishTable.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/content/tables/PublishTable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/content/tables/RawTable.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/content/tables/RawTable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/setup/tables/RoleTable.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/setup/tables/RoleTable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/setup/views/RoleView.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/setup/views/RoleView.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/setup/SetupMenu.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/setup/SetupMenu.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/domain/User$Builder.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/domain/User$Builder.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/domain/User.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/domain/User.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/setup/forms/UserForm.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/setup/forms/UserForm.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/setup/models/UserModel.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/setup/models/UserModel.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/setup/tables/UserTable.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/setup/tables/UserTable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/infoshare/client/content/setup/views/UserView.class" afterPath="$PROJECT_DIR$/target/classes/infoshare/client/content/setup/views/UserView.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/services/Address/Impl/AddressServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/services/Address/Impl/AddressServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/models/ContactModel.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/models/ContactModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/services/Contact/Impl/ContactServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/services/Contact/Impl/ContactServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/content/tables/EditTable.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/content/tables/EditTable.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/content/tables/PublishTable.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/content/tables/PublishTable.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/content/tables/RawTable.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/content/tables/RawTable.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/infoshare/restApi/RestApiUserTest.java" afterPath="$PROJECT_DIR$/src/test/java/infoshare/restApi/RestApiUserTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/tables/RoleTable.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/tables/RoleTable.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/views/RoleView.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/views/RoleView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/SetupMenu.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/SetupMenu.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/domain/User.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/domain/User.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/forms/UserForm.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/forms/UserForm.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/models/UserModel.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/models/UserModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/tables/UserTable.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/tables/UserTable.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/views/UserView.java" afterPath="$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/views/UserView.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="infoshare.iws" />
@@ -129,8 +99,8 @@
       <file leaf-file-name="ContactForm.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/forms/ContactForm.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.17405063">
-              <caret line="27" column="34" selection-start-line="27" selection-start-column="34" selection-end-line="27" selection-end-column="34" />
+            <state vertical-scroll-proportion="-0.08227848">
+              <caret line="33" column="60" selection-start-line="33" selection-start-column="55" selection-end-line="33" selection-end-column="60" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -1444,7 +1414,7 @@
       <workItem from="1438244190237" duration="288000" />
       <workItem from="1438244671468" duration="2902000" />
       <workItem from="1438247601232" duration="19733000" />
-      <workItem from="1438274544806" duration="1453000" />
+      <workItem from="1438274544806" duration="2201000" />
     </task>
     <task id="LOCAL-00001" summary="header sample, with no action Listeners">
       <created>1435155152131</created>
@@ -1584,11 +1554,17 @@
       <option name="project" value="LOCAL" />
       <updated>1438182725851</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="System setup-&gt;users add content is not binding the field , its only updates and it doesn't save new value">
+      <created>1438276129200</created>
+      <option name="number" value="00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1438276129200</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="718669000" />
+    <option name="totallyTimeSpent" value="719417000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1601,7 +1577,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="-1" width="1282" height="1005" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32890365" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1692,7 +1668,8 @@
     <MESSAGE value="rest test case add" />
     <MESSAGE value="still unable to post users and route" />
     <MESSAGE value="still unable to post users and route for address and contact is still missing , course no changes so far" />
-    <option name="LAST_COMMIT_MESSAGE" value="still unable to post users and route for address and contact is still missing , course no changes so far" />
+    <MESSAGE value="System setup-&gt;users add content is not binding the field , its only updates and it doesn't save new value" />
+    <option name="LAST_COMMIT_MESSAGE" value="System setup-&gt;users add content is not binding the field , its only updates and it doesn't save new value" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1843,6 +1820,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="45" column="66" selection-start-line="45" selection-start-column="66" selection-end-line="45" selection-end-column="66" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1878,6 +1856,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="41" column="39" selection-start-line="41" selection-start-column="39" selection-end-line="41" selection-end-column="39" />
+          <folding>
+            <element signature="method#equals#0;class#User#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1892,6 +1873,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.89906543">
           <caret line="39" column="29" selection-start-line="39" selection-start-column="29" selection-end-line="39" selection-end-column="29" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1906,6 +1888,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.23551401">
           <caret line="10" column="21" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1913,6 +1896,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.29345796">
           <caret line="39" column="29" selection-start-line="39" selection-start-column="29" selection-end-line="39" selection-end-column="29" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1920,6 +1904,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.49532712">
           <caret line="37" column="44" selection-start-line="37" selection-start-column="44" selection-end-line="37" selection-end-column="44" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1927,6 +1912,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.80747664">
           <caret line="40" column="5" selection-start-line="40" selection-start-column="5" selection-end-line="50" selection-end-column="33" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1934,6 +1920,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3084112">
           <caret line="86" column="59" selection-start-line="86" selection-start-column="59" selection-end-line="86" selection-end-column="59" />
+          <folding>
+            <element signature="method#openConnection#0;class#RestApiConnectorClass#0" expanded="false" />
+            <element signature="method#readAll#0;class#RestApiConnectorClass#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -2108,8 +2098,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/infoshare/client/content/setup/forms/ContactForm.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.17405063">
-          <caret line="27" column="34" selection-start-line="27" selection-start-column="34" selection-end-line="27" selection-end-column="34" />
+        <state vertical-scroll-proportion="-0.08227848">
+          <caret line="33" column="60" selection-start-line="33" selection-start-column="55" selection-end-line="33" selection-end-column="60" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
