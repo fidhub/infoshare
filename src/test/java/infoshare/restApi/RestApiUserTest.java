@@ -46,7 +46,8 @@ public class RestApiUserTest {
         user.setContact(contacts);
 
         List<String> address = new ArrayList<>();
-        Address addressModel = new Address.Builder("shjdhsjjhdas").id("f737d27fc2d4f303e318f8ac6ef95702").build();
+        Address addressModel = new Address.Builder("shjdhsjjhdas")
+                .id("f737d27fc2d4f303e318f8ac6ef95702").build();
         address.add(addressModel.getId());
         user.setAddress(address);
 
