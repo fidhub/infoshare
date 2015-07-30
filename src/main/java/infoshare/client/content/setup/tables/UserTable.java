@@ -16,9 +16,7 @@ import java.util.List;
 public class UserTable extends Table {
 
     private final MainLayout main;
-
     private UserService userService = new UserServiceImpl();
-
     public UserTable(MainLayout main) {
         this.main = main;
         setSizeFull();
@@ -30,6 +28,7 @@ public class UserTable extends Table {
         addContainerProperty("Username", String.class, null);
         addContainerProperty("First Name", String.class, null);
         addContainerProperty("Last Name", String.class, null);
+        addContainerProperty("Other Name", String.class, null);
         addContainerProperty("Enabled", Boolean.class, null);
         List<User> users= userService.findAll(); // From REST API
         for (User user : users) {
@@ -37,16 +36,14 @@ public class UserTable extends Table {
                     user.getUsername(),
                     user.getFirstName(),
                     user.getLastName(),
+                    user.getOtherName(),
                     user.isEnable()
                     }, user.getId());
         }
-//         Allow selecting items from the table.
+
         setNullSelectionAllowed(false);
-//
         setSelectable(true);
-        // Send changes in selection immediately to server.
         setImmediate(true);
     }
-
 
 }

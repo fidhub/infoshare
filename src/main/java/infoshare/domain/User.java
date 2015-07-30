@@ -16,13 +16,13 @@ import java.util.Set;
 public class User implements Serializable, Comparable<User> {
 
     private String id;
+    private String otherName;
     private String firstName;
     private String lastName;
-    private String otherName;
-    private String password;
-    private Set<String> roles = new HashSet<>();
     private String username;
     private boolean enable;
+    private String password;
+    private Set<String> roles = new HashSet<>();
     private List<String> contact = new ArrayList<>();
     private List<String> address = new ArrayList<>();
 
@@ -38,26 +38,62 @@ public class User implements Serializable, Comparable<User> {
         this.password = builder.password;
         this.roles = builder.roles;
         this.username = builder.username;
+        this.contact = builder.contact;
+        this.address = builder.address;
 //        this.demography = builder.demography;
         this.enable = builder.enable;
 
     }
 
-    @Override
-    public int compareTo(User o) {
-        return firstName.compareToIgnoreCase(o.firstName);
+    public String getId() {
+        return id;
+    }
+
+    public String getOtherName() {
+        return otherName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public boolean isEnable() {
+        return enable;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public Set<String> getRoles() {
+        return roles;
+    }
+
+    public List<String> getContact() {
+        return contact;
+    }
+
+    public List<String> getAddress() {
+        return address;
     }
 
     public static class Builder {
         private String id;
-        private String firstName;
-        private final String lastName;
         private String otherName;
-
+        private String firstName;
+        private String lastName;
+        private String username;
         private boolean enable;
         private String password;
         private Set<String> roles = new HashSet<>();
-        private String username;
         private List<String> contact = new ArrayList<>();
         private List<String> address = new ArrayList<>();
 
@@ -67,12 +103,12 @@ public class User implements Serializable, Comparable<User> {
 
         public Builder user(User person) {
             this.id = person.id;
-            this.firstName = person.getFirstName();
-            this.otherName = person.getOtherName();
-            this.password = person.getPassword();
-            this.roles = person.getRoles();
-            this.username = person.getUsername();
-            this.enable = person.isEnable();
+            this.firstName = person.firstName;
+            this.otherName = person.otherName;
+            this.password = person.password;
+            this.roles = person.roles;
+            this.username = person.username;
+            this.enable = person.enable;
             this.contact = person.contact;
             this.address = person.address;
             return this;
@@ -131,80 +167,19 @@ public class User implements Serializable, Comparable<User> {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return !(id != null ? !id.equals(user.id) : user.id != null);
+
+    }
+    @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
+        return id != null ? id.hashCode() : 0;
     }
-
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof User)) {
-            return false;
-        }
-        User other = (User) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public String getOtherName() {
-        return otherName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public Set<String> getRoles() {
-        return ImmutableSet.copyOf(roles);
-    }
-
-    public List<String> getContact(){
-        return ImmutableList.copyOf(contact);
-    }
-    public List<String> getAddress(){
-        return ImmutableList.copyOf(address);
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    //    public PersonDemography getDemography() {
-//        return demography;
-//    }
-    public boolean isEnable() {
-        return enable;
-    }
-
-
-    private boolean isNullObject(Object object) {
-        if (object == null) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id='" + id + '\'' +
-                '}';
+    public int compareTo(User user) {
+        return id.compareToIgnoreCase(user.id);
     }
 }

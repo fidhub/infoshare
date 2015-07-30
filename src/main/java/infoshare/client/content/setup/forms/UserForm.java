@@ -41,26 +41,23 @@ public class UserForm extends FormLayout {
         final TextField firstname = getTextField("First Name", "firstName");
         final TextField lastname = getTextField("Last Name", "lastName");
         final TextField username = getTextField("Username", "username");
-        final CheckBox enable = getCheckBoxField("Activate Account", "enabled");
+        final TextField otherName = getTextField("Other name", "otherName");
+        final CheckBox enable = getCheckBoxField("Activate Account", "enable");
         final ListSelect roles = getRoles("Select Roles", "role");
 
-
+        VerticalLayout layout = new VerticalLayout();
+        layout.setSpacing(true);
+        layout.addComponent(username);
+        layout.addComponent(otherName);
 
         final GridLayout grid = new GridLayout(3, 10);
         grid.setSizeFull();
 
         grid.addComponent(firstname, 0, 0);
         grid.addComponent(lastname, 1, 0);
-
-
-
-        grid.addComponent(username, 0, 1);
+        grid.addComponent(layout, 0, 1);
         grid.addComponent(enable, 0, 2);
-
         grid.addComponent(roles, 1, 1, 1, 2);
-
-
-
         grid.addComponent(buttons, 0, 3, 2, 3);
 
         addComponent(grid);
@@ -87,14 +84,12 @@ public class UserForm extends FormLayout {
 
     private ListSelect getRoles(String label, String field) {
         rolesList.setCaption(label);
-          for (Role role : roleService.findAll()) {
-              if (role.getId() != null) {
-                  rolesList.setItemCaption(role.getId(), role.getRoleName() + " " + role.getDescription());
-                  rolesList.setNullSelectionAllowed(false);
-                  rolesList.setMultiSelect(true);
-                  rolesList.addItem(role.getId());
-              }
-          }
+        roleService.findAll().stream().filter(role -> role.getId() != null).forEach(role -> {
+            rolesList.setItemCaption(role.getId(), role.getRoleName() + " " + role.getDescription());
+            rolesList.setNullSelectionAllowed(false);
+            rolesList.setMultiSelect(true);
+            rolesList.addItem(role.getId());
+        });
 
         rolesList.setWidth("250px");
         binder.bind(rolesList, field);

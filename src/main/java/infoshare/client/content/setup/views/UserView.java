@@ -11,6 +11,8 @@ import infoshare.client.content.setup.SetupMenu;
 import infoshare.client.content.setup.forms.UserForm;
 import infoshare.client.content.setup.models.UserModel;
 import infoshare.client.content.setup.tables.UserTable;
+import infoshare.domain.Address;
+import infoshare.domain.Contact;
 import infoshare.domain.Role;
 import infoshare.domain.User;
 import infoshare.services.roles.Impl.RoleServiceImpl;
@@ -18,8 +20,11 @@ import infoshare.services.roles.RoleService;
 import infoshare.services.users.Impl.UserServiceImpl;
 import infoshare.services.users.UserService;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Created by hashcode on 2015/06/23.
@@ -106,24 +111,26 @@ public class UserView extends VerticalLayout implements
         getHome();
     }
     private User getNewEntity(FieldGroup binder) {
-
         final UserModel bean = ((BeanItem<UserModel>) binder.getItemDataSource()).getBean();
-        Set<String> userRoles = new HashSet<>();
+       /* List<String> contacts = new ArrayList<>();
+        Contact model = new Contact.Builder("54554544545").id("f737d27fc2d4f303e318f8ac6ef95702").build();
+        Contact model2 = new Contact.Builder("54554544545").id("f737d27fc2d4f303e318f8ac6ef95701").build();
+        contacts.add(model.getId());
+        contacts.add(model2.getId());
 
-        if (bean.getRole() != null) {
-            for (String roleId : bean.getRole()) {
-                Role role = roleService.find(roleId);
-                if (role != null) {
-                    userRoles.add(role.getId());
-                }
-            }
-        }
+        List<String> address = new ArrayList<>();
+        Address addressModel = new Address.Builder("shjdhsjjhdas").id("f737d27fc2d4f303e318f8ac6ef95702").build();
+        address.add(addressModel.getId());
+        */
         final User user = new User.Builder(bean.getLastName())
                 .firstname(bean.getFirstName())
-                .role(userRoles)
-                .enable(bean.isEnabled())
+                .role(bean.getRole())
+                .enable(bean.isEnable())
                 .password(bean.getPassword())
                 .username(bean.getUsername())
+                .othername(bean.getOtherName())
+                .address(bean.getAddress())     //Todo : no route for entity yet
+                .contact(bean.getContact())     //Todo : no route for entity yet
                 .build();
         return user;
     }
@@ -131,6 +138,7 @@ public class UserView extends VerticalLayout implements
 
         final UserModel bean = ((BeanItem<UserModel>) binder.getItemDataSource()).getBean();
         Set<String> userRoles = new HashSet<>();
+
         if (bean.getRole()!= null) {
             for (String roleId : bean.getRole()) {
                 Role role = roleService.find(roleId);
@@ -139,13 +147,15 @@ public class UserView extends VerticalLayout implements
                 }
             }
         }
-
         final User user = new User.Builder(bean.getLastName())
                 .firstname(bean.getFirstName())
                 .role(userRoles)
-                .enable(bean.isEnabled())
-                .username(bean.getUsername())
+                .enable(bean.isEnable())
                 .password(bean.getPassword())
+                .username(bean.getUsername())
+                .othername(bean.getOtherName())
+                .address(bean.getAddress())//Todo : no route for entity yet
+                .contact(bean.getContact())//Todo : no route for entity yet
                 .id(table.getValue().toString())
                 .build();
         return user;
@@ -185,16 +195,17 @@ public class UserView extends VerticalLayout implements
     public UserModel getModel(User user) {
         Set<String> userRolesId = new HashSet<>();
         if (user.getRoles() != null) {
-            for (String role : user.getRoles()) {
-                userRolesId.add(role);
-            }
+            userRolesId.addAll(user.getRoles().stream().collect(Collectors.toList()));
         }
         UserModel model = new UserModel();
         model.setFirstName(user.getFirstName());
         model.setLastName(user.getLastName());
+        model.setOtherName(user.getOtherName());
         model.setUsername(user.getUsername());
-        model.setEnabled(user.isEnable());
+        model.setEnable(user.isEnable());
         model.setRole(userRolesId);
+        model.setAddress(user.getAddress()); //Todo : no route for entity yet
+        model.setContact(user.getContact()); //Todo : no route for entity yet
         model.setPassword(user.getPassword());
         return model;
     }

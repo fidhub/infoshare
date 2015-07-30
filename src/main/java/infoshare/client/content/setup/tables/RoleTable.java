@@ -36,11 +36,8 @@ public class RoleTable extends Table {
                     role.getDescription()
             }, role.getId());
         }
-        // Allow selecting items from the table.
         setNullSelectionAllowed(false);
-//
         setSelectable(true);
-        // Send changes in selection immediately to server.
         setImmediate(true);
     }
 }

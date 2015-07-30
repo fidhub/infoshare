@@ -3,6 +3,7 @@ package infoshare.client.content.setup;
 import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.VerticalLayout;
 import infoshare.client.content.MainLayout;
+import infoshare.client.content.setup.views.ContactView;
 import infoshare.client.content.setup.views.RoleView;
 import infoshare.client.content.setup.views.UserView;
 
@@ -25,18 +26,32 @@ public class SetupMenu  extends VerticalLayout {
         final VerticalLayout roleView = new VerticalLayout();
         roleView.setMargin(true);
         roleView.addComponent(new RoleView(main));
-        
+
+        final VerticalLayout address = new VerticalLayout();
+        address.setMargin(true);
+        address.addComponent(new RoleView(main));
+
+        final VerticalLayout contact = new VerticalLayout();
+        contact.setMargin(true);
+        contact.addComponent(new ContactView(main));
+
         tab = new TabSheet();
         tab.setHeight("100%");
         tab.setWidth("100%");
 
         tab.addTab(userView, "Add System USERS", null);
         tab.addTab(roleView, "Add System ROLES", null);
+        tab.addTab(address, "Add Address ", null);
+        tab.addTab(contact, "Add Contact ", null);
 
         if (selectedTab.equals("LANDING")) {
             tab.setSelectedTab(userView);
         } else if (selectedTab.equals("ROLES")) {
             tab.setSelectedTab(roleView);
+        } else if (selectedTab.equals("Address")) {
+            tab.setSelectedTab(address);
+        } else if (selectedTab.equals("Contact")) {
+            tab.setSelectedTab(contact);
         }
 
         addComponent(tab);

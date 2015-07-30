@@ -38,7 +38,6 @@ public class RawTable extends Table {
         try {
             contentService.findAll().stream().filter(content -> content != null).forEach(this::loadTable);
         }catch (Exception e){
-
         }
          setNullSelectionAllowed(false);
          setSelectable(true);

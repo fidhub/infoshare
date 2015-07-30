@@ -10,17 +10,16 @@ import java.util.Set;
 /**
  * Created by hashcode on 2015/06/23.
  */
-public class UserModel implements Serializable, Comparable<UserModel> {
+public class UserModel implements Serializable{
 
+    @NotNull
+    private String otherName;
     @NotNull
     private String firstName;
     @NotNull
     private String lastName;
-    private String otherName;
     private String password;
-    @NotNull
-    private String email;
-    private boolean enabled;
+    private boolean enable;
     @NotNull
     private Set<String> role = new HashSet<>();
     @NotNull
@@ -60,20 +59,12 @@ public class UserModel implements Serializable, Comparable<UserModel> {
         this.password = password;
     }
 
-    public String getEmail() {
-        return email;
+    public boolean isEnable() {
+        return enable;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
+    public void setEnable(boolean enable) {
+        this.enable = enable;
     }
 
     public Set<String> getRole() {
@@ -107,12 +98,6 @@ public class UserModel implements Serializable, Comparable<UserModel> {
     public void setAddress(List<String> address) {
         this.address = address;
     }
-
-    @Override
-    public int compareTo(UserModel o) {
-        return this.getLastName().compareTo(o.getLastName());
-    }
-
 
 
 }

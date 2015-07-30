@@ -26,7 +26,6 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public void remove(Address entity) {
-
     }
 
     @Override

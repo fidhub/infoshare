@@ -35,10 +35,7 @@ public class PublishTable extends Table{
         addContainerProperty("Date Created",String.class,null);
 
         try {
-            for (Content content : contentService.findAll()) {
-                if (content != null)
-                    loadTable(content);
-            }
+            contentService.findAll().stream().filter(content -> content != null).forEach(this::loadTable);
         }catch (Exception e){
 
         }
