@@ -8,9 +8,13 @@ import java.io.Serializable;
  */
 public class AddressModel implements Serializable {
 
+    @NotNull
     private String postalAddress;
+    @NotNull
     private String physicalAddress;
+    @NotNull
     private String postalCode;
+    @NotNull
     private String addressType;
 
     public String getPostalAddress() {

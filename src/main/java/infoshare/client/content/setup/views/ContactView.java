@@ -39,7 +39,7 @@ public class ContactView extends VerticalLayout implements
     @Override
     public void buttonClick(Button.ClickEvent clickEvent) {
         final Button source = clickEvent.getButton();
-        if (source == source){
+        if (source == form.save){
             saveForm(form.binder);
         }else if(source == form.clear){
             getHome();
@@ -73,15 +73,11 @@ public class ContactView extends VerticalLayout implements
         }
     }
     private void getHome() {
-        main.content.setSecondComponent(new SetupMenu(main, "Contact"));
+        main.content.setSecondComponent(new SetupMenu(main, "CONTACT"));
     }
+
     private Contact getNewEntity(FieldGroup binder) {
         final ContactModel bean = ((BeanItem<ContactModel>) binder.getItemDataSource()).getBean();
-        System.out.println(
-                bean.getEmail()+"\n"+
-                bean.getPhone()+"\n"+
-                bean.getContactType()+"\n"
-        );
         final Contact contact = new Contact.Builder(bean.getPhone())
                 .email(bean.getEmail())
                 .contactType(bean.getContactType())

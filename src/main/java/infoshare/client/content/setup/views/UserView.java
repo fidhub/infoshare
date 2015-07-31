@@ -112,16 +112,6 @@ public class UserView extends VerticalLayout implements
     }
     private User getNewEntity(FieldGroup binder) {
         final UserModel bean = ((BeanItem<UserModel>) binder.getItemDataSource()).getBean();
-       /* List<String> contacts = new ArrayList<>();
-        Contact model = new Contact.Builder("54554544545").id("f737d27fc2d4f303e318f8ac6ef95702").build();
-        Contact model2 = new Contact.Builder("54554544545").id("f737d27fc2d4f303e318f8ac6ef95701").build();
-        contacts.add(model.getId());
-        contacts.add(model2.getId());
-
-        List<String> address = new ArrayList<>();
-        Address addressModel = new Address.Builder("shjdhsjjhdas").id("f737d27fc2d4f303e318f8ac6ef95702").build();
-        address.add(addressModel.getId());
-        */
         final User user = new User.Builder(bean.getLastName())
                 .firstname(bean.getFirstName())
                 .role(bean.getRole())

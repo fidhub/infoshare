@@ -100,7 +100,6 @@ public class RoleView extends VerticalLayout implements
         return role;
     }
     private Role getNewEntity(FieldGroup binder) {
-
         final RoleModel bean = ((BeanItem<RoleModel>) binder.getItemDataSource()).getBean();
         final Role role = new Role.Builder(bean.getRoleName())
                 .description(bean.getDescription())

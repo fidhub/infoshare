@@ -14,7 +14,7 @@ import infoshare.services.Contact.Impl.ContactServiceImpl;
 public class ContactTable extends Table {
 
     private final MainLayout main;
-
+    private ContactService contactService = new ContactServiceImpl();
     public ContactTable(MainLayout main) {
         this.main = main;
         setSizeFull();
@@ -26,7 +26,7 @@ public class ContactTable extends Table {
         addContainerProperty("Phone number",String.class,null);
         addContainerProperty("Email Address",String.class,null);
         addContainerProperty("contact Type",String.class,null);
-        ContactService contactService = new ContactServiceImpl();
+
         for(Contact contact : contactService.findAll()){
             addItem(new Object[]{
                     contact.getPhone(),
