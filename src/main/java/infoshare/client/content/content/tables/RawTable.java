@@ -32,7 +32,7 @@ public class RawTable extends Table {
         addContainerProperty("Title",String.class,null);
         addContainerProperty("Category",String.class,null);
         addContainerProperty("Creator",String.class,null);
-        addContainerProperty("Source",String.class,null);
+    //    addContainerProperty("Source",String.class,null);
         addContainerProperty("Date Created",String.class,null);
 
         try {
@@ -53,7 +53,7 @@ public class RawTable extends Table {
                         content.getTitle(),
                         content.getCategory(),
                         content.getCreator(),
-                        content.getSource(),
+                    //    content.getSource(),
                         formatter.format(content.getDateCreated())
                 }, content.getId());
             }

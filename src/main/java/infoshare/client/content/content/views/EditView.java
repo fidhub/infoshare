@@ -12,6 +12,7 @@ import infoshare.client.content.content.ContentMenu;
 import infoshare.client.content.content.forms.RawAndEditForm;
 import infoshare.client.content.content.models.ContentModel;
 import infoshare.client.content.content.tables.EditTable;
+import infoshare.client.header.view.Header;
 import infoshare.domain.Category;
 import infoshare.domain.Content;
 import infoshare.domain.ContentType;
@@ -73,8 +74,7 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
     private void refreshContacts(String stringFilter ) {
         try {
             table.removeAllItems();
-            for(Content content: contentFilter.findAll(stringFilter))
-                table.loadTable(content);
+            contentFilter.findAll(stringFilter).forEach(table::loadTable);
         }catch (Exception e){
         }
     }
@@ -93,6 +93,8 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
            EditButton();
        }else if (source ==form.popUpUpdateBtn){
            saveEditedForm(form.binder);
+           Header header = new Header(main);
+           header.notify.getUI().setImmediate(true);
        }else if (source ==form.popUpCancelBtn){
            popUp.setModal(false);
            UI.getCurrent().removeWindow(popUp);
@@ -108,19 +110,12 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
         }
     }
     private void loadComboBoxs(){
-        for(Category category:categoryService.findAll()){
-            if(category!= null)
-                form.popUpCategoryCmb.addItem(category.getName());
-        }
-
-        for(ContentType category:contentTypeService.findAll()){
-            if(category!= null)
-                form.popUpContentTypeCmb.addItem(category.getName());
-        }
-        for(Source source:sourceService.findAll()){
-            if(source!= null)
-                form.popUpSourceCmb.addItem(source.getName());
-        }
+        categoryService.findAll().stream().filter(category -> category != null)
+                .forEach(category -> form.popUpCategoryCmb.addItem(category.getName()));
+        contentTypeService.findAll().stream().filter(category -> category != null)
+                .forEach(category -> form.popUpContentTypeCmb.addItem(category.getName()));
+        sourceService.findAll().stream().filter(source -> source != null)
+                .forEach(source -> form.popUpSourceCmb.addItem(source.getName()));
 
     }
     private void getHome() {

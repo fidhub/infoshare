@@ -41,7 +41,6 @@ public class RawView extends VerticalLayout implements
     private final MainLayout main;
     private final RawTable table;
     private final RawAndEditForm form;
-    private  Header header;
     private Window popUp ;
     private Button editBtn = new Button("EDIT");
     private ContentFilter contentFilter = new ContentFilter();
@@ -52,7 +51,6 @@ public class RawView extends VerticalLayout implements
         this.table = new RawTable(main);
         this.form = new RawAndEditForm();
         this.popUp = modelWindow();
-        header = new Header(main);
         setSizeFull();
         setSpacing(true);
         addComponent(getLayout());
@@ -88,7 +86,8 @@ public class RawView extends VerticalLayout implements
             }
         }else if (source ==form.popUpUpdateBtn){
             saveEditedForm(form.binder);
-            header.refreshNotification();
+            Header header = new Header(main);
+            header.notify.getUI().setImmediate(true);
         }else if (source ==form.popUpCancelBtn){
             popUp.setModal(false);
             UI.getCurrent().removeWindow(popUp);

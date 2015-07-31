@@ -19,6 +19,8 @@ import infoshare.services.Content.Impl.ContentServiceImp;
 
 import java.io.File;
 import java.util.Collection;
+import java.util.Date;
+import java.util.Timer;
 
 /**
  * Created by hashcode on 2015/06/23.
@@ -30,12 +32,11 @@ public class Header extends VerticalLayout implements Button.ClickListener {
     private Window notifications;
     private Window userProfile;
     public Button home = new Button();
-    public Button notify;
+    public Button notify = new Button();
     public Button user = new Button();
 
     public Header(MainLayout main) {
         this.main = main;
-        this.notify = new Button();
         setSizeFull();
         setSpacing(true);
         addComponent(getHeaderPanel());
@@ -69,7 +70,7 @@ public class Header extends VerticalLayout implements Button.ClickListener {
         }else if(source == notify){
           notificationButton(clickEvent);
         }else if(source ==user){
-        userButton(clickEvent);
+          userButton(clickEvent);
         }
     }
     private void notificationButton(ClickEvent clickEvent ){
@@ -120,12 +121,9 @@ public class Header extends VerticalLayout implements Button.ClickListener {
         footer.addStyleName(ValoTheme.WINDOW_BOTTOM_TOOLBAR);
         footer.setWidth("100%");
         Button more = new Button("View All Raw content",
-                new Button.ClickListener() {
-                    @Override
-                    public void buttonClick(final ClickEvent event) {
-                        main.content.setSecondComponent(new ContentMenu(main, "LANDING"));
-                        notifications.close();
-                    }
+                event1 -> {
+                    main.content.setSecondComponent(new ContentMenu(main, "LANDING"));
+                    notifications.close();
                 });
         more.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
         more.addStyleName(ValoTheme.BUTTON_TINY);
@@ -145,29 +143,24 @@ public class Header extends VerticalLayout implements Button.ClickListener {
         notificationTable.setImmediate(true);
 
     try {
-        for (Content content : contentService.findAll()) {
-            if (!content.getContentType().equalsIgnoreCase("edited") &&
-                    !content.getContentType().equalsIgnoreCase("published")) {
-                notificationTable.addItem(new Object[]{new Label(
-                        "<b>" + content.getCreator()
-                                + " created a new Tip</b><br><span>25 minutes ago</span><br>"
-                                + content.getContent().substring(0,10), ContentMode.HTML)
-                }, content.getId());
-            }
-        }
+        contentService.findAll().stream().filter(content -> !content.getContentType().equalsIgnoreCase("edited") &&
+                !content.getContentType().equalsIgnoreCase("published")).forEach(content -> {
+            notificationTable.addItem(new Object[]{new Label(
+                    "<b>" + content.getCreator()
+                            + " created a new Tip</b><br><span>25 minutes ago</span><br>"
+                            + content.getContent().substring(0, 10), ContentMode.HTML)
+            }, content.getId());
+        });
     }catch (Exception e) {
 
     }
-        notificationTable.addItemClickListener(new ItemClickEvent.ItemClickListener() {
-            @Override
-            public void itemClick(ItemClickEvent event) {
-                if (event.isDoubleClick())
-                {
-                    RawView rawView = new RawView(main);
-                    notifications.close();
-                    rawView.tableId = notificationTable.getValue().toString();
-                    rawView.EditButton();
-                }
+        notificationTable.addItemClickListener(event1 -> {
+            if (event1.isDoubleClick())
+            {
+                RawView rawView = new RawView(main);
+                notifications.close();
+                rawView.tableId = notificationTable.getValue().toString();
+                rawView.EditButton();
             }
         });
         layout.addComponent(notificationTable);
@@ -204,12 +197,9 @@ public class Header extends VerticalLayout implements Button.ClickListener {
         signOut.setIcon(FontAwesome.SIGN_OUT);
         signOut.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
         signOut.setSizeFull();
-        signOut.addClickListener(new Button.ClickListener() {
-            @Override
-            public void buttonClick(ClickEvent clickEvent) {
-                VaadinSession.getCurrent().close();
-                Page.getCurrent().reload();
-            }
+        signOut.addClickListener(clickEvent -> {
+            VaadinSession.getCurrent().close();
+            Page.getCurrent().reload();
         });
 
         layout.addComponent(profile);
@@ -267,7 +257,7 @@ public class Header extends VerticalLayout implements Button.ClickListener {
         barMenu.addComponent(user);
         barMenu.addComponent(textField);
         layout.addComponent(barMenu);
-        layout.setComponentAlignment(barMenu,Alignment.MIDDLE_RIGHT);
+        layout.setComponentAlignment(barMenu, Alignment.MIDDLE_RIGHT);
 
         return layout;
     }
@@ -277,8 +267,8 @@ public class Header extends VerticalLayout implements Button.ClickListener {
                 new File("src/main/webapp/VAADIN/themes/dashboard/headeredited.jpg"));
         Image logoImage = new Image(null,resource);
         logoImage.addStyleName("logo-header-image");
-        logoImage.setHeight(80.0f,Unit.PIXELS);
-        logoImage.setWidth(40.0f,Unit.PERCENTAGE);
+        logoImage.setHeight(80.0f, Unit.PIXELS);
+        logoImage.setWidth(40.0f, Unit.PERCENTAGE);
         logo.addComponent(logoImage);
         Responsive.makeResponsive(logo);
         return logo;
