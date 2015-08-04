@@ -12,7 +12,6 @@ import infoshare.client.content.content.ContentMenu;
 import infoshare.client.content.content.forms.RawAndEditForm;
 import infoshare.client.content.content.models.ContentModel;
 import infoshare.client.content.content.tables.EditTable;
-import infoshare.client.header.view.Header;
 import infoshare.domain.Category;
 import infoshare.domain.Content;
 import infoshare.domain.ContentType;
@@ -61,6 +60,7 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
        addComponent(table);
        addListeners();
    }
+
     private HorizontalLayout getLayout(){
         final HorizontalLayout layout = new HorizontalLayout();
         layout.setSpacing(false);
@@ -71,6 +71,7 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
         layout.addComponent(editBtn);
         return layout;
     }
+
     private void refreshContacts(String stringFilter ) {
         try {
             table.removeAllItems();
@@ -78,6 +79,7 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
         }catch (Exception e){
         }
     }
+
     private Window modelWindow(){
         final Window popup = new Window();
         popup.setWidth(80.0f,Unit.PERCENTAGE);
@@ -86,6 +88,7 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
         popup.setContent(form);
         return popup;
     }
+
    @Override
     public void buttonClick(Button.ClickEvent clickEvent) {
        final Button source = clickEvent.getButton();
@@ -93,8 +96,8 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
            EditButton();
        }else if (source ==form.popUpUpdateBtn){
            saveEditedForm(form.binder);
-           Header header = new Header(main);
-           header.notify.getUI().setImmediate(true);
+       /*    Header header = new Header(main);
+           header.notify.getUI().setImmediate(true);*/
        }else if (source ==form.popUpCancelBtn){
            popUp.setModal(false);
            UI.getCurrent().removeWindow(popUp);
@@ -102,6 +105,7 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
            getHome();
        }
     }
+
     @Override
     public void valueChange(Property.ValueChangeEvent valueChangeEvent) {
         final Property property = valueChangeEvent.getProperty();
@@ -109,18 +113,32 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
              editBtn.setVisible(true);
         }
     }
-    private void loadComboBoxs(){
-        categoryService.findAll().stream().filter(category -> category != null)
-                .forEach(category -> form.popUpCategoryCmb.addItem(category.getName()));
-        contentTypeService.findAll().stream().filter(category -> category != null)
+
+    private void loadComboBoxs() {
+        for (Category category : categoryService.findAll()) {
+            form.popUpCategoryCmb.addItem(category.getId());
+            form.popUpCategoryCmb.setItemCaption(category.getId(), category.getName());
+        }
+
+        for (ContentType contentType : contentTypeService.findAll()) {
+            form.popUpContentTypeCmb.addItem(contentType.getId());
+            form.popUpContentTypeCmb.setItemCaption(contentType.getId(), contentType.getName());
+        }
+        for (Source source : sourceService.findAll()) {
+            form.popUpSourceCmb.addItem(source.getId());
+            form.popUpSourceCmb.setItemCaption(source.getId(), source.getName());
+        }
+      /*  contentTypeService.findAll().stream().filter(category -> category != null)
                 .forEach(category -> form.popUpContentTypeCmb.addItem(category.getName()));
         sourceService.findAll().stream().filter(source -> source != null)
                 .forEach(source -> form.popUpSourceCmb.addItem(source.getName()));
-
+*/
     }
+
     private void getHome() {
         main.content.setSecondComponent(new ContentMenu(main, "EDITOR"));
     }
+
     private void EditButton(){
         loadComboBoxs();
         try {
@@ -135,10 +153,11 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
                     Notification.Type.HUMANIZED_MESSAGE);
         }
     }
+
     private void saveEditedForm(FieldGroup binder) {
         try {
             binder.commit();
-            contentService.merge(getUpdateEntity(binder));
+            contentService.save(getNewEntity(binder));
             popUp.setModal(false);
             table.setValue(null);
             UI.getCurrent().removeWindow(popUp);
@@ -149,21 +168,23 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
             getHome();
         }
     }
-    private Content getUpdateEntity(FieldGroup binder) {
+
+    private Content getNewEntity(FieldGroup binder) {
 
         final ContentModel bean = ((BeanItem<ContentModel>) binder.getItemDataSource()).getBean();
         bean.setDateCreated(contentService.find(table.getValue().toString()).getDateCreated());
         final Content content = new Content.Builder(bean.getTitle())
-                .category(bean.getCategory())
+                .category(categoryService.find(bean.getCategory()).getDescription())
                 .content(bean.getContent())
                 .contentType(bean.getContentType())
                 .creator(bean.getCreator())
                 .dateCreated(bean.getDateCreated())
-                .source(bean.getSource())
-                .id(table.getValue().toString())
+                .source(table.getValue().toString())
+               // .id(table.getValue().toString())
                 .build();
         return content;
     }
+
     private ContentModel getModel(Content val) {
         final ContentModel model = new ContentModel();
         final Content content = contentService.find(val.getId());
@@ -175,6 +196,7 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
         model.setSource(content.getSource());
         return model;
     }
+
     public void addListeners(){
         form.popUpUpdateBtn.addClickListener((Button.ClickListener)this);
         form.popUpCancelBtn.addClickListener((Button.ClickListener) this);
@@ -187,4 +209,5 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
             }
         });
     }
+
 }

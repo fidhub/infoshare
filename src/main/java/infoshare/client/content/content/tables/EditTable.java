@@ -6,6 +6,8 @@ import infoshare.client.content.MainLayout;
 import infoshare.domain.Content;
 import infoshare.services.Content.ContentService;
 import infoshare.services.Content.Impl.ContentServiceImp;
+import infoshare.services.category.CategoryService;
+import infoshare.services.category.Impl.CategoryServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.text.DateFormat;
@@ -19,6 +21,7 @@ public class EditTable extends Table{
 
     @Autowired
     private ContentService contentService = new ContentServiceImp();
+    private CategoryService categoryService = new CategoryServiceImpl();
     private final MainLayout main;
 
     public EditTable(MainLayout mainApp){
@@ -52,7 +55,6 @@ public class EditTable extends Table{
                     content.getTitle(),
                     content.getCategory(),
                     content.getCreator(),
-              //      content.getSource(),
                     formatter.format(content.getDateCreated())
             }, content.getId());
         }

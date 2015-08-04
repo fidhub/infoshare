@@ -38,15 +38,10 @@ public class RestApiConnectorClass {
             JsonReader reader = new JsonReader(new InputStreamReader(openConnection(fetchUrl).getInputStream()));
             JsonParser jsonParser = new JsonParser();
             JsonArray json = jsonParser.parse(reader).getAsJsonArray();
-
-            Gson gson = new GsonBuilder().registerTypeAdapter(Date.class, new JsonDeserializer<Date>() {
-                @Override
-                public Date deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext)
-                        throws JsonParseException {
-                    return new Date(jsonElement.getAsJsonPrimitive().getAsLong());
-                }
-
-            }).create();
+            Gson gson = new GsonBuilder().registerTypeAdapter(Date.class,
+                    (JsonDeserializer<Date>) (jsonElement, type,
+                     jsonDeserializationContext) -> new Date(jsonElement.getAsJsonPrimitive().getAsLong()))
+                    .create();
 
             for (JsonElement element : json) {
                 list.add(gson.fromJson(element, classType));
@@ -57,20 +52,19 @@ public class RestApiConnectorClass {
         return list;
     }
 
+
+
     public static <T> T read(String fetchUrl, String ID, Class<T> classType){
         try
         {
             JsonParser jsonParser = new JsonParser();
             JsonReader reader = new JsonReader(new InputStreamReader(openConnection(fetchUrl+ID).getInputStream()));
             JsonElement element = jsonParser.parse(reader);
-            Gson gson = new GsonBuilder().registerTypeAdapter(Date.class, new JsonDeserializer<Date>() {
-                @Override
-                public Date deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext)
-                        throws JsonParseException {
-                    return new Date(jsonElement.getAsJsonPrimitive().getAsLong());
-                }
+            Gson gson = new GsonBuilder().registerTypeAdapter(Date.class,
+                    (JsonDeserializer<Date>) (jsonElement, type,
+                    jsonDeserializationContext) -> new Date(jsonElement.getAsJsonPrimitive().getAsLong()))
+                    .create();
 
-            }).create();
             return (gson.fromJson(element,classType));
         }
         catch (Exception e)
@@ -86,17 +80,15 @@ public class RestApiConnectorClass {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<T> entity = new HttpEntity<>(classTypeObject,headers);
-
         JsonParser parser = new JsonParser();
-        JsonElement element = parser.parse(restTemplate.postForObject(url, entity, String.class)).getAsJsonObject();
-        Gson gson = new GsonBuilder().registerTypeAdapter(Date.class, new JsonDeserializer<Date>() {
-            @Override
-            public Date deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext)
-                    throws JsonParseException {
-                return new Date(jsonElement.getAsJsonPrimitive().getAsLong());
-            }
+        String jsonString = restTemplate.postForObject(url, entity, String.class);
+        JsonElement element = parser.parse(jsonString).getAsJsonObject();
 
-        }).create();
+
+        Gson gson = new GsonBuilder().registerTypeAdapter(Date.class,
+                (JsonDeserializer<Date>) (jsonElement, type,
+                jsonDeserializationContext) -> new Date(jsonElement.getAsJsonPrimitive().getAsLong()))
+                .create();
 
         return gson.fromJson(element,classType);
     }

@@ -73,9 +73,7 @@ public class UserView extends VerticalLayout implements
                 form.binder.setItemDataSource(new BeanItem<>(bean));
                 setReadFormProperties();
             }catch (Exception r){
-
             }
-
         }
     }
     private void saveForm(FieldGroup binder) {

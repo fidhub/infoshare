@@ -30,6 +30,7 @@ public class ContactView extends VerticalLayout implements
         this.main = mainApp;
         form = new ContactForm();
         table = new ContactTable(main);
+        form.edit.setVisible(false);
         setSizeFull();
         addComponent(form);
         addComponent(table);
@@ -43,6 +44,8 @@ public class ContactView extends VerticalLayout implements
             saveForm(form.binder);
         }else if(source == form.clear){
             getHome();
+        }else if(source == form.edit){
+            editor();
         }
     }
 
@@ -53,13 +56,12 @@ public class ContactView extends VerticalLayout implements
             final Contact contact = service.find(table.getValue().toString());
             final ContactModel bean = getModel(contact);
             form.binder.setItemDataSource(new BeanItem<>(bean));
+            setReadFormProperties();
         }
     }
+
     private void saveForm(FieldGroup binder) {
         try {
-            System.out.println(
-                 binder.getField("Phone")
-            );
             binder.commit();
             service.save(getNewEntity(binder));
             getHome();
@@ -72,6 +74,7 @@ public class ContactView extends VerticalLayout implements
             getHome();
         }
     }
+
     private void getHome() {
         main.content.setSecondComponent(new SetupMenu(main, "CONTACT"));
     }
@@ -84,12 +87,29 @@ public class ContactView extends VerticalLayout implements
                 .build();
         return contact;
     }
+
+    private void editor(){
+        form.binder.setReadOnly(false);
+        //Buttons Behaviour
+        form.save.setVisible(true);
+        form.edit.setVisible(false);
+    }
+
+    private void setReadFormProperties() {
+        form.binder.setReadOnly(true);
+        //Buttons Behaviour
+        form.save.setVisible(false);
+        form.edit.setVisible(true);
+    }
+
     private void addListeners() {
         //Register Button Listeners
         form.save.addClickListener((Button.ClickListener) this);
+        form.edit.addClickListener((Button.ClickListener) this);
         form.clear.addClickListener((Button.ClickListener) this);
         table.addValueChangeListener((Property.ValueChangeListener) this);
     }
+
     private ContactModel getModel(Contact contact){
         final ContactModel model = new ContactModel();
         model.setEmail(contact.getEmail());

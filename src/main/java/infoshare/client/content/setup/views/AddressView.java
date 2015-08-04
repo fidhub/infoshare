@@ -52,7 +52,6 @@ public class AddressView extends VerticalLayout implements
         }
 
     }
-
     @Override
     public void valueChange(Property.ValueChangeEvent event) {
         final Property property = event.getProperty();

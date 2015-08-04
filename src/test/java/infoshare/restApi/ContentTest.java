@@ -22,28 +22,25 @@ public class ContentTest {
         model.setSource("source name");
         model.setCategory("treatment");
         model.setTitle("hiv treatment guidelines");
-        model.setContent("Two regimens previously classified as Recommended regimens have been moved to the Alternative regimens category, with the rationale stated below:\n" +
-                "Atazanavir/ritonavir (ATV/r) plus TDF/FTC (BI)—Based on the results of a large comparative clinical trial showing a greater rate of discontinuation with ATV/r plus TDF/FTC because of toxicities when compared to (DRV/r or RAL) plus TDF/FTC\n" +
-                "Efavirenz/TDF/FTC (EFV/TDF/FTC) (BI)—Based on concerns about the tolerability of EFV in clinical trials and practice, especially the high rate of central nervous system (CNS)-related toxicities and a possible association with suicidality\n" +
-                "Three regimens (ATV/r plus ABC/3TC, EFV plus ABC/3TC, and rilpivirine/TDF/FTC) that were previously listed as Recommended regimens for baseline HIV RNA <100,000 copies/mL or CD4 T lymphocyte (CD4) count >200 cells/mm3 are now in the Alternative or Other category, with the same caveat about limiting their use in these populations.\n" +
-                "Two regimens that use fewer than two nucleoside reverse transcriptase inhibitors (DRV/r plus RAL and lopinavir/ritonavir plus 3TC) are now listed among the Other regimens, with the caveat that their use would be limited to those patients who cannot take either TDF or ABC.\n" +
-                "Coformulations of atazanavir (ATV) and darunavir (DRV) with the pharmacokinetic (PK) enhancer cobicistat (COBI) have been added to the Alternative regimen options.");
+        model.setContent("Two");
         model.setContentType("raw");
 
         RestApiConnectorClass.create(UrlPath.ContentLinks.POST, model, ContentModel.class);
     }
     @Test
     public void testPUT() throws Exception {
-        Content content = RestApiConnectorClass.read(UrlPath.ContentLinks.GET_ID, "78f24db69be185b2edb10fc7f0fedc97",
+        Content content = RestApiConnectorClass.read(UrlPath.ContentLinks.GET_ID, "d592b8cd7f48b0eee1e1f8e8f5988ab5",
                 Content.class);
         Content content1 = new Content.Builder(content.getTitle()).copy(content)
+                .source("9d57cca65eaf056735157f119f2a467b")
+                .category("3699255c536bcff9348f0de806866847")
                 .contentType("edited").build();
         RestApiConnectorClass.update(UrlPath.ContentLinks.PUT,content1);
     }
 
     @Test
     public  void testGet() throws Exception {
-        Content content = RestApiConnectorClass.read(UrlPath.ContentLinks.GET_ID, "2e881bde7d739f8a2adc0890592edf91",
+        Content content = RestApiConnectorClass.read(UrlPath.ContentLinks.GET_ID, "1054c0771746780c91b6a2217f6236b1",
                 Content.class);
 
         System.out.println(content.getId());

@@ -19,6 +19,8 @@ public class ContactForm extends FormLayout {
     public final FieldGroup binder;
     public Button save ;
     public Button clear;
+    public Button edit;
+
 
     public ContactForm() {
         model = new ContactModel();
@@ -50,7 +52,9 @@ public class ContactForm extends FormLayout {
         save.addStyleName(Reindeer.BUTTON_DEFAULT);
         save.setClickShortcut(ShortcutAction.KeyCode.ENTER);
         clear = new Button("Clear");
+        edit = new Button("Edit");
         layout.addComponent(save);
+        layout.addComponent(edit);
         layout.addComponent(clear);
 
         return layout;
