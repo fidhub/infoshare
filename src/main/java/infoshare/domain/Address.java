@@ -63,8 +63,8 @@ public class Address implements Serializable,Comparable<Address> {
             return this;
         }
 
-        public Builder postalcode(String postalCode){
-            this.postalAddress = postalCode;
+        public Builder postalCode(String postalCode){
+            this.postalCode = postalCode;
             return this;
         }
         public Builder addressType(String addressType){

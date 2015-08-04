@@ -19,6 +19,7 @@ public class AddressForm extends FormLayout {
     public FieldGroup binder;
     public Button save ;
     public Button clear;
+    public Button edit;
 
     public AddressForm() {
         this.model = new AddressModel();
@@ -29,20 +30,22 @@ public class AddressForm extends FormLayout {
         addComponent(getButtons());
     }
 
-    private HorizontalLayout getLayout(){
-        final HorizontalLayout layout = new HorizontalLayout();
-        layout.setSpacing(true);
+    private GridLayout getLayout(){
+
+        final GridLayout gridLayout = new GridLayout(6, 5);
+        gridLayout.setSizeFull();
 
         TextField postalAddress = getTextField("Postal Address","postalAddress");
         TextField postalCode = getTextField("Postal Code","postalCode");
         TextField physicalAddress = getTextField("Physical Address","physicalAddress");
         TextField addressType = getTextField("Address Type","addressType");
 
-        layout.addComponent(postalAddress);
-        layout.addComponent(postalCode);
-        layout.addComponent(physicalAddress);
-        layout.addComponent(addressType);
-        return layout;
+        gridLayout.addComponent(postalAddress, 0, 0);
+        gridLayout.addComponent(postalCode, 1, 0, 2, 0);
+        gridLayout.addComponent(physicalAddress, 0, 2);
+        gridLayout.addComponent(addressType, 1, 2, 2, 2);
+
+        return gridLayout;
     }
 
     private HorizontalLayout getButtons(){
@@ -54,7 +57,10 @@ public class AddressForm extends FormLayout {
         save.addStyleName(Reindeer.BUTTON_DEFAULT);
         save.setClickShortcut(ShortcutAction.KeyCode.ENTER);
         clear = new Button("Clear");
+        edit = new Button("Edit");
+
         layout.addComponent(save);
+        layout.addComponent(edit);
         layout.addComponent(clear);
 
         return layout;

@@ -18,7 +18,7 @@ public class AddressServiceImpl implements AddressService {
         if(addressMap == null){
             addressMap = new HashMap<>();
             Address address = new Address.Builder("24 killarney street")
-                    .postalAddress("p.o box").addressType("fdfd").postalcode("7530").id("1").build();
+                    .postalAddress("p.o box").addressType("fdfd").postalCode("7530").id("1").build();
 
             addressMap.put(address.getId(),address);
         }
