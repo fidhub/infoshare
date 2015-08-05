@@ -52,8 +52,6 @@ public class RestApiConnectorClass {
         return list;
     }
 
-
-
     public static <T> T read(String fetchUrl, String ID, Class<T> classType){
         try
         {
