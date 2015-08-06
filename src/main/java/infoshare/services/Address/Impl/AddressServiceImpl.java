@@ -1,6 +1,10 @@
 package infoshare.services.Address.Impl;
 
+import infoshare.RestApi.RestApiConnectorClass;
+import infoshare.RestApi.UrlPath;
+import infoshare.client.content.setup.models.ContactModel;
 import infoshare.domain.Address;
+import infoshare.domain.Contact;
 import infoshare.services.Address.AddressService;
 
 import java.util.ArrayList;
@@ -26,13 +30,12 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public Address find(String s) {
-        return addressMap.get(s);
+        return RestApiConnectorClass.read(UrlPath.AddressLinks.GET_ID,s, Address.class);
     }
 
     @Override
     public Address save(Address entity) {
-        addressMap.put(entity.getId(),entity);
-        return addressMap.get(entity.getId());
+        return RestApiConnectorClass.create(UrlPath.AddressLinks.POST,entity,Address.class);
     }
 
     @Override

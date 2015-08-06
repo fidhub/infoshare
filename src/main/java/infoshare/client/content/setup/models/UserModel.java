@@ -24,7 +24,9 @@ public class UserModel implements Serializable{
     private Set<String> role = new HashSet<>();
     @NotNull
     private String username;
+    //@NotNull
     private List<String> contact = new ArrayList<>();
+    //@NotNull
     private List<String> address = new ArrayList<>();
 
     public String getFirstName() {

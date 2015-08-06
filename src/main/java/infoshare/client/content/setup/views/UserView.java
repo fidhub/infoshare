@@ -3,16 +3,14 @@ package infoshare.client.content.setup.views;
 import com.vaadin.data.Property;
 import com.vaadin.data.fieldgroup.FieldGroup;
 import com.vaadin.data.util.BeanItem;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.Notification;
-import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.*;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.setup.SetupMenu;
+import infoshare.client.content.setup.forms.AddressForm;
+import infoshare.client.content.setup.forms.ContactForm;
 import infoshare.client.content.setup.forms.UserForm;
 import infoshare.client.content.setup.models.UserModel;
 import infoshare.client.content.setup.tables.UserTable;
-import infoshare.domain.Address;
-import infoshare.domain.Contact;
 import infoshare.domain.Role;
 import infoshare.domain.User;
 import infoshare.services.roles.Impl.RoleServiceImpl;
@@ -20,9 +18,8 @@ import infoshare.services.roles.RoleService;
 import infoshare.services.users.Impl.UserServiceImpl;
 import infoshare.services.users.UserService;
 
-import java.util.ArrayList;
+import java.nio.file.Watchable;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -33,7 +30,9 @@ public class UserView extends VerticalLayout implements
         Button.ClickListener, Property.ValueChangeListener {
 
     private final MainLayout main;
-    private final UserForm form;
+    private final UserForm userForm;
+    private final AddressForm addressForm;
+    private final ContactForm contactForm;
     private final UserTable table;
 
     private UserService userService = new UserServiceImpl();
@@ -41,27 +40,43 @@ public class UserView extends VerticalLayout implements
 
     public UserView(MainLayout app) {
         main = app;
-        form = new UserForm();
+        userForm = new UserForm();
+        addressForm = new AddressForm();
+        contactForm = new ContactForm();
         table = new UserTable(main);
         setSizeFull();
-        addComponent(form);
+        addComponent(userForm);
         addComponent(table);
         addListeners();
     }
     @Override
     public void buttonClick(Button.ClickEvent event) {
         final Button source = event.getButton();
-        if (source == form.save) {
-            saveForm(form.binder);
-        } else if (source == form.edit) {
+        if (source == userForm.save) {
+            saveForm(userForm.binder);
+        } else if (source == userForm.edit) {
             setEditFormProperties();
-        } else if (source == form.cancel) {
+        } else if (source == userForm.cancel) {
             getHome();
-        } else if (source == form.update) {
-            saveEditedForm(form.binder);
-        } else if (source == form.delete) {
-            deleteForm(form.binder);
+        } else if (source == userForm.update) {
+            saveEditedForm(userForm.binder);
+        } else if (source == userForm.delete) {
+            deleteForm(userForm.binder);
+        }else if(source == userForm.addNewAddress){
+            getModelWind(addressForm);
+        }else if(source == userForm.addNewContact){
+            getModelWind(contactForm);
         }
+    }
+    private  Window getModelWind(FormLayout c){
+        final Window window = new Window();
+        window.setWidth(22.0f, Unit.PERCENTAGE);
+        window.setHeight("350px");
+        window.setDraggable(false);
+        window.setModal(true);
+        window.setContent(c);
+        getUI().addWindow(window);
+        return window;
     }
     @Override
     public void valueChange(Property.ValueChangeEvent event) {
@@ -70,12 +85,10 @@ public class UserView extends VerticalLayout implements
             try {
                 final User user = userService.find(table.getValue().toString());
                 final UserModel bean = getModel(user);
-                form.binder.setItemDataSource(new BeanItem<>(bean));
+                userForm.binder.setItemDataSource(new BeanItem<>(bean));
                 setReadFormProperties();
             }catch (Exception r){
-
             }
-
         }
     }
     private void saveForm(FieldGroup binder) {
@@ -154,33 +167,38 @@ public class UserView extends VerticalLayout implements
         main.content.setSecondComponent(new SetupMenu(main, "LANDING"));
     }
     private void setEditFormProperties() {
-        form.binder.setReadOnly(false);
-        form.save.setVisible(false);
-        form.edit.setVisible(false);
-        form.cancel.setVisible(true);
-        form.delete.setVisible(false);
-        form.update.setVisible(true);
+        userForm.binder.setReadOnly(false);
+        userForm.save.setVisible(false);
+        userForm.edit.setVisible(false);
+        userForm.cancel.setVisible(true);
+        userForm.delete.setVisible(false);
+        userForm.update.setVisible(true);
     }
     private void setReadFormProperties() {
-        form.binder.setReadOnly(true);
+        userForm.binder.setReadOnly(true);
         //Buttons Behaviour
-        form.save.setVisible(false);
-        form.edit.setVisible(true);
-        form.cancel.setVisible(true);
-        form.delete.setVisible(true);
-        form.update.setVisible(false);
+        userForm.save.setVisible(false);
+        userForm.edit.setVisible(true);
+        userForm.cancel.setVisible(true);
+        userForm.delete.setVisible(true);
+        userForm.update.setVisible(false);
     }
     private void addListeners() {
         //Register Button Listeners
-        form.save.addClickListener((Button.ClickListener) this);
-        form.edit.addClickListener((Button.ClickListener) this);
-        form.cancel.addClickListener((Button.ClickListener) this);
-
-        form.update.addClickListener((Button.ClickListener) this);
-        form.delete.addClickListener((Button.ClickListener) this);
-        //Register Table Listerners
+        userForm.save.addClickListener((Button.ClickListener) this);
+        userForm.edit.addClickListener((Button.ClickListener) this);
+        userForm.cancel.addClickListener((Button.ClickListener) this);
+        userForm.update.addClickListener((Button.ClickListener) this);
+        userForm.delete.addClickListener((Button.ClickListener) this);
         table.addValueChangeListener((Property.ValueChangeListener) this);
-        form.rolesList.addValueChangeListener((Property.ValueChangeListener) this);
+        userForm.rolesList.addValueChangeListener((Property.ValueChangeListener) this);
+        userForm.addNewAddress.addClickListener((Button.ClickListener) this);
+        userForm.addNewContact.addClickListener((Button.ClickListener) this);
+
+        addressForm.save.addClickListener((Button.ClickListener) this);
+        addressForm.clear.addClickListener((Button.ClickListener) this);
+        contactForm.save.addClickListener((Button.ClickListener) this);
+        contactForm.clear.addClickListener((Button.ClickListener) this);
     }
     public UserModel getModel(User user) {
         Set<String> userRolesId = new HashSet<>();
@@ -199,5 +217,6 @@ public class UserView extends VerticalLayout implements
         model.setPassword(user.getPassword());
         return model;
     }
+
 
 }

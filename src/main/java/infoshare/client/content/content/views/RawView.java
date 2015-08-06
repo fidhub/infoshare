@@ -12,7 +12,6 @@ import infoshare.client.content.content.ContentMenu;
 import infoshare.client.content.content.forms.RawAndEditForm;
 import infoshare.client.content.content.models.ContentModel;
 import infoshare.client.content.content.tables.RawTable;
-import infoshare.client.header.view.Header;
 import infoshare.domain.Category;
 import infoshare.domain.Content;
 import infoshare.domain.ContentType;
@@ -79,15 +78,14 @@ public class RawView extends VerticalLayout implements
         final Button source = clickEvent.getButton();
         if(source==editBtn){
             try {
-                    tableId = table.getValue().toString();
+                tableId = table.getValue().toString();
                 EditButton();
             }catch (Exception e){
-
             }
         }else if (source ==form.popUpUpdateBtn){
             saveEditedForm(form.binder);
-            Header header = new Header(main);
-            header.notify.getUI().setImmediate(true);
+           /* Header header = new Header(main);
+            header.notify.getUI().setImmediate(true);*/
         }else if (source ==form.popUpCancelBtn){
             popUp.setModal(false);
             UI.getCurrent().removeWindow(popUp);
@@ -111,12 +109,26 @@ public class RawView extends VerticalLayout implements
         popup.setContent(form);
         return popup;
     }
-    private void loadComboBoxs(){
-        categoryService.findAll().stream().filter(category -> category != null).forEach(category -> form.popUpCategoryCmb.addItem(category.getName()));
-        contentTypeService.findAll().stream().filter(category -> category != null).forEach(category -> form.popUpContentTypeCmb.addItem(category.getName()));
-        sourceService.findAll().stream().filter(source -> source != null).forEach(source -> form.popUpSourceCmb.addItem(source.getName()));
+    private void loadComboBoxs() {
 
+        for (Category category : categoryService.findAll()) {
+            form.popUpCategoryCmb.addItem(category.getId());
+            form.popUpCategoryCmb.setItemCaption(category.getId(), category.getName());
+        }
 
+        for (ContentType contentType : contentTypeService.findAll()) {
+            form.popUpContentTypeCmb.addItem(contentType.getId());
+            form.popUpContentTypeCmb.setItemCaption(contentType.getId(), contentType.getName());
+        }
+        for (Source source : sourceService.findAll()) {
+            form.popUpSourceCmb.addItem(source.getId());
+            form.popUpSourceCmb.setItemCaption(source.getId(), source.getName());
+        }
+      /*  contentTypeService.findAll().stream().filter(category -> category != null)
+                .forEach(category -> form.popUpContentTypeCmb.addItem(category.getName()));
+        sourceService.findAll().stream().filter(source -> source != null)
+                .forEach(source -> form.popUpSourceCmb.addItem(source.getName()));
+*/
     }
     private void getHome() {
         main.content.setSecondComponent(new ContentMenu(main, "LANDING"));
@@ -137,7 +149,7 @@ public class RawView extends VerticalLayout implements
     private void saveEditedForm(FieldGroup binder) {
         try {
             binder.commit();
-            contentService.merge(updateEntity(binder));
+            contentService.save(getNewEntity(binder));
             popUp.setModal(false);
             table.setValue(null);
             UI.getCurrent().removeWindow(popUp);
@@ -148,22 +160,25 @@ public class RawView extends VerticalLayout implements
             getHome();
         }
     }
-    private Content updateEntity(FieldGroup binder){
+    private Content getNewEntity(FieldGroup binder) {
+
         final ContentModel bean = ((BeanItem<ContentModel>) binder.getItemDataSource()).getBean();
-        bean.setDateCreated(contentService.find(tableId).getDateCreated());
+        bean.setDateCreated(contentService.find(table.getValue().toString()).getDateCreated());
         final Content content = new Content.Builder(bean.getTitle())
-                .creator(bean.getCreator())
-                .source(bean.getSource())
-                .category(bean.getCategory())
+                .category(categoryService.find(bean.getCategory()).getId())
                 .content(bean.getContent())
                 .contentType(bean.getContentType())
+                .creator(bean.getCreator())
                 .dateCreated(bean.getDateCreated())
-                .id(tableId)
+                .source(table.getValue().toString())
+                        // .id(table.getValue().toString())
                 .build();
         tableId = null;
         return content;
     }
+
     private ContentModel getModel(Content val) {
+
         final ContentModel model = new ContentModel();
         final Content content = contentService.find(val.getId());
         model.setTitle(content.getTitle());
@@ -175,6 +190,7 @@ public class RawView extends VerticalLayout implements
         return model;
     }
     public void addListeners(){
+
         form.popUpUpdateBtn.addClickListener((Button.ClickListener)this);
         form.popUpCancelBtn.addClickListener((Button.ClickListener) this);
         table.addValueChangeListener((Property.ValueChangeListener) this);
@@ -185,6 +201,7 @@ public class RawView extends VerticalLayout implements
                 refreshContacts(textChangeEvent.getText());
             }
         });
+
     }
 
 }

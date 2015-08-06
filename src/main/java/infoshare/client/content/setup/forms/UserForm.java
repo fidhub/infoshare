@@ -3,9 +3,16 @@ package infoshare.client.content.setup.forms;
 import com.vaadin.data.fieldgroup.FieldGroup;
 import com.vaadin.data.util.BeanItem;
 import com.vaadin.data.validator.BeanValidator;
+import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.*;
+import com.vaadin.ui.themes.ValoTheme;
 import infoshare.client.content.setup.models.UserModel;
-import infoshare.domain.Role;
+import infoshare.domain.Address;
+import infoshare.domain.Contact;
+import infoshare.services.Address.AddressService;
+import infoshare.services.Address.Impl.AddressServiceImpl;
+import infoshare.services.Contact.ContactService;
+import infoshare.services.Contact.Impl.ContactServiceImpl;
 import infoshare.services.roles.Impl.RoleServiceImpl;
 import infoshare.services.roles.RoleService;
 
@@ -21,6 +28,10 @@ public class UserForm extends FormLayout {
 
     private RoleService roleService = new RoleServiceImpl();
     public ListSelect rolesList = new ListSelect();
+
+    public  Button addNewAddress = new Button("add New Address");
+    public  Button addNewContact = new Button("add New Contact");
+
     // Define Buttons
     public final Button save = new Button("Save");
     public final Button edit = new Button("Edit");
@@ -32,11 +43,13 @@ public class UserForm extends FormLayout {
         model = new UserModel();
         item = new BeanItem<>(model);
         binder = new FieldGroup(item);
-        final HorizontalLayout buttons = getButtons();
-        // Determines which properties are shown
+        setSizeFull();
         update.setVisible(false);
         delete.setVisible(false);
+        addComponent(getLayout());
+    }
 
+    private  GridLayout getLayout(){
 
         final TextField firstname = getTextField("First Name", "firstName");
         final TextField lastname = getTextField("Last Name", "lastName");
@@ -45,22 +58,38 @@ public class UserForm extends FormLayout {
         final CheckBox enable = getCheckBoxField("Activate Account", "enable");
         final ListSelect roles = getRoles("Select Roles", "role");
 
-        VerticalLayout layout = new VerticalLayout();
-        layout.setSpacing(true);
-        layout.addComponent(username);
-        layout.addComponent(otherName);
+        VerticalLayout rightLayout = new VerticalLayout();
+        rightLayout.setSpacing(true);
+        rightLayout.addComponent(firstname);
+        rightLayout.addComponent(otherName);
+        rightLayout.addComponent(lastname);
+        rightLayout.addComponent(new Label("<br/>", ContentMode.HTML));
+        rightLayout.addComponent(enable);
 
-        final GridLayout grid = new GridLayout(3, 10);
+        VerticalLayout leftLayout = new VerticalLayout();
+        leftLayout.setSpacing(true);
+        leftLayout.addComponent(username);
+        leftLayout.addComponent(roles);
+
+        addNewAddress.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
+        addNewAddress.addStyleName(ValoTheme.BUTTON_TINY);
+        addNewContact.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
+        addNewContact.addStyleName(ValoTheme.BUTTON_TINY);
+
+        HorizontalLayout buttons = new HorizontalLayout();
+        buttons.setSpacing(true);
+        buttons.addComponent(addNewAddress);
+        buttons.addComponent(addNewContact);
+
+        final GridLayout grid = new GridLayout(6, 10);
         grid.setSizeFull();
+        grid.setSpacing(true);
+        grid.addComponent(rightLayout, 0, 0);
+        grid.addComponent(leftLayout, 2, 0);
+        grid.addComponent(buttons, 0, 1,1,1);
+        grid.addComponent(getButtons(), 0, 3,1,3);
 
-        grid.addComponent(firstname, 0, 0);
-        grid.addComponent(lastname, 1, 0);
-        grid.addComponent(layout, 0, 1);
-        grid.addComponent(enable, 0, 2);
-        grid.addComponent(roles, 1, 1, 1, 2);
-        grid.addComponent(buttons, 0, 3, 2, 3);
-
-        addComponent(grid);
+        return grid;
     }
 
     private TextField getTextField(String label, String field) {
@@ -90,7 +119,6 @@ public class UserForm extends FormLayout {
             rolesList.setMultiSelect(true);
             rolesList.addItem(role.getId());
         });
-
         rolesList.setWidth("250px");
         binder.bind(rolesList, field);
 
@@ -98,6 +126,7 @@ public class UserForm extends FormLayout {
     }
 
     private HorizontalLayout getButtons() {
+
         HorizontalLayout buttons = new HorizontalLayout();
         buttons.addComponent(save);
         buttons.addComponent(edit);
@@ -106,4 +135,5 @@ public class UserForm extends FormLayout {
         buttons.addComponent(delete);
         return buttons;
     }
+
 }

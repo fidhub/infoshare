@@ -55,6 +55,7 @@ public class PublishView extends VerticalLayout implements Button.ClickListener,
 
         return layout;
     }
+
     private void refreshContacts(String stringFilter ) {
         try {
             table.removeAllItems();
@@ -63,6 +64,7 @@ public class PublishView extends VerticalLayout implements Button.ClickListener,
         }catch (Exception e){
         }
     }
+
     @Override
     public void valueChange(Property.ValueChangeEvent valueChangeEvent) {
         final Property property = valueChangeEvent.getProperty();
@@ -90,6 +92,7 @@ public class PublishView extends VerticalLayout implements Button.ClickListener,
         popup.setContent(form);
         return popup;
     }
+
     private void ViewContentButton(){
         try {
             final Content content = contentService.find(table.getValue().toString());
@@ -102,6 +105,7 @@ public class PublishView extends VerticalLayout implements Button.ClickListener,
                     Notification.Type.HUMANIZED_MESSAGE);
         }
     }
+
     private ContentModel getModel(Content val) {
         final ContentModel model = new ContentModel();
         final Content content = contentService.find(val.getId());
@@ -113,9 +117,11 @@ public class PublishView extends VerticalLayout implements Button.ClickListener,
         model.setSource(content.getSource());
         return model;
     }
+
     private void getHome() {
         main.content.setSecondComponent(new ContentMenu(main, "PUBLISHER"));
     }
+
     public void addListeners(){
         form.popUpCloseBtn.addClickListener((Button.ClickListener) this);
         viewContent.addClickListener((Button.ClickListener) this);

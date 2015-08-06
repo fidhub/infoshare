@@ -20,13 +20,18 @@ public class ContactForm extends FormLayout {
     public Button save ;
     public Button clear;
 
+
     public ContactForm() {
         model = new ContactModel();
         item = new BeanItem<>(model);
         binder = new FieldGroup(item);
-        setSizeUndefined();
+        setSizeFull();
+        addComponent(getLayout());
+    }
+    private VerticalLayout getLayout(){
 
-        final HorizontalLayout layout = new HorizontalLayout();
+        final VerticalLayout layout = new VerticalLayout();
+        layout.setSizeFull();
         layout.setSpacing(true);
 
         TextField phone = getTextField("Phone Number","phone");
@@ -36,11 +41,10 @@ public class ContactForm extends FormLayout {
         layout.addComponent(phone);
         layout.addComponent(email);
         layout.addComponent(contactType);
+        layout.addComponent(getButtons());
 
-        addComponent(layout);
-        addComponent(getButtons());
+        return layout;
     }
-
     private HorizontalLayout getButtons(){
         final HorizontalLayout layout = new HorizontalLayout();
         layout.setSizeUndefined();
