@@ -10,11 +10,7 @@ import infoshare.domain.Content;
 import infoshare.domain.ContentType;
 import infoshare.services.Content.ContentService;
 import infoshare.services.Content.Impl.ContentServiceImp;
-<<<<<<< HEAD
-import infoshare.services.ContentType.ContentTypeService;
-import infoshare.services.ContentType.Impl.ContentTypeServiceImpl;
-=======
->>>>>>> origin/master
+
 import infoshare.services.category.CategoryService;
 import infoshare.services.category.Impl.CategoryServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
