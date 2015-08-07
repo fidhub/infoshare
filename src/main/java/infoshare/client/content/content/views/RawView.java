@@ -110,6 +110,7 @@ public class RawView extends VerticalLayout implements
         return popup;
     }
     private void loadComboBoxs() {
+<<<<<<< HEAD
 
         for (Category category : categoryService.findAll()) {
             form.popUpCategoryCmb.addItem(category.getId());
@@ -123,8 +124,27 @@ public class RawView extends VerticalLayout implements
         for (Source source : sourceService.findAll()) {
             form.popUpSourceCmb.addItem(source.getId());
             form.popUpSourceCmb.setItemCaption(source.getId(), source.getName());
+=======
+
+        for (Category category : categoryService.findAll()) {
+            form.popUpCategoryCmb.addItem(category.getId());
+            form.popUpCategoryCmb.setItemCaption(category.getId(), category.getName());
+>>>>>>> origin/master
         }
 
+        for (ContentType contentType : contentTypeService.findAll()) {
+            form.popUpContentTypeCmb.addItem(contentType.getId());
+            form.popUpContentTypeCmb.setItemCaption(contentType.getId(), contentType.getName());
+        }
+        for (Source source : sourceService.findAll()) {
+            form.popUpSourceCmb.addItem(source.getId());
+            form.popUpSourceCmb.setItemCaption(source.getId(), source.getName());
+        }
+      /*  contentTypeService.findAll().stream().filter(category -> category != null)
+                .forEach(category -> form.popUpContentTypeCmb.addItem(category.getName()));
+        sourceService.findAll().stream().filter(source -> source != null)
+                .forEach(source -> form.popUpSourceCmb.addItem(source.getName()));
+*/
     }
     private void getHome() {
         main.content.setSecondComponent(new ContentMenu(main, "LANDING"));

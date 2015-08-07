@@ -18,7 +18,12 @@ public class ContactForm extends FormLayout {
     public final BeanItem<ContactModel> item;
     public final FieldGroup binder;
     public Button save ;
+<<<<<<< HEAD
     public Button cancel;
+=======
+    public Button clear;
+    public Button edit;
+>>>>>>> origin/master
 
 
     public ContactForm() {
@@ -49,9 +54,17 @@ public class ContactForm extends FormLayout {
         save = new Button("Save");
         save.addStyleName(Reindeer.BUTTON_DEFAULT);
         save.setClickShortcut(ShortcutAction.KeyCode.ENTER);
+<<<<<<< HEAD
         cancel = new Button("Cancel");
         layout.addComponent(save);
         layout.addComponent(cancel);
+=======
+        clear = new Button("Clear");
+        edit = new Button("Edit");
+        layout.addComponent(save);
+        layout.addComponent(edit);
+        layout.addComponent(clear);
+>>>>>>> origin/master
 
         return layout;
     }

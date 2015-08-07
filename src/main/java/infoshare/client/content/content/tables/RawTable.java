@@ -10,8 +10,11 @@ import infoshare.domain.Content;
 import infoshare.domain.ContentType;
 import infoshare.services.Content.ContentService;
 import infoshare.services.Content.Impl.ContentServiceImp;
+<<<<<<< HEAD
 import infoshare.services.ContentType.ContentTypeService;
 import infoshare.services.ContentType.Impl.ContentTypeServiceImpl;
+=======
+>>>>>>> origin/master
 import infoshare.services.category.CategoryService;
 import infoshare.services.category.Impl.CategoryServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +31,9 @@ public class RawTable extends Table {
 
     @Autowired
     private ContentService contentService = new ContentServiceImp();
-    private ContentTypeService categoryService = new ContentTypeServiceImpl();
+
+    private CategoryService categoryService = new CategoryServiceImpl();
+
 
 
     private final MainLayout main;
@@ -56,6 +61,7 @@ public class RawTable extends Table {
     }
 
     public void loadTable(Content content) {
+        System.out.println(content.getCategory().toString() +"thulebona");
         DateFormat formatter = new SimpleDateFormat("dd - MMMMMMM - yyyy");
         UrlPath.isEdited = RestApiConnectorClass.
                 readAll(UrlPath.ContentLinks.isEditedAndPlublished + content.getId(), String.class);
