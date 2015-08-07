@@ -124,11 +124,7 @@ public class RawView extends VerticalLayout implements
             form.popUpSourceCmb.addItem(source.getId());
             form.popUpSourceCmb.setItemCaption(source.getId(), source.getName());
         }
-      /*  contentTypeService.findAll().stream().filter(category -> category != null)
-                .forEach(category -> form.popUpContentTypeCmb.addItem(category.getName()));
-        sourceService.findAll().stream().filter(source -> source != null)
-                .forEach(source -> form.popUpSourceCmb.addItem(source.getName()));
-*/
+
     }
     private void getHome() {
         main.content.setSecondComponent(new ContentMenu(main, "LANDING"));

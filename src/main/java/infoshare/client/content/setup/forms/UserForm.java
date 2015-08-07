@@ -3,6 +3,7 @@ package infoshare.client.content.setup.forms;
 import com.vaadin.data.fieldgroup.FieldGroup;
 import com.vaadin.data.util.BeanItem;
 import com.vaadin.data.validator.BeanValidator;
+import com.vaadin.server.FontAwesome;
 import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
@@ -43,7 +44,7 @@ public class UserForm extends FormLayout {
         model = new UserModel();
         item = new BeanItem<>(model);
         binder = new FieldGroup(item);
-        setSizeFull();
+        //setSizeFull();
         update.setVisible(false);
         delete.setVisible(false);
         addComponent(getLayout());
@@ -73,15 +74,17 @@ public class UserForm extends FormLayout {
 
         addNewAddress.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
         addNewAddress.addStyleName(ValoTheme.BUTTON_TINY);
+        addNewAddress.setIcon(FontAwesome.PLUS);
         addNewContact.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
         addNewContact.addStyleName(ValoTheme.BUTTON_TINY);
+        addNewContact.setIcon(FontAwesome.PLUS);
 
         HorizontalLayout buttons = new HorizontalLayout();
         buttons.setSpacing(true);
         buttons.addComponent(addNewAddress);
         buttons.addComponent(addNewContact);
 
-        final GridLayout grid = new GridLayout(6, 10);
+        final GridLayout grid = new GridLayout(8, 5);
         grid.setSizeFull();
         grid.setSpacing(true);
         grid.addComponent(rightLayout, 0, 0);

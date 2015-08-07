@@ -2,6 +2,8 @@ package infoshare.client.content.content.tables;
 
 import com.vaadin.ui.Table;
 import com.vaadin.ui.themes.ValoTheme;
+import infoshare.RestApi.RestApiConnectorClass;
+import infoshare.RestApi.UrlPath;
 import infoshare.client.content.MainLayout;
 import infoshare.domain.Content;
 import infoshare.services.Content.ContentService;
@@ -50,7 +52,8 @@ public class EditTable extends Table{
 
     public void loadTable(Content content) {
         DateFormat formatter = new SimpleDateFormat("dd - MMMMMMM - yyyy");
-        if (content.getContentType().equalsIgnoreCase("edited")) {
+        UrlPath.isEdited = RestApiConnectorClass.readAll(UrlPath.ContentLinks.isEditedAndPlublished + content.getId(), String.class);
+        if (UrlPath.isEdited.contains("true")) {
             addItem(new Object[]{
                     content.getTitle(),
                     content.getCategory(),

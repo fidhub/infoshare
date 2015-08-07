@@ -1,12 +1,14 @@
 package infoshare.RestApi;
 
+import java.util.List;
+
 /**
  * Created by codex on 2015/07/21.
  */
 public class UrlPath {
 
     public static final  String URL ="http://10.47.2.247:9000";
-
+    public static List<String> isEdited;
     public static class  AddressLinks {
         public static final String POST = URL + "/api/address/create"; // @controllers.AddressController.createAddress
         public static final String GET_ID = URL + "/api/address/get/";  //@controllers.AddressController.getAddress(id)
@@ -33,6 +35,8 @@ public class UrlPath {
         public static final String GET_ID  = URL+"/api/cont/";          //@controllers.CategoryController.getCategory(id)
         public static final String PUT     = URL+"/api/cont/update";    //@controllers.CategoryController.update
         public static final String GETALL  = URL+"/api/cont/get/conts";      //@controllers.CategoryController.getAll
+        public static final String isEditedAndPlublished  = URL+"/api/cont/edited/";   // @controllers.ContentController.isEditedAndPlublished(id)
+        public static final String isPlublished  = URL+"/api/cont/published/";   // @controllers.ContentController.isEditedAndPlublished(id)
     }
 
      public static class ContentTypeLinks {

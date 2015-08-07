@@ -18,33 +18,29 @@ public class ContactForm extends FormLayout {
     public final BeanItem<ContactModel> item;
     public final FieldGroup binder;
     public Button save ;
-    public Button clear;
+    public Button cancel;
 
 
     public ContactForm() {
         model = new ContactModel();
         item = new BeanItem<>(model);
         binder = new FieldGroup(item);
-        setSizeFull();
-        addComponent(getLayout());
-    }
-    private VerticalLayout getLayout(){
+        setSizeUndefined();
 
-        final VerticalLayout layout = new VerticalLayout();
-        layout.setSizeFull();
+        final GridLayout layout = new GridLayout(4,10);
         layout.setSpacing(true);
-
         TextField phone = getTextField("Phone Number","phone");
         TextField email = getTextField("Email Address","email");
         TextField contactType = getTextField("contact Type","contactType");
 
-        layout.addComponent(phone);
-        layout.addComponent(email);
-        layout.addComponent(contactType);
-        layout.addComponent(getButtons());
+        layout.addComponent(phone,0,0);
+        layout.addComponent(email,1,0);
+        layout.addComponent(contactType,0,1);
 
-        return layout;
+        addComponent(layout);
+        addComponent(getButtons());
     }
+
     private HorizontalLayout getButtons(){
         final HorizontalLayout layout = new HorizontalLayout();
         layout.setSizeUndefined();
@@ -53,9 +49,9 @@ public class ContactForm extends FormLayout {
         save = new Button("Save");
         save.addStyleName(Reindeer.BUTTON_DEFAULT);
         save.setClickShortcut(ShortcutAction.KeyCode.ENTER);
-        clear = new Button("Clear");
+        cancel = new Button("Cancel");
         layout.addComponent(save);
-        layout.addComponent(clear);
+        layout.addComponent(cancel);
 
         return layout;
     }

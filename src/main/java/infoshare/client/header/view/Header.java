@@ -13,6 +13,7 @@ import infoshare.client.content.MainLayout;
 import infoshare.client.content.content.ContentMenu;
 import infoshare.client.content.content.views.RawView;
 import infoshare.client.header.landing_page.LandingHome;
+import infoshare.domain.Contact;
 import infoshare.domain.Content;
 import infoshare.services.Content.ContentService;
 import infoshare.services.Content.Impl.ContentServiceImp;
@@ -143,14 +144,15 @@ public class Header extends VerticalLayout implements Button.ClickListener {
         notificationTable.setImmediate(true);
 
     try {
-        contentService.findAll().stream().filter(content -> !content.getContentType().equalsIgnoreCase("edited") &&
-                !content.getContentType().equalsIgnoreCase("published")).forEach(content -> {
+        for (Content content: contentService.findAll()){
+
             notificationTable.addItem(new Object[]{new Label(
                     "<b>" + content.getCreator()
                             + " created a new Tip</b><br><span>25 minutes ago</span><br>"
                             + content.getContent().substring(0, 10), ContentMode.HTML)
             }, content.getId());
-        });
+        }
+
     }catch (Exception e) {
 
     }

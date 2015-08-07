@@ -7,7 +7,6 @@ import com.vaadin.event.ShortcutAction;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.Reindeer;
 import infoshare.client.content.setup.models.AddressModel;
-import infoshare.client.content.setup.models.ContactModel;
 
 /**
  * Created by codex on 2015/07/30.
@@ -18,7 +17,7 @@ public class AddressForm extends FormLayout {
     public BeanItem<AddressModel> item;
     public FieldGroup binder;
     public Button save ;
-    public Button clear;
+    public Button cancel;
 
     public AddressForm() {
         this.model = new AddressModel();
@@ -56,10 +55,10 @@ public class AddressForm extends FormLayout {
         save = new Button("Save");
         save.addStyleName(Reindeer.BUTTON_DEFAULT);
         save.setClickShortcut(ShortcutAction.KeyCode.ENTER);
-        clear = new Button("Clear");
+        cancel = new Button("cancel");
 
         layout.addComponent(save);
-        layout.addComponent(clear);
+        layout.addComponent(cancel);
 
         return layout;
     }

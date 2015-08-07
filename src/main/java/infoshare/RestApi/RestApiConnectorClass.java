@@ -82,7 +82,6 @@ public class RestApiConnectorClass {
         String jsonString = restTemplate.postForObject(url, entity, String.class);
         JsonElement element = parser.parse(jsonString).getAsJsonObject();
 
-
         Gson gson = new GsonBuilder().registerTypeAdapter(Date.class,
                 (JsonDeserializer<Date>) (jsonElement, type,
                 jsonDeserializationContext) -> new Date(jsonElement.getAsJsonPrimitive().getAsLong()))

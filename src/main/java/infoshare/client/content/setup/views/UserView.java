@@ -10,6 +10,7 @@ import infoshare.client.content.setup.forms.AddressForm;
 import infoshare.client.content.setup.forms.ContactForm;
 import infoshare.client.content.setup.forms.UserForm;
 import infoshare.client.content.setup.models.UserModel;
+import infoshare.client.content.setup.tables.AddressTable;
 import infoshare.client.content.setup.tables.UserTable;
 import infoshare.domain.Role;
 import infoshare.domain.User;
@@ -18,7 +19,6 @@ import infoshare.services.roles.RoleService;
 import infoshare.services.users.Impl.UserServiceImpl;
 import infoshare.services.users.UserService;
 
-import java.nio.file.Watchable;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -35,9 +35,10 @@ public class UserView extends VerticalLayout implements
     private final ContactForm contactForm;
     private final UserTable table;
 
+
     private UserService userService = new UserServiceImpl();
     private RoleService roleService = new RoleServiceImpl();
-
+    private Window popUpWindow =null;
     public UserView(MainLayout app) {
         main = app;
         userForm = new UserForm();
@@ -51,6 +52,7 @@ public class UserView extends VerticalLayout implements
     }
     @Override
     public void buttonClick(Button.ClickEvent event) {
+
         final Button source = event.getButton();
         if (source == userForm.save) {
             saveForm(userForm.binder);
@@ -63,19 +65,37 @@ public class UserView extends VerticalLayout implements
         } else if (source == userForm.delete) {
             deleteForm(userForm.binder);
         }else if(source == userForm.addNewAddress){
-            getModelWind(addressForm);
+            popUpWindow = getModelWind(addressForm,"350px") ;
+            getUI().addWindow(popUpWindow);
         }else if(source == userForm.addNewContact){
-            getModelWind(contactForm);
+            popUpWindow = getModelWind(addressForm, "350px");
+            getUI().addWindow(popUpWindow);
+        }if((source == addressForm.cancel)||(source == contactForm.cancel)){
+            popUpWindow.setModal(false);
+            UI.getCurrent().removeWindow(popUpWindow);
         }
     }
-    private  Window getModelWind(FormLayout c){
+    private void saveContact(FieldGroup binder){
+        try {
+            binder.commit();
+            userService.save(getUserNewEntity(binder));
+            popUpWindow.setModal(false);
+            UI.getCurrent().removeWindow(popUpWindow);
+            Notification.show("Record ADDED!", Notification.Type.HUMANIZED_MESSAGE);
+        } catch (FieldGroup.CommitException e) {
+            Notification.show("Values MISSING!", Notification.Type.HUMANIZED_MESSAGE);
+
+        }
+    }
+    private  Window getModelWind(FormLayout layout,String size){
         final Window window = new Window();
         window.setWidth(22.0f, Unit.PERCENTAGE);
-        window.setHeight("350px");
+        window.setHeight(size);
+        window.setClosable(false);
+        window.setResizable(false);
         window.setDraggable(false);
         window.setModal(true);
-        window.setContent(c);
-        getUI().addWindow(window);
+        window.setContent(layout);
         return window;
     }
     @Override
@@ -94,7 +114,7 @@ public class UserView extends VerticalLayout implements
     private void saveForm(FieldGroup binder) {
         try {
             binder.commit();
-            userService.save(getNewEntity(binder));
+            userService.save(getUserNewEntity(binder));
             getHome();
             Notification.show("Record ADDED!", Notification.Type.TRAY_NOTIFICATION);
         } catch (FieldGroup.CommitException e) {
@@ -108,7 +128,7 @@ public class UserView extends VerticalLayout implements
     private void saveEditedForm(FieldGroup binder) {
         try {
             binder.commit();
-            userService.merge(getUpdateEntity(binder));
+            userService.merge(getUserUpdateEntity(binder));
             getHome();
             Notification.show("Record UPDATED!", Notification.Type.HUMANIZED_MESSAGE);
         } catch (FieldGroup.CommitException e) {
@@ -120,10 +140,11 @@ public class UserView extends VerticalLayout implements
         }
     }
     private void deleteForm(FieldGroup binder) {
-        userService.remove(getUpdateEntity(binder));
+        userService.remove(getUserUpdateEntity(binder));
         getHome();
     }
-    private User getNewEntity(FieldGroup binder) {
+
+    private User getUserNewEntity(FieldGroup binder) {
         final UserModel bean = ((BeanItem<UserModel>) binder.getItemDataSource()).getBean();
         final User user = new User.Builder(bean.getLastName())
                 .firstname(bean.getFirstName())
@@ -137,7 +158,7 @@ public class UserView extends VerticalLayout implements
                 .build();
         return user;
     }
-    private User getUpdateEntity(FieldGroup binder) {
+    private User getUserUpdateEntity(FieldGroup binder) {
 
         final UserModel bean = ((BeanItem<UserModel>) binder.getItemDataSource()).getBean();
         Set<String> userRoles = new HashSet<>();
@@ -166,6 +187,7 @@ public class UserView extends VerticalLayout implements
     private void getHome() {
         main.content.setSecondComponent(new SetupMenu(main, "LANDING"));
     }
+
     private void setEditFormProperties() {
         userForm.binder.setReadOnly(false);
         userForm.save.setVisible(false);
@@ -196,9 +218,9 @@ public class UserView extends VerticalLayout implements
         userForm.addNewContact.addClickListener((Button.ClickListener) this);
 
         addressForm.save.addClickListener((Button.ClickListener) this);
-        addressForm.clear.addClickListener((Button.ClickListener) this);
+        addressForm.cancel.addClickListener((Button.ClickListener) this);
         contactForm.save.addClickListener((Button.ClickListener) this);
-        contactForm.clear.addClickListener((Button.ClickListener) this);
+        contactForm.cancel.addClickListener((Button.ClickListener) this);
     }
     public UserModel getModel(User user) {
         Set<String> userRolesId = new HashSet<>();
