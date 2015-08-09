@@ -8,33 +8,20 @@ import java.util.List;
 public class UrlPath {
 
     public static final  String URL ="http://10.47.2.247:9000";
-    public static List<String> isEdited;
+    public static List<Boolean> isEdited;
+
     public static class  AddressLinks {
         public static final String POST = URL + "/api/address/create"; // @controllers.AddressController.createAddress
         public static final String GET_ID = URL + "/api/address/get/";  //@controllers.AddressController.getAddress(id)
-//        public static final String PUT = URL + "/api/cat/update";  //@controllers.CategoryController.update
-//        public static final String GETALL = URL + "/api/cat/get/cats";  //@controllers.CategoryController.getAll
+//      public static final String PUT = URL + "/api/cat/update";  //@controllers.CategoryController.update
+//      public static final String GETALL = URL + "/api/cat/get/cats";  //@controllers.CategoryController.getAll
     }
 
     public static class  ContactLink{
         public static final String POST    = URL+"/api/contact/create"; // @controllers.ContactController.createContact
         public static final String GET_ID  = URL+"/api/contact/get/" ;  //@controllers.ContactController.getContact(id)
-//        public static final String PUT     = URL+"/api/cat/update" ;  //@controllers.CategoryController.update
-//        public static final String GETALL  = URL+"/api/cat/get/cats" ;  //@controllers.CategoryController.getAll
-}
-
-    public static class  AddressLinks {
-        public static final String POST = URL + "/api/address/create"; // @controllers.AddressController.createAddress
-        public static final String GET_ID = URL + "/api/address/get/";  //@controllers.AddressController.getAddress(id)
-//        public static final String PUT = URL + "/api/cat/update";  //@controllers.CategoryController.update
-//        public static final String GETALL = URL + "/api/cat/get/cats";  //@controllers.CategoryController.getAll
-    }
-
-    public static class  ContactLink{
-        public static final String POST    = URL+"/api/contact/create"; // @controllers.ContactController.createContact
-        public static final String GET_ID  = URL+"/api/contact/get/" ;  //@controllers.ContactController.getContact(id)
-//        public static final String PUT     = URL+"/api/cat/update" ;  //@controllers.CategoryController.update
-//        public static final String GETALL  = URL+"/api/cat/get/cats" ;  //@controllers.CategoryController.getAll
+//      public static final String PUT     = URL+"/api/cat/update" ;  //@controllers.CategoryController.update
+//      public static final String GETALL  = URL+"/api/cat/get/cats" ;  //@controllers.CategoryController.getAll
 }
 
     public static class CategoryLinks {

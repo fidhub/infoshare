@@ -3,6 +3,9 @@
     <words>
       <w>addlist</w>
       <w>boxs</w>
+      <w>conts</w>
+      <w>ctype</w>
+      <w>ctypes</w>
       <w>descr</w>
       <w>firstname</w>
       <w>gson</w>
@@ -15,6 +18,7 @@
       <w>notif</w>
       <w>oldpassword</w>
       <w>othername</w>
+      <w>plublished</w>
       <w>rolename</w>
       <w>thuleh</w>
       <w>userz</w>

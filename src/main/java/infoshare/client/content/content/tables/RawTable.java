@@ -57,12 +57,11 @@ public class RawTable extends Table {
     }
 
     public void loadTable(Content content) {
-        System.out.println(content.getCategory().toString() +"thulebona");
         DateFormat formatter = new SimpleDateFormat("dd - MMMMMMM - yyyy");
         UrlPath.isEdited = RestApiConnectorClass.
-                readAll(UrlPath.ContentLinks.isEditedAndPlublished + content.getId(), String.class);
+                readAll(UrlPath.ContentLinks.isEditedAndPlublished + content.getId(), Boolean.class);
         for (int i = 0; i < UrlPath.isEdited.size(); i++) {
-            if (UrlPath.isEdited.get(i).equalsIgnoreCase("false")) {
+            if (UrlPath.isEdited.get(i) ==false) {
                 addItem(new Object[]{
                         content.getTitle(),
                         content.getCategory(),
