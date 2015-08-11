@@ -55,13 +55,16 @@ public class EditTable extends Table{
         UrlPath.isEdited = RestApiConnectorClass.
                 readAll(UrlPath.ContentLinks.isEditedAndPlublished + content.getId(), Boolean.class);
         if (UrlPath.isEdited.contains(true)) {
-            addItem(new Object[]{
-                    content.getTitle(),
-                    content.getCategory(),
-                    content.getCreator(),
-                    formatter.format(content.getDateCreated())
-            }, content.getId());
+            try {
+                addItem(new Object[]{
+                        content.getTitle(),
+                        categoryService.find(content.getCategory()).getName(),
+                        content.getCreator(),
+                        formatter.format(content.getDateCreated())
+                }, content.getId());
+            }catch (Exception r) {
+            }
+            }
         }
-    }
 
 }

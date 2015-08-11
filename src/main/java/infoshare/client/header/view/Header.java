@@ -35,7 +35,7 @@ public class Header extends VerticalLayout implements Button.ClickListener {
     public Button home = new Button();
     public Button notify = new Button();
     public Button user = new Button();
-
+    private  Table notificationTable = new Table();
     public Header(MainLayout main) {
         this.main = main;
         setSizeFull();
@@ -131,7 +131,7 @@ public class Header extends VerticalLayout implements Button.ClickListener {
         footer.addComponent(more);
         footer.setComponentAlignment(more, Alignment.TOP_CENTER);
 
-        Table notificationTable = new Table();
+
         notificationTable.setWidth("100%");
         notificationTable.setHeight(360.0f, Unit.PIXELS);
         notificationTable.addContainerProperty("Notifications", Label.class, null);
@@ -143,19 +143,7 @@ public class Header extends VerticalLayout implements Button.ClickListener {
         notificationTable.setNullSelectionAllowed(false);
         notificationTable.setImmediate(true);
 
-    try {
-        for (Content content: contentService.findAll()){
-
-            notificationTable.addItem(new Object[]{new Label(
-                    "<b>" + content.getCreator()
-                            + " created a new Tip</b><br><span>25 minutes ago</span><br>"
-                            + content.getContent().substring(0, 10), ContentMode.HTML)
-            }, content.getId());
-        }
-
-    }catch (Exception e) {
-
-    }
+        refreshNotification();
         notificationTable.addItemClickListener(event1 -> {
             if (event1.isDoubleClick())
             {
@@ -225,15 +213,23 @@ public class Header extends VerticalLayout implements Button.ClickListener {
     }
     public  void refreshNotification(){
         int i = 0 ;
-        for(Content content:contentService.findAll())
-        {
-            if(content.getContentType().equalsIgnoreCase("raw")) {
+
+        try {
+            for (Content content: contentService.findAll()){
                 i++;
                 notify.addStyleName("notifications");
                 notify.addStyleName("unread");
                 notify.setCaption(i + "");
                 notify.setDescription(i + " un-edited tips content");
+                notificationTable.addItem(new Object[]{new Label(
+                        "<b>" + content.getCreator()
+                                + " created a new Tip</b><br><span>25 minutes ago</span><br>"
+                                + content.getContent().substring(0, 1), ContentMode.HTML)
+                }, content.getId());
             }
+
+        }catch (Exception e) {
+
         }
         if(i==0){
             notify.removeStyleName("unread");

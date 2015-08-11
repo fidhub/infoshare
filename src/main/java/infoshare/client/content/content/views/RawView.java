@@ -158,19 +158,24 @@ public class RawView extends VerticalLayout implements
     }
     private Content getNewEntity(FieldGroup binder) {
 
-        final ContentModel bean = ((BeanItem<ContentModel>) binder.getItemDataSource()).getBean();
-        bean.setDateCreated(contentService.find(table.getValue().toString()).getDateCreated());
-        final Content content = new Content.Builder(bean.getTitle())
-                .category(categoryService.find(bean.getCategory()).getId())
-                .content(bean.getContent())
-                .contentType(bean.getContentType())
-                .creator(bean.getCreator())
-                .dateCreated(bean.getDateCreated())
-                .source(table.getValue().toString())
-                        // .id(table.getValue().toString())
-                .build();
-        tableId = null;
-        return content;
+        try {
+            final ContentModel bean = ((BeanItem<ContentModel>) binder.getItemDataSource()).getBean();
+            bean.setDateCreated(contentService.find(table.getValue().toString()).getDateCreated());
+            final Content content = new Content.Builder(bean.getTitle())
+                    .category(categoryService.find(bean.getCategory()).getId())
+                    .content(bean.getContent())
+                    .contentType(bean.getContentType())
+                    .creator(bean.getCreator())
+                    .dateCreated(bean.getDateCreated())
+                    .source(table.getValue().toString())
+                            // .id(table.getValue().toString())
+                    .build();
+            return content;
+        }catch (Exception e){
+            return null;
+        }finally {
+            tableId = null;
+        }
     }
 
     private ContentModel getModel(Content val) {

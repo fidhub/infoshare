@@ -6,6 +6,8 @@ import infoshare.client.content.MainLayout;
 import infoshare.domain.Content;
 import infoshare.services.Content.ContentService;
 import infoshare.services.Content.Impl.ContentServiceImp;
+import infoshare.services.category.CategoryService;
+import infoshare.services.category.Impl.CategoryServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.text.DateFormat;
@@ -19,6 +21,8 @@ public class PublishTable extends Table{
 
     @Autowired
     private ContentService contentService = new ContentServiceImp();
+    private CategoryService categoryService = new CategoryServiceImpl();
+
     private final MainLayout main;
 
     public PublishTable(MainLayout mainApp){
@@ -46,13 +50,15 @@ public class PublishTable extends Table{
     public void loadTable(Content content) {
         DateFormat formatter = new SimpleDateFormat("dd - MMMMMMM - yyyy");
         if (content.getContentType().equalsIgnoreCase("published")) {
-            addItem(new Object[]{
-                    content.getTitle(),
-                    content.getCategory(),
-                    content.getCreator(),
-                   // content.getSource(),
-                    formatter.format(content.getDateCreated())
-            }, content.getId());
+            try {
+                addItem(new Object[]{
+                        content.getTitle(),
+                        categoryService.find(content.getCategory()).getName(),
+                        content.getCreator(),
+                        formatter.format(content.getDateCreated())
+                }, content.getId());
+            }catch (Exception r) {
+            }
         }
     }
 }

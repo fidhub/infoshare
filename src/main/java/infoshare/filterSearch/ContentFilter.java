@@ -6,6 +6,8 @@ import com.vaadin.ui.themes.ValoTheme;
 import infoshare.domain.Content;
 import infoshare.services.Content.ContentService;
 import infoshare.services.Content.Impl.ContentServiceImp;
+import infoshare.services.category.CategoryService;
+import infoshare.services.category.Impl.CategoryServiceImpl;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,6 +20,7 @@ import java.util.logging.Logger;
  */
 public class ContentFilter {
     private ContentService contacts = new ContentServiceImp();
+    private CategoryService categoryService = new CategoryServiceImpl();
     public TextField field = new TextField();
     public ContentFilter() {
         getField();
@@ -27,10 +30,9 @@ public class ContentFilter {
         for (Content contact : contacts.findAll()) {
             try {
                 boolean passesFilter = (stringFilter == null || stringFilter.isEmpty())
-                        /******************** too long***********************/
                         || contact.getTitle().toString().toLowerCase()
                         .contains(stringFilter.toLowerCase())
-                        || contact.getCategory().toString().toLowerCase()
+                        ||categoryService.find(contact.getCategory().toString()).getName().toLowerCase()
                         .contains(stringFilter.toLowerCase())
                         ||contact.getCreator().toString().toLowerCase()
                         .contains(stringFilter.toLowerCase())
@@ -46,12 +48,7 @@ public class ContentFilter {
                 Logger.getLogger(ex.getLocalizedMessage());
             }
         }
-     /*   Collections.sort(arrayList, new Comparator<Content>() {
-            @Override
-            public int compare(Content content, Content t1) {
-                return (Integer.parseInt(t1.getId())-Integer.parseInt(content.getId())) ;
-            }
-        });*/
+
         return arrayList;
     }
     private TextField getField(){

@@ -29,10 +29,10 @@ public class ContentTypeForm extends FormLayout {
         item = new BeanItem<>(model);
         binder = new FieldGroup(item);
 
-        ComboBox name = getComboBox("Content Type", "name");
-        name.addItem("Raw");
+        TextField name = getTextField("Content Type", "name");
+       /* name.addItem("Raw");
         name.addItem("Edited");
-        name.addItem("Published");
+        name.addItem("Published");*/
         TextArea description = getTextArea("Description", "description");
         GridLayout grid = new GridLayout(4, 8);
         grid.setSizeFull();
@@ -48,14 +48,14 @@ public class ContentTypeForm extends FormLayout {
         addComponent(grid);
 
     }
-    private ComboBox getComboBox(String label, String field) {
-        ComboBox comboBox = new ComboBox(label);
-        comboBox.setWidth(250, Unit.PIXELS);
-        comboBox.addValidator(new BeanValidator(ContentTypeModel.class, field));
-        comboBox.setImmediate(true);
-        comboBox.setNullSelectionAllowed(false);
-        binder.bind(comboBox, field);
-        return comboBox;
+    private TextField getTextField(String label, String field) {
+        TextField textField = new TextField(label);
+        textField.setWidth(250, Unit.PIXELS);
+        textField.addValidator(new BeanValidator(ContentTypeModel.class, field));
+        textField.setImmediate(true);
+        textField.setNullRepresentation("");
+        binder.bind(textField, field);
+        return textField;
     }
     private TextArea getTextArea(String label, String field) {
         TextArea textArea = new TextArea(label);

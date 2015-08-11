@@ -27,7 +27,6 @@ public class RawTable extends Table {
 
     @Autowired
     private ContentService contentService = new ContentServiceImp();
-
     private CategoryService categoryService = new CategoryServiceImpl();
 
 
@@ -62,13 +61,16 @@ public class RawTable extends Table {
                 readAll(UrlPath.ContentLinks.isEditedAndPlublished + content.getId(), Boolean.class);
         for (int i = 0; i < UrlPath.isEdited.size(); i++) {
             if (UrlPath.isEdited.get(i) ==false) {
-                addItem(new Object[]{
-                        content.getTitle(),
-                        content.getCategory(),
-                        content.getCreator(),
-                        //    content.getSource(),
-                        formatter.format(content.getDateCreated())
-                }, content.getId());
+
+                try {
+                    addItem(new Object[]{
+                            content.getTitle(),
+                            categoryService.find(content.getCategory()).getName(),
+                            content.getCreator(),
+                            formatter.format(content.getDateCreated())
+                    }, content.getId());
+                }catch (Exception r){
+                }
             }
         }
     }
