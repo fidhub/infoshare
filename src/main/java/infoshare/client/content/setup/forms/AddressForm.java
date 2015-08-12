@@ -23,27 +23,24 @@ public class AddressForm extends FormLayout {
         this.model = new AddressModel();
         this.item = new BeanItem<>(model);
         this.binder = new FieldGroup(item);
-        setSizeFull();
+        setSizeUndefined();
         addComponent(getLayout());
     }
 
-    private VerticalLayout getLayout(){
+    private GridLayout getLayout(){
 
-        final VerticalLayout layout = new VerticalLayout();
-        layout.setSizeFull();
+        final GridLayout layout = new GridLayout(4,5);
         layout.setSpacing(true);
-
         TextField postalAddress = getTextField("Postal Address","postalAddress");
         TextField postalCode = getTextField("Postal Code","postalCode");
         TextField physicalAddress = getTextField("Physical Address","physicalAddress");
         TextField addressType = getTextField("Address Type","addressType");
 
-        layout.addComponent(postalAddress);
-        layout.addComponent(physicalAddress);
-        layout.addComponent(addressType);
-        layout.addComponent(postalCode);
-        layout.addComponent(getButtons());
-
+        layout.addComponent(postalAddress,0,0);
+        layout.addComponent(physicalAddress,1,0);
+        layout.addComponent(addressType,0,1);
+        layout.addComponent(postalCode,1,1);
+        layout.addComponent(getButtons(),0,2);
         return layout;
     }
 

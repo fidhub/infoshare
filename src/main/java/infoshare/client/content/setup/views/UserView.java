@@ -11,7 +11,9 @@ import infoshare.client.content.setup.forms.ContactForm;
 import infoshare.client.content.setup.forms.UserForm;
 import infoshare.client.content.setup.models.UserModel;
 import infoshare.client.content.setup.tables.AddressTable;
+import infoshare.client.content.setup.tables.ContactTable;
 import infoshare.client.content.setup.tables.UserTable;
+import infoshare.domain.Address;
 import infoshare.domain.Role;
 import infoshare.domain.User;
 import infoshare.services.roles.Impl.RoleServiceImpl;
@@ -31,9 +33,12 @@ public class UserView extends VerticalLayout implements
 
     private final MainLayout main;
     private final UserForm userForm;
-    private final AddressForm addressForm;
-    private final ContactForm contactForm;
     private final UserTable table;
+    private final AddressForm addressForm;
+    private final AddressTable addressTable;
+    private final ContactForm contactForm;
+    private final ContactTable contactTable;
+
 
 
     private UserService userService = new UserServiceImpl();
@@ -43,7 +48,9 @@ public class UserView extends VerticalLayout implements
         main = app;
         userForm = new UserForm();
         addressForm = new AddressForm();
+        addressTable = new AddressTable();
         contactForm = new ContactForm();
+        contactTable = new ContactTable(main);
         table = new UserTable(main);
         setSizeFull();
         addComponent(userForm);
@@ -65,10 +72,10 @@ public class UserView extends VerticalLayout implements
         } else if (source == userForm.delete) {
             deleteForm(userForm.binder);
         }else if(source == userForm.addNewAddress){
-            popUpWindow = getModelWind(addressForm,"350px") ;
+            popUpWindow = getModelWind(addressForm,addressTable) ;
             getUI().addWindow(popUpWindow);
         }else if(source == userForm.addNewContact){
-            popUpWindow = getModelWind(addressForm, "350px");
+            popUpWindow = getModelWind(addressForm,contactTable);
             getUI().addWindow(popUpWindow);
         }if((source == addressForm.cancel)||(source == contactForm.cancel)){
             popUpWindow.setModal(false);
@@ -87,17 +94,22 @@ public class UserView extends VerticalLayout implements
 
         }
     }
-    private  Window getModelWind(FormLayout layout,String size){
+
+    private  Window getModelWind(FormLayout layout,Table whichTable){
         final Window window = new Window();
-        window.setWidth(22.0f, Unit.PERCENTAGE);
-        window.setHeight(size);
+       // window.setHeight("500px");
+        window.setWidth(50.0f, Unit.PERCENTAGE);
         window.setClosable(false);
         window.setResizable(false);
         window.setDraggable(false);
         window.setModal(true);
-        window.setContent(layout);
+        VerticalLayout layout1 = new VerticalLayout();
+        layout1.addComponent(layout);
+        layout1.addComponent(whichTable);
+        window.setContent(layout1);
         return window;
     }
+
     @Override
     public void valueChange(Property.ValueChangeEvent event) {
         final Property property = event.getProperty();
@@ -143,7 +155,6 @@ public class UserView extends VerticalLayout implements
         userService.remove(getUserUpdateEntity(binder));
         getHome();
     }
-
     private User getUserNewEntity(FieldGroup binder) {
         final UserModel bean = ((BeanItem<UserModel>) binder.getItemDataSource()).getBean();
         final User user = new User.Builder(bean.getLastName())
@@ -187,7 +198,6 @@ public class UserView extends VerticalLayout implements
     private void getHome() {
         main.content.setSecondComponent(new SetupMenu(main, "LANDING"));
     }
-
     private void setEditFormProperties() {
         userForm.binder.setReadOnly(false);
         userForm.save.setVisible(false);

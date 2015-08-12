@@ -84,8 +84,7 @@ public class RawView extends VerticalLayout implements
             }
         }else if (source ==form.popUpUpdateBtn){
             saveEditedForm(form.binder);
-           /* Header header = new Header(main);
-            header.notify.getUI().setImmediate(true);*/
+
         }else if (source ==form.popUpCancelBtn){
             popUp.setModal(false);
             UI.getCurrent().removeWindow(popUp);
@@ -202,6 +201,7 @@ public class RawView extends VerticalLayout implements
                 refreshContacts(textChangeEvent.getText());
             }
         });
+
 
     }
 

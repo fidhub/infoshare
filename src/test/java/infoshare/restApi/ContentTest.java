@@ -18,11 +18,17 @@ public class ContentTest {
     public void testPOST() throws Exception {
         ContentModel model = new ContentModel();
         model.setDateCreated(new Date());
-        model.setCreator("songezo mkumathela");
-        model.setSource("source name");
-        model.setCategory("treatment");
-        model.setTitle("hiv treatment guidelines");
-        model.setContent("Two");
+        model.setCreator("thulebona hadebe");
+        model.setSource("mobile");
+        model.setCategory("Treatment");
+        model.setTitle("Cancer prevention");
+        model.setContent(" Using any type of tobacco puts you on a collision course with cancer." +
+                " Smoking has been linked to various types of cancer — including cancer of the lung, bladder," +
+                " cervix and kidney. And chewing tobacco has been linked to cancer of the oral cavity and pancreas." +
+                " Even if you don't use tobacco, exposure to secondhand smoke might increase your risk of lung cancer." +
+                "Avoiding tobacco — or deciding to stop using it — is one of the most important health decisions you can make." +
+                " It's also an important part of cancer prevention. If you need help quitting tobacco," +
+                " ask your doctor about stop-smoking products and other strategies for quitting.");
         model.setContentType("raw");
 
         RestApiConnectorClass.create(UrlPath.ContentLinks.POST, model, ContentModel.class);

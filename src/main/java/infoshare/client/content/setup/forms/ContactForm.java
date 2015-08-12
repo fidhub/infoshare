@@ -37,7 +37,7 @@ public class ContactForm extends FormLayout {
 
         layout.addComponent(phone,0,0);
         layout.addComponent(email,1,0);
-        layout.addComponent(contactType,0,1);
+        layout.addComponent(contactType,1,1);
 
         addComponent(layout);
         addComponent(getButtons());

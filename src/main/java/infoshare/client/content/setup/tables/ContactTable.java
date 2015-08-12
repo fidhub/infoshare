@@ -17,7 +17,7 @@ public class ContactTable extends Table {
     private ContactService contactService = new ContactServiceImpl();
     public ContactTable(MainLayout main) {
         this.main = main;
-        setSizeFull();
+        setWidth("100%");
         Responsive.makeResponsive(this);
         addStyleName(ValoTheme.TABLE_BORDERLESS);
         addStyleName(ValoTheme.TABLE_NO_STRIPES);

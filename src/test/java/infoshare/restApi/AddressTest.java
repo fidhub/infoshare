@@ -19,7 +19,7 @@ public class AddressTest {
         model.setPostalCode("7530");
         model.setPostalAddress("P.O Box 659");
         model.setPhysicalAddress("24 Killernay Street Oakdale Bellville");
-        model.setAddressType("addresss");
+        model.setAddressType("address");
 
         RestApiConnectorClass.create(UrlPath.AddressLinks.POST, model, AddressModel.class);
     }

@@ -2,6 +2,8 @@ package infoshare.client.content.content.tables;
 
 import com.vaadin.ui.Table;
 import com.vaadin.ui.themes.ValoTheme;
+import infoshare.RestApi.RestApiConnectorClass;
+import infoshare.RestApi.UrlPath;
 import infoshare.client.content.MainLayout;
 import infoshare.domain.Content;
 import infoshare.services.Content.ContentService;
@@ -49,7 +51,9 @@ public class PublishTable extends Table{
     }
     public void loadTable(Content content) {
         DateFormat formatter = new SimpleDateFormat("dd - MMMMMMM - yyyy");
-        if (content.getContentType().equalsIgnoreCase("published")) {
+        UrlPath.isPlublished = RestApiConnectorClass.
+                readAll(UrlPath.ContentLinks.isPlublished + content.getId(), Boolean.class);
+        if (UrlPath.isPlublished.contains(true)) {
             try {
                 addItem(new Object[]{
                         content.getTitle(),

@@ -20,7 +20,11 @@ public class AddressTable extends TreeTable {
     private AddressService service = new AddressServiceImpl();
 
     public AddressTable() {
-        setSizeFull();
+        setWidth("100%");
+        addContainerProperty("Postal Address",String.class,null);
+        addContainerProperty("Physical Address",String.class,null);
+        addContainerProperty("Postal Code",String.class,null);
+        addContainerProperty("Address Type",String.class,null);
 
        // HierarchicalContainer
         setNullSelectionAllowed(false);

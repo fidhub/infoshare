@@ -9,6 +9,7 @@ public class UrlPath {
 
     public static final  String URL ="http://10.47.2.247:9000";
     public static List<Boolean> isEdited;
+    public static List<Boolean> isPlublished;
 
     public static class  AddressLinks {
         public static final String POST = URL + "/api/address/create"; // @controllers.AddressController.createAddress

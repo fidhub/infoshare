@@ -19,6 +19,8 @@ import infoshare.services.Content.ContentService;
 import infoshare.services.Content.Impl.ContentServiceImp;
 
 import java.io.File;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Timer;
@@ -35,7 +37,7 @@ public class Header extends VerticalLayout implements Button.ClickListener {
     public Button home = new Button();
     public Button notify = new Button();
     public Button user = new Button();
-    private  Table notificationTable = new Table();
+    private Table notificationTable = new Table();
     public Header(MainLayout main) {
         this.main = main;
         setSizeFull();
@@ -211,7 +213,27 @@ public class Header extends VerticalLayout implements Button.ClickListener {
         notify.addClickListener((Button.ClickListener) this);
         user.addClickListener((Button.ClickListener)this);
     }
-    public  void refreshNotification(){
+
+    private String differInTime(Date dateCreated){
+        Date date1 = new Date();
+
+        long diff = date1.getTime() - dateCreated.getTime();
+        long diffSeconds = diff    / 1000 % 60;
+        long diffMinutes = diff   / (60 * 1000) % 60;
+        long diffHours   = diff  / (60 * 60 * 1000) % 24;
+        long diffDays    = diff / (24 * 60 * 60 * 1000);
+
+        if(diffDays > 0)
+            return diffDays +" Days ago";
+        if(diffHours > 0)
+            return diffHours +" Hours ago";
+         else if(diffMinutes > 0)
+            return diffMinutes + " Minutes ago";
+          else
+            return diffSeconds + " seconds ago";
+    }
+
+    public void refreshNotification(){
         int i = 0 ;
 
         try {
@@ -222,15 +244,14 @@ public class Header extends VerticalLayout implements Button.ClickListener {
                 notify.setCaption(i + "");
                 notify.setDescription(i + " un-edited tips content");
                 notificationTable.addItem(new Object[]{new Label(
-                        "<b>" + content.getCreator()
-                                + " created a new Tip</b><br><span>25 minutes ago</span><br>"
-                                + content.getContent().substring(0, 1), ContentMode.HTML)
+                        "<b>" + content.getCreator().toUpperCase()
+                                + "</b> created a new tip <br><span><i>"
+                                + differInTime(content.getDateCreated()) + "</i></span><br>"
+                                + "<b> TITLE: </b><i>" + content.getTitle() + "</i>", ContentMode.HTML)
                 }, content.getId());
             }
+        }catch (Exception e) {}
 
-        }catch (Exception e) {
-
-        }
         if(i==0){
             notify.removeStyleName("unread");
             notify.setCaption("");
