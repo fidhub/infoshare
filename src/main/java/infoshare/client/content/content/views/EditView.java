@@ -174,7 +174,7 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
         final ContentModel bean = ((BeanItem<ContentModel>) binder.getItemDataSource()).getBean();
         bean.setDateCreated(contentService.find(table.getValue().toString()).getDateCreated());
         final Content content = new Content.Builder(bean.getTitle())
-                .category(categoryService.find(bean.getCategory()).getDescription())
+                .category(categoryService.find(bean.getCategory()).getId())
                 .content(bean.getContent())
                 .contentType(bean.getContentType())
                 .creator(bean.getCreator())

@@ -3,6 +3,7 @@ package infoshare.services.users.Impl;
 import com.vaadin.spring.annotation.SpringComponent;
 import infoshare.RestApi.RestApiConnectorClass;
 import infoshare.RestApi.UrlPath;
+import infoshare.client.content.setup.models.UserModel;
 import infoshare.domain.Role;
 import infoshare.domain.User;
 import infoshare.services.roles.Impl.RoleServiceImpl;
@@ -26,17 +27,17 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public User save(User entity) {
-       return RestApiConnectorClass.create(UrlPath.UserLinks.POST,entity,User.class);
+    public User save(User user) {
+        return  RestApiConnectorClass.create(UrlPath.UserLinks.POST, user, User.class);
     }
 
     @Override
-    public User merge(User entity) {
-        return RestApiConnectorClass.update(UrlPath.UserLinks.PUT,entity);
+    public User merge(User user) {
+        return RestApiConnectorClass.update(UrlPath.UserLinks.PUT,user);
     }
 
     @Override
-    public void remove(User entity) {
+    public void remove(User user) {
 
     }
 

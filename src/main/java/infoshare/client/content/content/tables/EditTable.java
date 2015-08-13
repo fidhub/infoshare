@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * Created by hashcode on 2015/06/24.
@@ -53,7 +52,7 @@ public class EditTable extends Table{
     public void loadTable(Content content) {
         DateFormat formatter = new SimpleDateFormat("dd - MMMMMMM - yyyy");
         UrlPath.isEdited = RestApiConnectorClass.
-                readAll(UrlPath.ContentLinks.isEditedAndPlublished + content.getId(), Boolean.class);
+                readAll(UrlPath.ContentLinks.isEdited + content.getId(), Boolean.class);
         if (UrlPath.isEdited.contains(true)) {
             try {
                 addItem(new Object[]{

@@ -19,7 +19,12 @@ public class ContentServiceImp implements ContentService {
 
     @Override
     public Content find(String s) {
-        return RestApiConnectorClass.read(UrlPath.ContentLinks.GET_ID, s, Content.class);
+        try {
+            return RestApiConnectorClass.read(UrlPath.ContentLinks.GET_ID, s, Content.class);
+        }catch (Exception ep){
+            return null;
+        }
+
     }
 
     @Override

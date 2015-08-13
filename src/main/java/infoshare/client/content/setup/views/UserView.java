@@ -13,7 +13,6 @@ import infoshare.client.content.setup.models.UserModel;
 import infoshare.client.content.setup.tables.AddressTable;
 import infoshare.client.content.setup.tables.ContactTable;
 import infoshare.client.content.setup.tables.UserTable;
-import infoshare.domain.Address;
 import infoshare.domain.Role;
 import infoshare.domain.User;
 import infoshare.services.roles.Impl.RoleServiceImpl;
@@ -75,23 +74,11 @@ public class UserView extends VerticalLayout implements
             popUpWindow = getModelWind(addressForm,addressTable) ;
             getUI().addWindow(popUpWindow);
         }else if(source == userForm.addNewContact){
-            popUpWindow = getModelWind(addressForm,contactTable);
+            popUpWindow = getModelWind(contactForm,contactTable);
             getUI().addWindow(popUpWindow);
         }if((source == addressForm.cancel)||(source == contactForm.cancel)){
             popUpWindow.setModal(false);
             UI.getCurrent().removeWindow(popUpWindow);
-        }
-    }
-    private void saveContact(FieldGroup binder){
-        try {
-            binder.commit();
-            userService.save(getUserNewEntity(binder));
-            popUpWindow.setModal(false);
-            UI.getCurrent().removeWindow(popUpWindow);
-            Notification.show("Record ADDED!", Notification.Type.HUMANIZED_MESSAGE);
-        } catch (FieldGroup.CommitException e) {
-            Notification.show("Values MISSING!", Notification.Type.HUMANIZED_MESSAGE);
-
         }
     }
 
@@ -128,12 +115,12 @@ public class UserView extends VerticalLayout implements
             binder.commit();
             userService.save(getUserNewEntity(binder));
             getHome();
-            Notification.show("Record ADDED!", Notification.Type.TRAY_NOTIFICATION);
+            Notification.show("Record ADDED!", Notification.Type.HUMANIZED_MESSAGE);
         } catch (FieldGroup.CommitException e) {
-            Notification.show("Values MISSING!", Notification.Type.TRAY_NOTIFICATION);
+            Notification.show("Values MISSING!", Notification.Type.HUMANIZED_MESSAGE);
             getHome();
         } catch(Exception dp){
-            Notification.show("Username is already taken!", Notification.Type.TRAY_NOTIFICATION);
+            Notification.show("Username is already taken!", Notification.Type.HUMANIZED_MESSAGE);
             getHome();
         }
     }
@@ -157,9 +144,10 @@ public class UserView extends VerticalLayout implements
     }
     private User getUserNewEntity(FieldGroup binder) {
         final UserModel bean = ((BeanItem<UserModel>) binder.getItemDataSource()).getBean();
+        System.out.println(bean.getRoles()) ;
         final User user = new User.Builder(bean.getLastName())
                 .firstname(bean.getFirstName())
-                .role(bean.getRole())
+                .role(bean.getRoles())
                 .enable(bean.isEnable())
                 .password(bean.getPassword())
                 .username(bean.getUsername())
@@ -174,8 +162,8 @@ public class UserView extends VerticalLayout implements
         final UserModel bean = ((BeanItem<UserModel>) binder.getItemDataSource()).getBean();
         Set<String> userRoles = new HashSet<>();
 
-        if (bean.getRole()!= null) {
-            for (String roleId : bean.getRole()) {
+        if (bean.getRoles()!= null) {
+            for (String roleId : bean.getRoles()) {
                 Role role = roleService.find(roleId);
                 if (role != null) {
                     userRoles.add(role.getId());
@@ -243,7 +231,7 @@ public class UserView extends VerticalLayout implements
         model.setOtherName(user.getOtherName());
         model.setUsername(user.getUsername());
         model.setEnable(user.isEnable());
-        model.setRole(userRolesId);
+        model.setRoles(userRolesId);
         model.setAddress(user.getAddress()); //Todo : no route for entity yet
         model.setContact(user.getContact()); //Todo : no route for entity yet
         model.setPassword(user.getPassword());

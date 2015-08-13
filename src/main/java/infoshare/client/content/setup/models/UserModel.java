@@ -12,20 +12,21 @@ import java.util.Set;
  */
 public class UserModel implements Serializable{
 
-    @NotNull
+   // @NotNull
     private String otherName;
     @NotNull
     private String firstName;
     @NotNull
     private String lastName;
-    private String password;
+    private String password = "pass";
     private boolean enable;
     @NotNull
-    private Set<String> role = new HashSet<>();
+    private Set<String> roles = new HashSet<>();
     @NotNull
     private String username;
     //@NotNull
     private List<String> contact = new ArrayList<>();
+
    // @NotNull
     private List<String> address = new ArrayList<>();
 
@@ -69,12 +70,12 @@ public class UserModel implements Serializable{
         this.enable = enable;
     }
 
-    public Set<String> getRole() {
-        return role;
+    public Set<String> getRoles() {
+        return roles;
     }
 
-    public void setRole(Set<String> role) {
-        this.role = role;
+    public void setRoles(Set<String> roles) {
+        this.roles = roles;
     }
 
     public String getUsername() {
@@ -86,14 +87,17 @@ public class UserModel implements Serializable{
     }
 
     public List<String> getContact() {
+        contact.add("54321");
         return contact;
     }
 
     public void setContact(List<String> contact) {
+
         this.contact = contact;
     }
 
     public List<String> getAddress() {
+        address.add("12345");
         return address;
     }
 
