@@ -13,7 +13,6 @@ import infoshare.client.content.setup.models.UserModel;
 import infoshare.client.content.setup.tables.AddressTable;
 import infoshare.client.content.setup.tables.ContactTable;
 import infoshare.client.content.setup.tables.UserTable;
-import infoshare.domain.Address;
 import infoshare.domain.Role;
 import infoshare.domain.User;
 import infoshare.services.roles.Impl.RoleServiceImpl;
@@ -75,7 +74,7 @@ public class UserView extends VerticalLayout implements
             popUpWindow = getModelWind(addressForm,addressTable) ;
             getUI().addWindow(popUpWindow);
         }else if(source == userForm.addNewContact){
-            popUpWindow = getModelWind(addressForm,contactTable);
+            popUpWindow = getModelWind(contactForm,contactTable);
             getUI().addWindow(popUpWindow);
         }if((source == addressForm.cancel)||(source == contactForm.cancel)){
             popUpWindow.setModal(false);

@@ -27,7 +27,13 @@ public class ContactForm extends FormLayout {
         model = new ContactModel();
         item = new BeanItem<>(model);
         binder = new FieldGroup(item);
+        //edit.setVisible(false);
         setSizeUndefined();
+        addComponent(getLayout());
+
+    }
+
+    public GridLayout getLayout(){
 
         final GridLayout layout = new GridLayout(4,10);
         layout.setSpacing(true);
@@ -37,10 +43,12 @@ public class ContactForm extends FormLayout {
 
         layout.addComponent(phone,0,0);
         layout.addComponent(email,1,0);
-        layout.addComponent(contactType,1,1);
+        layout.addComponent(contactType,0,1);
+        layout.addComponent(getButtons(),0,2);
 
         addComponent(layout);
-        addComponent(getButtons());
+       // addComponent(getButtons());
+        return layout;
     }
 
     private HorizontalLayout getButtons(){
@@ -56,9 +64,9 @@ public class ContactForm extends FormLayout {
         layout.addComponent(cancel);
         clear = new Button("Clear");
         edit = new Button("Edit");
-        layout.addComponent(save);
+        //layout.addComponent(save);
         layout.addComponent(edit);
-        layout.addComponent(clear);
+        //layout.addComponent(clear);
 
         return layout;
     }
