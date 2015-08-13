@@ -41,7 +41,7 @@ public class ContactForm extends FormLayout {
         TextField email = getTextField("Email Address","email");
         TextField contactType = getTextField("contact Type","contactType");
 
-        layout.addComponent(phone,0,0);
+        layout.addComponent(phone, 0, 0);
         layout.addComponent(email,1,0);
         layout.addComponent(contactType,0,1);
         layout.addComponent(getButtons(),0,2);
@@ -60,12 +60,13 @@ public class ContactForm extends FormLayout {
         save.addStyleName(Reindeer.BUTTON_DEFAULT);
         save.setClickShortcut(ShortcutAction.KeyCode.ENTER);
         cancel = new Button("Cancel");
-        layout.addComponent(save);
-        layout.addComponent(cancel);
-        clear = new Button("Clear");
-        edit = new Button("Edit");
+        layout.addComponent(save)
+        ;edit = new Button("Edit");
         //layout.addComponent(save);
         layout.addComponent(edit);
+        layout.addComponent(cancel);
+        clear = new Button("Clear");
+
         //layout.addComponent(clear);
 
         return layout;
