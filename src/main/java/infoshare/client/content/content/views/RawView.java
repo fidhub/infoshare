@@ -133,13 +133,8 @@ public class RawView extends VerticalLayout implements
             final Content content = contentService.find(tableId);
             final ContentModel bean = getModel(content);
             form.binder.setItemDataSource(new BeanItem<>(bean));
-
-            if(popUp != null) {
-                UI.getCurrent().removeWindow(popUp);
-            }else {
-                UI.getCurrent().addWindow(popUp);
+              UI.getCurrent().addWindow(popUp);
                 popUp.setModal(true);
-            }
             getHome();
         }catch (Exception e){
             Notification.show("Select the row you wanna edit",

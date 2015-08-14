@@ -51,19 +51,21 @@ public class EditTable extends Table{
 
     public void loadTable(Content content) {
         DateFormat formatter = new SimpleDateFormat("dd - MMMMMMM - yyyy");
-        UrlPath.isEdited = RestApiConnectorClass.
-                readAll(UrlPath.ContentLinks.isEdited + content.getId(), Boolean.class);
-        if (UrlPath.isEdited.contains(true)) {
-            try {
-                addItem(new Object[]{
-                        content.getTitle(),
-                        categoryService.find(content.getCategory()).getName(),
-                        content.getCreator(),
-                        formatter.format(content.getDateCreated())
-                }, content.getId());
-            }catch (Exception r) {
-            }
+        if (!content.getSource().equalsIgnoreCase("mobile")) {
+            UrlPath.isEdited = RestApiConnectorClass.
+                    readAll(UrlPath.ContentLinks.isEdited + content.getSource(), Boolean.class);
+            if (UrlPath.isEdited.contains(true)) {
+                try {
+                    addItem(new Object[]{
+                            content.getTitle(),
+                            categoryService.find(content.getCategory()).getName(),
+                            content.getCreator(),
+                            formatter.format(content.getDateCreated())
+                    }, content.getId());
+                } catch (Exception r) {
+                }
             }
         }
+    }
 
 }

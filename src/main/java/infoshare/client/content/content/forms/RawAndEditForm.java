@@ -48,7 +48,7 @@ public class RawAndEditForm extends FormLayout {
         combo.setSpacing(true);
         combo.addComponent(popUpContentTypeCmb);
         combo.addComponent(popUpCategoryCmb);
-        combo.addComponent(popUpSourceCmb);
+       // combo.addComponent(popUpSourceCmb);
 
         GridLayout gridLayout = new  GridLayout(4,7);
         gridLayout.setSpacing(true);

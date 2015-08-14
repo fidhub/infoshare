@@ -16,8 +16,11 @@ public class AddressForm extends FormLayout {
     private AddressModel model;
     public BeanItem<AddressModel> item;
     public FieldGroup binder;
-    public Button save ;
-    public Button cancel;
+    public final Button save = new Button("Save");
+    public final Button edit = new Button("Edit");
+    public final Button cancel = new Button("Cancel");
+    public final Button update = new Button("Update");
+    public final Button exit = new Button("Exit");
 
     public AddressForm() {
         this.model = new AddressModel();
@@ -40,7 +43,7 @@ public class AddressForm extends FormLayout {
         layout.addComponent(physicalAddress,1,0);
         layout.addComponent(addressType,0,1);
         layout.addComponent(postalCode,1,1);
-        layout.addComponent(getButtons(),0,2);
+        layout.addComponent(getButtons(),0,2,1,2);
         return layout;
     }
 
@@ -49,13 +52,13 @@ public class AddressForm extends FormLayout {
         layout.setSizeUndefined();
         layout.setSpacing(true);
 
-        save = new Button("Save");
         save.addStyleName(Reindeer.BUTTON_DEFAULT);
         save.setClickShortcut(ShortcutAction.KeyCode.ENTER);
-        cancel = new Button("cancel");
-
         layout.addComponent(save);
+        layout.addComponent(edit);
+        layout.addComponent(update);
         layout.addComponent(cancel);
+        layout.addComponent(exit);
 
         return layout;
     }

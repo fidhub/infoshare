@@ -60,24 +60,20 @@ public class RawTable extends Table {
 
     public void loadTable(Content content) {
         DateFormat formatter = new SimpleDateFormat("dd - MMMMMMM - yyyy");
-        String cat ;
-           if (content.getContentType().equalsIgnoreCase("raw")) {
-
+        if (content.getSource().equalsIgnoreCase("mobile")) {
+            UrlPath.isEdited = RestApiConnectorClass.readAll(UrlPath.ContentLinks.isEdited + content.getId(), Boolean.class);
+            if (!UrlPath.isEdited.contains(true)) {
                 try {
-                    if(content.getCategory().equalsIgnoreCase("uncategorized"))
-                    cat = content.getCategory();
-                else
-                    cat = categoryService.find(content.getCategory()).getName();
                     addItem(new Object[]{
                             content.getTitle(),
-                            cat,
+                            content.getCategory(),
                             content.getCreator(),
                             formatter.format(content.getDateCreated())
                     }, content.getId());
-                }catch (Exception r){
-                    r.printStackTrace();
+                } catch (Exception r) {
                 }
-           }
+            }
+        }
     }
 }
 

@@ -67,7 +67,7 @@ public class ContactForm extends FormLayout {
         layout.addComponent(cancel);
         clear = new Button("Clear");
 
-        //layout.addComponent(clear);
+        //layout.addComponent(exit);
 
         return layout;
     }

@@ -26,10 +26,21 @@ public class AddressTable extends TreeTable {
         addContainerProperty("Postal Code",String.class,null);
         addContainerProperty("Address Type",String.class,null);
 
-       // HierarchicalContainer
+        for(Address address: service.findAll())
+            loadTable(address);
         setNullSelectionAllowed(false);
         setSelectable(true);
         setImmediate(true);
     }
 
+    private void loadTable(Address address){
+            try{
+                addItem(new Object[]{
+                        address.getPostalAddress(),
+                        address.getPhysicalAddress(),
+                        address.getPostalCode(),
+                        address.getAddressType()
+                },address.getId());
+            }catch (Exception e){}
+    }
 }

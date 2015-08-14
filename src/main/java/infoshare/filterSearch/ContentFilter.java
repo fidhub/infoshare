@@ -9,9 +9,9 @@ import infoshare.services.Content.Impl.ContentServiceImp;
 import infoshare.services.category.CategoryService;
 import infoshare.services.category.Impl.CategoryServiceImpl;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -26,23 +26,28 @@ public class ContentFilter {
         getField();
     }
     public synchronized List<Content> findAll(String stringFilter) {
+        DateFormat formatter = new SimpleDateFormat("dd - MMMMMMM - yyyy");
         ArrayList arrayList = new ArrayList();
-        for (Content contact : contacts.findAll()) {
+        String cat;
+        for (Content content : contacts.findAll()) {
+            if(!content.getCategory().equalsIgnoreCase("uncategorized"))
+                cat = categoryService.find(content.getCategory().toString()).getName().toLowerCase();
+                else cat = content.getCategory().toString().toLowerCase();
+
             try {
                 boolean passesFilter = (stringFilter == null || stringFilter.isEmpty())
-                        || contact.getTitle().toString().toLowerCase()
+                        || content.getTitle().toString().toLowerCase()
                         .contains(stringFilter.toLowerCase())
-                        ||categoryService.find(contact.getCategory().toString()).getName().toLowerCase()
+                        ||cat.contains(stringFilter.toLowerCase())
+                        || content.getCreator().toString().toLowerCase()
                         .contains(stringFilter.toLowerCase())
-                        ||contact.getCreator().toString().toLowerCase()
+                        || content.getSource().toString().toLowerCase()
                         .contains(stringFilter.toLowerCase())
-                        ||contact.getSource().toString().toLowerCase()
-                        .contains(stringFilter.toLowerCase())
-                        ||contact.getDateCreated().toString().toLowerCase()
+                        ||formatter.format(content.getDateCreated()).toString().toLowerCase()
                         .contains(stringFilter.toLowerCase());
 
                 if (passesFilter) {
-                    arrayList.add(contact);
+                    arrayList.add(content);
                 }
             } catch (Exception ex) {
                 Logger.getLogger(ex.getLocalizedMessage());

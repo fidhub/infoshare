@@ -9,12 +9,16 @@ import infoshare.client.content.setup.SetupMenu;
 import infoshare.client.content.setup.forms.AddressForm;
 import infoshare.client.content.setup.forms.ContactForm;
 import infoshare.client.content.setup.forms.UserForm;
+import infoshare.client.content.setup.models.AddressModel;
 import infoshare.client.content.setup.models.UserModel;
 import infoshare.client.content.setup.tables.AddressTable;
 import infoshare.client.content.setup.tables.ContactTable;
 import infoshare.client.content.setup.tables.UserTable;
+import infoshare.domain.Address;
 import infoshare.domain.Role;
 import infoshare.domain.User;
+import infoshare.services.Address.AddressService;
+import infoshare.services.Address.Impl.AddressServiceImpl;
 import infoshare.services.roles.Impl.RoleServiceImpl;
 import infoshare.services.roles.RoleService;
 import infoshare.services.users.Impl.UserServiceImpl;
@@ -42,6 +46,7 @@ public class UserView extends VerticalLayout implements
 
     private UserService userService = new UserServiceImpl();
     private RoleService roleService = new RoleServiceImpl();
+    private AddressService addressService = new AddressServiceImpl();
     private Window popUpWindow =null;
     public UserView(MainLayout app) {
         main = app;
@@ -77,7 +82,7 @@ public class UserView extends VerticalLayout implements
         }else if(source == userForm.addNewContact){
             popUpWindow = getModelWind(contactForm,contactTable);
             getUI().addWindow(popUpWindow);
-        }if((source == addressForm.cancel)||(source == contactForm.cancel)){
+        }if((source == addressForm.exit)||(source == contactForm.cancel)){
             popUpWindow.setModal(false);
             UI.getCurrent().removeWindow(popUpWindow);
         }
@@ -85,7 +90,7 @@ public class UserView extends VerticalLayout implements
 
     private  Window getModelWind(FormLayout layout,Table whichTable){
         final Window window = new Window();
-       // window.setHeight("500px");
+        setEditContactFormProperties();
         window.setWidth(50.0f, Unit.PERCENTAGE);
         window.setClosable(false);
         window.setResizable(false);
@@ -113,6 +118,14 @@ public class UserView extends VerticalLayout implements
                 setReadFormProperties();
             }catch (Exception r){
             }
+        }
+        if (property == addressTable){
+            try {
+                final Address address = addressService.find(addressTable.getValue().toString());
+                final AddressModel bean = getAddressModel(address);
+                addressForm.binder.setItemDataSource(new BeanItem<>(bean));
+                setReadContactFormProperties();
+            }catch (Exception e){}
         }
     }
     private void saveForm(FieldGroup binder) {
@@ -208,22 +221,47 @@ public class UserView extends VerticalLayout implements
         userForm.delete.setVisible(true);
         userForm.update.setVisible(false);
     }
+    private void setEditContactFormProperties(){
+        addressForm.binder.setReadOnly(false);
+        addressForm.save.setVisible(true);
+        addressForm.edit.setVisible(false);
+        addressForm.cancel.setVisible(true);
+        addressForm.update.setVisible(false);
+        addressForm.exit.setVisible(true);
+    }
+    private void setReadContactFormProperties(){
+        addressForm.binder.setReadOnly(true);
+        addressForm.save.setVisible(false);
+        addressForm.edit.setVisible(true);
+        addressForm.cancel.setVisible(true);
+        addressForm.update.setVisible(true);
+        addressForm.exit.setVisible(false);
+    }
     private void addListeners() {
         //Register Button Listeners
-        userForm.save.addClickListener((Button.ClickListener) this);
-        userForm.edit.addClickListener((Button.ClickListener) this);
-        userForm.cancel.addClickListener((Button.ClickListener) this);
-        userForm.update.addClickListener((Button.ClickListener) this);
-        userForm.delete.addClickListener((Button.ClickListener) this);
-        table.addValueChangeListener((Property.ValueChangeListener) this);
-        contactTable.addValueChangeListener((Property.ValueChangeListener) this);
-        userForm.rolesList.addValueChangeListener((Property.ValueChangeListener) this);
-        userForm.addNewAddress.addClickListener((Button.ClickListener) this);
-        userForm.addNewContact.addClickListener((Button.ClickListener) this);
-        addressForm.save.addClickListener((Button.ClickListener) this);
-        addressForm.cancel.addClickListener((Button.ClickListener) this);
-        contactForm.save.addClickListener((Button.ClickListener) this);
-        contactForm.cancel.addClickListener((Button.ClickListener) this);
+        userForm.save.addClickListener(this);
+        userForm.edit.addClickListener(this);
+        userForm.cancel.addClickListener(this);
+        userForm.update.addClickListener(this);
+        userForm.delete.addClickListener(this);
+
+        addressForm.save.addClickListener(this);
+        addressForm.edit.addClickListener(this);
+        addressForm.cancel.addClickListener(this);
+        addressForm.update.addClickListener(this);
+        addressForm.exit.addClickListener(this);
+        addressTable.addValueChangeListener(this);
+
+        table.addValueChangeListener(this);
+        contactTable.addValueChangeListener(this);
+        userForm.rolesList.addValueChangeListener(this);
+        userForm.addNewAddress.addClickListener(this);
+        userForm.addNewContact.addClickListener(this);
+
+        addressForm.save.addClickListener(this);
+        addressForm.cancel.addClickListener(this);
+        contactForm.save.addClickListener(this);
+        contactForm.clear.addClickListener(this);
     }
     public UserModel getModel(User user) {
         Set<String> userRolesId = new HashSet<>();
@@ -242,5 +280,12 @@ public class UserView extends VerticalLayout implements
         model.setPassword(user.getPassword());
         return model;
     }
-
+    public AddressModel getAddressModel(Address address){
+        AddressModel model = new AddressModel();
+        model.setAddressType(address.getAddressType());
+        model.setPhysicalAddress(address.getPhysicalAddress());
+        model.setPostalCode(address.getPostalCode());
+        model.setPostalAddress(address.getPostalAddress());
+        return model;
+    }
 }
