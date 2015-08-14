@@ -60,8 +60,8 @@ public class ContactForm extends FormLayout {
         save.addStyleName(Reindeer.BUTTON_DEFAULT);
         save.setClickShortcut(ShortcutAction.KeyCode.ENTER);
         cancel = new Button("Cancel");
-        layout.addComponent(save)
-        ;edit = new Button("Edit");
+        layout.addComponent(save);
+        edit = new Button("Edit");
         //layout.addComponent(save);
         layout.addComponent(edit);
         layout.addComponent(cancel);
