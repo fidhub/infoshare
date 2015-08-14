@@ -82,18 +82,6 @@ public class UserView extends VerticalLayout implements
             UI.getCurrent().removeWindow(popUpWindow);
         }
     }
-    private void saveContact(FieldGroup binder){
-        try {
-            binder.commit();
-            userService.save(getUserNewEntity(binder));
-            popUpWindow.setModal(false);
-            UI.getCurrent().removeWindow(popUpWindow);
-            Notification.show("Record ADDED!", Notification.Type.HUMANIZED_MESSAGE);
-        } catch (FieldGroup.CommitException e) {
-            Notification.show("Values MISSING!", Notification.Type.HUMANIZED_MESSAGE);
-
-        }
-    }
 
     private  Window getModelWind(FormLayout layout,Table whichTable){
         final Window window = new Window();
@@ -132,12 +120,12 @@ public class UserView extends VerticalLayout implements
             binder.commit();
             userService.save(getUserNewEntity(binder));
             getHome();
-            Notification.show("Record ADDED!", Notification.Type.TRAY_NOTIFICATION);
+            Notification.show("Record ADDED!", Notification.Type.HUMANIZED_MESSAGE);
         } catch (FieldGroup.CommitException e) {
-            Notification.show("Values MISSING!", Notification.Type.TRAY_NOTIFICATION);
+            Notification.show("Values MISSING!", Notification.Type.HUMANIZED_MESSAGE);
             getHome();
         } catch(Exception dp){
-            Notification.show("Username is already taken!", Notification.Type.TRAY_NOTIFICATION);
+            Notification.show("Username is already taken!", Notification.Type.HUMANIZED_MESSAGE);
             getHome();
         }
     }
@@ -161,9 +149,10 @@ public class UserView extends VerticalLayout implements
     }
     private User getUserNewEntity(FieldGroup binder) {
         final UserModel bean = ((BeanItem<UserModel>) binder.getItemDataSource()).getBean();
+        System.out.println(bean.getRoles()) ;
         final User user = new User.Builder(bean.getLastName())
                 .firstname(bean.getFirstName())
-                .role(bean.getRole())
+                .role(bean.getRoles())
                 .enable(bean.isEnable())
                 .password(bean.getPassword())
                 .username(bean.getUsername())
@@ -178,8 +167,8 @@ public class UserView extends VerticalLayout implements
         final UserModel bean = ((BeanItem<UserModel>) binder.getItemDataSource()).getBean();
         Set<String> userRoles = new HashSet<>();
 
-        if (bean.getRole()!= null) {
-            for (String roleId : bean.getRole()) {
+        if (bean.getRoles()!= null) {
+            for (String roleId : bean.getRoles()) {
                 Role role = roleService.find(roleId);
                 if (role != null) {
                     userRoles.add(role.getId());
@@ -247,7 +236,7 @@ public class UserView extends VerticalLayout implements
         model.setOtherName(user.getOtherName());
         model.setUsername(user.getUsername());
         model.setEnable(user.isEnable());
-        model.setRole(userRolesId);
+        model.setRoles(userRolesId);
         model.setAddress(user.getAddress()); //Todo : no route for entity yet
         model.setContact(user.getContact()); //Todo : no route for entity yet
         model.setPassword(user.getPassword());

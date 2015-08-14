@@ -133,8 +133,13 @@ public class RawView extends VerticalLayout implements
             final Content content = contentService.find(tableId);
             final ContentModel bean = getModel(content);
             form.binder.setItemDataSource(new BeanItem<>(bean));
-            UI.getCurrent().addWindow(popUp);
-            popUp.setModal(true);
+
+            if(popUp != null) {
+                UI.getCurrent().removeWindow(popUp);
+            }else {
+                UI.getCurrent().addWindow(popUp);
+                popUp.setModal(true);
+            }
             getHome();
         }catch (Exception e){
             Notification.show("Select the row you wanna edit",
@@ -167,7 +172,6 @@ public class RawView extends VerticalLayout implements
                     .creator(bean.getCreator())
                     .dateCreated(bean.getDateCreated())
                     .source(table.getValue().toString())
-                            // .id(table.getValue().toString())
                     .build();
             return content;
         }catch (Exception e){

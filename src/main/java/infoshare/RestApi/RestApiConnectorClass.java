@@ -77,10 +77,10 @@ public class RestApiConnectorClass {
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<T> entity = new HttpEntity<>(classTypeObject,headers);
-        JsonParser parser = new JsonParser();
-        JsonElement element = parser.parse(restTemplate.postForObject(url, entity, String.class)).getAsJsonObject();
-
+        HttpEntity<T> body = new HttpEntity<>(classTypeObject,headers);
+        JsonElement element = new JsonParser()
+               .parse(restTemplate.postForObject(url, body, String.class))/*Todo: post*/
+                .getAsJsonObject();
         Gson gson = new GsonBuilder().registerTypeAdapter(Date.class,
                 (JsonDeserializer<Date>) (jsonElement, type,
                 jsonDeserializationContext) -> new Date(jsonElement.getAsJsonPrimitive().getAsLong()))
@@ -95,8 +95,8 @@ public class RestApiConnectorClass {
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<T> entity = new HttpEntity<>( classType,headers);
-        restTemplate.put(url, entity);
+        HttpEntity<T> body = new HttpEntity<>( classType,headers);
+        restTemplate.put(url, body);
 
         return classType;
     }

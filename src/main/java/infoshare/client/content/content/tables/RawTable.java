@@ -11,6 +11,8 @@ import infoshare.domain.ContentType;
 import infoshare.services.Content.ContentService;
 import infoshare.services.Content.Impl.ContentServiceImp;
 
+import infoshare.services.ContentType.ContentTypeService;
+import infoshare.services.ContentType.Impl.ContentTypeServiceImpl;
 import infoshare.services.category.CategoryService;
 import infoshare.services.category.Impl.CategoryServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,7 @@ public class RawTable extends Table {
     @Autowired
     private ContentService contentService = new ContentServiceImp();
     private CategoryService categoryService = new CategoryServiceImpl();
+    private ContentTypeService contentTypeService = new ContentTypeServiceImpl();
 
 
 
@@ -57,22 +60,25 @@ public class RawTable extends Table {
 
     public void loadTable(Content content) {
         DateFormat formatter = new SimpleDateFormat("dd - MMMMMMM - yyyy");
-        UrlPath.isEdited = RestApiConnectorClass.
-                readAll(UrlPath.ContentLinks.isEditedAndPlublished + content.getId(), Boolean.class);
-        for (int i = 0; i < UrlPath.isEdited.size(); i++) {
-            if (UrlPath.isEdited.get(i) ==false) {
+        String cat ;
+           if (content.getContentType().equalsIgnoreCase("raw")) {
 
                 try {
+                    if(content.getCategory().equalsIgnoreCase("uncategorized"))
+                    cat = content.getCategory();
+                else
+                    cat = categoryService.find(content.getCategory()).getName();
                     addItem(new Object[]{
                             content.getTitle(),
-                            categoryService.find(content.getCategory()).getName(),
+                            cat,
                             content.getCreator(),
                             formatter.format(content.getDateCreated())
                     }, content.getId());
                 }catch (Exception r){
+                    r.printStackTrace();
                 }
-            }
-        }
+           }
     }
-
 }
+
+

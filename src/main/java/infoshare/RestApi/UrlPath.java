@@ -37,8 +37,9 @@ public class UrlPath {
         public static final String GET_ID  = URL+"/api/cont/";          //@controllers.CategoryController.getCategory(id)
         public static final String PUT     = URL+"/api/cont/update";    //@controllers.CategoryController.update
         public static final String GETALL  = URL+"/api/cont/get/conts";      //@controllers.CategoryController.getAll
-        public static final String isEditedAndPlublished  = URL+"/api/cont/edited/";   // @controllers.ContentController.isEditedAndPlublished(id)
-        public static final String isPlublished  = URL+"/api/cont/published/";   // @controllers.ContentController.isEditedAndPlublished(id)
+        public static final String isEdited = URL+"/api/cont/edited/";   // @controllers.ContentController.isEdited(id)
+        public static final String isPlublished  = URL+"/api/cont/published/";   // @controllers.ContentController.isEdited(id)
+        public static final String byType   = URL+"/api/cont/bytype/";   // @controllers.ContentController.getContentByTypeId(id,num)
     }
 
      public static class ContentTypeLinks {

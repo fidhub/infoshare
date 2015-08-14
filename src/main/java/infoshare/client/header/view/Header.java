@@ -9,6 +9,8 @@ import com.vaadin.ui.*;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.themes.ChameleonTheme;
 import com.vaadin.ui.themes.ValoTheme;
+import infoshare.RestApi.RestApiConnectorClass;
+import infoshare.RestApi.UrlPath;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.content.ContentMenu;
 import infoshare.client.content.content.views.RawView;
@@ -21,9 +23,8 @@ import infoshare.services.Content.Impl.ContentServiceImp;
 import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Collection;
-import java.util.Date;
-import java.util.Timer;
+import java.util.*;
+import java.util.Calendar;
 
 /**
  * Created by hashcode on 2015/06/23.
@@ -216,16 +217,26 @@ public class Header extends VerticalLayout implements Button.ClickListener {
 
     private String differInTime(Date dateCreated){
         Date date1 = new Date();
+        Calendar startCalendar = new GregorianCalendar();
+        startCalendar.setTime(dateCreated);
+        Calendar endCalendar = new GregorianCalendar();
+        endCalendar.setTime(date1);
 
+        int diffYear = endCalendar.get(Calendar.YEAR) - startCalendar.get(Calendar.YEAR);
+        int diffMonth = diffYear * 12 + endCalendar.get(Calendar.MONTH) - startCalendar.get(Calendar.MONTH);
         long diff = date1.getTime() - dateCreated.getTime();
         long diffSeconds = diff    / 1000 % 60;
         long diffMinutes = diff   / (60 * 1000) % 60;
         long diffHours   = diff  / (60 * 60 * 1000) % 24;
         long diffDays    = diff / (24 * 60 * 60 * 1000);
 
-        if(diffDays > 0)
+        if(diffYear > 0)
+            return diffYear +" Years ago";
+        else if (diffMonth >0)
+            return diffMonth +" Month(s) ago";
+        else if(diffDays > 0)
             return diffDays +" Days ago";
-        if(diffHours > 0)
+         if(diffHours > 0)
             return diffHours +" Hours ago";
          else if(diffMinutes > 0)
             return diffMinutes + " Minutes ago";
@@ -283,7 +294,7 @@ public class Header extends VerticalLayout implements Button.ClickListener {
     private Component getLogo(){
         final HorizontalLayout logo = new HorizontalLayout();
         FileResource resource = new FileResource(
-                new File("src/main/webapp/VAADIN/themes/dashboard/headeredited.jpg"));
+                new File("src/main/webapp/VAADIN/themes/dashboard/Kujali Logo.png"));
         Image logoImage = new Image(null,resource);
         logoImage.addStyleName("logo-header-image");
         logoImage.setHeight(80.0f, Unit.PIXELS);

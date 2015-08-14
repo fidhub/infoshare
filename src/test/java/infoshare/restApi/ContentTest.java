@@ -20,7 +20,7 @@ public class ContentTest {
         model.setDateCreated(new Date());
         model.setCreator("thulebona hadebe");
         model.setSource("mobile");
-        model.setCategory("Treatment");
+        model.setCategory("uncategorized");
         model.setTitle("Cancer prevention");
         model.setContent(" Using any type of tobacco puts you on a collision course with cancer." +
                 " Smoking has been linked to various types of cancer — including cancer of the lung, bladder," +
@@ -54,7 +54,7 @@ public class ContentTest {
 
     @Test
     public void testRaw() throws Exception {
-        List<Boolean> list = RestApiConnectorClass.readAll(UrlPath.ContentLinks .isEditedAndPlublished+"98fe2ef595181b72cdd3ec085508fb40",Boolean.class);
+        List<Boolean> list = RestApiConnectorClass.readAll(UrlPath.ContentLinks .isEdited +"98fe2ef595181b72cdd3ec085508fb40",Boolean.class);
 
         List<Content> contents = RestApiConnectorClass.readAll(UrlPath.ContentLinks.GETALL,Content.class);
         System.out.println(list);

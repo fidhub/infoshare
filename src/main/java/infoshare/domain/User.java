@@ -1,8 +1,6 @@
 package infoshare.domain;
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableSet;
-import jdk.nashorn.internal.ir.annotations.Immutable;
+
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -36,7 +34,7 @@ public class User implements Serializable, Comparable<User> {
         this.lastName = builder.lastName;
         this.otherName = builder.otherName;
         this.password = builder.password;
-        this.roles = builder.roles;
+        this.roles = builder.role;
         this.username = builder.username;
         this.contact = builder.contact;
         this.address = builder.address;
@@ -86,14 +84,14 @@ public class User implements Serializable, Comparable<User> {
     }
 
     public static class Builder {
-        private String id;
+        private String id ;
         private String otherName;
         private String firstName;
         private String lastName;
         private String username;
         private boolean enable;
         private String password;
-        private Set<String> roles = new HashSet<>();
+        private Set<String> role = new HashSet<>();
         private List<String> contact = new ArrayList<>();
         private List<String> address = new ArrayList<>();
 
@@ -106,7 +104,7 @@ public class User implements Serializable, Comparable<User> {
             this.firstName = person.firstName;
             this.otherName = person.otherName;
             this.password = person.password;
-            this.roles = person.roles;
+            this.role = person.roles;
             this.username = person.username;
             this.enable = person.enable;
             this.contact = person.contact;
@@ -142,7 +140,7 @@ public class User implements Serializable, Comparable<User> {
         }
 
         public Builder role(Set<String> value) {
-            this.roles = value;
+            this.role = value;
             return this;
         }
 

@@ -165,7 +165,9 @@
 
   }
   .logo-header-image{
-    border-radius: 20%;
+    margin-left: 30%;
+    margin-top: -20%;
+
   }
   .dashboard-view {
     @include width-range($max: 480px) {
