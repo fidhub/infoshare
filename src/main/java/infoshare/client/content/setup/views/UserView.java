@@ -51,6 +51,7 @@ public class UserView extends VerticalLayout implements
         contactForm = new ContactForm();
         contactTable = new ContactTable(main);
         table = new UserTable(main);
+        contactForm.edit.setVisible(false);
         setSizeFull();
         addComponent(userForm);
         addComponent(table);
@@ -100,6 +101,10 @@ public class UserView extends VerticalLayout implements
     @Override
     public void valueChange(Property.ValueChangeEvent event) {
         final Property property = event.getProperty();
+        if (property == contactTable){
+            contactForm.edit.setVisible(true);
+            contactForm.save.setVisible(false);
+        }
         if (property == table) {
             try {
                 final User user = userService.find(table.getValue().toString());
@@ -211,10 +216,10 @@ public class UserView extends VerticalLayout implements
         userForm.update.addClickListener((Button.ClickListener) this);
         userForm.delete.addClickListener((Button.ClickListener) this);
         table.addValueChangeListener((Property.ValueChangeListener) this);
+        contactTable.addValueChangeListener((Property.ValueChangeListener) this);
         userForm.rolesList.addValueChangeListener((Property.ValueChangeListener) this);
         userForm.addNewAddress.addClickListener((Button.ClickListener) this);
         userForm.addNewContact.addClickListener((Button.ClickListener) this);
-
         addressForm.save.addClickListener((Button.ClickListener) this);
         addressForm.cancel.addClickListener((Button.ClickListener) this);
         contactForm.save.addClickListener((Button.ClickListener) this);
@@ -237,6 +242,5 @@ public class UserView extends VerticalLayout implements
         model.setPassword(user.getPassword());
         return model;
     }
-
 
 }
