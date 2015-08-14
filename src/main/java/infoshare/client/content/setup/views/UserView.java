@@ -52,6 +52,7 @@ public class UserView extends VerticalLayout implements
         contactTable = new ContactTable(main);
         table = new UserTable(main);
         contactForm.edit.setVisible(false);
+        contactForm.clear.setVisible(false);
         setSizeFull();
         addComponent(userForm);
         addComponent(table);
@@ -104,6 +105,7 @@ public class UserView extends VerticalLayout implements
         if (property == contactTable){
             contactForm.edit.setVisible(true);
             contactForm.save.setVisible(false);
+            contactForm.clear.setVisible(true);
         }
         if (property == table) {
             try {
