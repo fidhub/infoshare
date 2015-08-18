@@ -17,10 +17,12 @@ public class ContactForm extends FormLayout {
     private final ContactModel model;
     public final BeanItem<ContactModel> item;
     public final FieldGroup binder;
-    public Button save ;
-    public Button cancel;
-    public Button clear;
-    public Button edit;
+
+    public Button save = new Button("Save");
+    public Button cancel = new Button("Cancel");
+    public Button update = new Button("Update");
+    public Button edit = new Button("Edit");
+    public Button exit = new Button("Exit");
 
 
     public ContactForm() {
@@ -55,19 +57,15 @@ public class ContactForm extends FormLayout {
         layout.setSizeUndefined();
         layout.setSpacing(true);
 
-        save = new Button("Save");
         save.addStyleName(Reindeer.BUTTON_DEFAULT);
         save.setClickShortcut(ShortcutAction.KeyCode.ENTER);
         layout.addComponent(save);
-        edit = new Button("Edit");
         layout.addComponent(edit);
-        clear = new Button("Clear");
-        layout.addComponent(clear);
-        cancel = new Button("Cancel");
+        layout.addComponent(update);
+        //layout.addComponent(edit);
+        //layout.addComponent(edit);
         layout.addComponent(cancel);
-
-
-        //layout.addComponent(exit);
+        layout.addComponent(exit);
 
         return layout;
     }

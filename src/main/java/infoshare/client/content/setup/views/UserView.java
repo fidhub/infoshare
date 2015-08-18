@@ -3,22 +3,18 @@ package infoshare.client.content.setup.views;
 import com.vaadin.data.Property;
 import com.vaadin.data.fieldgroup.FieldGroup;
 import com.vaadin.data.util.BeanItem;
-import com.vaadin.ui.*;
+import com.vaadin.ui.Button;
+import com.vaadin.ui.Notification;
+import com.vaadin.ui.VerticalLayout;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.setup.SetupMenu;
-import infoshare.client.content.setup.forms.AddressForm;
 import infoshare.client.content.setup.forms.ContactForm;
 import infoshare.client.content.setup.forms.UserForm;
-import infoshare.client.content.setup.models.AddressModel;
 import infoshare.client.content.setup.models.UserModel;
-import infoshare.client.content.setup.tables.AddressTable;
 import infoshare.client.content.setup.tables.ContactTable;
 import infoshare.client.content.setup.tables.UserTable;
-import infoshare.domain.Address;
 import infoshare.domain.Role;
 import infoshare.domain.User;
-import infoshare.services.Address.AddressService;
-import infoshare.services.Address.Impl.AddressServiceImpl;
 import infoshare.services.roles.Impl.RoleServiceImpl;
 import infoshare.services.roles.RoleService;
 import infoshare.services.users.Impl.UserServiceImpl;
@@ -40,20 +36,20 @@ public class UserView extends VerticalLayout implements
     private final ContactForm contactForm;
     private final ContactTable contactTable;
 
-
-
     private UserService userService = new UserServiceImpl();
     private RoleService roleService = new RoleServiceImpl();
     private AddressView addressView ;
+    private ContactView contactView;
     public UserView(MainLayout app) {
         main = app;
         addressView = new AddressView(main);
+        contactView = new ContactView(main);
         userForm = new UserForm();
         contactForm = new ContactForm();
         contactTable = new ContactTable(main);
         table = new UserTable(main);
         contactForm.edit.setVisible(false);
-        contactForm.clear.setVisible(false);
+        contactForm.update.setVisible(false);
         setSizeFull();
         addComponent(userForm);
         addComponent(table);
@@ -77,7 +73,8 @@ public class UserView extends VerticalLayout implements
             addressView.setModal(true);
             getUI().addWindow(addressView);
         }else if(source == userForm.addNewContact){
-
+            contactView.setModal(true);
+            getUI().addWindow(contactView);
         }
     }
 
@@ -88,7 +85,8 @@ public class UserView extends VerticalLayout implements
         if (property == contactTable){
             contactForm.edit.setVisible(true);
             contactForm.save.setVisible(false);
-            contactForm.clear.setVisible(true);
+            contactForm.update.setVisible(true);
+            contactForm.exit.setVisible(false);
         }
         if (property == table) {
             try {
@@ -192,6 +190,8 @@ public class UserView extends VerticalLayout implements
         userForm.delete.setVisible(false);
         userForm.update.setVisible(true);
     }
+
+
     private void setReadFormProperties() {
         userForm.binder.setReadOnly(true);
         //Buttons Behaviour
@@ -215,7 +215,8 @@ public class UserView extends VerticalLayout implements
         userForm.addNewAddress.addClickListener(this);
         userForm.addNewContact.addClickListener(this);
         contactForm.save.addClickListener(this);
-        contactForm.clear.addClickListener(this);
+        contactForm.update.addClickListener(this);
+        contactForm.exit.addClickListener(this);
     }
     public UserModel getModel(User user) {
         Set<String> userRolesId = new HashSet<>();
