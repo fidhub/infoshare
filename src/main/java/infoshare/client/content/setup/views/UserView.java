@@ -6,19 +6,12 @@ import com.vaadin.data.util.BeanItem;
 import com.vaadin.ui.*;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.setup.SetupMenu;
-import infoshare.client.content.setup.forms.AddressForm;
-import infoshare.client.content.setup.forms.ContactForm;
 import infoshare.client.content.setup.forms.UserForm;
-import infoshare.client.content.setup.models.AddressModel;
 import infoshare.client.content.setup.models.UserModel;
 import infoshare.client.content.setup.tables.AddressTable;
-import infoshare.client.content.setup.tables.ContactTable;
 import infoshare.client.content.setup.tables.UserTable;
-import infoshare.domain.Address;
 import infoshare.domain.Role;
 import infoshare.domain.User;
-import infoshare.services.Address.AddressService;
-import infoshare.services.Address.Impl.AddressServiceImpl;
 import infoshare.services.roles.Impl.RoleServiceImpl;
 import infoshare.services.roles.RoleService;
 import infoshare.services.users.Impl.UserServiceImpl;
@@ -37,23 +30,13 @@ public class UserView extends VerticalLayout implements
     private final MainLayout main;
     private final UserForm userForm;
     private final UserTable table;
-    private final ContactForm contactForm;
-    private final ContactTable contactTable;
-
-
-
     private UserService userService = new UserServiceImpl();
     private RoleService roleService = new RoleServiceImpl();
     private AddressView addressView ;
     public UserView(MainLayout app) {
         main = app;
-        addressView = new AddressView(main);
         userForm = new UserForm();
-        contactForm = new ContactForm();
-        contactTable = new ContactTable(main);
         table = new UserTable(main);
-        contactForm.edit.setVisible(false);
-        contactForm.clear.setVisible(false);
         setSizeFull();
         addComponent(userForm);
         addComponent(table);
@@ -74,8 +57,12 @@ public class UserView extends VerticalLayout implements
         } else if (source == userForm.delete) {
             deleteForm(userForm.binder);
         }else if(source == userForm.addNewAddress){
-            addressView.setModal(true);
-            getUI().addWindow(addressView);
+            try {
+                addressView.setModal(true);
+                getUI().addWindow(addressView);
+            }catch (Exception e){
+                Notification.show("Select the user first",Notification.Type.HUMANIZED_MESSAGE);
+            }
         }else if(source == userForm.addNewContact){
 
         }
@@ -85,13 +72,10 @@ public class UserView extends VerticalLayout implements
     @Override
     public void valueChange(Property.ValueChangeEvent event) {
         final Property property = event.getProperty();
-        if (property == contactTable){
-            contactForm.edit.setVisible(true);
-            contactForm.save.setVisible(false);
-            contactForm.clear.setVisible(true);
-        }
-        if (property == table) {
+         if (property == table) {
             try {
+                AddressTable.userID = table.getValue().toString();
+                addressView = new AddressView(main);
                 final User user = userService.find(table.getValue().toString());
                 final UserModel bean = getModel(user);
                 userForm.binder.setItemDataSource(new BeanItem<>(bean));
@@ -99,14 +83,6 @@ public class UserView extends VerticalLayout implements
             }catch (Exception r){
             }
         }
-        /*if (property == addressTable){
-            try {
-                final Address address = addressService.find(addressTable.getValue().toString());
-                final AddressModel bean = getAddressModel(address);
-                addressForm.binder.setItemDataSource(new BeanItem<>(bean));
-                setReadContactFormProperties();
-            }catch (Exception e){}
-        }*/
     }
     private void saveForm(FieldGroup binder) {
         try {
@@ -142,7 +118,6 @@ public class UserView extends VerticalLayout implements
     }
     private User getUserNewEntity(FieldGroup binder) {
         final UserModel bean = ((BeanItem<UserModel>) binder.getItemDataSource()).getBean();
-        System.out.println(bean.getRoles()) ;
         final User user = new User.Builder(bean.getLastName())
                 .firstname(bean.getFirstName())
                 .role(bean.getRoles())
@@ -208,14 +183,10 @@ public class UserView extends VerticalLayout implements
         userForm.edit.addClickListener(this);
         userForm.cancel.addClickListener(this);
         userForm.update.addClickListener(this);
-
         table.addValueChangeListener(this);
-        contactTable.addValueChangeListener(this);
         userForm.rolesList.addValueChangeListener(this);
         userForm.addNewAddress.addClickListener(this);
         userForm.addNewContact.addClickListener(this);
-        contactForm.save.addClickListener(this);
-        contactForm.clear.addClickListener(this);
     }
     public UserModel getModel(User user) {
         Set<String> userRolesId = new HashSet<>();
@@ -234,12 +205,5 @@ public class UserView extends VerticalLayout implements
         model.setPassword(user.getPassword());
         return model;
     }
-   /* public AddressModel getAddressModel(Address address){
-        AddressModel model = new AddressModel();
-        model.setAddressType(address.getAddressType());
-        model.setPhysicalAddress(address.getPhysicalAddress());
-        model.setPostalCode(address.getPostalCode());
-        model.setPostalAddress(address.getPostalAddress());
-        return model;
-    }*/
+
 }

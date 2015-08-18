@@ -2,7 +2,9 @@ package infoshare.client.content.setup;
 
 import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.Window;
 import infoshare.client.content.MainLayout;
+import infoshare.client.content.setup.views.AddressView;
 import infoshare.client.content.setup.views.RoleView;
 import infoshare.client.content.setup.views.UserView;
 
@@ -26,9 +28,11 @@ public class SetupMenu  extends VerticalLayout {
         roleView.setMargin(true);
         roleView.addComponent(new RoleView(main));
 
+
         tab = new TabSheet();
         tab.setHeight("100%");
         tab.setWidth("100%");
+
 
         tab.addTab(userView, "Add System USERS", null);
         tab.addTab(roleView, "Add System ROLES", null);
@@ -38,7 +42,6 @@ public class SetupMenu  extends VerticalLayout {
         } else if (selectedTab.equals("ROLES")) {
             tab.setSelectedTab(roleView);
         }
-
         addComponent(tab);
 
     }

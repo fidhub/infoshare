@@ -30,8 +30,8 @@ public class UserForm extends FormLayout {
     private RoleService roleService = new RoleServiceImpl();
     public ListSelect rolesList = new ListSelect();
 
-    public  Button addNewAddress = new Button("add New Address");
-    public  Button addNewContact = new Button("add New Contact");
+    public  Button addNewAddress = new Button("Address");
+    public  Button addNewContact = new Button("Contact");
 
     // Define Buttons
     public final Button save = new Button("Save");
@@ -55,6 +55,7 @@ public class UserForm extends FormLayout {
         final TextField lastname = getTextField("Last Name", "lastName");
         final TextField username = getTextField("Username", "username");
         final TextField otherName = getTextField("Other name", "otherName");
+        final PasswordField password = getPasswordField("Password", "password");
         final CheckBox enable = getCheckBoxField("Activate Account", "enable");
         final ListSelect roles = getRoles("Select Roles", "roles");
 
@@ -63,6 +64,7 @@ public class UserForm extends FormLayout {
         rightLayout.addComponent(firstname);
         rightLayout.addComponent(otherName);
         rightLayout.addComponent(lastname);
+        rightLayout.addComponent(password);
         rightLayout.addComponent(new Label("<br/>", ContentMode.HTML));
         rightLayout.addComponent(enable);
 
@@ -72,10 +74,10 @@ public class UserForm extends FormLayout {
         leftLayout.addComponent(roles);
 
         addNewAddress.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
-        addNewAddress.addStyleName(ValoTheme.BUTTON_TINY);
+        addNewAddress.addStyleName(ValoTheme.BUTTON_SMALL);
         addNewAddress.setIcon(FontAwesome.PLUS);
         addNewContact.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
-        addNewContact.addStyleName(ValoTheme.BUTTON_TINY);
+        addNewContact.addStyleName(ValoTheme.BUTTON_SMALL);
         addNewContact.setIcon(FontAwesome.PLUS);
 
         HorizontalLayout buttons = new HorizontalLayout();
@@ -96,6 +98,15 @@ public class UserForm extends FormLayout {
 
     private TextField getTextField(String label, String field) {
         TextField textField = new TextField(label);
+        textField.setWidth(250, Unit.PIXELS);
+        textField.setNullRepresentation("");
+        textField.addValidator(new BeanValidator(UserModel.class, field));
+        textField.setImmediate(true);
+        binder.bind(textField, field);
+        return textField;
+    }
+ private PasswordField getPasswordField(String label, String field) {
+        PasswordField textField = new PasswordField(label);
         textField.setWidth(250, Unit.PIXELS);
         textField.setNullRepresentation("");
         textField.addValidator(new BeanValidator(UserModel.class, field));

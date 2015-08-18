@@ -30,8 +30,8 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public Address find(String s) {
-        return addressMap.get(s);
-      //  return RestApiConnectorClass.read(UrlPath.AddressLinks.GET_ID,s, Address.class);
+        //return addressMap.get(s);
+       return RestApiConnectorClass.read(UrlPath.AddressLinks.GET_ID,s, Address.class);
     }
 
     @Override
