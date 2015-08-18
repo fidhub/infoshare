@@ -18,7 +18,8 @@ public class UserModel implements Serializable{
     private String firstName;
     @NotNull
     private String lastName;
-    private String password = "pass";
+    @NotNull
+    private String password ;
     private boolean enable;
     @NotNull
     private Set<String> roles = new HashSet<>();
