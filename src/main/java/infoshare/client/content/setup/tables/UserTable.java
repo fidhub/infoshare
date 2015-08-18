@@ -31,8 +31,7 @@ public class UserTable extends Table {
         addContainerProperty("Other Name", String.class, null);
         addContainerProperty("Enabled", Boolean.class, null);
 
-        List<User> users= userService.findAll(); // From REST API
-        for (User user : users) {
+        for (User user : userService.findAll()) {
             addItem(new Object[]{
                     user.getUsername(),
                     user.getFirstName(),

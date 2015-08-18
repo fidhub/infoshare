@@ -37,8 +37,6 @@ public class UserView extends VerticalLayout implements
     private final MainLayout main;
     private final UserForm userForm;
     private final UserTable table;
-    private final AddressForm addressForm;
-    private final AddressTable addressTable;
     private final ContactForm contactForm;
     private final ContactTable contactTable;
 
@@ -46,13 +44,11 @@ public class UserView extends VerticalLayout implements
 
     private UserService userService = new UserServiceImpl();
     private RoleService roleService = new RoleServiceImpl();
-    private AddressService addressService = new AddressServiceImpl();
-    private Window popUpWindow =null;
+    private AddressView addressView ;
     public UserView(MainLayout app) {
         main = app;
+        addressView = new AddressView(main);
         userForm = new UserForm();
-        addressForm = new AddressForm();
-        addressTable = new AddressTable();
         contactForm = new ContactForm();
         contactTable = new ContactTable(main);
         table = new UserTable(main);
@@ -78,31 +74,13 @@ public class UserView extends VerticalLayout implements
         } else if (source == userForm.delete) {
             deleteForm(userForm.binder);
         }else if(source == userForm.addNewAddress){
-            popUpWindow = getModelWind(addressForm,addressTable) ;
-            getUI().addWindow(popUpWindow);
+            addressView.setModal(true);
+            getUI().addWindow(addressView);
         }else if(source == userForm.addNewContact){
-            popUpWindow = getModelWind(contactForm,contactTable);
-            getUI().addWindow(popUpWindow);
-        }if((source == addressForm.exit)||(source == contactForm.cancel)){
-            popUpWindow.setModal(false);
-            UI.getCurrent().removeWindow(popUpWindow);
+
         }
     }
 
-    private  Window getModelWind(FormLayout layout,Table whichTable){
-        final Window window = new Window();
-        setEditContactFormProperties();
-        window.setWidth(50.0f, Unit.PERCENTAGE);
-        window.setClosable(false);
-        window.setResizable(false);
-        window.setDraggable(false);
-        window.setModal(true);
-        VerticalLayout layout1 = new VerticalLayout();
-        layout1.addComponent(layout);
-        layout1.addComponent(whichTable);
-        window.setContent(layout1);
-        return window;
-    }
 
     @Override
     public void valueChange(Property.ValueChangeEvent event) {
@@ -121,14 +99,14 @@ public class UserView extends VerticalLayout implements
             }catch (Exception r){
             }
         }
-        if (property == addressTable){
+        /*if (property == addressTable){
             try {
                 final Address address = addressService.find(addressTable.getValue().toString());
                 final AddressModel bean = getAddressModel(address);
                 addressForm.binder.setItemDataSource(new BeanItem<>(bean));
                 setReadContactFormProperties();
             }catch (Exception e){}
-        }
+        }*/
     }
     private void saveForm(FieldGroup binder) {
         try {
@@ -223,45 +201,19 @@ public class UserView extends VerticalLayout implements
         userForm.delete.setVisible(true);
         userForm.update.setVisible(false);
     }
-    private void setEditContactFormProperties(){
-        addressForm.binder.setReadOnly(false);
-        addressForm.save.setVisible(true);
-        addressForm.edit.setVisible(false);
-        addressForm.cancel.setVisible(true);
-        addressForm.update.setVisible(false);
-        addressForm.exit.setVisible(true);
-    }
-    private void setReadContactFormProperties(){
-        addressForm.binder.setReadOnly(true);
-        addressForm.save.setVisible(false);
-        addressForm.edit.setVisible(true);
-        addressForm.cancel.setVisible(true);
-        addressForm.update.setVisible(true);
-        addressForm.exit.setVisible(false);
-    }
+
     private void addListeners() {
         //Register Button Listeners
         userForm.save.addClickListener(this);
         userForm.edit.addClickListener(this);
         userForm.cancel.addClickListener(this);
         userForm.update.addClickListener(this);
-        userForm.delete.addClickListener(this);
-
-        addressForm.save.addClickListener(this);
-        addressForm.edit.addClickListener(this);
-        addressForm.cancel.addClickListener(this);
-        addressForm.update.addClickListener(this);
-        addressForm.exit.addClickListener(this);
-        addressTable.addValueChangeListener(this);
 
         table.addValueChangeListener(this);
         contactTable.addValueChangeListener(this);
         userForm.rolesList.addValueChangeListener(this);
         userForm.addNewAddress.addClickListener(this);
         userForm.addNewContact.addClickListener(this);
-
-        addressForm.save.addClickListener(this);
-        addressForm.cancel.addClickListener(this);
         contactForm.save.addClickListener(this);
         contactForm.clear.addClickListener(this);
     }
@@ -282,12 +234,12 @@ public class UserView extends VerticalLayout implements
         model.setPassword(user.getPassword());
         return model;
     }
-    public AddressModel getAddressModel(Address address){
+   /* public AddressModel getAddressModel(Address address){
         AddressModel model = new AddressModel();
         model.setAddressType(address.getAddressType());
         model.setPhysicalAddress(address.getPhysicalAddress());
         model.setPostalCode(address.getPostalCode());
         model.setPostalAddress(address.getPostalAddress());
         return model;
-    }
+    }*/
 }

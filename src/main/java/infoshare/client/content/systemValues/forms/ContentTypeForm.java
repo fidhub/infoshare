@@ -30,9 +30,6 @@ public class ContentTypeForm extends FormLayout {
         binder = new FieldGroup(item);
 
         TextField name = getTextField("Content Type", "name");
-       /* name.addItem("Raw");
-        name.addItem("Edited");
-        name.addItem("Published");*/
         TextArea description = getTextArea("Description", "description");
         GridLayout grid = new GridLayout(4, 8);
         grid.setSizeFull();
