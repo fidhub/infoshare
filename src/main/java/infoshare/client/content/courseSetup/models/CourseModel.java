@@ -11,7 +11,6 @@ import java.util.List;
  */
 public class CourseModel implements Serializable {
 
-    private String id;
     @NotNull
     private String courseLevel;
     @NotNull
@@ -27,13 +26,6 @@ public class CourseModel implements Serializable {
         this.lessons = lessons;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getCourseLevel() {
         return courseLevel;

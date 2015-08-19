@@ -9,7 +9,7 @@ import com.vaadin.ui.themes.ValoTheme;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.content.ContentMenu;
 import infoshare.client.content.content.forms.PublishForm;
-import infoshare.client.content.content.models.PublishModel;
+import infoshare.client.content.content.models.ContentModel;
 import infoshare.client.content.content.tables.PublishTable;
 import infoshare.domain.Content;
 import infoshare.filterSearch.ContentFilter;
@@ -55,6 +55,7 @@ public class PublishView extends VerticalLayout implements Button.ClickListener,
 
         return layout;
     }
+
     private void refreshContacts(String stringFilter ) {
         try {
             table.removeAllItems();
@@ -63,6 +64,7 @@ public class PublishView extends VerticalLayout implements Button.ClickListener,
         }catch (Exception e){
         }
     }
+
     @Override
     public void valueChange(Property.ValueChangeEvent valueChangeEvent) {
         final Property property = valueChangeEvent.getProperty();
@@ -83,16 +85,18 @@ public class PublishView extends VerticalLayout implements Button.ClickListener,
         }
     }
     private Window modelWindow(){
-        final Window popup = new Window("VIEW Content");
+        final Window popup = new Window();
         popup.setWidth(80.0f,Unit.PERCENTAGE);
-        popup.setHeight(90.0f, Unit.PERCENTAGE);
+        popup.setClosable(false);
+        popup.setResizable(false);
         popup.setContent(form);
         return popup;
     }
+
     private void ViewContentButton(){
         try {
             final Content content = contentService.find(table.getValue().toString());
-            final PublishModel bean = getModel(content);
+            final ContentModel bean = getModel(content);
             form.binder.setItemDataSource(new BeanItem<>(bean));
             UI.getCurrent().addWindow(popUp);
             popUp.setModal(true);
@@ -101,11 +105,11 @@ public class PublishView extends VerticalLayout implements Button.ClickListener,
                     Notification.Type.HUMANIZED_MESSAGE);
         }
     }
-    private PublishModel getModel(Content val) {
-        final PublishModel model = new PublishModel();
+
+    private ContentModel getModel(Content val) {
+        final ContentModel model = new ContentModel();
         final Content content = contentService.find(val.getId());
         model.setTitle(content.getTitle());
-        model.setId(content.getId());
         model.setCategory(content.getCategory());
         model.setCreator(content.getCreator());
         model.setContent(content.getContent());
@@ -113,9 +117,11 @@ public class PublishView extends VerticalLayout implements Button.ClickListener,
         model.setSource(content.getSource());
         return model;
     }
+
     private void getHome() {
         main.content.setSecondComponent(new ContentMenu(main, "PUBLISHER"));
     }
+
     public void addListeners(){
         form.popUpCloseBtn.addClickListener((Button.ClickListener) this);
         viewContent.addClickListener((Button.ClickListener) this);

@@ -1,6 +1,8 @@
 package infoshare.services.ContentType.Impl;
 
 import com.vaadin.spring.annotation.SpringComponent;
+import infoshare.RestApi.RestApiConnectorClass;
+import infoshare.RestApi.UrlPath;
 import infoshare.domain.ContentType;
 import infoshare.services.ContentType.ContentTypeService;
 import org.springframework.stereotype.Service;
@@ -17,53 +19,26 @@ import java.util.Map;
 @SpringComponent
 public class ContentTypeServiceImpl implements ContentTypeService{
 
-    static Map<String,ContentType>  contentTypes = null;
-
-    public ContentTypeServiceImpl() {
-        if(contentTypes == null){
-            contentTypes = new HashMap<>();
-            ContentType contentType = new ContentType.Builder("edited")
-                    .contentTyeDescription("un edited content posted by thule")
-                    .id("1")
-                    .build();
-            ContentType contentType1 = new ContentType.Builder("raw")
-                    .contentTyeDescription("un edited content posted by thule")
-                    .id("1")
-                    .build();
-            ContentType contentType2 = new ContentType.Builder("Published")
-                    .contentTyeDescription("un edited content posted by thule")
-                    .id("1")
-                    .build();
-            contentTypes.put(contentType .getId(),contentType );
-            contentTypes.put(contentType1.getId(),contentType1);
-            contentTypes.put(contentType2.getId(),contentType2);
-        }
-    }
-
     @Override
     public ContentType find(String s) {
-     return contentTypes.get(s);
+     return RestApiConnectorClass.read(UrlPath.ContentTypeLinks.GET_ID, s, ContentType.class);
     }
 
     @Override
     public ContentType save(ContentType entity) {
-        contentTypes.put(entity.getId(),entity);
-        return contentTypes.get(entity.getId());
+        return RestApiConnectorClass.create(UrlPath.ContentTypeLinks.POST, entity, ContentType.class);
     }
     @Override
     public ContentType merge(ContentType entity) {
-        contentTypes.put(entity.getId(),entity);
-        return contentTypes.get(entity.getId());
+        return RestApiConnectorClass.update(UrlPath.ContentTypeLinks.PUT,entity);
     }
 
     @Override
     public void remove(ContentType entity) {
-        contentTypes.remove(entity.getId());
     }
 
     @Override
     public List<ContentType> findAll() {
-
-        return new ArrayList<>(contentTypes.values());
+        return RestApiConnectorClass.readAll(UrlPath.ContentTypeLinks.GETALL,ContentType.class);
     }
 }

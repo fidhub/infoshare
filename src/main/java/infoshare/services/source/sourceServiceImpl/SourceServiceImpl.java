@@ -1,6 +1,8 @@
 package infoshare.services.source.sourceServiceImpl;
 
 import com.vaadin.spring.annotation.SpringComponent;
+import infoshare.RestApi.RestApiConnectorClass;
+import infoshare.RestApi.UrlPath;
 import infoshare.domain.Source;
 import infoshare.services.source.SourceService;
 import org.springframework.stereotype.Service;
@@ -16,42 +18,28 @@ import java.util.Map;
 @Service
 @SpringComponent
 public class SourceServiceImpl implements SourceService {
-    static Map<String,Source> sources = null;
 
-    public SourceServiceImpl() {
-        if(sources == null) {
-            sources = new HashMap<>();
-            Source source = new Source.Builder("source name")
-                    .description("psum dolor sit amet, consectetur adipisicing elit, sed do eiusmod")
-                    .id("1")
-                    .build();
-            sources.put(source.getId(), source);
-        }
-    }
     @Override
     public Source find(String s) {
-        return sources.get(s);
+        return RestApiConnectorClass.read(UrlPath.SourceLinks.GET_ID,s,Source.class);
     }
 
     @Override
     public Source save(Source entity) {
-        sources.put(entity.getId(),entity);
-        return sources.get(entity.getId());
+     return RestApiConnectorClass.create(UrlPath.SourceLinks.POST,entity,Source.class);
     }
 
     @Override
     public Source merge(Source entity) {
-        sources.put(entity.getId(),entity);
-        return sources.get(entity.getId());
+       return RestApiConnectorClass.update(UrlPath.SourceLinks.PUT,entity);
     }
 
     @Override
     public void remove(Source entity) {
-        sources.remove(entity.getId());
     }
 
     @Override
     public List<Source> findAll() {
-        return new ArrayList<>(sources.values());
+        return RestApiConnectorClass.readAll(UrlPath.SourceLinks.GETALL,Source.class);
     }
 }

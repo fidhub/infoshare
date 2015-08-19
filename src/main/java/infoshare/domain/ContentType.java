@@ -8,45 +8,45 @@ import java.io.Serializable;
 public class ContentType implements Serializable, Comparable<ContentType> {
 
     private String id;
-    private String contentTyeName;
-    private String contentTyeDescription;
+    private String name;
+    private String description;
 
     private ContentType(Builder builder) {
         this.id = builder.id;
-        this.contentTyeName = builder.contentTyeName;
-        this.contentTyeDescription = builder.contentTyeDescription;
+        this.name = builder.name;
+        this.description = builder.description;
     }
 
     public String getId() {
         return id;
     }
 
-    public String getContentTyeName() {
-        return contentTyeName;
+    public String getName() {
+        return name;
     }
 
-    public String getContentTyeDescription() {
-        return contentTyeDescription;
+    public String getDescription() {
+        return description;
     }
     @Override
     public int compareTo(ContentType contentType) {
-        return contentTyeName.compareTo(contentType.contentTyeName);
+        return name.compareTo(contentType.name);
     }
 
     public static class Builder{
         private String id;
-        private String contentTyeName;
-        private String contentTyeDescription;
+        private String name;
+        private String description;
 
         public Builder(String contentName){
-            this.contentTyeName = contentName;
+            this.name = contentName;
         }
         public Builder id(String id){
             this.id = id;
             return this;
         }
-        public Builder contentTyeDescription(String description){
-            this.contentTyeDescription = description;
+        public Builder description(String description){
+            this.description = description;
             return this;
         }
         public ContentType build(){

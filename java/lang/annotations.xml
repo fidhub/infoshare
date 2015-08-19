@@ -1,5 +1,5 @@
 <root>
-  <item contentName='java.lang.Override'>
-    <annotation contentName='java.lang.annotation.Deprecated'/>
+  <item name='java.lang.Class'>
+    <annotation name='java.lang.annotation.Deprecated'/>
   </item>
 </root>

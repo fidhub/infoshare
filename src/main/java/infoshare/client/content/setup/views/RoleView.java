@@ -14,7 +14,6 @@ import infoshare.client.content.setup.tables.RoleTable;
 import infoshare.domain.Role;
 import infoshare.services.roles.Impl.RoleServiceImpl;
 import infoshare.services.roles.RoleService;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Created by hashcode on 2015/06/24.
@@ -22,7 +21,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class RoleView extends VerticalLayout implements
         Button.ClickListener, Property.ValueChangeListener {
 
-    @Autowired
     private RoleService roleService = new RoleServiceImpl();
 
     private final MainLayout main;
@@ -38,7 +36,6 @@ public class RoleView extends VerticalLayout implements
         addComponent(table);
         addListeners();
     }
-
     @Override
     public void buttonClick(Button.ClickEvent event) {
         final Button source = event.getButton();
@@ -54,7 +51,6 @@ public class RoleView extends VerticalLayout implements
             deleteForm(form.binder);
         }
     }
-
     @Override
     public void valueChange(Property.ValueChangeEvent event) {
         final Property property = event.getProperty();
@@ -69,11 +65,10 @@ public class RoleView extends VerticalLayout implements
             setReadFormProperties();
         }
     }
-
     private void saveForm(FieldGroup binder) {
         try {
             binder.commit();
-            roleService.save(getEntity(binder));
+            roleService.save(getNewEntity(binder));
             getHome();
             Notification.show("Record ADDED!", Notification.Type.TRAY_NOTIFICATION);
         } catch (FieldGroup.CommitException e) {
@@ -81,11 +76,10 @@ public class RoleView extends VerticalLayout implements
             getHome();
         }
     }
-
     private void saveEditedForm(FieldGroup binder) {
         try {
             binder.commit();
-            roleService.merge(getEntity(binder));
+            roleService.merge(getUpdateEntity(binder));
             getHome();
             Notification.show("Record UPDATED!", Notification.Type.TRAY_NOTIFICATION);
         } catch (FieldGroup.CommitException e) {
@@ -93,26 +87,28 @@ public class RoleView extends VerticalLayout implements
             getHome();
         }
     }
-
     private void deleteForm(FieldGroup binder) {
-        final Role role = getEntity(binder);
-        roleService.remove(role);
+        roleService.remove(getUpdateEntity(binder));
         getHome();
     }
-
-    private Role getEntity(FieldGroup binder) {
+    private Role getUpdateEntity(FieldGroup binder) {
         final RoleModel bean = ((BeanItem<RoleModel>) binder.getItemDataSource()).getBean();
-        final Role role = new Role.Builder(bean.getRolename())
+        final Role role = new Role.Builder(bean.getRoleName())
                 .description(bean.getDescription())
-                .id(bean.getId())
+                .id(table.getValue().toString())
                 .build();
         return role;
     }
-
+    private Role getNewEntity(FieldGroup binder) {
+        final RoleModel bean = ((BeanItem<RoleModel>) binder.getItemDataSource()).getBean();
+        final Role role = new Role.Builder(bean.getRoleName())
+                .description(bean.getDescription())
+                .build();
+        return role;
+    }
     private void getHome() {
         main.content.setSecondComponent(new SetupMenu(main, "ROLES"));
     }
-
     private void setEditFormProperties() {
         form.binder.setReadOnly(false);
         form.save.setVisible(false);
@@ -121,7 +117,6 @@ public class RoleView extends VerticalLayout implements
         form.delete.setVisible(false);
         form.update.setVisible(true);
     }
-
     private void setReadFormProperties() {
         form.binder.setReadOnly(true);
         //Buttons Behaviou
@@ -131,7 +126,6 @@ public class RoleView extends VerticalLayout implements
         form.delete.setVisible(true);
         form.update.setVisible(false);
     }
-
     private void addListeners() {
         //Register Button Listeners
         form.save.addClickListener((Button.ClickListener) this);
@@ -142,13 +136,10 @@ public class RoleView extends VerticalLayout implements
         //Register Table Listerners
         table.addValueChangeListener((Property.ValueChangeListener) this);
     }
-
-    private RoleModel getModel(Role val) {
+    private RoleModel getModel(Role role) {
         final RoleModel model = new RoleModel();
-        final Role role = roleService.find(val.getId());
         model.setDescription(role.getDescription());
-        model.setId(role.getId());
-        model.setRolename(role.getRolename());
+        model.setRoleName(role.getRoleName());
         return model;
     }
 }

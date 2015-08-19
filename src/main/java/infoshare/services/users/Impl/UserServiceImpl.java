@@ -1,6 +1,9 @@
 package infoshare.services.users.Impl;
 
 import com.vaadin.spring.annotation.SpringComponent;
+import infoshare.RestApi.RestApiConnectorClass;
+import infoshare.RestApi.UrlPath;
+import infoshare.client.content.setup.models.UserModel;
 import infoshare.domain.Role;
 import infoshare.domain.User;
 import infoshare.services.roles.Impl.RoleServiceImpl;
@@ -18,52 +21,28 @@ import java.util.*;
 @SpringComponent
 public class UserServiceImpl implements UserService{
 
-    static Map<String,User> users = null ;
-    @Autowired
-    private RoleService roleService = new RoleServiceImpl();
-
-    public UserServiceImpl() {
-        Set<Role> roles = new HashSet<>();
-        for(Role role: roleService.findAll()) {
-            roles.add(role);
-        }
-        if(users == null) {
-            users = new HashMap<>();
-            User user = new User.Builder("Hadebe")
-                    .firstname("Thulebona")
-                    .othername("Emmanuel")
-                    .role(roles)
-                    .id("1")
-                    .enable(true)
-                    .username("thuleh")
-                    .build();
-            users.put(user.getId(),user);
-        }
-    }
     @Override
     public User find(String s) {
-        return users.get(s);
+        return RestApiConnectorClass.read(UrlPath.UserLinks.GET_ID,s,User.class);
     }
 
     @Override
-    public User save(User entity) {
-        users.put(entity.getId(),entity);
-        return users.get(entity.getId());
+    public User save(User user) {
+        return  RestApiConnectorClass.create(UrlPath.UserLinks.POST, user, User.class);
     }
 
     @Override
-    public User merge(User entity) {
-        users.put(entity.getId(),entity);
-        return users.get(entity.getId());
+    public User merge(User user) {
+        return RestApiConnectorClass.update(UrlPath.UserLinks.PUT,user);
     }
 
     @Override
-    public void remove(User entity) {
-        users.remove(entity.getId());
+    public void remove(User user) {
+
     }
 
     @Override
     public List<User> findAll() {
-        return new ArrayList<>(users.values());
+        return RestApiConnectorClass.readAll(UrlPath.UserLinks.GETALL,User.class);
     }
 }

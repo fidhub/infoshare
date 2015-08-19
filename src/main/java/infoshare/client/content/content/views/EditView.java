@@ -10,7 +10,7 @@ import com.vaadin.ui.themes.ValoTheme;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.content.ContentMenu;
 import infoshare.client.content.content.forms.RawAndEditForm;
-import infoshare.client.content.content.models.RawAndEditModel;
+import infoshare.client.content.content.models.ContentModel;
 import infoshare.client.content.content.tables.EditTable;
 import infoshare.domain.Category;
 import infoshare.domain.Content;
@@ -60,6 +60,7 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
        addComponent(table);
        addListeners();
    }
+
     private HorizontalLayout getLayout(){
         final HorizontalLayout layout = new HorizontalLayout();
         layout.setSpacing(false);
@@ -70,20 +71,24 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
         layout.addComponent(editBtn);
         return layout;
     }
+
     private void refreshContacts(String stringFilter ) {
         try {
             table.removeAllItems();
-            for(Content content: contentFilter.findAll(stringFilter))
-                table.loadTable(content);
+            contentFilter.findAll(stringFilter).forEach(table::loadTable);
         }catch (Exception e){
         }
     }
+
     private Window modelWindow(){
-        final Window popup = new Window("UPDATE EDITED CONTENT");
+        final Window popup = new Window();
         popup.setWidth(80.0f,Unit.PERCENTAGE);
+        popup.setClosable(false);
+        popup.setResizable(false);
         popup.setContent(form);
         return popup;
     }
+
    @Override
     public void buttonClick(Button.ClickEvent clickEvent) {
        final Button source = clickEvent.getButton();
@@ -91,6 +96,8 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
            EditButton();
        }else if (source ==form.popUpUpdateBtn){
            saveEditedForm(form.binder);
+       /*    Header header = new Header(main);
+           header.notify.getUI().setImmediate(true);*/
        }else if (source ==form.popUpCancelBtn){
            popUp.setModal(false);
            UI.getCurrent().removeWindow(popUp);
@@ -98,6 +105,7 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
            getHome();
        }
     }
+
     @Override
     public void valueChange(Property.ValueChangeEvent valueChangeEvent) {
         final Property property = valueChangeEvent.getProperty();
@@ -105,30 +113,37 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
              editBtn.setVisible(true);
         }
     }
-    private void loadComboBoxs(){
-        for(Category category:categoryService.findAll()){
-            if(category!= null)
-                form.popUpCategoryCmb.addItem(category.getName());
+
+    private void loadComboBoxs() {
+        for (Category category : categoryService.findAll()) {
+            form.popUpCategoryCmb.addItem(category.getId());
+            form.popUpCategoryCmb.setItemCaption(category.getId(), category.getName());
         }
 
-        for(ContentType category:contentTypeService.findAll()){
-            if(category!= null)
-                form.popUpContentTypeCmb.addItem(category.getContentTyeName());
+        for (ContentType contentType : contentTypeService.findAll()) {
+            form.popUpContentTypeCmb.addItem(contentType.getId());
+            form.popUpContentTypeCmb.setItemCaption(contentType.getId(), contentType.getName());
         }
-        for(Source source:sourceService.findAll()){
-            if(source!= null)
-                form.popUpSourceCmb.addItem(source.getName());
+        for (Source source : sourceService.findAll()) {
+            form.popUpSourceCmb.addItem(source.getId());
+            form.popUpSourceCmb.setItemCaption(source.getId(), source.getName());
         }
-
+      /*  contentTypeService.findAll().stream().filter(category -> category != null)
+                .forEach(category -> form.popUpContentTypeCmb.addItem(category.getName()));
+        sourceService.findAll().stream().filter(source -> source != null)
+                .forEach(source -> form.popUpSourceCmb.addItem(source.getName()));
+*/
     }
+
     private void getHome() {
         main.content.setSecondComponent(new ContentMenu(main, "EDITOR"));
     }
+
     private void EditButton(){
         loadComboBoxs();
         try {
             final Content content = contentService.find(table.getValue().toString());
-            final RawAndEditModel bean = getModel(content);
+            final ContentModel bean = getModel(content);
             form.binder.setItemDataSource(new BeanItem<>(bean));
 
             UI.getCurrent().addWindow(popUp);
@@ -138,10 +153,11 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
                     Notification.Type.HUMANIZED_MESSAGE);
         }
     }
+
     private void saveEditedForm(FieldGroup binder) {
         try {
             binder.commit();
-            contentService.merge(getUpdateEntity(binder));
+            contentService.save(getNewEntity(binder));
             popUp.setModal(false);
             table.setValue(null);
             UI.getCurrent().removeWindow(popUp);
@@ -152,26 +168,27 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
             getHome();
         }
     }
-    private Content getUpdateEntity(FieldGroup binder) {
 
-        final RawAndEditModel bean = ((BeanItem<RawAndEditModel>) binder.getItemDataSource()).getBean();
-        bean.setDateCreated(contentService.find(bean.getId()).getDateCreated());
+    private Content getNewEntity(FieldGroup binder) {
+
+        final ContentModel bean = ((BeanItem<ContentModel>) binder.getItemDataSource()).getBean();
+        bean.setDateCreated(contentService.find(table.getValue().toString()).getDateCreated());
         final Content content = new Content.Builder(bean.getTitle())
-                .category(bean.getCategory())
+                .category(categoryService.find(bean.getCategory()).getId())
                 .content(bean.getContent())
                 .contentType(bean.getContentType())
                 .creator(bean.getCreator())
                 .dateCreated(bean.getDateCreated())
-                .source(bean.getSource())
-                .id(bean.getId())
+                .source(table.getValue().toString())
+               // .id(table.getValue().toString())
                 .build();
         return content;
     }
-    private RawAndEditModel getModel(Content val) {
-        final RawAndEditModel model = new RawAndEditModel();
+
+    private ContentModel getModel(Content val) {
+        final ContentModel model = new ContentModel();
         final Content content = contentService.find(val.getId());
         model.setTitle(content.getTitle());
-        model.setId(content.getId());
         model.setCategory(content.getCategory());
         model.setCreator(content.getCreator());
         model.setContent(content.getContent());
@@ -179,6 +196,7 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
         model.setSource(content.getSource());
         return model;
     }
+
     public void addListeners(){
         form.popUpUpdateBtn.addClickListener((Button.ClickListener)this);
         form.popUpCancelBtn.addClickListener((Button.ClickListener) this);
@@ -191,4 +209,5 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
             }
         });
     }
+
 }

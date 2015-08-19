@@ -52,22 +52,23 @@ public class ContentSourceView extends VerticalLayout implements Button.ClickLis
             deleteForm(form.binder);
         }
     }
-
     @Override
     public void valueChange(Property.ValueChangeEvent event) {
         final Property property = event.getProperty();
         if (property == table) {
-            final Source source = sourceService.find(table.getValue().toString());
-            final SourceModel bean = getModel(source);
-            form.binder.setItemDataSource(new BeanItem<>(bean));
-            setReadFormProperties();
+            try {
+                final Source source = sourceService.find(table.getValue().toString());
+                final SourceModel bean = getModel(source);
+                form.binder.setItemDataSource(new BeanItem<>(bean));
+                setReadFormProperties();
+            }catch (Exception r) {
+            }
         }
     }
-
     private void saveForm(FieldGroup binder) {
         try {
             binder.commit();
-            sourceService.save(getUpdateEntity(binder));
+            sourceService.save(getNewEntity(binder));
             getHome();
             Notification.show("Record ADDED!", Notification.Type.TRAY_NOTIFICATION);
         } catch (FieldGroup.CommitException e) {
@@ -75,7 +76,6 @@ public class ContentSourceView extends VerticalLayout implements Button.ClickLis
             getHome();
         }
     }
-
     private void saveEditedForm(FieldGroup binder) {
         try {
             binder.commit();
@@ -87,25 +87,28 @@ public class ContentSourceView extends VerticalLayout implements Button.ClickLis
             getHome();
         }
     }
-
     private void deleteForm(FieldGroup binder) {
-        final Source source = getUpdateEntity(binder);
-        sourceService.remove(source);
+        sourceService.remove(getUpdateEntity(binder));
         getHome();
+    }
+    private Source getNewEntity(FieldGroup binder) {
+        final SourceModel bean = ((BeanItem<SourceModel>) binder.getItemDataSource()).getBean();
+        final Source source = new Source.Builder(bean.getName())
+                .description(bean.getDescription())
+                .build();
+        return source;
     }
     private Source getUpdateEntity(FieldGroup binder) {
         final SourceModel bean = ((BeanItem<SourceModel>) binder.getItemDataSource()).getBean();
         final Source source = new Source.Builder(bean.getName())
                 .description(bean.getDescription())
-                .id(bean.getId())
+                .id(table.getValue().toString())
                 .build();
         return source;
     }
-
     private void getHome() {
       main.content.setSecondComponent(new SystemValues(main, "SOURCE"));
     }
-
     private void setEditFormProperties() {
         form.binder.setReadOnly(false);
         form.save.setVisible(false);
@@ -114,17 +117,15 @@ public class ContentSourceView extends VerticalLayout implements Button.ClickLis
         form.delete.setVisible(false);
         form.update.setVisible(true);
     }
-
     private void setReadFormProperties() {
         form.binder.setReadOnly(true);
-        //Buttons Behaviou
+        //Buttons Behaviour
         form.save.setVisible(false);
         form.edit.setVisible(true);
         form.cancel.setVisible(true);
         form.delete.setVisible(true);
         form.update.setVisible(false);
     }
-
     private void addListeners() {
         //Register Button Listeners
         form.save.addClickListener((Button.ClickListener) this);
@@ -135,12 +136,9 @@ public class ContentSourceView extends VerticalLayout implements Button.ClickLis
         //Register Table Listerners
         table.addValueChangeListener((Property.ValueChangeListener) this);
     }
-
-    private SourceModel getModel(Source val) {
+    private SourceModel getModel(Source source) {
         final SourceModel model = new SourceModel();
-        final Source source = sourceService.find(val.getId());
         model.setDescription(source.getDescription());
-        model.setId(source.getId());
         model.setName(source.getName());
         return model;
     }

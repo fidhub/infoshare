@@ -7,7 +7,7 @@ import com.vaadin.server.FontAwesome;
 import com.vaadin.server.Responsive;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
-import infoshare.client.content.content.models.RawAndEditModel;
+import infoshare.client.content.content.models.ContentModel;
 
 /**
  * Created by hashcode on 2015/06/24.
@@ -15,13 +15,13 @@ import infoshare.client.content.content.models.RawAndEditModel;
 public class PublishForm extends FormLayout{
 
 
-    private final RawAndEditModel model;
-    public final BeanItem<RawAndEditModel> item;
+    private final ContentModel model;
+    public final BeanItem<ContentModel> item;
     public final FieldGroup binder;
     public Button popUpCloseBtn =new Button("CLOSE");
 
     public PublishForm() {
-        model = new RawAndEditModel();
+        model = new ContentModel();
         item = new BeanItem<>(model);
         binder = new FieldGroup(item);
 
@@ -44,10 +44,11 @@ public class PublishForm extends FormLayout{
     private RichTextArea getTextArea(String label,String field){
         final RichTextArea richTextArea = new RichTextArea(label);
         richTextArea.setImmediate(true);
-        richTextArea.setHeight(400.0f, Unit.PIXELS);
+        richTextArea.setHeight(450.0f, Unit.PIXELS);
         richTextArea.setWidth(98.0f, Unit.PERCENTAGE);
         richTextArea.setNullRepresentation("");
-        richTextArea.addValidator(new BeanValidator(RawAndEditModel.class, field));
+        richTextArea.setReadOnly(true);
+        richTextArea.addValidator(new BeanValidator(ContentModel.class, field));
         richTextArea.setImmediate(true);
         binder.bind(richTextArea,field);
 

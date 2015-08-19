@@ -45,10 +45,10 @@ public class UIComboBoxHelper<T> implements Serializable {
         ComboBox comboBox = new ComboBox(fieldText);
         List<RoleModel> roles = new ArrayList<>();// This Will come from REST API
 //
-        for (RoleModel role : roles) {
+       /* for (RoleModel role : roles) {
             comboBox.addItem(role.getId());
-            comboBox.setItemCaption(role.getId(), role.getRolename());
-        }
+            comboBox.setItemCaption(role.getId(), role.getRoleName());
+        }*/
         comboBox.addValidator(new BeanValidator(fieldClass, fieldName));
         comboBox.setImmediate(true);
         comboBox.setNullSelectionAllowed(false);

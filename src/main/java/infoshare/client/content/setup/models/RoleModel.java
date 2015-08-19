@@ -7,26 +7,18 @@ import java.io.Serializable;
  * Created by hashcode on 2015/06/23.
  */
 public class RoleModel implements Serializable {
-    private String id;
+
     @NotNull
-    private String rolename;
+    private String roleName;
     @NotNull
     private String description;
 
-    public String getId() {
-        return id;
+    public String getRoleName() {
+        return roleName;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getRolename() {
-        return rolename;
-    }
-
-    public void setRolename(String rolename) {
-        this.rolename = rolename;
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 
     public String getDescription() {

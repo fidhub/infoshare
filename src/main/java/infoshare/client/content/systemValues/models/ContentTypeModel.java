@@ -8,33 +8,24 @@ import java.io.Serializable;
  */
 public class ContentTypeModel implements Serializable {
 
-    private String id;
     @NotNull
-    private String contentTyeName;
+    private String name;
     @NotNull
-    private String contentTyeDescription;
+    private String description;
 
-    public String getId() {
-        return id;
+    public String getName() {
+        return name;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getContentTyeName() {
-        return contentTyeName;
+    public String getDescription() {
+        return description;
     }
 
-    public void setContentTyeName(String contentTyeName) {
-        this.contentTyeName = contentTyeName;
-    }
-
-    public String getContentTyeDescription() {
-        return contentTyeDescription;
-    }
-
-    public void setContentTyeDescription(String contentTyeDescription) {
-        this.contentTyeDescription = contentTyeDescription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

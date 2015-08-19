@@ -2,12 +2,18 @@ package infoshare.client.content.content.tables;
 
 import com.vaadin.ui.Table;
 import com.vaadin.ui.themes.ValoTheme;
+import infoshare.RestApi.RestApiConnectorClass;
+import infoshare.RestApi.UrlPath;
 import infoshare.client.content.MainLayout;
 import infoshare.domain.Content;
 import infoshare.services.Content.ContentService;
 import infoshare.services.Content.Impl.ContentServiceImp;
+import infoshare.services.category.CategoryService;
+import infoshare.services.category.Impl.CategoryServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -17,34 +23,46 @@ public class PublishTable extends Table{
 
     @Autowired
     private ContentService contentService = new ContentServiceImp();
+    private CategoryService categoryService = new CategoryServiceImpl();
+
     private final MainLayout main;
 
     public PublishTable(MainLayout mainApp){
         this.main = mainApp;
         setSizeFull();
         addStyleName(ValoTheme.TABLE_BORDERLESS);
+        addStyleName(ValoTheme.TABLE_NO_STRIPES);
+        addStyleName(ValoTheme.TABLE_NO_VERTICAL_LINES);
+        addStyleName(ValoTheme.TABLE_SMALL);
         addContainerProperty("Title",String.class,null);
         addContainerProperty("Category",String.class,null);
         addContainerProperty("Creator",String.class,null);
-        addContainerProperty("Source",String.class,null);
-        addContainerProperty("Date Created",Date.class,null);
+       // addContainerProperty("Source",String.class,null);
+        addContainerProperty("Date Created",String.class,null);
 
-        for (Content content: contentService.findAll()){
-            loadTable(content);
+        try {
+            contentService.findAll().stream().filter(content -> content != null).forEach(this::loadTable);
+        }catch (Exception e){
+
         }
         setNullSelectionAllowed(false);
         setSelectable(true);
         setImmediate(true);
     }
-    public void loadTable(Content content){
-            if(content.getContentType().equalsIgnoreCase("published")) {
+    public void loadTable(Content content) {
+        DateFormat formatter = new SimpleDateFormat("dd - MMMMMMM - yyyy");
+        UrlPath.isPlublished = RestApiConnectorClass.
+                readAll(UrlPath.ContentLinks.isPlublished + content.getId(), Boolean.class);
+        if (UrlPath.isPlublished.contains(true)) {
+            try {
                 addItem(new Object[]{
                         content.getTitle(),
-                        content.getCategory(),
+                        categoryService.find(content.getCategory()).getName(),
                         content.getCreator(),
-                        content.getSource(),
-                        content.getDateCreated()
+                        formatter.format(content.getDateCreated())
                 }, content.getId());
+            }catch (Exception r) {
             }
+        }
     }
 }

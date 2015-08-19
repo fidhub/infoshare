@@ -38,7 +38,6 @@ public class CategoryView extends VerticalLayout implements Button.ClickListener
         addListeners();
 
     }
-
     @Override
     public void buttonClick(Button.ClickEvent clickEvent) {
 
@@ -55,7 +54,6 @@ public class CategoryView extends VerticalLayout implements Button.ClickListener
             deleteForm(form.binder);
         }
     }
-
     @Override
     public void valueChange(Property.ValueChangeEvent valueChangeEvent) {
         final Property property = valueChangeEvent.getProperty();
@@ -67,11 +65,10 @@ public class CategoryView extends VerticalLayout implements Button.ClickListener
         }
 
     }
-
     private void saveForm(FieldGroup binder) {
         try {
             binder.commit();
-            categoryService.save(getEntity(binder));
+            categoryService.save(getNewEntity(binder));
             getHome();
             Notification.show("Record ADDED!", Notification.Type.TRAY_NOTIFICATION);
         } catch (FieldGroup.CommitException e) {
@@ -79,11 +76,10 @@ public class CategoryView extends VerticalLayout implements Button.ClickListener
             getHome();
         }
     }
-
     private void saveEditedForm(FieldGroup binder) {
         try {
             binder.commit();
-            categoryService.merge(getEntity(binder));
+            categoryService.merge(getUpdateEntity(binder));
             getHome();
             Notification.show("Record UPDATED!", Notification.Type.TRAY_NOTIFICATION);
         } catch (FieldGroup.CommitException e) {
@@ -91,26 +87,29 @@ public class CategoryView extends VerticalLayout implements Button.ClickListener
             getHome();
         }
     }
-
     private void deleteForm(FieldGroup binder) {
-        final Category category = getEntity(binder);
+        final Category category = getUpdateEntity(binder);
         categoryService.remove(category);
         getHome();
     }
-
-    private Category getEntity(FieldGroup binder) {
+    private Category getNewEntity(FieldGroup binder) {
         final CategoryModel bean = ((BeanItem<CategoryModel>) binder.getItemDataSource()).getBean();
         final Category category = new Category.Builder(bean.getName())
                 .description(bean.getDescription())
-                .id(bean.getId())
                 .build();
         return category;
     }
-
+    private Category getUpdateEntity(FieldGroup binder) {
+        final CategoryModel bean = ((BeanItem<CategoryModel>) binder.getItemDataSource()).getBean();
+        final Category category = new Category.Builder(bean.getName())
+                .description(bean.getDescription())
+                .id(table.getValue().toString())
+                .build();
+        return category;
+    }
     private void getHome() {
        main.content.setSecondComponent(new SystemValues(main, "CATEGORY"));
     }
-
     private void setEditFormProperties() {
         form.binder.setReadOnly(false);
         form.save.setVisible(false);
@@ -119,17 +118,14 @@ public class CategoryView extends VerticalLayout implements Button.ClickListener
         form.delete.setVisible(false);
         form.update.setVisible(true);
     }
-
     private void setReadFormProperties() {
         form.binder.setReadOnly(true);
-        //Buttons Behaviou
         form.save.setVisible(false);
         form.edit.setVisible(true);
         form.cancel.setVisible(true);
         form.delete.setVisible(true);
         form.update.setVisible(false);
     }
-
     private void addListeners() {
         //Register Button Listeners
         form.save.addClickListener((Button.ClickListener) this);
@@ -140,13 +136,10 @@ public class CategoryView extends VerticalLayout implements Button.ClickListener
         //Register Table Listerners
         table.addValueChangeListener((Property.ValueChangeListener) this);
     }
-
-    private CategoryModel getModel(Category val) {
+    private CategoryModel getModel(Category category) {
         final CategoryModel model = new CategoryModel();
-        final Category ctgry = categoryService.find(val.getId());
-        model.setDescription(ctgry.getDescription());
-        model.setId(ctgry.getId());
-        model.setName(ctgry.getName());
+        model.setDescription(category.getDescription());
+        model.setName(category.getName());
         return model;
     }
 }

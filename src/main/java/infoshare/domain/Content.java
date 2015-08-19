@@ -103,11 +103,23 @@ public class Content implements Serializable, Comparable<Content> {
             return this;
         }
 
+        public Builder copy(Content content){
+            this.id = content.id;
+            this.dateCreated = content.dateCreated;
+            this.creator = content.creator;
+            this.source = content.source;
+            this.category = content.category;
+            this.title = content.title;
+            this.content = content.content;
+            this.contentType = content.contentType;
+
+            return this;
+        }
+
         public Content build(){
             return new Content(this);
         }
     }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

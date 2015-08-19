@@ -33,7 +33,6 @@ public class CourseView extends VerticalLayout implements Button.ClickListener, 
         addComponent(table);
         addListeners();
     }
-
     @Override
     public void buttonClick(Button.ClickEvent event) {
         final Button source = event.getButton();
@@ -49,7 +48,6 @@ public class CourseView extends VerticalLayout implements Button.ClickListener, 
             deleteForm(form.binder);
         }
     }
-
     @Override
     public void valueChange(Property.ValueChangeEvent event) {
         final Property property = event.getProperty();
@@ -64,11 +62,10 @@ public class CourseView extends VerticalLayout implements Button.ClickListener, 
             setReadFormProperties();
         }
     }
-
     private void saveForm(FieldGroup binder) {
         try {
             binder.commit();
-            courseService.save(getEntity(binder));
+            courseService.save(getNewEntity(binder));
             getHome();
             Notification.show("Record ADDED!", Notification.Type.TRAY_NOTIFICATION);
         } catch (FieldGroup.CommitException e) {
@@ -76,11 +73,10 @@ public class CourseView extends VerticalLayout implements Button.ClickListener, 
             getHome();
         }
     }
-
     private void saveEditedForm(FieldGroup binder) {
         try {
             binder.commit();
-            courseService.merge(getEntity(binder));
+            courseService.merge(getUpdateEntity(binder));
             getHome();
             Notification.show("Record UPDATED!", Notification.Type.TRAY_NOTIFICATION);
         } catch (FieldGroup.CommitException e) {
@@ -88,26 +84,30 @@ public class CourseView extends VerticalLayout implements Button.ClickListener, 
             getHome();
         }
     }
-
     private void deleteForm(FieldGroup binder) {
-        final Course course = getEntity(binder);
-        courseService.remove(course);
+        courseService.remove(getUpdateEntity(binder));
         getHome();
     }
-    private Course getEntity(FieldGroup binder) {
+    private Course getNewEntity(FieldGroup binder) {
         final CourseModel bean = ((BeanItem<CourseModel>) binder.getItemDataSource()).getBean();
         final Course course = new Course.Builder(bean.getCourseLevel())
                 .description(bean.getCourseDescription())
                 .lessons(bean.getLessons())
-                .id(bean.getId())
                 .build();
         return course;
     }
-
+    private Course getUpdateEntity(FieldGroup binder) {
+        final CourseModel bean = ((BeanItem<CourseModel>) binder.getItemDataSource()).getBean();
+        final Course course = new Course.Builder(bean.getCourseLevel())
+                .description(bean.getCourseDescription())
+                .lessons(bean.getLessons())
+                .id(table.getValue().toString())
+                .build();
+        return course;
+    }
     private void getHome() {
         main.content.setSecondComponent(new CoursesMenu(main, "Course"));
     }
-
     private void setEditFormProperties() {
         form.binder.setReadOnly(false);
         form.save.setVisible(false);
@@ -116,7 +116,6 @@ public class CourseView extends VerticalLayout implements Button.ClickListener, 
         form.delete.setVisible(false);
         form.update.setVisible(true);
     }
-
     private void setReadFormProperties() {
         form.binder.setReadOnly(true);
         //Buttons Behaviou
@@ -126,7 +125,6 @@ public class CourseView extends VerticalLayout implements Button.ClickListener, 
         form.delete.setVisible(true);
         form.update.setVisible(false);
     }
-
     private void addListeners() {
         //Register Button Listeners
         form.save.addClickListener((Button.ClickListener) this);
@@ -137,14 +135,11 @@ public class CourseView extends VerticalLayout implements Button.ClickListener, 
         //Register Table Listerners
         table.addValueChangeListener((Property.ValueChangeListener) this);
     }
-
-    private CourseModel getModel(Course val) {
+    private CourseModel getModel(Course course) {
         final CourseModel model = new CourseModel();
-        final Course course = courseService.find(val.getId());
         model.setCourseLevel(course.getCourseLevel());
         model.setCourseDescription(course.getCourseDescription());
         model.setLessons(course.getLessons());
-        model.setId(course.getId());
         return model;
     }
 }

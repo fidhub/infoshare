@@ -5,7 +5,6 @@ import com.vaadin.data.fieldgroup.FieldGroup;
 import com.vaadin.data.util.BeanItem;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.*;
-import com.vaadin.ui.themes.ChameleonTheme;
 import com.vaadin.ui.themes.ValoTheme;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.courseSetup.CoursesMenu;
@@ -35,13 +34,15 @@ public class LessonView extends VerticalLayout implements Button.ClickListener, 
     private CourseService courseService = new CourseServiceImpl();
 
     public LessonView(MainLayout main) {
-
         this.main = main;
         this.form = new LessonForm();
-        if(table == null)
+        if(table == null){
             this.table = new LessonTable();
-        else
-            table.loadTable(courseCmb.getValue().toString());
+            addLesson.setVisible(false);
+            editLesson.setVisible(false);
+        }
+        else if(courseCmb.getValue() != null)
+              table.loadTable(courseCmb.getValue().toString());
 
         this.popUp = modelWindow();
 
@@ -56,10 +57,11 @@ public class LessonView extends VerticalLayout implements Button.ClickListener, 
     public void buttonClick(Button.ClickEvent clickEvent) {
         final Button source = clickEvent.getButton();
         if (source == addLesson){
-            UI.getCurrent().addWindow(popUp);
-            popUp.setModal(true);
-            form.popUpSaveBtn.setVisible(true);
-            form.popUpUpdateBtn.setVisible(false);
+                UI.getCurrent().addWindow(popUp);
+                popUp.setModal(true);
+                form.popUpSaveBtn.setVisible(true);
+                form.popUpUpdateBtn.setVisible(false);
+
         }else if(source == editLesson){
             editButton();
         }else if(source== form.popUpCancelBtn){
@@ -78,6 +80,8 @@ public class LessonView extends VerticalLayout implements Button.ClickListener, 
         final Property property = valueChangeEvent.getProperty();
         if (property == courseCmb){
             table.loadTable(courseCmb.getValue().toString());
+            addLesson.setVisible(true);
+            editLesson.setVisible(true);
         }
     }
     private void editButton(){
@@ -92,7 +96,7 @@ public class LessonView extends VerticalLayout implements Button.ClickListener, 
                 }
             }
         }catch (Exception e){
-            new Notification("Select the lesson you wanna edit", Notification.Type.HUMANIZED_MESSAGE);
+             Notification.show("Select the lesson you wanna edit", Notification.Type.HUMANIZED_MESSAGE);
         }finally {
             form.popUpUpdateBtn.setVisible(true);
             form.popUpSaveBtn.setVisible(false);
@@ -114,6 +118,8 @@ public class LessonView extends VerticalLayout implements Button.ClickListener, 
     private Window modelWindow(){
         final Window popup = new Window();
         popup.setWidth(80.0f, Unit.PERCENTAGE);
+        popup.setClosable(false);
+        popup.setResizable(false);
         popup.setContent(form);
         return popup;
     }
@@ -128,7 +134,7 @@ public class LessonView extends VerticalLayout implements Button.ClickListener, 
     }
     private ComboBox getComboBox() {
         if (courseCmb == null)
-            courseCmb = new ComboBox("Select Course");
+            courseCmb = new ComboBox();
         for (Course course : courseService.findAll()) {
             if (course.getId() != null) {
                 courseCmb.addItem(course.getId());
@@ -139,9 +145,9 @@ public class LessonView extends VerticalLayout implements Button.ClickListener, 
                 courseCmb.setImmediate(true);
             }
         }
-        courseCmb.setWidth(330.0f, Unit.PIXELS);
-        courseCmb.addStyleName(ChameleonTheme.COMBOBOX_SELECT_BUTTON);
-        courseCmb.setIcon(FontAwesome.BOOK);
+        courseCmb.setWidth(300.0f, Unit.PIXELS);
+        courseCmb.setInputPrompt("Select Course.....");
+        courseCmb.addStyleName(ValoTheme.COMBOBOX_SMALL);
         return courseCmb;
     }
     private void getHome(){
@@ -184,20 +190,21 @@ public class LessonView extends VerticalLayout implements Button.ClickListener, 
         List<Lesson> lessons = courseBean.getLessons();
 
         final Lesson lesson = new Lesson.Builder(lessonBean.getLesson())
-                                        .description(lessonBean.getDescription())
-                                        .content(lessonBean.getContent())
-                                        .id(table.getValue().toString()).build();
+                            .description(lessonBean.getDescription())
+                            .content(lessonBean.getContent())
+                            .id(table.getValue().toString())
+                            .build();
+
         for(int i=0; i<lessons.size(); i++)
             if(lessons.get(i).getId().equals(lesson.getId()))
                 lessons.remove(i);
 
         lessons.add(lesson);
         final Course course = new Course.Builder(courseBean.getCourseLevel())
-                                        .description(courseBean.getCourseDescription())
-                                        .lessons(lessons).id(courseBean.getId()).build();
+                             .description(courseBean.getCourseDescription())
+                             .lessons(lessons).id(courseBean.getId()).build();
         return course;
     }
-
     private Course getNewEntity(FieldGroup binder) {
 
         final Course courseBean = courseService.find(courseCmb.getValue().toString());
@@ -206,18 +213,16 @@ public class LessonView extends VerticalLayout implements Button.ClickListener, 
 
         int size = lessons.size();
         final Lesson lesson = new Lesson.Builder(lessonBean.getLesson())
-                                        .description(lessonBean.getDescription())
-                                        .content(lessonBean.getContent())
-                                        .id((size+1)+"").build();
+                             .description(lessonBean.getDescription())
+                             .content(lessonBean.getContent())
+                             .id((size+1)+"").build();
         lessons.add(lesson);
         final Course course = new Course.Builder(courseBean.getCourseLevel())
-                                        .description(courseBean.getCourseDescription())
-                                        .lessons(lessons).id(courseBean.getId()).build();
+                            .description(courseBean.getCourseDescription())
+                            .lessons(lessons).id(courseBean.getId()).build();
         return course;
     }
-
     public LessonModel getLessonModel(Lesson lesson) {
-
         LessonModel  model = new LessonModel();
         model.setLesson(lesson.getLesson());
         model.setDescription(lesson.getDescription());

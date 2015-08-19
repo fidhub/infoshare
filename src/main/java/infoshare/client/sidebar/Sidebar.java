@@ -15,16 +15,18 @@ import infoshare.client.sidebar.trees.SetupTree;
 public class Sidebar extends Accordion implements ItemClickEvent.ItemClickListener {
     private final MainLayout main;
 
-    private final String PASSWORD = "Manage PASSWORD";
-    private final String CONTENT = "Manage CONTENT";
-    private final String COURSES = "Manage COURSES";
-    private final String SETUP = "System SETUP";
+    private final String PASSWORD = "MANAGE PASSWORD";
+    private final String CONTENT = "MANAGE CONTENT";
+    private final String COURSES = "MANAGE COURSES";
+    private final String SETUP = "SYSTEM SETUP";
 
 
     public Sidebar(MainLayout main) {
         setSizeFull();
         this.main = main;
-        setHeight("250px");
+        addStyleName("accordion");
+        setHeight("260px");
+
         VerticalLayout rawMenu = new VerticalLayout();
         ContentTree contentTree = new ContentTree(main);
         rawMenu.addComponent(contentTree);

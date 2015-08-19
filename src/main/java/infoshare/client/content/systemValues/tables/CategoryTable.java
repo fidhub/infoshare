@@ -1,6 +1,8 @@
 package infoshare.client.content.systemValues.tables;
 
+import com.vaadin.server.Responsive;
 import com.vaadin.ui.Table;
+import com.vaadin.ui.themes.ValoTheme;
 import infoshare.client.content.MainLayout;
 import infoshare.domain.Category;
 import infoshare.services.category.CategoryService;
@@ -22,6 +24,11 @@ public class CategoryTable extends Table {
     public CategoryTable(MainLayout mainApp){
         this.mainLayout = mainApp;
         setSizeFull();
+        Responsive.makeResponsive(this);
+        addStyleName(ValoTheme.TABLE_BORDERLESS);
+        addStyleName(ValoTheme.TABLE_NO_STRIPES);
+        addStyleName(ValoTheme.TABLE_NO_VERTICAL_LINES);
+        addStyleName(ValoTheme.TABLE_SMALL);
         addContainerProperty("Tip Category", String.class, null);
         addContainerProperty("Description", String.class,null);
 

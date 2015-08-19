@@ -2,56 +2,57 @@ package infoshare.client.content.setup.models;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
  * Created by hashcode on 2015/06/23.
  */
-public class UserModel implements Serializable, Comparable<UserModel> {
-    private String id;
+public class UserModel implements Serializable{
+
+   // @NotNull
+    private String otherName;
     @NotNull
-    private String firstname;
+    private String firstName;
     @NotNull
-    private String lastname;
-    private String othername;
-    private String password;
+    private String lastName;
     @NotNull
-    private String email;
-    private boolean enabled;
+    private String password ;
+    private boolean enable;
     @NotNull
-    private Set<String> roleIds;
+    private Set<String> roles = new HashSet<>();
     @NotNull
     private String username;
-    public String getId() {
-        return id;
+    //@NotNull
+    private List<String> contact = new ArrayList<>();
+
+   // @NotNull
+    private List<String> address = new ArrayList<>();
+
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getFirstname() {
-        return firstname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getOtherName() {
+        return otherName;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
-    public String getOthername() {
-        return othername;
-    }
-
-    public void setOthername(String othername) {
-        this.othername = othername;
+    public void setOtherName(String otherName) {
+        this.otherName = otherName;
     }
 
     public String getPassword() {
@@ -62,6 +63,22 @@ public class UserModel implements Serializable, Comparable<UserModel> {
         this.password = password;
     }
 
+    public boolean isEnable() {
+        return enable;
+    }
+
+    public void setEnable(boolean enable) {
+        this.enable = enable;
+    }
+
+    public Set<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<String> roles) {
+        this.roles = roles;
+    }
+
     public String getUsername() {
         return username;
     }
@@ -70,52 +87,24 @@ public class UserModel implements Serializable, Comparable<UserModel> {
         this.username = username;
     }
 
-    @Override
-    public int compareTo(UserModel o) {
-        return this.getLastname().compareTo(o.getLastname());
+    public List<String> getContact() {
+        contact.add("54321");
+        return contact;
     }
 
-    /**
-     * @return the email
-     */
-    public String getEmail() {
-        return email;
+    public void setContact(List<String> contact) {
+
+        this.contact = contact;
     }
 
-    /**
-     * @param email the email to set
-     */
-    public void setEmail(String email) {
-        this.email = email;
+    public List<String> getAddress() {
+        address.add("12345");
+        return address;
     }
 
-
-    /**
-     * @return the enabled
-     */
-    public boolean isEnabled() {
-        return enabled;
+    public void setAddress(List<String> address) {
+        this.address = address;
     }
 
-    /**
-     * @param enabled the enabled to set
-     */
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-
-    /**
-     * @return the roleIds
-     */
-    public Set<String> getRoleIds() {
-        return roleIds;
-    }
-
-    /**
-     * @param roleIds the roleIds to set
-     */
-    public void setRoleIds(Set<String> roleIds) {
-        this.roleIds = roleIds;
-    }
 
 }

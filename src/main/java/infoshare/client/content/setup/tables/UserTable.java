@@ -1,6 +1,8 @@
 package infoshare.client.content.setup.tables;
 
+import com.vaadin.server.Responsive;
 import com.vaadin.ui.Table;
+import com.vaadin.ui.themes.ValoTheme;
 import infoshare.client.content.MainLayout;
 import infoshare.domain.User;
 import infoshare.services.users.Impl.UserServiceImpl;
@@ -14,32 +16,34 @@ import java.util.List;
 public class UserTable extends Table {
 
     private final MainLayout main;
-
     private UserService userService = new UserServiceImpl();
-
     public UserTable(MainLayout main) {
         this.main = main;
         setSizeFull();
+        Responsive.makeResponsive(this);
+        addStyleName(ValoTheme.TABLE_BORDERLESS);
+        addStyleName(ValoTheme.TABLE_NO_STRIPES);
+        addStyleName(ValoTheme.TABLE_NO_VERTICAL_LINES);
+        addStyleName(ValoTheme.TABLE_SMALL);
         addContainerProperty("Username", String.class, null);
         addContainerProperty("First Name", String.class, null);
         addContainerProperty("Last Name", String.class, null);
+        addContainerProperty("Other Name", String.class, null);
         addContainerProperty("Enabled", Boolean.class, null);
-        List<User> users= userService.findAll(); // From REST API
-        for (User user : users) {
+
+        for (User user : userService.findAll()) {
             addItem(new Object[]{
                     user.getUsername(),
-                    user.getFirstname(),
-                    user.getLastname(),
+                    user.getFirstName(),
+                    user.getLastName(),
+                    user.getOtherName(),
                     user.isEnable()
                     }, user.getId());
         }
-//         Allow selecting items from the table.
+
         setNullSelectionAllowed(false);
-//
         setSelectable(true);
-        // Send changes in selection immediately to server.
         setImmediate(true);
     }
-
 
 }

@@ -40,6 +40,13 @@ public class Category implements Serializable, Comparable<Category> {
             return this;
         }
 
+        public Builder copy(Category category){
+            this.id = category.id;
+            this.name = category.name;
+            this.description = category.description;
+            return this;
+        }
+
         public Category build() {
             return new Category(this);
         }
