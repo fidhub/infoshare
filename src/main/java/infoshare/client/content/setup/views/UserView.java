@@ -81,8 +81,8 @@ public class UserView extends VerticalLayout implements
         if (property == table) {
             try {
                 AddressTable.userID = table.getValue().toString();
-                contactView = new ContactView(main);
                 addressView = new AddressView(main);
+                contactView = new ContactView(main);
                 final User user = userService.find(table.getValue().toString());
                 final UserModel bean = getModel(user);
                 userForm.binder.setItemDataSource(new BeanItem<>(bean));
