@@ -29,13 +29,15 @@ public class ContactServiceImpl implements ContactService {
 
     @Override
     public Contact find(String s) {
-        return stringMap.get(s);
+        //return stringMap.get(s);
+        return RestApiConnectorClass.read(UrlPath.ContactLink.GET_ID, s, Contact.class);
     }
 
     @Override
     public Contact save(Contact entity) {
-        stringMap.put(entity.getId(),entity);
-        return stringMap.get(entity.getId());
+//        stringMap.put(entity.getId(),entity);
+//        return stringMap.get(entity.getId());
+        return RestApiConnectorClass.create(UrlPath.ContactLink.POST,entity,Contact.class);
     }
 
     @Override

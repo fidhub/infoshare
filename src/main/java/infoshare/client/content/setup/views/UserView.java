@@ -33,6 +33,7 @@ public class UserView extends VerticalLayout implements
     private UserService userService = new UserServiceImpl();
     private RoleService roleService = new RoleServiceImpl();
     private AddressView addressView ;
+    private ContactView contactView;
     public UserView(MainLayout app) {
         main = app;
         userForm = new UserForm();
@@ -64,7 +65,12 @@ public class UserView extends VerticalLayout implements
                 Notification.show("Select the user first",Notification.Type.HUMANIZED_MESSAGE);
             }
         }else if(source == userForm.addNewContact){
-
+            try {
+                contactView.setModal(true);
+                getUI().addWindow(contactView);
+            }catch (Exception e){
+                Notification.show("Select the user first",Notification.Type.HUMANIZED_MESSAGE);
+            }
         }
     }
 
@@ -72,10 +78,11 @@ public class UserView extends VerticalLayout implements
     @Override
     public void valueChange(Property.ValueChangeEvent event) {
         final Property property = event.getProperty();
-         if (property == table) {
+        if (property == table) {
             try {
                 AddressTable.userID = table.getValue().toString();
                 addressView = new AddressView(main);
+                contactView = new ContactView(main);
                 final User user = userService.find(table.getValue().toString());
                 final UserModel bean = getModel(user);
                 userForm.binder.setItemDataSource(new BeanItem<>(bean));
@@ -156,6 +163,7 @@ public class UserView extends VerticalLayout implements
                 .build();
         return user;
     }
+
     private void getHome() {
         main.content.setSecondComponent(new SetupMenu(main, "LANDING"));
     }
