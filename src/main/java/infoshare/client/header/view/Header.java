@@ -246,22 +246,28 @@ public class Header extends VerticalLayout implements Button.ClickListener {
 
     public void refreshNotification(){
         int i = 0 ;
+            for (Content content: contentService.findAll()) {
 
-        try {
-            for (Content content: contentService.findAll()){
-                i++;
-                notify.addStyleName("notifications");
-                notify.addStyleName("unread");
-                notify.setCaption(i + "");
-                notify.setDescription(i + " un-edited tips content");
-                notificationTable.addItem(new Object[]{new Label(
-                        "<b>" + content.getCreator().toUpperCase()
-                                + "</b> created a new tip <br><span><i>"
-                                + differInTime(content.getDateCreated()) + "</i></span><br>"
-                                + "<b> TITLE: </b><i>" + content.getTitle() + "</i>", ContentMode.HTML)
-                }, content.getId());
+                if (content.getSource().equalsIgnoreCase("mobile")) {
+                    UrlPath.isEdited = RestApiConnectorClass.readAll(UrlPath.ContentLinks.isEdited + content.getId(), Boolean.class);
+                    if (!UrlPath.isEdited.contains(true)) {
+                        try {
+                            i++;
+                            notify.addStyleName("notifications");
+                            notify.addStyleName("unread");
+                            notify.setCaption(i + "");
+                            notify.setDescription(i + " un-edited tips content");
+                            notificationTable.addItem(new Object[]{new Label(
+                                    "<b>" + content.getCreator().toUpperCase()
+                                            + "</b> created a new tip <br><span><i>"
+                                            + differInTime(content.getDateCreated()) + "</i></span><br>"
+                                            + "<b> TITLE: </b><i>" + content.getTitle() + "</i>", ContentMode.HTML)
+                            }, content.getId());
+                        } catch (Exception r) {
+                        }
+                    }
+                }
             }
-        }catch (Exception e) {}
 
         if(i==0){
             notify.removeStyleName("unread");
