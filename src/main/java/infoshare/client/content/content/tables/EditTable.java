@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by hashcode on 2015/06/24.
@@ -48,17 +50,16 @@ public class EditTable extends Table{
         setImmediate(true);
     }
 
-
     public void loadTable(Content content) {
         DateFormat formatter = new SimpleDateFormat("dd - MMMMMMM - yyyy");
-        if (!content.getSource().equalsIgnoreCase("mobile")) {
-            UrlPath.isEdited = RestApiConnectorClass.
-                    readAll(UrlPath.ContentLinks.isEdited + content.getSource(), Boolean.class);
-            if (UrlPath.isEdited.contains(true)) {
+
+        if (!content.getSource().equalsIgnoreCase("mobile") ) {
+            String category = categoryService.find(content.getCategory()).getName();
+            if (!Check(content).contains(true)) {
                 try {
                     addItem(new Object[]{
                             content.getTitle(),
-                            categoryService.find(content.getCategory()).getName(),
+                            category,
                             content.getCreator(),
                             formatter.format(content.getDateCreated())
                     }, content.getId());
@@ -68,4 +69,14 @@ public class EditTable extends Table{
         }
     }
 
+    public List<Boolean> Check( Content content ){
+        List<Boolean> check = new ArrayList<>();
+        List<Content> contents =  contentService.findAll();
+        for(int i= 0; i<contents.size(); i++){
+                if(content.getId().equalsIgnoreCase(contents.get(i).getSource())){
+                    check.add(true);
+                }else check.add(false);
+        }
+        return check;
+    }
 }

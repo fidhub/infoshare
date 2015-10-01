@@ -53,21 +53,6 @@ public class ContentTest {
     }
 
     @Test
-    public void testRaw() throws Exception {
-        List<Boolean> list = RestApiConnectorClass.readAll(UrlPath.ContentLinks .isEdited +"98fe2ef595181b72cdd3ec085508fb40",Boolean.class);
-
-        List<Content> contents = RestApiConnectorClass.readAll(UrlPath.ContentLinks.GETALL,Content.class);
-        System.out.println(list);
-        for(int i=0; i<list.size(); i++) {
-            if(list.get(i)== true)
-              System.out.println(i+"\t Edited\t"+contents.get(i).getId()+"\t"+contents.get(i).getSource());
-            if(list.get(i) == false){
-                System.out.println(i+"\t raw\t"+contents.get(i).getId()+"\t"+contents.get(i).getSource());
-            }
-        }
-    }
-
-    @Test
     public void testGetAll() throws Exception {
         List<Content> contents = RestApiConnectorClass.readAll(UrlPath.ContentLinks.GETALL,Content.class);
         System.out.println(contents);
