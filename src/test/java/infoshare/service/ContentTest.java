@@ -26,7 +26,7 @@ public class ContentTest extends TestCase {
     public void testGetAll() throws Exception {
         Content content = contentService.find("bb31d3c323f6e891cc62aec8afe7596e");
         Assert.assertEquals(content.getCreator(), "Songezo Kamila");
-
-
     }
+
+
 }
