@@ -49,6 +49,14 @@ public class ContentType implements Serializable, Comparable<ContentType> {
             this.description = description;
             return this;
         }
+
+        public Builder copy(ContentType contentType){
+            this.id = contentType.id;
+            this.name = contentType.name;
+            this.description = contentType.description;
+
+            return this;
+        }
         public ContentType build(){
             return  new ContentType(this);
         }

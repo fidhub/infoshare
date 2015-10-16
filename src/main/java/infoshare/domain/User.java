@@ -159,6 +159,21 @@ public class User implements Serializable, Comparable<User> {
             return this;
         }
 
+        public Builder copy(User user){
+            this.id = user.id;
+            this.username = user.username;
+            this.password = user.password;
+            this.firstName = user.firstName;
+            this.lastName = user.lastName;
+            this.role = user.getRoles();
+            this.address = user.address;
+            this.enable = user.enable;
+            this.contact = user.contact;
+            this.otherName = user.otherName;
+
+            return this;
+        }
+
         public User build() {
             return new User(this);
         }

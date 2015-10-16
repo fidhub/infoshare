@@ -41,7 +41,7 @@ public class ContentTest {
                 .source("9d57cca65eaf056735157f119f2a467b")
                 .category("3699255c536bcff9348f0de806866847")
                 .contentType("edited").build();
-        RestApiConnectorClass.update(UrlPath.ContentLinks.PUT,content1);
+        RestApiConnectorClass.update(UrlPath.ContentLinks.PUT, content1);
     }
 
     @Test
