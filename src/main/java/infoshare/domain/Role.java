@@ -36,7 +36,7 @@ public class Role implements Serializable, Comparable<Role> {
     public static class Builder {
 
         private String id;
-        private final String rolename;
+        private String rolename;
         private String description;
 
         public Builder(String rolename) {
@@ -53,12 +53,17 @@ public class Role implements Serializable, Comparable<Role> {
             return this;
         }
 
-    /*    public Builder copy(Role role){
+        public Builder rolename(String value){
+            this.rolename = value;
+            return this;
+        }
+
+        public Builder copy(Role role){
             this.id = role.id;
             this.rolename = role.roleName;
             this.description = role.description;
             return  this;
-        }*/
+        }
         public Role build() {
             return new Role(this);
         }

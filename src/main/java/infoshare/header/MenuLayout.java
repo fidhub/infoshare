@@ -1,4 +1,4 @@
-package infoshare.client.header;
+package infoshare.header;
 
 import com.vaadin.ui.Component;
 import com.vaadin.ui.ComponentContainer;

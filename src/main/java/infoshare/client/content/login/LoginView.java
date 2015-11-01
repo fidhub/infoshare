@@ -48,7 +48,7 @@ public class LoginView extends VerticalLayout {
     }
 
     private Component buildFields() {
-        HorizontalLayout fields = new HorizontalLayout();
+        VerticalLayout fields = new VerticalLayout();
         fields.setSpacing(true);
         fields.addStyleName("fields");
 

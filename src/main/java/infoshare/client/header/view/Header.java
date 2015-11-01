@@ -244,7 +244,7 @@ public class Header extends VerticalLayout implements Button.ClickListener {
             return diffSeconds + " seconds ago";
     }
 
-    public void refreshNotification(){
+    public void refreshNotification() {
         int i = 0 ;
             for (Content content: contentService.findAll()) {
 
@@ -268,13 +268,13 @@ public class Header extends VerticalLayout implements Button.ClickListener {
                     }
                 }
             }
-
         if(i==0){
             notify.removeStyleName("unread");
             notify.setCaption("");
             notify.setDescription("No new tips");
         }
     }
+
     private HorizontalLayout getLayout(){
         final HorizontalLayout layout = new HorizontalLayout();
         layout.addStyleName("dashboard-view");

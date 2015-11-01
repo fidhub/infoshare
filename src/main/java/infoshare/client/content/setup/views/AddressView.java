@@ -145,14 +145,12 @@ public class AddressView extends Window implements Button.ClickListener, Propert
     }
 
     private void addListeners() {
-
         addressForm.save.addClickListener(this);
         addressForm.edit.addClickListener(this);
         addressForm.cancel.addClickListener(this);
         addressForm.update.addClickListener(this);
         addressForm.exit.addClickListener(this);
         addressTable.addValueChangeListener(this);
-
     }
     public AddressModel getAddressModel(Address address){
         AddressModel model = new AddressModel();
