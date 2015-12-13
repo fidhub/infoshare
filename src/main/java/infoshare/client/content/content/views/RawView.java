@@ -29,8 +29,7 @@ import infoshare.services.source.sourceServiceImpl.SourceServiceImpl;
 /**
  * Created by hashcode on 2015/06/24.
  */
-public class RawView extends VerticalLayout implements
-        Button.ClickListener,Property.ValueChangeListener{
+public class RawView extends VerticalLayout implements Button.ClickListener,Property.ValueChangeListener{
 
     private ContentService contentService = new ContentServiceImp();
     private ContentTypeService contentTypeService = new ContentTypeServiceImpl();

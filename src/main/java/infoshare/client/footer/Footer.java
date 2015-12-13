@@ -1,16 +1,26 @@
 package infoshare.client.footer;
 
-import com.vaadin.ui.Panel;
+import com.vaadin.shared.ui.label.ContentMode;
+import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.themes.ValoTheme;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by hashcode on 2015/06/23.
  */
 public class Footer extends VerticalLayout {
 
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy");
     public Footer() {
         setSizeFull();
-        this.addComponent(new Panel());
+
+        Label footer = new Label("<p align='center'> All right Reserved Kujali Living Hub "+ dateFormat.format(new Date()), ContentMode.HTML);
+        footer.addStyleName(ValoTheme.LABEL_H4);
+        footer.addStyleName(ValoTheme.LABEL_COLORED);
+        this.addComponent(footer);
 
     }
 }
