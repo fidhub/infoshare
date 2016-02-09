@@ -14,7 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by hashcode on 2015/06/24.
@@ -51,18 +53,30 @@ public class PublishTable extends Table{
     }
     public void loadTable(Content content) {
         DateFormat formatter = new SimpleDateFormat("dd - MMMMMMM - yyyy");
-        UrlPath.isPlublished = RestApiConnectorClass.
-                readAll(UrlPath.ContentLinks.isPlublished + content.getId(), Boolean.class);
-        if (UrlPath.isPlublished.contains(true)) {
-            try {
-                addItem(new Object[]{
-                        content.getTitle(),
-                        categoryService.find(content.getCategory()).getName(),
-                        content.getCreator(),
-                        formatter.format(content.getDateCreated())
-                }, content.getId());
-            }catch (Exception r) {
+        if (!content.getSource().equalsIgnoreCase("mobile")) {
+            String category = categoryService.find(content.getCategory()).getName();
+        if (Check(content).contains(true)) {
+                try {
+                    addItem(new Object[]{
+                            content.getTitle(),
+                            category,
+                            content.getCreator(),
+                            formatter.format(content.getDateCreated())
+                    }, content.getId());
+                } catch (Exception r) {
+                }
             }
         }
+    }
+
+    public List<Boolean> Check( Content content ){
+        List<Boolean> check = new ArrayList<>();
+        int size =  contentService.findAll().size();
+        for(int i= 0; i<size; i++){
+            if(content.getId().equalsIgnoreCase(contentService.findAll().get(i).getSource())){
+                check.add(true);
+            }else check.add(false);
+        }
+        return check;
     }
 }

@@ -106,13 +106,13 @@ public class UserForm extends FormLayout {
         return textField;
     }
  private PasswordField getPasswordField(String label, String field) {
-        PasswordField textField = new PasswordField(label);
-        textField.setWidth(250, Unit.PIXELS);
-        textField.setNullRepresentation("");
-        textField.addValidator(new BeanValidator(UserModel.class, field));
-        textField.setImmediate(true);
-        binder.bind(textField, field);
-        return textField;
+        PasswordField passwordField = new PasswordField(label);
+        passwordField.setWidth(250, Unit.PIXELS);
+        passwordField.setNullRepresentation("");
+        passwordField.addValidator(new BeanValidator(UserModel.class, field));
+        passwordField.setImmediate(true);
+        binder.bind(passwordField, field);
+        return passwordField;
     }
 
     private CheckBox getCheckBoxField(String label, String field) {
