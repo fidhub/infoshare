@@ -340,8 +340,8 @@ public class Header extends VerticalLayout implements Button.ClickListener {
         home.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
         home.addStyleName(ValoTheme.BUTTON_SMALL);
 
-        user.setCaption("User name");
-        user.setDescription("Your user name)");
+        user.setCaption("Username");
+        user.setDescription("Your username)");
         user.setIcon(FontAwesome.USER_MD);
         user.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
         user.addStyleName(ValoTheme.BUTTON_SMALL);
