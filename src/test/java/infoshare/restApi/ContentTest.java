@@ -31,9 +31,11 @@ public class ContentTest {
                 "Avoiding tobacco — or deciding to stop using it — is one of the most important health decisions you can make." +
                 " It's also an important part of cancer prevention. If you need help quitting tobacco," +
                 " ask your doctor about stop-smoking products and other strategies for quitting.");
-        model.setContentType("raw");
+        model.setState("active");
+        model.setContentType("Text");
+        model.setStatus("raw");
 
-        RestApiConnectorClass.create(UrlPath.ContentLinks.POST, model, ContentModel.class);
+        RestApiConnectorClass.create(UrlPath.RawLinks.POST, model, ContentModel.class);
     }
     @Test
     public void testPUT() throws Exception {

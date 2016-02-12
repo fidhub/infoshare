@@ -11,11 +11,13 @@ import infoshare.client.content.content.ContentMenu;
 import infoshare.client.content.content.forms.PublishForm;
 import infoshare.client.content.content.models.ContentModel;
 import infoshare.client.content.content.tables.PublishTable;
-import infoshare.domain.Content;
-import infoshare.filterSearch.ContentFilter;
-import infoshare.services.Content.ContentService;
-import infoshare.services.Content.Impl.ContentServiceImp;
+import infoshare.domain.PublishedContent;
+import infoshare.filterSearch.PublishedContentFilter;
+import infoshare.services.PublishedContent.Impl.PublishedContentServiceImpl;
+import infoshare.services.PublishedContent.PublishedContentService;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.stream.Collectors;
 
 /**
  * Created by hashcode on 2015/06/24.
@@ -23,14 +25,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class PublishView extends VerticalLayout implements Button.ClickListener,
         Property.ValueChangeListener {
     @Autowired
-    private ContentService contentService = new ContentServiceImp();
+    private PublishedContentService publishedContentService = new PublishedContentServiceImpl();
 
     private final MainLayout main;
     private final PublishTable table;
     private final PublishForm form;
     private final Window popUp ;
     private Button viewContent = new Button("View Content");
-    private ContentFilter contentFilter = new ContentFilter();
+    private PublishedContentFilter publishedContentFilter = new PublishedContentFilter();
     public PublishView( MainLayout mainApp) {
 
         this.main = mainApp;
@@ -50,7 +52,7 @@ public class PublishView extends VerticalLayout implements Button.ClickListener,
         viewContent.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
         viewContent.addStyleName(ValoTheme.BUTTON_SMALL);
         viewContent.setIcon(FontAwesome.EDIT);
-        layout.addComponent(contentFilter.field);
+        layout.addComponent(publishedContentFilter.field);
         layout.addComponent(viewContent);
 
         return layout;
@@ -59,8 +61,10 @@ public class PublishView extends VerticalLayout implements Button.ClickListener,
     private void refreshContacts(String stringFilter ) {
         try {
             table.removeAllItems();
-            for(Content content: contentFilter.findAll(stringFilter))
-                  table.loadTable(content);
+            publishedContentFilter.findAll(stringFilter)
+                    .stream()
+                    .filter(cont ->cont.getStatus().equalsIgnoreCase("Published"))
+                    .collect(Collectors.toList()).forEach(table::loadTable);
         }catch (Exception e){
         }
     }
@@ -95,8 +99,8 @@ public class PublishView extends VerticalLayout implements Button.ClickListener,
 
     private void ViewContentButton(){
         try {
-            final Content content = contentService.find(table.getValue().toString());
-            final ContentModel bean = getModel(content);
+            final PublishedContent publishedContent = publishedContentService.find(table.getValue().toString());
+            final ContentModel bean = getModel(publishedContent);
             form.binder.setItemDataSource(new BeanItem<>(bean));
             UI.getCurrent().addWindow(popUp);
             popUp.setModal(true);
@@ -106,15 +110,15 @@ public class PublishView extends VerticalLayout implements Button.ClickListener,
         }
     }
 
-    private ContentModel getModel(Content val) {
+    private ContentModel getModel(PublishedContent val) {
         final ContentModel model = new ContentModel();
-        final Content content = contentService.find(val.getId());
-        model.setTitle(content.getTitle());
-        model.setCategory(content.getCategory());
-        model.setCreator(content.getCreator());
-        model.setContent(content.getContent());
-        model.setContentType(content.getContentType());
-        model.setSource(content.getSource());
+        final PublishedContent publishedContent = publishedContentService.find(val.getId());
+        model.setTitle(publishedContent.getTitle());
+        model.setCategory(publishedContent.getCategory());
+        model.setCreator(publishedContent.getCreator());
+        model.setContent(publishedContent.getContent());
+        model.setContentType(publishedContent.getContentType());
+        model.setSource(publishedContent.getSource());
         return model;
     }
 
@@ -126,7 +130,7 @@ public class PublishView extends VerticalLayout implements Button.ClickListener,
         form.popUpCloseBtn.addClickListener((Button.ClickListener) this);
         viewContent.addClickListener((Button.ClickListener) this);
         table.addValueChangeListener((Property.ValueChangeListener) this);
-        contentFilter.field.addTextChangeListener(new FieldEvents.TextChangeListener() {
+        publishedContentFilter.field.addTextChangeListener(new FieldEvents.TextChangeListener() {
             @Override
             public void textChange(FieldEvents.TextChangeEvent textChangeEvent) {
                 refreshContacts(textChangeEvent.getText());

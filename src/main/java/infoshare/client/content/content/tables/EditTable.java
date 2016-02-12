@@ -6,8 +6,12 @@ import infoshare.RestApi.RestApiConnectorClass;
 import infoshare.RestApi.UrlPath;
 import infoshare.client.content.MainLayout;
 import infoshare.domain.Content;
+import infoshare.domain.EditedContent;
+import infoshare.domain.RawContent;
 import infoshare.services.Content.ContentService;
 import infoshare.services.Content.Impl.ContentServiceImp;
+import infoshare.services.EditedContent.EditedContentService;
+import infoshare.services.EditedContent.Impl.EditedContentServiceImpl;
 import infoshare.services.category.CategoryService;
 import infoshare.services.category.Impl.CategoryServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +28,7 @@ import java.util.stream.Collectors;
 public class EditTable extends Table{
 
     @Autowired
-    private ContentService contentService = new ContentServiceImp();
+    private EditedContentService editedContentService = new EditedContentServiceImpl();
     private CategoryService categoryService = new CategoryServiceImpl();
     private final MainLayout main;
 
@@ -43,12 +47,12 @@ public class EditTable extends Table{
         addContainerProperty("Date Created",String.class,null);
 
         try {
-            contentService.findAll()
+            editedContentService.findAll()
                     .stream()
                     .filter(content -> content != null)
                     .collect(Collectors.toList())
                     .stream()
-                    .filter(cont-> !cont.getSource().equalsIgnoreCase("mobile"))
+                    .filter(cont-> !cont.getStatus().equalsIgnoreCase("Edited"))
                     .collect(Collectors.toList())
                     .forEach(this::loadTable);
         }catch (Exception e){
@@ -58,42 +62,19 @@ public class EditTable extends Table{
         setImmediate(true);
     }
 
-    public void loadTable(Content content) {
-        DateFormat formatter = new SimpleDateFormat("dd - MMMMMMM - yyyy");
-        String category = categoryService.find(content.getCategory()).getName();
-               if(!Check(content).contains(true)) {
-                   try {
-                       addItem(new Object[]{
-                               content.getTitle(),
-                               category,
-                               content.getCreator(),
-                               formatter.format(content.getDateCreated())
-                       }, content.getId());
-                   } catch (Exception r) {
-                   }
-               }
+    public void loadTable(EditedContent editedContent) {
+        DateFormat formatter = new SimpleDateFormat("dd-MMMMMMM-yyyy");
+        String category = categoryService.find(editedContent.getCategory()).getName();
+        try {
+            addItem(new Object[]{
+                    editedContent.getTitle(),
+                    category,
+                    editedContent.getCreator(),
+                    formatter.format(editedContent.getDateCreated())
+            }, editedContent.getId());
+        } catch (Exception r) {
+        }
+
     }
 
-    public List<Boolean> Check( Content content ) {
-        List<Boolean> check = new ArrayList<>();
-        List<Content> contents =  contentService.findAll()
-                .stream()
-                .filter(cont -> cont != null)
-                .collect(Collectors.toList())
-                .stream()
-                .filter(cont -> !cont.getSource().equalsIgnoreCase("mobile"))
-                .collect(Collectors.toList());
-
-        for (int i = 0; i < contents.size(); i++) {
-
-                if (content.getId().equalsIgnoreCase(contents.get(i).getSource())) {
-                    for (int j=0; j<contents.size(); j++) {
-                        if (contents.get(i).getSource().equalsIgnoreCase(contents.get(j).getId())) {
-                            check.add(false);
-                        }else check.add(true);
-                    }
-                }
-            }
-        return check;
-    }
 }

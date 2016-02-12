@@ -4,8 +4,9 @@ import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.themes.ValoTheme;
 import infoshare.domain.Content;
-import infoshare.services.Content.ContentService;
-import infoshare.services.Content.Impl.ContentServiceImp;
+import infoshare.domain.RawContent;
+import infoshare.services.RawContent.Impl.RawContentServiceImpl;
+import infoshare.services.RawContent.RawContentService;
 import infoshare.services.category.CategoryService;
 import infoshare.services.category.Impl.CategoryServiceImpl;
 
@@ -18,36 +19,36 @@ import java.util.logging.Logger;
 /**
  * Created by codex on 2015/07/14.
  */
-public class ContentFilter {
-    private ContentService contacts = new ContentServiceImp();
+public class RawContentFilter {
+    private RawContentService rawContentService = new RawContentServiceImpl();
     private CategoryService categoryService = new CategoryServiceImpl();
     public TextField field = new TextField();
-    public ContentFilter() {
+    public RawContentFilter() {
         getField();
     }
-    public synchronized List<Content> findAll(String stringFilter) {
+    public synchronized List<RawContent> findAll(String stringFilter) {
         DateFormat formatter = new SimpleDateFormat("dd - MMMMMMM - yyyy");
         ArrayList arrayList = new ArrayList();
         String cat;
-        for (Content content : contacts.findAll()) {
-            if(!content.getCategory().equalsIgnoreCase("uncategorized"))
-                cat = categoryService.find(content.getCategory().toString()).getName().toLowerCase();
-                else cat = content.getCategory().toString().toLowerCase();
+        for (RawContent rawContent : rawContentService.findAll()) {
+            if(!rawContent.getCategory().equalsIgnoreCase("uncategorized"))
+                cat = categoryService.find(rawContent.getCategory().toString()).getName().toLowerCase();
+                else cat = rawContent.getCategory().toString().toLowerCase();
 
             try {
                 boolean passesFilter = (stringFilter == null || stringFilter.isEmpty())
-                        || content.getTitle().toString().toLowerCase()
+                        || rawContent.getTitle().toString().toLowerCase()
                         .contains(stringFilter.toLowerCase())
                         ||cat.contains(stringFilter.toLowerCase())
-                        || content.getCreator().toString().toLowerCase()
+                        || rawContent.getCreator().toString().toLowerCase()
                         .contains(stringFilter.toLowerCase())
-                        || content.getSource().toString().toLowerCase()
+                        || rawContent.getSource().toString().toLowerCase()
                         .contains(stringFilter.toLowerCase())
-                        ||formatter.format(content.getDateCreated()).toString().toLowerCase()
+                        ||formatter.format(rawContent.getDateCreated()).toString().toLowerCase()
                         .contains(stringFilter.toLowerCase());
 
                 if (passesFilter) {
-                    arrayList.add(content);
+                    arrayList.add(rawContent);
                 }
             } catch (Exception ex) {
                 Logger.getLogger(ex.getLocalizedMessage());
@@ -57,7 +58,7 @@ public class ContentFilter {
         return arrayList;
     }
     private TextField getField(){
-        field.setInputPrompt("Filter content ...");
+        field.setInputPrompt("Filter rawContent ...");
         field.setWidth("260px");
         field.setIcon(FontAwesome.FILTER);
         field.addStyleName(ValoTheme.TEXTFIELD_INLINE_ICON);

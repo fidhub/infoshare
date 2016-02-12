@@ -7,7 +7,7 @@ import java.util.List;
  */
 public class UrlPath {
 
-    public static final  String URL ="http://10.47.2.247:9000";
+    public static final  String URL ="http://kujali.cput.ac.za";
     public static List<Boolean> isEdited;
     public static List<Boolean> isPlublished;
 

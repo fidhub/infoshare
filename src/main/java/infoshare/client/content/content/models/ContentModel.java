@@ -19,6 +19,10 @@ public class ContentModel implements Serializable {
     private String content;
     @NotNull
     private String contentType;
+    @NotNull
+    private String status     ;
+    @NotNull
+    private String state      ;
 
     public String getCategory() {
         return category;
@@ -68,5 +72,19 @@ public class ContentModel implements Serializable {
     }
     public void setContentType(String contentType){
         this.contentType = contentType;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getState() {
+        return state;
+    }
+    public void setState(String state) {
+        this.state = state;
     }
 }

@@ -12,11 +12,8 @@ import infoshare.client.content.content.ContentMenu;
 import infoshare.client.content.content.forms.RawAndEditForm;
 import infoshare.client.content.content.models.ContentModel;
 import infoshare.client.content.content.tables.EditTable;
-import infoshare.domain.Category;
-import infoshare.domain.Content;
-import infoshare.domain.ContentType;
-import infoshare.domain.Source;
-import infoshare.filterSearch.ContentFilter;
+import infoshare.domain.*;
+import infoshare.filterSearch.EditedContentFilter;
 import infoshare.services.Content.ContentService;
 import infoshare.services.Content.Impl.ContentServiceImp;
 import infoshare.services.ContentType.ContentTypeService;
@@ -26,6 +23,8 @@ import infoshare.services.category.Impl.CategoryServiceImpl;
 import infoshare.services.source.SourceService;
 import infoshare.services.source.sourceServiceImpl.SourceServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.stream.Collectors;
 
 /**
  * Created by hashcode on 2015/06/24.
@@ -44,7 +43,7 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
 
     private Window popUp ;
     private Button editBtn = new Button("UPDATE");
-    private ContentFilter contentFilter = new ContentFilter();
+    private EditedContentFilter editedContentFilter = new EditedContentFilter();
 
     public EditView( MainLayout mainApp) {
 
@@ -67,7 +66,7 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
         editBtn.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
         editBtn.addStyleName(ValoTheme.BUTTON_SMALL);
         editBtn.setIcon(FontAwesome.EDIT);
-        layout.addComponent(contentFilter.field);
+        layout.addComponent(editedContentFilter.field);
         layout.addComponent(editBtn);
         return layout;
     }
@@ -75,7 +74,13 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
     private void refreshContacts(String stringFilter ) {
         try {
             table.removeAllItems();
-            contentFilter.findAll(stringFilter).forEach(table::loadTable);
+            editedContentFilter.findAll(stringFilter).stream()
+                    .filter(content -> content != null)
+                    .collect(Collectors.toList())
+                    .stream()
+                    .filter(cont -> !cont.getStatus().equalsIgnoreCase("Edited"))
+                    .collect(Collectors.toList())
+                    .forEach(table::loadTable);
         }catch (Exception e){
         }
     }
@@ -202,7 +207,7 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
         form.popUpCancelBtn.addClickListener((Button.ClickListener) this);
         editBtn.addClickListener((Button.ClickListener) this);
         table.addValueChangeListener((Property.ValueChangeListener)this);
-        contentFilter.field.addTextChangeListener(new FieldEvents.TextChangeListener() {
+        editedContentFilter.field.addTextChangeListener(new FieldEvents.TextChangeListener() {
             @Override
             public void textChange(FieldEvents.TextChangeEvent textChangeEvent) {
                 refreshContacts(textChangeEvent.getText());
