@@ -35,8 +35,6 @@ public class ContactServiceImpl implements ContactService {
 
     @Override
     public Contact save(Contact entity) {
-//        stringMap.put(entity.getId(),entity);
-//        return stringMap.get(entity.getId());
         return RestApiConnectorClass.create(UrlPath.ContactLink.POST,entity,Contact.class);
     }
 
