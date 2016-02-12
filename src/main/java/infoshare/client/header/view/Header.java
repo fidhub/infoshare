@@ -23,6 +23,7 @@ import java.io.File;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.stream.Collectors;
 
 /**
  * Created by hashcode on 2015/06/23.
@@ -37,8 +38,10 @@ public class Header extends VerticalLayout implements Button.ClickListener {
     public Button notify = new Button();
     public Button user = new Button();
     private Table notificationTable = new Table();
+    RawView rawView ;
     public Header(MainLayout main) {
         this.main = main;
+        rawView = new RawView(main);
         setSizeFull();
         setSpacing(true);
         addComponent(getHeaderPanel());
@@ -150,13 +153,16 @@ public class Header extends VerticalLayout implements Button.ClickListener {
         notificationTable.setImmediate(true);
 
         refreshNotification();
+
         notificationTable.addItemClickListener(event1 -> {
+            int i=1;
             if (event1.isDoubleClick())
             {
-                RawView rawView = new RawView(main);
-                notifications.close();
-                rawView.tableId = notificationTable.getValue().toString();
-                rawView.EditButton();
+               if(i==1) { i=0;
+                   notifications.close();
+                   rawView.tableId = notificationTable.getValue().toString();
+                   rawView.EditButton();
+               }
             }
         });
         layout.addComponent(notificationTable);
@@ -220,9 +226,9 @@ public class Header extends VerticalLayout implements Button.ClickListener {
     }
 
     private void addListener(){
-        home.addClickListener((Button.ClickListener)this);
-        notify.addClickListener((Button.ClickListener) this);
-        user.addClickListener((Button.ClickListener)this);
+        home.addClickListener(this);
+        notify.addClickListener(this);
+        user.addClickListener(this);
     }
 
     private String differInTime(Date dateCreated){
@@ -254,12 +260,12 @@ public class Header extends VerticalLayout implements Button.ClickListener {
             return diffSeconds + " seconds ago";
     }
 
-    public void refreshNotification() {
+    public  void refreshNotification() {
         int i = 0 ;
-            for (Content content: contentService.findAll()) {
+            for (Content content: contentService.findAll().stream().filter(cont ->cont.getSource().equalsIgnoreCase("mobile"))
+                    .collect(Collectors.toList())) {
 
-                if (content.getSource().equalsIgnoreCase("mobile")) {
-                    UrlPath.isEdited = RestApiConnectorClass.readAll(UrlPath.ContentLinks.isEdited + content.getId(), Boolean.class);
+                    UrlPath.isEdited = RestApiConnectorClass.readAll(UrlPath.ContentLinks.Edited + content.getId(), Boolean.class);
                     if (!UrlPath.isEdited.contains(true)) {
                         try {
                             i++;
@@ -277,7 +283,7 @@ public class Header extends VerticalLayout implements Button.ClickListener {
                         }
                     }
                 }
-            }
+
         if(i==0){
             notify.removeStyleName("unread");
             notify.setCaption("");

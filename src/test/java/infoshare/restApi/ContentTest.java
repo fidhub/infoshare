@@ -4,6 +4,8 @@ import infoshare.RestApi.RestApiConnectorClass;
 import infoshare.RestApi.UrlPath;
 import infoshare.client.content.content.models.ContentModel;
 import infoshare.domain.Content;
+import infoshare.services.Content.ContentService;
+import infoshare.services.Content.Impl.ContentServiceImp;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -57,5 +59,18 @@ public class ContentTest {
         List<Content> contents = RestApiConnectorClass.readAll(UrlPath.ContentLinks.GETALL,Content.class);
         System.out.println(contents);
         Assert.assertFalse(contents.isEmpty());
+    }
+
+    @Test
+    public void testUpdateAll() throws Exception {
+        ContentService contentService = new ContentServiceImp();
+        for(Content content:contentService.findAll()){
+            Content content1 = new Content.Builder(content.getTitle()).copy(content)
+                    .source("mobile")
+                    .category("uncategorized")
+                    .creator("CreatorIdGoesHere")
+                    .contentType("raw").build();
+            RestApiConnectorClass.update(UrlPath.ContentLinks.PUT, content1);
+        }
     }
 }
