@@ -118,7 +118,7 @@ public class ContactView extends Window implements Button.ClickListener, Propert
 
         final User user = new User.Builder(bean.getLastName())
                 .firstname(bean.getFirstName())
-                .role(bean.getRoles())
+                .role(bean.getRole())
                 .enable(bean.isEnable())
                 .password(bean.getPassword())
                 .username(bean.getUsername())

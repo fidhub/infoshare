@@ -22,7 +22,7 @@ public class UserModel implements Serializable{
     private String password ;
     private boolean enable;
     @NotNull
-    private Set<String> roles = new HashSet<>();
+    private Set<String> role = new HashSet<>();
     @NotNull
     private String username;
     //@NotNull
@@ -71,12 +71,12 @@ public class UserModel implements Serializable{
         this.enable = enable;
     }
 
-    public Set<String> getRoles() {
-        return roles;
+    public Set<String> getRole() {
+        return role;
     }
 
-    public void setRoles(Set<String> roles) {
-        this.roles = roles;
+    public void setRole(Set<String> role) {
+        this.role = role;
     }
 
     public String getUsername() {

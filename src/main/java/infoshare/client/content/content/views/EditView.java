@@ -18,12 +18,17 @@ import infoshare.services.Content.ContentService;
 import infoshare.services.Content.Impl.ContentServiceImp;
 import infoshare.services.ContentType.ContentTypeService;
 import infoshare.services.ContentType.Impl.ContentTypeServiceImpl;
+import infoshare.services.EditedContent.EditedContentService;
+import infoshare.services.EditedContent.Impl.EditedContentServiceImpl;
+import infoshare.services.PublishedContent.Impl.PublishedContentServiceImpl;
+import infoshare.services.PublishedContent.PublishedContentService;
 import infoshare.services.category.CategoryService;
 import infoshare.services.category.Impl.CategoryServiceImpl;
 import infoshare.services.source.SourceService;
 import infoshare.services.source.sourceServiceImpl.SourceServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 /**
@@ -32,7 +37,8 @@ import java.util.stream.Collectors;
 public class EditView extends VerticalLayout implements Button.ClickListener, Property.ValueChangeListener{
 
     @Autowired
-    private ContentService contentService = new ContentServiceImp();
+    private EditedContentService editedContentService = new EditedContentServiceImpl();
+    private PublishedContentService publishedContentService = new PublishedContentServiceImpl();
     private CategoryService categoryService = new CategoryServiceImpl();
     private ContentTypeService contentTypeService = new ContentTypeServiceImpl();
     private SourceService sourceService = new SourceServiceImpl();
@@ -40,12 +46,10 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
     private final MainLayout main;
     private final EditTable table;
     private final RawAndEditForm form;
-
     private Window popUp ;
     private Button editBtn = new Button("UPDATE");
     private EditedContentFilter editedContentFilter = new EditedContentFilter();
-
-    public EditView( MainLayout mainApp) {
+    public  EditView( MainLayout mainApp) {
 
        this.main = mainApp;
        this.table = new EditTable(main);
@@ -59,7 +63,6 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
        addComponent(table);
        addListeners();
    }
-
     private HorizontalLayout getLayout(){
         final HorizontalLayout layout = new HorizontalLayout();
         layout.setSpacing(false);
@@ -70,7 +73,6 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
         layout.addComponent(editBtn);
         return layout;
     }
-
     private void refreshContacts(String stringFilter ) {
         try {
             table.removeAllItems();
@@ -84,16 +86,15 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
         }catch (Exception e){
         }
     }
-
     private Window modelWindow(){
         final Window popup = new Window();
         popup.setWidth(80.0f,Unit.PERCENTAGE);
         popup.setClosable(false);
         popup.setResizable(false);
+        loadComboBoxs();
         popup.setContent(form);
         return popup;
     }
-
    @Override
     public void buttonClick(Button.ClickEvent clickEvent) {
        final Button source = clickEvent.getButton();
@@ -101,8 +102,6 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
            EditButton();
        }else if (source ==form.popUpUpdateBtn){
            saveEditedForm(form.binder);
-       /*    Header header = new Header(main);
-           header.notify.getUI().setImmediate(true);*/
        }else if (source ==form.popUpCancelBtn){
            popUp.setModal(false);
            UI.getCurrent().removeWindow(popUp);
@@ -110,7 +109,6 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
            getHome();
        }
     }
-
     @Override
     public void valueChange(Property.ValueChangeEvent valueChangeEvent) {
         final Property property = valueChangeEvent.getProperty();
@@ -118,7 +116,6 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
              editBtn.setVisible(true);
         }
     }
-
     private void loadComboBoxs() {
         for (Category category : categoryService.findAll()) {
             form.popUpCategoryCmb.addItem(category.getId());
@@ -133,36 +130,28 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
             form.popUpSourceCmb.addItem(source.getId());
             form.popUpSourceCmb.setItemCaption(source.getId(), source.getName());
         }
-      /*  contentTypeService.findAll().stream().filter(category -> category != null)
-                .forEach(category -> form.popUpContentTypeCmb.addItem(category.getName()));
-        sourceService.findAll().stream().filter(source -> source != null)
-                .forEach(source -> form.popUpSourceCmb.addItem(source.getName()));
-*/
     }
-
     private void getHome() {
         main.content.setSecondComponent(new ContentMenu(main, "EDITOR"));
     }
-
     private void EditButton(){
-        loadComboBoxs();
         try {
-            final Content content = contentService.find(table.getValue().toString());
-            final ContentModel bean = getModel(content);
+            final EditedContent editedContent = editedContentService.find(table.getValue().toString());
+            final ContentModel bean = getModel(table.getValue().toString());
             form.binder.setItemDataSource(new BeanItem<>(bean));
-
             UI.getCurrent().addWindow(popUp);
             popUp.setModal(true);
         }catch (Exception e){
             Notification.show("Select the row you wanna edit",
                     Notification.Type.HUMANIZED_MESSAGE);
+            System.out.println(e.fillInStackTrace());
         }
     }
-
     private void saveEditedForm(FieldGroup binder) {
         try {
             binder.commit();
-            contentService.save(getNewEntity(binder));
+            publishedContentService.save(getNewEntity(binder));
+            editedContentService.merge(getUpdateEntity(binder));
             popUp.setModal(false);
             table.setValue(null);
             UI.getCurrent().removeWindow(popUp);
@@ -173,35 +162,56 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
             getHome();
         }
     }
-
-    private Content getNewEntity(FieldGroup binder) {
+    private PublishedContent getNewEntity(FieldGroup binder) {
 
         final ContentModel bean = ((BeanItem<ContentModel>) binder.getItemDataSource()).getBean();
-        bean.setDateCreated(contentService.find(table.getValue().toString()).getDateCreated());
-        final Content content = new Content.Builder(bean.getTitle())
+        bean.setDateCreated(editedContentService.find(table.getValue().toString()).getDateCreated());
+        final PublishedContent editedContent = new PublishedContent
+                .Builder(bean.getTitle())
                 .category(categoryService.find(bean.getCategory()).getId())
                 .content(bean.getContent())
                 .contentType(bean.getContentType())
                 .creator(bean.getCreator())
                 .dateCreated(bean.getDateCreated())
                 .source(table.getValue().toString())
+                .state(bean.getState())
+                .status("Published")
                // .id(table.getValue().toString())
                 .build();
-        return content;
+        return editedContent;
     }
+    private EditedContent getUpdateEntity(FieldGroup binder) {
 
-    private ContentModel getModel(Content val) {
+        final ContentModel bean = ((BeanItem<ContentModel>) binder.getItemDataSource()).getBean();
+        bean.setDateCreated(editedContentService.find(table.getValue().toString()).getDateCreated());
+        final EditedContent editedContent = new EditedContent
+                .Builder(bean.getTitle())
+                .category(categoryService.find(bean.getCategory()).getId())
+                .content(bean.getContent())
+                .contentType(bean.getContentType())
+                .creator(bean.getCreator())
+                .dateCreated(bean.getDateCreated())
+                .source(table.getValue().toString())
+                .state(bean.getState())
+                .status("Published")
+                .id(table.getValue().toString())
+                .build();
+        return editedContent;
+    }
+    private ContentModel getModel(String val) {
         final ContentModel model = new ContentModel();
-        final Content content = contentService.find(val.getId());
-        model.setTitle(content.getTitle());
-        model.setCategory(content.getCategory());
-        model.setCreator(content.getCreator());
-        model.setContent(content.getContent());
-        model.setContentType(content.getContentType());
-        model.setSource(content.getSource());
+        final EditedContent editedContent = editedContentService.find(val.toString());
+        System.out.println(editedContent.getTitle()+".........mdjfhdfdj");
+        model.setTitle(editedContent.getTitle());
+        model.setCategory(editedContent.getCategory());
+        model.setCreator(editedContent.getCreator());
+        model.setContent(editedContent.getContent());
+        model.setContentType(editedContent.getContentType());
+        model.setSource(editedContent.getSource());
+        model.setStatus(editedContent.getStatus());
+        model.setState(editedContent.getState());
         return model;
     }
-
     public void addListeners(){
         form.popUpUpdateBtn.addClickListener((Button.ClickListener)this);
         form.popUpCancelBtn.addClickListener((Button.ClickListener) this);

@@ -1,15 +1,11 @@
 package infoshare.RestApi;
 
-import java.util.List;
-
 /**
  * Created by codex on 2015/07/21.
  */
 public class UrlPath {
 
     public static final  String URL ="http://kujali.cput.ac.za";
-    public static List<Boolean> isEdited;
-    public static List<Boolean> isPlublished;
 
     public static class  AddressLinks {
         public static final String POST = URL + "/api/address/create"; // @controllers.AddressController.createAddress
@@ -68,7 +64,7 @@ public class UrlPath {
     }
     public static class RoleLinks {
         public static final String POST    = URL+"/api/role/create";   // @controllers.RoleController.create
-        public static final String GET_ID  = URL+"/api/role/";   // @controllers.RoleController.getRoles(id)
+        public static final String GET_ID  = URL+"/api/role/";   // @controllers.RoleController.getRole(id)
         public static final String PUT     = URL+"/api/role/update";   // @controllers.RoleController.update
         public static final String GETALL  = URL+"/api/role/get/roles";   // @controllers.RoleController.getAll
     }

@@ -43,16 +43,17 @@ public class EditTable extends Table{
         addContainerProperty("Title",String.class,null);
         addContainerProperty("Category",String.class,null);
         addContainerProperty("Creator",String.class,null);
-     //   addContainerProperty("Source",String.class,null);
         addContainerProperty("Date Created",String.class,null);
-
         try {
             editedContentService.findAll()
                     .stream()
                     .filter(content -> content != null)
                     .collect(Collectors.toList())
                     .stream()
-                    .filter(cont-> !cont.getStatus().equalsIgnoreCase("Edited"))
+                    .filter(cont -> cont.getStatus().equalsIgnoreCase("Edited"))
+                    .collect(Collectors.toList())
+                    .stream()
+                    .filter(cont -> cont.getState().equalsIgnoreCase("active"))
                     .collect(Collectors.toList())
                     .forEach(this::loadTable);
         }catch (Exception e){
@@ -74,7 +75,6 @@ public class EditTable extends Table{
             }, editedContent.getId());
         } catch (Exception r) {
         }
-
     }
 
 }

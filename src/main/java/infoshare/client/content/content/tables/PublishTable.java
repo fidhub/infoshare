@@ -44,7 +44,12 @@ public class PublishTable extends Table{
                     .filter(cont -> cont != null)
                     .collect(Collectors.toList())
                     .stream()
-                    .filter(cont -> cont.getStatus().equalsIgnoreCase("raw")).forEach(this::loadTable);
+                    .filter(cont -> cont.getStatus().equalsIgnoreCase("Published"))
+                    .collect(Collectors.toList())
+                    .stream()
+                    .filter(cont -> cont.getState().equalsIgnoreCase("active"))
+                    .collect(Collectors.toList())
+                    .forEach(this::loadTable);
         }catch (Exception e){
 
         }

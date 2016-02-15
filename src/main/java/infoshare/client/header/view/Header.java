@@ -16,8 +16,11 @@ import infoshare.client.content.content.views.RawView;
 import infoshare.client.header.Form.ProfilePopUp;
 import infoshare.client.header.landing_page.LandingHome;
 import infoshare.domain.Content;
+import infoshare.domain.RawContent;
 import infoshare.services.Content.ContentService;
 import infoshare.services.Content.Impl.ContentServiceImp;
+import infoshare.services.RawContent.Impl.RawContentServiceImpl;
+import infoshare.services.RawContent.RawContentService;
 
 import java.io.File;
 import java.util.Calendar;
@@ -30,7 +33,7 @@ import java.util.stream.Collectors;
  */
 public class Header extends VerticalLayout implements Button.ClickListener {
 
-    private ContentService contentService = new ContentServiceImp();
+    private RawContentService rawContentService = new RawContentServiceImpl();
     private MainLayout main ;
     private Window notifications;
     private Window userProfile;
@@ -38,7 +41,7 @@ public class Header extends VerticalLayout implements Button.ClickListener {
     public Button notify = new Button();
     public Button user = new Button();
     private Table notificationTable = new Table();
-    RawView rawView ;
+    private RawView rawView ;
     public Header(MainLayout main) {
         this.main = main;
         rawView = new RawView(main);
@@ -262,27 +265,31 @@ public class Header extends VerticalLayout implements Button.ClickListener {
 
     public  void refreshNotification() {
         int i = 0 ;
-            for (Content content: contentService.findAll().stream().filter(cont ->cont.getSource().equalsIgnoreCase("mobile"))
+            for (RawContent rawContent :rawContentService.findAll()
+                    .stream()
+                    .filter(cont->cont.getStatus().equalsIgnoreCase("Raw"))
+                    .collect(Collectors.toList())
+                    .stream()
+                    .filter(cont ->cont.getState().equalsIgnoreCase("active"))
                     .collect(Collectors.toList())) {
 
-                    UrlPath.isEdited = RestApiConnectorClass.readAll(UrlPath.ContentLinks.Edited + content.getId(), Boolean.class);
-                    if (!UrlPath.isEdited.contains(true)) {
-                        try {
-                            i++;
-                            notify.addStyleName("notifications");
-                            notify.addStyleName("unread");
-                            notify.setCaption(i + "");
-                            notify.setDescription(i + " un-edited tips content");
-                            notificationTable.addItem(new Object[]{new Label(
-                                    "<b>" + content.getCreator().toUpperCase()
-                                            + "</b> created a new tip <br><span><i>"
-                                            + differInTime(content.getDateCreated()) + "</i></span><br>"
-                                            + "<b> TITLE: </b><i>" + content.getTitle() + "</i>", ContentMode.HTML)
-                            }, content.getId());
-                        } catch (Exception r) {
-                        }
-                    }
+                try {
+                    i++;
+                    notify.addStyleName("notifications");
+                    notify.addStyleName("unread");
+                    notify.setCaption(i + "");
+                    notify.setDescription(i + " un-edited tips content");
+                    notificationTable.addItem(new Object[]{new Label(
+                            "<b>" + rawContent.getCreator().toUpperCase()
+                                    + "</b> created a new tip <br><span><i>"
+                                    + differInTime(rawContent.getDateCreated())
+                                    + "</i></span><br>"
+                                    + "<b> TITLE: </b><i>" + rawContent.getTitle()
+                                    + "</i>", ContentMode.HTML)
+                    }, rawContent.getId());
+                } catch (Exception r) {
                 }
+            }
 
         if(i==0){
             notify.removeStyleName("unread");
