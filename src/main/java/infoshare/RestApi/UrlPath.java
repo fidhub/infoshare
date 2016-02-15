@@ -7,7 +7,7 @@ import java.util.List;
  */
 public class UrlPath {
 
-    public static final  String URL ="http://10.47.2.247:9000";
+    public static final  String URL ="http://kujali.cput.ac.za";
     public static List<Boolean> isEdited;
     public static List<Boolean> isPlublished;
 
@@ -68,7 +68,7 @@ public class UrlPath {
     }
     public static class RoleLinks {
         public static final String POST    = URL+"/api/role/create";   // @controllers.RoleController.create
-        public static final String GET_ID  = URL+"/api/role/";   // @controllers.RoleController.getRoles(id)
+        public static final String GET_ID  = URL+"/api/role/";   // @controllers.RoleController.getRole(id)
         public static final String PUT     = URL+"/api/role/update";   // @controllers.RoleController.update
         public static final String GETALL  = URL+"/api/role/get/roles";   // @controllers.RoleController.getAll
     }

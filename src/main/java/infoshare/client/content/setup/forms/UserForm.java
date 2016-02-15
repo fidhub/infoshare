@@ -8,12 +8,6 @@ import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 import infoshare.client.content.setup.models.UserModel;
-import infoshare.domain.Address;
-import infoshare.domain.Contact;
-import infoshare.services.Address.AddressService;
-import infoshare.services.Address.Impl.AddressServiceImpl;
-import infoshare.services.Contact.ContactService;
-import infoshare.services.Contact.Impl.ContactServiceImpl;
 import infoshare.services.roles.Impl.RoleServiceImpl;
 import infoshare.services.roles.RoleService;
 
@@ -57,7 +51,7 @@ public class UserForm extends FormLayout {
         final TextField otherName = getTextField("Other name", "otherName");
         final PasswordField password = getPasswordField("Password", "password");
         final CheckBox enable = getCheckBoxField("Activate Account", "enable");
-        final ListSelect roles = getRoles("Select Roles", "roles");
+        final ListSelect roles = getRoles("Select Roles", "role");
 
         VerticalLayout rightLayout = new VerticalLayout();
         rightLayout.setSpacing(true);

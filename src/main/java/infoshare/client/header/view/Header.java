@@ -154,16 +154,16 @@ public class Header extends VerticalLayout implements Button.ClickListener {
 
         refreshNotification();
 
-        notificationTable.addItemClickListener(event1 -> {
-            int i=1;
-            if (event1.isDoubleClick())
-            {
-               if(i==1) { i=0;
-                   notifications.close();
-                   rawView.tableId = notificationTable.getValue().toString();
-                   rawView.EditButton();
-               }
-            }
+            notificationTable.addItemClickListener(clickEvent -> {
+                int i=1;
+                if (clickEvent.isDoubleClick())
+                {
+                    if(i==1) { i=0;
+                        notifications.close();
+                        rawView.tableId = notificationTable.getValue().toString();
+                        rawView.EditButton();
+                    }
+                }
         });
         layout.addComponent(notificationTable);
         layout.setComponentAlignment(notificationTable, Alignment.TOP_CENTER);
