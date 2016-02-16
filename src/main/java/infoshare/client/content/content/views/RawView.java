@@ -9,7 +9,8 @@ import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.content.ContentMenu;
-import infoshare.client.content.content.forms.RawAndEditForm;
+import infoshare.client.content.content.forms.EditForm;
+import infoshare.client.content.content.forms.RawForm;
 import infoshare.client.content.content.models.ContentModel;
 import infoshare.client.content.content.tables.RawTable;
 import infoshare.domain.*;
@@ -40,7 +41,7 @@ public class RawView extends VerticalLayout implements Button.ClickListener,Prop
 
     private final MainLayout main;
     private final RawTable table;
-    private final RawAndEditForm form;
+    private final RawForm form;
     private Window popUp ;
     private Button editBtn = new Button("EDIT");
     private RawContentFilter rawContentFilter = new RawContentFilter();
@@ -50,7 +51,7 @@ public class RawView extends VerticalLayout implements Button.ClickListener,Prop
 
         this.main = mainApp;
         this.table = new RawTable(main);
-        this.form = new RawAndEditForm();
+        this.form = new RawForm();
         this.popUp = modelWindow();
         setSizeFull();
         setSpacing(true);
@@ -95,10 +96,10 @@ public class RawView extends VerticalLayout implements Button.ClickListener,Prop
                 EditButton();
             }catch (Exception e){
             }
-        }else if (source ==form.popUpUpdateBtn){
+        }else if (source ==form.putEdited){
             saveEditedForm(form.binder);
 
-        }else if (source ==form.popUpCancelBtn){
+        }else if (source ==form.backBtn){
             popUp.setModal(false);
             UI.getCurrent().removeWindow(popUp);
             table.setValue(null);
@@ -117,26 +118,8 @@ public class RawView extends VerticalLayout implements Button.ClickListener,Prop
         popup.setWidth(80.0f, Unit.PERCENTAGE);
         popup.setClosable(false);
         popup.setResizable(false);
-        loadComboBoxs();
         popup.setContent(form);
         return popup;
-    }
-    private void loadComboBoxs() {
-
-        for (Category category : categoryService.findAll()) {
-            form.popUpCategoryCmb.addItem(category.getId());
-            form.popUpCategoryCmb.setItemCaption(category.getId(), category.getName());
-        }
-
-        for (ContentType contentType : contentTypeService.findAll()) {
-            form.popUpContentTypeCmb.addItem(contentType.getId());
-            form.popUpContentTypeCmb.setItemCaption(contentType.getId(), contentType.getName());
-        }
-        for (Source source : sourceService.findAll()) {
-            form.popUpSourceCmb.addItem(source.getId());
-            form.popUpSourceCmb.setItemCaption(source.getId(), source.getName());
-        }
-
     }
     private void getHome() {
         main.content.setSecondComponent(new ContentMenu(main, "LANDING"));
@@ -175,7 +158,7 @@ public class RawView extends VerticalLayout implements Button.ClickListener,Prop
             bean.setDateCreated(rawContentService.find(table.getValue().toString()).getDateCreated());
             final EditedContent editedContent = new EditedContent
                     .Builder(bean.getTitle())
-                    .category(categoryService.find(bean.getCategory()).getId())
+                    .category(bean.getCategory())
                     .content(bean.getContent())
                     .contentType(bean.getContentType())
                     .creator(bean.getCreator())
@@ -197,7 +180,7 @@ public class RawView extends VerticalLayout implements Button.ClickListener,Prop
             bean.setDateCreated(rawContentService.find(table.getValue().toString()).getDateCreated());
             final RawContent rawContent = new RawContent
                     .Builder(bean.getTitle())
-                    .category(categoryService.find(bean.getCategory()).getId())
+                    .category(bean.getCategory())
                     .content(bean.getContent())
                     .contentType(bean.getContentType())
                     .creator(bean.getCreator())
@@ -215,7 +198,6 @@ public class RawView extends VerticalLayout implements Button.ClickListener,Prop
         }
     }
     private ContentModel getModel(RawContent val) {
-
         final ContentModel model = new ContentModel();
         final RawContent rawContent = rawContentService.find(val.getId());
         model.setTitle(rawContent.getTitle());
@@ -230,8 +212,8 @@ public class RawView extends VerticalLayout implements Button.ClickListener,Prop
     }
     public void addListeners(){
 
-        form.popUpUpdateBtn.addClickListener((Button.ClickListener)this);
-        form.popUpCancelBtn.addClickListener((Button.ClickListener) this);
+        form.putEdited.addClickListener((Button.ClickListener)this);
+        form.backBtn.addClickListener((Button.ClickListener) this);
         table.addValueChangeListener((Property.ValueChangeListener) this);
         editBtn.addClickListener((Button.ClickListener) this);
         rawContentFilter.field.addTextChangeListener(new FieldEvents.TextChangeListener() {

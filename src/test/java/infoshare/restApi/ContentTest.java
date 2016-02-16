@@ -20,10 +20,10 @@ public class ContentTest {
     public void testPOST() throws Exception {
         ContentModel model = new ContentModel();
         model.setDateCreated(new Date());
-        model.setCreator("thulebona hadebe");
+        model.setCreator("Songezo Mkumatela");
         model.setSource("mobile");
         model.setCategory("uncategorized");
-        model.setTitle("Cancer prevention");
+        model.setTitle("HIV prevention");
         model.setContent(" Using any type of tobacco puts you on a collision course with cancer." +
                 " Smoking has been linked to various types of cancer — including cancer of the lung, bladder," +
                 " cervix and kidney. And chewing tobacco has been linked to cancer of the oral cavity and pancreas." +

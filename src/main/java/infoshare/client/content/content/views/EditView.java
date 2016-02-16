@@ -9,13 +9,11 @@ import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.content.ContentMenu;
-import infoshare.client.content.content.forms.RawAndEditForm;
+import infoshare.client.content.content.forms.EditForm;
 import infoshare.client.content.content.models.ContentModel;
 import infoshare.client.content.content.tables.EditTable;
 import infoshare.domain.*;
 import infoshare.filterSearch.EditedContentFilter;
-import infoshare.services.Content.ContentService;
-import infoshare.services.Content.Impl.ContentServiceImp;
 import infoshare.services.ContentType.ContentTypeService;
 import infoshare.services.ContentType.Impl.ContentTypeServiceImpl;
 import infoshare.services.EditedContent.EditedContentService;
@@ -28,7 +26,6 @@ import infoshare.services.source.SourceService;
 import infoshare.services.source.sourceServiceImpl.SourceServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 /**
@@ -45,7 +42,7 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
 
     private final MainLayout main;
     private final EditTable table;
-    private final RawAndEditForm form;
+    private final EditForm form;
     private Window popUp ;
     private Button editBtn = new Button("UPDATE");
     private EditedContentFilter editedContentFilter = new EditedContentFilter();
@@ -53,7 +50,7 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
 
        this.main = mainApp;
        this.table = new EditTable(main);
-       this.form = new RawAndEditForm();
+       this.form = new EditForm();
        this.popUp = modelWindow();
        editBtn.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
        editBtn.setIcon(FontAwesome.EDIT);
@@ -136,7 +133,6 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
     }
     private void EditButton(){
         try {
-            final EditedContent editedContent = editedContentService.find(table.getValue().toString());
             final ContentModel bean = getModel(table.getValue().toString());
             form.binder.setItemDataSource(new BeanItem<>(bean));
             UI.getCurrent().addWindow(popUp);
@@ -144,19 +140,24 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
         }catch (Exception e){
             Notification.show("Select the row you wanna edit",
                     Notification.Type.HUMANIZED_MESSAGE);
-            System.out.println(e.fillInStackTrace());
+            System.out.println(e.getMessage());
         }
     }
     private void saveEditedForm(FieldGroup binder) {
         try {
             binder.commit();
-            publishedContentService.save(getNewEntity(binder));
-            editedContentService.merge(getUpdateEntity(binder));
-            popUp.setModal(false);
-            table.setValue(null);
-            UI.getCurrent().removeWindow(popUp);
-            getHome();
-            Notification.show("Record EDITED!", Notification.Type.HUMANIZED_MESSAGE);
+            try {
+                publishedContentService.save(getNewEntity(binder));
+                editedContentService.merge(getUpdateEntity(binder));
+                popUp.setModal(false);
+                table.setValue(null);
+                UI.getCurrent().removeWindow(popUp);
+                getHome();
+                Notification.show("Record EDITED!", Notification.Type.HUMANIZED_MESSAGE);
+            }catch (Exception e){
+                Notification.show("Please select the Category",Notification.Type.HUMANIZED_MESSAGE);
+            }
+
         } catch (FieldGroup.CommitException e) {
             Notification.show("Fill in all Fields!!", Notification.Type.HUMANIZED_MESSAGE);
             getHome();
@@ -201,7 +202,6 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
     private ContentModel getModel(String val) {
         final ContentModel model = new ContentModel();
         final EditedContent editedContent = editedContentService.find(val.toString());
-        System.out.println(editedContent.getTitle()+".........mdjfhdfdj");
         model.setTitle(editedContent.getTitle());
         model.setCategory(editedContent.getCategory());
         model.setCreator(editedContent.getCreator());

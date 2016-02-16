@@ -65,11 +65,11 @@ public class EditTable extends Table{
 
     public void loadTable(EditedContent editedContent) {
         DateFormat formatter = new SimpleDateFormat("dd-MMMMMMM-yyyy");
-        String category = categoryService.find(editedContent.getCategory()).getName();
+    //    String category = categoryService.find(editedContent.getCategory()).getName();
         try {
             addItem(new Object[]{
                     editedContent.getTitle(),
-                    category,
+                    editedContent.getCategory(),
                     editedContent.getCreator(),
                     formatter.format(editedContent.getDateCreated())
             }, editedContent.getId());
