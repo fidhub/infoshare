@@ -112,7 +112,8 @@ public class UserDetailsView extends VerticalLayout implements
 
     private Window modelWindow(){
         final Window popup = new Window();
-        popup.setWidth(80.0f, Unit.PERCENTAGE);
+        popup.setWidth(60.0f, Unit.PERCENTAGE);
+        popup.setHeight(60.0f, Unit.PERCENTAGE);
         popup.setClosable(false);
         popup.setResizable(false);
         popup.setContent(form);
