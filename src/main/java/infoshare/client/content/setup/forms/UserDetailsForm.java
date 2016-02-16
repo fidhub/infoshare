@@ -31,7 +31,7 @@ public class UserDetailsForm extends FormLayout {
         final TextField LastName = getTextField("Last Name", "lastName");
         final TextField OtherName = getTextField("OtherName", "otherName");
         final TextField Password = getTextField("Password", "password");
-//        final TextField Role = getTextField("Role", "role");
+        final ListSelect Role = getRoles("Role", "role");
 
 
 
@@ -65,6 +65,5 @@ public class UserDetailsForm extends FormLayout {
         binder.bind(textField, field);
 
         return textField;
-
     }
 }
