@@ -1,6 +1,5 @@
 package infoshare.client.header.view;
 
-import com.vaadin.event.ItemClickEvent;
 import com.vaadin.event.LayoutEvents;
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.server.*;
@@ -14,17 +13,17 @@ import infoshare.RestApi.UrlPath;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.content.ContentMenu;
 import infoshare.client.content.content.views.RawView;
+import infoshare.client.header.Form.ProfilePopUp;
 import infoshare.client.header.landing_page.LandingHome;
-import infoshare.domain.Contact;
 import infoshare.domain.Content;
 import infoshare.services.Content.ContentService;
 import infoshare.services.Content.Impl.ContentServiceImp;
 
 import java.io.File;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.*;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.stream.Collectors;
 
 /**
  * Created by hashcode on 2015/06/23.
@@ -39,12 +38,15 @@ public class Header extends VerticalLayout implements Button.ClickListener {
     public Button notify = new Button();
     public Button user = new Button();
     private Table notificationTable = new Table();
+    RawView rawView ;
     public Header(MainLayout main) {
         this.main = main;
+        rawView = new RawView(main);
         setSizeFull();
         setSpacing(true);
         addComponent(getHeaderPanel());
         addListener();
+        Responsive.makeResponsive(this);
         refreshNotification();
     }
 
@@ -55,10 +57,11 @@ public class Header extends VerticalLayout implements Button.ClickListener {
         headerPanel.addStyleName(ChameleonTheme.PANEL_LIGHT);
         headerPanel.addStyleName(ChameleonTheme.PANEL_BUBBLE);
         headerPanel.addStyleName(ValoTheme.PANEL_BORDERLESS);
-
+        Responsive.makeResponsive(headerPanel);
         headerPanel.setContent(getLayout());
         return headerPanel;
     }
+
     @Override
     public  void buttonClick(ClickEvent clickEvent) {
         Button source = clickEvent.getButton();
@@ -77,6 +80,7 @@ public class Header extends VerticalLayout implements Button.ClickListener {
           userButton(clickEvent);
         }
     }
+
     private void notificationButton(ClickEvent clickEvent ){
         if (userProfile != null && userProfile.getUI() !=null) {
             userProfile.close();
@@ -97,6 +101,7 @@ public class Header extends VerticalLayout implements Button.ClickListener {
             });
         }
     }
+
     private void userButton(ClickEvent clickEvent){
         if (notifications != null && notifications.getUI() != null) {
             notifications.close();
@@ -116,6 +121,7 @@ public class Header extends VerticalLayout implements Button.ClickListener {
             });
         }
     }
+
     public  void buildNotifications( ClickEvent event) {
         notifications = new Window();
         final VerticalLayout layout = new VerticalLayout();
@@ -147,14 +153,17 @@ public class Header extends VerticalLayout implements Button.ClickListener {
         notificationTable.setImmediate(true);
 
         refreshNotification();
-        notificationTable.addItemClickListener(event1 -> {
-            if (event1.isDoubleClick())
-            {
-                RawView rawView = new RawView(main);
-                notifications.close();
-                rawView.tableId = notificationTable.getValue().toString();
-                rawView.EditButton();
-            }
+
+            notificationTable.addItemClickListener(clickEvent -> {
+                int i=1;
+                if (clickEvent.isDoubleClick())
+                {
+                    if(i==1) { i=0;
+                        notifications.close();
+                        rawView.tableId = notificationTable.getValue().toString();
+                        rawView.EditButton();
+                    }
+                }
         });
         layout.addComponent(notificationTable);
         layout.setComponentAlignment(notificationTable, Alignment.TOP_CENTER);
@@ -173,6 +182,7 @@ public class Header extends VerticalLayout implements Button.ClickListener {
         notifications.setCloseShortcut(ShortcutAction.KeyCode.ESCAPE, null);
 
     }
+
     private void buildUser(ClickEvent event) {
         userProfile = new Window();
         final VerticalLayout layout = new VerticalLayout();
@@ -184,6 +194,11 @@ public class Header extends VerticalLayout implements Button.ClickListener {
         profile.setIcon(FontAwesome.USER);
         profile.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
         profile.setSizeFull();
+        profile.addClickListener(clickEvent -> {
+            ProfilePopUp popup3 = new ProfilePopUp();
+            UI.getCurrent().addWindow(popup3);
+            userProfile.close();
+        });
 
         Button signOut = new Button( "Sign out");
         signOut.addStyleName(ValoTheme.BUTTON_TINY);
@@ -209,10 +224,11 @@ public class Header extends VerticalLayout implements Button.ClickListener {
         userProfile.setCloseShortcut(ShortcutAction.KeyCode.ESCAPE, null);
 
     }
+
     private void addListener(){
-        home.addClickListener((Button.ClickListener)this);
-        notify.addClickListener((Button.ClickListener) this);
-        user.addClickListener((Button.ClickListener)this);
+        home.addClickListener(this);
+        notify.addClickListener(this);
+        user.addClickListener(this);
     }
 
     private String differInTime(Date dateCreated){
@@ -244,24 +260,29 @@ public class Header extends VerticalLayout implements Button.ClickListener {
             return diffSeconds + " seconds ago";
     }
 
-    public void refreshNotification(){
+    public  void refreshNotification() {
         int i = 0 ;
+            for (Content content: contentService.findAll().stream().filter(cont ->cont.getSource().equalsIgnoreCase("mobile"))
+                    .collect(Collectors.toList())) {
 
-        try {
-            for (Content content: contentService.findAll()){
-                i++;
-                notify.addStyleName("notifications");
-                notify.addStyleName("unread");
-                notify.setCaption(i + "");
-                notify.setDescription(i + " un-edited tips content");
-                notificationTable.addItem(new Object[]{new Label(
-                        "<b>" + content.getCreator().toUpperCase()
-                                + "</b> created a new tip <br><span><i>"
-                                + differInTime(content.getDateCreated()) + "</i></span><br>"
-                                + "<b> TITLE: </b><i>" + content.getTitle() + "</i>", ContentMode.HTML)
-                }, content.getId());
-            }
-        }catch (Exception e) {}
+                    UrlPath.isEdited = RestApiConnectorClass.readAll(UrlPath.ContentLinks.Edited + content.getId(), Boolean.class);
+                    if (!UrlPath.isEdited.contains(true)) {
+                        try {
+                            i++;
+                            notify.addStyleName("notifications");
+                            notify.addStyleName("unread");
+                            notify.setCaption(i + "");
+                            notify.setDescription(i + " un-edited tips content");
+                            notificationTable.addItem(new Object[]{new Label(
+                                    "<b>" + content.getCreator().toUpperCase()
+                                            + "</b> created a new tip <br><span><i>"
+                                            + differInTime(content.getDateCreated()) + "</i></span><br>"
+                                            + "<b> TITLE: </b><i>" + content.getTitle() + "</i>", ContentMode.HTML)
+                            }, content.getId());
+                        } catch (Exception r) {
+                        }
+                    }
+                }
 
         if(i==0){
             notify.removeStyleName("unread");
@@ -269,6 +290,7 @@ public class Header extends VerticalLayout implements Button.ClickListener {
             notify.setDescription("No new tips");
         }
     }
+
     private HorizontalLayout getLayout(){
         final HorizontalLayout layout = new HorizontalLayout();
         layout.addStyleName("dashboard-view");
@@ -291,6 +313,7 @@ public class Header extends VerticalLayout implements Button.ClickListener {
 
         return layout;
     }
+
     private Component getLogo(){
         final HorizontalLayout logo = new HorizontalLayout();
         FileResource resource = new FileResource(
@@ -303,6 +326,7 @@ public class Header extends VerticalLayout implements Button.ClickListener {
         Responsive.makeResponsive(logo);
         return logo;
     }
+
     private TextField getSearch(){
 
         final TextField searchBox = new TextField();
@@ -312,6 +336,7 @@ public class Header extends VerticalLayout implements Button.ClickListener {
         searchBox.addStyleName(ValoTheme.TEXTAREA_SMALL);
         return searchBox;
     }
+
     private HorizontalLayout getBar(){
         HorizontalLayout layout = new HorizontalLayout();
         layout.setSpacing(false);
@@ -321,8 +346,8 @@ public class Header extends VerticalLayout implements Button.ClickListener {
         home.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
         home.addStyleName(ValoTheme.BUTTON_SMALL);
 
-        user.setCaption("User name");
-        user.setDescription("Your user name)");
+        user.setCaption("Username");
+        user.setDescription("Your username)");
         user.setIcon(FontAwesome.USER_MD);
         user.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
         user.addStyleName(ValoTheme.BUTTON_SMALL);

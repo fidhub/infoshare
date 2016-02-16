@@ -57,8 +57,12 @@ public class ContactView extends Window implements Button.ClickListener, Propert
         if (source == contactForm.cancel){
             getHome();
             setEditContactFormProperties();
-        }else if (source == contactForm.edit){
+        }
+        else if (source == contactForm.edit){
             setUpdatedProperties();
+        }
+        else if (source == contactForm.update){
+            saveEditedForm(contactForm.binder);
         }
         else if (source == contactForm.exit){
             this.setModal(false);
@@ -114,7 +118,7 @@ public class ContactView extends Window implements Button.ClickListener, Propert
 
         final User user = new User.Builder(bean.getLastName())
                 .firstname(bean.getFirstName())
-                .role(bean.getRoles())
+                .role(bean.getRole())
                 .enable(bean.isEnable())
                 .password(bean.getPassword())
                 .username(bean.getUsername())
@@ -186,6 +190,7 @@ public class ContactView extends Window implements Button.ClickListener, Propert
         contactForm.cancel.setVisible(true);
         contactForm.update.setVisible(true);
         contactForm.exit.setVisible(false);
+        ///saveEditedForm();
     }
 
 
@@ -196,6 +201,27 @@ public class ContactView extends Window implements Button.ClickListener, Propert
         contactForm.cancel.setVisible(true);
         contactForm.update.setVisible(false);
         contactForm.exit.setVisible(true);
+    }
+
+    private void saveEditedForm(FieldGroup binder) {
+        try {
+            binder.commit();
+            contactService.merge(getUpdateEntity(binder));
+            getHome();
+            Notification.show("Record UPDATED!", Notification.Type.TRAY_NOTIFICATION);
+        } catch (FieldGroup.CommitException e) {
+            Notification.show("Values MISSING!", Notification.Type.TRAY_NOTIFICATION);
+            getHome();
+        }
+    }
+
+    private Contact getUpdateEntity(FieldGroup binder) {
+        final ContactModel bean = ((BeanItem<ContactModel>) binder.getItemDataSource()).getBean();
+        final Contact contact = new Contact.Builder(bean.getPhone())
+                .email(bean.getEmail())
+                .contactType(bean.getContactType())
+                .build();
+        return contact;
     }
 
 }

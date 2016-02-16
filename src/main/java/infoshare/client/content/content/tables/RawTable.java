@@ -5,9 +5,7 @@ import com.vaadin.ui.themes.ValoTheme;
 import infoshare.RestApi.RestApiConnectorClass;
 import infoshare.RestApi.UrlPath;
 import infoshare.client.content.MainLayout;
-import infoshare.domain.Category;
 import infoshare.domain.Content;
-import infoshare.domain.ContentType;
 import infoshare.services.Content.ContentService;
 import infoshare.services.Content.Impl.ContentServiceImp;
 
@@ -19,8 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
 
 /**
  * Created by hashcode on 2015/06/24.
@@ -61,7 +57,7 @@ public class RawTable extends Table {
     public void loadTable(Content content) {
         DateFormat formatter = new SimpleDateFormat("dd - MMMMMMM - yyyy");
         if (content.getSource().equalsIgnoreCase("mobile")) {
-            UrlPath.isEdited = RestApiConnectorClass.readAll(UrlPath.ContentLinks.isEdited + content.getId(), Boolean.class);
+            UrlPath.isEdited = RestApiConnectorClass.readAll(UrlPath.ContentLinks.Edited + content.getId(), Boolean.class);
             if (!UrlPath.isEdited.contains(true)) {
                 try {
                     addItem(new Object[]{

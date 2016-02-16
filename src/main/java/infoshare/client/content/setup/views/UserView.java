@@ -127,7 +127,7 @@ public class UserView extends VerticalLayout implements
         final UserModel bean = ((BeanItem<UserModel>) binder.getItemDataSource()).getBean();
         final User user = new User.Builder(bean.getLastName())
                 .firstname(bean.getFirstName())
-                .role(bean.getRoles())
+                .role(bean.getRole())
                 .enable(bean.isEnable())
                 .password(bean.getPassword())
                 .username(bean.getUsername())
@@ -142,8 +142,8 @@ public class UserView extends VerticalLayout implements
         final UserModel bean = ((BeanItem<UserModel>) binder.getItemDataSource()).getBean();
         Set<String> userRoles = new HashSet<>();
 
-        if (bean.getRoles()!= null) {
-            for (String roleId : bean.getRoles()) {
+        if (bean.getRole()!= null) {
+            for (String roleId : bean.getRole()) {
                 Role role = roleService.find(roleId);
                 if (role != null) {
                     userRoles.add(role.getId());
@@ -198,8 +198,8 @@ public class UserView extends VerticalLayout implements
     }
     public UserModel getModel(User user) {
         Set<String> userRolesId = new HashSet<>();
-        if (user.getRoles() != null) {
-            userRolesId.addAll(user.getRoles().stream().collect(Collectors.toList()));
+        if (user.getRole() != null) {
+            userRolesId.addAll(user.getRole().stream().collect(Collectors.toList()));
         }
         UserModel model = new UserModel();
         model.setFirstName(user.getFirstName());
@@ -207,7 +207,7 @@ public class UserView extends VerticalLayout implements
         model.setOtherName(user.getOtherName());
         model.setUsername(user.getUsername());
         model.setEnable(user.isEnable());
-        model.setRoles(userRolesId);
+        model.setRole(userRolesId);
         model.setAddress(user.getAddress()); //Todo : no route for entity yet
         model.setContact(user.getContact()); //Todo : no route for entity yet
         model.setPassword(user.getPassword());

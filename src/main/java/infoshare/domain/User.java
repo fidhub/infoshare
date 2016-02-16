@@ -20,7 +20,7 @@ public class User implements Serializable, Comparable<User> {
     private String username;
     private boolean enable;
     private String password;
-    private Set<String> roles = new HashSet<>();
+    private Set<String> role = new HashSet<>();
     private List<String> contact = new ArrayList<>();
     private List<String> address = new ArrayList<>();
 
@@ -34,7 +34,7 @@ public class User implements Serializable, Comparable<User> {
         this.lastName = builder.lastName;
         this.otherName = builder.otherName;
         this.password = builder.password;
-        this.roles = builder.role;
+        this.role = builder.role;
         this.username = builder.username;
         this.contact = builder.contact;
         this.address = builder.address;
@@ -71,8 +71,8 @@ public class User implements Serializable, Comparable<User> {
         return password;
     }
 
-    public Set<String> getRoles() {
-        return roles;
+    public Set<String> getRole() {
+        return role;
     }
 
     public List<String> getContact() {
@@ -104,7 +104,7 @@ public class User implements Serializable, Comparable<User> {
             this.firstName = person.firstName;
             this.otherName = person.otherName;
             this.password = person.password;
-            this.role = person.roles;
+            this.role = person.role;
             this.username = person.username;
             this.enable = person.enable;
             this.contact = person.contact;
@@ -156,6 +156,21 @@ public class User implements Serializable, Comparable<User> {
 
         public Builder username(String value) {
             this.username = value;
+            return this;
+        }
+
+        public Builder copy(User user){
+            this.id = user.id;
+            this.username = user.username;
+            this.password = user.password;
+            this.firstName = user.firstName;
+            this.lastName = user.lastName;
+            this.role = user.getRole();
+            this.address = user.address;
+            this.enable = user.enable;
+            this.contact = user.contact;
+            this.otherName = user.otherName;
+
             return this;
         }
 

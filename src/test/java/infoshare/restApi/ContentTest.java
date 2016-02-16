@@ -4,6 +4,8 @@ import infoshare.RestApi.RestApiConnectorClass;
 import infoshare.RestApi.UrlPath;
 import infoshare.client.content.content.models.ContentModel;
 import infoshare.domain.Content;
+import infoshare.services.Content.ContentService;
+import infoshare.services.Content.Impl.ContentServiceImp;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -41,7 +43,7 @@ public class ContentTest {
                 .source("9d57cca65eaf056735157f119f2a467b")
                 .category("3699255c536bcff9348f0de806866847")
                 .contentType("edited").build();
-        RestApiConnectorClass.update(UrlPath.ContentLinks.PUT,content1);
+        RestApiConnectorClass.update(UrlPath.ContentLinks.PUT, content1);
     }
 
     @Test
@@ -53,24 +55,22 @@ public class ContentTest {
     }
 
     @Test
-    public void testRaw() throws Exception {
-        List<Boolean> list = RestApiConnectorClass.readAll(UrlPath.ContentLinks .isEdited +"98fe2ef595181b72cdd3ec085508fb40",Boolean.class);
-
-        List<Content> contents = RestApiConnectorClass.readAll(UrlPath.ContentLinks.GETALL,Content.class);
-        System.out.println(list);
-        for(int i=0; i<list.size(); i++) {
-            if(list.get(i)== true)
-              System.out.println(i+"\t Edited\t"+contents.get(i).getId()+"\t"+contents.get(i).getSource());
-            if(list.get(i) == false){
-                System.out.println(i+"\t raw\t"+contents.get(i).getId()+"\t"+contents.get(i).getSource());
-            }
-        }
-    }
-
-    @Test
     public void testGetAll() throws Exception {
         List<Content> contents = RestApiConnectorClass.readAll(UrlPath.ContentLinks.GETALL,Content.class);
         System.out.println(contents);
         Assert.assertFalse(contents.isEmpty());
+    }
+
+    @Test
+    public void testUpdateAll() throws Exception {
+        ContentService contentService = new ContentServiceImp();
+        for(Content content:contentService.findAll()){
+            Content content1 = new Content.Builder(content.getTitle()).copy(content)
+                    .source("mobile")
+                    .category("uncategorized")
+                    .creator("CreatorIdGoesHere")
+                    .contentType("raw").build();
+            RestApiConnectorClass.update(UrlPath.ContentLinks.PUT, content1);
+        }
     }
 }

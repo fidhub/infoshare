@@ -14,6 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by hashcode on 2015/06/24.
@@ -40,7 +43,14 @@ public class EditTable extends Table{
         addContainerProperty("Date Created",String.class,null);
 
         try {
-            contentService.findAll().stream().filter(content -> content != null).forEach(this::loadTable);
+            contentService.findAll()
+                    .stream()
+                    .filter(content -> content != null)
+                    .collect(Collectors.toList())
+                    .stream()
+                    .filter(cont-> !cont.getSource().equalsIgnoreCase("mobile"))
+                    .collect(Collectors.toList())
+                    .forEach(this::loadTable);
         }catch (Exception e){
         }
         setNullSelectionAllowed(false);
@@ -48,24 +58,42 @@ public class EditTable extends Table{
         setImmediate(true);
     }
 
-
     public void loadTable(Content content) {
         DateFormat formatter = new SimpleDateFormat("dd - MMMMMMM - yyyy");
-        if (!content.getSource().equalsIgnoreCase("mobile")) {
-            UrlPath.isEdited = RestApiConnectorClass.
-                    readAll(UrlPath.ContentLinks.isEdited + content.getSource(), Boolean.class);
-            if (UrlPath.isEdited.contains(true)) {
-                try {
-                    addItem(new Object[]{
-                            content.getTitle(),
-                            categoryService.find(content.getCategory()).getName(),
-                            content.getCreator(),
-                            formatter.format(content.getDateCreated())
-                    }, content.getId());
-                } catch (Exception r) {
-                }
-            }
-        }
+        String category = categoryService.find(content.getCategory()).getName();
+               if(!Check(content).contains(true)) {
+                   try {
+                       addItem(new Object[]{
+                               content.getTitle(),
+                               category,
+                               content.getCreator(),
+                               formatter.format(content.getDateCreated())
+                       }, content.getId());
+                   } catch (Exception r) {
+                   }
+               }
     }
 
+    public List<Boolean> Check( Content content ) {
+        List<Boolean> check = new ArrayList<>();
+        List<Content> contents =  contentService.findAll()
+                .stream()
+                .filter(cont -> cont != null)
+                .collect(Collectors.toList())
+                .stream()
+                .filter(cont -> !cont.getSource().equalsIgnoreCase("mobile"))
+                .collect(Collectors.toList());
+
+        for (int i = 0; i < contents.size(); i++) {
+
+                if (content.getId().equalsIgnoreCase(contents.get(i).getSource())) {
+                    for (int j=0; j<contents.size(); j++) {
+                        if (contents.get(i).getSource().equalsIgnoreCase(contents.get(j).getId())) {
+                            check.add(false);
+                        }else check.add(true);
+                    }
+                }
+            }
+        return check;
+    }
 }
