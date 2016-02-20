@@ -14,6 +14,7 @@ import java.io.File;
 /**
  * Created by THULEBONA on 2015/12/03.
  */
+
 public class ProfilePopUp extends Window {
     private final ContentModel model;
     public final BeanItem<ContentModel> item;

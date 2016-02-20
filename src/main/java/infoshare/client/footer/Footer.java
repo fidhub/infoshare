@@ -17,7 +17,8 @@ public class Footer extends VerticalLayout {
     public Footer() {
         setSizeFull();
 
-        Label footer = new Label("<p align='center'> All right Reserved Kujali Living Hub "+ dateFormat.format(new Date()), ContentMode.HTML);
+        Label footer = new Label("<p align='center'> &copy; All right Reserved Kujali Living Hub "
+                + dateFormat.format(new Date()), ContentMode.HTML);
         footer.addStyleName(ValoTheme.LABEL_H4);
         footer.addStyleName(ValoTheme.LABEL_COLORED);
         this.addComponent(footer);

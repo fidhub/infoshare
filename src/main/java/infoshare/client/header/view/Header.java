@@ -16,20 +16,24 @@ import infoshare.client.content.content.views.RawView;
 import infoshare.client.header.Form.ProfilePopUp;
 import infoshare.client.header.landing_page.LandingHome;
 import infoshare.domain.Content;
+import infoshare.domain.RawContent;
 import infoshare.services.Content.ContentService;
 import infoshare.services.Content.Impl.ContentServiceImp;
+import infoshare.services.RawContent.Impl.RawContentServiceImpl;
+import infoshare.services.RawContent.RawContentService;
 
 import java.io.File;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.stream.Collectors;
 
 /**
  * Created by hashcode on 2015/06/23.
  */
 public class Header extends VerticalLayout implements Button.ClickListener {
 
-    private ContentService contentService = new ContentServiceImp();
+    private RawContentService rawContentService = new RawContentServiceImpl();
     private MainLayout main ;
     private Window notifications;
     private Window userProfile;
@@ -37,8 +41,10 @@ public class Header extends VerticalLayout implements Button.ClickListener {
     public Button notify = new Button();
     public Button user = new Button();
     private Table notificationTable = new Table();
+    private RawView rawView ;
     public Header(MainLayout main) {
         this.main = main;
+        rawView = new RawView(main);
         setSizeFull();
         setSpacing(true);
         addComponent(getHeaderPanel());
@@ -150,13 +156,16 @@ public class Header extends VerticalLayout implements Button.ClickListener {
         notificationTable.setImmediate(true);
 
         refreshNotification();
+
         notificationTable.addItemClickListener(event1 -> {
+            int i=1;
             if (event1.isDoubleClick())
             {
-                RawView rawView = new RawView(main);
-                notifications.close();
-                rawView.tableId = notificationTable.getValue().toString();
-                rawView.EditButton();
+               if(i==1) { i=0;
+                   notifications.close();
+                   rawView.tableId = notificationTable.getValue().toString();
+                   rawView.EditButton();
+               }
             }
         });
         layout.addComponent(notificationTable);
@@ -220,9 +229,9 @@ public class Header extends VerticalLayout implements Button.ClickListener {
     }
 
     private void addListener(){
-        home.addClickListener((Button.ClickListener)this);
-        notify.addClickListener((Button.ClickListener) this);
-        user.addClickListener((Button.ClickListener)this);
+        home.addClickListener(this);
+        notify.addClickListener(this);
+        user.addClickListener(this);
     }
 
     private String differInTime(Date dateCreated){
@@ -254,30 +263,34 @@ public class Header extends VerticalLayout implements Button.ClickListener {
             return diffSeconds + " seconds ago";
     }
 
-    public void refreshNotification() {
+    public  void refreshNotification() {
         int i = 0 ;
-            for (Content content: contentService.findAll()) {
+            for (RawContent rawContent :rawContentService.findAll()
+                    .stream()
+                    .filter(cont->cont.getStatus().equalsIgnoreCase("Raw"))
+                    .collect(Collectors.toList())
+                    .stream()
+                    .filter(cont ->cont.getState().equalsIgnoreCase("active"))
+                    .collect(Collectors.toList())) {
 
-                if (content.getSource().equalsIgnoreCase("mobile")) {
-                    UrlPath.isEdited = RestApiConnectorClass.readAll(UrlPath.ContentLinks.isEdited + content.getId(), Boolean.class);
-                    if (!UrlPath.isEdited.contains(true)) {
-                        try {
-                            i++;
-                            notify.addStyleName("notifications");
-                            notify.addStyleName("unread");
-                            notify.setCaption(i + "");
-                            notify.setDescription(i + " un-edited tips content");
-                            notificationTable.addItem(new Object[]{new Label(
-                                    "<b>" + content.getCreator().toUpperCase()
-                                            + "</b> created a new tip <br><span><i>"
-                                            + differInTime(content.getDateCreated()) + "</i></span><br>"
-                                            + "<b> TITLE: </b><i>" + content.getTitle() + "</i>", ContentMode.HTML)
-                            }, content.getId());
-                        } catch (Exception r) {
-                        }
-                    }
+                try {
+                    i++;
+                    notify.addStyleName("notifications");
+                    notify.addStyleName("unread");
+                    notify.setCaption(i + "");
+                    notify.setDescription(i + " un-edited tips content");
+                    notificationTable.addItem(new Object[]{new Label(
+                            "<b>" + rawContent.getCreator().toUpperCase()
+                                    + "</b> created a new tip <br><span><i>"
+                                    + differInTime(rawContent.getDateCreated())
+                                    + "</i></span><br>"
+                                    + "<b> TITLE: </b><i>" + rawContent.getTitle()
+                                    + "</i>", ContentMode.HTML)
+                    }, rawContent.getId());
+                } catch (Exception r) {
                 }
             }
+
         if(i==0){
             notify.removeStyleName("unread");
             notify.setCaption("");
@@ -340,8 +353,8 @@ public class Header extends VerticalLayout implements Button.ClickListener {
         home.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
         home.addStyleName(ValoTheme.BUTTON_SMALL);
 
-        user.setCaption("User name");
-        user.setDescription("Your user name)");
+        user.setCaption("Username");
+        user.setDescription("Your username)");
         user.setIcon(FontAwesome.USER_MD);
         user.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
         user.addStyleName(ValoTheme.BUTTON_SMALL);

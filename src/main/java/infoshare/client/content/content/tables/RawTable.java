@@ -5,22 +5,16 @@ import com.vaadin.ui.themes.ValoTheme;
 import infoshare.RestApi.RestApiConnectorClass;
 import infoshare.RestApi.UrlPath;
 import infoshare.client.content.MainLayout;
-import infoshare.domain.Category;
 import infoshare.domain.Content;
-import infoshare.domain.ContentType;
-import infoshare.services.Content.ContentService;
-import infoshare.services.Content.Impl.ContentServiceImp;
+import infoshare.domain.RawContent;
 
-import infoshare.services.ContentType.ContentTypeService;
-import infoshare.services.ContentType.Impl.ContentTypeServiceImpl;
-import infoshare.services.category.CategoryService;
-import infoshare.services.category.Impl.CategoryServiceImpl;
+import infoshare.services.RawContent.Impl.RawContentServiceImpl;
+import infoshare.services.RawContent.RawContentService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by hashcode on 2015/06/24.
@@ -28,15 +22,11 @@ import java.util.List;
 public class RawTable extends Table {
 
     @Autowired
-    private ContentService contentService = new ContentServiceImp();
-    private CategoryService categoryService = new CategoryServiceImpl();
-    private ContentTypeService contentTypeService = new ContentTypeServiceImpl();
-
-
-
+    private RawContentService rawContentService = new RawContentServiceImpl();
     private final MainLayout main;
 
     public RawTable(MainLayout mainApp){
+
         this.main = mainApp;
         setSizeFull();
         addStyleName(ValoTheme.TABLE_BORDERLESS);
@@ -50,7 +40,17 @@ public class RawTable extends Table {
         addContainerProperty("Date Created",String.class,null);
 
         try {
-            contentService.findAll().stream().filter(content -> content != null).forEach(this::loadTable);
+            rawContentService.findAll()
+                    .stream()
+                    .filter(cont -> cont!= null)
+                    .collect(Collectors.toList())
+                    .stream()
+                    .filter(cont->cont.getStatus().equalsIgnoreCase("raw"))
+                    .collect(Collectors.toList())
+                     .stream()
+                    .filter(cont->cont.getState().equalsIgnoreCase("active"))
+                    .collect(Collectors.toList())
+                    .forEach(this::loadTable);
         }catch (Exception e){
         }
          setNullSelectionAllowed(false);
@@ -58,23 +58,19 @@ public class RawTable extends Table {
          setImmediate(true);
     }
 
-    public void loadTable(Content content) {
-        DateFormat formatter = new SimpleDateFormat("dd - MMMMMMM - yyyy");
-        if (content.getSource().equalsIgnoreCase("mobile")) {
-            UrlPath.isEdited = RestApiConnectorClass.readAll(UrlPath.ContentLinks.isEdited + content.getId(), Boolean.class);
-            if (!UrlPath.isEdited.contains(true)) {
-                try {
-                    addItem(new Object[]{
-                            content.getTitle(),
-                            content.getCategory(),
-                            content.getCreator(),
-                            formatter.format(content.getDateCreated())
-                    }, content.getId());
-                } catch (Exception r) {
-                }
-            }
+    public void loadTable(RawContent rawContent) {
+        DateFormat formatter = new SimpleDateFormat("dd-MMMMMMM - yyyy");
+        try {
+            addItem(new Object[]{
+                    rawContent.getTitle(),
+                    rawContent.getCategory(),
+                    rawContent.getCreator(),
+                    formatter.format(rawContent.getDateCreated())
+            }, rawContent.getId());
+        } catch (Exception r) {
         }
     }
+
 }
 
 

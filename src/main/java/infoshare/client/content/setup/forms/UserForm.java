@@ -57,7 +57,7 @@ public class UserForm extends FormLayout {
         final TextField otherName = getTextField("Other name", "otherName");
         final PasswordField password = getPasswordField("Password", "password");
         final CheckBox enable = getCheckBoxField("Activate Account", "enable");
-        final ListSelect roles = getRoles("Select Roles", "roles");
+        final ListSelect roles = getRoles("Select Roles", "role");
 
         VerticalLayout rightLayout = new VerticalLayout();
         rightLayout.setSpacing(true);

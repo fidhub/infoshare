@@ -9,45 +9,49 @@ import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.content.ContentMenu;
-import infoshare.client.content.content.forms.RawAndEditForm;
+import infoshare.client.content.content.forms.EditForm;
+import infoshare.client.content.content.forms.RawForm;
 import infoshare.client.content.content.models.ContentModel;
 import infoshare.client.content.content.tables.RawTable;
-import infoshare.domain.Category;
-import infoshare.domain.Content;
-import infoshare.domain.ContentType;
-import infoshare.domain.Source;
-import infoshare.filterSearch.ContentFilter;
-import infoshare.services.Content.ContentService;
-import infoshare.services.Content.Impl.ContentServiceImp;
+import infoshare.domain.*;
+import infoshare.filterSearch.RawContentFilter;
 import infoshare.services.ContentType.ContentTypeService;
 import infoshare.services.ContentType.Impl.ContentTypeServiceImpl;
+import infoshare.services.EditedContent.EditedContentService;
+import infoshare.services.EditedContent.Impl.EditedContentServiceImpl;
+import infoshare.services.RawContent.Impl.RawContentServiceImpl;
+import infoshare.services.RawContent.RawContentService;
 import infoshare.services.category.CategoryService;
 import infoshare.services.category.Impl.CategoryServiceImpl;
 import infoshare.services.source.SourceService;
 import infoshare.services.source.sourceServiceImpl.SourceServiceImpl;
+
+import java.util.stream.Collectors;
 
 /**
  * Created by hashcode on 2015/06/24.
  */
 public class RawView extends VerticalLayout implements Button.ClickListener,Property.ValueChangeListener{
 
-    private ContentService contentService = new ContentServiceImp();
+    private RawContentService rawContentService = new RawContentServiceImpl();
+    private EditedContentService editedContentService = new EditedContentServiceImpl();
     private ContentTypeService contentTypeService = new ContentTypeServiceImpl();
     private CategoryService categoryService = new CategoryServiceImpl();
     private SourceService sourceService = new SourceServiceImpl();
 
     private final MainLayout main;
     private final RawTable table;
-    private final RawAndEditForm form;
+    private final RawForm form;
     private Window popUp ;
     private Button editBtn = new Button("EDIT");
-    private ContentFilter contentFilter = new ContentFilter();
-    public String tableId ;
+    private RawContentFilter rawContentFilter = new RawContentFilter();
+    public String tableId;
 
     public RawView( MainLayout mainApp) {
+
         this.main = mainApp;
         this.table = new RawTable(main);
-        this.form = new RawAndEditForm();
+        this.form = new RawForm();
         this.popUp = modelWindow();
         setSizeFull();
         setSpacing(true);
@@ -56,24 +60,35 @@ public class RawView extends VerticalLayout implements Button.ClickListener,Prop
         addListeners();
     }
     private HorizontalLayout getLayout(){
+
         final HorizontalLayout layout = new HorizontalLayout();
         layout.setSpacing(false);
         editBtn.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
         editBtn.addStyleName(ValoTheme.BUTTON_SMALL);
         editBtn.setIcon(FontAwesome.EDIT);
-        layout.addComponent(contentFilter.field);
+        layout.addComponent(rawContentFilter.field);
         layout.addComponent(editBtn);
         return layout;
     }
     public void refreshContacts(String stringFilter ) {
         try {
             table.removeAllItems();
-            contentFilter.findAll(stringFilter).forEach(table::loadTable);
+            rawContentFilter.findAll(stringFilter)
+                    .stream()
+                    .filter(cont -> cont!= null)
+                    .collect(Collectors.toList())
+                    .stream()
+                    .filter(cont->cont.getStatus().equalsIgnoreCase("raw"))
+                    .collect(Collectors.toList())
+                    .stream()
+                    .filter(cont->cont.getState().equalsIgnoreCase("active"))
+                    .collect(Collectors.toList()).forEach(table::loadTable);
         }catch (Exception e){
         }
     }
     @Override
     public void buttonClick(Button.ClickEvent clickEvent) {
+
         final Button source = clickEvent.getButton();
         if(source==editBtn){
             try {
@@ -81,10 +96,10 @@ public class RawView extends VerticalLayout implements Button.ClickListener,Prop
                 EditButton();
             }catch (Exception e){
             }
-        }else if (source ==form.popUpUpdateBtn){
+        }else if (source ==form.putEdited){
             saveEditedForm(form.binder);
 
-        }else if (source ==form.popUpCancelBtn){
+        }else if (source ==form.backBtn){
             popUp.setModal(false);
             UI.getCurrent().removeWindow(popUp);
             table.setValue(null);
@@ -103,34 +118,16 @@ public class RawView extends VerticalLayout implements Button.ClickListener,Prop
         popup.setWidth(80.0f, Unit.PERCENTAGE);
         popup.setClosable(false);
         popup.setResizable(false);
-        loadComboBoxs();
         popup.setContent(form);
         return popup;
-    }
-    private void loadComboBoxs() {
-
-        for (Category category : categoryService.findAll()) {
-            form.popUpCategoryCmb.addItem(category.getId());
-            form.popUpCategoryCmb.setItemCaption(category.getId(), category.getName());
-        }
-
-        for (ContentType contentType : contentTypeService.findAll()) {
-            form.popUpContentTypeCmb.addItem(contentType.getId());
-            form.popUpContentTypeCmb.setItemCaption(contentType.getId(), contentType.getName());
-        }
-        for (Source source : sourceService.findAll()) {
-            form.popUpSourceCmb.addItem(source.getId());
-            form.popUpSourceCmb.setItemCaption(source.getId(), source.getName());
-        }
-
     }
     private void getHome() {
         main.content.setSecondComponent(new ContentMenu(main, "LANDING"));
     }
     public void EditButton(){
         try {
-            final Content content = contentService.find(tableId);
-            final ContentModel bean = getModel(content);
+            final RawContent rawContent = rawContentService.find(tableId);
+            final ContentModel bean = getModel(rawContent);
             form.binder.setItemDataSource(new BeanItem<>(bean));
               UI.getCurrent().addWindow(popUp);
                 popUp.setModal(true);
@@ -143,7 +140,8 @@ public class RawView extends VerticalLayout implements Button.ClickListener,Prop
     private void saveEditedForm(FieldGroup binder) {
         try {
             binder.commit();
-            contentService.save(getNewEntity(binder));
+            editedContentService.save(getNewEntity(binder));
+            rawContentService.merge(getUpdateEntity(binder));
             popUp.setModal(false);
             table.setValue(null);
             UI.getCurrent().removeWindow(popUp);
@@ -154,46 +152,71 @@ public class RawView extends VerticalLayout implements Button.ClickListener,Prop
             getHome();
         }
     }
-    private Content getNewEntity(FieldGroup binder) {
-
+    private EditedContent getNewEntity(FieldGroup binder) {
         try {
             final ContentModel bean = ((BeanItem<ContentModel>) binder.getItemDataSource()).getBean();
-            bean.setDateCreated(contentService.find(table.getValue().toString()).getDateCreated());
-            final Content content = new Content.Builder(bean.getTitle())
-                    .category(categoryService.find(bean.getCategory()).getId())
+            bean.setDateCreated(rawContentService.find(table.getValue().toString()).getDateCreated());
+            final EditedContent editedContent = new EditedContent
+                    .Builder(bean.getTitle())
+                    .category(bean.getCategory())
                     .content(bean.getContent())
                     .contentType(bean.getContentType())
                     .creator(bean.getCreator())
                     .dateCreated(bean.getDateCreated())
                     .source(table.getValue().toString())
+                    .state(bean.getState())
+                    .status("Edited")
                     .build();
-            return content;
+            return editedContent;
         }catch (Exception e){
             return null;
         }finally {
             tableId = null;
         }
     }
-
-    private ContentModel getModel(Content val) {
-
+    private RawContent getUpdateEntity(FieldGroup binder) {
+        try {
+            final ContentModel bean = ((BeanItem<ContentModel>) binder.getItemDataSource()).getBean();
+            bean.setDateCreated(rawContentService.find(table.getValue().toString()).getDateCreated());
+            final RawContent rawContent = new RawContent
+                    .Builder(bean.getTitle())
+                    .category(bean.getCategory())
+                    .content(bean.getContent())
+                    .contentType(bean.getContentType())
+                    .creator(bean.getCreator())
+                    .dateCreated(bean.getDateCreated())
+                    .source(table.getValue().toString())
+                    .state(bean.getState())
+                    .status("Edited")
+                    .id(table.getValue().toString())
+                    .build();
+            return rawContent;
+        }catch (Exception e){
+            return null;
+        }finally {
+            tableId = null;
+        }
+    }
+    private ContentModel getModel(RawContent val) {
         final ContentModel model = new ContentModel();
-        final Content content = contentService.find(val.getId());
-        model.setTitle(content.getTitle());
-        model.setCategory(content.getCategory());
-        model.setCreator(content.getCreator());
-        model.setContent(content.getContent());
-        model.setContentType(content.getContentType());
-        model.setSource(content.getSource());
+        final RawContent rawContent = rawContentService.find(val.getId());
+        model.setTitle(rawContent.getTitle());
+        model.setCategory(rawContent.getCategory());
+        model.setCreator(rawContent.getCreator());
+        model.setContent(rawContent.getContent());
+        model.setContentType(rawContent.getContentType());
+        model.setSource(rawContent.getSource());
+        model.setStatus(rawContent.getStatus());
+        model.setState(rawContent.getState());
         return model;
     }
     public void addListeners(){
 
-        form.popUpUpdateBtn.addClickListener((Button.ClickListener)this);
-        form.popUpCancelBtn.addClickListener((Button.ClickListener) this);
+        form.putEdited.addClickListener((Button.ClickListener)this);
+        form.backBtn.addClickListener((Button.ClickListener) this);
         table.addValueChangeListener((Property.ValueChangeListener) this);
         editBtn.addClickListener((Button.ClickListener) this);
-        contentFilter.field.addTextChangeListener(new FieldEvents.TextChangeListener() {
+        rawContentFilter.field.addTextChangeListener(new FieldEvents.TextChangeListener() {
             @Override
             public void textChange(FieldEvents.TextChangeEvent textChangeEvent) {
                 refreshContacts(textChangeEvent.getText());

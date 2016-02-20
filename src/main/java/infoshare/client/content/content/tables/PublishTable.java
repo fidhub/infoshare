@@ -2,21 +2,17 @@ package infoshare.client.content.content.tables;
 
 import com.vaadin.ui.Table;
 import com.vaadin.ui.themes.ValoTheme;
-import infoshare.RestApi.RestApiConnectorClass;
-import infoshare.RestApi.UrlPath;
 import infoshare.client.content.MainLayout;
-import infoshare.domain.Content;
-import infoshare.services.Content.ContentService;
-import infoshare.services.Content.Impl.ContentServiceImp;
+import infoshare.domain.PublishedContent;
+import infoshare.services.PublishedContent.Impl.PublishedContentServiceImpl;
+import infoshare.services.PublishedContent.PublishedContentService;
 import infoshare.services.category.CategoryService;
 import infoshare.services.category.Impl.CategoryServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by hashcode on 2015/06/24.
@@ -24,7 +20,7 @@ import java.util.List;
 public class PublishTable extends Table{
 
     @Autowired
-    private ContentService contentService = new ContentServiceImp();
+    private PublishedContentService publishedContentService = new PublishedContentServiceImpl();
     private CategoryService categoryService = new CategoryServiceImpl();
 
     private final MainLayout main;
@@ -43,7 +39,17 @@ public class PublishTable extends Table{
         addContainerProperty("Date Created",String.class,null);
 
         try {
-            contentService.findAll().stream().filter(content -> content != null).forEach(this::loadTable);
+            publishedContentService.findAll()
+                    .stream()
+                    .filter(cont -> cont != null)
+                    .collect(Collectors.toList())
+                    .stream()
+                    .filter(cont -> cont.getStatus().equalsIgnoreCase("Published"))
+                    .collect(Collectors.toList())
+                    .stream()
+                    .filter(cont -> cont.getState().equalsIgnoreCase("active"))
+                    .collect(Collectors.toList())
+                    .forEach(this::loadTable);
         }catch (Exception e){
 
         }
@@ -51,13 +57,11 @@ public class PublishTable extends Table{
         setSelectable(true);
         setImmediate(true);
     }
-    public void loadTable(Content content) {
+    public void loadTable(PublishedContent content) {
         DateFormat formatter = new SimpleDateFormat("dd - MMMMMMM - yyyy");
-        if (!content.getSource().equalsIgnoreCase("mobile")) {
-            String category = categoryService.find(content.getCategory()).getName();
-        if (Check(content).contains(true)) {
-                try {
-                    addItem(new Object[]{
+           String category = categoryService.find(content.getCategory()).getName();
+              try{
+                  addItem(new Object[]{
                             content.getTitle(),
                             category,
                             content.getCreator(),
@@ -65,18 +69,8 @@ public class PublishTable extends Table{
                     }, content.getId());
                 } catch (Exception r) {
                 }
-            }
-        }
+
     }
 
-    public List<Boolean> Check( Content content ){
-        List<Boolean> check = new ArrayList<>();
-        int size =  contentService.findAll().size();
-        for(int i= 0; i<size; i++){
-            if(content.getId().equalsIgnoreCase(contentService.findAll().get(i).getSource())){
-                check.add(true);
-            }else check.add(false);
-        }
-        return check;
-    }
+
 }
