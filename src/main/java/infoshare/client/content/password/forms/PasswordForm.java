@@ -31,10 +31,11 @@ public class PasswordForm extends FormLayout{
 
         final GridLayout grid = new GridLayout(3, 10);
         grid.setSizeFull();
+        grid.setHeight(400.0f, Unit.PIXELS);
         grid.addComponent(oldpassword, 0, 0);
         grid.addComponent(repeatPassword, 1, 0);
         grid.addComponent(newPassword, 2, 0);
-        grid.addComponent(buttons, 0, 3, 2, 3);
+        grid.addComponent(buttons, 0, 1, 2, 1);
 
         addComponent(grid);
     }

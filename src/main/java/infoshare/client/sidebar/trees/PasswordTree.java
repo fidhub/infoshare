@@ -18,7 +18,6 @@ public class PasswordTree extends Tree implements ItemClickListener {
     public PasswordTree(MainLayout main) {
         this.main = main;
         addItem(CHANGE_PASSWORD);
-
         //Add Listerners
         addItemClickListener((ItemClickEvent.ItemClickListener) this);
 

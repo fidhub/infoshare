@@ -48,7 +48,7 @@ public class LoginView extends VerticalLayout {
     }
 
     private Component buildFields() {
-        HorizontalLayout fields = new HorizontalLayout();
+        VerticalLayout fields = new VerticalLayout();
         fields.setSpacing(true);
         fields.addStyleName("fields");
 
@@ -68,13 +68,7 @@ public class LoginView extends VerticalLayout {
         fields.addComponents(username, password, signin);
         fields.setComponentAlignment(signin, Alignment.BOTTOM_LEFT);
 
-        signin.addClickListener(new Button.ClickListener() {
-
-            public void buttonClick(final Button.ClickEvent event) {
-                main.setContent(new MainLayout(main));
-
-            }
-        });
+        signin.addClickListener(event -> main.setContent(new MainLayout(main)));
         return fields;
     }
 
