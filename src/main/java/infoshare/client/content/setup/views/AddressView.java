@@ -115,7 +115,7 @@ public class AddressView extends Window implements Button.ClickListener, Propert
                 .othername(bean.getOtherName())
                 .address(addresses)//Todo : no route for entity yet
                 .contact(bean.getContact())//Todo : no route for entity yet
-                .id(addressTable.userID)
+                .id(AddressTable.userID)
                 .build();
         return user;
     }

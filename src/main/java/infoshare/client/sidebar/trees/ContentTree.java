@@ -17,7 +17,7 @@ public class ContentTree extends Tree implements ItemClickEvent.ItemClickListene
         this.main = main;
         addItem(CONTENT);
         //Add Listerners
-        addItemClickListener((ItemClickEvent.ItemClickListener) this);
+        addItemClickListener(this);
     }
 
     @Override

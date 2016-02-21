@@ -83,7 +83,6 @@ public class Header extends VerticalLayout implements Button.ClickListener {
           userButton(clickEvent);
         }
     }
-
     private void notificationButton(ClickEvent clickEvent ){
         if (userProfile != null && userProfile.getUI() !=null) {
             userProfile.close();
@@ -104,7 +103,6 @@ public class Header extends VerticalLayout implements Button.ClickListener {
             });
         }
     }
-
     private void userButton(ClickEvent clickEvent){
         if (notifications != null && notifications.getUI() != null) {
             notifications.close();
@@ -124,7 +122,6 @@ public class Header extends VerticalLayout implements Button.ClickListener {
             });
         }
     }
-
     public  void buildNotifications( ClickEvent event) {
         notifications = new Window();
         final VerticalLayout layout = new VerticalLayout();
@@ -158,13 +155,13 @@ public class Header extends VerticalLayout implements Button.ClickListener {
         refreshNotification();
 
         notificationTable.addItemClickListener(event1 -> {
-            int i=1;
-            if (event1.isDoubleClick())
-            {
-               if(i==1) { i=0;
+            boolean flag =true;
+            if (event1.isDoubleClick()) {
+               if(flag) {
                    notifications.close();
                    rawView.tableId = notificationTable.getValue().toString();
                    rawView.EditButton();
+                   flag=false;
                }
             }
         });

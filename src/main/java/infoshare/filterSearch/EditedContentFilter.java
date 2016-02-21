@@ -14,6 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 /**
  * Created by user9 on 2016/02/12.
@@ -25,11 +26,17 @@ public class EditedContentFilter {
     public EditedContentFilter() {
         getField();
     }
-    public synchronized List<EditedContent> findAll(String stringFilter) {
+
+    public synchronized List<EditedContent> findAll(String stringFilter,String state) {
         DateFormat formatter = new SimpleDateFormat("dd - MMMMMMM - yyyy");
         ArrayList arrayList = new ArrayList();
         String cat;
-        for (EditedContent EditedContent : editedContentService.findAll()) {
+        for (EditedContent EditedContent : editedContentService.findAll()
+                .stream().filter(cont ->cont.getState().equalsIgnoreCase(state))
+                .collect(Collectors.toList())
+                .stream().filter(cont ->cont.getStatus().equalsIgnoreCase("edited"))
+                .collect(Collectors.toList())
+                ) {
             if(!EditedContent.getCategory().equalsIgnoreCase("uncategorized"))
                 cat = categoryService.find(EditedContent.getCategory().toString()).getName().toLowerCase();
             else cat = EditedContent.getCategory().toString().toLowerCase();
@@ -57,7 +64,7 @@ public class EditedContentFilter {
         return arrayList;
     }
     private TextField getField(){
-        field.setInputPrompt("Filter EditedContent ...");
+        field.setInputPrompt("Filter Edited Content ...");
         field.setWidth("260px");
         field.setIcon(FontAwesome.FILTER);
         field.addStyleName(ValoTheme.TEXTFIELD_INLINE_ICON);

@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 /**
  * Created by codex on 2015/07/14.
@@ -23,6 +24,7 @@ public class RawContentFilter {
     private RawContentService rawContentService = new RawContentServiceImpl();
     private CategoryService categoryService = new CategoryServiceImpl();
     public TextField field = new TextField();
+
     public RawContentFilter() {
         getField();
     }
@@ -30,7 +32,12 @@ public class RawContentFilter {
         DateFormat formatter = new SimpleDateFormat("dd - MMMMMMM - yyyy");
         ArrayList arrayList = new ArrayList();
         String cat;
-        for (RawContent rawContent : rawContentService.findAll()) {
+        for (RawContent rawContent : rawContentService.findAll()
+                .stream().filter(cont ->cont.getState().equalsIgnoreCase("active"))
+                .collect(Collectors.toList())
+                .stream().filter(cont ->cont.getStatus().equalsIgnoreCase("raw"))
+                .collect(Collectors.toList())
+                ) {
             if(!rawContent.getCategory().equalsIgnoreCase("uncategorized"))
                 cat = categoryService.find(rawContent.getCategory().toString()).getName().toLowerCase();
                 else cat = rawContent.getCategory().toString().toLowerCase();
@@ -58,7 +65,7 @@ public class RawContentFilter {
         return arrayList;
     }
     private TextField getField(){
-        field.setInputPrompt("Filter rawContent ...");
+        field.setInputPrompt("Filter Content ...");
         field.setWidth("260px");
         field.setIcon(FontAwesome.FILTER);
         field.addStyleName(ValoTheme.TEXTFIELD_INLINE_ICON);
