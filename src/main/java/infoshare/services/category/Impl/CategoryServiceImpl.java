@@ -1,15 +1,11 @@
 package infoshare.services.category.Impl;
 
-import infoshare.RestApi.RestApiConnectorClass;
-import infoshare.RestApi.UrlPath;
-import infoshare.client.content.systemValues.models.CategoryModel;
+import infoshare.restapi.RestApiConnectorClass;
+import infoshare.restapi.UrlPath;
 import infoshare.domain.Category;
 import infoshare.services.category.CategoryService;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by codex on 2015/06/29.

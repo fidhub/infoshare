@@ -8,17 +8,12 @@ import com.vaadin.ui.*;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.themes.ChameleonTheme;
 import com.vaadin.ui.themes.ValoTheme;
-import infoshare.RestApi.RestApiConnectorClass;
-import infoshare.RestApi.UrlPath;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.content.ContentMenu;
 import infoshare.client.content.content.views.RawView;
 import infoshare.client.header.Form.ProfilePopUp;
 import infoshare.client.header.landing_page.LandingHome;
-import infoshare.domain.Content;
 import infoshare.domain.RawContent;
-import infoshare.services.Content.ContentService;
-import infoshare.services.Content.Impl.ContentServiceImp;
 import infoshare.services.RawContent.Impl.RawContentServiceImpl;
 import infoshare.services.RawContent.RawContentService;
 

@@ -1,16 +1,13 @@
 package infoshare.services.ContentType.Impl;
 
 import com.vaadin.spring.annotation.SpringComponent;
-import infoshare.RestApi.RestApiConnectorClass;
-import infoshare.RestApi.UrlPath;
+import infoshare.restapi.RestApiConnectorClass;
+import infoshare.restapi.UrlPath;
 import infoshare.domain.ContentType;
 import infoshare.services.ContentType.ContentTypeService;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by codex on 2015/06/25.

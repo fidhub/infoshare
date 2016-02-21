@@ -1,15 +1,10 @@
 package infoshare.services.users.Impl;
 
 import com.vaadin.spring.annotation.SpringComponent;
-import infoshare.RestApi.RestApiConnectorClass;
-import infoshare.RestApi.UrlPath;
-import infoshare.client.content.setup.models.UserModel;
-import infoshare.domain.Role;
+import infoshare.restapi.RestApiConnectorClass;
+import infoshare.restapi.UrlPath;
 import infoshare.domain.User;
-import infoshare.services.roles.Impl.RoleServiceImpl;
-import infoshare.services.roles.RoleService;
 import infoshare.services.users.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;

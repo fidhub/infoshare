@@ -14,7 +14,7 @@ import infoshare.client.content.courseSetup.tables.LessonTable;
 import infoshare.domain.Course;
 import infoshare.domain.Lesson;
 import infoshare.services.courses.CourseService;
-import infoshare.services.courses.Impl.CourseServiceImpl;
+import infoshare.services.courses.Impl.Services;
 
 import java.util.List;
 
@@ -31,7 +31,7 @@ public class LessonView extends VerticalLayout implements Button.ClickListener, 
     private Button addLesson = new Button("Add Lesson");
     private Button editLesson = new Button("Edit Lesson");
     private static ComboBox courseCmb = null;
-    private CourseService courseService = new CourseServiceImpl();
+    private CourseService courseService = new Services();
 
     public LessonView(MainLayout main) {
         this.main = main;

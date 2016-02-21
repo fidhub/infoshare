@@ -5,93 +5,96 @@ import java.io.Serializable;
 /**
  * Created by hashcode on 2015/06/24.
  */
-public class Role implements Serializable, Comparable<Role> {
-
-
+public class Role implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String id;
-    private String roleName;
+    private String name;
     private String description;
-
-    private Role() {
-    }
+    private String state;
 
     public String getId() {
         return id;
     }
 
-    public String getRoleName() {
-        return roleName;
+    public String getName() {
+        return name;
     }
 
     public String getDescription() {
         return description;
     }
 
-    private Role(Builder builder) {
-        this.id = builder.id;
-        this.roleName = builder.rolename;
-        this.description = builder.description;
+    public String getState() {
+        return state;
     }
 
-    public static class Builder {
+    private Role() {
 
+    }
+
+    private Role(Builder builder) {
+        this.id = builder.id;
+        this.name = builder.name;
+        this.description = builder.description;
+        this.state = builder.state;
+    }
+
+    public static class Builder{
         private String id;
-        private String rolename;
+        private String name;
         private String description;
+        private String state;
 
-        public Builder(String rolename) {
-            this.rolename = rolename;
-        }
-
-        public Builder id(String value) {
-            this.id = value;
+        public Builder state(String value) {
+            this.state = value;
             return this;
         }
 
-        public Builder description(String value) {
+        public Builder id(String value){
+            this.id = value;
+            return this;
+        }
+        public Builder roleName(String value){
+            this.name = value;
+            return this;
+        }
+        public Builder description(String value){
             this.description = value;
             return this;
         }
 
-        public Builder rolename(String value){
-            this.rolename = value;
+        public Builder copy(Role value) {
+            this.id = value.id;
+            this.name = value.name;
+            this.description = value.description;
+            this.state = value.state;
             return this;
         }
 
-        public Builder copy(Role role){
-            this.id = role.id;
-            this.rolename = role.roleName;
-            this.description = role.description;
-            return  this;
-        }
         public Role build() {
             return new Role(this);
         }
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Role)) return false;
+
+        Role role = (Role) o;
+
+        if (getId() != null ? !getId().equals(role.getId()) : role.getId() != null) return false;
+        if (getName() != null ? !getName().equals(role.getName()) : role.getName() != null)
+            return false;
+        return !(getDescription() != null ? !getDescription().equals(role.getDescription()) : role.getDescription() != null);
+
+    }
+
+    @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
+        int result = getId() != null ? getId().hashCode() : 0;
+        result = 31 * result + (getName() != null ? getName().hashCode() : 0);
+        result = 31 * result + (getDescription() != null ? getDescription().hashCode() : 0);
+        return result;
     }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Role)) {
-            return false;
-        }
-        Role other = (Role) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public int compareTo(Role o) {
-        return roleName.compareToIgnoreCase(o.roleName);
-    }
-
 }

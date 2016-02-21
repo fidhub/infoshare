@@ -1,7 +1,7 @@
 package infoshare.services.Contact.Impl;
 
-import infoshare.RestApi.RestApiConnectorClass;
-import infoshare.RestApi.UrlPath;
+import infoshare.restapi.RestApiConnectorClass;
+import infoshare.restapi.UrlPath;
 import infoshare.domain.Contact;
 import infoshare.services.Contact.ContactService;
 

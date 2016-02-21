@@ -1,4 +1,4 @@
-package infoshare.RestApi;
+package infoshare.restapi;
 
 /**
  * Created by codex on 2015/07/21.

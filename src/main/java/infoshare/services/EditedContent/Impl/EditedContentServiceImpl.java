@@ -1,7 +1,7 @@
 package infoshare.services.EditedContent.Impl;
 
-import infoshare.RestApi.RestApiConnectorClass;
-import infoshare.RestApi.UrlPath;
+import infoshare.restapi.RestApiConnectorClass;
+import infoshare.restapi.UrlPath;
 import infoshare.domain.EditedContent;
 import infoshare.services.EditedContent.EditedContentService;
 

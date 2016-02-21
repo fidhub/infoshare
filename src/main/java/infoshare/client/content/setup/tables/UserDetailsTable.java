@@ -3,21 +3,11 @@ package infoshare.client.content.setup.tables;
 import com.vaadin.server.Responsive;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.themes.ValoTheme;
-import infoshare.RestApi.RestApiConnectorClass;
-import infoshare.RestApi.UrlPath;
 import infoshare.client.content.MainLayout;
-import infoshare.domain.Content;
-import infoshare.domain.Role;
 import infoshare.domain.User;
-import infoshare.services.roles.Impl.RoleServiceImpl;
-import infoshare.services.roles.RoleService;
 import infoshare.services.users.Impl.UserServiceImpl;
 import infoshare.services.users.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.List;
 
 /**
  * Created by user9 on 2016/02/11.

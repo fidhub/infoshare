@@ -2,14 +2,8 @@ package infoshare.client.content.content.tables;
 
 import com.vaadin.ui.Table;
 import com.vaadin.ui.themes.ValoTheme;
-import infoshare.RestApi.RestApiConnectorClass;
-import infoshare.RestApi.UrlPath;
 import infoshare.client.content.MainLayout;
-import infoshare.domain.Content;
 import infoshare.domain.EditedContent;
-import infoshare.domain.RawContent;
-import infoshare.services.Content.ContentService;
-import infoshare.services.Content.Impl.ContentServiceImp;
 import infoshare.services.EditedContent.EditedContentService;
 import infoshare.services.EditedContent.Impl.EditedContentServiceImpl;
 import infoshare.services.category.CategoryService;
@@ -18,8 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.Collectors;
 
 /**
