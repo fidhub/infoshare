@@ -1,21 +1,27 @@
 package infoshare.client.content.content.views;
 
 import com.vaadin.data.Property;
+import com.vaadin.data.fieldgroup.FieldGroup;
 import com.vaadin.data.util.BeanItem;
 import com.vaadin.event.FieldEvents;
-import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.*;
-import com.vaadin.ui.themes.ValoTheme;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.content.ContentMenu;
 import infoshare.client.content.content.forms.PublishForm;
 import infoshare.client.content.content.models.ContentModel;
 import infoshare.client.content.content.tables.PublishTable;
-import infoshare.domain.Content;
-import infoshare.filterSearch.ContentFilter;
-import infoshare.services.Content.ContentService;
-import infoshare.services.Content.Impl.ContentServiceImp;
+import infoshare.domain.EditedContent;
+import infoshare.domain.PublishedContent;
+import infoshare.filterSearch.PublishedContentFilter;
+import infoshare.services.EditedContent.EditedContentService;
+import infoshare.services.EditedContent.Impl.EditedContentServiceImpl;
+import infoshare.services.PublishedContent.Impl.PublishedContentServiceImpl;
+import infoshare.services.PublishedContent.PublishedContentService;
+import infoshare.services.category.CategoryService;
+import infoshare.services.category.Impl.CategoryServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.stream.Collectors;
 
 /**
  * Created by hashcode on 2015/06/24.
@@ -23,14 +29,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class PublishView extends VerticalLayout implements Button.ClickListener,
         Property.ValueChangeListener {
     @Autowired
-    private ContentService contentService = new ContentServiceImp();
+    private PublishedContentService publishedContentService = new PublishedContentServiceImpl();
+    private CategoryService categoryService = new CategoryServiceImpl();
+    private EditedContentService editedContentService = new EditedContentServiceImpl();
 
     private final MainLayout main;
     private final PublishTable table;
     private final PublishForm form;
     private final Window popUp ;
-    private Button viewContent = new Button("View Content");
-    private ContentFilter contentFilter = new ContentFilter();
+    private PublishedContentFilter publishedContentFilter = new PublishedContentFilter();
     public PublishView( MainLayout mainApp) {
 
         this.main = mainApp;
@@ -39,49 +46,52 @@ public class PublishView extends VerticalLayout implements Button.ClickListener,
         this.popUp = modelWindow();
         setSpacing(true);
         setSizeFull();
-        addComponent(getLayout());
+        addComponent(publishedContentFilter.field);
         addComponent(table);
         addListeners();
     }
 
-    private HorizontalLayout getLayout(){
+   /* private HorizontalLayout getLayout(){
         final HorizontalLayout layout = new HorizontalLayout();
         layout.setSpacing(false);
         viewContent.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
         viewContent.addStyleName(ValoTheme.BUTTON_SMALL);
         viewContent.setIcon(FontAwesome.EDIT);
-        layout.addComponent(contentFilter.field);
+        layout.addComponent(publishedContentFilter.field);
         layout.addComponent(viewContent);
 
         return layout;
-    }
+    }*/
 
     private void refreshContacts(String stringFilter ) {
         try {
             table.removeAllItems();
-            for(Content content: contentFilter.findAll(stringFilter))
-                  table.loadTable(content);
+            publishedContentFilter.findAll(stringFilter)
+                    .stream()
+                    .filter(cont ->cont.getStatus().equalsIgnoreCase("Published"))
+                    .collect(Collectors.toList())
+                    .stream()
+                    .filter(cont ->cont.getState().equalsIgnoreCase("active"))
+                    .collect(Collectors.toList())
+                    .forEach(table::loadTable);
         }catch (Exception e){
         }
     }
-
     @Override
     public void valueChange(Property.ValueChangeEvent valueChangeEvent) {
         final Property property = valueChangeEvent.getProperty();
-        if (property == table) {
-            viewContent.setVisible(true);
-        }
+
     }
     @Override
     public void buttonClick(Button.ClickEvent clickEvent) {
         final Button source = clickEvent.getButton();
-        if(source==viewContent){
-            ViewContentButton();
-        }else if (source ==form.popUpCloseBtn){
+        if (source ==form.popUpCloseBtn){
             popUp.setModal(false);
             UI.getCurrent().removeWindow(popUp);
             table.setValue(null);
             getHome();
+        }else if (source==form.putToEdit){
+            saveEditedForm(form.binder);
         }
     }
     private Window modelWindow(){
@@ -92,11 +102,50 @@ public class PublishView extends VerticalLayout implements Button.ClickListener,
         popup.setContent(form);
         return popup;
     }
-
+    private void saveEditedForm(FieldGroup binder) {
+        try {
+            binder.commit();
+            try {
+                editedContentService.save(getNewEntity( publishedContentService.merge(getUpdateEntity(table.getValue().toString()))));
+                popUp.setModal(false);
+                table.setValue(null);
+                UI.getCurrent().removeWindow(popUp);
+                getHome();
+                Notification.show("Record EDITED!", Notification.Type.HUMANIZED_MESSAGE);
+            }catch (Exception e){
+                Notification.show(e.getMessage()+"Please select the Category",Notification.Type.HUMANIZED_MESSAGE);
+            }
+        } catch (FieldGroup.CommitException e) {
+            Notification.show("Fill in all Fields!!", Notification.Type.HUMANIZED_MESSAGE);
+            getHome();
+        }
+    }
+    private PublishedContent getUpdateEntity(String val ) {
+        final PublishedContent bean = publishedContentService.find(val);
+        final PublishedContent editedContent = new PublishedContent
+                .Builder(bean.getTitle()).copy(bean)
+                .status("Edited")
+                .build();
+        return editedContent;
+    }
+    private EditedContent getNewEntity(PublishedContent bean) {
+        final EditedContent editedContent = new EditedContent
+                .Builder(bean.getTitle())
+                .category(bean.getCategory())
+                .content(bean.getContent())
+                .contentType(bean.getContentType())
+                .creator(bean.getCreator())
+                .dateCreated(bean.getDateCreated())
+                .source(bean.getSource())
+                .state(bean.getState())
+                .status("Edited")
+                .build();
+        return editedContent;
+    }
     private void ViewContentButton(){
         try {
-            final Content content = contentService.find(table.getValue().toString());
-            final ContentModel bean = getModel(content);
+            final PublishedContent publishedContent = publishedContentService.find(table.getValue().toString());
+            final ContentModel bean = getModel(publishedContent);
             form.binder.setItemDataSource(new BeanItem<>(bean));
             UI.getCurrent().addWindow(popUp);
             popUp.setModal(true);
@@ -105,33 +154,34 @@ public class PublishView extends VerticalLayout implements Button.ClickListener,
                     Notification.Type.HUMANIZED_MESSAGE);
         }
     }
-
-    private ContentModel getModel(Content val) {
+    private ContentModel getModel(PublishedContent val) {
         final ContentModel model = new ContentModel();
-        final Content content = contentService.find(val.getId());
-        model.setTitle(content.getTitle());
-        model.setCategory(content.getCategory());
-        model.setCreator(content.getCreator());
-        model.setContent(content.getContent());
-        model.setContentType(content.getContentType());
-        model.setSource(content.getSource());
+        final PublishedContent publishedContent = publishedContentService.find(val.getId());
+        model.setTitle(publishedContent.getTitle());
+        model.setCategory(publishedContent.getCategory());
+        model.setCreator(publishedContent.getCreator());
+        model.setContent(publishedContent.getContent());
+        model.setContentType(publishedContent.getContentType());
+        model.setSource(publishedContent.getSource());
         return model;
     }
-
     private void getHome() {
         main.content.setSecondComponent(new ContentMenu(main, "PUBLISHER"));
     }
-
     public void addListeners(){
-        form.popUpCloseBtn.addClickListener((Button.ClickListener) this);
-        viewContent.addClickListener((Button.ClickListener) this);
-        table.addValueChangeListener((Property.ValueChangeListener) this);
-        contentFilter.field.addTextChangeListener(new FieldEvents.TextChangeListener() {
-            @Override
-            public void textChange(FieldEvents.TextChangeEvent textChangeEvent) {
-                refreshContacts(textChangeEvent.getText());
+        form.popUpCloseBtn.addClickListener(this);
+        form.putToEdit.addClickListener(this);
+        table.addValueChangeListener(this);
+        table.addItemClickListener(item ->{
+            boolean flag = true;
+            if(item.isDoubleClick()){
+                if(flag) {
+                    ViewContentButton();
+                    flag = false;
+                }
             }
         });
+        publishedContentFilter.field.addTextChangeListener((FieldEvents.TextChangeListener) textChangeEvent -> refreshContacts(textChangeEvent.getText()));
     }
 
 }

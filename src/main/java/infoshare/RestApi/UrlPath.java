@@ -1,15 +1,11 @@
 package infoshare.RestApi;
 
-import java.util.List;
-
 /**
  * Created by codex on 2015/07/21.
  */
 public class UrlPath {
 
     public static final  String URL ="http://kujali.cput.ac.za";
-    public static List<Boolean> isEdited;
-    public static List<Boolean> isPlublished;
 
     public static class  AddressLinks {
         public static final String POST = URL + "/api/address/create"; // @controllers.AddressController.createAddress
@@ -22,9 +18,9 @@ public class UrlPath {
     }
 
     public static class CategoryLinks {
-        public static final String POST    = URL+"/api/cat/create" ;  //@controllers.CategoryController.create
-        public static final String GET_ID  = URL+"/api/cat/";        //@controllers.CategoryController.getCategory(id)
-        public static final String PUT     = URL+"/api/cat/update" ;  //@controllers.CategoryController.update
+        public static final String POST    = URL+"/api/cat/create" ;    //@controllers.CategoryController.create
+        public static final String GET_ID  = URL+"/api/cat/";           //@controllers.CategoryController.getCategory(id)
+        public static final String PUT     = URL+"/api/cat/update" ;    //@controllers.CategoryController.update
         public static final String GETALL  = URL+"/api/cat/get/cats" ;  //@controllers.CategoryController.getAll
 
     }
@@ -39,16 +35,16 @@ public class UrlPath {
 
     public static class EditedLinks{
 
-        public static final String POST    = URL+"/api/cont/ed/create";  // @controllers.EditedContentController.create
-        public static final String GET_ID  = URL+"/api/cont/ed/";  //@controllers.EditedContentController.getContent(id)
-        public static final String PUT     = URL+"/api/cont/ed/update";  // @controllers.EditedContentController.update
-        public static final String GETALL  = URL+"/api/cont/ed/get/conts";  // @controllers.EditedContentController.getAll
+        public static final String POST    = URL+"/api/cont/ed/create";    // @controllers.EditedContentController.create
+        public static final String GET_ID  = URL+"/api/cont/ed//";         //@controllers.EditedContentController.getContent(id)
+        public static final String PUT     = URL+"/api/cont/ed/update";    // @controllers.EditedContentController.update
+        public static final String GETALL  = URL+"/api/cont/ed/get/conts"; // @controllers.EditedContentController.getAll
     }
 
     public static class PublishedLinks {
-        public static final String POST   = URL + "/api/cont/pub/create"; // @controllers.PublishedContentController.create
-        public static final String GET_ID = URL + "/api/cont/pub/"; // @controllers.PublishedContentController.getContent(id)
-        public static final String PUT    = URL + "/api/cont/pub/update"; // @controllers.PublishedContentController.update
+        public static final String POST   = URL + "/api/cont/pub/create";    // @controllers.PublishedContentController.create
+        public static final String GET_ID = URL + "/api/cont/pub/";          // @controllers.PublishedContentController.getContent(id)
+        public static final String PUT    = URL + "/api/cont/pub/update";    // @controllers.PublishedContentController.update
         public static final String GETALL = URL + "/api/cont/pub/get/conts"; // @controllers.PublishedContentController.getAll    }
     }
 
@@ -88,8 +84,6 @@ public class UrlPath {
         public static final String PUT     = URL+"/api/ctype/update"; // @controllers.ContntTypeController.update
         public static final String GETALL  = URL+"/api/ctype/get/ctypes"; // @controllers.ContntTypeController.getAll
     }
-
-
 
     public static class SourceLinks {
         public static final String POST    = URL+"/api/src/create";    //@controllers.SourceController.create

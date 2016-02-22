@@ -13,7 +13,7 @@ import infoshare.client.content.content.models.ContentModel;
 /**
  * Created by hashcode on 2015/06/24.
  */
-public class RawAndEditForm extends FormLayout {
+public class EditForm extends FormLayout {
 
     private final ContentModel model;
     public final BeanItem<ContentModel> item;
@@ -25,14 +25,13 @@ public class RawAndEditForm extends FormLayout {
     public final ComboBox popUpContentTypeCmb;
     public final ComboBox popUpCategoryCmb;
     public final ComboBox popUpSourceCmb;
-    public RawAndEditForm() {
+    public EditForm() {
         model = new ContentModel();
         item = new BeanItem<>(model);
         binder = new FieldGroup(item);
         popUpContentTypeCmb = getComboBox("Content Type","contentType");
         popUpCategoryCmb = getComboBox("Category","category");
         popUpSourceCmb = getComboBox("source","source");
-
         final RichTextArea textEditor = getRichTextArea("Content","content");
 
         final HorizontalLayout buttons = new HorizontalLayout();
