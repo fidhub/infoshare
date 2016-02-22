@@ -30,7 +30,7 @@ public class PublishedContentFilter {
         getField();
     }
     public synchronized List<PublishedContent> findAll(String stringFilter) {
-        DateFormat formatter = new SimpleDateFormat("dd-MMMMMMM-yyyy");
+        DateFormat formatter = new SimpleDateFormat("dd MMMMMMM yyyy");
         ArrayList arrayList = new ArrayList();
         String cat;
         for (PublishedContent publishedContent : publishedContentService.findAll().stream()

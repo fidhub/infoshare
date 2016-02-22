@@ -69,7 +69,7 @@ public class PasswordTab extends VerticalLayout implements
     }
     private void addListeners() {
         //Register Button Listeners
-        form.cancelButton.addClickListener((Button.ClickListener) this);
-        form.changePasswordButton.addClickListener((Button.ClickListener) this);
+        form.cancelButton.addClickListener(this);
+        form.changePasswordButton.addClickListener(this);
     }
 }

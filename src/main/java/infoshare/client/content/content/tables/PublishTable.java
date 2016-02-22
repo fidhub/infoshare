@@ -1,5 +1,6 @@
 package infoshare.client.content.content.tables;
 
+import com.vaadin.ui.Button;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.themes.ValoTheme;
 import infoshare.client.content.MainLayout;
@@ -35,7 +36,6 @@ public class PublishTable extends Table{
         addContainerProperty("Title",String.class,null);
         addContainerProperty("Category",String.class,null);
         addContainerProperty("Creator",String.class,null);
-       // addContainerProperty("Source",String.class,null);
         addContainerProperty("Date Created",String.class,null);
 
         try {
@@ -58,7 +58,7 @@ public class PublishTable extends Table{
         setImmediate(true);
     }
     public void loadTable(PublishedContent content) {
-        DateFormat formatter = new SimpleDateFormat("dd - MMMMMMM - yyyy");
+        DateFormat formatter = new SimpleDateFormat("dd MMMMMMM yyyy");
            String category = categoryService.find(content.getCategory()).getName();
               try{
                   addItem(new Object[]{

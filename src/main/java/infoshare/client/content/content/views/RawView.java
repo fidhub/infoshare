@@ -4,27 +4,18 @@ import com.vaadin.data.Property;
 import com.vaadin.data.fieldgroup.FieldGroup;
 import com.vaadin.data.util.BeanItem;
 import com.vaadin.event.FieldEvents;
-import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.*;
-import com.vaadin.ui.themes.ValoTheme;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.content.ContentMenu;
-import infoshare.client.content.content.forms.EditForm;
 import infoshare.client.content.content.forms.RawForm;
 import infoshare.client.content.content.models.ContentModel;
 import infoshare.client.content.content.tables.RawTable;
 import infoshare.domain.*;
 import infoshare.filterSearch.RawContentFilter;
-import infoshare.services.ContentType.ContentTypeService;
-import infoshare.services.ContentType.Impl.ContentTypeServiceImpl;
 import infoshare.services.EditedContent.EditedContentService;
 import infoshare.services.EditedContent.Impl.EditedContentServiceImpl;
 import infoshare.services.RawContent.Impl.RawContentServiceImpl;
 import infoshare.services.RawContent.RawContentService;
-import infoshare.services.category.CategoryService;
-import infoshare.services.category.Impl.CategoryServiceImpl;
-import infoshare.services.source.SourceService;
-import infoshare.services.source.sourceServiceImpl.SourceServiceImpl;
 
 import java.util.stream.Collectors;
 
@@ -35,15 +26,11 @@ public class RawView extends VerticalLayout implements Button.ClickListener,Prop
 
     private RawContentService rawContentService = new RawContentServiceImpl();
     private EditedContentService editedContentService = new EditedContentServiceImpl();
-    private ContentTypeService contentTypeService = new ContentTypeServiceImpl();
-    private CategoryService categoryService = new CategoryServiceImpl();
-    private SourceService sourceService = new SourceServiceImpl();
 
     private final MainLayout main;
     private final RawTable table;
     private final RawForm form;
     private Window popUp ;
-    private Button editBtn = new Button("EDIT");
     private RawContentFilter rawContentFilter = new RawContentFilter();
     public String tableId;
 
@@ -55,20 +42,9 @@ public class RawView extends VerticalLayout implements Button.ClickListener,Prop
         this.popUp = modelWindow();
         setSizeFull();
         setSpacing(true);
-        addComponent(getLayout());
+        addComponent(rawContentFilter.field);
         addComponent(table);
         addListeners();
-    }
-    private HorizontalLayout getLayout(){
-
-        final HorizontalLayout layout = new HorizontalLayout();
-        layout.setSpacing(false);
-        editBtn.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
-        editBtn.addStyleName(ValoTheme.BUTTON_SMALL);
-        editBtn.setIcon(FontAwesome.EDIT);
-        layout.addComponent(rawContentFilter.field);
-        layout.addComponent(editBtn);
-        return layout;
     }
     public void refreshContacts(String stringFilter ) {
         try {
@@ -88,17 +64,9 @@ public class RawView extends VerticalLayout implements Button.ClickListener,Prop
     }
     @Override
     public void buttonClick(Button.ClickEvent clickEvent) {
-
         final Button source = clickEvent.getButton();
-        if(source==editBtn){
-            try {
-                tableId = table.getValue().toString();
-                EditButton();
-            }catch (Exception e){
-            }
-        }else if (source ==form.putEdited){
+        if (source ==form.putEdited){
             saveEditedForm(form.binder);
-
         }else if (source ==form.backBtn){
             popUp.setModal(false);
             UI.getCurrent().removeWindow(popUp);
@@ -109,9 +77,6 @@ public class RawView extends VerticalLayout implements Button.ClickListener,Prop
     @Override
     public void valueChange(Property.ValueChangeEvent event) {
         final Property property = event.getProperty();
-        if (property == table) {
-            editBtn.setVisible(true);
-        }
     }
     private Window modelWindow(){
         final Window popup = new Window();
@@ -126,6 +91,7 @@ public class RawView extends VerticalLayout implements Button.ClickListener,Prop
     }
     public void EditButton(){
         try {
+            tableId = table.getValue().toString();
             final RawContent rawContent = rawContentService.find(tableId);
             final ContentModel bean = getModel(rawContent);
             form.binder.setItemDataSource(new BeanItem<>(bean));
@@ -211,17 +177,19 @@ public class RawView extends VerticalLayout implements Button.ClickListener,Prop
         return model;
     }
     public void addListeners(){
-
-        form.putEdited.addClickListener((Button.ClickListener)this);
-        form.backBtn.addClickListener((Button.ClickListener) this);
-        table.addValueChangeListener((Property.ValueChangeListener) this);
-        editBtn.addClickListener((Button.ClickListener) this);
-        rawContentFilter.field.addTextChangeListener(new FieldEvents.TextChangeListener() {
-            @Override
-            public void textChange(FieldEvents.TextChangeEvent textChangeEvent) {
-                refreshContacts(textChangeEvent.getText());
+        form.putEdited.addClickListener(this);
+        form.backBtn.addClickListener(this);
+        table.addValueChangeListener(this);
+        table.addItemClickListener(item -> {
+            boolean flag = true;
+            if (item.isDoubleClick()) {
+                if(flag) {
+                    EditButton();
+                    flag=false;
+                }
             }
         });
+        rawContentFilter.field.addTextChangeListener((FieldEvents.TextChangeListener) textChangeEvent -> refreshContacts(textChangeEvent.getText()));
 
 
     }

@@ -29,7 +29,6 @@ public class EditTable extends Table{
 
     @Autowired
     private EditedContentService editedContentService = new EditedContentServiceImpl();
-    private CategoryService categoryService = new CategoryServiceImpl();
     private final MainLayout main;
 
     public EditTable(MainLayout mainApp){
@@ -64,8 +63,7 @@ public class EditTable extends Table{
     }
 
     public void loadTable(EditedContent editedContent) {
-        DateFormat formatter = new SimpleDateFormat("dd-MMMMMMM-yyyy");
-    //    String category = categoryService.find(editedContent.getCategory()).getName();
+        DateFormat formatter = new SimpleDateFormat("dd MMMMMMM yyyy");
         try {
             addItem(new Object[]{
                     editedContent.getTitle(),

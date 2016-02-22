@@ -28,7 +28,7 @@ public class RawContentFilter {
         getField();
     }
     public synchronized List<RawContent> findAll(String stringFilter) {
-        DateFormat formatter = new SimpleDateFormat("dd - MMMMMMM - yyyy");
+        DateFormat formatter = new SimpleDateFormat("dd MMMMMMM yyyy");
         ArrayList arrayList = new ArrayList();
         String cat;
         for (RawContent rawContent : rawContentService.findAll().stream()

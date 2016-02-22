@@ -130,13 +130,13 @@ public class ContentTypeView extends VerticalLayout implements Button.ClickListe
     }
     private void addListeners() {
         //Register Button Listeners
-        form.save.addClickListener((Button.ClickListener) this);
-        form.edit.addClickListener((Button.ClickListener) this);
-        form.cancel.addClickListener((Button.ClickListener) this);
-        form.update.addClickListener((Button.ClickListener) this);
-        form.delete.addClickListener((Button.ClickListener) this);
+        form.save.addClickListener(this);
+        form.edit.addClickListener(this);
+        form.cancel.addClickListener(this);
+        form.update.addClickListener(this);
+        form.delete.addClickListener(this);
         //Register Table Listerners
-        table.addValueChangeListener((Property.ValueChangeListener) this);
+        table.addValueChangeListener(this);
     }
     private ContentTypeModel getModel(ContentType contentType) {
         final ContentTypeModel model = new ContentTypeModel();

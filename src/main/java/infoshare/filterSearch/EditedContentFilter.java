@@ -26,8 +26,8 @@ public class EditedContentFilter {
     public EditedContentFilter() {
         getField();
     }
-    public synchronized List<EditedContent> findAll(String stringFilter) {
-        DateFormat formatter = new SimpleDateFormat("dd-MMMMMMM-yyyy");
+    public synchronized List<EditedContent> findAll(String stringFilter,String state) {
+        DateFormat formatter = new SimpleDateFormat("dd MMMMMMM yyyy");
         ArrayList arrayList = new ArrayList();
         String cat;
         for (EditedContent EditedContent : editedContentService.findAll().stream()
@@ -38,7 +38,6 @@ public class EditedContentFilter {
             if(!EditedContent.getCategory().toLowerCase().equalsIgnoreCase("uncategorized")) {
                 cat = categoryService.find(EditedContent.getCategory().toString().trim()).getName();
             }else cat = EditedContent.getCategory().toString().toLowerCase();
-
             try {
                 boolean passesFilter = (stringFilter == null || stringFilter.isEmpty())
                         || EditedContent.getTitle().toString().toLowerCase()
@@ -50,7 +49,6 @@ public class EditedContentFilter {
                         .contains(stringFilter.toLowerCase())
                         ||formatter.format(EditedContent.getDateCreated()).toString().toLowerCase()
                         .contains(stringFilter.toLowerCase());
-
                 if (passesFilter) {
                     arrayList.add(EditedContent);
                 }

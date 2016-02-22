@@ -83,7 +83,6 @@ public class Header extends VerticalLayout implements Button.ClickListener {
           userButton(clickEvent);
         }
     }
-
     private void notificationButton(ClickEvent clickEvent ){
         if (userProfile != null && userProfile.getUI() !=null) {
             userProfile.close();
@@ -104,7 +103,6 @@ public class Header extends VerticalLayout implements Button.ClickListener {
             });
         }
     }
-
     private void userButton(ClickEvent clickEvent){
         if (notifications != null && notifications.getUI() != null) {
             notifications.close();
@@ -124,7 +122,6 @@ public class Header extends VerticalLayout implements Button.ClickListener {
             });
         }
     }
-
     public  void buildNotifications( ClickEvent event) {
         notifications = new Window();
         final VerticalLayout layout = new VerticalLayout();
@@ -158,9 +155,8 @@ public class Header extends VerticalLayout implements Button.ClickListener {
         refreshNotification();
 
         notificationTable.addItemClickListener(event1 -> {
-            boolean flag=true;
-            if (event1.isDoubleClick())
-            {
+            boolean flag =true;
+            if (event1.isDoubleClick()) {
                if(flag) {
                    notifications.close();
                    rawView.tableId = notificationTable.getValue().toString();
@@ -363,7 +359,7 @@ public class Header extends VerticalLayout implements Button.ClickListener {
         notify.addStyleName("notifications");
         notify.addStyleName("unread");
         notify.setIcon( new FileResource(
-                new File("src/main/webapp/VAADIN/themes/dashboard/img/notifications.png")));
+                new File("src/main/webapp/VAADIN/themes/dashboard/notifications.png")));
         notify.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
         notify.addStyleName(ValoTheme.BUTTON_SMALL);
 

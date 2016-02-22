@@ -7,13 +7,13 @@ import java.util.List;
  */
 public interface Service<E, ID> {
 
-    public E find(ID id);
+    E find(ID id);
 
-    public E save(E entity);
+    E save(E entity);
 
-    public E merge(E entity);
+    E merge(E entity);
 
-    public void remove(E entity);
+    void remove(E entity);
 
-    public List<E> findAll();
+    List<E> findAll();
 }

@@ -3,9 +3,7 @@ package infoshare.client.content.content.views;
 import com.vaadin.data.Property;
 import com.vaadin.data.util.BeanItem;
 import com.vaadin.event.FieldEvents;
-import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.*;
-import com.vaadin.ui.themes.ValoTheme;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.content.ContentMenu;
 import infoshare.client.content.content.forms.PublishForm;
@@ -31,7 +29,6 @@ public class PublishView extends VerticalLayout implements Button.ClickListener,
     private final PublishTable table;
     private final PublishForm form;
     private final Window popUp ;
-    private Button viewContent = new Button("View Content");
     private PublishedContentFilter publishedContentFilter = new PublishedContentFilter();
     public PublishView( MainLayout mainApp) {
 
@@ -41,12 +38,12 @@ public class PublishView extends VerticalLayout implements Button.ClickListener,
         this.popUp = modelWindow();
         setSpacing(true);
         setSizeFull();
-        addComponent(getLayout());
+        addComponent(publishedContentFilter.field);
         addComponent(table);
         addListeners();
     }
 
-    private HorizontalLayout getLayout(){
+   /* private HorizontalLayout getLayout(){
         final HorizontalLayout layout = new HorizontalLayout();
         layout.setSpacing(false);
         viewContent.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
@@ -56,7 +53,7 @@ public class PublishView extends VerticalLayout implements Button.ClickListener,
         layout.addComponent(viewContent);
 
         return layout;
-    }
+    }*/
 
     private void refreshContacts(String stringFilter ) {
         try {
@@ -76,16 +73,12 @@ public class PublishView extends VerticalLayout implements Button.ClickListener,
     @Override
     public void valueChange(Property.ValueChangeEvent valueChangeEvent) {
         final Property property = valueChangeEvent.getProperty();
-        if (property == table) {
-            viewContent.setVisible(true);
-        }
+
     }
     @Override
     public void buttonClick(Button.ClickEvent clickEvent) {
         final Button source = clickEvent.getButton();
-        if(source==viewContent){
-            ViewContentButton();
-        }else if (source ==form.popUpCloseBtn){
+        if (source ==form.popUpCloseBtn){
             popUp.setModal(false);
             UI.getCurrent().removeWindow(popUp);
             table.setValue(null);
@@ -100,7 +93,6 @@ public class PublishView extends VerticalLayout implements Button.ClickListener,
         popup.setContent(form);
         return popup;
     }
-
     private void ViewContentButton(){
         try {
             final PublishedContent publishedContent = publishedContentService.find(table.getValue().toString());
@@ -113,7 +105,6 @@ public class PublishView extends VerticalLayout implements Button.ClickListener,
                     Notification.Type.HUMANIZED_MESSAGE);
         }
     }
-
     private ContentModel getModel(PublishedContent val) {
         final ContentModel model = new ContentModel();
         final PublishedContent publishedContent = publishedContentService.find(val.getId());
@@ -125,21 +116,22 @@ public class PublishView extends VerticalLayout implements Button.ClickListener,
         model.setSource(publishedContent.getSource());
         return model;
     }
-
     private void getHome() {
         main.content.setSecondComponent(new ContentMenu(main, "PUBLISHER"));
     }
-
     public void addListeners(){
-        form.popUpCloseBtn.addClickListener((Button.ClickListener) this);
-        viewContent.addClickListener((Button.ClickListener) this);
-        table.addValueChangeListener((Property.ValueChangeListener) this);
-        publishedContentFilter.field.addTextChangeListener(new FieldEvents.TextChangeListener() {
-            @Override
-            public void textChange(FieldEvents.TextChangeEvent textChangeEvent) {
-                refreshContacts(textChangeEvent.getText());
+        form.popUpCloseBtn.addClickListener(this);
+        table.addValueChangeListener(this);
+        table.addItemClickListener(item ->{
+            boolean flag = true;
+            if(item.isDoubleClick()){
+                if(flag) {
+                    ViewContentButton();
+                    flag = false;
+                }
             }
         });
+        publishedContentFilter.field.addTextChangeListener((FieldEvents.TextChangeListener) textChangeEvent -> refreshContacts(textChangeEvent.getText()));
     }
 
 }
