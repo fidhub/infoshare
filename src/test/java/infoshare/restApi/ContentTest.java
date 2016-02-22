@@ -4,13 +4,17 @@ import infoshare.RestApi.RestApiConnectorClass;
 import infoshare.RestApi.UrlPath;
 import infoshare.client.content.content.models.ContentModel;
 import infoshare.domain.Content;
+import infoshare.domain.EditedContent;
 import infoshare.services.Content.ContentService;
 import infoshare.services.Content.Impl.ContentServiceImp;
+import infoshare.services.EditedContent.EditedContentService;
+import infoshare.services.EditedContent.Impl.EditedContentServiceImpl;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by user9 on 2015/07/24.
@@ -65,14 +69,15 @@ public class ContentTest {
 
     @Test
     public void testUpdateAll() throws Exception {
-        ContentService contentService = new ContentServiceImp();
-        for(Content content:contentService.findAll()){
-            Content content1 = new Content.Builder(content.getTitle()).copy(content)
-                    .source("mobile")
-                    .category("uncategorized")
-                    .creator("CreatorIdGoesHere")
-                    .contentType("raw").build();
-            RestApiConnectorClass.update(UrlPath.ContentLinks.PUT, content1);
+        EditedContentService contentService = new EditedContentServiceImpl();
+        for(EditedContent content:contentService.findAll().stream()
+                .filter(cont -> cont.getState().equalsIgnoreCase("active"))
+                .collect(Collectors.toList()).stream()
+                .filter(cont -> cont.getStatus().equalsIgnoreCase("Edited"))
+                .collect(Collectors.toList())){
+            EditedContent content1 = new EditedContent.Builder(content.getTitle()).copy(content)
+                    .category("uncategorized").build();
+            RestApiConnectorClass.update(UrlPath.EditedLinks.PUT, content1);
         }
     }
 }

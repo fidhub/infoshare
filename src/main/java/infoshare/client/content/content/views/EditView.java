@@ -6,6 +6,7 @@ import com.vaadin.data.util.BeanItem;
 import com.vaadin.event.FieldEvents;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.*;
+import com.vaadin.ui.declarative.FieldBinder;
 import com.vaadin.ui.themes.ValoTheme;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.content.ContentMenu;
@@ -44,16 +45,17 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
     private final EditTable table;
     private final EditForm form;
     private Window popUp ;
-    private Button editBtn = new Button("UPDATE");
-    private EditedContentFilter editedContentFilter = new EditedContentFilter();
+
+    private Button deleteCont ;
+    private Button viewTrash;
+    private EditedContentFilter editedContentFilter= new EditedContentFilter();
+
     public  EditView( MainLayout mainApp) {
 
        this.main = mainApp;
        this.table = new EditTable(main);
        this.form = new EditForm();
        this.popUp = modelWindow();
-       editBtn.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
-       editBtn.setIcon(FontAwesome.EDIT);
        setSizeFull();
        setSpacing(true);
        addComponent(getLayout());
@@ -63,24 +65,31 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
     private HorizontalLayout getLayout(){
         final HorizontalLayout layout = new HorizontalLayout();
         layout.setSpacing(false);
-        editBtn.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
-        editBtn.addStyleName(ValoTheme.BUTTON_SMALL);
-        editBtn.setIcon(FontAwesome.EDIT);
+        deleteCont = new Button("Delete");
+        viewTrash = new Button("view Trash");
+        deleteCont.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
+        deleteCont.addStyleName(ValoTheme.BUTTON_SMALL);
+        deleteCont.setIcon(FontAwesome.TRASH_O);
+        viewTrash.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
+        viewTrash.addStyleName(ValoTheme.BUTTON_SMALL);
+        viewTrash.setIcon(FontAwesome.EDIT);
         layout.addComponent(editedContentFilter.field);
-        layout.addComponent(editBtn);
+        layout.addComponent(deleteCont);
+        layout.addComponent(viewTrash);
         return layout;
     }
     private void refreshContacts(String stringFilter ) {
         try {
             table.removeAllItems();
             editedContentFilter.findAll(stringFilter).stream()
-                    .filter(content -> content != null)
+                    .filter(cont -> cont.getState().equalsIgnoreCase("active"))
                     .collect(Collectors.toList())
                     .stream()
-                    .filter(cont -> !cont.getStatus().equalsIgnoreCase("Edited"))
+                    .filter(cont -> cont.getStatus().equalsIgnoreCase("Edited"))
                     .collect(Collectors.toList())
                     .forEach(table::loadTable);
         }catch (Exception e){
+            System.out.println(e.getMessage());
         }
     }
     private Window modelWindow(){
@@ -95,22 +104,27 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
    @Override
     public void buttonClick(Button.ClickEvent clickEvent) {
        final Button source = clickEvent.getButton();
-       if(source==editBtn){
-           EditButton();
-       }else if (source ==form.popUpUpdateBtn){
+       if(source==deleteCont){
+         saveTrash(form.binder);
+          }else if (source ==form.popUpUpdateBtn){
            saveEditedForm(form.binder);
        }else if (source ==form.popUpCancelBtn){
            popUp.setModal(false);
            UI.getCurrent().removeWindow(popUp);
            table.setValue(null);
            getHome();
+       }else if(source== viewTrash) {
+           table.removeAllItems();
+           editedContentService.findAll()
+                   .stream()
+                   .filter(cont -> cont.getState().equalsIgnoreCase("deleted"))
+                   .collect(Collectors.toList()).forEach(table::loadTable);
        }
     }
     @Override
     public void valueChange(Property.ValueChangeEvent valueChangeEvent) {
         final Property property = valueChangeEvent.getProperty();
         if (property == table) {
-             editBtn.setVisible(true);
         }
     }
     private void loadComboBoxs() {
@@ -163,6 +177,19 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
             getHome();
         }
     }
+    public void saveTrash(FieldGroup binder){
+        try {
+            binder.commit();
+            try {
+                editedContentService.merge(getMoveToCrash(binder));  getHome();
+            }catch (Exception e){
+                Notification.show("Please select the Category",Notification.Type.HUMANIZED_MESSAGE);
+            }
+
+        } catch (FieldGroup.CommitException e) {
+            e.printStackTrace();
+        }
+    }
     private PublishedContent getNewEntity(FieldGroup binder) {
 
         final ContentModel bean = ((BeanItem<ContentModel>) binder.getItemDataSource()).getBean();
@@ -197,6 +224,25 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
                 .status("Published")
                 .id(table.getValue().toString())
                 .build();
+
+        return editedContent;
+    }
+    private EditedContent getMoveToCrash(FieldGroup binder) {
+
+        final ContentModel bean = ((BeanItem<ContentModel>) binder.getItemDataSource()).getBean();
+        bean.setState("Deleted");
+        final EditedContent editedContent = new EditedContent
+                .Builder(bean.getTitle())
+                .category(bean.getCategory())
+                .content(bean.getContent())
+                .contentType(bean.getContentType())
+                .creator(bean.getCreator())
+                .dateCreated(bean.getDateCreated())
+                .source(bean.getSource())
+                .state(bean.getState())
+                .status(bean.getStatus())
+                .id(table.getValue().toString())
+                .build();
         return editedContent;
     }
     private ContentModel getModel(String val) {
@@ -215,14 +261,20 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
     public void addListeners(){
         form.popUpUpdateBtn.addClickListener((Button.ClickListener)this);
         form.popUpCancelBtn.addClickListener((Button.ClickListener) this);
-        editBtn.addClickListener((Button.ClickListener) this);
+        deleteCont.addClickListener((Button.ClickListener) this);
+        viewTrash.addClickListener((Button.ClickListener) this);
         table.addValueChangeListener((Property.ValueChangeListener)this);
-        editedContentFilter.field.addTextChangeListener(new FieldEvents.TextChangeListener() {
-            @Override
-            public void textChange(FieldEvents.TextChangeEvent textChangeEvent) {
-                refreshContacts(textChangeEvent.getText());
+        table.addItemClickListener(event1 -> {
+            boolean flag=true;
+            if (event1.isDoubleClick())
+            {
+                if(flag) {
+                   EditButton();
+                   flag=false;
+                }
             }
         });
+        editedContentFilter.field.addTextChangeListener(textChangeEvent -> refreshContacts(textChangeEvent.getText()));
     }
 
 }

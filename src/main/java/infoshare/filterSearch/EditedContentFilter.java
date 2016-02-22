@@ -14,6 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 /**
  * Created by user9 on 2016/02/12.
@@ -26,13 +27,17 @@ public class EditedContentFilter {
         getField();
     }
     public synchronized List<EditedContent> findAll(String stringFilter) {
-        DateFormat formatter = new SimpleDateFormat("dd - MMMMMMM - yyyy");
+        DateFormat formatter = new SimpleDateFormat("dd-MMMMMMM-yyyy");
         ArrayList arrayList = new ArrayList();
         String cat;
-        for (EditedContent EditedContent : editedContentService.findAll()) {
-            if(!EditedContent.getCategory().equalsIgnoreCase("uncategorized"))
-                cat = categoryService.find(EditedContent.getCategory().toString()).getName().toLowerCase();
-            else cat = EditedContent.getCategory().toString().toLowerCase();
+        for (EditedContent EditedContent : editedContentService.findAll().stream()
+                .filter(cont -> cont.getState().equalsIgnoreCase("active"))
+                .collect(Collectors.toList()).stream()
+                .filter(cont -> cont.getStatus().equalsIgnoreCase("Edited"))
+                .collect(Collectors.toList())) {
+            if(!EditedContent.getCategory().toLowerCase().equalsIgnoreCase("uncategorized")) {
+                cat = categoryService.find(EditedContent.getCategory().toString().trim()).getName();
+            }else cat = EditedContent.getCategory().toString().toLowerCase();
 
             try {
                 boolean passesFilter = (stringFilter == null || stringFilter.isEmpty())
@@ -50,7 +55,7 @@ public class EditedContentFilter {
                     arrayList.add(EditedContent);
                 }
             } catch (Exception ex) {
-                Logger.getLogger(ex.getLocalizedMessage());
+                System.out.println(ex.getMessage());
             }
         }
 
