@@ -26,21 +26,18 @@ public class EditedContentFilter {
     public EditedContentFilter() {
         getField();
     }
-
     public synchronized List<EditedContent> findAll(String stringFilter,String state) {
-        DateFormat formatter = new SimpleDateFormat("dd - MMMMMMM - yyyy");
+        DateFormat formatter = new SimpleDateFormat("dd MMMMMMM yyyy");
         ArrayList arrayList = new ArrayList();
         String cat;
-        for (EditedContent EditedContent : editedContentService.findAll()
-                .stream().filter(cont ->cont.getState().equalsIgnoreCase(state))
-                .collect(Collectors.toList())
-                .stream().filter(cont ->cont.getStatus().equalsIgnoreCase("edited"))
-                .collect(Collectors.toList())
-                ) {
-            if(!EditedContent.getCategory().equalsIgnoreCase("uncategorized"))
-                cat = categoryService.find(EditedContent.getCategory().toString()).getName().toLowerCase();
-            else cat = EditedContent.getCategory().toString().toLowerCase();
-
+        for (EditedContent EditedContent : editedContentService.findAll().stream()
+                .filter(cont -> cont.getState().equalsIgnoreCase("active"))
+                .collect(Collectors.toList()).stream()
+                .filter(cont -> cont.getStatus().equalsIgnoreCase("Edited"))
+                .collect(Collectors.toList())) {
+            if(!EditedContent.getCategory().toLowerCase().equalsIgnoreCase("uncategorized")) {
+                cat = categoryService.find(EditedContent.getCategory().toString().trim()).getName();
+            }else cat = EditedContent.getCategory().toString().toLowerCase();
             try {
                 boolean passesFilter = (stringFilter == null || stringFilter.isEmpty())
                         || EditedContent.getTitle().toString().toLowerCase()
@@ -52,19 +49,18 @@ public class EditedContentFilter {
                         .contains(stringFilter.toLowerCase())
                         ||formatter.format(EditedContent.getDateCreated()).toString().toLowerCase()
                         .contains(stringFilter.toLowerCase());
-
                 if (passesFilter) {
                     arrayList.add(EditedContent);
                 }
             } catch (Exception ex) {
-                Logger.getLogger(ex.getLocalizedMessage());
+                System.out.println(ex.getMessage());
             }
         }
 
         return arrayList;
     }
     private TextField getField(){
-        field.setInputPrompt("Filter Edited Content ...");
+        field.setInputPrompt("Filter EditedContent ...");
         field.setWidth("260px");
         field.setIcon(FontAwesome.FILTER);
         field.addStyleName(ValoTheme.TEXTFIELD_INLINE_ICON);

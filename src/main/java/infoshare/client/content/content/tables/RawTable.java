@@ -36,7 +36,6 @@ public class RawTable extends Table {
         addContainerProperty("Title",String.class,null);
         addContainerProperty("Category",String.class,null);
         addContainerProperty("Creator",String.class,null);
-    //    addContainerProperty("Source",String.class,null);
         addContainerProperty("Date Created",String.class,null);
 
         try {
@@ -59,7 +58,7 @@ public class RawTable extends Table {
     }
 
     public void loadTable(RawContent rawContent) {
-        DateFormat formatter = new SimpleDateFormat("dd-MMMMMMM - yyyy");
+        DateFormat formatter = new SimpleDateFormat("dd MMMMMMM yyyy");
         try {
             addItem(new Object[]{
                     rawContent.getTitle(),

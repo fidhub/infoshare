@@ -24,22 +24,20 @@ public class RawContentFilter {
     private RawContentService rawContentService = new RawContentServiceImpl();
     private CategoryService categoryService = new CategoryServiceImpl();
     public TextField field = new TextField();
-
     public RawContentFilter() {
         getField();
     }
     public synchronized List<RawContent> findAll(String stringFilter) {
-        DateFormat formatter = new SimpleDateFormat("dd - MMMMMMM - yyyy");
+        DateFormat formatter = new SimpleDateFormat("dd MMMMMMM yyyy");
         ArrayList arrayList = new ArrayList();
         String cat;
-        for (RawContent rawContent : rawContentService.findAll()
-                .stream().filter(cont ->cont.getState().equalsIgnoreCase("active"))
-                .collect(Collectors.toList())
-                .stream().filter(cont ->cont.getStatus().equalsIgnoreCase("raw"))
-                .collect(Collectors.toList())
-                ) {
-            if(!rawContent.getCategory().equalsIgnoreCase("uncategorized"))
-                cat = categoryService.find(rawContent.getCategory().toString()).getName().toLowerCase();
+        for (RawContent rawContent : rawContentService.findAll().stream()
+                .filter(cont -> cont.getState().equalsIgnoreCase("active"))
+                .collect(Collectors.toList()).stream()
+                .filter(cont -> cont.getStatus().equalsIgnoreCase("raw"))
+                .collect(Collectors.toList())) {
+            if(!rawContent.getCategory().toLowerCase().equalsIgnoreCase("uncategorized"))
+                cat = categoryService.find(rawContent.getCategory().toString().trim()).getName();
                 else cat = rawContent.getCategory().toString().toLowerCase();
 
             try {
@@ -65,7 +63,7 @@ public class RawContentFilter {
         return arrayList;
     }
     private TextField getField(){
-        field.setInputPrompt("Filter Content ...");
+        field.setInputPrompt("Filter rawContent ...");
         field.setWidth("260px");
         field.setIcon(FontAwesome.FILTER);
         field.addStyleName(ValoTheme.TEXTFIELD_INLINE_ICON);

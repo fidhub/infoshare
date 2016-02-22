@@ -5,7 +5,7 @@ package infoshare.RestApi;
  */
 public class UrlPath {
 
-    public static final  String URL ="https://kujali.cput.ac.za";
+    public static final  String URL ="http://kujali.cput.ac.za";
 
     public static class  AddressLinks {
         public static final String POST = URL + "/api/address/create"; // @controllers.AddressController.createAddress

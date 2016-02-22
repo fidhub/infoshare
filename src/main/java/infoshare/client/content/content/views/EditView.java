@@ -25,8 +25,8 @@ import infoshare.services.category.Impl.CategoryServiceImpl;
 import infoshare.services.source.SourceService;
 import infoshare.services.source.sourceServiceImpl.SourceServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.vaadin.dialogs.ConfirmDialog;
 
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 /**
@@ -58,6 +58,7 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
        this.form = new EditForm();
        this.popUp = modelWindow();
        viewActive.setVisible(false);
+       deleteCont.setVisible(true);
        state ="active";
        setSizeFull();
        setSpacing(true);
@@ -82,7 +83,7 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
 
         viewActive.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
         viewActive.addStyleName(ValoTheme.BUTTON_SMALL);
-        viewActive.setCaption("Active");
+        viewActive.setCaption("Show Active");
         viewActive.setDescription("Show Active content");
         viewActive.setIcon(FontAwesome.EDIT);
 
@@ -126,17 +127,40 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
            popUp.setModal(false);
            UI.getCurrent().removeWindow(popUp);
            table.setValue(null);
+           if(state.equalsIgnoreCase("Active")){
            getHome();
+           }else {
+               getTrash();
+           }
        }else if(source==viewTrash){
            viewTrash.setVisible(false);
            state="Deleted";
+           deleteCont.setVisible(false);
            viewActive.setVisible(true);
            getTrash();
        }else if(source==viewActive){
            viewActive.setVisible(false);
            state="Active";
-           viewTrash.setVisible(true);
+          // viewTrash.setVisible(true);
            getHome();
+       }else if (source ==deleteCont){
+           try{
+               // The quickest way to confirm
+               ConfirmDialog.show(this.getUI(),"Are you sure you Wanna delete ?",
+                       (ConfirmDialog.Listener) dialog -> {
+                           if (dialog.isConfirmed()) {
+                               editedContentService.merge(getTrashEntity(table.getValue().toString()));
+                               getHome();
+                           } else {
+                              getHome();
+                           }
+                       });
+
+
+
+           }catch (Exception e){
+              Notification.show(e.getMessage(), Notification.Type.HUMANIZED_MESSAGE);
+           }
        }
     }
     @Override
@@ -176,6 +200,7 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
     }
     private void getTrash(){
         try{
+            table.removeAllItems();
             editedContentService.findAll().stream()
                     .filter(cont -> cont.getState().equalsIgnoreCase("Deleted"))
                     .collect(Collectors.toList())
@@ -234,6 +259,14 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
                 .build();
         return editedContent;
     }
+    private EditedContent getTrashEntity(String val) {
+       EditedContent content = editedContentService.find(val);
+        final EditedContent editedContent = new EditedContent
+                .Builder(content.getTitle()).copy(content)
+                .state("Deleted")
+                .build();
+        return editedContent;
+    }
     private ContentModel getModel(String val) {
         final ContentModel model = new ContentModel();
         final EditedContent editedContent = editedContentService.find(val.toString());
@@ -263,12 +296,7 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
                 }
             }
         });
-        editedContentFilter.field.addTextChangeListener(new FieldEvents.TextChangeListener() {
-            @Override
-            public void textChange(FieldEvents.TextChangeEvent textChangeEvent) {
-                refreshContacts(textChangeEvent.getText());
-            }
-        });
+        editedContentFilter.field.addTextChangeListener((FieldEvents.TextChangeListener) textChangeEvent -> refreshContacts(textChangeEvent.getText()));
     }
 
 }

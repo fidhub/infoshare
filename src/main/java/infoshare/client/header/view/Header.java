@@ -359,7 +359,7 @@ public class Header extends VerticalLayout implements Button.ClickListener {
         notify.addStyleName("notifications");
         notify.addStyleName("unread");
         notify.setIcon( new FileResource(
-                new File("src/main/webapp/VAADIN/themes/dashboard/img/notifications.png")));
+                new File("src/main/webapp/VAADIN/themes/dashboard/notifications.png")));
         notify.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
         notify.addStyleName(ValoTheme.BUTTON_SMALL);
 
