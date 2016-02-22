@@ -100,10 +100,10 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
                     .filter(content -> content != null)
                     .collect(Collectors.toList())
                     .stream()
-                    .filter(cont -> !cont.getStatus().equalsIgnoreCase("Edited"))
+                    .filter(cont -> cont.getState().equalsIgnoreCase(state))
                     .collect(Collectors.toList())
                     .stream()
-                    .filter(cont -> !cont.getStatus().equalsIgnoreCase("active"))
+                    .filter(cont -> cont.getStatus().equalsIgnoreCase("Edited"))
                     .collect(Collectors.toList())
                     .forEach(table::loadTable);
         }catch (Exception e){
@@ -139,27 +139,21 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
            viewActive.setVisible(true);
            getTrash();
        }else if(source==viewActive){
+           getHome();
            viewActive.setVisible(false);
            state="Active";
-          // viewTrash.setVisible(true);
-           getHome();
        }else if (source ==deleteCont){
-           try{
-               // The quickest way to confirm
+           if(table.getValue().toString()!=null) {
                ConfirmDialog.show(this.getUI(),"Are you sure you Wanna delete ?",
                        (ConfirmDialog.Listener) dialog -> {
                            if (dialog.isConfirmed()) {
                                editedContentService.merge(getTrashEntity(table.getValue().toString()));
                                getHome();
-                           } else {
-                              getHome();
-                           }
+                           } else getHome();
+
                        });
-
-
-
-           }catch (Exception e){
-              Notification.show(e.getMessage(), Notification.Type.HUMANIZED_MESSAGE);
+           }else{
+              Notification.show("Select content you wanna delete", Notification.Type.HUMANIZED_MESSAGE);
            }
        }
     }

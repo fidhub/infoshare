@@ -129,7 +129,7 @@ public class RawView extends VerticalLayout implements Button.ClickListener,Prop
                     .contentType(bean.getContentType())
                     .creator(bean.getCreator())
                     .dateCreated(bean.getDateCreated())
-                    .source(table.getValue().toString())
+                    .source(bean.getSource())
                     .state(bean.getState())
                     .status("Edited")
                     .build();
@@ -151,7 +151,7 @@ public class RawView extends VerticalLayout implements Button.ClickListener,Prop
                     .contentType(bean.getContentType())
                     .creator(bean.getCreator())
                     .dateCreated(bean.getDateCreated())
-                    .source(table.getValue().toString())
+                    .source(bean.getSource())
                     .state(bean.getState())
                     .status("Edited")
                     .id(table.getValue().toString())

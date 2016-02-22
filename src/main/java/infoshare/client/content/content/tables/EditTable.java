@@ -29,6 +29,7 @@ public class EditTable extends Table{
 
     @Autowired
     private EditedContentService editedContentService = new EditedContentServiceImpl();
+    private CategoryService categoryService = new CategoryServiceImpl();
     private final MainLayout main;
 
     public EditTable(MainLayout mainApp){
@@ -49,10 +50,10 @@ public class EditTable extends Table{
                     .filter(content -> content != null)
                     .collect(Collectors.toList())
                     .stream()
-                    .filter(cont -> cont.getStatus().equalsIgnoreCase("Edited"))
+                    .filter(cont -> cont.getState().equalsIgnoreCase("Active"))
                     .collect(Collectors.toList())
                     .stream()
-                    .filter(cont -> cont.getState().equalsIgnoreCase("active"))
+                    .filter(cont -> cont.getStatus().equalsIgnoreCase("Edited"))
                     .collect(Collectors.toList())
                     .forEach(this::loadTable);
         }catch (Exception e){
@@ -64,10 +65,14 @@ public class EditTable extends Table{
 
     public void loadTable(EditedContent editedContent) {
         DateFormat formatter = new SimpleDateFormat("dd MMMMMMM yyyy");
+        String cat;
+        if(!editedContent.getCategory().toLowerCase().equalsIgnoreCase("uncategorized")) {
+            cat = categoryService.find(editedContent.getCategory().toString().trim()).getName();
+        }else cat = editedContent.getCategory().toString().toLowerCase();
         try {
             addItem(new Object[]{
                     editedContent.getTitle(),
-                    editedContent.getCategory(),
+                    cat,
                     editedContent.getCreator(),
                     formatter.format(editedContent.getDateCreated())
             }, editedContent.getId());

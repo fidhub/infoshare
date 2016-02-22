@@ -1,6 +1,7 @@
 package infoshare.client.content.content.views;
 
 import com.vaadin.data.Property;
+import com.vaadin.data.fieldgroup.FieldGroup;
 import com.vaadin.data.util.BeanItem;
 import com.vaadin.event.FieldEvents;
 import com.vaadin.ui.*;
@@ -9,10 +10,15 @@ import infoshare.client.content.content.ContentMenu;
 import infoshare.client.content.content.forms.PublishForm;
 import infoshare.client.content.content.models.ContentModel;
 import infoshare.client.content.content.tables.PublishTable;
+import infoshare.domain.EditedContent;
 import infoshare.domain.PublishedContent;
 import infoshare.filterSearch.PublishedContentFilter;
+import infoshare.services.EditedContent.EditedContentService;
+import infoshare.services.EditedContent.Impl.EditedContentServiceImpl;
 import infoshare.services.PublishedContent.Impl.PublishedContentServiceImpl;
 import infoshare.services.PublishedContent.PublishedContentService;
+import infoshare.services.category.CategoryService;
+import infoshare.services.category.Impl.CategoryServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.stream.Collectors;
@@ -24,6 +30,8 @@ public class PublishView extends VerticalLayout implements Button.ClickListener,
         Property.ValueChangeListener {
     @Autowired
     private PublishedContentService publishedContentService = new PublishedContentServiceImpl();
+    private CategoryService categoryService = new CategoryServiceImpl();
+    private EditedContentService editedContentService = new EditedContentServiceImpl();
 
     private final MainLayout main;
     private final PublishTable table;
@@ -69,7 +77,6 @@ public class PublishView extends VerticalLayout implements Button.ClickListener,
         }catch (Exception e){
         }
     }
-
     @Override
     public void valueChange(Property.ValueChangeEvent valueChangeEvent) {
         final Property property = valueChangeEvent.getProperty();
@@ -83,6 +90,8 @@ public class PublishView extends VerticalLayout implements Button.ClickListener,
             UI.getCurrent().removeWindow(popUp);
             table.setValue(null);
             getHome();
+        }else if (source==form.putToEdit){
+            saveEditedForm(form.binder);
         }
     }
     private Window modelWindow(){
@@ -92,6 +101,46 @@ public class PublishView extends VerticalLayout implements Button.ClickListener,
         popup.setResizable(false);
         popup.setContent(form);
         return popup;
+    }
+    private void saveEditedForm(FieldGroup binder) {
+        try {
+            binder.commit();
+            try {
+                editedContentService.save(getNewEntity( publishedContentService.merge(getUpdateEntity(table.getValue().toString()))));
+                popUp.setModal(false);
+                table.setValue(null);
+                UI.getCurrent().removeWindow(popUp);
+                getHome();
+                Notification.show("Record EDITED!", Notification.Type.HUMANIZED_MESSAGE);
+            }catch (Exception e){
+                Notification.show(e.getMessage()+"Please select the Category",Notification.Type.HUMANIZED_MESSAGE);
+            }
+        } catch (FieldGroup.CommitException e) {
+            Notification.show("Fill in all Fields!!", Notification.Type.HUMANIZED_MESSAGE);
+            getHome();
+        }
+    }
+    private PublishedContent getUpdateEntity(String val ) {
+        final PublishedContent bean = publishedContentService.find(val);
+        final PublishedContent editedContent = new PublishedContent
+                .Builder(bean.getTitle()).copy(bean)
+                .status("Edited")
+                .build();
+        return editedContent;
+    }
+    private EditedContent getNewEntity(PublishedContent bean) {
+        final EditedContent editedContent = new EditedContent
+                .Builder(bean.getTitle())
+                .category(bean.getCategory())
+                .content(bean.getContent())
+                .contentType(bean.getContentType())
+                .creator(bean.getCreator())
+                .dateCreated(bean.getDateCreated())
+                .source(bean.getSource())
+                .state(bean.getState())
+                .status("Edited")
+                .build();
+        return editedContent;
     }
     private void ViewContentButton(){
         try {
@@ -121,6 +170,7 @@ public class PublishView extends VerticalLayout implements Button.ClickListener,
     }
     public void addListeners(){
         form.popUpCloseBtn.addClickListener(this);
+        form.putToEdit.addClickListener(this);
         table.addValueChangeListener(this);
         table.addItemClickListener(item ->{
             boolean flag = true;

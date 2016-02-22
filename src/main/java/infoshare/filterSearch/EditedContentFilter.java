@@ -31,7 +31,7 @@ public class EditedContentFilter {
         ArrayList arrayList = new ArrayList();
         String cat;
         for (EditedContent EditedContent : editedContentService.findAll().stream()
-                .filter(cont -> cont.getState().equalsIgnoreCase("active"))
+                .filter(cont -> cont.getState().equalsIgnoreCase(state))
                 .collect(Collectors.toList()).stream()
                 .filter(cont -> cont.getStatus().equalsIgnoreCase("Edited"))
                 .collect(Collectors.toList())) {
@@ -60,7 +60,7 @@ public class EditedContentFilter {
         return arrayList;
     }
     private TextField getField(){
-        field.setInputPrompt("Filter EditedContent ...");
+        field.setInputPrompt("Filter Edited Content ...");
         field.setWidth("260px");
         field.setIcon(FontAwesome.FILTER);
         field.addStyleName(ValoTheme.TEXTFIELD_INLINE_ICON);
