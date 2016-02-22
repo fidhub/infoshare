@@ -80,13 +80,13 @@ public class UserDetailsView extends VerticalLayout implements
                 if (i==1) {
                     i = 0;
                     try {
-                         User user = userService.find(table.getValue().toString());
+                        User user = userService.find(table.getValue().toString());
                         final UserModel bean = getModel(user);
                         form.binder.setItemDataSource(new BeanItem<>(bean));
                         UI.getCurrent().addWindow(popUp);
                         popUp.setModal(true);
                         //getHome();
-                    }catch (Exception e){
+                        }catch (Exception e){
                         Notification.show("Select the row you wanna edit",
                                 Notification.Type.HUMANIZED_MESSAGE);
                     }
@@ -113,7 +113,7 @@ public class UserDetailsView extends VerticalLayout implements
     private Window modelWindow(){
         final Window popup = new Window();
         popup.setWidth(60.0f, Unit.PERCENTAGE);
-        popup.setHeight(60.0f, Unit.PERCENTAGE);
+        popup.setHeight(55.0f, Unit.PERCENTAGE);
         popup.setClosable(false);
         popup.setResizable(false);
         popup.setContent(form);

@@ -8,6 +8,8 @@ import com.vaadin.server.Responsive;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 import infoshare.client.content.setup.models.UserModel;
+import infoshare.services.roles.Impl.RoleServiceImpl;
+import infoshare.services.roles.RoleService;
 
 /**
  * Created by user9 on 2016/02/11.
@@ -20,6 +22,9 @@ public class UserDetailsForm extends FormLayout {
 
     public TextField field = new TextField();
 
+    private RoleService roleService = new RoleServiceImpl();
+    public ListSelect rolesList = new ListSelect();
+
     public Button popUpBackBtn = new Button("Back");
 
     public UserDetailsForm() {
@@ -31,8 +36,7 @@ public class UserDetailsForm extends FormLayout {
         final TextField LastName = getTextField("Last Name", "lastName");
         final TextField OtherName = getTextField("OtherName", "otherName");
         final TextField Password = getTextField("Password", "password");
-        final ListSelect Role = getRoles("Role", "role");
-
+        final ListSelect roles = getRoles("User Role", "role");
 
 
         GridLayout gridLayout = new GridLayout(4,10);
@@ -45,13 +49,15 @@ public class UserDetailsForm extends FormLayout {
         gridLayout.addComponent(LastName, 0, 2);
         gridLayout.addComponent(OtherName, 1, 2);
         gridLayout.addComponent(Password, 0, 4);
+        gridLayout.addComponent(roles, 1, 4);
+
 
         final HorizontalLayout layout = new HorizontalLayout();
         layout.setSpacing(false);
         popUpBackBtn.setIcon(FontAwesome.BACKWARD);
         popUpBackBtn.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
         layout.addComponent(popUpBackBtn);
-        gridLayout.addComponent(layout, 0, 9);
+        gridLayout.addComponent(layout, 0, 7);
         addComponent(gridLayout);
 
     }
@@ -65,5 +71,20 @@ public class UserDetailsForm extends FormLayout {
         binder.bind(textField, field);
 
         return textField;
+    }
+
+    private ListSelect getRoles(String label, String field) {
+        rolesList.setCaption(label);
+        roleService.findAll().stream().filter(role -> role.getId() != null).forEach(role -> {
+            rolesList.setItemCaption(role.getId(), role.getRoleName() + " " + role.getDescription());
+            rolesList.setNullSelectionAllowed(false);
+            rolesList.setMultiSelect(true);
+            rolesList.addItem(role.getId());
+        });
+        rolesList.setWidth("250px");
+        rolesList.setHeight("35px");
+        binder.bind(rolesList, field);
+
+        return rolesList;
     }
 }
