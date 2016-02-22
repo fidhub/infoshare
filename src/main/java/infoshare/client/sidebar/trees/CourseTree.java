@@ -17,7 +17,7 @@ public class CourseTree extends Tree implements ItemClickEvent.ItemClickListener
         this.main = main;
         addItem(COURSES);
         //Add Listerners
-        addItemClickListener((ItemClickEvent.ItemClickListener) this);
+        addItemClickListener(this);
     }
 
     @Override

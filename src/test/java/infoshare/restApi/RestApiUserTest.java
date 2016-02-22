@@ -26,28 +26,15 @@ public class RestApiUserTest {
         user.setOtherName("Emmanuel");
         user.setFirstName("Thulebona");
         user.setLastName("hadebe");
-        user.setUsername("thule");
+        user.setUsername("thuleh");
         user.setEnable(true);
-        user.setPassword("pass");
+        user.setPassword("2lehadebe");
 
         Set<String> roles = new HashSet<>();
         RoleService roleServ = new RoleServiceImpl();
         roles.addAll(roleServ.findAll().stream().map(Role::getId).collect(Collectors.toList()));
         user.setRole(roles);
         //Todo   id:a699571541acbff8de8708d4b98e74d9   e6325fabbea69788146b73f856a296fb
-      /*  List<String> contacts = new ArrayList<>();
-        Contact model = new Contact.Builder("54554544545").id("f737d27fc2d4f303e318f8ac6ef95702").build();
-        Contact model2 = new Contact.Builder("54554544545").id("f737d27fc2d4f303e318f8ac6ef95701").build();
-        contacts.add(model.getId());
-        contacts.add(model2.getId());
-        user.setContact(contacts);*/
-
-        /*List<String> address = new ArrayList<>();
-        Address addressModel = new Address.Builder("shjdhsjjhdas")
-                .id("f737d27fc2d4f303e318f8ac6ef95702").build();
-        address.add(addressModel.getId());
-        user.setAddress(address);*/
-
         RestApiConnectorClass.create(UrlPath.UserLinks.POST, user,UserModel.class);
 
     }

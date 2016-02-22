@@ -24,7 +24,7 @@ public class SetupTree extends Tree implements ItemClickEvent.ItemClickListener 
         addItem(COURSES);
         addItem(SYSTEM_VALUES);
         //Add Listerners
-        addItemClickListener((ItemClickEvent.ItemClickListener) this);
+        addItemClickListener(this);
     }
 
     @Override
