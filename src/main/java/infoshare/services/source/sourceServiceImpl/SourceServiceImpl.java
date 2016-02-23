@@ -2,7 +2,6 @@ package infoshare.services.source.sourceServiceImpl;
 
 import com.vaadin.spring.annotation.SpringComponent;
 import infoshare.restapi.RestApiConnectorClass;
-import infoshare.restapi.UrlPath;
 import infoshare.domain.Source;
 import infoshare.services.source.SourceService;
 import org.springframework.stereotype.Service;

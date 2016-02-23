@@ -1,7 +1,6 @@
 package infoshare.restApi;
 
 import infoshare.restapi.RestApiConnectorClass;
-import infoshare.restapi.UrlPath;
 import infoshare.client.content.systemValues.models.SourceModel;
 import infoshare.domain.Source;
 import org.junit.Assert;

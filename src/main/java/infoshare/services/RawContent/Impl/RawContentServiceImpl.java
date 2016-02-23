@@ -1,7 +1,6 @@
 package infoshare.services.RawContent.Impl;
 
 import infoshare.restapi.RestApiConnectorClass;
-import infoshare.restapi.UrlPath;
 import infoshare.domain.RawContent;
 import infoshare.services.RawContent.RawContentService;
 

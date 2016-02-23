@@ -1,7 +1,6 @@
 package infoshare.services.category.Impl;
 
 import infoshare.restapi.RestApiConnectorClass;
-import infoshare.restapi.UrlPath;
 import infoshare.domain.Category;
 import infoshare.services.category.CategoryService;
 

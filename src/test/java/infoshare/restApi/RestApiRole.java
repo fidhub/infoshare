@@ -1,7 +1,6 @@
 package infoshare.restApi;
 
 import infoshare.restapi.RestApiConnectorClass;
-import infoshare.restapi.UrlPath;
 import infoshare.client.content.setup.models.RoleModel;
 import infoshare.domain.Role;
 import junit.framework.TestCase;

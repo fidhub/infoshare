@@ -1,9 +1,10 @@
 package infoshare.services.users.Impl;
 
 import com.vaadin.spring.annotation.SpringComponent;
+import infoshare.app.conf.RestUtil;
 import infoshare.restapi.RestApiConnectorClass;
-import infoshare.restapi.UrlPath;
 import infoshare.domain.User;
+import infoshare.restapi.common.CommonBaseURI;
 import infoshare.services.users.UserService;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +19,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User find(String s) {
-        return RestApiConnectorClass.read(UrlPath.UserLinks.GET_ID,s,User.class);
+        return RestUtil.getById(CommonBaseURI.).read(UrlPath.UserLinks.GET_ID,s,User.class);
     }
 
     @Override

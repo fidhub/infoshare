@@ -1,7 +1,6 @@
 package infoshare.services.PublishedContent.Impl;
 
 import infoshare.restapi.RestApiConnectorClass;
-import infoshare.restapi.UrlPath;
 import infoshare.domain.PublishedContent;
 import infoshare.services.PublishedContent.PublishedContentService;
 

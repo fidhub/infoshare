@@ -1,7 +1,6 @@
 package infoshare.restApi;
 
 import infoshare.restapi.RestApiConnectorClass;
-import infoshare.restapi.UrlPath;
 import infoshare.client.content.content.models.ContentModel;
 import infoshare.domain.Content;
 import infoshare.services.Content.ContentService;
