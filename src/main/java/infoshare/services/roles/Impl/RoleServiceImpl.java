@@ -1,13 +1,10 @@
 package infoshare.services.roles.Impl;
 
 import com.vaadin.spring.annotation.SpringComponent;
-import infoshare.restapi.RestApiConnectorClass;
-import infoshare.restapi.UrlPath;
 import infoshare.domain.Role;
 import infoshare.services.roles.RoleService;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Set;
 
 /**
