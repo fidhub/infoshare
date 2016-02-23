@@ -6,15 +6,20 @@ import com.vaadin.data.util.BeanItem;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.VerticalLayout;
+import infoshare.app.facade.ContentTypeFacade;
 import infoshare.client.content.systemValues.forms.ContentTypeForm;
 import infoshare.client.content.systemValues.models.ContentTypeModel;
 import infoshare.client.content.systemValues.SystemValues;
 import infoshare.client.content.systemValues.tables.ContentTypeTable;
 import infoshare.client.content.MainLayout;
 import infoshare.domain.ContentType;
+import infoshare.factories.ContentTypeFactory;
 import infoshare.services.ContentType.ContentTypeService;
 import infoshare.services.ContentType.Impl.ContentTypeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by codex on 2015/06/25.
@@ -22,7 +27,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class ContentTypeView extends VerticalLayout implements Button.ClickListener, Property.ValueChangeListener {
 
     @Autowired
-    private ContentTypeService contentTypeService = new ContentTypeServiceImpl();
+    private ContentTypeService contentTypeService = ContentTypeFacade.contentTypeService;
 
     private final MainLayout main;
     private final ContentTypeForm form;
@@ -57,7 +62,7 @@ public class ContentTypeView extends VerticalLayout implements Button.ClickListe
         final Property property = event.getProperty();
         if (property == table) {
             try {
-                final ContentType contentType = contentTypeService.find(table.getValue().toString());
+                final ContentType contentType = contentTypeService.findById(table.getValue().toString());
                 final ContentTypeModel bean = getModel(contentType);
                 form.binder.setItemDataSource(new BeanItem<>(bean));
                 setReadFormProperties();
@@ -80,7 +85,7 @@ public class ContentTypeView extends VerticalLayout implements Button.ClickListe
     private void saveEditedForm(FieldGroup binder) {
         try {
             binder.commit();
-            contentTypeService.merge(getUpdateEntity(binder));
+            contentTypeService.update(getUpdateEntity(binder));
             getHome();
             Notification.show("Record UPDATED!", Notification.Type.HUMANIZED_MESSAGE);
         } catch (FieldGroup.CommitException e) {
@@ -89,23 +94,23 @@ public class ContentTypeView extends VerticalLayout implements Button.ClickListe
         }
     }
     private void deleteForm(FieldGroup binder) {
-        contentTypeService.remove(getUpdateEntity(binder));
+        contentTypeService.delete(getUpdateEntity(binder));
         getHome();
     }
     private ContentType getUpdateEntity(FieldGroup binder) {
         final ContentTypeModel bean = ((BeanItem<ContentTypeModel>) binder.getItemDataSource()).getBean();
-        final ContentType contentType = new ContentType.Builder(bean.getName())
+        final ContentType contentType =  new ContentType.Builder(bean.getName())
                 .description(bean.getDescription())
                 .id(table.getValue().toString())
                 .build();
         return contentType;
     }
-
     private ContentType getNewEntity(FieldGroup binder) {
         final ContentTypeModel bean = ((BeanItem<ContentTypeModel>) binder.getItemDataSource()).getBean();
-        final ContentType contentType = new ContentType.Builder(bean.getName())
-                .description(bean.getDescription())
-                .build();
+        Map<String,String> contentTypeVals = new HashMap<>();
+        contentTypeVals.put("contentName",bean.getName());
+        contentTypeVals.put("description",bean.getDescription());
+        final ContentType contentType = ContentTypeFactory.getContentType(contentTypeVals);
         return contentType;
     }
     private void getHome() {

@@ -54,9 +54,7 @@ public class PersonServiceImpl implements PersonService {
     public Set<Role> getRoles(String userId) {
         Set<Role> rolesList = new HashSet<>();
         Set<PersonRole> roles = PeopleFacade.personRoleService.findPersonRoles(userId);
-        for (PersonRole role : roles) {
-            rolesList.add(DemographicsFacade.rolesListService.findById(role.getRoleId()));
-        }
+        rolesList.addAll(roles.stream().map(role -> DemographicsFacade.rolesListService.findById(role.getRoleId())).collect(Collectors.toList()));
         return rolesList;
     }
 

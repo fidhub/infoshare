@@ -30,10 +30,10 @@ public class AddressTable extends Table {
     }
 
     public void loadTable() {
-        User user = userService.find(userID);
+        User user = userService.findById(userID);
         if (user != null) {
             for (int i = 0; i < user.getAddress().size(); i++) {
-                Address address = service.find(user.getAddress().get(i));
+                Address address = service.findById(user.getAddress().get(i));
                 try {
                     this.addItem(new Object[]{
                             address.getPostalAddress(),

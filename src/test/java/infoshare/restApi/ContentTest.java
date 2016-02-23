@@ -1,17 +1,11 @@
 package infoshare.restApi;
 
-import infoshare.restapi.RestApiConnectorClass;
+import infoshare.app.conf.RestUtil;
 import infoshare.client.content.content.models.ContentModel;
-import infoshare.domain.Content;
-import infoshare.domain.EditedContent;
-import infoshare.services.Content.EditedContentService;
-import infoshare.services.Content.Impl.EditedContentServiceImpl;
-import org.junit.Assert;
+import infoshare.restapi.Content.ContentBaseUrl;
 import org.junit.Test;
 
 import java.util.Date;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Created by user9 on 2015/07/24.
@@ -36,9 +30,9 @@ public class ContentTest {
         model.setContentType("Text");
         model.setStatus("raw");
 
-        RestApiConnectorClass.create(UrlPath.RawLinks.POST, model, ContentModel.class);
+        RestUtil.save(ContentBaseUrl.Raw.POST, model, ContentModel.class);
     }
-    @Test
+  /*  @Test
     public void testPUT() throws Exception {
         Content content = RestApiConnectorClass.read(UrlPath.ContentLinks.GET_ID, "d592b8cd7f48b0eee1e1f8e8f5988ab5",
                 Content.class);
@@ -76,5 +70,5 @@ public class ContentTest {
                     .category("uncategorized").build();
             RestApiConnectorClass.update(UrlPath.EditedLinks.PUT, content1);
         }
-    }
+    }*/
 }

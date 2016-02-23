@@ -3,6 +3,7 @@ package infoshare.client.content.systemValues.tables;
 import com.vaadin.server.Responsive;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.themes.ValoTheme;
+import infoshare.app.facade.CategoryFacade;
 import infoshare.client.content.MainLayout;
 import infoshare.domain.Category;
 import infoshare.services.category.CategoryService;
@@ -17,7 +18,7 @@ import java.util.List;
 public class CategoryTable extends Table {
 
     @Autowired
-    private CategoryService categoryService = new CategoryServiceImpl();
+    private CategoryService categoryService = CategoryFacade.categoryService;
 
     private MainLayout mainLayout;
 
@@ -32,13 +33,10 @@ public class CategoryTable extends Table {
         addContainerProperty("Tip Category", String.class, null);
         addContainerProperty("Description", String.class,null);
 
-        List<Category> categories = categoryService.findAll();
-
-        for (Category category: categories){
+        for (Category category:  categoryService.findAll()){
             addItem(new Object[]{
-
                     category.getName(),
-                            category.getDescription()
+                    category.getDescription()
             },category.getId());
         }
 

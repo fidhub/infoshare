@@ -8,6 +8,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Songezo on 2015-09-29.
@@ -19,13 +20,13 @@ public class AddressTest extends TestCase {
 
     @Test
     public void testRead() throws Exception {
-        List<Address> add = addressService.findAll();
+        Set<Address> add = addressService.findAll();
         Assert.assertFalse(add.isEmpty());
     }
 
     @Test
     public void testName() throws Exception {
-        Address add1 = addressService.find("2");
+        Address add1 = addressService.findById("2");
         Assert.assertEquals(add1.getPostalAddress(), "4960");
     }
 }

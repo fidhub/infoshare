@@ -10,7 +10,7 @@ import infoshare.services.Content.RawContentService;
 /**
  * Created by user9 on 2016/02/23.
  */
-public class contentFacade {
+public class ContentFacade {
     public final static RawContentService rawContentService = new RawContentServiceImpl();
     public final static EditedContentService editedContentService = new EditedContentServiceImpl();
     public final static PublishedContentService publishedContentService = new PublishedContentServiceImpl();

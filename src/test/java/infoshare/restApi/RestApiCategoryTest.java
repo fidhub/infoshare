@@ -1,13 +1,5 @@
 package infoshare.restApi;
 
-import infoshare.restapi.RestApiConnectorClass;
-import infoshare.client.content.systemValues.models.CategoryModel;
-import infoshare.domain.Category;
-import org.junit.Assert;
-import org.junit.Test;
-
-import java.util.List;
-
 /**
  * Created by codex on 2015/07/21.
  */
@@ -16,7 +8,7 @@ public class RestApiCategoryTest {
     // Category id1: 9673d201a00487f061351d12fe4d7d10
     // Category id2: 52b67c6cd00b98f53caf61bd227bfb7e
     // Category id3: eb6888b9f53a17508e5e95673e1010c6
-
+/*
     @Test
     public void testPost() throws Exception {
 
@@ -47,5 +39,5 @@ public class RestApiCategoryTest {
     public void testGetAll() throws Exception {
         List<Category> categories = RestApiConnectorClass.readAll(UrlPath.CategoryLinks.GETALL, Category.class);
         Assert.assertFalse(categories.isEmpty());
-    }
+    }*/
 }

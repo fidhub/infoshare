@@ -8,6 +8,7 @@ import com.vaadin.ui.*;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.themes.ChameleonTheme;
 import com.vaadin.ui.themes.ValoTheme;
+import infoshare.app.facade.ContentFacade;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.content.ContentMenu;
 import infoshare.client.content.content.views.RawView;
@@ -28,7 +29,7 @@ import java.util.stream.Collectors;
  */
 public class Header extends VerticalLayout implements Button.ClickListener {
 
-    private RawContentService rawContentService = new RawContentServiceImpl();
+    private RawContentService rawContentService = ContentFacade.rawContentService;
     private MainLayout main ;
     private Window notifications;
     private Window userProfile;

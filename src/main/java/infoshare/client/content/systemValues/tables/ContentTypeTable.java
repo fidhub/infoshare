@@ -3,6 +3,7 @@ package infoshare.client.content.systemValues.tables;
 import com.vaadin.server.Responsive;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.themes.ValoTheme;
+import infoshare.app.facade.ContentTypeFacade;
 import infoshare.client.content.MainLayout;
 import infoshare.domain.ContentType;
 import infoshare.services.ContentType.ContentTypeService;
@@ -10,6 +11,7 @@ import infoshare.services.ContentType.Impl.ContentTypeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by codex on 2015/06/25.
@@ -17,7 +19,7 @@ import java.util.List;
 public class ContentTypeTable extends Table {
 
     @Autowired
-    private ContentTypeService contentTypeService = new ContentTypeServiceImpl();
+    private ContentTypeService contentTypeService = ContentTypeFacade.contentTypeService;
 
     private MainLayout main;
 
@@ -31,9 +33,8 @@ public class ContentTypeTable extends Table {
         addStyleName(ValoTheme.TABLE_SMALL);
         addContainerProperty("Name",String.class,null);
         addContainerProperty("Description",String.class,null);
-        List<ContentType> contentTypes = contentTypeService.findAll();
 
-        for(ContentType contentType: contentTypes){
+        for(ContentType contentType: contentTypeService.findAll()){
             addItem(new Object[]{
                     contentType.getName(),
                     contentType.getDescription()

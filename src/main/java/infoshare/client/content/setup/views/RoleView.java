@@ -6,14 +6,20 @@ import com.vaadin.data.util.BeanItem;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.VerticalLayout;
+import infoshare.app.facade.RoleFacade;
+import infoshare.app.util.DomainState;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.setup.SetupMenu;
 import infoshare.client.content.setup.forms.RoleForm;
 import infoshare.client.content.setup.models.RoleModel;
 import infoshare.client.content.setup.tables.RoleTable;
 import infoshare.domain.Role;
+import infoshare.factories.RoleFactory;
 import infoshare.services.roles.Impl.RoleServiceImpl;
 import infoshare.services.roles.RoleService;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by hashcode on 2015/06/24.
@@ -21,7 +27,7 @@ import infoshare.services.roles.RoleService;
 public class RoleView extends VerticalLayout implements
         Button.ClickListener, Property.ValueChangeListener {
 
-    private RoleService roleService = new RoleServiceImpl();
+    private RoleService roleService = RoleFacade.roleSrvice;
 
     private final MainLayout main;
     private final RoleForm form;
@@ -56,7 +62,7 @@ public class RoleView extends VerticalLayout implements
         final Property property = event.getProperty();
         if (property == table) {
             try {
-                final Role role = roleService.find(table.getValue().toString());
+                final Role role = roleService.findById(table.getValue().toString());
                 final RoleModel bean = getModel(role);
                 form.binder.setItemDataSource(new BeanItem<>(bean));
             }catch (Exception e){
@@ -79,7 +85,7 @@ public class RoleView extends VerticalLayout implements
     private void saveEditedForm(FieldGroup binder) {
         try {
             binder.commit();
-            roleService.merge(getUpdateEntity(binder));
+            roleService.update(getUpdateEntity(binder));
             getHome();
             Notification.show("Record UPDATED!", Notification.Type.TRAY_NOTIFICATION);
         } catch (FieldGroup.CommitException e) {
@@ -88,12 +94,13 @@ public class RoleView extends VerticalLayout implements
         }
     }
     private void deleteForm(FieldGroup binder) {
-        roleService.remove(getUpdateEntity(binder));
+        roleService.delete(getUpdateEntity(binder));
         getHome();
     }
     private Role getUpdateEntity(FieldGroup binder) {
         final RoleModel bean = ((BeanItem<RoleModel>) binder.getItemDataSource()).getBean();
-        final Role role = new Role.Builder(bean.getRoleName())
+        final Role role = new Role.Builder()
+                .roleName(bean.getRoleName())
                 .description(bean.getDescription())
                 .id(table.getValue().toString())
                 .build();
@@ -101,9 +108,11 @@ public class RoleView extends VerticalLayout implements
     }
     private Role getNewEntity(FieldGroup binder) {
         final RoleModel bean = ((BeanItem<RoleModel>) binder.getItemDataSource()).getBean();
-        final Role role = new Role.Builder(bean.getRoleName())
-                .description(bean.getDescription())
-                .build();
+        Map<String,String> rolevals = new HashMap<>();
+        rolevals.put("roleName",bean.getRoleName());
+        rolevals.put("description",bean.getDescription());
+        rolevals.put("state",DomainState.ACTIVE.name());
+        final Role role = RoleFactory.getRole(rolevals);
         return role;
     }
     private void getHome() {
@@ -139,7 +148,7 @@ public class RoleView extends VerticalLayout implements
     private RoleModel getModel(Role role) {
         final RoleModel model = new RoleModel();
         model.setDescription(role.getDescription());
-        model.setRoleName(role.getRoleName());
+        model.setRoleName(role.getName());
         return model;
     }
 }

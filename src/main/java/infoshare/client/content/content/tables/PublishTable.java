@@ -2,6 +2,8 @@ package infoshare.client.content.content.tables;
 
 import com.vaadin.ui.Table;
 import com.vaadin.ui.themes.ValoTheme;
+import infoshare.app.facade.CategoryFacade;
+import infoshare.app.facade.ContentFacade;
 import infoshare.client.content.MainLayout;
 import infoshare.domain.PublishedContent;
 import infoshare.services.Content.Impl.PublishedContentServiceImpl;
@@ -20,8 +22,8 @@ import java.util.stream.Collectors;
 public class PublishTable extends Table{
 
     @Autowired
-    private PublishedContentService publishedContentService = new PublishedContentServiceImpl();
-    private CategoryService categoryService = new CategoryServiceImpl();
+    private PublishedContentService publishedContentService = ContentFacade.publishedContentService;
+    private CategoryService categoryService = CategoryFacade.categoryService;
 
     private final MainLayout main;
 
@@ -58,7 +60,7 @@ public class PublishTable extends Table{
     }
     public void loadTable(PublishedContent content) {
         DateFormat formatter = new SimpleDateFormat("dd MMMMMMM yyyy");
-           String category = categoryService.find(content.getCategory()).getName();
+           String category = categoryService.findById(content.getCategory()).getName();
               try{
                   addItem(new Object[]{
                             content.getTitle(),

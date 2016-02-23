@@ -86,7 +86,7 @@ public class LessonView extends VerticalLayout implements Button.ClickListener, 
     }
     private void editButton(){
         try {
-            final Course course = courseService.find(courseCmb.getValue().toString());
+            final Course course = courseService.findById(courseCmb.getValue().toString());
             course.getLessons().stream().filter(lesson -> lesson.getId() == table.getValue().toString()).forEach(lesson -> {
                 final LessonModel bean = getLessonModel(lesson);
                 form.binder.setItemDataSource(new BeanItem<>(bean));
@@ -154,7 +154,7 @@ public class LessonView extends VerticalLayout implements Button.ClickListener, 
     private void saveEditedForm(FieldGroup binder) {
         try {
             binder.commit();
-            courseService.merge(getUpdateEntity(binder));
+            courseService.update(getUpdateEntity(binder));
             popUp.setModal(false);
             UI.getCurrent().removeWindow(popUp);
             getHome();
@@ -183,7 +183,7 @@ public class LessonView extends VerticalLayout implements Button.ClickListener, 
     }
     private Course getUpdateEntity(FieldGroup binder) {
 
-        final Course courseBean = courseService.find(courseCmb.getValue().toString());
+        final Course courseBean = courseService.findById(courseCmb.getValue().toString());
         final LessonModel lessonBean = ((BeanItem<LessonModel>) binder.getItemDataSource()).getBean();
         List<Lesson> lessons = courseBean.getLessons();
 
@@ -205,7 +205,7 @@ public class LessonView extends VerticalLayout implements Button.ClickListener, 
     }
     private Course getNewEntity(FieldGroup binder) {
 
-        final Course courseBean = courseService.find(courseCmb.getValue().toString());
+        final Course courseBean = courseService.findById(courseCmb.getValue().toString());
         final LessonModel lessonBean = ((BeanItem<LessonModel>) binder.getItemDataSource()).getBean();
         List<Lesson> lessons = courseBean.getLessons();
 

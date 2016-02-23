@@ -53,7 +53,7 @@ public class CourseView extends VerticalLayout implements Button.ClickListener, 
         final Property property = event.getProperty();
         if (property == table) {
             try {
-                final Course course = courseService.find(table.getValue().toString());
+                final Course course = courseService.findById(table.getValue().toString());
                 final CourseModel bean = getModel(course);
                 form.binder.setItemDataSource(new BeanItem<>(bean));
             }catch (Exception e){
@@ -76,7 +76,7 @@ public class CourseView extends VerticalLayout implements Button.ClickListener, 
     private void saveEditedForm(FieldGroup binder) {
         try {
             binder.commit();
-            courseService.merge(getUpdateEntity(binder));
+            courseService.update(getUpdateEntity(binder));
             getHome();
             Notification.show("Record UPDATED!", Notification.Type.TRAY_NOTIFICATION);
         } catch (FieldGroup.CommitException e) {
@@ -85,7 +85,7 @@ public class CourseView extends VerticalLayout implements Button.ClickListener, 
         }
     }
     private void deleteForm(FieldGroup binder) {
-        courseService.remove(getUpdateEntity(binder));
+        courseService.update(getUpdateEntity(binder));
         getHome();
     }
     private Course getNewEntity(FieldGroup binder) {

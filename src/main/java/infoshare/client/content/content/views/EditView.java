@@ -7,13 +7,20 @@ import com.vaadin.event.FieldEvents;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
+import infoshare.app.facade.CategoryFacade;
+import infoshare.app.facade.ContentFacade;
+import infoshare.app.facade.ContentTypeFacade;
+import infoshare.app.facade.SourceFacade;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.content.ContentMenu;
 import infoshare.client.content.content.forms.EditForm;
 import infoshare.client.content.content.models.ContentModel;
 import infoshare.client.content.content.tables.EditTable;
 import infoshare.domain.*;
+import infoshare.factories.EditedContentFacory;
+import infoshare.factories.PublishedContentFactory;
 import infoshare.filterSearch.EditedContentFilter;
+import infoshare.filterSearch.PublishedContentFilter;
 import infoshare.services.ContentType.ContentTypeService;
 import infoshare.services.ContentType.Impl.ContentTypeServiceImpl;
 import infoshare.services.Content.EditedContentService;
@@ -27,6 +34,9 @@ import infoshare.services.source.sourceServiceImpl.SourceServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.vaadin.dialogs.ConfirmDialog;
 
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -35,11 +45,11 @@ import java.util.stream.Collectors;
 public class EditView extends VerticalLayout implements Button.ClickListener, Property.ValueChangeListener{
 
     @Autowired
-    private EditedContentService editedContentService = new EditedContentServiceImpl();
-    private PublishedContentService publishedContentService = new PublishedContentServiceImpl();
-    private CategoryService categoryService = new CategoryServiceImpl();
-    private ContentTypeService contentTypeService = new ContentTypeServiceImpl();
-    private SourceService sourceService = new SourceServiceImpl();
+    private EditedContentService editedContentService = ContentFacade.editedContentService;
+    private PublishedContentService publishedContentService = ContentFacade.publishedContentService;
+    private CategoryService categoryService = CategoryFacade.categoryService;
+    private ContentTypeService contentTypeService = ContentTypeFacade.contentTypeService;
+    private SourceService sourceService = SourceFacade.sourceService;
 
     private final MainLayout main;
     private final EditTable table;
@@ -147,7 +157,7 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
                ConfirmDialog.show(this.getUI(),"Are you sure you Wanna delete ?",
                        (ConfirmDialog.Listener) dialog -> {
                            if (dialog.isConfirmed()) {
-                               editedContentService.merge(getTrashEntity(table.getValue().toString()));
+                               editedContentService.update(getTrashEntity(table.getValue().toString()));
                                getHome();
                            } else getHome();
 
@@ -208,7 +218,7 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
             binder.commit();
             try {
                 publishedContentService.save(getNewEntity(binder));
-                editedContentService.merge(getUpdateEntity(binder));
+                editedContentService.update(getUpdateEntity(binder));
                 popUp.setModal(false);
                 table.setValue(null);
                 UI.getCurrent().removeWindow(popUp);
@@ -224,24 +234,21 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
     }
     private PublishedContent getNewEntity(FieldGroup binder) {
         final ContentModel bean = ((BeanItem<ContentModel>) binder.getItemDataSource()).getBean();
-        final PublishedContent editedContent = new PublishedContent
-                .Builder(bean.getTitle())
-                .category(categoryService.find(bean.getCategory()).getId())
-                .content(bean.getContent())
-                .contentType(bean.getContentType())
-                .creator(bean.getCreator())
-                .dateCreated(bean.getDateCreated())
-                .source(bean.getSource())
-                .state(bean.getState())
-                .status("Published")
-                .build();
-        return editedContent;
+        Map<String,String> publishedVals = new HashMap<>();
+        publishedVals.put("content",bean.getContent());
+        publishedVals.put("category",bean.getCategory());
+        publishedVals.put("creator",bean.getCreator());
+        publishedVals.put("contentType",bean.getContentType());
+        publishedVals.put("status",bean.getStatus());
+        publishedVals.put("source",bean.getStatus());
+        final PublishedContent publishedContent = PublishedContentFactory.getPublishedContent(publishedVals,new Date());
+        return publishedContent;
     }
     private EditedContent getUpdateEntity(FieldGroup binder) {
         final ContentModel bean = ((BeanItem<ContentModel>) binder.getItemDataSource()).getBean();
         final EditedContent editedContent = new EditedContent
                 .Builder(bean.getTitle())
-                .category(categoryService.find(bean.getCategory()).getId())
+                .category(categoryService.findById(bean.getCategory()).getId())
                 .content(bean.getContent())
                 .contentType(bean.getContentType())
                 .creator(bean.getCreator())
@@ -254,7 +261,7 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
         return editedContent;
     }
     private EditedContent getTrashEntity(String val) {
-       EditedContent content = editedContentService.find(val);
+       EditedContent content = editedContentService.findById(val);
         final EditedContent editedContent = new EditedContent
                 .Builder(content.getTitle()).copy(content)
                 .state("Deleted")
@@ -263,7 +270,7 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
     }
     private ContentModel getModel(String val) {
         final ContentModel model = new ContentModel();
-        final EditedContent editedContent = editedContentService.find(val.toString());
+        final EditedContent editedContent = editedContentService.findById(val.toString());
         model.setTitle(editedContent.getTitle());
         model.setCategory(editedContent.getCategory());
         model.setCreator(editedContent.getCreator());

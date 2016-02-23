@@ -121,7 +121,7 @@ public class UserForm extends FormLayout {
     private ListSelect getRoles(String label, String field) {
         rolesList.setCaption(label);
         roleService.findAll().stream().filter(role -> role.getId() != null).forEach(role -> {
-            rolesList.setItemCaption(role.getId(), role.getRoleName() + " " + role.getDescription());
+            rolesList.setItemCaption(role.getId(), role.getName() + " " + role.getDescription());
             rolesList.setNullSelectionAllowed(false);
             rolesList.setMultiSelect(true);
             rolesList.addItem(role.getId());

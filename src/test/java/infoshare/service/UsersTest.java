@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Songezo on 2015-10-01.
@@ -29,18 +30,17 @@ public class UsersTest extends TestCase {
 
     @Test
     public void testReadAll() throws Exception {
-        List<User> userss = userService.findAll();
-        System.out.print(userss.get(0).getId());
-        Assert.assertTrue(!userss.isEmpty());
+        Set<User> users = userService.findAll();
+        Assert.assertTrue(!users.isEmpty());
     }
 
     @Test
     public void testUpdate() throws Exception {
-        User user = userService.find("efc53f54b95151428c15195800572a0e");
+        User user = userService.findById("efc53f54b95151428c15195800572a0e");
         User userUpdate = new User.Builder(getName()).copy(user).username("mimi").build();
 
-        userService.merge(userUpdate);
-        User checkUpdated = userService.find("efc53f54b95151428c15195800572a0e");
+        userService.update(userUpdate);
+        User checkUpdated = userService.findById("efc53f54b95151428c15195800572a0e");
         Assert.assertEquals(user.getUsername(), checkUpdated.getUsername());
     }
 }

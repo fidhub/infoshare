@@ -3,6 +3,7 @@ package infoshare.client.content.systemValues.tables;
 import com.vaadin.server.Responsive;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.themes.ValoTheme;
+import infoshare.app.facade.SourceFacade;
 import infoshare.client.content.MainLayout;
 import infoshare.domain.Source;
 import infoshare.services.source.SourceService;
@@ -17,7 +18,7 @@ import java.util.List;
 public  class ContentSourceTable extends Table{
 
     @Autowired
-    private SourceService sourceService = new SourceServiceImpl();
+    private SourceService sourceService = SourceFacade.sourceService;
 
     private MainLayout main;
 
@@ -31,9 +32,7 @@ public  class ContentSourceTable extends Table{
         addStyleName(ValoTheme.TABLE_SMALL);
         addContainerProperty("Name",String.class,null);
         addContainerProperty("Description",String.class,null);
-        List<Source> sources = sourceService.findAll();
-
-        for(Source source: sources){
+        for(Source source: sourceService.findAll()){
             addItem(new Object[]{
                     source.getName(),
                     source.getDescription()

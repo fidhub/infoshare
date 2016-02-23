@@ -83,7 +83,7 @@ public class UserView extends VerticalLayout implements
                 AddressTable.userID = table.getValue().toString();
                 addressView = new AddressView(main);
                 contactView = new ContactView(main);
-                final User user = userService.find(table.getValue().toString());
+                final User user = userService.findById(table.getValue().toString());
                 final UserModel bean = getModel(user);
                 userForm.binder.setItemDataSource(new BeanItem<>(bean));
                 setReadFormProperties();
@@ -108,7 +108,7 @@ public class UserView extends VerticalLayout implements
     private void saveEditedForm(FieldGroup binder) {
         try {
             binder.commit();
-            userService.merge(getUserUpdateEntity(binder));
+            userService.update(getUserUpdateEntity(binder));
             getHome();
             Notification.show("Record UPDATED!", Notification.Type.HUMANIZED_MESSAGE);
         } catch (FieldGroup.CommitException e) {
@@ -120,7 +120,7 @@ public class UserView extends VerticalLayout implements
         }
     }
     private void deleteForm(FieldGroup binder) {
-        userService.remove(getUserUpdateEntity(binder));
+        userService.delete(getUserUpdateEntity(binder));
         getHome();
     }
     private User getUserNewEntity(FieldGroup binder) {
@@ -144,7 +144,7 @@ public class UserView extends VerticalLayout implements
 
         if (bean.getRole()!= null) {
             for (String roleId : bean.getRole()) {
-                Role role = roleService.find(roleId);
+                Role role = roleService.findById(roleId);
                 if (role != null) {
                     userRoles.add(role.getId());
                 }

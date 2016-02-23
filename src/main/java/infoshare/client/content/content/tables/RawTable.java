@@ -2,6 +2,7 @@ package infoshare.client.content.content.tables;
 
 import com.vaadin.ui.Table;
 import com.vaadin.ui.themes.ValoTheme;
+import infoshare.app.facade.ContentFacade;
 import infoshare.client.content.MainLayout;
 import infoshare.domain.RawContent;
 
@@ -19,7 +20,7 @@ import java.util.stream.Collectors;
 public class RawTable extends Table {
 
     @Autowired
-    private RawContentService rawContentService = new RawContentServiceImpl();
+    private RawContentService rawContentService = ContentFacade.rawContentService;
     private final MainLayout main;
 
     public RawTable(MainLayout mainApp){

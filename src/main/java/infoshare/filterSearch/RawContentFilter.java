@@ -3,6 +3,8 @@ package infoshare.filterSearch;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.themes.ValoTheme;
+import infoshare.app.facade.CategoryFacade;
+import infoshare.app.facade.ContentFacade;
 import infoshare.domain.RawContent;
 import infoshare.services.Content.Impl.RawContentServiceImpl;
 import infoshare.services.Content.RawContentService;
@@ -20,8 +22,8 @@ import java.util.stream.Collectors;
  * Created by codex on 2015/07/14.
  */
 public class RawContentFilter {
-    private RawContentService rawContentService = new RawContentServiceImpl();
-    private CategoryService categoryService = new CategoryServiceImpl();
+    private RawContentService rawContentService = ContentFacade.rawContentService;
+    private CategoryService categoryService = CategoryFacade.categoryService;
     public TextField field = new TextField();
     public RawContentFilter() {
         getField();
@@ -36,7 +38,7 @@ public class RawContentFilter {
                 .filter(cont -> cont.getStatus().equalsIgnoreCase("raw"))
                 .collect(Collectors.toList())) {
             if(!rawContent.getCategory().toLowerCase().equalsIgnoreCase("uncategorized"))
-                cat = categoryService.find(rawContent.getCategory().toString().trim()).getName();
+                cat = categoryService.findById(rawContent.getCategory().toString().trim()).getName();
                 else cat = rawContent.getCategory().toString().toLowerCase();
 
             try {
