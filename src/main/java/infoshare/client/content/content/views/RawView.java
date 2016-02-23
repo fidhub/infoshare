@@ -12,10 +12,10 @@ import infoshare.client.content.content.models.ContentModel;
 import infoshare.client.content.content.tables.RawTable;
 import infoshare.domain.*;
 import infoshare.filterSearch.RawContentFilter;
-import infoshare.services.EditedContent.EditedContentService;
-import infoshare.services.EditedContent.Impl.EditedContentServiceImpl;
-import infoshare.services.RawContent.Impl.RawContentServiceImpl;
-import infoshare.services.RawContent.RawContentService;
+import infoshare.services.Content.EditedContentService;
+import infoshare.services.Content.Impl.EditedContentServiceImpl;
+import infoshare.services.Content.Impl.RawContentServiceImpl;
+import infoshare.services.Content.RawContentService;
 
 import java.util.stream.Collectors;
 

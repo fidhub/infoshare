@@ -3,11 +3,9 @@ package infoshare.filterSearch;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.themes.ValoTheme;
-import infoshare.domain.EditedContent;
 import infoshare.domain.PublishedContent;
-import infoshare.services.EditedContent.Impl.EditedContentServiceImpl;
-import infoshare.services.PublishedContent.Impl.PublishedContentServiceImpl;
-import infoshare.services.PublishedContent.PublishedContentService;
+import infoshare.services.Content.Impl.PublishedContentServiceImpl;
+import infoshare.services.Content.PublishedContentService;
 import infoshare.services.category.CategoryService;
 import infoshare.services.category.Impl.CategoryServiceImpl;
 
@@ -16,7 +14,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 /**

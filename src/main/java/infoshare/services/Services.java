@@ -7,13 +7,13 @@ import java.util.Set;
  */
 public interface Services<E, ID> {
 
-    public E findById(ID id);
+    E findById(ID id);
 
-    public E save(E entity);
+    E save(E entity);
 
-    public E update(E entity);
+    E update(E entity);
 
-    public void delete(E entity);
+    void delete(E entity);
 
-    public Set<E> findAll();
+    Set<E> findAll();
 }

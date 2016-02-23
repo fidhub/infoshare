@@ -1,4 +1,4 @@
-package infoshare.services.RawContent;
+package infoshare.services.Content;
 
 import infoshare.domain.RawContent;
 import infoshare.services.Services;

@@ -1,4 +1,4 @@
-package infoshare.services.Address;
+package infoshare.services.Contact;
 
 import infoshare.domain.Address;
 import infoshare.services.Services;

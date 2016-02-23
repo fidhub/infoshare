@@ -5,8 +5,8 @@ import com.vaadin.ui.themes.ValoTheme;
 import infoshare.client.content.MainLayout;
 import infoshare.domain.RawContent;
 
-import infoshare.services.RawContent.Impl.RawContentServiceImpl;
-import infoshare.services.RawContent.RawContentService;
+import infoshare.services.Content.Impl.RawContentServiceImpl;
+import infoshare.services.Content.RawContentService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.text.DateFormat;

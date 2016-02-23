@@ -1,8 +1,8 @@
 package infoshare.service;
 
 import infoshare.domain.Address;
-import infoshare.services.Address.AddressService;
-import infoshare.services.Address.Impl.AddressServiceImpl;
+import infoshare.services.Contact.AddressService;
+import infoshare.services.Contact.Impl.AddressServiceImpl;
 import junit.framework.TestCase;
 import org.junit.Assert;
 import org.junit.Test;

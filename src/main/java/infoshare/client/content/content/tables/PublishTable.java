@@ -1,12 +1,11 @@
 package infoshare.client.content.content.tables;
 
-import com.vaadin.ui.Button;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.themes.ValoTheme;
 import infoshare.client.content.MainLayout;
 import infoshare.domain.PublishedContent;
-import infoshare.services.PublishedContent.Impl.PublishedContentServiceImpl;
-import infoshare.services.PublishedContent.PublishedContentService;
+import infoshare.services.Content.Impl.PublishedContentServiceImpl;
+import infoshare.services.Content.PublishedContentService;
 import infoshare.services.category.CategoryService;
 import infoshare.services.category.Impl.CategoryServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;

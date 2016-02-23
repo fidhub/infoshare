@@ -1,12 +1,12 @@
 package infoshare.services.ContentType.Impl;
 
 import com.vaadin.spring.annotation.SpringComponent;
-import infoshare.restapi.RestApiConnectorClass;
 import infoshare.domain.ContentType;
+import infoshare.restapi.ContentType.ContentTypeAPI;
 import infoshare.services.ContentType.ContentTypeService;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * Created by codex on 2015/06/25.
@@ -16,25 +16,27 @@ import java.util.List;
 public class ContentTypeServiceImpl implements ContentTypeService{
 
     @Override
-    public ContentType find(String s) {
-     return RestApiConnectorClass.read(UrlPath.ContentTypeLinks.GET_ID, s, ContentType.class);
+    public ContentType findById(String s) {
+        return ContentTypeAPI.findById(s);
     }
 
     @Override
     public ContentType save(ContentType entity) {
-        return RestApiConnectorClass.create(UrlPath.ContentTypeLinks.POST, entity, ContentType.class);
-    }
-    @Override
-    public ContentType merge(ContentType entity) {
-        return RestApiConnectorClass.update(UrlPath.ContentTypeLinks.PUT,entity);
+        return ContentTypeAPI.save(entity);
     }
 
     @Override
-    public void remove(ContentType entity) {
+    public ContentType update(ContentType entity) {
+        return ContentTypeAPI.update(entity);
     }
 
     @Override
-    public List<ContentType> findAll() {
-        return RestApiConnectorClass.readAll(UrlPath.ContentTypeLinks.GETALL,ContentType.class);
+    public void delete(ContentType entity) {
+        ContentTypeAPI.update(entity);
+    }
+
+    @Override
+    public Set<ContentType> findAll() {
+        return ContentTypeAPI.findAll();
     }
 }

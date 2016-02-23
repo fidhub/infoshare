@@ -1,4 +1,4 @@
-package infoshare.services.PublishedContent;
+package infoshare.services.Content;
 
 import infoshare.domain.PublishedContent;
 import infoshare.services.Services;

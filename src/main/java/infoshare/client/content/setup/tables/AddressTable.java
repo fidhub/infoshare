@@ -3,8 +3,8 @@ package infoshare.client.content.setup.tables;
 import com.vaadin.ui.Table;
 import infoshare.domain.Address;
 import infoshare.domain.User;
-import infoshare.services.Address.AddressService;
-import infoshare.services.Address.Impl.AddressServiceImpl;
+import infoshare.services.Contact.AddressService;
+import infoshare.services.Contact.Impl.AddressServiceImpl;
 import infoshare.services.users.Impl.UserServiceImpl;
 import infoshare.services.users.UserService;
 

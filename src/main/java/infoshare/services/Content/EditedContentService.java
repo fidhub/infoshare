@@ -1,4 +1,4 @@
-package infoshare.services.EditedContent;
+package infoshare.services.Content;
 
 import infoshare.domain.EditedContent;
 import infoshare.services.Services;

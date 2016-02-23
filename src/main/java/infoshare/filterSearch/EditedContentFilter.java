@@ -4,8 +4,8 @@ import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.themes.ValoTheme;
 import infoshare.domain.EditedContent;
-import infoshare.services.EditedContent.EditedContentService;
-import infoshare.services.EditedContent.Impl.EditedContentServiceImpl;
+import infoshare.services.Content.EditedContentService;
+import infoshare.services.Content.Impl.EditedContentServiceImpl;
 import infoshare.services.category.CategoryService;
 import infoshare.services.category.Impl.CategoryServiceImpl;
 
@@ -13,7 +13,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 /**

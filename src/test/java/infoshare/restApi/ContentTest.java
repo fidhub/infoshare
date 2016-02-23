@@ -4,10 +4,8 @@ import infoshare.restapi.RestApiConnectorClass;
 import infoshare.client.content.content.models.ContentModel;
 import infoshare.domain.Content;
 import infoshare.domain.EditedContent;
-import infoshare.services.Content.ContentService;
-import infoshare.services.Content.Impl.ContentServiceImp;
-import infoshare.services.EditedContent.EditedContentService;
-import infoshare.services.EditedContent.Impl.EditedContentServiceImpl;
+import infoshare.services.Content.EditedContentService;
+import infoshare.services.Content.Impl.EditedContentServiceImpl;
 import org.junit.Assert;
 import org.junit.Test;
 
