@@ -1,19 +1,12 @@
 package infoshare.restApi;
 
-import infoshare.RestApi.RestApiConnectorClass;
-import infoshare.RestApi.UrlPath;
-import infoshare.client.content.setup.models.UserModel;
+import infoshare.restapi.RestApiConnectorClass;
 import infoshare.client.content.systemValues.models.CategoryModel;
 import infoshare.domain.Category;
-import infoshare.domain.Role;
-import infoshare.services.roles.Impl.RoleServiceImpl;
-import infoshare.services.roles.RoleService;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by codex on 2015/07/21.

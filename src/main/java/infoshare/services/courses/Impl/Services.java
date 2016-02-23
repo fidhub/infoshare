@@ -16,10 +16,10 @@ import java.util.Map;
  */
 @Service
 @SpringComponent
-public class CourseServiceImpl implements CourseService {
+public class Services implements CourseService {
 
     static Map<String,Course> coursesMap = null;
-    public CourseServiceImpl() {
+    public Services() {
         if(coursesMap == null){
             coursesMap = new HashMap<>();
             List<Lesson> lessons = new ArrayList<>();

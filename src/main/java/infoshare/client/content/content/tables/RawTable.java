@@ -2,10 +2,7 @@ package infoshare.client.content.content.tables;
 
 import com.vaadin.ui.Table;
 import com.vaadin.ui.themes.ValoTheme;
-import infoshare.RestApi.RestApiConnectorClass;
-import infoshare.RestApi.UrlPath;
 import infoshare.client.content.MainLayout;
-import infoshare.domain.Content;
 import infoshare.domain.RawContent;
 
 import infoshare.services.RawContent.Impl.RawContentServiceImpl;

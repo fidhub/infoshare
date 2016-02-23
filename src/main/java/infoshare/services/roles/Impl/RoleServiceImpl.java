@@ -1,16 +1,11 @@
 package infoshare.services.roles.Impl;
 
 import com.vaadin.spring.annotation.SpringComponent;
-import infoshare.RestApi.RestApiConnectorClass;
-import infoshare.RestApi.UrlPath;
 import infoshare.domain.Role;
 import infoshare.services.roles.RoleService;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by hashcode on 2015/06/24.
@@ -20,27 +15,29 @@ import java.util.Map;
 @SpringComponent
 public class RoleServiceImpl implements RoleService{
 
+
     @Override
-    public Role find(String s) {
-        return RestApiConnectorClass.read(UrlPath.RoleLinks.GET_ID,s,Role.class);
+    public Role findById(String s) {
+        return null;
     }
 
     @Override
     public Role save(Role entity) {
-        return RestApiConnectorClass.create(UrlPath.RoleLinks.POST,entity,Role.class);
+        return null;
     }
 
     @Override
-    public Role merge(Role entity) {
-        return RestApiConnectorClass.update(UrlPath.RoleLinks.PUT,entity);
+    public Role update(Role entity) {
+        return null;
     }
 
     @Override
-    public void remove(Role entity) {
+    public void delete(Role entity) {
+
     }
 
     @Override
-    public List<Role> findAll() {
-        return RestApiConnectorClass.readAll(UrlPath.RoleLinks.GETALL,Role.class);
+    public Set<Role> findAll() {
+        return null;
     }
 }

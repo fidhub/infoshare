@@ -13,7 +13,7 @@ import infoshare.client.content.courseSetup.models.CourseModel;
 import infoshare.client.content.courseSetup.tables.CoursesTable;
 import infoshare.domain.Course;
 import infoshare.services.courses.CourseService;
-import infoshare.services.courses.Impl.CourseServiceImpl;
+import infoshare.services.courses.Impl.Services;
 
 /**
  * Created by codex on 2015/07/07.
@@ -23,7 +23,7 @@ public class CourseView extends VerticalLayout implements Button.ClickListener, 
     private final MainLayout main;
     private final CoursesForm form;
     private final CoursesTable table;
-    private CourseService courseService = new CourseServiceImpl();
+    private CourseService courseService = new Services();
 
     public CourseView(MainLayout main) {
         this.main = main;

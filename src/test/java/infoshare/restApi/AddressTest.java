@@ -1,7 +1,6 @@
 package infoshare.restApi;
 
-import infoshare.RestApi.RestApiConnectorClass;
-import infoshare.RestApi.UrlPath;
+import infoshare.restapi.RestApiConnectorClass;
 import infoshare.client.content.setup.models.AddressModel;
 import org.junit.Test;
 

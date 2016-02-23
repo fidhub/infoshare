@@ -5,14 +5,14 @@ import com.vaadin.ui.Table;
 import com.vaadin.ui.themes.ValoTheme;
 import infoshare.domain.Course;
 import infoshare.services.courses.CourseService;
-import infoshare.services.courses.Impl.CourseServiceImpl;
+import infoshare.services.courses.Impl.Services;
 
 /**
  * Created by codex on 2015/07/07.
  */
 public class CoursesTable extends Table {
 
-    private CourseService courseService = new CourseServiceImpl();
+    private CourseService courseService = new Services();
     public CoursesTable() {
         setSizeFull();
         Responsive.makeResponsive(this);

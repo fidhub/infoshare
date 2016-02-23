@@ -1,13 +1,11 @@
 package infoshare.services.Content.Impl;
 
 import com.vaadin.spring.annotation.SpringComponent;
-import infoshare.RestApi.RestApiConnectorClass;
-import infoshare.RestApi.UrlPath;
+import infoshare.restapi.RestApiConnectorClass;
 import infoshare.domain.Content;
 import infoshare.services.Content.ContentService;
 import org.springframework.stereotype.Service;
 
-import java.text.DateFormat;
 import java.util.*;
 
 /**

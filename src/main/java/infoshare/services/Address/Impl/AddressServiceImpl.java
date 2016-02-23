@@ -1,10 +1,7 @@
 package infoshare.services.Address.Impl;
 
-import infoshare.RestApi.RestApiConnectorClass;
-import infoshare.RestApi.UrlPath;
-import infoshare.client.content.setup.models.ContactModel;
+import infoshare.restapi.RestApiConnectorClass;
 import infoshare.domain.Address;
-import infoshare.domain.Contact;
 import infoshare.services.Address.AddressService;
 
 import java.util.ArrayList;
