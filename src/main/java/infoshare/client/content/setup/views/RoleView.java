@@ -15,7 +15,6 @@ import infoshare.client.content.setup.models.RoleModel;
 import infoshare.client.content.setup.tables.RoleTable;
 import infoshare.domain.Role;
 import infoshare.factories.RoleFactory;
-import infoshare.services.roles.Impl.RoleServiceImpl;
 import infoshare.services.roles.RoleService;
 
 import java.util.HashMap;
@@ -27,7 +26,7 @@ import java.util.Map;
 public class RoleView extends VerticalLayout implements
         Button.ClickListener, Property.ValueChangeListener {
 
-    private RoleService roleService = RoleFacade.roleSrvice;
+    private RoleService roleService = RoleFacade.roleService;
 
     private final MainLayout main;
     private final RoleForm form;

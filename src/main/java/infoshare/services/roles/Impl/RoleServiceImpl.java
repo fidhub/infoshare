@@ -3,7 +3,6 @@ package infoshare.services.roles.Impl;
 import com.vaadin.spring.annotation.SpringComponent;
 import infoshare.domain.Role;
 import infoshare.restapi.Roles.RolesAPI;
-import infoshare.restapi.common.demographics.RoleAPI;
 import infoshare.services.roles.RoleService;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +14,7 @@ import java.util.Set;
 
 @Service
 @SpringComponent
-public class RoleServiceImpl implements RoleService{
+public class RoleServiceImpl implements RoleService {
 
 
     @Override

@@ -1,6 +1,5 @@
 package infoshare.app.facade;
 
-import infoshare.restapi.ContentType.ContentTypeBaseUrl;
 import infoshare.services.ContentType.ContentTypeService;
 import infoshare.services.ContentType.Impl.ContentTypeServiceImpl;
 

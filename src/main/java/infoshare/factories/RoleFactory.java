@@ -10,12 +10,12 @@ import java.util.Map;
  */
 public class RoleFactory {
 
-    public static Role getRole(Map<String,String> roleVlas){
+    public static Role getRole(Map<String,String> roleVals){
         Role role = new Role.Builder()
                 .id(KeyGenerator.getEntityId())
-                .roleName(roleVlas.get("roleName"))
-                .description(roleVlas.get("description"))
-                .state(roleVlas.get("state"))
+                .roleName(roleVals.get("roleName"))
+                .description(roleVals.get("description"))
+                .state(roleVals.get("state"))
                 .build();
         return role;
     }
