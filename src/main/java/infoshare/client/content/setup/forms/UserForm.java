@@ -8,12 +8,6 @@ import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 import infoshare.client.content.setup.models.UserModel;
-import infoshare.domain.Address;
-import infoshare.domain.Contact;
-import infoshare.services.Address.AddressService;
-import infoshare.services.Address.Impl.AddressServiceImpl;
-import infoshare.services.Contact.ContactService;
-import infoshare.services.Contact.Impl.ContactServiceImpl;
 import infoshare.services.roles.Impl.RoleServiceImpl;
 import infoshare.services.roles.RoleService;
 
@@ -127,7 +121,7 @@ public class UserForm extends FormLayout {
     private ListSelect getRoles(String label, String field) {
         rolesList.setCaption(label);
         roleService.findAll().stream().filter(role -> role.getId() != null).forEach(role -> {
-            rolesList.setItemCaption(role.getId(), role.getRoleName() + " " + role.getDescription());
+            rolesList.setItemCaption(role.getId(), role.getName() + " " + role.getDescription());
             rolesList.setNullSelectionAllowed(false);
             rolesList.setMultiSelect(true);
             rolesList.addItem(role.getId());

@@ -1,8 +1,8 @@
 package infoshare.app.util.email;
 
 
-import hashwork.app.facade.UtilFacade;
-import hashwork.domain.ui.util.Mail;
+import infoshare.app.facade.UtilFacade;
+import infoshare.domain.Mail;
 
 import javax.activation.DataHandler;
 import javax.activation.DataSource;

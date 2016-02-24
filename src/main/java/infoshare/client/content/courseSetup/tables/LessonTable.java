@@ -31,7 +31,7 @@ public  class LessonTable extends Table {
     public void loadTable( String id ){
         try {
             removeAllItems();
-            for (Lesson lesson : courseService.find(id).getLessons())
+            for (Lesson lesson : courseService.findById(id).getLessons())
                 addItem(new Object[]{
                         lesson.getLesson(),
                         lesson.getDescription()

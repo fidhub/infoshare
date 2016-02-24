@@ -1,8 +1,8 @@
 package infoshare.restApi;
 
-import infoshare.restapi.RestApiConnectorClass;
-import infoshare.restapi.UrlPath;
+import infoshare.app.conf.RestUtil;
 import infoshare.client.content.setup.models.AddressModel;
+import infoshare.restapi.Contacts.ContactBaseUrl;
 import org.junit.Test;
 
 /**
@@ -21,6 +21,6 @@ public class AddressTest {
         model.setPhysicalAddress("24 Killernay Street Oakdale Bellville");
         model.setAddressType("address");
 
-        RestApiConnectorClass.create(UrlPath.AddressLinks.POST, model, AddressModel.class);
+        RestUtil.save(ContactBaseUrl.Address.POST, model, AddressModel.class);
     }
 }

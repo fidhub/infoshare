@@ -1,13 +1,12 @@
 package infoshare.services.source.sourceServiceImpl;
 
 import com.vaadin.spring.annotation.SpringComponent;
-import infoshare.restapi.RestApiConnectorClass;
-import infoshare.restapi.UrlPath;
 import infoshare.domain.Source;
+import infoshare.restapi.Source.SourceAPI;
 import infoshare.services.source.SourceService;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * Created by codex on 2015/06/27.
@@ -17,26 +16,27 @@ import java.util.List;
 public class SourceServiceImpl implements SourceService {
 
     @Override
-    public Source find(String s) {
-        return RestApiConnectorClass.read(UrlPath.SourceLinks.GET_ID,s,Source.class);
+    public Source findById(String s) {
+        return SourceAPI.findById(s);
     }
 
     @Override
     public Source save(Source entity) {
-     return RestApiConnectorClass.create(UrlPath.SourceLinks.POST,entity,Source.class);
+        return SourceAPI.save(entity);
     }
 
     @Override
-    public Source merge(Source entity) {
-       return RestApiConnectorClass.update(UrlPath.SourceLinks.PUT,entity);
+    public Source update(Source entity) {
+        return SourceAPI.update(entity);
     }
 
     @Override
-    public void remove(Source entity) {
+    public void delete(Source entity) {
+        SourceAPI.update(entity);
     }
 
     @Override
-    public List<Source> findAll() {
-        return RestApiConnectorClass.readAll(UrlPath.SourceLinks.GETALL,Source.class);
+    public Set<Source> findAll() {
+        return SourceAPI.findAll();
     }
 }

@@ -7,25 +7,36 @@ import com.vaadin.event.FieldEvents;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
+import infoshare.app.facade.CategoryFacade;
+import infoshare.app.facade.ContentFacade;
+import infoshare.app.facade.ContentTypeFacade;
+import infoshare.app.facade.SourceFacade;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.content.ContentMenu;
 import infoshare.client.content.content.forms.EditForm;
 import infoshare.client.content.content.models.ContentModel;
 import infoshare.client.content.content.tables.EditTable;
 import infoshare.domain.*;
+import infoshare.factories.EditedContentFacory;
+import infoshare.factories.PublishedContentFactory;
 import infoshare.filterSearch.EditedContentFilter;
+import infoshare.filterSearch.PublishedContentFilter;
 import infoshare.services.ContentType.ContentTypeService;
 import infoshare.services.ContentType.Impl.ContentTypeServiceImpl;
-import infoshare.services.EditedContent.EditedContentService;
-import infoshare.services.EditedContent.Impl.EditedContentServiceImpl;
-import infoshare.services.PublishedContent.Impl.PublishedContentServiceImpl;
-import infoshare.services.PublishedContent.PublishedContentService;
+import infoshare.services.Content.EditedContentService;
+import infoshare.services.Content.Impl.EditedContentServiceImpl;
+import infoshare.services.Content.Impl.PublishedContentServiceImpl;
+import infoshare.services.Content.PublishedContentService;
 import infoshare.services.category.CategoryService;
 import infoshare.services.category.Impl.CategoryServiceImpl;
 import infoshare.services.source.SourceService;
 import infoshare.services.source.sourceServiceImpl.SourceServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.vaadin.dialogs.ConfirmDialog;
 
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -34,26 +45,31 @@ import java.util.stream.Collectors;
 public class EditView extends VerticalLayout implements Button.ClickListener, Property.ValueChangeListener{
 
     @Autowired
-    private EditedContentService editedContentService = new EditedContentServiceImpl();
-    private PublishedContentService publishedContentService = new PublishedContentServiceImpl();
-    private CategoryService categoryService = new CategoryServiceImpl();
-    private ContentTypeService contentTypeService = new ContentTypeServiceImpl();
-    private SourceService sourceService = new SourceServiceImpl();
+    private EditedContentService editedContentService = ContentFacade.editedContentService;
+    private PublishedContentService publishedContentService = ContentFacade.publishedContentService;
+    private CategoryService categoryService = CategoryFacade.categoryService;
+    private ContentTypeService contentTypeService = ContentTypeFacade.contentTypeService;
+    private SourceService sourceService = SourceFacade.sourceService;
 
     private final MainLayout main;
     private final EditTable table;
     private final EditForm form;
     private Window popUp ;
-    private Button editBtn = new Button("UPDATE");
     private EditedContentFilter editedContentFilter = new EditedContentFilter();
+    private Button deleteCont = new Button();
+    private Button viewTrash = new Button();
+    private Button viewActive = new Button();
+    private String state;
+
     public  EditView( MainLayout mainApp) {
 
        this.main = mainApp;
        this.table = new EditTable(main);
        this.form = new EditForm();
        this.popUp = modelWindow();
-       editBtn.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
-       editBtn.setIcon(FontAwesome.EDIT);
+       viewActive.setVisible(false);
+       deleteCont.setVisible(true);
+       state ="active";
        setSizeFull();
        setSpacing(true);
        addComponent(getLayout());
@@ -63,21 +79,41 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
     private HorizontalLayout getLayout(){
         final HorizontalLayout layout = new HorizontalLayout();
         layout.setSpacing(false);
-        editBtn.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
-        editBtn.addStyleName(ValoTheme.BUTTON_SMALL);
-        editBtn.setIcon(FontAwesome.EDIT);
+        deleteCont.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
+        deleteCont.addStyleName(ValoTheme.BUTTON_SMALL);
+        deleteCont.setCaption("Remove");
+        deleteCont.setDescription("Delete Content");
+        deleteCont.setIcon(FontAwesome.REMOVE);
+
+        viewTrash.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
+        viewTrash.addStyleName(ValoTheme.BUTTON_SMALL);
+        viewTrash.setCaption("Trash");
+        viewTrash.setDescription("Show Deleted content");
+        viewTrash.setIcon(FontAwesome.TRASH_O);
+
+        viewActive.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
+        viewActive.addStyleName(ValoTheme.BUTTON_SMALL);
+        viewActive.setCaption("Show Active");
+        viewActive.setDescription("Show Active content");
+        viewActive.setIcon(FontAwesome.EDIT);
+
         layout.addComponent(editedContentFilter.field);
-        layout.addComponent(editBtn);
+        layout.addComponent(deleteCont);
+        layout.addComponent(viewTrash);
+        layout.addComponent(viewActive);
         return layout;
     }
     private void refreshContacts(String stringFilter ) {
         try {
             table.removeAllItems();
-            editedContentFilter.findAll(stringFilter).stream()
+            editedContentFilter.findAll(stringFilter,state).stream()
                     .filter(content -> content != null)
                     .collect(Collectors.toList())
                     .stream()
-                    .filter(cont -> !cont.getStatus().equalsIgnoreCase("Edited"))
+                    .filter(cont -> cont.getState().equalsIgnoreCase(state))
+                    .collect(Collectors.toList())
+                    .stream()
+                    .filter(cont -> cont.getStatus().equalsIgnoreCase("Edited"))
                     .collect(Collectors.toList())
                     .forEach(table::loadTable);
         }catch (Exception e){
@@ -95,23 +131,46 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
    @Override
     public void buttonClick(Button.ClickEvent clickEvent) {
        final Button source = clickEvent.getButton();
-       if(source==editBtn){
-           EditButton();
-       }else if (source ==form.popUpUpdateBtn){
+       if (source ==form.popUpUpdateBtn){
            saveEditedForm(form.binder);
        }else if (source ==form.popUpCancelBtn){
            popUp.setModal(false);
            UI.getCurrent().removeWindow(popUp);
            table.setValue(null);
+           if(state.equalsIgnoreCase("Active")){
            getHome();
+           }else {
+               getTrash();
+           }
+       }else if(source==viewTrash){
+           viewTrash.setVisible(false);
+           state="Deleted";
+           deleteCont.setVisible(false);
+           viewActive.setVisible(true);
+           getTrash();
+       }else if(source==viewActive){
+           getHome();
+           viewActive.setVisible(false);
+           state="Active";
+       }else if (source ==deleteCont){
+           if(table.getValue().toString()!=null) {
+               ConfirmDialog.show(this.getUI(),"Are you sure you Wanna delete ?",
+                       (ConfirmDialog.Listener) dialog -> {
+                           if (dialog.isConfirmed()) {
+                               editedContentService.update(getTrashEntity(table.getValue().toString()));
+                               getHome();
+                           } else getHome();
+
+                       });
+           }else{
+              Notification.show("Select content you wanna delete", Notification.Type.HUMANIZED_MESSAGE);
+           }
        }
     }
     @Override
     public void valueChange(Property.ValueChangeEvent valueChangeEvent) {
         final Property property = valueChangeEvent.getProperty();
-        if (property == table) {
-             editBtn.setVisible(true);
-        }
+
     }
     private void loadComboBoxs() {
         for (Category category : categoryService.findAll()) {
@@ -143,12 +202,23 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
             System.out.println(e.getMessage());
         }
     }
+    private void getTrash(){
+        try{
+            table.removeAllItems();
+            editedContentService.findAll().stream()
+                    .filter(cont -> cont.getState().equalsIgnoreCase("Deleted"))
+                    .collect(Collectors.toList())
+                    .stream().filter(cont -> cont.getStatus().equalsIgnoreCase("Edited"))
+                    .collect(Collectors.toList()).forEach(table::loadTable);
+        }catch (Exception e){
+        }
+    }
     private void saveEditedForm(FieldGroup binder) {
         try {
             binder.commit();
             try {
                 publishedContentService.save(getNewEntity(binder));
-                editedContentService.merge(getUpdateEntity(binder));
+                editedContentService.update(getUpdateEntity(binder));
                 popUp.setModal(false);
                 table.setValue(null);
                 UI.getCurrent().removeWindow(popUp);
@@ -157,51 +227,50 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
             }catch (Exception e){
                 Notification.show("Please select the Category",Notification.Type.HUMANIZED_MESSAGE);
             }
-
         } catch (FieldGroup.CommitException e) {
             Notification.show("Fill in all Fields!!", Notification.Type.HUMANIZED_MESSAGE);
             getHome();
         }
     }
     private PublishedContent getNewEntity(FieldGroup binder) {
-
         final ContentModel bean = ((BeanItem<ContentModel>) binder.getItemDataSource()).getBean();
-        bean.setDateCreated(editedContentService.find(table.getValue().toString()).getDateCreated());
-        final PublishedContent editedContent = new PublishedContent
-                .Builder(bean.getTitle())
-                .category(categoryService.find(bean.getCategory()).getId())
-                .content(bean.getContent())
-                .contentType(bean.getContentType())
-                .creator(bean.getCreator())
-                .dateCreated(bean.getDateCreated())
-                .source(table.getValue().toString())
-                .state(bean.getState())
-                .status("Published")
-               // .id(table.getValue().toString())
-                .build();
-        return editedContent;
+        Map<String,String> publishedVals = new HashMap<>();
+        publishedVals.put("content",bean.getContent());
+        publishedVals.put("category",bean.getCategory());
+        publishedVals.put("creator",bean.getCreator());
+        publishedVals.put("contentType",bean.getContentType());
+        publishedVals.put("status",bean.getStatus());
+        publishedVals.put("source",bean.getStatus());
+        final PublishedContent publishedContent = PublishedContentFactory.getPublishedContent(publishedVals,new Date());
+        return publishedContent;
     }
     private EditedContent getUpdateEntity(FieldGroup binder) {
-
         final ContentModel bean = ((BeanItem<ContentModel>) binder.getItemDataSource()).getBean();
-        bean.setDateCreated(editedContentService.find(table.getValue().toString()).getDateCreated());
         final EditedContent editedContent = new EditedContent
                 .Builder(bean.getTitle())
-                .category(categoryService.find(bean.getCategory()).getId())
+                .category(categoryService.findById(bean.getCategory()).getId())
                 .content(bean.getContent())
                 .contentType(bean.getContentType())
                 .creator(bean.getCreator())
                 .dateCreated(bean.getDateCreated())
-                .source(table.getValue().toString())
+                .source(bean.getSource())
                 .state(bean.getState())
                 .status("Published")
                 .id(table.getValue().toString())
                 .build();
         return editedContent;
     }
+    private EditedContent getTrashEntity(String val) {
+       EditedContent content = editedContentService.findById(val);
+        final EditedContent editedContent = new EditedContent
+                .Builder(content.getTitle()).copy(content)
+                .state("Deleted")
+                .build();
+        return editedContent;
+    }
     private ContentModel getModel(String val) {
         final ContentModel model = new ContentModel();
-        final EditedContent editedContent = editedContentService.find(val.toString());
+        final EditedContent editedContent = editedContentService.findById(val.toString());
         model.setTitle(editedContent.getTitle());
         model.setCategory(editedContent.getCategory());
         model.setCreator(editedContent.getCreator());
@@ -213,16 +282,22 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
         return model;
     }
     public void addListeners(){
-        form.popUpUpdateBtn.addClickListener((Button.ClickListener)this);
-        form.popUpCancelBtn.addClickListener((Button.ClickListener) this);
-        editBtn.addClickListener((Button.ClickListener) this);
-        table.addValueChangeListener((Property.ValueChangeListener)this);
-        editedContentFilter.field.addTextChangeListener(new FieldEvents.TextChangeListener() {
-            @Override
-            public void textChange(FieldEvents.TextChangeEvent textChangeEvent) {
-                refreshContacts(textChangeEvent.getText());
+        form.popUpUpdateBtn.addClickListener(this);
+        form.popUpCancelBtn.addClickListener(this);
+        deleteCont.addClickListener(this);
+        viewTrash.addClickListener(this);
+        viewActive.addClickListener(this);
+        table.addValueChangeListener(this);
+        table.addItemClickListener(item ->{
+            boolean flag = true;
+            if (item.isDoubleClick()) {
+                if(flag) {
+                    EditButton();
+                    flag=false;
+                }
             }
         });
+        editedContentFilter.field.addTextChangeListener((FieldEvents.TextChangeListener) textChangeEvent -> refreshContacts(textChangeEvent.getText()));
     }
 
 }

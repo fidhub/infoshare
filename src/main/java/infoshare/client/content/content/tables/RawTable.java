@@ -2,11 +2,12 @@ package infoshare.client.content.content.tables;
 
 import com.vaadin.ui.Table;
 import com.vaadin.ui.themes.ValoTheme;
+import infoshare.app.facade.ContentFacade;
 import infoshare.client.content.MainLayout;
 import infoshare.domain.RawContent;
 
-import infoshare.services.RawContent.Impl.RawContentServiceImpl;
-import infoshare.services.RawContent.RawContentService;
+import infoshare.services.Content.Impl.RawContentServiceImpl;
+import infoshare.services.Content.RawContentService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.text.DateFormat;
@@ -19,7 +20,7 @@ import java.util.stream.Collectors;
 public class RawTable extends Table {
 
     @Autowired
-    private RawContentService rawContentService = new RawContentServiceImpl();
+    private RawContentService rawContentService = ContentFacade.rawContentService;
     private final MainLayout main;
 
     public RawTable(MainLayout mainApp){
@@ -33,7 +34,6 @@ public class RawTable extends Table {
         addContainerProperty("Title",String.class,null);
         addContainerProperty("Category",String.class,null);
         addContainerProperty("Creator",String.class,null);
-    //    addContainerProperty("Source",String.class,null);
         addContainerProperty("Date Created",String.class,null);
 
         try {
@@ -56,7 +56,7 @@ public class RawTable extends Table {
     }
 
     public void loadTable(RawContent rawContent) {
-        DateFormat formatter = new SimpleDateFormat("dd-MMMMMMM - yyyy");
+        DateFormat formatter = new SimpleDateFormat("dd MMMMMMM yyyy");
         try {
             addItem(new Object[]{
                     rawContent.getTitle(),

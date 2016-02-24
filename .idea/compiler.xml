@@ -22,11 +22,18 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="infoshare" />
+      </profile>
+      <profile default="false" name="Annotation profile for za.ac.cput.infoshare" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="za.ac.cput.infoshare" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="infoshare" target="1.8" />
+      <module name="za.ac.cput.infoshare" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

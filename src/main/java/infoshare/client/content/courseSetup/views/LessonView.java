@@ -37,7 +37,7 @@ public class LessonView extends VerticalLayout implements Button.ClickListener, 
         this.main = main;
         this.form = new LessonForm();
         if(table == null){
-            this.table = new LessonTable();
+            table = new LessonTable();
             addLesson.setVisible(false);
             editLesson.setVisible(false);
         }
@@ -86,15 +86,13 @@ public class LessonView extends VerticalLayout implements Button.ClickListener, 
     }
     private void editButton(){
         try {
-            final Course course = courseService.find(courseCmb.getValue().toString());
-            for(Lesson lesson: course.getLessons()) {
-                if(lesson.getId() == table.getValue().toString()) {
-                    final LessonModel bean = getLessonModel(lesson);
-                    form.binder.setItemDataSource(new BeanItem<>(bean));
-                    UI.getCurrent().addWindow(popUp);
-                    popUp.setModal(true);
-                }
-            }
+            final Course course = courseService.findById(courseCmb.getValue().toString());
+            course.getLessons().stream().filter(lesson -> lesson.getId() == table.getValue().toString()).forEach(lesson -> {
+                final LessonModel bean = getLessonModel(lesson);
+                form.binder.setItemDataSource(new BeanItem<>(bean));
+                UI.getCurrent().addWindow(popUp);
+                popUp.setModal(true);
+            });
         }catch (Exception e){
              Notification.show("Select the lesson you wanna edit", Notification.Type.HUMANIZED_MESSAGE);
         }finally {
@@ -124,13 +122,13 @@ public class LessonView extends VerticalLayout implements Button.ClickListener, 
         return popup;
     }
     public void addListeners(){
-        form.popUpUpdateBtn.addClickListener((Button.ClickListener)this);
-        form.popUpSaveBtn.addClickListener((Button.ClickListener)this);
-        form.popUpCancelBtn.addClickListener((Button.ClickListener) this);
-        table.addValueChangeListener((Property.ValueChangeListener) this);
-        addLesson.addClickListener((Button.ClickListener) this);
-        editLesson.addClickListener((Button.ClickListener) this);
-        courseCmb.addValueChangeListener((Property.ValueChangeListener) this);
+        form.popUpUpdateBtn.addClickListener(this);
+        form.popUpSaveBtn.addClickListener(this);
+        form.popUpCancelBtn.addClickListener(this);
+        table.addValueChangeListener(this);
+        addLesson.addClickListener(this);
+        editLesson.addClickListener(this);
+        courseCmb.addValueChangeListener(this);
     }
     private ComboBox getComboBox() {
         if (courseCmb == null)
@@ -156,7 +154,7 @@ public class LessonView extends VerticalLayout implements Button.ClickListener, 
     private void saveEditedForm(FieldGroup binder) {
         try {
             binder.commit();
-            courseService.merge(getUpdateEntity(binder));
+            courseService.update(getUpdateEntity(binder));
             popUp.setModal(false);
             UI.getCurrent().removeWindow(popUp);
             getHome();
@@ -185,7 +183,7 @@ public class LessonView extends VerticalLayout implements Button.ClickListener, 
     }
     private Course getUpdateEntity(FieldGroup binder) {
 
-        final Course courseBean = courseService.find(courseCmb.getValue().toString());
+        final Course courseBean = courseService.findById(courseCmb.getValue().toString());
         final LessonModel lessonBean = ((BeanItem<LessonModel>) binder.getItemDataSource()).getBean();
         List<Lesson> lessons = courseBean.getLessons();
 
@@ -207,7 +205,7 @@ public class LessonView extends VerticalLayout implements Button.ClickListener, 
     }
     private Course getNewEntity(FieldGroup binder) {
 
-        final Course courseBean = courseService.find(courseCmb.getValue().toString());
+        final Course courseBean = courseService.findById(courseCmb.getValue().toString());
         final LessonModel lessonBean = ((BeanItem<LessonModel>) binder.getItemDataSource()).getBean();
         List<Lesson> lessons = courseBean.getLessons();
 

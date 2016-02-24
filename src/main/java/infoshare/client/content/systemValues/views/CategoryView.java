@@ -6,15 +6,20 @@ import com.vaadin.data.util.BeanItem;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.VerticalLayout;
+import infoshare.app.facade.CategoryFacade;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.systemValues.SystemValues;
 import infoshare.client.content.systemValues.forms.CategoryForm;
 import infoshare.client.content.systemValues.models.CategoryModel;
 import infoshare.client.content.systemValues.tables.CategoryTable;
 import infoshare.domain.Category;
+import infoshare.factories.CategoryFactory;
 import infoshare.services.category.CategoryService;
 import infoshare.services.category.Impl.CategoryServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by codex on 2015/06/26.
@@ -22,7 +27,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class CategoryView extends VerticalLayout implements Button.ClickListener, Property.ValueChangeListener {
 
     @Autowired
-    private CategoryService categoryService = new CategoryServiceImpl();
+    private CategoryService categoryService = CategoryFacade.categoryService;
 
     private final MainLayout main;
     private final CategoryForm form;
@@ -58,7 +63,7 @@ public class CategoryView extends VerticalLayout implements Button.ClickListener
     public void valueChange(Property.ValueChangeEvent valueChangeEvent) {
         final Property property = valueChangeEvent.getProperty();
         if (property == table){
-            final Category category = categoryService.find(table.getValue().toString());
+            final Category category = categoryService.findById(table.getValue().toString());
             final CategoryModel bean = getModel(category);
             form.binder.setItemDataSource(new BeanItem<>(bean));
             setReadFormProperties();
@@ -79,7 +84,7 @@ public class CategoryView extends VerticalLayout implements Button.ClickListener
     private void saveEditedForm(FieldGroup binder) {
         try {
             binder.commit();
-            categoryService.merge(getUpdateEntity(binder));
+            categoryService.update(getUpdateEntity(binder));
             getHome();
             Notification.show("Record UPDATED!", Notification.Type.TRAY_NOTIFICATION);
         } catch (FieldGroup.CommitException e) {
@@ -89,14 +94,15 @@ public class CategoryView extends VerticalLayout implements Button.ClickListener
     }
     private void deleteForm(FieldGroup binder) {
         final Category category = getUpdateEntity(binder);
-        categoryService.remove(category);
+        categoryService.delete(category);
         getHome();
     }
     private Category getNewEntity(FieldGroup binder) {
         final CategoryModel bean = ((BeanItem<CategoryModel>) binder.getItemDataSource()).getBean();
-        final Category category = new Category.Builder(bean.getName())
-                .description(bean.getDescription())
-                .build();
+        Map<String,String> categoryVals = new HashMap<>();
+        categoryVals.put("name",bean.getName());
+        categoryVals.put("description",bean.getDescription());
+        final Category category = CategoryFactory.getCategory(categoryVals);
         return category;
     }
     private Category getUpdateEntity(FieldGroup binder) {
@@ -128,13 +134,13 @@ public class CategoryView extends VerticalLayout implements Button.ClickListener
     }
     private void addListeners() {
         //Register Button Listeners
-        form.save.addClickListener((Button.ClickListener) this);
-        form.edit.addClickListener((Button.ClickListener) this);
-        form.cancel.addClickListener((Button.ClickListener) this);
-        form.update.addClickListener((Button.ClickListener) this);
-        form.delete.addClickListener((Button.ClickListener) this);
+        form.save.addClickListener(this);
+        form.edit.addClickListener(this);
+        form.cancel.addClickListener(this);
+        form.update.addClickListener(this);
+        form.delete.addClickListener(this);
         //Register Table Listerners
-        table.addValueChangeListener((Property.ValueChangeListener) this);
+        table.addValueChangeListener(this);
     }
     private CategoryModel getModel(Category category) {
         final CategoryModel model = new CategoryModel();

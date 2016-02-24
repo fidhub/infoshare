@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Songezo on 2015-10-02.
@@ -20,24 +21,23 @@ public class RoleTest extends TestCase{
     @Test
     public void testCreate() throws Exception {
         List<Role> roles = new ArrayList<>();
-        Role role = new Role.Builder(getName()).description("System Adminstrator").build();
+        Role role = new Role.Builder().description("System Adminstrator").build();
         Assert.assertNotNull(roles.addAll(roles));
     }
 
     @Test
     public void testReadAll() throws Exception {
-        List<Role> roleList = roleService.findAll();
-        System.out.print(roleList.get(1).getId());
+        Set<Role> roleList = roleService.findAll();
         Assert.assertTrue(!roleList.isEmpty());
     }
 
     @Test
     public void testUpdate() throws Exception {
-        Role role1 = roleService.find("5f6d90347283ecc51bbcec07706d5261");
-        Role roleUpdate = new Role.Builder(getName()).copy(role1).description("edits the content").build();
+        Role role1 = roleService.findById("5f6d90347283ecc51bbcec07706d5261");
+        Role roleUpdate = new Role.Builder().copy(role1).description("edits the content").build();
 
-        roleService.merge(roleUpdate);
-        Role roleUpdated = roleService.find("5f6d90347283ecc51bbcec07706d5261");
+        roleService.update(roleUpdate);
+        Role roleUpdated = roleService.findById("5f6d90347283ecc51bbcec07706d5261");
         Assert.assertEquals(role1.getDescription(), roleUpdated.getDescription());
     }
 }

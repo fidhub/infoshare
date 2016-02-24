@@ -37,10 +37,10 @@ public class ContactTable extends Table {
     }
 
     public void loadTable() {
-        User user = userService.find(AddressTable.userID);
+        User user = userService.findById(AddressTable.userID);
         if (user != null) {
             for (int i = 0; i < user.getContact().size(); i++) {
-                Contact contact = contactService.find(user.getContact().get(i));
+                Contact contact = contactService.findById(user.getContact().get(i));
                 try {
                     this.addItem(new Object[]{
                             contact.getPhone(),

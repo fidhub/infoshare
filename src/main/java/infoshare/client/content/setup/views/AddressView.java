@@ -13,8 +13,8 @@ import infoshare.client.content.setup.models.AddressModel;
 import infoshare.client.content.setup.tables.AddressTable;
 import infoshare.domain.Address;
 import infoshare.domain.User;
-import infoshare.services.Address.AddressService;
-import infoshare.services.Address.Impl.AddressServiceImpl;
+import infoshare.services.Contact.AddressService;
+import infoshare.services.Contact.Impl.AddressServiceImpl;
 import infoshare.services.users.Impl.UserServiceImpl;
 import infoshare.services.users.UserService;
 
@@ -83,7 +83,7 @@ public class AddressView extends Window implements Button.ClickListener, Propert
         final Property property = valueChangeEvent.getProperty();
         if (property == addressTable){
             try {
-                final Address address = addressService.find(addressTable.getValue().toString());
+                final Address address = addressService.findById(addressTable.getValue().toString());
                 final AddressModel bean = getAddressModel(address);
                 addressForm.binder.setItemDataSource(new BeanItem<>(bean));
                 setReadContactFormProperties();
@@ -93,12 +93,12 @@ public class AddressView extends Window implements Button.ClickListener, Propert
 
     private User getUserUpdateEntity(String addressID) {
 
-        final User bean = userService.find(AddressTable.userID);
+        final User bean = userService.findById(AddressTable.userID);
         List<String> addresses = new ArrayList<>();
 
         if (bean.getAddress()!= null) {
             for (String ID : bean.getAddress()) {
-                Address address = addressService.find(ID);
+                Address address = addressService.findById(ID);
                 if (address != null) {
                     addresses.add(address.getId());
                 }
@@ -115,7 +115,7 @@ public class AddressView extends Window implements Button.ClickListener, Propert
                 .othername(bean.getOtherName())
                 .address(addresses)//Todo : no route for entity yet
                 .contact(bean.getContact())//Todo : no route for entity yet
-                .id(addressTable.userID)
+                .id(AddressTable.userID)
                 .build();
         return user;
     }
@@ -123,7 +123,7 @@ public class AddressView extends Window implements Button.ClickListener, Propert
         try {
             binder.commit();
             Address address = addressService.save(getAddressNewEntity(binder));
-            userService.merge(getUserUpdateEntity(address.getId()));
+            userService.update(getUserUpdateEntity(address.getId()));
             getHome();
             Notification.show("Address ADDED!", Notification.Type.HUMANIZED_MESSAGE);
         } catch (FieldGroup.CommitException e) {

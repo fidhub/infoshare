@@ -3,11 +3,11 @@ package infoshare.filterSearch;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.themes.ValoTheme;
-import infoshare.domain.EditedContent;
+import infoshare.app.facade.CategoryFacade;
+import infoshare.app.facade.ContentFacade;
 import infoshare.domain.PublishedContent;
-import infoshare.services.EditedContent.Impl.EditedContentServiceImpl;
-import infoshare.services.PublishedContent.Impl.PublishedContentServiceImpl;
-import infoshare.services.PublishedContent.PublishedContentService;
+import infoshare.services.Content.Impl.PublishedContentServiceImpl;
+import infoshare.services.Content.PublishedContentService;
 import infoshare.services.category.CategoryService;
 import infoshare.services.category.Impl.CategoryServiceImpl;
 
@@ -16,24 +16,27 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 /**
  * Created by user9 on 2016/02/12.
  */
 public class PublishedContentFilter {
-    private PublishedContentService publishedContentService = new PublishedContentServiceImpl();
-    private CategoryService categoryService = new CategoryServiceImpl();
+    private PublishedContentService publishedContentService = ContentFacade.publishedContentService;
+    private CategoryService categoryService = CategoryFacade.categoryService;
     public TextField field = new TextField();
     public PublishedContentFilter() {
         getField();
     }
     public synchronized List<PublishedContent> findAll(String stringFilter) {
-        DateFormat formatter = new SimpleDateFormat("dd - MMMMMMM - yyyy");
+        DateFormat formatter = new SimpleDateFormat("dd MMMMMMM yyyy");
         ArrayList arrayList = new ArrayList();
         String cat;
-        for (PublishedContent publishedContent : publishedContentService.findAll()) {
+        for (PublishedContent publishedContent : publishedContentService.findAll().stream()
+                .filter(cont -> cont.getState().equalsIgnoreCase("active"))
+                .collect(Collectors.toList())) {
             if(!publishedContent.getCategory().equalsIgnoreCase("uncategorized"))
-                cat = categoryService.find(publishedContent.getCategory().toString()).getName().toLowerCase();
+                cat = categoryService.findById(publishedContent.getCategory().toString()).getName().toLowerCase();
             else cat = publishedContent.getCategory().toString().toLowerCase();
 
             try {

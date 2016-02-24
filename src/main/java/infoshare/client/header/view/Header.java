@@ -8,14 +8,15 @@ import com.vaadin.ui.*;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.themes.ChameleonTheme;
 import com.vaadin.ui.themes.ValoTheme;
+import infoshare.app.facade.ContentFacade;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.content.ContentMenu;
 import infoshare.client.content.content.views.RawView;
 import infoshare.client.header.Form.ProfilePopUp;
 import infoshare.client.header.landing_page.LandingHome;
 import infoshare.domain.RawContent;
-import infoshare.services.RawContent.Impl.RawContentServiceImpl;
-import infoshare.services.RawContent.RawContentService;
+import infoshare.services.Content.Impl.RawContentServiceImpl;
+import infoshare.services.Content.RawContentService;
 
 import java.io.File;
 import java.util.Calendar;
@@ -28,7 +29,7 @@ import java.util.stream.Collectors;
  */
 public class Header extends VerticalLayout implements Button.ClickListener {
 
-    private RawContentService rawContentService = new RawContentServiceImpl();
+    private RawContentService rawContentService = ContentFacade.rawContentService;
     private MainLayout main ;
     private Window notifications;
     private Window userProfile;
@@ -78,7 +79,6 @@ public class Header extends VerticalLayout implements Button.ClickListener {
           userButton(clickEvent);
         }
     }
-
     private void notificationButton(ClickEvent clickEvent ){
         if (userProfile != null && userProfile.getUI() !=null) {
             userProfile.close();
@@ -99,7 +99,6 @@ public class Header extends VerticalLayout implements Button.ClickListener {
             });
         }
     }
-
     private void userButton(ClickEvent clickEvent){
         if (notifications != null && notifications.getUI() != null) {
             notifications.close();
@@ -119,7 +118,6 @@ public class Header extends VerticalLayout implements Button.ClickListener {
             });
         }
     }
-
     public  void buildNotifications( ClickEvent event) {
         notifications = new Window();
         final VerticalLayout layout = new VerticalLayout();
@@ -153,13 +151,13 @@ public class Header extends VerticalLayout implements Button.ClickListener {
         refreshNotification();
 
         notificationTable.addItemClickListener(event1 -> {
-            int i=1;
-            if (event1.isDoubleClick())
-            {
-               if(i==1) { i=0;
+            boolean flag =true;
+            if (event1.isDoubleClick()) {
+               if(flag) {
                    notifications.close();
                    rawView.tableId = notificationTable.getValue().toString();
                    rawView.EditButton();
+                   flag=false;
                }
             }
         });
@@ -357,7 +355,7 @@ public class Header extends VerticalLayout implements Button.ClickListener {
         notify.addStyleName("notifications");
         notify.addStyleName("unread");
         notify.setIcon( new FileResource(
-                new File("src/main/webapp/VAADIN/themes/dashboard/img/notifications.png")));
+                new File("src/main/webapp/VAADIN/themes/dashboard/notifications.png")));
         notify.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
         notify.addStyleName(ValoTheme.BUTTON_SMALL);
 

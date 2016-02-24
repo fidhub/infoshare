@@ -3,6 +3,7 @@ package infoshare.client.content.setup.tables;
 import com.vaadin.server.Responsive;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.themes.ValoTheme;
+import infoshare.app.facade.RoleFacade;
 import infoshare.client.content.MainLayout;
 import infoshare.domain.Role;
 import infoshare.services.roles.Impl.RoleServiceImpl;
@@ -18,7 +19,7 @@ public class RoleTable extends Table {
 
     private final MainLayout main;
     @Autowired
-    private RoleService roleService = new RoleServiceImpl();
+    private RoleService roleService = RoleFacade.roleSrvice;
 
     public RoleTable(MainLayout main) {
         this.main = main;
@@ -30,10 +31,11 @@ public class RoleTable extends Table {
         addStyleName(ValoTheme.TABLE_SMALL);
         addContainerProperty("Role Name", String.class, null);
         addContainerProperty("category", String.class, null);
-        List<Role> roles = roleService.findAll();
-        for (Role role : roles) {
-            addItem(new Object[]{role.getRoleName(),
-                    role.getDescription()
+        addContainerProperty("State", String.class, null);
+        for (Role role : roleService.findAll()) {
+            addItem(new Object[]{role.getName(),
+                    role.getDescription(),
+                    role.getState()
             }, role.getId());
         }
         setNullSelectionAllowed(false);

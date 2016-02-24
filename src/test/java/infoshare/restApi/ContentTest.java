@@ -1,16 +1,11 @@
 package infoshare.restApi;
 
-import infoshare.restapi.RestApiConnectorClass;
-import infoshare.restapi.UrlPath;
+import infoshare.app.conf.RestUtil;
 import infoshare.client.content.content.models.ContentModel;
-import infoshare.domain.Content;
-import infoshare.services.Content.ContentService;
-import infoshare.services.Content.Impl.ContentServiceImp;
-import org.junit.Assert;
+import infoshare.restapi.Content.ContentBaseUrl;
 import org.junit.Test;
 
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by user9 on 2015/07/24.
@@ -35,9 +30,9 @@ public class ContentTest {
         model.setContentType("Text");
         model.setStatus("raw");
 
-        RestApiConnectorClass.create(UrlPath.RawLinks.POST, model, ContentModel.class);
+        RestUtil.save(ContentBaseUrl.Raw.POST, model, ContentModel.class);
     }
-    @Test
+  /*  @Test
     public void testPUT() throws Exception {
         Content content = RestApiConnectorClass.read(UrlPath.ContentLinks.GET_ID, "d592b8cd7f48b0eee1e1f8e8f5988ab5",
                 Content.class);
@@ -65,14 +60,15 @@ public class ContentTest {
 
     @Test
     public void testUpdateAll() throws Exception {
-        ContentService contentService = new ContentServiceImp();
-        for(Content content:contentService.findAll()){
-            Content content1 = new Content.Builder(content.getTitle()).copy(content)
-                    .source("mobile")
-                    .category("uncategorized")
-                    .creator("CreatorIdGoesHere")
-                    .contentType("raw").build();
-            RestApiConnectorClass.update(UrlPath.ContentLinks.PUT, content1);
+        EditedContentService contentService = new EditedContentServiceImpl();
+        for(EditedContent content:contentService.findAll().stream()
+                .filter(cont -> cont.getState().equalsIgnoreCase("active"))
+                .collect(Collectors.toList()).stream()
+                .filter(cont -> cont.getStatus().equalsIgnoreCase("Edited"))
+                .collect(Collectors.toList())){
+            EditedContent content1 = new EditedContent.Builder(content.getTitle()).copy(content)
+                    .category("uncategorized").build();
+            RestApiConnectorClass.update(UrlPath.EditedLinks.PUT, content1);
         }
-    }
+    }*/
 }

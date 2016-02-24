@@ -6,10 +6,7 @@ import infoshare.domain.Lesson;
 import infoshare.services.courses.CourseService;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by codex on 2015/07/07.
@@ -60,10 +57,9 @@ public class Services implements CourseService {
     }
 
     @Override
-    public Course find(String s) {
+    public Course findById(String s) {
         return coursesMap.get(s);
     }
-
 
     @Override
     public Course save(Course entity) {
@@ -72,18 +68,18 @@ public class Services implements CourseService {
     }
 
     @Override
-    public Course merge(Course entity) {
+    public Course update(Course entity) {
         coursesMap.put(entity.getId(),entity);
         return coursesMap.get(entity.getId());
     }
 
     @Override
-    public void remove(Course entity) {
+    public void delete(Course entity) {
         coursesMap.remove(entity.getId());
     }
 
     @Override
-    public List<Course> findAll() {
-        return new ArrayList<>(coursesMap.values());
+    public Set<Course> findAll() {
+        return new HashSet<>(coursesMap.values());
     }
 }

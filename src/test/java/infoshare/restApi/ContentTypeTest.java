@@ -1,14 +1,6 @@
 package infoshare.restApi;
 
-import infoshare.restapi.RestApiConnectorClass;
-import infoshare.restapi.UrlPath;
-import infoshare.client.content.systemValues.models.ContentTypeModel;
-import infoshare.domain.ContentType;
 import junit.framework.TestCase;
-import org.junit.Assert;
-import org.junit.Test;
-
-import java.util.List;
 
 /**
  * Created by user9 on 2015/07/24.
@@ -16,7 +8,7 @@ import java.util.List;
 public class ContentTypeTest extends TestCase {
 
     //id 1 :83312a3616830b5ebba284e3635f2d13
-    @Test
+   /* @Test
     public void testPut() throws Exception {
 
         ContentTypeModel model = new ContentTypeModel();
@@ -47,5 +39,5 @@ public class ContentTypeTest extends TestCase {
     public void testGetAll() throws Exception {
       List<ContentType> contentTypes = RestApiConnectorClass.readAll(UrlPath.ContentTypeLinks.GETALL, ContentType.class);
         Assert.assertTrue(contentTypes.isEmpty());
-    }
+    }*/
 }

@@ -1,13 +1,11 @@
 package infoshare.services.users.Impl;
 
 import com.vaadin.spring.annotation.SpringComponent;
-import infoshare.restapi.RestApiConnectorClass;
-import infoshare.restapi.UrlPath;
 import infoshare.domain.User;
 import infoshare.services.users.UserService;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.Set;
 
 /**
  * Created by hashcode on 2015/06/24.
@@ -17,27 +15,27 @@ import java.util.*;
 public class UserServiceImpl implements UserService{
 
     @Override
-    public User find(String s) {
-        return RestApiConnectorClass.read(UrlPath.UserLinks.GET_ID,s,User.class);
+    public User findById(String s) {
+        return null;
     }
 
     @Override
-    public User save(User user) {
-        return  RestApiConnectorClass.create(UrlPath.UserLinks.POST, user, User.class);
+    public User save(User entity) {
+        return null;
     }
 
     @Override
-    public User merge(User user) {
-        return RestApiConnectorClass.update(UrlPath.UserLinks.PUT,user);
+    public User update(User entity) {
+        return null;
     }
 
     @Override
-    public void remove(User user) {
+    public void delete(User entity) {
 
     }
 
     @Override
-    public List<User> findAll() {
-        return RestApiConnectorClass.readAll(UrlPath.UserLinks.GETALL,User.class);
+    public Set<User> findAll() {
+        return null;
     }
 }

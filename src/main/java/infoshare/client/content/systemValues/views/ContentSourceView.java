@@ -6,15 +6,20 @@ import com.vaadin.data.util.BeanItem;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.VerticalLayout;
+import infoshare.app.facade.SourceFacade;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.systemValues.SystemValues;
 import infoshare.client.content.systemValues.forms.ContentSourceForm;
 import infoshare.client.content.systemValues.models.SourceModel;
 import infoshare.client.content.systemValues.tables.ContentSourceTable;
 import infoshare.domain.Source;
+import infoshare.factories.SourceFactory;
 import infoshare.services.source.SourceService;
 import infoshare.services.source.sourceServiceImpl.SourceServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by codex on 2015/06/26.
@@ -22,7 +27,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class ContentSourceView extends VerticalLayout implements Button.ClickListener, Property.ValueChangeListener {
 
     @Autowired
-    private SourceService sourceService = new SourceServiceImpl();
+    private SourceService sourceService = SourceFacade.sourceService;
 
     private final MainLayout main;
     private final ContentSourceForm form;
@@ -57,7 +62,7 @@ public class ContentSourceView extends VerticalLayout implements Button.ClickLis
         final Property property = event.getProperty();
         if (property == table) {
             try {
-                final Source source = sourceService.find(table.getValue().toString());
+                final Source source = sourceService.findById(table.getValue().toString());
                 final SourceModel bean = getModel(source);
                 form.binder.setItemDataSource(new BeanItem<>(bean));
                 setReadFormProperties();
@@ -79,7 +84,7 @@ public class ContentSourceView extends VerticalLayout implements Button.ClickLis
     private void saveEditedForm(FieldGroup binder) {
         try {
             binder.commit();
-            sourceService.merge(getUpdateEntity(binder));
+            sourceService.update(getUpdateEntity(binder));
             getHome();
             Notification.show("Record UPDATED!", Notification.Type.TRAY_NOTIFICATION);
         } catch (FieldGroup.CommitException e) {
@@ -88,14 +93,15 @@ public class ContentSourceView extends VerticalLayout implements Button.ClickLis
         }
     }
     private void deleteForm(FieldGroup binder) {
-        sourceService.remove(getUpdateEntity(binder));
+        sourceService.delete(getUpdateEntity(binder));
         getHome();
     }
     private Source getNewEntity(FieldGroup binder) {
         final SourceModel bean = ((BeanItem<SourceModel>) binder.getItemDataSource()).getBean();
-        final Source source = new Source.Builder(bean.getName())
-                .description(bean.getDescription())
-                .build();
+        Map<String,String> sourceVals = new HashMap<>();
+        sourceVals.put("name",bean.getName());
+        sourceVals.put("description",bean.getDescription());
+        final Source source = SourceFactory.getSource(sourceVals);
         return source;
     }
     private Source getUpdateEntity(FieldGroup binder) {
@@ -128,13 +134,13 @@ public class ContentSourceView extends VerticalLayout implements Button.ClickLis
     }
     private void addListeners() {
         //Register Button Listeners
-        form.save.addClickListener((Button.ClickListener) this);
-        form.edit.addClickListener((Button.ClickListener) this);
-        form.cancel.addClickListener((Button.ClickListener) this);
-        form.update.addClickListener((Button.ClickListener) this);
-        form.delete.addClickListener((Button.ClickListener) this);
+        form.save.addClickListener(this);
+        form.edit.addClickListener(this);
+        form.cancel.addClickListener(this);
+        form.update.addClickListener(this);
+        form.delete.addClickListener(this);
         //Register Table Listerners
-        table.addValueChangeListener((Property.ValueChangeListener) this);
+        table.addValueChangeListener(this);
     }
     private SourceModel getModel(Source source) {
         final SourceModel model = new SourceModel();

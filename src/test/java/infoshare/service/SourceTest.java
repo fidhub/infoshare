@@ -8,6 +8,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Songezo on 2015-10-02.
@@ -17,24 +18,23 @@ public class SourceTest extends TestCase {
 
     @Test
     public void testReadAll() throws Exception {
-        List<Source> sources = sourceService.findAll();
-        System.out.print(sources.get(0).getId());
+        Set<Source> sources = sourceService.findAll();
         Assert.assertTrue(!sources.isEmpty());
     }
 
     @Test
     public void testFindOne() throws Exception {
-        Source srcFind = sourceService.find("1");
+        Source srcFind = sourceService.findById("1");
         Assert.assertEquals(srcFind.getName(), "Mobile Phone");
     }
 
     @Test
     public void testUpdate() throws Exception {
-        Source source = sourceService.find("0fa5487777fc3a71cb77608a58926569");
+        Source source = sourceService.findById("0fa5487777fc3a71cb77608a58926569");
         Source sourceUpdate = new Source.Builder(getName()).copy(source).description("Emergency patients").build();
 
-        sourceService.merge(sourceUpdate);
-        Source sourceUpdated = sourceService.find("0fa5487777fc3a71cb77608a58926569");
+        sourceService.update(sourceUpdate);
+        Source sourceUpdated = sourceService.findById("0fa5487777fc3a71cb77608a58926569");
         Assert.assertEquals(source.getDescription(), sourceUpdated.getDescription());
     }
 }

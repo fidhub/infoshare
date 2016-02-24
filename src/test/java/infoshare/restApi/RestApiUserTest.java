@@ -1,25 +1,10 @@
 package infoshare.restApi;
 
-import infoshare.restapi.RestApiConnectorClass;
-import infoshare.restapi.UrlPath;
-import infoshare.client.content.setup.models.UserModel;
-import infoshare.domain.Role;
-import infoshare.domain.User;
-import infoshare.services.roles.Impl.RoleServiceImpl;
-import infoshare.services.roles.RoleService;
-import org.junit.Assert;
-import org.junit.Test;
-
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 /**
  * Created by user9 on 2015/07/24.
  */
 public class RestApiUserTest {
-    @Test
+   /* @Test
     public void testPost() throws Exception {
 
         UserModel user = new UserModel();
@@ -50,5 +35,5 @@ public class RestApiUserTest {
     public void testGetAll() throws Exception {
         List<User> users = RestApiConnectorClass.readAll(UrlPath.UserLinks.GETALL, User.class);
         Assert.assertTrue(users.isEmpty());
-    }
+    }*/
 }

@@ -3,8 +3,8 @@ package infoshare.client.content.setup.tables;
 import com.vaadin.ui.Table;
 import infoshare.domain.Address;
 import infoshare.domain.User;
-import infoshare.services.Address.AddressService;
-import infoshare.services.Address.Impl.AddressServiceImpl;
+import infoshare.services.Contact.AddressService;
+import infoshare.services.Contact.Impl.AddressServiceImpl;
 import infoshare.services.users.Impl.UserServiceImpl;
 import infoshare.services.users.UserService;
 
@@ -30,10 +30,10 @@ public class AddressTable extends Table {
     }
 
     public void loadTable() {
-        User user = userService.find(userID);
+        User user = userService.findById(userID);
         if (user != null) {
             for (int i = 0; i < user.getAddress().size(); i++) {
-                Address address = service.find(user.getAddress().get(i));
+                Address address = service.findById(user.getAddress().get(i));
                 try {
                     this.addItem(new Object[]{
                             address.getPostalAddress(),

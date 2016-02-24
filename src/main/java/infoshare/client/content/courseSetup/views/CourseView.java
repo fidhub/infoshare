@@ -53,7 +53,7 @@ public class CourseView extends VerticalLayout implements Button.ClickListener, 
         final Property property = event.getProperty();
         if (property == table) {
             try {
-                final Course course = courseService.find(table.getValue().toString());
+                final Course course = courseService.findById(table.getValue().toString());
                 final CourseModel bean = getModel(course);
                 form.binder.setItemDataSource(new BeanItem<>(bean));
             }catch (Exception e){
@@ -76,7 +76,7 @@ public class CourseView extends VerticalLayout implements Button.ClickListener, 
     private void saveEditedForm(FieldGroup binder) {
         try {
             binder.commit();
-            courseService.merge(getUpdateEntity(binder));
+            courseService.update(getUpdateEntity(binder));
             getHome();
             Notification.show("Record UPDATED!", Notification.Type.TRAY_NOTIFICATION);
         } catch (FieldGroup.CommitException e) {
@@ -85,7 +85,7 @@ public class CourseView extends VerticalLayout implements Button.ClickListener, 
         }
     }
     private void deleteForm(FieldGroup binder) {
-        courseService.remove(getUpdateEntity(binder));
+        courseService.update(getUpdateEntity(binder));
         getHome();
     }
     private Course getNewEntity(FieldGroup binder) {
@@ -127,13 +127,13 @@ public class CourseView extends VerticalLayout implements Button.ClickListener, 
     }
     private void addListeners() {
         //Register Button Listeners
-        form.save.addClickListener((Button.ClickListener) this);
-        form.edit.addClickListener((Button.ClickListener) this);
-        form.cancel.addClickListener((Button.ClickListener) this);
-        form.update.addClickListener((Button.ClickListener) this);
-        form.delete.addClickListener((Button.ClickListener) this);
+        form.save.addClickListener(this);
+        form.edit.addClickListener(this);
+        form.cancel.addClickListener(this);
+        form.update.addClickListener(this);
+        form.delete.addClickListener(this);
         //Register Table Listerners
-        table.addValueChangeListener((Property.ValueChangeListener) this);
+        table.addValueChangeListener(this);
     }
     private CourseModel getModel(Course course) {
         final CourseModel model = new CourseModel();

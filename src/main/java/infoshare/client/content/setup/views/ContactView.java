@@ -93,7 +93,7 @@ public class ContactView extends Window implements Button.ClickListener, Propert
         final Property property = valueChangeEvent.getProperty();
         if (property == contactTable){
             try {
-                final Contact contact = contactService.find(contactTable.getValue().toString());
+                final Contact contact = contactService.findById(contactTable.getValue().toString());
                 final ContactModel bean = getContactModel(contact);
                 contactForm.binder.setItemDataSource(new BeanItem<>(bean));
                 setReadContactFormProperties();
@@ -103,12 +103,12 @@ public class ContactView extends Window implements Button.ClickListener, Propert
     }
 
     private User getUserUpdateEntity(String contactID) {
-        final User bean = userService.find(AddressTable.userID);
+        final User bean = userService.findById(AddressTable.userID);
         List<String> contacts = new ArrayList<>();
 
         if (bean.getContact()!= null) {
             for (String ID : bean.getContact()) {
-                Contact contact = contactService.find(ID);
+                Contact contact = contactService.findById(ID);
                 if (contact != null) {
                     contacts.add(contact.getId());
                 }
@@ -134,7 +134,7 @@ public class ContactView extends Window implements Button.ClickListener, Propert
         try {
             binder.commit();
             Contact contact = contactService.save(getContactNewEntity(binder));
-            userService.merge(getUserUpdateEntity(contact.getId()));
+            userService.update(getUserUpdateEntity(contact.getId()));
             getHome();
             Notification.show("Contact ADDED!", Notification.Type.HUMANIZED_MESSAGE);
         } catch (FieldGroup.CommitException e) {
@@ -206,7 +206,7 @@ public class ContactView extends Window implements Button.ClickListener, Propert
     private void saveEditedForm(FieldGroup binder) {
         try {
             binder.commit();
-            contactService.merge(getUpdateEntity(binder));
+            contactService.update(getUpdateEntity(binder));
             getHome();
             Notification.show("Record UPDATED!", Notification.Type.TRAY_NOTIFICATION);
         } catch (FieldGroup.CommitException e) {
