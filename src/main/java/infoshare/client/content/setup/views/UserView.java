@@ -6,7 +6,7 @@ import com.vaadin.data.util.BeanItem;
 import com.vaadin.ui.*;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.setup.SetupMenu;
-import infoshare.client.content.setup.forms.UserForm;
+import infoshare.client.content.setup.forms.PersonForm;
 import infoshare.client.content.setup.models.UserModel;
 import infoshare.client.content.setup.tables.AddressTable;
 import infoshare.client.content.setup.tables.UserTable;
@@ -28,7 +28,7 @@ public class UserView extends VerticalLayout implements
         Button.ClickListener, Property.ValueChangeListener {
 
     private final MainLayout main;
-    private final UserForm userForm;
+    private final PersonForm personForm;
     private final UserTable table;
     private UserService userService = new UserServiceImpl();
     private RoleService roleService = new RoleServiceImpl();
@@ -36,10 +36,10 @@ public class UserView extends VerticalLayout implements
     private ContactView contactView;
     public UserView(MainLayout app) {
         main = app;
-        userForm = new UserForm();
+        personForm = new PersonForm();
         table = new UserTable(main);
         setSizeFull();
-        addComponent(userForm);
+        addComponent(personForm);
         addComponent(table);
         addListeners();
     }
@@ -47,24 +47,24 @@ public class UserView extends VerticalLayout implements
     public void buttonClick(Button.ClickEvent event) {
 
         final Button source = event.getButton();
-        if (source == userForm.save) {
-            saveForm(userForm.binder);
-        } else if (source == userForm.edit) {
+        if (source == personForm.save) {
+            saveForm(personForm.binder);
+        } else if (source == personForm.edit) {
             setEditFormProperties();
-        } else if (source == userForm.cancel) {
+        } else if (source == personForm.cancel) {
             getHome();
-        } else if (source == userForm.update) {
-            saveEditedForm(userForm.binder);
-        } else if (source == userForm.delete) {
-            deleteForm(userForm.binder);
-        }else if(source == userForm.addNewAddress){
+        } else if (source == personForm.update) {
+            saveEditedForm(personForm.binder);
+        } else if (source == personForm.delete) {
+            deleteForm(personForm.binder);
+        }else if(source == personForm.addNewAddress){
             try {
                 addressView.setModal(true);
                 getUI().addWindow(addressView);
             }catch (Exception e){
                 Notification.show("Select the user first",Notification.Type.HUMANIZED_MESSAGE);
             }
-        }else if(source == userForm.addNewContact){
+        }else if(source == personForm.addNewContact){
             try {
                 contactView.setModal(true);
                 getUI().addWindow(contactView);
@@ -85,7 +85,7 @@ public class UserView extends VerticalLayout implements
                 contactView = new ContactView(main);
                 final User user = userService.findById(table.getValue().toString());
                 final UserModel bean = getModel(user);
-                userForm.binder.setItemDataSource(new BeanItem<>(bean));
+                personForm.binder.setItemDataSource(new BeanItem<>(bean));
                 setReadFormProperties();
             }catch (Exception r){
             }
@@ -168,33 +168,33 @@ public class UserView extends VerticalLayout implements
         main.content.setSecondComponent(new SetupMenu(main, "LANDING"));
     }
     private void setEditFormProperties() {
-        userForm.binder.setReadOnly(false);
-        userForm.save.setVisible(false);
-        userForm.edit.setVisible(false);
-        userForm.cancel.setVisible(true);
-        userForm.delete.setVisible(false);
-        userForm.update.setVisible(true);
+        personForm.binder.setReadOnly(false);
+        personForm.save.setVisible(false);
+        personForm.edit.setVisible(false);
+        personForm.cancel.setVisible(true);
+        personForm.delete.setVisible(false);
+        personForm.update.setVisible(true);
     }
     private void setReadFormProperties() {
-        userForm.binder.setReadOnly(true);
+        personForm.binder.setReadOnly(true);
         //Buttons Behaviour
-        userForm.save.setVisible(false);
-        userForm.edit.setVisible(true);
-        userForm.cancel.setVisible(true);
-        userForm.delete.setVisible(true);
-        userForm.update.setVisible(false);
+        personForm.save.setVisible(false);
+        personForm.edit.setVisible(true);
+        personForm.cancel.setVisible(true);
+        personForm.delete.setVisible(true);
+        personForm.update.setVisible(false);
     }
 
     private void addListeners() {
         //Register Button Listeners
-        userForm.save.addClickListener(this);
-        userForm.edit.addClickListener(this);
-        userForm.cancel.addClickListener(this);
-        userForm.update.addClickListener(this);
+        personForm.save.addClickListener(this);
+        personForm.edit.addClickListener(this);
+        personForm.cancel.addClickListener(this);
+        personForm.update.addClickListener(this);
         table.addValueChangeListener(this);
-        userForm.rolesList.addValueChangeListener(this);
-        userForm.addNewAddress.addClickListener(this);
-        userForm.addNewContact.addClickListener(this);
+        personForm.rolesList.addValueChangeListener(this);
+        personForm.addNewAddress.addClickListener(this);
+        personForm.addNewContact.addClickListener(this);
     }
     public UserModel getModel(User user) {
         Set<String> userRolesId = new HashSet<>();
