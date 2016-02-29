@@ -4,9 +4,8 @@ import com.vaadin.ui.Table;
 import com.vaadin.ui.themes.ValoTheme;
 import infoshare.app.facade.ContentFacade;
 import infoshare.client.content.MainLayout;
-import infoshare.domain.RawContent;
+import infoshare.domain.content.RawContent;
 
-import infoshare.services.Content.Impl.RawContentServiceImpl;
 import infoshare.services.Content.RawContentService;
 import org.springframework.beans.factory.annotation.Autowired;
 

@@ -1,8 +1,7 @@
 package infoshare.client.content.setup.tables;
 
 import com.vaadin.ui.Table;
-import infoshare.domain.Address;
-import infoshare.domain.User;
+import infoshare.domain.person.PersonAddress;
 import infoshare.services.Contact.AddressService;
 import infoshare.services.Contact.Impl.AddressServiceImpl;
 import infoshare.services.users.Impl.UserServiceImpl;
@@ -19,10 +18,10 @@ public class AddressTable extends Table {
 
     public AddressTable() {
         setWidth("100%");
-        addContainerProperty("Postal Address", String.class, null);
-        addContainerProperty("Physical Address", String.class, null);
+        addContainerProperty("Postal PersonAddress", String.class, null);
+        addContainerProperty("Physical PersonAddress", String.class, null);
         addContainerProperty("Postal Code", String.class, null);
-        addContainerProperty("Address Type", String.class, null);
+        addContainerProperty("PersonAddress Type", String.class, null);
         loadTable();
         setNullSelectionAllowed(false);
         setSelectable(true);
@@ -33,14 +32,14 @@ public class AddressTable extends Table {
         User user = userService.findById(userID);
         if (user != null) {
             for (int i = 0; i < user.getAddress().size(); i++) {
-                Address address = service.findById(user.getAddress().get(i));
+                PersonAddress personAddress = service.findById(user.getAddress().get(i));
                 try {
                     this.addItem(new Object[]{
-                            address.getPostalAddress(),
-                            address.getPhysicalAddress(),
-                            address.getPostalCode(),
-                            address.getAddressType()
-                    }, address.getId());
+                            personAddress.getPostalAddress(),
+                            personAddress.getPhysicalAddress(),
+                            personAddress.getPostalCode(),
+                            personAddress.getAddressTypeId()
+                    }, personAddress.getId());
                 } catch (Exception e) {
                 }
             }

@@ -3,7 +3,7 @@ package infoshare.factories;
 
 import infoshare.app.util.DomainState;
 import infoshare.app.util.security.KeyGenerator;
-import infoshare.domain.Person;
+import infoshare.domain.person.Person;
 
 import java.util.Map;
 
@@ -17,7 +17,7 @@ public class PersonFactory {
         Person person = new Person.Builder()
                 .id(KeyGenerator.getEntityId())
                 .firstName(stringVals.get("firstName"))
-                .middletName(stringVals.get("middleName"))
+                .middleName(stringVals.get("middleName"))
                 .lastName(stringVals.get("lastName"))
                 .authvalue(stringVals.get("authvalue"))
                 .emailAddress(stringVals.get("emailAddress"))

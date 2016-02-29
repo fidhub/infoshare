@@ -1,4 +1,4 @@
-package infoshare.domain;
+package infoshare.domain.content;
 
 import java.io.Serializable;import java.lang.Comparable;import java.lang.Object;import java.lang.Override;import java.lang.String;
 

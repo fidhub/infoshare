@@ -12,10 +12,9 @@ import infoshare.client.content.systemValues.SystemValues;
 import infoshare.client.content.systemValues.forms.ContentSourceForm;
 import infoshare.client.content.systemValues.models.SourceModel;
 import infoshare.client.content.systemValues.tables.ContentSourceTable;
-import infoshare.domain.Source;
+import infoshare.domain.content.Source;
 import infoshare.factories.SourceFactory;
 import infoshare.services.source.SourceService;
-import infoshare.services.source.sourceServiceImpl.SourceServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashMap;

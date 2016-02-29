@@ -1,13 +1,12 @@
 package infoshare.service;
 
-import infoshare.domain.Category;
+import infoshare.domain.content.Category;
 import infoshare.services.category.CategoryService;
 import infoshare.services.category.Impl.CategoryServiceImpl;
 import junit.framework.TestCase;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.List;
 import java.util.Set;
 
 /**

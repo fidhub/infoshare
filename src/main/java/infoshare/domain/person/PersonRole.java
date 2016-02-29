@@ -1,4 +1,4 @@
-package infoshare.domain;
+package infoshare.domain.person;
 
 import java.io.Serializable;
 

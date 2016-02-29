@@ -1,6 +1,6 @@
 package infoshare.services.Content.Impl;
 
-import infoshare.domain.PublishedContent;
+import infoshare.domain.content.PublishedContent;
 import infoshare.restapi.Content.PublishedContentAPI;
 import infoshare.services.Content.PublishedContentService;
 

@@ -2,8 +2,7 @@ package infoshare.factories;
 
 import infoshare.app.util.DomainState;
 import infoshare.app.util.security.KeyGenerator;
-import infoshare.domain.PublishedContent;
-import infoshare.domain.RawContent;
+import infoshare.domain.content.PublishedContent;
 
 import java.util.Date;
 import java.util.Map;

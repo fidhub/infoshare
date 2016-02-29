@@ -1,6 +1,6 @@
 package infoshare.services.Contact.Impl;
 
-import infoshare.domain.Address;
+import infoshare.domain.person.PersonAddress;
 import infoshare.restapi.Contacts.AddressAPI;
 import infoshare.services.Contact.AddressService;
 
@@ -12,27 +12,27 @@ import java.util.Set;
 public class AddressServiceImpl implements AddressService {
 
     @Override
-    public Address findById(String s) {
+    public PersonAddress findById(String s) {
         return AddressAPI.findById(s);
     }
 
     @Override
-    public Address save(Address entity) {
+    public PersonAddress save(PersonAddress entity) {
         return AddressAPI.save(entity);
     }
 
     @Override
-    public Address update(Address entity) {
+    public PersonAddress update(PersonAddress entity) {
         return AddressAPI.save(entity);
     }
 
     @Override
-    public void delete(Address entity) {
+    public void delete(PersonAddress entity) {
         AddressAPI.save(entity);
     }
 
     @Override
-    public Set<Address> findAll() {
+    public Set<PersonAddress> findAll() {
         return null;
     }
 }

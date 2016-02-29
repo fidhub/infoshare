@@ -5,11 +5,9 @@ import com.vaadin.ui.TextField;
 import com.vaadin.ui.themes.ValoTheme;
 import infoshare.app.facade.CategoryFacade;
 import infoshare.app.facade.ContentFacade;
-import infoshare.domain.PublishedContent;
-import infoshare.services.Content.Impl.PublishedContentServiceImpl;
+import infoshare.domain.content.PublishedContent;
 import infoshare.services.Content.PublishedContentService;
 import infoshare.services.category.CategoryService;
-import infoshare.services.category.Impl.CategoryServiceImpl;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

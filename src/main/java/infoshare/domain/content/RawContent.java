@@ -1,4 +1,4 @@
-package infoshare.domain;
+package infoshare.domain.content;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -8,6 +8,7 @@ import java.util.Date;
  */
 public class RawContent implements Serializable, Comparable<RawContent> {
 
+    private String org;
     private String id;
     private Date dateCreated;
     private String creator;
@@ -21,6 +22,7 @@ public class RawContent implements Serializable, Comparable<RawContent> {
 
     public RawContent(Builder builder) {
         this.id = builder.id;
+        this.org = builder.org;
         this.dateCreated = builder.dateCreated;
         this.creator = builder.creator;
         this.source = builder.source;
@@ -32,6 +34,9 @@ public class RawContent implements Serializable, Comparable<RawContent> {
         this.status = builder.status;
     }
 
+    public String getOrg() {
+        return org;
+    }
     public String getId() {
         return id;
     }
@@ -83,14 +88,22 @@ public class RawContent implements Serializable, Comparable<RawContent> {
         private String contentType;
         private String status     ;
         private String state      ;
+        public String org;
 
-        public Builder(String title){
+        public Builder title(String title){
             this.title = title;
+            return this;
         }
         public Builder id(String id){
             this.id =id;
             return this;
         }
+
+        public Builder org(String org) {
+            this.org = org;
+            return this;
+        }
+
         public Builder dateCreated(Date dateCreated){
             this.dateCreated = dateCreated;
             return this;
@@ -128,6 +141,7 @@ public class RawContent implements Serializable, Comparable<RawContent> {
             this.id = rawContent.id;
             this.dateCreated = rawContent.dateCreated;
             this.creator = rawContent.creator;
+            this.org = rawContent.org;
             this.source = rawContent.source;
             this.category = rawContent.category;
             this.title = rawContent.title;
@@ -142,7 +156,7 @@ public class RawContent implements Serializable, Comparable<RawContent> {
         public RawContent build(){return new RawContent(this);}
     }
 
-
+    public static Builder builder(){return new Builder();}
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -39,7 +39,7 @@ public class ContactForm extends FormLayout {
         final GridLayout layout = new GridLayout(4,10);
         layout.setSpacing(true);
         TextField phone = getTextField("Phone Number","phone");
-        TextField email = getTextField("Email Address","email");
+        TextField email = getTextField("Email PersonAddress","email");
         TextField contactType = getTextField("contact Type","contactType");
 
         layout.addComponent(phone, 0, 0);

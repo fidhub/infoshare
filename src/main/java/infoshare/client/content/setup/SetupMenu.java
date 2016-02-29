@@ -2,12 +2,10 @@ package infoshare.client.content.setup;
 
 import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.Window;
 import infoshare.client.content.MainLayout;
-import infoshare.client.content.setup.views.AddressView;
 import infoshare.client.content.setup.views.RoleView;
 import infoshare.client.content.setup.views.UserDetailsView;
-import infoshare.client.content.setup.views.UserView;
+import infoshare.client.content.setup.views.PersonView;
 
 /**
  * Created by hashcode on 2015/06/23.
@@ -22,7 +20,7 @@ public class SetupMenu  extends VerticalLayout {
 
         final VerticalLayout userView = new VerticalLayout();
         userView.setMargin(true);
-        userView.addComponent(new UserView(main));
+        userView.addComponent(new PersonView(main));
 
         final VerticalLayout roleView = new VerticalLayout();
         roleView.setMargin(true);

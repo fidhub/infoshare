@@ -7,7 +7,7 @@ package infoshare.factories;
 
 
 import infoshare.app.util.DomainState;
-import infoshare.domain.PersonRole;
+import infoshare.domain.person.PersonRole;
 
 /**
  *

@@ -7,7 +7,7 @@ import infoshare.app.facade.UtilFacade;
 import infoshare.app.util.email.ComposeEmail;
 import infoshare.app.util.email.EmailUtil;
 import infoshare.domain.Mail;
-import infoshare.domain.Person;
+import infoshare.domain.person.Person;
 import infoshare.domain.Role;
 import infoshare.services.people.PersonService;
 import org.apache.commons.lang3.RandomStringUtils;

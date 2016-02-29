@@ -3,8 +3,10 @@ package infoshare.client.content.setup.forms;
 import com.vaadin.data.fieldgroup.FieldGroup;
 import com.vaadin.data.util.BeanItem;
 import com.vaadin.data.validator.BeanValidator;
+import com.vaadin.server.FontAwesome;
 import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.*;
+import com.vaadin.ui.themes.ValoTheme;
 import infoshare.app.facade.RoleFacade;
 import infoshare.client.content.setup.models.PersonModel;
 import infoshare.services.roles.RoleService;
@@ -21,11 +23,11 @@ public class PersonForm extends FormLayout {
 
     private RoleService roleService = RoleFacade.roleService;
     public ListSelect rolesList = new ListSelect();
-/*
-    public  Button addNewAddress = new Button("Address");
-    public  Button addNewContact = new Button("Contact");*/
+
 
     // Define Buttons
+    public final Button addNewAddress = new Button("PersonAddress");
+    public final Button addNewContact = new Button("Contact");
     public final Button save = new Button("Save");
     public final Button edit = new Button("Edit");
     public final Button cancel = new Button("Cancel");
@@ -45,7 +47,7 @@ public class PersonForm extends FormLayout {
 
         final TextField firstname = getTextField("First Name", "firstName");
         final TextField middleName = getTextField("Middle Name", "middleName");
-        final TextField emailAddress = getTextField("Email Address", "emailAddress");
+        final TextField emailAddress = getTextField("Email PersonAddress", "emailAddress");
         final TextField lastname = getTextField("Last Name", "lastName");
         final TextField authvalue = getTextField("author value", "authvalue");
         final CheckBox enable = getCheckBoxField("Activate Account", "enable");
@@ -74,24 +76,24 @@ public class PersonForm extends FormLayout {
         leftLayout.addComponent(accountNonLocked);
         leftLayout.addComponent(roles);
 
-        /*addNewAddress.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
+        addNewAddress.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
         addNewAddress.addStyleName(ValoTheme.BUTTON_SMALL);
         addNewAddress.setIcon(FontAwesome.PLUS);
         addNewContact.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
         addNewContact.addStyleName(ValoTheme.BUTTON_SMALL);
         addNewContact.setIcon(FontAwesome.PLUS);
-*/
-       /* HorizontalLayout buttons = new HorizontalLayout();
+
+        HorizontalLayout buttons = new HorizontalLayout();
         buttons.setSpacing(true);
         buttons.addComponent(addNewAddress);
-        buttons.addComponent(addNewContact);*/
+        buttons.addComponent(addNewContact);
 
         final GridLayout grid = new GridLayout(8, 5);
         grid.setSizeFull();
         grid.setSpacing(true);
         grid.addComponent(rightLayout, 0, 0);
         grid.addComponent(leftLayout, 2, 0);
-       // grid.addComponent(buttons, 0, 1,1,1);
+        grid.addComponent(buttons, 0, 1,1,1);
         grid.addComponent(getButtons(), 0, 3,1,3);
 
         return grid;

@@ -1,4 +1,4 @@
-package infoshare.domain;
+package infoshare.domain.content;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -17,9 +17,11 @@ public class EditedContent implements Serializable, Comparable<EditedContent> {
     private String contentType;
     private String status     ;
     private String state      ;
+    private String org;
 
     public EditedContent(Builder builder) {
         this.id = builder.id;
+        this.org = builder.org;
         this.dateCreated = builder.dateCreated;
         this.creator = builder.creator;
         this.source = builder.source;
@@ -29,6 +31,10 @@ public class EditedContent implements Serializable, Comparable<EditedContent> {
         this.contentType = builder.contentType;
         this.state = builder.state;
         this.status = builder.status;
+    }
+
+    public String getOrg() {
+        return org;
     }
 
     public String getId() {
@@ -82,12 +88,19 @@ public class EditedContent implements Serializable, Comparable<EditedContent> {
         private String contentType;
         private String status     ;
         private String state      ;
+        public String org;
 
-        public Builder(String title){
+        public Builder title(String title){
             this.title = title;
+            return this;
         }
         public Builder id(String id){
             this.id =id;
+            return this;
+        }
+
+        public Builder org(String org) {
+            this.org = org;
             return this;
         }
         public Builder dateCreated(Date dateCreated){
@@ -141,7 +154,7 @@ public class EditedContent implements Serializable, Comparable<EditedContent> {
         public EditedContent build(){return new EditedContent(this);}
     }
 
-
+    public static Builder builder(){return new Builder();}
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

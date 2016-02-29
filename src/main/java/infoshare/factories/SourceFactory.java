@@ -1,7 +1,7 @@
 package infoshare.factories;
 
 import infoshare.app.util.security.KeyGenerator;
-import infoshare.domain.Source;
+import infoshare.domain.content.Source;
 
 import java.util.Map;
 

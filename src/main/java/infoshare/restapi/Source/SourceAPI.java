@@ -1,9 +1,7 @@
 package infoshare.restapi.Source;
 
 import infoshare.app.conf.RestUtil;
-import infoshare.domain.Role;
-import infoshare.domain.Source;
-import infoshare.restapi.Roles.RolesBaseUrl;
+import infoshare.domain.content.Source;
 
 import java.util.Set;
 

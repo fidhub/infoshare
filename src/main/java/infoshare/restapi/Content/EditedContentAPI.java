@@ -1,9 +1,8 @@
 package infoshare.restapi.Content;
 
 import infoshare.app.conf.RestUtil;
-import infoshare.domain.EditedContent;
+import infoshare.domain.content.EditedContent;
 
-import java.time.format.ResolverStyle;
 import java.util.Set;
 
 /**

@@ -1,13 +1,12 @@
 package infoshare.service;
 
-import infoshare.domain.Source;
+import infoshare.domain.content.Source;
 import infoshare.services.source.SourceService;
 import infoshare.services.source.sourceServiceImpl.SourceServiceImpl;
 import junit.framework.TestCase;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.List;
 import java.util.Set;
 
 /**

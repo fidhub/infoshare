@@ -1,4 +1,4 @@
-package infoshare.domain;
+package infoshare.domain.content;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -17,10 +17,12 @@ public class PublishedContent implements Serializable, Comparable <PublishedCont
     private String contentType;
     private String status     ;
     private String state      ;
+    private String org;
 
     public PublishedContent(Builder builder) {
         this.id = builder.id;
         this.dateCreated = builder.dateCreated;
+        this.org = builder.org;
         this.creator = builder.creator;
         this.source = builder.source;
         this.category = builder.category;
@@ -31,6 +33,9 @@ public class PublishedContent implements Serializable, Comparable <PublishedCont
         this.status = builder.status;
     }
 
+    public String getOrg() {
+        return org;
+    }
     public String getId() {
         return id;
     }
@@ -82,12 +87,19 @@ public class PublishedContent implements Serializable, Comparable <PublishedCont
         private String contentType;
         private String status     ;
         private String state      ;
+        public String org;
 
-        public Builder(String title){
+        public Builder title(String title){
             this.title = title;
+            return this;
         }
         public Builder id(String id){
             this.id =id;
+            return this;
+        }
+
+        public Builder org(String org) {
+            this.org = org;
             return this;
         }
         public Builder dateCreated(Date dateCreated){
@@ -126,6 +138,7 @@ public class PublishedContent implements Serializable, Comparable <PublishedCont
         public Builder copy(PublishedContent publishedContent){
             this.id = publishedContent.id;
             this.dateCreated = publishedContent.dateCreated;
+            this.org = publishedContent.org;
             this.creator = publishedContent.creator;
             this.source = publishedContent.source;
             this.category = publishedContent.category;
@@ -140,7 +153,7 @@ public class PublishedContent implements Serializable, Comparable <PublishedCont
 
         public PublishedContent build(){return new PublishedContent(this);}
     }
-
+    public static Builder builder(){return new Builder();}
 
     @Override
     public boolean equals(Object o) {

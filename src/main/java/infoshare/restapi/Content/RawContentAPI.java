@@ -1,7 +1,7 @@
 package infoshare.restapi.Content;
 
 import infoshare.app.conf.RestUtil;
-import infoshare.domain.RawContent;
+import infoshare.domain.content.RawContent;
 
 import java.util.Set;
 

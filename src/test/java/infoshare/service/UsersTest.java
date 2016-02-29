@@ -1,6 +1,5 @@
 package infoshare.service;
 
-import infoshare.domain.User;
 import infoshare.services.users.Impl.UserServiceImpl;
 import infoshare.services.users.UserService;
 import junit.framework.TestCase;

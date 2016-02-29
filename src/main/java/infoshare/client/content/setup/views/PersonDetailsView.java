@@ -6,22 +6,22 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.VerticalLayout;
 import infoshare.client.content.MainLayout;
-import infoshare.client.content.setup.tables.UserDetailsTable;
+import infoshare.client.content.setup.tables.PersonDetailsTable;
 import infoshare.filterSearch.UserFilter;
 
 /**
  * Created by user9 on 2016/02/11.
  */
-public class UserDetailsView extends VerticalLayout implements
+public class PersonDetailsView extends VerticalLayout implements
         Button.ClickListener, Property.ValueChangeListener {
 
     private final MainLayout main;
-    private final UserDetailsTable table;
+    private final PersonDetailsTable table;
     private final UserFilter userDetails;
 
-    public UserDetailsView(MainLayout app) {
+    public PersonDetailsView(MainLayout app) {
         main = app;
-        table = new UserDetailsTable(main);
+        table = new PersonDetailsTable(main);
         userDetails = new UserFilter();
         HorizontalLayout layout = new HorizontalLayout();
         layout.setSpacing(false);
@@ -44,7 +44,7 @@ public class UserDetailsView extends VerticalLayout implements
     public void refreshContacts(String stringFilter ) {
         try {
             table.removeAllItems();
-            userDetails.findAll(stringFilter).forEach(this.table::loadTable);
+            userDetails.findAll(stringFilter,"CPUT").forEach(this.table::loadTable);
         }catch (Exception e){
         }
     }

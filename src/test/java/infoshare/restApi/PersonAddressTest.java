@@ -8,7 +8,7 @@ import org.junit.Test;
 /**
  * Created by user9 on 2015/08/04.
  */
-public class AddressTest {
+public class PersonAddressTest {
 
     //Todo: id=66d6403b1a4c582eb61d2e0f104d4386
 

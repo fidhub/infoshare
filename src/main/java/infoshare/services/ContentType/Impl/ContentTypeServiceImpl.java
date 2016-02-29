@@ -1,7 +1,7 @@
 package infoshare.services.ContentType.Impl;
 
 import com.vaadin.spring.annotation.SpringComponent;
-import infoshare.domain.ContentType;
+import infoshare.domain.content.ContentType;
 import infoshare.restapi.ContentType.ContentTypeAPI;
 import infoshare.services.ContentType.ContentTypeService;
 import org.springframework.stereotype.Service;

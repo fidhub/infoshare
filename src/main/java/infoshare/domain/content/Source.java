@@ -1,4 +1,4 @@
-package infoshare.domain;
+package infoshare.domain.content;
 
 import java.io.Serializable;
 
@@ -8,6 +8,7 @@ import java.io.Serializable;
 public class Source implements Serializable, Comparable<Source> {
 
     private String id;
+    private String org;
     private String name;
     private String description;
 
@@ -16,6 +17,7 @@ public class Source implements Serializable, Comparable<Source> {
 
     public Source(Builder builder) {
         this.id = builder.id;
+        this.org = builder.org;
         this.name = builder.name;
         this.description = builder.description;
 
@@ -37,9 +39,16 @@ public class Source implements Serializable, Comparable<Source> {
         private String id;
         private String name;
         private String description;
+        private String org;
 
-        public Builder(String name){
+        public Builder org(String org) {
+            this.org = org;
+            return this;
+        }
+
+        public Builder name(String name){
             this.name = name;
+            return this;
         }
 
         public Builder id(String id){
@@ -53,6 +62,7 @@ public class Source implements Serializable, Comparable<Source> {
 
         public Builder copy(Source source){
             this.id = source.id;
+            this.org = source.org;
             this.name = source.name;
             this.description = source.description;
             return this;
@@ -61,6 +71,7 @@ public class Source implements Serializable, Comparable<Source> {
             return new Source(this);
         }
     }
+    public static Builder builder(){return new Builder();}
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -1,6 +1,6 @@
 package infoshare.services.Content;
 
-import infoshare.domain.EditedContent;
+import infoshare.domain.content.EditedContent;
 import infoshare.services.Services;
 
 /**

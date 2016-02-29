@@ -1,6 +1,6 @@
 package infoshare.services.category.Impl;
 
-import infoshare.domain.Category;
+import infoshare.domain.content.Category;
 import infoshare.restapi.Category.CategoryAPI;
 import infoshare.services.category.CategoryService;
 

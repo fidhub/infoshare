@@ -14,8 +14,7 @@ import infoshare.client.content.content.ContentMenu;
 import infoshare.client.content.content.views.RawView;
 import infoshare.client.header.Form.ProfilePopUp;
 import infoshare.client.header.landing_page.LandingHome;
-import infoshare.domain.RawContent;
-import infoshare.services.Content.Impl.RawContentServiceImpl;
+import infoshare.domain.content.RawContent;
 import infoshare.services.Content.RawContentService;
 
 import java.io.File;

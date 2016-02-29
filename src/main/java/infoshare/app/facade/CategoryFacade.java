@@ -1,6 +1,5 @@
 package infoshare.app.facade;
 
-import infoshare.domain.Category;
 import infoshare.services.category.CategoryService;
 import infoshare.services.category.Impl.CategoryServiceImpl;
 

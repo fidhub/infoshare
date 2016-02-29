@@ -1,6 +1,6 @@
 package infoshare.services.category;
 
-import infoshare.domain.Category;
+import infoshare.domain.content.Category;
 import infoshare.services.Services;
 import org.springframework.stereotype.Component;
 

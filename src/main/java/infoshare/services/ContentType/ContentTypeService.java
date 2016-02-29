@@ -1,6 +1,6 @@
 package infoshare.services.ContentType;
 
-import infoshare.domain.ContentType;
+import infoshare.domain.content.ContentType;
 import infoshare.services.Services;
 import org.springframework.stereotype.Component;
 

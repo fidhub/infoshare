@@ -11,8 +11,7 @@ import infoshare.client.content.MainLayout;
 import infoshare.client.content.setup.forms.AddressForm;
 import infoshare.client.content.setup.models.AddressModel;
 import infoshare.client.content.setup.tables.AddressTable;
-import infoshare.domain.Address;
-import infoshare.domain.User;
+import infoshare.domain.person.PersonAddress;
 import infoshare.services.Contact.AddressService;
 import infoshare.services.Contact.Impl.AddressServiceImpl;
 import infoshare.services.users.Impl.UserServiceImpl;
@@ -83,8 +82,8 @@ public class AddressView extends Window implements Button.ClickListener, Propert
         final Property property = valueChangeEvent.getProperty();
         if (property == addressTable){
             try {
-                final Address address = addressService.findById(addressTable.getValue().toString());
-                final AddressModel bean = getAddressModel(address);
+                final PersonAddress personAddress = addressService.findById(addressTable.getValue().toString());
+                final AddressModel bean = getAddressModel(personAddress);
                 addressForm.binder.setItemDataSource(new BeanItem<>(bean));
                 setReadContactFormProperties();
             }catch (Exception e){}
@@ -98,9 +97,9 @@ public class AddressView extends Window implements Button.ClickListener, Propert
 
         if (bean.getAddress()!= null) {
             for (String ID : bean.getAddress()) {
-                Address address = addressService.findById(ID);
-                if (address != null) {
-                    addresses.add(address.getId());
+                PersonAddress personAddress = addressService.findById(ID);
+                if (personAddress != null) {
+                    addresses.add(personAddress.getId());
                 }
             }
         }
@@ -122,10 +121,10 @@ public class AddressView extends Window implements Button.ClickListener, Propert
     private void saveForm(FieldGroup binder) {
         try {
             binder.commit();
-            Address address = addressService.save(getAddressNewEntity(binder));
-            userService.update(getUserUpdateEntity(address.getId()));
+            PersonAddress personAddress = addressService.save(getAddressNewEntity(binder));
+            userService.update(getUserUpdateEntity(personAddress.getId()));
             getHome();
-            Notification.show("Address ADDED!", Notification.Type.HUMANIZED_MESSAGE);
+            Notification.show("PersonAddress ADDED!", Notification.Type.HUMANIZED_MESSAGE);
         } catch (FieldGroup.CommitException e) {
             Notification.show("Values MISSING!", Notification.Type.HUMANIZED_MESSAGE);
             getHome();
@@ -134,14 +133,14 @@ public class AddressView extends Window implements Button.ClickListener, Propert
             getHome();
         }
     }
-    private Address getAddressNewEntity(FieldGroup binder) {
+    private PersonAddress getAddressNewEntity(FieldGroup binder) {
         final AddressModel bean = ((BeanItem<AddressModel>)binder.getItemDataSource()).getBean();
-        final Address address = new Address.Builder(bean.getPhysicalAddress())
+        final PersonAddress personAddress = new PersonAddress.Builder(bean.getPhysicalAddress())
                                 .postalCode(bean.getPostalCode())
                                 .postalAddress(bean.getPostalAddress())
                                 .addressType(bean.getAddressType())
                                 .build();
-        return address;
+        return personAddress;
     }
 
     private void addListeners() {
@@ -152,12 +151,12 @@ public class AddressView extends Window implements Button.ClickListener, Propert
         addressForm.exit.addClickListener(this);
         addressTable.addValueChangeListener(this);
     }
-    public AddressModel getAddressModel(Address address){
+    public AddressModel getAddressModel(PersonAddress personAddress){
         AddressModel model = new AddressModel();
-        model.setAddressType(address.getAddressType());
-        model.setPhysicalAddress(address.getPhysicalAddress());
-        model.setPostalCode(address.getPostalCode());
-        model.setPostalAddress(address.getPostalAddress());
+        model.setAddressType(personAddress.getAddressTypeId());
+        model.setPhysicalAddress(personAddress.getPhysicalAddress());
+        model.setPostalCode(personAddress.getPostalCode());
+        model.setPostalAddress(personAddress.getPostalAddress());
         return model;
     }
 

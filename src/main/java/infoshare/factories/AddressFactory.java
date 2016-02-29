@@ -1,7 +1,7 @@
 package infoshare.factories;
 
 import infoshare.app.util.security.KeyGenerator;
-import infoshare.domain.Address;
+import infoshare.domain.person.PersonAddress;
 
 import java.util.Map;
 
@@ -10,13 +10,13 @@ import java.util.Map;
  */
 public class AddressFactory {
 
-    public static Address getAddress(Map<String,String> addressVals){
-        Address address = new Address.Builder(addressVals.get("physicalAddress"))
+    public static PersonAddress getAddress(Map<String,String> addressVals){
+        PersonAddress personAddress = new PersonAddress.Builder()
                 .id(KeyGenerator.getEntityId())
-                .postalAddress(addressVals.get("postalAddress"))
+                .addressTypeId(addressVals.get("addressTypeId"))
                 .postalCode(addressVals.get("postalCode"))
-                .addressType(addressVals.get("addressType"))
+                .postalCode(addressVals.get("postalCode"))
                 .build();
-        return address;
+        return personAddress;
     }
 }

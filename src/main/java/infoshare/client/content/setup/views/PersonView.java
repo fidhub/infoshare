@@ -3,41 +3,45 @@ package infoshare.client.content.setup.views;
 import com.vaadin.data.Property;
 import com.vaadin.data.fieldgroup.FieldGroup;
 import com.vaadin.data.util.BeanItem;
-import com.vaadin.ui.*;
+import com.vaadin.ui.Button;
+import com.vaadin.ui.Notification;
+import com.vaadin.ui.VerticalLayout;
+import infoshare.app.facade.PeopleFacade;
+import infoshare.app.facade.RoleFacade;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.setup.SetupMenu;
 import infoshare.client.content.setup.forms.PersonForm;
-import infoshare.client.content.setup.models.UserModel;
-import infoshare.client.content.setup.tables.AddressTable;
-import infoshare.client.content.setup.tables.UserTable;
+import infoshare.client.content.setup.models.PersonModel;
+import infoshare.client.content.setup.tables.PersonTable;
+import infoshare.domain.person.Person;
 import infoshare.domain.Role;
-import infoshare.domain.User;
-import infoshare.services.roles.Impl.RoleServiceImpl;
+import infoshare.factories.PersonFactory;
+import infoshare.services.people.PersonRoleService;
+import infoshare.services.people.PersonService;
 import infoshare.services.roles.RoleService;
-import infoshare.services.users.Impl.UserServiceImpl;
-import infoshare.services.users.UserService;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
  * Created by hashcode on 2015/06/23.
  */
-public class UserView extends VerticalLayout implements
+public class PersonView extends VerticalLayout implements
         Button.ClickListener, Property.ValueChangeListener {
 
     private final MainLayout main;
     private final PersonForm personForm;
-    private final UserTable table;
-    private UserService userService = new UserServiceImpl();
-    private RoleService roleService = new RoleServiceImpl();
-    private AddressView addressView ;
-    private ContactView contactView;
-    public UserView(MainLayout app) {
+    private final PersonTable table;
+    private PersonService personService = PeopleFacade.personService;
+    private RoleService roleService = RoleFacade.roleService;
+    private PersonRoleService rolesListService = PeopleFacade.personRoleService;
+    public PersonView(MainLayout app) {
         main = app;
         personForm = new PersonForm();
-        table = new UserTable(main);
+        table = new PersonTable(main);
         setSizeFull();
         addComponent(personForm);
         addComponent(table);
@@ -57,34 +61,15 @@ public class UserView extends VerticalLayout implements
             saveEditedForm(personForm.binder);
         } else if (source == personForm.delete) {
             deleteForm(personForm.binder);
-        }else if(source == personForm.addNewAddress){
-            try {
-                addressView.setModal(true);
-                getUI().addWindow(addressView);
-            }catch (Exception e){
-                Notification.show("Select the user first",Notification.Type.HUMANIZED_MESSAGE);
-            }
-        }else if(source == personForm.addNewContact){
-            try {
-                contactView.setModal(true);
-                getUI().addWindow(contactView);
-            }catch (Exception e){
-                Notification.show("Select the user first",Notification.Type.HUMANIZED_MESSAGE);
-            }
         }
     }
-
-
     @Override
     public void valueChange(Property.ValueChangeEvent event) {
         final Property property = event.getProperty();
         if (property == table) {
             try {
-                AddressTable.userID = table.getValue().toString();
-                addressView = new AddressView(main);
-                contactView = new ContactView(main);
-                final User user = userService.findById(table.getValue().toString());
-                final UserModel bean = getModel(user);
+                final Person person = personService.getPersonById("campany",table.getValue().toString());
+                final PersonModel bean = getModel(person);
                 personForm.binder.setItemDataSource(new BeanItem<>(bean));
                 setReadFormProperties();
             }catch (Exception r){
@@ -94,7 +79,7 @@ public class UserView extends VerticalLayout implements
     private void saveForm(FieldGroup binder) {
         try {
             binder.commit();
-            userService.save(getUserNewEntity(binder));
+            personService.save(getPersonNewEntity(binder));
             getHome();
             Notification.show("Record ADDED!", Notification.Type.HUMANIZED_MESSAGE);
         } catch (FieldGroup.CommitException e) {
@@ -108,7 +93,7 @@ public class UserView extends VerticalLayout implements
     private void saveEditedForm(FieldGroup binder) {
         try {
             binder.commit();
-            userService.update(getUserUpdateEntity(binder));
+            personService.update(getPersonUpdateEntity(binder));
             getHome();
             Notification.show("Record UPDATED!", Notification.Type.HUMANIZED_MESSAGE);
         } catch (FieldGroup.CommitException e) {
@@ -120,26 +105,28 @@ public class UserView extends VerticalLayout implements
         }
     }
     private void deleteForm(FieldGroup binder) {
-        userService.delete(getUserUpdateEntity(binder));
+        personService.delete(getPersonUpdateEntity(binder));
         getHome();
     }
-    private User getUserNewEntity(FieldGroup binder) {
-        final UserModel bean = ((BeanItem<UserModel>) binder.getItemDataSource()).getBean();
-        final User user = new User.Builder(bean.getLastName())
-                .firstname(bean.getFirstName())
-                .role(bean.getRole())
-                .enable(bean.isEnable())
-                .password(bean.getPassword())
-                .username(bean.getUsername())
-                .othername(bean.getOtherName())
-                .address(bean.getAddress())     //Todo : no route for entity yet
-                .contact(bean.getContact())     //Todo : no route for entity yet
-                .build();
-        return user;
+    private Person getPersonNewEntity(FieldGroup binder) {
+        final PersonModel bean = ((BeanItem<PersonModel>) binder.getItemDataSource()).getBean();
+        Map<String,Boolean> boolVals = new HashMap<>();
+        boolVals.put("enabled",bean.getEnabled());
+        boolVals.put("accountNonExpired",bean.getAccountNonExpired());
+        boolVals.put("accountNonLocked",bean.getAccountNonLocked());
+        boolVals.put("credentialsNonExpired",bean.getCredentialsNonExpired());
+        Map<String,String> stringVals = new HashMap<>();
+        stringVals.put("firstName",bean.getFirstName());
+        stringVals.put("middleName",bean.getMiddleName());
+        stringVals.put("lastName",bean.getMiddleName());
+        stringVals.put("authvalue",bean.getAuthvalue());
+        stringVals.put("emailAddress",bean.getEmailAddress());
+        final Person person = PersonFactory.getPerson(stringVals, boolVals);
+        return person;
     }
-    private User getUserUpdateEntity(FieldGroup binder) {
+    private Person getPersonUpdateEntity(FieldGroup binder) {
 
-        final UserModel bean = ((BeanItem<UserModel>) binder.getItemDataSource()).getBean();
+        final PersonModel bean = ((BeanItem<PersonModel>) binder.getItemDataSource()).getBean();
         Set<String> userRoles = new HashSet<>();
 
         if (bean.getRole()!= null) {
@@ -150,7 +137,7 @@ public class UserView extends VerticalLayout implements
                 }
             }
         }
-        final User user = new User.Builder(bean.getLastName())
+        final Person user = new User.Builder(bean.getLastName())
                 .firstname(bean.getFirstName())
                 .role(userRoles)
                 .enable(bean.isEnable())
@@ -163,7 +150,23 @@ public class UserView extends VerticalLayout implements
                 .build();
         return user;
     }
-
+    public PersonModel getModel(User user) {
+        Set<String> userRolesId = new HashSet<>();
+        if (user.getRole() != null) {
+            userRolesId.addAll(user.getRole().stream().collect(Collectors.toList()));
+        }
+        UserModel model = new UserModel();
+        model.setFirstName(user.getFirstName());
+        model.setLastName(user.getLastName());
+        model.setOtherName(user.getOtherName());
+        model.setUsername(user.getUsername());
+        model.setEnable(user.isEnable());
+        model.setRole(userRolesId);
+        model.setAddress(user.getAddress()); //Todo : no route for entity yet
+        model.setContact(user.getContact()); //Todo : no route for entity yet
+        model.setPassword(user.getPassword());
+        return model;
+    }
     private void getHome() {
         main.content.setSecondComponent(new SetupMenu(main, "LANDING"));
     }
@@ -184,7 +187,6 @@ public class UserView extends VerticalLayout implements
         personForm.delete.setVisible(true);
         personForm.update.setVisible(false);
     }
-
     private void addListeners() {
         //Register Button Listeners
         personForm.save.addClickListener(this);
@@ -193,25 +195,6 @@ public class UserView extends VerticalLayout implements
         personForm.update.addClickListener(this);
         table.addValueChangeListener(this);
         personForm.rolesList.addValueChangeListener(this);
-        personForm.addNewAddress.addClickListener(this);
-        personForm.addNewContact.addClickListener(this);
-    }
-    public UserModel getModel(User user) {
-        Set<String> userRolesId = new HashSet<>();
-        if (user.getRole() != null) {
-            userRolesId.addAll(user.getRole().stream().collect(Collectors.toList()));
-        }
-        UserModel model = new UserModel();
-        model.setFirstName(user.getFirstName());
-        model.setLastName(user.getLastName());
-        model.setOtherName(user.getOtherName());
-        model.setUsername(user.getUsername());
-        model.setEnable(user.isEnable());
-        model.setRole(userRolesId);
-        model.setAddress(user.getAddress()); //Todo : no route for entity yet
-        model.setContact(user.getContact()); //Todo : no route for entity yet
-        model.setPassword(user.getPassword());
-        return model;
     }
 
 }

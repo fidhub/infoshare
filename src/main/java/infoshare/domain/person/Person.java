@@ -1,4 +1,4 @@
-package infoshare.domain;
+package infoshare.domain.person;
 
 import java.io.Serializable;
 
@@ -8,6 +8,7 @@ import java.io.Serializable;
 public class Person implements Serializable, Comparable<Person> {
     private static final long serialVersionUID = 1L;
     private String id;
+    private String org;
     private String firstName;
     private String middleName;
     private String emailAddress;
@@ -29,6 +30,10 @@ public class Person implements Serializable, Comparable<Person> {
 
     public String getFirstName() {
         return firstName;
+    }
+
+    public String getOrg() {
+        return org;
     }
 
     public String getMiddleName() {
@@ -70,6 +75,7 @@ public class Person implements Serializable, Comparable<Person> {
     public Person(Builder builder) {
         this.id = builder.id;
         this.firstName = builder.firstName;
+        this.org = builder.org;
         this.middleName = builder.middleName;
         this.lastName = builder.lastName;
         this.emailAddress = builder.emailAddress;
@@ -83,17 +89,16 @@ public class Person implements Serializable, Comparable<Person> {
 
     public static class Builder {
         private String id;
+        private String org;
         private String firstName;
         private String middleName;
         private String lastName;
         private String emailAddress;
-        private String title;
         private String authvalue;
         private Boolean enabled;
         private Boolean accountNonExpired;
         private Boolean credentialsNonExpired;
         private Boolean accountNonLocked;
-
         private String state;
 
         public Builder enabled(Boolean value) {
@@ -106,7 +111,10 @@ public class Person implements Serializable, Comparable<Person> {
             return this;
         }
 
-
+        public Builder org(String org){
+            this.org =org;
+            return this;
+        }
         public Builder state(String value) {
             this.state = value;
             return this;
@@ -132,7 +140,7 @@ public class Person implements Serializable, Comparable<Person> {
             return this;
         }
 
-        public Builder middletName(String value) {
+        public Builder middleName(String value) {
             this.middleName = value;
             return this;
         }
@@ -148,11 +156,6 @@ public class Person implements Serializable, Comparable<Person> {
             return this;
         }
 
-        public Builder title(String value) {
-            this.title = value;
-            return this;
-        }
-
         public Builder authvalue(String value) {
             this.authvalue = value;
             return this;
@@ -165,6 +168,7 @@ public class Person implements Serializable, Comparable<Person> {
             this.accountNonLocked = value.accountNonLocked;
             this.credentialsNonExpired = value.credentialsNonExpired;
             this.id = value.id;
+            this.org =value.org;
             this.firstName = value.firstName;
             this.middleName = value.middleName;
             this.lastName = value.lastName;
