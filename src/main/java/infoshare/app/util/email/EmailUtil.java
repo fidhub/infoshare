@@ -2,7 +2,7 @@ package infoshare.app.util.email;
 
 
 import infoshare.app.facade.UtilFacade;
-import infoshare.domain.Mail;
+import infoshare.domain.util.Mail;
 
 import javax.activation.DataHandler;
 import javax.activation.DataSource;

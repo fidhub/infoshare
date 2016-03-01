@@ -5,7 +5,7 @@ package infoshare.factories;
 
 import infoshare.app.util.DomainState;
 import infoshare.app.util.security.KeyGenerator;
-import infoshare.domain.Mail;
+import infoshare.domain.util.Mail;
 
 import java.util.Date;
 

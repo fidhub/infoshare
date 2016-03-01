@@ -3,7 +3,7 @@ package infoshare.restapi.common.util;
 
 
 import infoshare.app.conf.RestUtil;
-import infoshare.domain.Mail;
+import infoshare.domain.util.Mail;
 import infoshare.restapi.common.CommonBaseURI;
 
 import java.util.Set;

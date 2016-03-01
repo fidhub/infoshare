@@ -1,4 +1,4 @@
-package infoshare.domain;
+package infoshare.domain.util;
 
 import java.io.Serializable;
 
@@ -6,43 +6,50 @@ import java.io.Serializable;
  * Created by codex on 2015/07/03.
  */
 public class Token implements Serializable, Comparable<Token> {
+
     private String id;
-    private String token;
+    private String tokenValue;
+    private Token(){}
 
-    private Token(Builder builder){
+    public Token(Builder builder){
         this.id= builder.id;
-        this.token = builder.token;
+        this.tokenValue = builder.tokenValue;
     }
-
     public String getId() {
         return id;
     }
-
-    public String getToken() {
-        return token;
-    }
-
-    @Override
-    public int compareTo(Token token) {
-        return id.compareTo(token.id);
+    public String getTokenValue() {
+        return tokenValue;
     }
 
     public static class Builder{
         private String id;
-        private String token;
+        private String tokenValue;
 
-        public Builder(String token){
-            this.token = token;
+        public Builder tokenValue(String tokenValue){
+            this.tokenValue = tokenValue;
+            return this;
         }
         public Builder id(String id){
             this.id = id;
             return  this;
+        }
+        public Builder copy(Token token){
+            this.id = token.id;
+            this.tokenValue = token.tokenValue;
+
+            return this;
         }
         public Token build(){
             return new Token(this);
         }
     }
 
+    public static Builder builder(){return new Builder();}
+    @Override
+    public int compareTo(Token token) {
+        return id.compareTo(token.id);
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -2,7 +2,7 @@ package infoshare.services.utililties.Impl;
 
 
 
-import infoshare.domain.Mail;
+import infoshare.domain.util.Mail;
 import infoshare.restapi.common.util.MailAPI;
 import infoshare.services.utililties.MailService;
 

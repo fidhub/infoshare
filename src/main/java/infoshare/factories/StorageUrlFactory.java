@@ -2,7 +2,6 @@ package infoshare.factories;
 
 
 import infoshare.app.util.security.KeyGenerator;
-import infoshare.domain.StorageUrl;
 
 /**
  * Created by hashcode on 2016/01/05.

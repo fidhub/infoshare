@@ -2,7 +2,6 @@ package infoshare.restapi.common.util;
 
 
 import infoshare.app.conf.RestUtil;
-import infoshare.domain.StorageUrl;
 import infoshare.restapi.common.CommonBaseURI;
 
 import java.util.Set;

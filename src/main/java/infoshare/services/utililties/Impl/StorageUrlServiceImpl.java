@@ -2,7 +2,6 @@ package infoshare.services.utililties.Impl;
 
 
 
-import infoshare.domain.StorageUrl;
 import infoshare.restapi.common.util.StorageUrlAPI;
 import infoshare.services.utililties.StorageUrlService;
 

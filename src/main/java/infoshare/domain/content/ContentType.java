@@ -38,8 +38,9 @@ public class ContentType implements Serializable, Comparable<ContentType> {
         private String name;
         private String description;
 
-        public Builder(String contentName){
-            this.name = contentName;
+        public Builder name(String name){
+            this.name = name;
+            return this;
         }
         public Builder id(String id){
             this.id = id;
@@ -62,6 +63,7 @@ public class ContentType implements Serializable, Comparable<ContentType> {
         }
     }
 
+    public static Builder builder(){return new Builder();}
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

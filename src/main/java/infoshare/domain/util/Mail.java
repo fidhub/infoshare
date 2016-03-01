@@ -1,4 +1,4 @@
-package infoshare.domain;
+package infoshare.domain.util;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -6,7 +6,7 @@ import java.util.Date;
 /**
  * Created by hashcode on 2015/11/28.
  */
-public class Mail implements Serializable {
+public class Mail implements Serializable,Comparable<Mail> {
     private String id;
     private String key;
     private String value;
@@ -14,6 +14,8 @@ public class Mail implements Serializable {
     private String port;
     private String state;
     private Date date;
+    private String orgId;
+    private Mail(){}
 
     public String getId() {
         return id;
@@ -43,8 +45,13 @@ public class Mail implements Serializable {
         return date;
     }
 
+    public String getOrgId() {
+        return orgId;
+    }
+
     public Mail(Builder builder) {
         this.id = builder.id;
+        this.orgId = builder.orgId;
         this.date = builder.date;
         this.host = builder.host;
         this.key = builder.key;
@@ -54,6 +61,8 @@ public class Mail implements Serializable {
         this.date = builder.date;
     }
 
+
+
     public static class Builder {
         private String id;
         private String key;
@@ -62,9 +71,7 @@ public class Mail implements Serializable {
         private String port;
         private String state;
         private Date date;
-
-        public Builder() {
-        }
+        public String orgId;
 
         public Builder id(String value) {
             this.id = value;
@@ -101,8 +108,13 @@ public class Mail implements Serializable {
             return this;
         }
 
+        public Builder orgId(String orgId){
+            this.orgId = orgId;
+            return  this;
+        }
         public Builder copy(Mail value) {
             this.id = value.id;
+            this.orgId = value.orgId;
             this.date = value.date;
             this.host = value.host;
             this.key = value.key;
@@ -116,8 +128,11 @@ public class Mail implements Serializable {
         public Mail build() {
             return new Mail(this);
         }
-
-
     }
 
+    public static Builder builder(){return new Builder();}
+    @Override
+    public int compareTo(Mail mail) {
+        return host.compareTo(mail.host);
+    }
 }

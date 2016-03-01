@@ -14,6 +14,17 @@ public class Category implements Serializable, Comparable<Category> {
     private Category() {
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
     private Category(Builder builder) {
         this.id = builder.id;
         this.name = builder.name;
@@ -26,8 +37,9 @@ public class Category implements Serializable, Comparable<Category> {
         private String name;
         private String description;
 
-        public Builder(String name) {
+        public Builder name(String name) {
             this.name = name;
+            return this;
         }
 
         public Builder id(String value) {
@@ -52,6 +64,7 @@ public class Category implements Serializable, Comparable<Category> {
         }
     }
 
+    public static Builder builder(){return new Builder();}
     @Override
     public int hashCode() {
         int hash = 0;
@@ -74,15 +87,4 @@ public class Category implements Serializable, Comparable<Category> {
         return name.compareToIgnoreCase(category.name);
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
 }
