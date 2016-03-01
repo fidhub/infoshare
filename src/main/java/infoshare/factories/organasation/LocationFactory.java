@@ -1,5 +1,6 @@
 package infoshare.factories.organasation;
 
+import infoshare.app.util.DomainState;
 import infoshare.app.util.security.KeyGenerator;
 import infoshare.domain.organisation.Location;
 
@@ -21,7 +22,7 @@ public class LocationFactory {
                 .latitude(locationVals.get("latitude"))
                 .longitude(locationVals.get("longitude"))
                 .parentid(locationVals.get("parentId"))
-                .state(locationVals.get("state"))
+                .state(DomainState.ACTIVE.name())
                 .date(date)
                 .build();
         return location;

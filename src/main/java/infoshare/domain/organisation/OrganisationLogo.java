@@ -25,6 +25,7 @@ public class OrganisationLogo implements Serializable, Comparable<OrganisationLo
     public OrganisationLogo(Builder builder) {
         this.org = builder.org;
         this.id = builder.id;
+        this.description = builder.description;
         this.url = builder.url;
         this.size = builder.size;
         this.mime = builder.mime;
@@ -106,6 +107,7 @@ public class OrganisationLogo implements Serializable, Comparable<OrganisationLo
         public Builder copy(OrganisationLogo organisationLogo){
             this.org = organisationLogo.org;
             this.id = organisationLogo.id;
+            this.description = organisationLogo.description;
             this.url = organisationLogo.url;
             this.size = organisationLogo.size;
             this.mime = organisationLogo.mime;

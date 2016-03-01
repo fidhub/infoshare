@@ -1,5 +1,6 @@
 package infoshare.factories.content;
 
+import infoshare.app.util.DomainState;
 import infoshare.app.util.security.KeyGenerator;
 import infoshare.domain.content.Media;
 
@@ -18,7 +19,7 @@ public class MediaFactory {
                 .description(mediaVals.get("description"))
                 .url(mediaVals.get("url"))
                 .mime(mediaVals.get("mime"))
-                .state(mediaVals.get("state"))
+                .state(DomainState.ACTIVE.name())
                 .date(date)
                 .build();
         return media;

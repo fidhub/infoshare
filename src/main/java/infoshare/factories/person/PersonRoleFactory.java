@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package infoshare.factories;
+package infoshare.factories.person;
 
 
 import infoshare.app.util.DomainState;
@@ -14,8 +14,8 @@ import infoshare.domain.person.PersonRole;
  * @author BONGANI
  */
 public class PersonRoleFactory {
-    public static PersonRole getPersonRole(String personId, String roleId)
-    {
+
+    public static PersonRole getPersonRole(String personId, String roleId) {
         PersonRole personRole = new PersonRole.Builder()
                 .state(DomainState.ACTIVE.name())
                 .personId(personId)

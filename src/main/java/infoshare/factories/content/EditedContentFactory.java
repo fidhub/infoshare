@@ -1,5 +1,6 @@
 package infoshare.factories.content;
 
+import infoshare.app.util.DomainState;
 import infoshare.app.util.security.KeyGenerator;
 import infoshare.domain.content.EditedContent;
 
@@ -21,7 +22,7 @@ public class EditedContentFactory {
                 .content(editedContentVals.get("content"))
                 .contentType(editedContentVals.get("contentType"))
                 .status(editedContentVals.get("status"))
-                .state(editedContentVals.get("state"))
+                .state(DomainState.ACTIVE.name())
                 .org(editedContentVals.get("org"))
                 .build();
         return editedContent;

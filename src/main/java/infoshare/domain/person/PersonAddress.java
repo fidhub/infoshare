@@ -94,6 +94,11 @@ public class PersonAddress implements Serializable,Comparable<PersonAddress> {
             return this;
         }
 
+        public Builder personId(String personId) {
+            this.personId = personId;
+            return this;
+        }
+
         public Builder copy(PersonAddress personAddress){
             this.id = personAddress.id;
             this.state = personAddress.state;

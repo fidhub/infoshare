@@ -1,5 +1,6 @@
 package infoshare.factories.location;
 
+import infoshare.app.util.DomainState;
 import infoshare.app.util.security.KeyGenerator;
 import infoshare.domain.location.AddressType;
 
@@ -13,7 +14,7 @@ public class ContactTypeFactory {
         AddressType addressType = new AddressType.Builder()
                 .id(KeyGenerator.getEntityId())
                 .name(addressTypeVals.get("name"))
-                .state(addressTypeVals.get("state"))
+                .state(DomainState.ACTIVE.name())
                 .build();
         return addressType;
 

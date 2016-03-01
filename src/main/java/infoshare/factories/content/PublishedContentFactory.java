@@ -1,5 +1,6 @@
 package infoshare.factories.content;
 
+import infoshare.app.util.DomainState;
 import infoshare.app.util.security.KeyGenerator;
 import infoshare.domain.content.PublishedContent;
 
@@ -21,7 +22,7 @@ public class PublishedContentFactory {
                         .content(publishedContentVals.get("content"))
                         .contentType(publishedContentVals.get("contentType"))
                         .status(publishedContentVals.get("status"))
-                        .state(publishedContentVals.get("state"))
+                        .state(DomainState.ACTIVE.name())
                         .org(publishedContentVals.get("org"))
                         .build();
                 return publishedContent;

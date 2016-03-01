@@ -1,5 +1,6 @@
 package infoshare.factories.organasation;
 
+import infoshare.app.util.DomainState;
 import infoshare.app.util.security.KeyGenerator;
 import infoshare.domain.organisation.Organisation;
 
@@ -18,7 +19,7 @@ public class OrganisationFactory {
                 .details(details)
                 .adminattached(organisationVals.get("adminattached"))
                 .date(date)
-                .state(organisationVals.get("state"))
+                .state(DomainState.ACTIVE.name())
                 .build();
         return organisation;
     }

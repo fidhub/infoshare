@@ -15,7 +15,7 @@ import infoshare.client.content.setup.models.PersonModel;
 import infoshare.client.content.setup.tables.PersonTable;
 import infoshare.domain.person.Person;
 import infoshare.domain.Role;
-import infoshare.factories.PersonFactory;
+import infoshare.factories.person.PersonFactory;
 import infoshare.services.people.PersonRoleService;
 import infoshare.services.people.PersonService;
 import infoshare.services.roles.RoleService;

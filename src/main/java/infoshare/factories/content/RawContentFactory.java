@@ -1,5 +1,6 @@
 package infoshare.factories.content;
 
+import infoshare.app.util.DomainState;
 import infoshare.app.util.security.KeyGenerator;
 import infoshare.domain.content.RawContent;
 
@@ -21,7 +22,7 @@ public class RawContentFactory {
                 .content(rawContentVals.get("content"))
                 .contentType(rawContentVals.get("contentType"))
                 .status(rawContentVals.get("status"))
-                .state(rawContentVals.get("state"))
+                .state(DomainState.ACTIVE.name())
                 .org(rawContentVals.get("org"))
                 .build();
         return rawContent;

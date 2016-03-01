@@ -1,5 +1,6 @@
 package infoshare.factories.location;
 
+import infoshare.app.util.DomainState;
 import infoshare.app.util.security.KeyGenerator;
 import infoshare.domain.location.LocationType;
 
@@ -14,7 +15,7 @@ public class LocationTypeFactory {
         LocationType locationType = new LocationType.Builder()
                 .id(KeyGenerator.getEntityId())
                 .name(locationTypeVals.get("name"))
-                .state(locationTypeVals.get("state"))
+                .state(DomainState.ACTIVE.name())
                 .code(locationTypeVals.get("code"))
                 .build();
         return locationType;

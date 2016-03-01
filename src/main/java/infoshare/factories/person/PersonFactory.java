@@ -1,4 +1,4 @@
-package infoshare.factories;
+package infoshare.factories.person;
 
 
 import infoshare.app.util.DomainState;
@@ -16,6 +16,7 @@ public class PersonFactory {
                                    Map<String, Boolean> boolVals) {
         Person person = new Person.Builder()
                 .id(KeyGenerator.getEntityId())
+                .org(stringVals.get("org"))
                 .firstName(stringVals.get("firstName"))
                 .middleName(stringVals.get("middleName"))
                 .lastName(stringVals.get("lastName"))
