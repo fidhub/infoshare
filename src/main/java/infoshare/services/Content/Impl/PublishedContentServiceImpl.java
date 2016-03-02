@@ -12,11 +12,6 @@ import java.util.Set;
 public class PublishedContentServiceImpl implements PublishedContentService {
 
     @Override
-    public PublishedContent findById(String s) {
-        return PublishedContentAPI.findById(s);
-    }
-
-    @Override
     public PublishedContent save(PublishedContent entity) {
         return PublishedContentAPI.save(entity);
     }
@@ -27,12 +22,17 @@ public class PublishedContentServiceImpl implements PublishedContentService {
     }
 
     @Override
+    public PublishedContent findById(String org, String id) {
+        return PublishedContentAPI.findById(org,id);
+    }
+
+    @Override
     public void delete(PublishedContent entity) {
         PublishedContentAPI.update(entity);
     }
 
     @Override
-    public Set<PublishedContent> findAll() {
-        return PublishedContentAPI.findAll();
+    public Set<PublishedContent> findAll(String org) {
+        return PublishedContentAPI.findAll(org);
     }
 }

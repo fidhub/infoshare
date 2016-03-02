@@ -18,15 +18,21 @@ public class ContentBaseUrl {
     public static class Edited {
 
         public static final String POST    = RestUtil.URL+"/api/cont/ed/create";    //@controllers.EditedContentController.create
-        public static final String GET     = RestUtil.URL+"/api/cont/ed//";    //@controllers.EditedContentController.getContent(id)
+        public static final String GET     = RestUtil.URL+"/api/cont/ed/";    //@controllers.EditedContentController.getContent(id)
         public static final String PUT     = RestUtil.URL+"/api/cont/ed/update";    //@controllers.EditedContentController.update
-        public static final String GET_ALL = RestUtil.URL+"/api/cont/ed/get/conts";    //@controllers.EditedContentController.getAll
+        public static final String GET_ALL = RestUtil.URL+"/api/cont/ed/get/conts/";    //@controllers.EditedContentController.getAll
     }
     public static class Published {
 
         public static final String POST    =RestUtil.URL+"/api/cont/pub/create";      //@controllers.PublishedContentController.create
         public static final String GET     =RestUtil.URL+"/api/cont/pub/";      //@controllers.PublishedContentController.getContent(id)
         public static final String PUT     =RestUtil.URL+"/api/cont/pub/update";      //@controllers.PublishedContentController.update
-        public static final String GET_ALL =RestUtil.URL+"/api/cont/pub/get/conts";      //@controllers.PublishedContentController.getAll
+        public static final String GET_ALL =RestUtil.URL+"/api/cont/pub/get/conts/";      //@controllers.PublishedContentController.getAll
     }
+       /*
+
+POST        /api/cont/ed/create                         @controllers.content.EditedContentController.create
+GET         /api/cont/ed/:orgId/:id                     @controllers.content.EditedContentController.getContentById(orgId,id)
+PUT         /api/cont/ed/update                         @controllers.content.EditedContentController.update
+GET         /api/cont/ed/get/conts/:orgId               @controllers.content.EditedContentController.getAll(orgId)  */
 }

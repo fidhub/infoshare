@@ -13,4 +13,6 @@ public class CategoryBaseUrl {
       public static final String PUT     =RestUtil.URL+"/api/cat/update";    //@controllers.CategoryController.update
       public static final String GET_ALL = RestUtil.URL+"/api/cat/get/cats";  //@controllers.CategoryController.getAll
     }
+
+
 }

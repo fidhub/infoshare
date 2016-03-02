@@ -12,4 +12,6 @@ public class SourceBaseUrl {
       public static final String  PUT     =RestUtil.URL+"/api/src/update";    //@controllers.SourceController.update
       public static final String  GET_ALL =RestUtil.URL+"/api/src/get/srcs";    //@controllers.SourceController.getAll
     }
+
+
 }

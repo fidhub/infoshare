@@ -12,11 +12,6 @@ import java.util.Set;
 public class EditedContentServiceImpl implements EditedContentService {
 
     @Override
-    public EditedContent findById(String s) {
-        return EditedContentAPI.findById(s);
-    }
-
-    @Override
     public EditedContent save(EditedContent entity) {
         return EditedContentAPI.save(entity);
     }
@@ -27,12 +22,17 @@ public class EditedContentServiceImpl implements EditedContentService {
     }
 
     @Override
+    public EditedContent findById(String org, String id) {
+        return EditedContentAPI.findById(org,id);
+    }
+
+    @Override
     public void delete(EditedContent entity) {
         EditedContentAPI.update(entity);
     }
 
     @Override
-    public Set<EditedContent> findAll() {
-        return EditedContentAPI.findAll();
+    public Set<EditedContent> findAll(String org) {
+        return EditedContentAPI.findAll(org);
     }
 }

@@ -11,10 +11,6 @@ import java.util.Set;
  */
 public class RawContentServiceImpl implements RawContentService {
 
-    @Override
-    public RawContent findById(String s) {
-        return RawContentAPI.findById(s);
-    }
 
     @Override
     public RawContent save(RawContent entity) {
@@ -27,12 +23,18 @@ public class RawContentServiceImpl implements RawContentService {
     }
 
     @Override
+    public RawContent findById(String org, String id) {
+        return RawContentAPI.findById(org,id);
+    }
+
+    @Override
     public void delete(RawContent entity) {
         RawContentAPI.save(entity);
     }
 
     @Override
-    public Set<RawContent> findAll() {
-        return RawContentAPI.findAll();
+    public Set<RawContent> findAll(String org) {
+        return RawContentAPI.findAll(org);
     }
+
 }
