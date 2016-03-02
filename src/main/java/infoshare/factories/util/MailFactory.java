@@ -1,4 +1,4 @@
-package infoshare.factories;
+package infoshare.factories.util;
 
 
 
@@ -14,8 +14,9 @@ import java.util.Date;
  */
 public class MailFactory {
     public static
-    Mail createMailConf(String key, String value, String host, String port) {
+    Mail createMailConf(String key, String value, String host, String port, String orgId) {
         Mail mail = new Mail.Builder()
+                .orgId(orgId)
                 .date(new Date())
                 .host(host)
                 .id(KeyGenerator.getEntityId())

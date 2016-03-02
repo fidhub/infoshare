@@ -10,7 +10,7 @@ public class PersonDemographics implements Serializable, Comparable<PersonDemogr
     private String id;
     private String personId;
     private String genderId;
-    private String dateOfBirth;
+    private Date dateOfBirth;
     private String maritalStatusId;
     private int numberOfDependencies;
     private Date date;
@@ -41,7 +41,7 @@ public class PersonDemographics implements Serializable, Comparable<PersonDemogr
         return genderId;
     }
 
-    public String getDateOfBirth() {
+    public Date getDateOfBirth() {
         return dateOfBirth;
     }
 
@@ -65,7 +65,7 @@ public class PersonDemographics implements Serializable, Comparable<PersonDemogr
         private String id;
         private String personId;
         private String genderId;
-        private String dateOfBirth;
+        private Date dateOfBirth;
         private String maritalStatusId;
         private int numberOfDependencies;
         private Date date;
@@ -86,7 +86,7 @@ public class PersonDemographics implements Serializable, Comparable<PersonDemogr
             return this;
         }
 
-        public Builder setDateOfBirth(String dateOfBirth) {
+        public Builder dateOfBirth(Date dateOfBirth) {
             this.dateOfBirth = dateOfBirth;
             return this;
         }

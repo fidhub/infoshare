@@ -29,8 +29,9 @@ public class Keys implements Serializable, Comparable<Keys> {
         private String id;
         private String value;
 
-        public Builder(String value){
+        public Builder value(String value){
             this.value = value;
+            return this;
         }
         public Builder id(String id){
             this.id = id;
@@ -41,6 +42,7 @@ public class Keys implements Serializable, Comparable<Keys> {
             return new Keys(this);
         }
     }
+    public static Builder builder(){return new Builder();}
     @Override
     public int compareTo(Keys keys) {
         return id.compareTo(keys.id);

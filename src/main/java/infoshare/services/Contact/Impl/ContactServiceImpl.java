@@ -1,6 +1,5 @@
 package infoshare.services.Contact.Impl;
 
-import infoshare.domain.Contact;
 import infoshare.restapi.Contacts.ContactAPI;
 import infoshare.services.Contact.ContactService;
 

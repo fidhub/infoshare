@@ -3,7 +3,6 @@ package infoshare.client.content.courseSetup.tables;
 import com.vaadin.server.Responsive;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.themes.ValoTheme;
-import infoshare.domain.Lesson;
 import infoshare.services.courses.CourseService;
 import infoshare.services.courses.Impl.Services;
 

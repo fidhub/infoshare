@@ -1,7 +1,7 @@
 package infoshare.services.roles.Impl;
 
 import com.vaadin.spring.annotation.SpringComponent;
-import infoshare.domain.Role;
+import infoshare.domain.demographics.Role;
 import infoshare.restapi.Roles.RolesAPI;
 import infoshare.services.roles.RoleService;
 import org.springframework.stereotype.Service;

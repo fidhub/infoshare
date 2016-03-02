@@ -20,8 +20,8 @@ public class PersonAPI {
         return RestUtil.getById(PersonBaseURI.Person.GET_ID, param, Person.class);
     }
 
-    public static Set<Person> findAll(String param) {
-        return RestUtil.getAll(PersonBaseURI.Person.GETALL + param, Person.class);
+    public static Set<Person> findAll(String OrganisationPeople) {
+        return RestUtil.getAll(PersonBaseURI.Person.GET_Org + OrganisationPeople, Person.class);
     }
 
     public static Person findByEmail(String param) {

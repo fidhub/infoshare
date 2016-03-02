@@ -1,6 +1,6 @@
 package infoshare.service;
 
-import infoshare.domain.Role;
+import infoshare.domain.demographics.Role;
 import infoshare.services.roles.Impl.RoleServiceImpl;
 import infoshare.services.roles.RoleService;
 import junit.framework.TestCase;

@@ -11,7 +11,7 @@ import infoshare.app.facade.DemographicsFacade;
 import infoshare.app.facade.PeopleFacade;
 import infoshare.domain.person.Person;
 import infoshare.domain.person.PersonRole;
-import infoshare.domain.Role;
+import infoshare.domain.demographics.Role;
 import infoshare.restapi.people.PersonAPI;
 import infoshare.services.people.PersonService;
 

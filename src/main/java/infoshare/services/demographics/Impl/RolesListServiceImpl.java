@@ -1,7 +1,7 @@
 package infoshare.services.demographics.Impl;
 
 
-import infoshare.domain.Role;
+import infoshare.domain.demographics.Role;
 import infoshare.restapi.common.demographics.RoleAPI;
 import infoshare.services.demographics.RolesListService;
 

@@ -2,6 +2,8 @@ package infoshare.services.utililties;
 
 
 
+import infoshare.domain.storage.StorageUrl;
+
 import java.util.Set;
 
 /**

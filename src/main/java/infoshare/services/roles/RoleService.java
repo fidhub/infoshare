@@ -1,6 +1,6 @@
 package infoshare.services.roles;
 
-import infoshare.domain.Role;
+import infoshare.domain.demographics.Role;
 import infoshare.services.Services;
 import org.springframework.stereotype.Component;
 

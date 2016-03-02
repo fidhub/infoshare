@@ -13,7 +13,6 @@ import infoshare.client.content.content.models.ContentModel;
 import infoshare.client.content.content.tables.RawTable;
 import infoshare.domain.content.EditedContent;
 import infoshare.domain.content.RawContent;
-import infoshare.factories.EditedContentFacory;
 import infoshare.filterSearch.RawContentFilter;
 import infoshare.services.Content.EditedContentService;
 import infoshare.services.Content.RawContentService;

@@ -3,7 +3,7 @@ package infoshare.restapi.common.demographics;
 
 
 import infoshare.app.conf.RestUtil;
-import infoshare.domain.Role;
+import infoshare.domain.demographics.Role;
 import infoshare.restapi.common.CommonBaseURI;
 
 import java.util.Set;

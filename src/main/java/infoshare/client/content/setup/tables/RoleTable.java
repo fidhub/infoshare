@@ -5,7 +5,7 @@ import com.vaadin.ui.Table;
 import com.vaadin.ui.themes.ValoTheme;
 import infoshare.app.facade.RoleFacade;
 import infoshare.client.content.MainLayout;
-import infoshare.domain.Role;
+import infoshare.domain.demographics.Role;
 import infoshare.services.roles.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 

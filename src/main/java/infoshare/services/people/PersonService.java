@@ -8,7 +8,7 @@ package infoshare.services.people;
 
 
 import infoshare.domain.person.Person;
-import infoshare.domain.Role;
+import infoshare.domain.demographics.Role;
 
 import java.util.Set;
 

@@ -17,7 +17,6 @@ import infoshare.client.content.content.forms.EditForm;
 import infoshare.client.content.content.models.ContentModel;
 import infoshare.client.content.content.tables.EditTable;
 import infoshare.domain.content.*;
-import infoshare.factories.PublishedContentFactory;
 import infoshare.filterSearch.EditedContentFilter;
 import infoshare.services.ContentType.ContentTypeService;
 import infoshare.services.Content.EditedContentService;

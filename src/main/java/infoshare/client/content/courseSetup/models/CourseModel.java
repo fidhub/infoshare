@@ -1,7 +1,5 @@
 package infoshare.client.content.courseSetup.models;
 
-import infoshare.domain.Lesson;
-
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.List;

@@ -10,17 +10,8 @@ import java.util.Map;
 /**
  * Created by codet on 2016/02/23.
  */
-public class AddressFactory {
+public class PersonAddressFactory {
 
-    /*
-    private String id;
-    private String personId;
-    private String description;
-    private Date date;
-    private String state;
-    private String postalCode;
-    private String addressTypeId;
-     */
     public static PersonAddress getAddress(Map<String, String> addressVals, Date date){
         PersonAddress personAddress = new PersonAddress.Builder()
                 .id(KeyGenerator.getEntityId())

@@ -6,16 +6,22 @@
 package infoshare.app.facade;
 
 
-import infoshare.services.people.Impl.PersonRoleServiceImpl;
-import infoshare.services.people.Impl.PersonServiceImpl;
-import infoshare.services.people.PersonRoleService;
-import infoshare.services.people.PersonService;
+import infoshare.domain.person.PersonContact;
+import infoshare.domain.person.PersonDemographics;
+import infoshare.domain.person.PersonImages;
+import infoshare.domain.person.PersonLanguage;
+import infoshare.services.people.*;
+import infoshare.services.people.Impl.*;
 
 public class PeopleFacade {
 
-
     public final static PersonRoleService personRoleService = new PersonRoleServiceImpl();
     public final static PersonService personService = new PersonServiceImpl();
+    public final static PersonAddressService personAddressService = new PersonAddressServiceImpl();
+    public final static PersonContactService personContactService = new PersonContactServiceImpl();
+    public final static PersonDemographicsService personDemographicsService = new PersonDemographicsServiceImpl();
+    public final static PersonImagesService personImagesService = new PersonImagesServiceImpl();
+    public final static PersonLanguageService personLanguageService = new PersonLanguageServiceImpl();
 
 
 

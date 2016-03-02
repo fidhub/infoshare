@@ -3,7 +3,6 @@ package infoshare.client.content.setup.tables;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.themes.ValoTheme;
 import infoshare.client.content.MainLayout;
-import infoshare.domain.Contact;
 import infoshare.services.Contact.ContactService;
 import infoshare.services.Contact.Impl.ContactServiceImpl;
 import infoshare.services.users.Impl.UserServiceImpl;

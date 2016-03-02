@@ -1,4 +1,4 @@
-package infoshare.factories;
+package infoshare.factories.util;
 
 import infoshare.app.util.security.KeyGenerator;
 import infoshare.domain.util.Keys;
@@ -10,10 +10,11 @@ import java.util.Map;
  */
 public class KeysFactory {
 
-    public static Keys getKeys(Map<String,String> keyVals){
+    public static Keys getKeys(String keyVal){
 
-        Keys keys = new Keys.Builder(keyVals.get("value"))
+        Keys keys = new Keys.Builder()
                 .id(KeyGenerator.getEntityId())
+                .value(keyVal)
                 .build();
         return keys;
     }

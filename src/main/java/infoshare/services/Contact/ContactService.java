@@ -1,6 +1,5 @@
 package infoshare.services.Contact;
 
-import infoshare.domain.Contact;
 import infoshare.services.Services;
 
 /**

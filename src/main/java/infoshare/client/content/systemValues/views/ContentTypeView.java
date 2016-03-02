@@ -13,7 +13,6 @@ import infoshare.client.content.systemValues.SystemValues;
 import infoshare.client.content.systemValues.tables.ContentTypeTable;
 import infoshare.client.content.MainLayout;
 import infoshare.domain.content.ContentType;
-import infoshare.factories.ContentTypeFactory;
 import infoshare.services.ContentType.ContentTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 
