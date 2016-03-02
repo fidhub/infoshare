@@ -18,5 +18,7 @@ public class CategoryAPI {
     public static Category update(Category category){
         return RestUtil.update(CategoryBaseUrl.Category.PUT,category);
     }
-    public static Set<Category> findAll(){return RestUtil.getAll(CategoryBaseUrl.Category.GET_ALL,Category.class); }
+    public static Set<Category> findAll(){
+        return RestUtil.getAll(CategoryBaseUrl.Category.GET_ALL,Category.class);
+    }
 }
