@@ -1,7 +1,6 @@
 package infoshare.services.users.Impl;
 
 import com.vaadin.spring.annotation.SpringComponent;
-import infoshare.domain.User;
 import infoshare.services.users.UserService;
 import org.springframework.stereotype.Service;
 

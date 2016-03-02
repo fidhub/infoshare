@@ -5,11 +5,9 @@ import com.vaadin.ui.themes.ValoTheme;
 import infoshare.app.facade.CategoryFacade;
 import infoshare.app.facade.ContentFacade;
 import infoshare.client.content.MainLayout;
-import infoshare.domain.PublishedContent;
-import infoshare.services.Content.Impl.PublishedContentServiceImpl;
+import infoshare.domain.content.PublishedContent;
 import infoshare.services.Content.PublishedContentService;
 import infoshare.services.category.CategoryService;
-import infoshare.services.category.Impl.CategoryServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.text.DateFormat;

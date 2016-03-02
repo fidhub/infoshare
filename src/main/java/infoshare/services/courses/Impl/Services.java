@@ -1,8 +1,6 @@
 package infoshare.services.courses.Impl;
 
 import com.vaadin.spring.annotation.SpringComponent;
-import infoshare.domain.Course;
-import infoshare.domain.Lesson;
 import infoshare.services.courses.CourseService;
 import org.springframework.stereotype.Service;
 

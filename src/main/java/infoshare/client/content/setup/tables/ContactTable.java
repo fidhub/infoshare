@@ -3,8 +3,6 @@ package infoshare.client.content.setup.tables;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.themes.ValoTheme;
 import infoshare.client.content.MainLayout;
-import infoshare.domain.Contact;
-import infoshare.domain.User;
 import infoshare.services.Contact.ContactService;
 import infoshare.services.Contact.Impl.ContactServiceImpl;
 import infoshare.services.users.Impl.UserServiceImpl;
@@ -27,7 +25,7 @@ public class ContactTable extends Table {
         addStyleName(ValoTheme.TABLE_NO_VERTICAL_LINES);
         addStyleName(ValoTheme.TABLE_SMALL);
         addContainerProperty("Phone number", String.class, null);
-        addContainerProperty("Email Address",String.class,null);
+        addContainerProperty("Email PersonAddress",String.class,null);
         addContainerProperty("contact Type",String.class,null);
         loadTable();
 

@@ -7,7 +7,7 @@ package infoshare.services.people.Impl;
 
 
 
-import infoshare.domain.PersonRole;
+import infoshare.domain.person.PersonRole;
 import infoshare.restapi.people.PersonRoleAPI;
 import infoshare.services.people.PersonRoleService;
 

@@ -5,12 +5,9 @@ import com.vaadin.ui.Table;
 import com.vaadin.ui.themes.ValoTheme;
 import infoshare.app.facade.SourceFacade;
 import infoshare.client.content.MainLayout;
-import infoshare.domain.Source;
+import infoshare.domain.content.Source;
 import infoshare.services.source.SourceService;
-import infoshare.services.source.sourceServiceImpl.SourceServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.List;
 
 /**
  * Created by codex on 2015/06/26.

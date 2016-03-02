@@ -1,6 +1,5 @@
 package infoshare.app.facade;
 
-import infoshare.domain.Address;
 import infoshare.services.Contact.AddressService;
 import infoshare.services.Contact.ContactService;
 import infoshare.services.Contact.Impl.AddressServiceImpl;

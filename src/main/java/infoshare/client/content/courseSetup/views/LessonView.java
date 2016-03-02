@@ -11,8 +11,6 @@ import infoshare.client.content.courseSetup.CoursesMenu;
 import infoshare.client.content.courseSetup.forms.LessonForm;
 import infoshare.client.content.courseSetup.models.LessonModel;
 import infoshare.client.content.courseSetup.tables.LessonTable;
-import infoshare.domain.Course;
-import infoshare.domain.Lesson;
 import infoshare.services.courses.CourseService;
 import infoshare.services.courses.Impl.Services;
 

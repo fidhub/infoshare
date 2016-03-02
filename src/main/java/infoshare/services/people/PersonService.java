@@ -7,8 +7,8 @@ package infoshare.services.people;
 
 
 
-import infoshare.domain.Person;
-import infoshare.domain.Role;
+import infoshare.domain.person.Person;
+import infoshare.domain.demographics.Role;
 
 import java.util.Set;
 
@@ -27,6 +27,8 @@ public interface PersonService {
     Set<Role> getRoles(String userId);
 
     Set<Person> getPersonsWithRole(String company, String role);
+
+    Set<Person> getPersonByCompany(String company);
 
     boolean isThisPersonInThis(String personId, String role);
 

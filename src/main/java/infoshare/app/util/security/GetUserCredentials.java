@@ -2,7 +2,7 @@ package infoshare.app.util.security;
 
 
 import infoshare.app.facade.PeopleFacade;
-import infoshare.domain.Person;
+import infoshare.domain.person.Person;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;

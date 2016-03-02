@@ -34,10 +34,10 @@ public class AddressForm extends FormLayout {
 
         final GridLayout layout = new GridLayout(4,5);
         layout.setSpacing(true);
-        TextField postalAddress = getTextField("Postal Address","postalAddress");
+        TextField postalAddress = getTextField("Postal PersonAddress","postalAddress");
         TextField postalCode = getTextField("Postal Code","postalCode");
-        TextField physicalAddress = getTextField("Physical Address","physicalAddress");
-        TextField addressType = getTextField("Address Type","addressType");
+        TextField physicalAddress = getTextField("Physical PersonAddress","physicalAddress");
+        TextField addressType = getTextField("PersonAddress Type","addressTypeId");
 
         layout.addComponent(postalAddress,0,0);
         layout.addComponent(physicalAddress,1,0);

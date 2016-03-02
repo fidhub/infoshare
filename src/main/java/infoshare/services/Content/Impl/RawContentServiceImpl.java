@@ -1,6 +1,6 @@
 package infoshare.services.Content.Impl;
 
-import infoshare.domain.RawContent;
+import infoshare.domain.content.RawContent;
 import infoshare.restapi.Content.RawContentAPI;
 import infoshare.services.Content.RawContentService;
 

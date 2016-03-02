@@ -1,7 +1,7 @@
 package infoshare.restapi.Roles;
 
 import infoshare.app.conf.RestUtil;
-import infoshare.domain.Role;
+import infoshare.domain.demographics.Role;
 
 import java.util.Set;
 

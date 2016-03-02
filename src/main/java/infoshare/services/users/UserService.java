@@ -1,6 +1,5 @@
 package infoshare.services.users;
 
-import infoshare.domain.User;
 import infoshare.services.Services;
 import org.springframework.stereotype.Component;
 

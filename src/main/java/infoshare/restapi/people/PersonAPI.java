@@ -2,7 +2,7 @@ package infoshare.restapi.people;
 
 
 import infoshare.app.conf.RestUtil;
-import infoshare.domain.Person;
+import infoshare.domain.person.Person;
 
 import java.util.Set;
 
@@ -20,13 +20,14 @@ public class PersonAPI {
         return RestUtil.getById(PersonBaseURI.Person.GET_ID, param, Person.class);
     }
 
-    public static Set<Person> findAll(String param) {
-        return RestUtil.getAll(PersonBaseURI.Person.GETALL + param, Person.class);
+    public static Set<Person> findAll(String OrganisationPeople) {
+        return RestUtil.getAll(PersonBaseURI.Person.GET_Org + OrganisationPeople, Person.class);
     }
 
     public static Person findByEmail(String param) {
         return RestUtil.getById(PersonBaseURI.Person.GET_BY_EMAIL, param, Person.class);
     }
+
 
 
 }

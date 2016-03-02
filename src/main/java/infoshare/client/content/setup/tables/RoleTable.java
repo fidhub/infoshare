@@ -5,12 +5,9 @@ import com.vaadin.ui.Table;
 import com.vaadin.ui.themes.ValoTheme;
 import infoshare.app.facade.RoleFacade;
 import infoshare.client.content.MainLayout;
-import infoshare.domain.Role;
-import infoshare.services.roles.Impl.RoleServiceImpl;
+import infoshare.domain.demographics.Role;
 import infoshare.services.roles.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.List;
 
 /**
  * Created by hashcode on 2015/06/24.
@@ -19,7 +16,7 @@ public class RoleTable extends Table {
 
     private final MainLayout main;
     @Autowired
-    private RoleService roleService = RoleFacade.roleSrvice;
+    private RoleService roleService = RoleFacade.roleService;
 
     public RoleTable(MainLayout main) {
         this.main = main;

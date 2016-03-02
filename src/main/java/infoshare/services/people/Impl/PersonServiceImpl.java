@@ -9,9 +9,9 @@ package infoshare.services.people.Impl;
 
 import infoshare.app.facade.DemographicsFacade;
 import infoshare.app.facade.PeopleFacade;
-import infoshare.domain.Person;
-import infoshare.domain.PersonRole;
-import infoshare.domain.Role;
+import infoshare.domain.person.Person;
+import infoshare.domain.person.PersonRole;
+import infoshare.domain.demographics.Role;
 import infoshare.restapi.people.PersonAPI;
 import infoshare.services.people.PersonService;
 
@@ -64,6 +64,11 @@ public class PersonServiceImpl implements PersonService {
                 .parallelStream()
                 .filter(person -> isThisPersonInThis(person.getId(), role))
                 .collect(Collectors.toSet());
+    }
+
+    @Override
+    public Set<Person> getPersonByCompany(String company) {
+        return PersonAPI.findAll(company);
     }
 
     @Override

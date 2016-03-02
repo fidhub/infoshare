@@ -1,6 +1,5 @@
 package infoshare.services.courses;
 
-import infoshare.domain.Course;
 import infoshare.services.Services;
 import org.springframework.stereotype.Component;
 

@@ -1,7 +1,7 @@
 package infoshare.restapi.Category;
 
 import infoshare.app.conf.RestUtil;
-import infoshare.domain.Category;
+import infoshare.domain.content.Category;
 
 import java.util.Set;
 

@@ -1,7 +1,7 @@
 package infoshare.services.utililties;
 
 
-import infoshare.domain.Mail;
+import infoshare.domain.util.Mail;
 import infoshare.services.Services;
 
 /**

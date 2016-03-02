@@ -1,7 +1,7 @@
 package infoshare.services.source.sourceServiceImpl;
 
 import com.vaadin.spring.annotation.SpringComponent;
-import infoshare.domain.Source;
+import infoshare.domain.content.Source;
 import infoshare.restapi.Source.SourceAPI;
 import infoshare.services.source.SourceService;
 import org.springframework.stereotype.Service;

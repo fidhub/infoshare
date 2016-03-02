@@ -1,6 +1,6 @@
 package infoshare.services.Content.Impl;
 
-import infoshare.domain.EditedContent;
+import infoshare.domain.content.EditedContent;
 import infoshare.restapi.Content.EditedContentAPI;
 import infoshare.services.Content.EditedContentService;
 

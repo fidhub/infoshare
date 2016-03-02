@@ -12,8 +12,6 @@ import infoshare.client.content.setup.forms.ContactForm;
 import infoshare.client.content.setup.models.ContactModel;
 import infoshare.client.content.setup.tables.AddressTable;
 import infoshare.client.content.setup.tables.ContactTable;
-import infoshare.domain.Contact;
-import infoshare.domain.User;
 import infoshare.services.Contact.ContactService;
 import infoshare.services.Contact.Impl.ContactServiceImpl;
 import infoshare.services.users.Impl.UserServiceImpl;
