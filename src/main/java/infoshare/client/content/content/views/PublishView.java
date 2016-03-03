@@ -14,8 +14,8 @@ import infoshare.client.content.content.tables.PublishTable;
 import infoshare.domain.content.EditedContent;
 import infoshare.domain.content.PublishedContent;
 import infoshare.filterSearch.PublishedContentFilter;
-import infoshare.services.Content.EditedContentService;
-import infoshare.services.Content.PublishedContentService;
+import infoshare.services.ContentFiles.content.EditedContentService;
+import infoshare.services.ContentFiles.content.PublishedContentService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;

@@ -1,14 +1,18 @@
 package infoshare.services.people.Impl;
 
+import com.vaadin.spring.annotation.SpringComponent;
 import infoshare.domain.person.PersonImages;
 import infoshare.restapi.people.PersonImagesAPI;
 import infoshare.services.people.PersonImagesService;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
 /**
  * Created by user9 on 2016/03/02.
  */
+@Service
+@SpringComponent
 public class PersonImagesServiceImpl implements PersonImagesService {
     @Override
     public PersonImages save(PersonImages entity) {

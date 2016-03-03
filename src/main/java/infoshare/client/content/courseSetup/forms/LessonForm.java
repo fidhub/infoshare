@@ -28,7 +28,7 @@ public class LessonForm extends FormLayout {
         binder = new FieldGroup(item);
         final TextField lesson = getTextField("lesson","lesson");
         final TextArea description = getTextArea("Description","description");
-        final RichTextArea textEditor = getRichTextArea("Content","content");
+        final RichTextArea textEditor = getRichTextArea("ContentFiles","content");
 
         final HorizontalLayout buttons = new HorizontalLayout();
         buttons.setSpacing(true);

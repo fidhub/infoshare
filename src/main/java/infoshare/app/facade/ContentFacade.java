@@ -1,11 +1,11 @@
 package infoshare.app.facade;
 
-import infoshare.services.Content.EditedContentService;
-import infoshare.services.Content.Impl.EditedContentServiceImpl;
-import infoshare.services.Content.Impl.PublishedContentServiceImpl;
-import infoshare.services.Content.Impl.RawContentServiceImpl;
-import infoshare.services.Content.PublishedContentService;
-import infoshare.services.Content.RawContentService;
+import infoshare.services.ContentFiles.content.EditedContentService;
+import infoshare.services.ContentFiles.content.Impl.EditedContentServiceImpl;
+import infoshare.services.ContentFiles.content.Impl.PublishedContentServiceImpl;
+import infoshare.services.ContentFiles.content.Impl.RawContentServiceImpl;
+import infoshare.services.ContentFiles.content.PublishedContentService;
+import infoshare.services.ContentFiles.content.RawContentService;
 
 /**
  * Created by user9 on 2016/02/23.

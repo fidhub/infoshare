@@ -6,7 +6,7 @@ import infoshare.app.facade.ContentFacade;
 import infoshare.client.content.MainLayout;
 import infoshare.domain.content.RawContent;
 
-import infoshare.services.Content.RawContentService;
+import infoshare.services.ContentFiles.content.RawContentService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.text.DateFormat;

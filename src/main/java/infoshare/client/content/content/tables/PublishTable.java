@@ -6,8 +6,8 @@ import infoshare.app.facade.CategoryFacade;
 import infoshare.app.facade.ContentFacade;
 import infoshare.client.content.MainLayout;
 import infoshare.domain.content.PublishedContent;
-import infoshare.services.Content.PublishedContentService;
-import infoshare.services.category.CategoryService;
+import infoshare.services.ContentFiles.content.PublishedContentService;
+import infoshare.services.ContentFiles.category.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.text.DateFormat;

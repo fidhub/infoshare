@@ -31,7 +31,7 @@ public class RawForm extends FormLayout {
         backBtn.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
         backBtn.setIcon(FontAwesome.ARROW_LEFT);
 
-        TextArea textEditor = getRichTextArea("Content","content");
+        TextArea textEditor = getRichTextArea("ContentFiles","content");
         final HorizontalLayout layout = new HorizontalLayout();
         layout.setSpacing(true);
         layout.addComponent(putEdited);

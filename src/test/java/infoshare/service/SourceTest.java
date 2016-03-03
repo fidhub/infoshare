@@ -1,8 +1,8 @@
 package infoshare.service;
 
 import infoshare.domain.content.Source;
-import infoshare.services.source.SourceService;
-import infoshare.services.source.sourceServiceImpl.SourceServiceImpl;
+import infoshare.services.ContentFiles.source.SourceService;
+import infoshare.services.ContentFiles.source.Impl.SourceServiceImpl;
 import junit.framework.TestCase;
 import org.junit.Assert;
 import org.junit.Test;

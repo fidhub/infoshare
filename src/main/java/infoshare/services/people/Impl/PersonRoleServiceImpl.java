@@ -7,15 +7,19 @@ package infoshare.services.people.Impl;
 
 
 
+import com.vaadin.spring.annotation.SpringComponent;
 import infoshare.domain.person.PersonRole;
 import infoshare.restapi.people.PersonRoleAPI;
 import infoshare.services.people.PersonRoleService;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
 /**
  * @author BONGANI
  */
+@Service
+@SpringComponent
 public class PersonRoleServiceImpl implements PersonRoleService {
 
     @Override

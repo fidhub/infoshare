@@ -8,10 +8,11 @@ package infoshare.services.people;
 
 
 import infoshare.domain.person.PersonRole;
+import org.springframework.stereotype.Component;
 
 import java.util.Set;
 
-
+@Component
 public interface PersonRoleService {
     Set<PersonRole> findPersonRoles(String personId);
 
