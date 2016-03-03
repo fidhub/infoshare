@@ -7,8 +7,13 @@ import com.vaadin.server.FontAwesome;
 import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
+<<<<<<< HEAD:src/main/java/infoshare/client/content/setup/forms/PersonForm.java
 import infoshare.app.facade.RoleFacade;
 import infoshare.client.content.setup.models.PersonModel;
+=======
+import infoshare.client.content.setup.models.UserModel;
+import infoshare.services.roles.Impl.RoleServiceImpl;
+>>>>>>> fa6ff7d925bc1f5383382a2409f93a590eb6edf5:src/main/java/infoshare/client/content/setup/forms/UserForm.java
 import infoshare.services.roles.RoleService;
 
 /**
