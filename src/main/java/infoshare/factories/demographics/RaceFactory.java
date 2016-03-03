@@ -10,7 +10,7 @@ import java.util.Map;
  * Created by Songezo on 2016-03-02.
  */
 public class RaceFactory {
-    public static Race getrace (Map<String, String> raceVals){
+    public static Race getRace (Map<String, String> raceVals){
         Race race = new Race.Builder()
                 .id(KeyGenerator.getEntityId())
                 .name(raceVals.get("name"))
