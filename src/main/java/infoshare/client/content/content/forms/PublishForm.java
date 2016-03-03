@@ -26,7 +26,7 @@ public class PublishForm extends FormLayout{
         item = new BeanItem<>(model);
         binder = new FieldGroup(item);
 
-        final RichTextArea richTextArea = getTextArea("Content","content");
+        final RichTextArea richTextArea = getTextArea("ContentFiles","content");
         final HorizontalLayout buttons = new HorizontalLayout();
         buttons.setSpacing(true);
         popUpCloseBtn.setIcon(FontAwesome.ARROW_CIRCLE_O_LEFT);

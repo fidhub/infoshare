@@ -14,8 +14,8 @@ import infoshare.client.content.content.tables.RawTable;
 import infoshare.domain.content.EditedContent;
 import infoshare.domain.content.RawContent;
 import infoshare.filterSearch.RawContentFilter;
-import infoshare.services.Content.EditedContentService;
-import infoshare.services.Content.RawContentService;
+import infoshare.services.ContentFiles.content.EditedContentService;
+import infoshare.services.ContentFiles.content.RawContentService;
 
 import java.util.Date;
 import java.util.HashMap;

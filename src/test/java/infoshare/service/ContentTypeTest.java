@@ -2,8 +2,8 @@ package infoshare.service;
 
 
 import infoshare.domain.content.ContentType;
-import infoshare.services.ContentType.ContentTypeService;
-import infoshare.services.ContentType.Impl.ContentTypeServiceImpl;
+import infoshare.services.ContentFiles.ContentType.ContentTypeService;
+import infoshare.services.ContentFiles.ContentType.Impl.ContentTypeServiceImpl;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -26,7 +26,7 @@ public class ContentTypeTest {
         //finding the old ContentType ID
         ContentType contentType = contentTypeService.findById("7330628ddb3380d7ad0b24465a78d81f");
 
-        //Updating the Content Type
+        //Updating the ContentFiles Type
         ContentType contentTypeUpdate = new ContentType.Builder(contentType.getName())
                 .copy(contentType).description("edited copy  of the raw content").build();
 
@@ -34,7 +34,7 @@ public class ContentTypeTest {
         contentTypeService.update(contentTypeUpdate);
         ContentType checkUpadate = contentTypeService.findById("7330628ddb3380d7ad0b24465a78d81f");
 
-        //Testing if the new Content Type is the same as the Old one
+        //Testing if the new ContentFiles Type is the same as the Old one
         Assert.assertEquals(contentType.getDescription(), checkUpadate.getDescription());
         }
 }

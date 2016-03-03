@@ -1,8 +1,8 @@
 package infoshare.service;
 
 import infoshare.domain.content.Category;
-import infoshare.services.category.CategoryService;
-import infoshare.services.category.Impl.CategoryServiceImpl;
+import infoshare.services.ContentFiles.category.CategoryService;
+import infoshare.services.ContentFiles.category.Impl.CategoryServiceImpl;
 import junit.framework.TestCase;
 import org.junit.Assert;
 import org.junit.Test;

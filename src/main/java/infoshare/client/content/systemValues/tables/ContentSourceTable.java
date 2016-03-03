@@ -6,7 +6,7 @@ import com.vaadin.ui.themes.ValoTheme;
 import infoshare.app.facade.SourceFacade;
 import infoshare.client.content.MainLayout;
 import infoshare.domain.content.Source;
-import infoshare.services.source.SourceService;
+import infoshare.services.ContentFiles.source.SourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**

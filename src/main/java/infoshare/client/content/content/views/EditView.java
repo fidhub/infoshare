@@ -18,11 +18,11 @@ import infoshare.client.content.content.models.ContentModel;
 import infoshare.client.content.content.tables.EditTable;
 import infoshare.domain.content.*;
 import infoshare.filterSearch.EditedContentFilter;
-import infoshare.services.ContentType.ContentTypeService;
-import infoshare.services.Content.EditedContentService;
-import infoshare.services.Content.PublishedContentService;
-import infoshare.services.category.CategoryService;
-import infoshare.services.source.SourceService;
+import infoshare.services.ContentFiles.ContentType.ContentTypeService;
+import infoshare.services.ContentFiles.content.EditedContentService;
+import infoshare.services.ContentFiles.content.PublishedContentService;
+import infoshare.services.ContentFiles.category.CategoryService;
+import infoshare.services.ContentFiles.source.SourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.vaadin.dialogs.ConfirmDialog;
 
@@ -74,7 +74,7 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
         deleteCont.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
         deleteCont.addStyleName(ValoTheme.BUTTON_SMALL);
         deleteCont.setCaption("Remove");
-        deleteCont.setDescription("Delete Content");
+        deleteCont.setDescription("Delete ContentFiles");
         deleteCont.setIcon(FontAwesome.REMOVE);
 
         viewTrash.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);

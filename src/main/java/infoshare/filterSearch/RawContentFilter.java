@@ -6,8 +6,8 @@ import com.vaadin.ui.themes.ValoTheme;
 import infoshare.app.facade.CategoryFacade;
 import infoshare.app.facade.ContentFacade;
 import infoshare.domain.content.RawContent;
-import infoshare.services.Content.RawContentService;
-import infoshare.services.category.CategoryService;
+import infoshare.services.ContentFiles.content.RawContentService;
+import infoshare.services.ContentFiles.category.CategoryService;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

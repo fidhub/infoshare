@@ -15,7 +15,7 @@ import infoshare.client.content.content.views.RawView;
 import infoshare.client.header.Form.ProfilePopUp;
 import infoshare.client.header.landing_page.LandingHome;
 import infoshare.domain.content.RawContent;
-import infoshare.services.Content.RawContentService;
+import infoshare.services.ContentFiles.content.RawContentService;
 
 import java.io.File;
 import java.util.Calendar;

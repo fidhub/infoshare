@@ -7,6 +7,7 @@ package infoshare.services.people.Impl;
 
 
 
+import com.vaadin.spring.annotation.SpringComponent;
 import infoshare.app.facade.DemographicsFacade;
 import infoshare.app.facade.PeopleFacade;
 import infoshare.domain.person.Person;
@@ -14,6 +15,7 @@ import infoshare.domain.person.PersonRole;
 import infoshare.domain.demographics.Role;
 import infoshare.restapi.people.PersonAPI;
 import infoshare.services.people.PersonService;
+import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -22,6 +24,8 @@ import java.util.stream.Collectors;
 /**
  * @author BONGANI
  */
+@Service
+@SpringComponent
 public class PersonServiceImpl implements PersonService {
 
     @Override
