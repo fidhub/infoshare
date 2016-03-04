@@ -1,15 +1,19 @@
 package infoshare.services.demographics.Impl;
 
 
+import com.vaadin.spring.annotation.SpringComponent;
 import infoshare.domain.demographics.Role;
 import infoshare.restapi.common.demographics.RoleAPI;
 import infoshare.services.demographics.RolesListService;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
 /**
  * Created by hashcode on 2015/08/18.
  */
+@SpringComponent
+@Service
 public class RolesListServiceImpl implements RolesListService {
 
     @Override
@@ -35,7 +39,6 @@ public class RolesListServiceImpl implements RolesListService {
     @Override
     public void delete(Role entity) {
         RoleAPI.save(entity);
-
     }
 
     @Override
