@@ -14,7 +14,7 @@ public class CourseModel implements Serializable {
     @NotNull
     private String courseDescription;
 
-    private List<Lesson> lessons;
+ /*   private List<Lesson> lessons;
 
     public List<Lesson> getLessons() {
         return lessons;
@@ -22,7 +22,7 @@ public class CourseModel implements Serializable {
 
     public void setLessons(List<Lesson> lessons) {
         this.lessons = lessons;
-    }
+    }*/
 
 
     public String getCourseLevel() {

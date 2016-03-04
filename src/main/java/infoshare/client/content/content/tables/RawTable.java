@@ -36,7 +36,7 @@ public class RawTable extends Table {
         addContainerProperty("Date Created",String.class,null);
 
         try {
-            rawContentService.findAll()
+            rawContentService.findAll("org")
                     .stream()
                     .filter(cont -> cont!= null)
                     .collect(Collectors.toList())

@@ -7,7 +7,7 @@ import com.vaadin.server.FontAwesome;
 import com.vaadin.server.Responsive;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
-import infoshare.client.content.setup.models.UserModel;
+import infoshare.client.content.setup.models.PersonModel;
 import infoshare.services.roles.Impl.RoleServiceImpl;
 import infoshare.services.roles.RoleService;
 
@@ -16,19 +16,18 @@ import infoshare.services.roles.RoleService;
  */
 public class UserDetailsForm extends FormLayout {
 
-    private final UserModel model;
-    public final BeanItem<UserModel> item;
+    private final PersonModel model;
+    public final BeanItem<PersonModel> item;
     public final FieldGroup binder;
 
     public TextField field = new TextField();
-
     private RoleService roleService = new RoleServiceImpl();
     public ListSelect rolesList = new ListSelect();
 
     public Button popUpBackBtn = new Button("Back");
 
     public UserDetailsForm() {
-        model = new UserModel();
+        model = new PersonModel();
         item = new BeanItem<>(model);
         binder = new FieldGroup(item);
         final TextField UserName = getTextField("User Name", "username");
@@ -66,7 +65,7 @@ public class UserDetailsForm extends FormLayout {
         TextField textField = new TextField(label);
         textField.setWidth(250, Unit.PIXELS);
         textField.setNullRepresentation("");
-        textField.addValidator(new BeanValidator(UserModel.class, field));
+        textField.addValidator(new BeanValidator(PersonModel.class, field));
         textField.setImmediate(true);
         binder.bind(textField, field);
 
@@ -76,7 +75,7 @@ public class UserDetailsForm extends FormLayout {
     private ListSelect getRoles(String label, String field) {
         rolesList.setCaption(label);
         roleService.findAll().stream().filter(role -> role.getId() != null).forEach(role -> {
-            rolesList.setItemCaption(role.getId(), role.getRoleName() + " " + role.getDescription());
+            rolesList.setItemCaption(role.getId(),role.getDescription());
             rolesList.setNullSelectionAllowed(false);
             rolesList.setMultiSelect(true);
             rolesList.addItem(role.getId());

@@ -1,20 +1,12 @@
 package infoshare.client.content.courseSetup.views;
 
 import com.vaadin.data.Property;
-import com.vaadin.data.fieldgroup.FieldGroup;
-import com.vaadin.data.util.BeanItem;
-import com.vaadin.server.FontAwesome;
-import com.vaadin.ui.*;
-import com.vaadin.ui.themes.ValoTheme;
+import com.vaadin.ui.Button;
+import com.vaadin.ui.ComboBox;
+import com.vaadin.ui.VerticalLayout;
 import infoshare.client.content.MainLayout;
-import infoshare.client.content.courseSetup.CoursesMenu;
 import infoshare.client.content.courseSetup.forms.LessonForm;
-import infoshare.client.content.courseSetup.models.LessonModel;
 import infoshare.client.content.courseSetup.tables.LessonTable;
-import infoshare.services.courses.CourseService;
-import infoshare.services.courses.Impl.Services;
-
-import java.util.List;
 
 /**
  * Created by codex on 2015/07/07.
@@ -22,14 +14,14 @@ import java.util.List;
 
 public class LessonView extends VerticalLayout implements Button.ClickListener, Property.ValueChangeListener {
 
-    private final Window popUp;
+   // private final Window popUp;
     private final MainLayout main ;
     private final LessonForm form;
     private static LessonTable table = null;
     private Button addLesson = new Button("Add Lesson");
     private Button editLesson = new Button("Edit Lesson");
     private static ComboBox courseCmb = null;
-    private CourseService courseService = new Services();
+   // private CourseService courseService = new Services();
 
     public LessonView(MainLayout main) {
         this.main = main;
@@ -42,34 +34,34 @@ public class LessonView extends VerticalLayout implements Button.ClickListener, 
         else if(courseCmb.getValue() != null)
               table.loadTable(courseCmb.getValue().toString());
 
-        this.popUp = modelWindow();
+       // this.popUp = modelWindow();
 
         setSizeFull();
         setSpacing(true);
-        addComponent(getComboBox());
-        addComponent(getButtons());
+        //addComponent(getComboBox());
+        //addComponent(getButtons());
         addComponent(table);
-        addListeners();
+       // addListeners();
     }
     @Override
     public void buttonClick(Button.ClickEvent clickEvent) {
         final Button source = clickEvent.getButton();
         if (source == addLesson){
-                UI.getCurrent().addWindow(popUp);
-                popUp.setModal(true);
+             //   UI.getCurrent().addWindow(popUp);
+             //   popUp.setModal(true);
                 form.popUpSaveBtn.setVisible(true);
                 form.popUpUpdateBtn.setVisible(false);
 
         }else if(source == editLesson){
-            editButton();
+           // editButton();
         }else if(source== form.popUpCancelBtn){
-            popUp.setModal(false);
-            UI.getCurrent().removeWindow(popUp);
-            getHome();
+           // popUp.setModal(false);
+          //  UI.getCurrent().removeWindow(popUp);
+            //getHome();
         }else if(source == form.popUpUpdateBtn){
-            saveEditedForm(form.binder);
+            //saveEditedForm(form.binder);
         }else if (source == form.popUpSaveBtn){
-            saveForm(form.binder);
+           /// saveForm(form.binder);
         }
 
     }
@@ -82,7 +74,7 @@ public class LessonView extends VerticalLayout implements Button.ClickListener, 
             editLesson.setVisible(true);
         }
     }
-    private void editButton(){
+   /* private void editButton(){
         try {
             final Course course = courseService.findById(courseCmb.getValue().toString());
             course.getLessons().stream().filter(lesson -> lesson.getId() == table.getValue().toString()).forEach(lesson -> {
@@ -225,5 +217,5 @@ public class LessonView extends VerticalLayout implements Button.ClickListener, 
         model.setContent(lesson.getContent());
         model.setId(lesson.getId());
         return model;
-    }
+    }*/
 }

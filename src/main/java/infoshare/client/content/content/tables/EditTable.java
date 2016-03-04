@@ -37,7 +37,7 @@ public class EditTable extends Table{
                 addContainerProperty("Creator",String.class,null);
                 addContainerProperty("Date Created",String.class,null);
                 try {
-                    editedContentService.findAll()
+                    editedContentService.findAll("org")
                             .stream()
                             .filter(content -> content != null)
                             .collect(Collectors.toList())

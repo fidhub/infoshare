@@ -14,6 +14,7 @@ import infoshare.client.content.setup.forms.RoleForm;
 import infoshare.client.content.setup.models.RoleModel;
 import infoshare.client.content.setup.tables.RoleTable;
 import infoshare.domain.demographics.Role;
+import infoshare.factories.demographics.RoleFactory;
 import infoshare.services.roles.RoleService;
 
 import java.util.HashMap;

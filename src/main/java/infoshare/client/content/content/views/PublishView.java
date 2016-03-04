@@ -13,6 +13,7 @@ import infoshare.client.content.content.models.ContentModel;
 import infoshare.client.content.content.tables.PublishTable;
 import infoshare.domain.content.EditedContent;
 import infoshare.domain.content.PublishedContent;
+import infoshare.factories.content.EditedContentFactory;
 import infoshare.filterSearch.PublishedContentFilter;
 import infoshare.services.ContentFiles.content.EditedContentService;
 import infoshare.services.ContentFiles.content.PublishedContentService;
@@ -37,6 +38,7 @@ public class PublishView extends VerticalLayout implements Button.ClickListener,
     private final PublishForm form;
     private final Window popUp ;
     private PublishedContentFilter publishedContentFilter = new PublishedContentFilter();
+
     public PublishView( MainLayout mainApp) {
 
         this.main = mainApp;
@@ -107,9 +109,9 @@ public class PublishView extends VerticalLayout implements Button.ClickListener,
         }
     }
     private PublishedContent getUpdateEntity(String val ) {
-        final PublishedContent bean = publishedContentService.findById(val);
+        final PublishedContent bean = publishedContentService.findById("",val);
         final PublishedContent editedContent = new PublishedContent
-                .Builder(bean.getTitle()).copy(bean)
+                .Builder().copy(bean)
                 .status("Edited")
                 .build();
         return editedContent;
@@ -122,12 +124,12 @@ public class PublishView extends VerticalLayout implements Button.ClickListener,
         editedVals.put("contentType",bean.getContentType());
         editedVals.put("status",bean.getStatus());
         editedVals.put("source",bean.getStatus());
-        final EditedContent editedContent = EditedContentFacory.getEditedContent(editedVals,new Date());
+        final EditedContent editedContent = EditedContentFactory.getEditedContent(editedVals, new Date());
         return editedContent;
     }
     private void ViewContentButton(){
         try {
-            final PublishedContent publishedContent = publishedContentService.findById(table.getValue().toString());
+            final PublishedContent publishedContent = publishedContentService.findById("",table.getValue().toString());
             final ContentModel bean = getModel(publishedContent);
             form.binder.setItemDataSource(new BeanItem<>(bean));
             UI.getCurrent().addWindow(popUp);
@@ -139,7 +141,7 @@ public class PublishView extends VerticalLayout implements Button.ClickListener,
     }
     private ContentModel getModel(PublishedContent val) {
         final ContentModel model = new ContentModel();
-        final PublishedContent publishedContent = publishedContentService.findById(val.getId());
+        final PublishedContent publishedContent = publishedContentService.findById("",val.getId());
         model.setTitle(publishedContent.getTitle());
         model.setCategory(publishedContent.getCategory());
         model.setCreator(publishedContent.getCreator());

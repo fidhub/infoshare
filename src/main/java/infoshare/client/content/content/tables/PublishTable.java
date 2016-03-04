@@ -38,7 +38,7 @@ public class PublishTable extends Table{
         addContainerProperty("Date Created",String.class,null);
 
         try {
-            publishedContentService.findAll()
+            publishedContentService.findAll("org")
                     .stream()
                     .filter(cont -> cont != null)
                     .collect(Collectors.toList())

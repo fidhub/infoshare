@@ -17,54 +17,73 @@ public class RawForm extends FormLayout {
     private final ContentModel model;
     public final BeanItem<ContentModel> item;
     public final FieldGroup binder;
-    public final Button putEdited ;
+    public final Button saveBtn;
     public final Button backBtn ;
+    public final ComboBox popUpContentTypeCmb;
+    public final ComboBox popUpCategoryCmb;
+    public final ComboBox popUpSourceCmb;
 
     public RawForm() {
         model = new ContentModel();
         item = new BeanItem<>(model);
         binder = new FieldGroup(item);
-        putEdited = new Button("Put To Edited");
-        putEdited.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
-        putEdited.setIcon(FontAwesome.SAVE);
+
+        popUpContentTypeCmb = getComboBox("ContentFiles Type","contentType");
+        popUpCategoryCmb = getComboBox("Category","category");
+        popUpSourceCmb = getComboBox("source","source");
+
+        saveBtn = new Button("Save");
+        saveBtn.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
+        saveBtn.setIcon(FontAwesome.SAVE);
         backBtn = new Button("Back");
         backBtn.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
         backBtn.setIcon(FontAwesome.ARROW_LEFT);
 
-        TextArea textEditor = getRichTextArea("ContentFiles","content");
+        RichTextArea textEditor = getRichTextArea("ContentFiles","content");
         final HorizontalLayout layout = new HorizontalLayout();
         layout.setSpacing(true);
-        layout.addComponent(putEdited);
+        layout.addComponent(saveBtn);
         layout.addComponent(backBtn);
 
         final HorizontalLayout horizontalLayout = new HorizontalLayout();
-        horizontalLayout.setEnabled(false);
         horizontalLayout.setSizeFull();
         horizontalLayout.addComponent(textEditor);
 
+        final HorizontalLayout combo = new HorizontalLayout();
+        combo.setSpacing(true);
+        combo.addComponent(popUpContentTypeCmb);
+        combo.addComponent(popUpCategoryCmb);
 
         GridLayout gridLayout = new  GridLayout(4,7);
         gridLayout.setSpacing(true);
         gridLayout.setSizeFull();
         Responsive.makeResponsive(gridLayout);
         gridLayout.addComponent(textEditor, 0, 0,3,2);
+        gridLayout.addComponent(combo,0,3);
         gridLayout.addComponent(layout,0,5);
 
         addComponent(gridLayout);
 
 
-
     }
-    private TextArea getRichTextArea(String label, String field){
-        TextArea textArea = new TextArea(label);
-        textArea.setImmediate(true);
-        textArea.setWidth(99.0f, Unit.PERCENTAGE);
-        textArea.setHeight(400.0f, Unit.PIXELS);
-        textArea.setNullRepresentation("");
-        textArea.setReadOnly(true);
-        textArea.addValidator(new BeanValidator(ContentModel.class, field));
-        textArea.setImmediate(true);
-        binder.bind(textArea,field);
-        return textArea;
+    private RichTextArea getRichTextArea(String label, String field){
+        RichTextArea richTextArea = new RichTextArea(label);
+        richTextArea.setImmediate(true);
+        richTextArea.setWidth(99.0f, Unit.PERCENTAGE);
+        richTextArea.setHeight(400.0f, Unit.PIXELS);
+        richTextArea.setNullRepresentation("");
+        richTextArea.setReadOnly(true);
+        richTextArea.addValidator(new BeanValidator(ContentModel.class, field));
+        richTextArea.setImmediate(true);
+        binder.bind(richTextArea,field);
+        return richTextArea;
+    }
+    private ComboBox getComboBox(String label, String field){
+        final ComboBox comboBox = new ComboBox(label);
+        comboBox.setImmediate(true);
+        comboBox.addValidator(new BeanValidator(ContentModel.class, field));
+        comboBox.setNullSelectionAllowed(false);
+        binder.bind(comboBox,field);
+        return comboBox;
     }
 }

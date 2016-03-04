@@ -13,6 +13,7 @@ import infoshare.client.content.content.models.ContentModel;
 import infoshare.client.content.content.tables.RawTable;
 import infoshare.domain.content.EditedContent;
 import infoshare.domain.content.RawContent;
+import infoshare.factories.content.EditedContentFactory;
 import infoshare.filterSearch.RawContentFilter;
 import infoshare.services.ContentFiles.content.EditedContentService;
 import infoshare.services.ContentFiles.content.RawContentService;
@@ -68,7 +69,7 @@ public class RawView extends VerticalLayout implements Button.ClickListener,Prop
     @Override
     public void buttonClick(Button.ClickEvent clickEvent) {
         final Button source = clickEvent.getButton();
-        if (source ==form.putEdited){
+        if (source ==form.saveBtn){
             saveEditedForm(form.binder);
         }else if (source ==form.backBtn){
             popUp.setModal(false);
@@ -95,7 +96,7 @@ public class RawView extends VerticalLayout implements Button.ClickListener,Prop
     public void EditButton(){
         try {
             tableId = table.getValue().toString();
-            final RawContent rawContent = rawContentService.findById(tableId);
+            final RawContent rawContent = rawContentService.findById("",tableId);
             final ContentModel bean = getModel(rawContent);
             form.binder.setItemDataSource(new BeanItem<>(bean));
               UI.getCurrent().addWindow(popUp);
@@ -124,7 +125,7 @@ public class RawView extends VerticalLayout implements Button.ClickListener,Prop
     private EditedContent getNewEntity(FieldGroup binder) {
         try {
             final ContentModel bean = ((BeanItem<ContentModel>) binder.getItemDataSource()).getBean();
-            bean.setDateCreated(rawContentService.findById(table.getValue().toString()).getDateCreated());
+            bean.setDateCreated(rawContentService.findById("",table.getValue().toString()).getDateCreated());
             Map<String,String> editedVals = new HashMap<>();
             editedVals.put("content",bean.getContent());
             editedVals.put("category",bean.getCategory());
@@ -132,7 +133,7 @@ public class RawView extends VerticalLayout implements Button.ClickListener,Prop
             editedVals.put("contentType",bean.getContentType());
             editedVals.put("status",bean.getStatus());
             editedVals.put("source",bean.getStatus());
-            final EditedContent editedContent = EditedContentFacory.getEditedContent(editedVals,new Date());
+            final EditedContent editedContent = EditedContentFactory.getEditedContent(editedVals, new Date());
             return editedContent;
         }catch (Exception e){
             return null;
@@ -141,9 +142,9 @@ public class RawView extends VerticalLayout implements Button.ClickListener,Prop
     private RawContent getUpdateEntity(FieldGroup binder) {
         try {
             final ContentModel bean = ((BeanItem<ContentModel>) binder.getItemDataSource()).getBean();
-            bean.setDateCreated(rawContentService.findById(table.getValue().toString()).getDateCreated());
-            final RawContent rawContent = new RawContent
-                    .Builder(bean.getTitle())
+            bean.setDateCreated(rawContentService.findById("",table.getValue().toString()).getDateCreated());
+            final RawContent rawContent = new RawContent.Builder()
+                    .title(bean.getTitle())
                     .category(bean.getCategory())
                     .content(bean.getContent())
                     .contentType(bean.getContentType())
@@ -151,6 +152,7 @@ public class RawView extends VerticalLayout implements Button.ClickListener,Prop
                     .dateCreated(bean.getDateCreated())
                     .source(bean.getSource())
                     .state(bean.getState())
+                    .org(bean.getOrg())
                     .status("Edited")
                     .id(table.getValue().toString())
                     .build();
@@ -163,7 +165,7 @@ public class RawView extends VerticalLayout implements Button.ClickListener,Prop
     }
     private ContentModel getModel(RawContent val) {
         final ContentModel model = new ContentModel();
-        final RawContent rawContent = rawContentService.findById(val.getId());
+        final RawContent rawContent = rawContentService.findById("",val.getId());
         model.setTitle(rawContent.getTitle());
         model.setCategory(rawContent.getCategory());
         model.setCreator(rawContent.getCreator());
@@ -172,10 +174,11 @@ public class RawView extends VerticalLayout implements Button.ClickListener,Prop
         model.setSource(rawContent.getSource());
         model.setStatus(rawContent.getStatus());
         model.setState(rawContent.getState());
+        model.setOrg(rawContent.getOrg());
         return model;
     }
     public void addListeners(){
-        form.putEdited.addClickListener(this);
+        form.saveBtn.addClickListener(this);
         form.backBtn.addClickListener(this);
         table.addValueChangeListener(this);
         table.addItemClickListener(item -> {
@@ -188,8 +191,6 @@ public class RawView extends VerticalLayout implements Button.ClickListener,Prop
             }
         });
         rawContentFilter.field.addTextChangeListener((FieldEvents.TextChangeListener) textChangeEvent -> refreshContacts(textChangeEvent.getText()));
-
-
     }
 
 }

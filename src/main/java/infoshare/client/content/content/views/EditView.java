@@ -17,6 +17,7 @@ import infoshare.client.content.content.forms.EditForm;
 import infoshare.client.content.content.models.ContentModel;
 import infoshare.client.content.content.tables.EditTable;
 import infoshare.domain.content.*;
+import infoshare.factories.content.PublishedContentFactory;
 import infoshare.filterSearch.EditedContentFilter;
 import infoshare.services.ContentFiles.ContentType.ContentTypeService;
 import infoshare.services.ContentFiles.content.EditedContentService;
@@ -174,7 +175,7 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
             form.popUpContentTypeCmb.addItem(contentType.getId());
             form.popUpContentTypeCmb.setItemCaption(contentType.getId(), contentType.getName());
         }
-        for (Source source : sourceService.findAll()) {
+        for (Source source : sourceService.findAll("org")) {
             form.popUpSourceCmb.addItem(source.getId());
             form.popUpSourceCmb.setItemCaption(source.getId(), source.getName());
         }
@@ -197,7 +198,7 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
     private void getTrash(){
         try{
             table.removeAllItems();
-            editedContentService.findAll().stream()
+            editedContentService.findAll("org").stream()
                     .filter(cont -> cont.getState().equalsIgnoreCase("Deleted"))
                     .collect(Collectors.toList())
                     .stream().filter(cont -> cont.getStatus().equalsIgnoreCase("Edited"))
@@ -233,13 +234,14 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
         publishedVals.put("contentType",bean.getContentType());
         publishedVals.put("status",bean.getStatus());
         publishedVals.put("source",bean.getStatus());
-        final PublishedContent publishedContent = PublishedContentFactory.getPublishedContent(publishedVals,new Date());
+        final PublishedContent publishedContent = PublishedContentFactory.getPublishedContent(publishedVals, new Date());
         return publishedContent;
     }
     private EditedContent getUpdateEntity(FieldGroup binder) {
         final ContentModel bean = ((BeanItem<ContentModel>) binder.getItemDataSource()).getBean();
         final EditedContent editedContent = new EditedContent
-                .Builder(bean.getTitle())
+                .Builder()
+                .title(bean.getTitle())
                 .category(categoryService.findById(bean.getCategory()).getId())
                 .content(bean.getContent())
                 .contentType(bean.getContentType())
@@ -247,22 +249,23 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
                 .dateCreated(bean.getDateCreated())
                 .source(bean.getSource())
                 .state(bean.getState())
+                .org(bean.getOrg())
                 .status("Published")
                 .id(table.getValue().toString())
                 .build();
         return editedContent;
     }
     private EditedContent getTrashEntity(String val) {
-       EditedContent content = editedContentService.findById(val);
+       EditedContent content = editedContentService.findById("",val);
         final EditedContent editedContent = new EditedContent
-                .Builder(content.getTitle()).copy(content)
+                .Builder().copy(content)
                 .state("Deleted")
                 .build();
         return editedContent;
     }
     private ContentModel getModel(String val) {
         final ContentModel model = new ContentModel();
-        final EditedContent editedContent = editedContentService.findById(val.toString());
+        final EditedContent editedContent = editedContentService.findById("",val.toString());
         model.setTitle(editedContent.getTitle());
         model.setCategory(editedContent.getCategory());
         model.setCreator(editedContent.getCreator());
@@ -271,6 +274,7 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
         model.setSource(editedContent.getSource());
         model.setStatus(editedContent.getStatus());
         model.setState(editedContent.getState());
+        model.setOrg(editedContent.getOrg());
         return model;
     }
     public void addListeners(){

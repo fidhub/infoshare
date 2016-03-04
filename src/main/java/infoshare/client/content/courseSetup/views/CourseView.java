@@ -1,18 +1,12 @@
 package infoshare.client.content.courseSetup.views;
 
 import com.vaadin.data.Property;
-import com.vaadin.data.fieldgroup.FieldGroup;
-import com.vaadin.data.util.BeanItem;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.VerticalLayout;
 import infoshare.client.content.MainLayout;
-import infoshare.client.content.courseSetup.CoursesMenu;
 import infoshare.client.content.courseSetup.forms.CoursesForm;
-import infoshare.client.content.courseSetup.models.CourseModel;
 import infoshare.client.content.courseSetup.tables.CoursesTable;
-import infoshare.services.courses.CourseService;
-import infoshare.services.courses.Impl.Services;
 
 /**
  * Created by codex on 2015/07/07.
@@ -22,7 +16,7 @@ public class CourseView extends VerticalLayout implements Button.ClickListener, 
     private final MainLayout main;
     private final CoursesForm form;
     private final CoursesTable table;
-    private CourseService courseService = new Services();
+   // private CourseService courseService = new Services();
 
     public CourseView(MainLayout main) {
         this.main = main;
@@ -30,21 +24,21 @@ public class CourseView extends VerticalLayout implements Button.ClickListener, 
         table = new CoursesTable();
         addComponent(form);
         addComponent(table);
-        addListeners();
+    //    addListeners();
     }
     @Override
     public void buttonClick(Button.ClickEvent event) {
         final Button source = event.getButton();
         if (source == form.save) {
-            saveForm(form.binder);
+          //  saveForm(form.binder);
         } else if (source == form.edit) {
-            setEditFormProperties();
+          //  setEditFormProperties();
         } else if (source == form.cancel) {
-            getHome();
+          //  getHome();
         } else if (source == form.update) {
-            saveEditedForm(form.binder);
+          //  saveEditedForm(form.binder);
         } else if (source == form.delete) {
-            deleteForm(form.binder);
+         //   deleteForm(form.binder);
         }
     }
     @Override
@@ -52,16 +46,16 @@ public class CourseView extends VerticalLayout implements Button.ClickListener, 
         final Property property = event.getProperty();
         if (property == table) {
             try {
-                final Course course = courseService.findById(table.getValue().toString());
-                final CourseModel bean = getModel(course);
-                form.binder.setItemDataSource(new BeanItem<>(bean));
+             //   final Course course = courseService.findById(table.getValue().toString());
+             //   final CourseModel bean = getModel(course);
+              //  form.binder.setItemDataSource(new BeanItem<>(bean));
             }catch (Exception e){
                 Notification.show(e.toString(), Notification.Type.WARNING_MESSAGE);
             }
-            setReadFormProperties();
+          //  setReadFormProperties();
         }
     }
-    private void saveForm(FieldGroup binder) {
+  /*  private void saveForm(FieldGroup binder) {
         try {
             binder.commit();
             courseService.save(getNewEntity(binder));
@@ -140,5 +134,5 @@ public class CourseView extends VerticalLayout implements Button.ClickListener, 
         model.setCourseDescription(course.getCourseDescription());
         model.setLessons(course.getLessons());
         return model;
-    }
+    }*/
 }

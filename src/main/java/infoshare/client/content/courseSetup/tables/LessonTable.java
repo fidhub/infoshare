@@ -3,15 +3,13 @@ package infoshare.client.content.courseSetup.tables;
 import com.vaadin.server.Responsive;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.themes.ValoTheme;
-import infoshare.services.courses.CourseService;
-import infoshare.services.courses.Impl.Services;
 
 /**
  * Created by codex on 2015/07/09.
  */
 public  class LessonTable extends Table {
 
-    private CourseService courseService = new Services();
+  //  private CourseService courseService = new Services();
 
     public LessonTable() {
         setSizeFull();
@@ -28,7 +26,7 @@ public  class LessonTable extends Table {
         setImmediate(true);
     }
     public void loadTable( String id ){
-        try {
+       /* try {
             removeAllItems();
             for (Lesson lesson : courseService.findById(id).getLessons())
                 addItem(new Object[]{
@@ -36,6 +34,6 @@ public  class LessonTable extends Table {
                         lesson.getDescription()
                 }, lesson.getId());
         }catch (Exception e){
-        }
+        }*/
     }
 }
