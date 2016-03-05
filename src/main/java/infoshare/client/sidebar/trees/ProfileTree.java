@@ -1,0 +1,73 @@
+package infoshare.client.sidebar.trees;
+
+import com.vaadin.event.ItemClickEvent;
+import com.vaadin.ui.Tree;
+import infoshare.client.content.MainLayout;
+import infoshare.client.content.profile.contacts.ContactsMenu;
+import infoshare.client.content.profile.demographics.DemographicsMenu;
+import infoshare.client.content.profile.password.PasswordMenu;
+import infoshare.client.content.profile.profile.ProfileMenu;
+
+
+/**
+ * Created by hashcode on 2015/08/17.
+ */
+public class ProfileTree extends Tree implements ItemClickEvent.ItemClickListener {
+    private final MainLayout main;
+    public static final Object PROFILE = "Profile SUMMARY";
+    public static final Object CONTACTS = "Your CONTACTS";
+    public static final Object DEMOGRAOHICS = "Your DEMOGRAPHICS";
+    public static final Object CHANGE_PASSSWORD = "Change PASSWORD";
+    private static final String LANDING_TAB = "LANDING";
+
+    public ProfileTree(MainLayout main) {
+        this.main = main;
+        addItem(PROFILE);
+        addItem(DEMOGRAOHICS);
+        addItem(CONTACTS);
+        addItem(CHANGE_PASSSWORD);
+
+        //Add Listeners
+        addItemClickListener(this);
+    }
+
+    @Override
+    public void itemClick(ItemClickEvent event) {
+        Object itemId = event.getItemId();
+        if (itemId != null) {
+            if (PROFILE.equals(itemId)) {
+                profileView();
+            } else if (DEMOGRAOHICS.equals(itemId)) {
+                demographicsView();
+
+            } else if (CONTACTS.equals(itemId)) {
+                contactsView();
+
+            } else if (CHANGE_PASSSWORD.equals(itemId)) {
+                passwordView();
+
+            }
+        }
+    }
+
+
+
+    private void contactsView() {
+        main.content.setSecondComponent(new ContactsMenu(main, LANDING_TAB));
+
+    }
+
+    private void demographicsView() {
+        main.content.setSecondComponent(new DemographicsMenu(main, LANDING_TAB));
+
+    }
+
+    private void profileView() {
+        main.content.setSecondComponent(new ProfileMenu(main, LANDING_TAB));
+    }
+
+    private void passwordView() {
+        main.content.setSecondComponent(new PasswordMenu(main, LANDING_TAB));
+
+    }
+}

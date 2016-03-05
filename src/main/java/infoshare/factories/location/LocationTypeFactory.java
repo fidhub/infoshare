@@ -4,19 +4,17 @@ import infoshare.app.util.DomainState;
 import infoshare.app.util.security.KeyGenerator;
 import infoshare.domain.location.LocationType;
 
-import java.util.Map;
-
 /**
  * Created by user9 on 2016/03/01.
  */
 public class LocationTypeFactory {
 
-    public static LocationType getLocationType(Map<String,String> locationTypeVals){
+    public static LocationType getLocationType(String name, String code){
         LocationType locationType = new LocationType.Builder()
                 .id(KeyGenerator.getEntityId())
-                .name(locationTypeVals.get("name"))
+                .name(name)
                 .state(DomainState.ACTIVE.name())
-                .code(locationTypeVals.get("code"))
+                .code(code)
                 .build();
         return locationType;
     }

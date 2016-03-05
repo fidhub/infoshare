@@ -37,8 +37,10 @@ public class Header extends VerticalLayout implements Button.ClickListener {
     public Button user = new Button();
     private Table notificationTable = new Table();
     private RawView rawView ;
-    public Header(MainLayout main) {
+    private final Page page;
+    public Header(MainLayout main,Page page) {
         this.main = main;
+        this.page = page;
         rawView = new RawView(main);
         setSizeFull();
         setSpacing(true);
@@ -324,6 +326,20 @@ public class Header extends VerticalLayout implements Button.ClickListener {
         logo.addComponent(logoImage);
         Responsive.makeResponsive(logo);
         return logo;
+    }
+
+    private Button logout() {
+        Button signout = new Button("Sign Out");
+        signout.addStyleName(ValoTheme.BUTTON_LINK);
+        signout.setIcon(FontAwesome.SIGN_OUT);
+        signout.addClickListener(new Button.ClickListener() {
+            @Override
+            public void buttonClick(Button.ClickEvent event) {
+                page.setLocation("/logout");
+            }
+        });
+
+        return signout;
     }
 
     private TextField getSearch(){

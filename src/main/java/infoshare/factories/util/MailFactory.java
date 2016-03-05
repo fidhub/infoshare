@@ -4,6 +4,7 @@ package infoshare.factories.util;
 
 
 import infoshare.app.util.DomainState;
+import infoshare.app.util.security.GetUserCredentials;
 import infoshare.app.util.security.KeyGenerator;
 import infoshare.domain.util.Mail;
 
@@ -14,9 +15,9 @@ import java.util.Date;
  */
 public class MailFactory {
     public static
-    Mail createMailConf(String key, String value, String host, String port, String orgId) {
+    Mail createMailConf(String key, String value, String host, String port) {
         Mail mail = new Mail.Builder()
-                .orgId(orgId)
+                .orgId(GetUserCredentials.getUser().getOrg())
                 .date(new Date())
                 .host(host)
                 .id(KeyGenerator.getEntityId())
