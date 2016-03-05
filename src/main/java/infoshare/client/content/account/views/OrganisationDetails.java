@@ -36,7 +36,7 @@ import java.util.concurrent.Executors;
 /**
  * Created by hashcode on 2015/12/01.
  */
-public class CompanyDetails extends VerticalLayout implements
+public class OrganisationDetails extends VerticalLayout implements
         Button.ClickListener {
 
     private final MainLayout main;
@@ -48,7 +48,7 @@ public class CompanyDetails extends VerticalLayout implements
     private final String companyId;
 
 
-    public CompanyDetails(MainLayout main, Company co, String tab) {
+    public OrganisationDetails(MainLayout main, Company co, String tab) {
         company = co;
         companyId = company.getId();
         Label heading = new Label("<h2>Details for " + company.getName() + "</H2>", ContentMode.HTML);

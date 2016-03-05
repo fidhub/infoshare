@@ -25,7 +25,7 @@ import java.util.Set;
 /**
  * Created by hashcode on 2015/11/16.
  */
-public class ManageCompaniesTab extends VerticalLayout implements
+public class ManageOrganisationTab extends VerticalLayout implements
         Button.ClickListener, Property.ValueChangeListener {
 
     final private MainLayout main;
@@ -40,7 +40,7 @@ public class ManageCompaniesTab extends VerticalLayout implements
     Set<Company> companies = OfficeFacade.companyService.getActiveCompanies();
 
 
-    public ManageCompaniesTab(MainLayout main) {
+    public ManageOrganisationTab(MainLayout main) {
         contentPanel.setSizeFull();
         addCompany.setStyleName(ValoTheme.BUTTON_FRIENDLY);
 
@@ -210,7 +210,7 @@ public class ManageCompaniesTab extends VerticalLayout implements
                     list.add(company);
                 }
             }
-            table = new CompanyTable(main, ManageCompaniesTab.this, list);
+            table = new CompanyTable(main, ManageOrganisationTab.this, list);
             contentPanel.removeAllComponents();
             contentPanel.addComponent(table);
         });
@@ -220,7 +220,7 @@ public class ManageCompaniesTab extends VerticalLayout implements
             @Override
             public void handleAction(Object sender, Object target) {
                 companySearchBox.setValue("");
-                table = new CompanyTable(main, ManageCompaniesTab.this, companies);
+                table = new CompanyTable(main, ManageOrganisationTab.this, companies);
                 contentPanel.removeAllComponents();
                 contentPanel.addComponent(table);
             }

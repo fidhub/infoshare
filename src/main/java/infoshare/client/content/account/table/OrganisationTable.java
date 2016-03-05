@@ -7,7 +7,7 @@ import infoshare.app.util.DomainState;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.account.AccountMenu;
 import infoshare.client.content.account.forms.CompanyAdminForm;
-import infoshare.client.content.account.views.ManageCompaniesTab;
+import infoshare.client.content.account.views.ManageOrganisationTab;
 import infoshare.domain.organisation.Organisation;
 
 import java.util.Date;
@@ -20,7 +20,7 @@ public class OrganisationTable extends Table {
     private final MainLayout main;
 
 
-    public OrganisationTable(MainLayout main, ManageCompaniesTab tab, Set<Organisation> companies) {
+    public OrganisationTable(MainLayout main, ManageOrganisationTab tab, Set<Organisation> companies) {
         this.main = main;
         setSizeFull();
         addContainerProperty("Date", Date.class, null);

@@ -18,7 +18,7 @@ import java.util.Set;
 /**
  * Created by hashcode on 2015/11/30.
  */
-public class DisabledCompaniesTab extends VerticalLayout implements
+public class DisabledOrganisationTab extends VerticalLayout implements
         Button.ClickListener, Property.ValueChangeListener {
 
     final private MainLayout main;
@@ -31,7 +31,7 @@ public class DisabledCompaniesTab extends VerticalLayout implements
     private final TextField companySearchBox = new TextField(" Company Search");
     Set<Company> companies = OfficeFacade.companyService.getRetiredCompanies();
 
-    public DisabledCompaniesTab(MainLayout main) {
+    public DisabledOrganisationTab(MainLayout main) {
         contentPanel.setSizeFull();
 
         companySearchBox.setInputPrompt("Use Name of the Company to Search");
@@ -105,7 +105,7 @@ public class DisabledCompaniesTab extends VerticalLayout implements
                     list.add(company);
                 }
             }
-            table = new DisabledCompanyTable(main, DisabledCompaniesTab.this, list);
+            table = new DisabledCompanyTable(main, DisabledOrganisationTab.this, list);
             contentPanel.removeAllComponents();
             contentPanel.addComponent(table);
         });
@@ -115,7 +115,7 @@ public class DisabledCompaniesTab extends VerticalLayout implements
             @Override
             public void handleAction(Object sender, Object target) {
                 companySearchBox.setValue("");
-                table = new DisabledCompanyTable(main, DisabledCompaniesTab.this, companies);
+                table = new DisabledCompanyTable(main, DisabledOrganisationTab.this, companies);
                 contentPanel.removeAllComponents();
                 contentPanel.addComponent(table);
             }

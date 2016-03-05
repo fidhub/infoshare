@@ -8,12 +8,12 @@ import hashwork.client.content.MainLayout;
 /**
  * Created by hashcode on 2015/11/16.
  */
-public class CompanyAnalyticsTab extends VerticalLayout implements
+public class OrganisationAnalyticsTab extends VerticalLayout implements
         Button.ClickListener, Property.ValueChangeListener {
 
     final private MainLayout main;
 
-    public CompanyAnalyticsTab(MainLayout main) {
+    public OrganisationAnalyticsTab(MainLayout main) {
         this.main = main;
     }
 

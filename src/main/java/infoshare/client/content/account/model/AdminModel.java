@@ -14,8 +14,7 @@ public class AdminModel implements Serializable {
     private String emailAddress;
     @NotNull
     private String lastName;
-    @NotNull
-    private String title;
+
 
     public String getFirstName() {
         return firstName;
@@ -49,11 +48,5 @@ public class AdminModel implements Serializable {
         this.lastName = lastName;
     }
 
-    public String getTitle() {
-        return title;
-    }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
 }
