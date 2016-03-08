@@ -1,10 +1,9 @@
 package infoshare.client.content.common.demographics.table;
 
 import com.vaadin.ui.Table;
-import hashwork.client.content.MainLayout;
-import hashwork.domain.ui.demographics.Race;
-import hashwork.services.ui.demographics.Impl.RaceListServiceImpl;
-import hashwork.services.ui.demographics.RaceListService;
+import infoshare.app.facade.DemographicsFacade;
+import infoshare.client.content.MainLayout;
+import infoshare.domain.demographics.Race;
 
 import java.util.Set;
 
@@ -13,7 +12,7 @@ import java.util.Set;
  */
 public class RaceListTable extends Table {
     private final MainLayout main;
-    private final RaceListService raceListService = new RaceListServiceImpl();
+
 
     public RaceListTable(MainLayout main) {
         this.main = main;
@@ -23,7 +22,7 @@ public class RaceListTable extends Table {
 
 
         // Add Data Columns
-        Set<Race> races = raceListService.findAll();
+        Set<Race> races = DemographicsFacade.raceListService.findAll();
         for (Race locationType : races) {
             addItem(new Object[]{locationType.getName()}, locationType.getId());
         }

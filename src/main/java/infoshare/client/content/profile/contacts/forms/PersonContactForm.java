@@ -4,19 +4,21 @@ import com.vaadin.data.fieldgroup.FieldGroup;
 import com.vaadin.data.util.BeanItem;
 import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.*;
-import hashwork.app.facade.LocationFacade;
-import hashwork.app.facade.UtilFacade;
-import hashwork.app.util.fields.ButtonsHelper;
-import hashwork.app.util.fields.UIComboBoxHelper;
-import hashwork.app.util.fields.UIComponentHelper;
-import hashwork.client.content.profile.contacts.model.PersonAddressModel;
-import hashwork.client.content.profile.contacts.model.PersonContactsModel;
-import hashwork.domain.ui.location.ContactType;
-import hashwork.domain.ui.util.Status;
+import infoshare.app.facade.LocationFacade;
+import infoshare.app.facade.UtilFacade;
+import infoshare.app.util.fields.ButtonsHelper;
+import infoshare.app.util.fields.UIComboBoxHelper;
+import infoshare.app.util.fields.UIComponentHelper;
+import infoshare.client.content.profile.contacts.model.PersonAddressModel;
+import infoshare.client.content.profile.contacts.model.PersonContactsModel;
+import infoshare.domain.location.ContactType;
+import infoshare.domain.util.Status;
 
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
+
+;
 
 /**
  * Created by hashcode on 2015/12/20.

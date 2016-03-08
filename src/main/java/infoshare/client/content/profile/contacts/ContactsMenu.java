@@ -2,10 +2,11 @@ package infoshare.client.content.profile.contacts;
 
 import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.VerticalLayout;
-import hashwork.client.content.MainLayout;
-import hashwork.client.content.profile.contacts.views.PersonAddressTab;
-import hashwork.client.content.profile.contacts.views.ContactsSummaryTab;
-import hashwork.client.content.profile.contacts.views.PersonContactsTab;
+import infoshare.client.content.MainLayout;
+import infoshare.client.content.profile.contacts.views.ContactsSummaryTab;
+import infoshare.client.content.profile.contacts.views.PersonAddressTab;
+import infoshare.client.content.profile.contacts.views.PersonContactsTab;
+
 
 /**
  * Created by hashcode on 2015/12/07.

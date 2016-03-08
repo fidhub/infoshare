@@ -1,12 +1,12 @@
 package infoshare.client.content.profile.contacts.table;
 
 import com.vaadin.ui.Table;
-import hashwork.app.facade.LocationFacade;
-import hashwork.app.facade.PeopleFacade;
-import hashwork.app.util.security.GetUserCredentials;
-import hashwork.client.content.MainLayout;
-import hashwork.domain.people.PersonAddress;
-import hashwork.domain.ui.location.AddressType;
+import infoshare.app.facade.LocationFacade;
+import infoshare.app.facade.PeopleFacade;
+import infoshare.app.util.security.GetUserCredentials;
+import infoshare.client.content.MainLayout;
+import infoshare.domain.location.AddressType;
+import infoshare.domain.person.PersonAddress;
 
 import java.util.Date;
 import java.util.Set;

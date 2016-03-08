@@ -12,13 +12,13 @@ import java.util.Map;
  */
 public class OrganisationFactory {
 
-    public static Organisation getOrganisation(Map<String, String> organisationVals, Map<String, String> details, Date date){
+    public static Organisation getOrganisation(String name, String adminattached, Map<String, String> details){
         Organisation organisation = new Organisation.Builder()
                 .id(KeyGenerator.getEntityId())
-                .name(organisationVals.get("name"))
+                .name(name)
                 .details(details)
-                .adminattached(organisationVals.get("adminattached"))
-                .date(date)
+                .adminattached(adminattached)
+                .date(new Date())
                 .state(DomainState.ACTIVE.name())
                 .build();
         return organisation;

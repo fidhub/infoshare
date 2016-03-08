@@ -11,8 +11,8 @@ import infoshare.client.content.content.ContentMenu;
 import infoshare.client.content.content.forms.PublishForm;
 import infoshare.client.content.content.models.ContentModel;
 import infoshare.client.content.content.tables.PublishTable;
-import infoshare.domain.content.EditedContent;
 import infoshare.domain.content.PublishedContent;
+import infoshare.factories.content.PublishedContentFactory;
 import infoshare.filterSearch.PublishedContentFilter;
 import infoshare.services.Content.EditedContentService;
 import infoshare.services.Content.PublishedContentService;
@@ -92,7 +92,7 @@ public class PublishView extends VerticalLayout implements Button.ClickListener,
         try {
             binder.commit();
             try {
-                editedContentService.save(getNewEntity(publishedContentService.update(getUpdateEntity(table.getValue().toString()))));
+                publishedContentService.save(getNewEntity(publishedContentService.update(getUpdateEntity(table.getValue().toString()))));
                 popUp.setModal(false);
                 table.setValue(null);
                 UI.getCurrent().removeWindow(popUp);
@@ -109,12 +109,12 @@ public class PublishView extends VerticalLayout implements Button.ClickListener,
     private PublishedContent getUpdateEntity(String val ) {
         final PublishedContent bean = publishedContentService.findById(val);
         final PublishedContent editedContent = new PublishedContent
-                .Builder(bean.getTitle()).copy(bean)
+                .Builder().copy(bean)
                 .status("Edited")
                 .build();
         return editedContent;
     }
-    private EditedContent getNewEntity(PublishedContent bean) {
+    private PublishedContent getNewEntity(PublishedContent bean) {
         Map<String,String> editedVals = new HashMap<>();
         editedVals.put("content",bean.getContent());
         editedVals.put("category",bean.getCategory());
@@ -122,7 +122,7 @@ public class PublishView extends VerticalLayout implements Button.ClickListener,
         editedVals.put("contentType",bean.getContentType());
         editedVals.put("status",bean.getStatus());
         editedVals.put("source",bean.getStatus());
-        final EditedContent editedContent = EditedContentFacory.getEditedContent(editedVals,new Date());
+        final PublishedContent editedContent = PublishedContentFactory.getPublishedContent(editedVals,new Date());
         return editedContent;
     }
     private void ViewContentButton(){

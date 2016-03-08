@@ -5,12 +5,12 @@ import com.vaadin.event.ShortcutAction;
 import com.vaadin.event.ShortcutListener;
 import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.*;
-import hashwork.app.facade.OfficeFacade;
-import hashwork.client.content.MainLayout;
-import hashwork.client.content.account.AccountMenu;
-import hashwork.client.content.account.model.CompanyModel;
-import hashwork.client.content.account.table.DisabledCompanyTable;
-import hashwork.domain.company.Company;
+import infoshare.app.facade.OrganisationFacade;
+import infoshare.client.content.MainLayout;
+import infoshare.client.content.account.AccountMenu;
+import infoshare.client.content.account.model.OrganisationModel;
+import infoshare.client.content.account.table.DisabledOrganisationTable;
+import infoshare.domain.organisation.Organisation;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -24,12 +24,12 @@ public class DisabledOrganisationTab extends VerticalLayout implements
     final private MainLayout main;
 
 
-    private DisabledCompanyTable table;
+    private DisabledOrganisationTable table;
     private final HorizontalLayout headerBar = new HorizontalLayout();
     public final VerticalLayout contentPanel = new VerticalLayout();
 
     private final TextField companySearchBox = new TextField(" Company Search");
-    Set<Company> companies = OfficeFacade.companyService.getRetiredCompanies();
+    Set<Organisation> companies = OrganisationFacade.companyService.getRetiredOrganisations();
 
     public DisabledOrganisationTab(MainLayout main) {
         contentPanel.setSizeFull();
@@ -37,7 +37,7 @@ public class DisabledOrganisationTab extends VerticalLayout implements
         companySearchBox.setInputPrompt("Use Name of the Company to Search");
         this.main = main;
 
-        table = new DisabledCompanyTable(main, this, companies);
+        table = new DisabledOrganisationTable(main, this, companies);
         headerBar.setSizeFull();
         headerBar.addComponent(companySearchBox);
         headerBar.setExpandRatio(companySearchBox, 1);
@@ -69,8 +69,8 @@ public class DisabledOrganisationTab extends VerticalLayout implements
         }
     }
 
-    private CompanyModel getModel(Company company) {
-        CompanyModel model = new CompanyModel();
+    private OrganisationModel getModel(Organisation company) {
+        OrganisationModel model = new OrganisationModel();
         model.setAddress(company.getDetails().get("address"));
         model.setContactphone(company.getDetails().get("contactphone"));
         model.setEmail(company.getDetails().get("email"));
@@ -99,13 +99,13 @@ public class DisabledOrganisationTab extends VerticalLayout implements
         table.addValueChangeListener(this);
         companySearchBox.addTextChangeListener(event -> {
             table.removeAllItems();
-            Set<Company> list = new HashSet<>();
-            for (Company company : companies) {
+            Set<Organisation> list = new HashSet<>();
+            for (Organisation company : companies) {
                 if (company.getName().toLowerCase().contains(event.getText().toLowerCase())) {
                     list.add(company);
                 }
             }
-            table = new DisabledCompanyTable(main, DisabledOrganisationTab.this, list);
+            table = new DisabledOrganisationTable(main, DisabledOrganisationTab.this, list);
             contentPanel.removeAllComponents();
             contentPanel.addComponent(table);
         });
@@ -115,7 +115,7 @@ public class DisabledOrganisationTab extends VerticalLayout implements
             @Override
             public void handleAction(Object sender, Object target) {
                 companySearchBox.setValue("");
-                table = new DisabledCompanyTable(main, DisabledOrganisationTab.this, companies);
+                table = new DisabledOrganisationTable(main, DisabledOrganisationTab.this, companies);
                 contentPanel.removeAllComponents();
                 contentPanel.addComponent(table);
             }

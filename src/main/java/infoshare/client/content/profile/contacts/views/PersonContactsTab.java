@@ -6,16 +6,17 @@ import com.vaadin.data.util.BeanItem;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.VerticalLayout;
-import hashwork.app.facade.PeopleFacade;
-import hashwork.app.util.DomainState;
-import hashwork.app.util.security.GetUserCredentials;
-import hashwork.client.content.MainLayout;
-import hashwork.client.content.profile.contacts.ContactsMenu;
-import hashwork.client.content.profile.contacts.forms.PersonContactForm;
-import hashwork.client.content.profile.contacts.model.PersonContactsModel;
-import hashwork.client.content.profile.contacts.table.PersonContactsTable;
-import hashwork.domain.people.PersonContact;
-import hashwork.factories.people.PersonContactFactory;
+import infoshare.app.facade.PeopleFacade;
+import infoshare.app.util.DomainState;
+import infoshare.app.util.security.GetUserCredentials;
+import infoshare.client.content.MainLayout;
+import infoshare.client.content.profile.contacts.ContactsMenu;
+import infoshare.client.content.profile.contacts.forms.PersonContactForm;
+import infoshare.client.content.profile.contacts.model.PersonContactsModel;
+import infoshare.client.content.profile.contacts.table.PersonContactsTable;
+import infoshare.domain.person.PersonContact;
+import infoshare.factories.person.PersonContactFactory;
+
 
 /**
  * Created by hashcode on 2015/12/07.
@@ -140,7 +141,7 @@ public class PersonContactsTab extends VerticalLayout implements
         final PersonContactsModel model = ((BeanItem<PersonContactsModel>) binder.getItemDataSource()).getBean();
         final String personId = GetUserCredentials.getUser().getId();
         final PersonContact personContact = PersonContactFactory
-                .getPersonContact(personId, model.getAddressTypeId(), model.getContactValue(), model.getStatus());
+                .getContact(personId, model.getAddressTypeId(), model.getContactValue(), model.getStatus());
         return personContact;
     }
 
@@ -151,8 +152,8 @@ public class PersonContactsTab extends VerticalLayout implements
         final PersonContact updatedPersonAddress = new PersonContact
                 .Builder()
                 .copy(personContact)
-                .addressTypeId(model.getAddressTypeId())
-                .contactValue(model.getContactValue())
+                .addresstypeid(model.getAddressTypeId())
+                .contactvalue(model.getContactValue())
                 .status(model.getStatus())
                 .build();
         return updatedPersonAddress;

@@ -6,16 +6,17 @@ import com.vaadin.data.util.BeanItem;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.VerticalLayout;
-import hashwork.app.facade.PeopleFacade;
-import hashwork.app.util.DomainState;
-import hashwork.app.util.security.GetUserCredentials;
-import hashwork.client.content.MainLayout;
-import hashwork.client.content.profile.contacts.ContactsMenu;
-import hashwork.client.content.profile.contacts.forms.PersonAddressForm;
-import hashwork.client.content.profile.contacts.model.PersonAddressModel;
-import hashwork.client.content.profile.contacts.table.PersonAddressTable;
-import hashwork.domain.people.PersonAddress;
-import hashwork.factories.people.PersonAddressFactory;
+import infoshare.app.facade.PeopleFacade;
+import infoshare.app.util.DomainState;
+import infoshare.app.util.security.GetUserCredentials;
+import infoshare.client.content.MainLayout;
+import infoshare.client.content.profile.contacts.ContactsMenu;
+import infoshare.client.content.profile.contacts.forms.PersonAddressForm;
+import infoshare.client.content.profile.contacts.model.PersonAddressModel;
+import infoshare.client.content.profile.contacts.table.PersonAddressTable;
+import infoshare.domain.person.PersonAddress;
+import infoshare.factories.person.PersonAddressFactory;
+
 
 /**
  * Created by hashcode on 2015/12/07.
@@ -140,7 +141,7 @@ public class PersonAddressTab extends VerticalLayout implements
         final PersonAddressModel model = ((BeanItem<PersonAddressModel>) binder.getItemDataSource()).getBean();
         final String personId = GetUserCredentials.getUser().getId();
         final PersonAddress personAddress = PersonAddressFactory
-                .getPersonAddress(personId, model.getDescription(), model.getPostalCode(), model.getAddressTypeId());
+                .getAddress(personId, model.getDescription(), model.getPostalCode(), model.getAddressTypeId());
         return personAddress;
     }
 

@@ -6,16 +6,16 @@ import com.vaadin.data.util.BeanItem;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.VerticalLayout;
-import hashwork.app.util.DomainState;
-import hashwork.client.content.MainLayout;
-import hashwork.client.content.common.demographics.CommonDemographicsMenu;
-import hashwork.client.content.common.demographics.forms.LanguageProficiencyForm;
-import hashwork.client.content.common.demographics.model.LanguageProficiencyModel;
-import hashwork.client.content.common.demographics.table.LanguageProficiencyTable;
-import hashwork.domain.ui.demographics.LanguageProficiency;
-import hashwork.factories.ui.demographics.LanguageProficiencyFactory;
-import hashwork.services.ui.demographics.Impl.LanguageProficiencyServiceImpl;
-import hashwork.services.ui.demographics.LanguageProficiencyService;
+import infoshare.app.facade.DemographicsFacade;
+import infoshare.app.util.DomainState;
+import infoshare.client.content.MainLayout;
+import infoshare.client.content.common.demographics.CommonDemographicsMenu;
+import infoshare.client.content.common.demographics.forms.LanguageProficiencyForm;
+import infoshare.client.content.common.demographics.model.LanguageProficiencyModel;
+import infoshare.client.content.common.demographics.table.LanguageProficiencyTable;
+import infoshare.domain.demographics.LanguageProficiency;
+import infoshare.factories.common.LanguageProficiencyFactory;
+
 
 /**
  * Created by hashcode on 2015/08/18.
@@ -23,7 +23,6 @@ import hashwork.services.ui.demographics.LanguageProficiencyService;
 public class LanguageProficiencyTab extends VerticalLayout implements Button.ClickListener, Property.ValueChangeListener {
 
     private final MainLayout main;
-    private final LanguageProficiencyService languageProficiencyService = new LanguageProficiencyServiceImpl();
     private final LanguageProficiencyForm form;
     private final LanguageProficiencyTable table;
 
@@ -58,7 +57,7 @@ public class LanguageProficiencyTab extends VerticalLayout implements Button.Cli
         final Property property = event.getProperty();
         if (property == table) {
 
-            final LanguageProficiency languageProficiency = languageProficiencyService.findById(table.getValue().toString());
+            final LanguageProficiency languageProficiency = DemographicsFacade.languageProficiencyService.findById(table.getValue().toString());
             final LanguageProficiencyModel model = getModel(languageProficiency);
             form.binder.setItemDataSource(new BeanItem<>(model));
             setReadFormProperties();
@@ -68,7 +67,7 @@ public class LanguageProficiencyTab extends VerticalLayout implements Button.Cli
     private void saveForm(FieldGroup binder) {
         try {
             binder.commit();
-            languageProficiencyService.save(getNewEntity(binder));
+            DemographicsFacade.languageProficiencyService.save(getNewEntity(binder));
             getHome();
             Notification.show("Record ADDED!", Notification.Type.TRAY_NOTIFICATION);
         } catch (FieldGroup.CommitException e) {
@@ -80,7 +79,7 @@ public class LanguageProficiencyTab extends VerticalLayout implements Button.Cli
     private void saveEditedForm(FieldGroup binder) {
         try {
             binder.commit();
-            languageProficiencyService.save(getUpdateEntity(binder));
+            DemographicsFacade.languageProficiencyService.save(getUpdateEntity(binder));
             getHome();
             Notification.show("Record UPDATED!", Notification.Type.TRAY_NOTIFICATION);
         } catch (FieldGroup.CommitException e) {
@@ -90,13 +89,13 @@ public class LanguageProficiencyTab extends VerticalLayout implements Button.Cli
     }
 
     private void deleteForm(FieldGroup binder) {
-        final LanguageProficiency languageProficiency = languageProficiencyService.findById(table.getValue().toString());
+        final LanguageProficiency languageProficiency = DemographicsFacade.languageProficiencyService.findById(table.getValue().toString());
         final LanguageProficiency updatedLanguageProficiency = new LanguageProficiency
                 .Builder()
                 .copy(languageProficiency)
                 .state(DomainState.RETIRED.name())
                 .build();
-        languageProficiencyService.save(updatedLanguageProficiency);
+        DemographicsFacade.languageProficiencyService.save(updatedLanguageProficiency);
         getHome();
     }
 
@@ -144,7 +143,7 @@ public class LanguageProficiencyTab extends VerticalLayout implements Button.Cli
 
     private LanguageProficiency getUpdateEntity(FieldGroup binder) {
         final LanguageProficiencyModel bean = ((BeanItem<LanguageProficiencyModel>) binder.getItemDataSource()).getBean();
-        final LanguageProficiency languageProficiency = languageProficiencyService.findById(table.getValue().toString());
+        final LanguageProficiency languageProficiency = DemographicsFacade.languageProficiencyService.findById(table.getValue().toString());
         final LanguageProficiency updatedLanguageProficiency = new LanguageProficiency
                 .Builder()
                 .copy(languageProficiency)

@@ -6,22 +6,22 @@ import com.vaadin.data.util.BeanItem;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.VerticalLayout;
-import hashwork.app.util.DomainState;
-import hashwork.client.content.MainLayout;
-import hashwork.client.content.common.demographics.CommonDemographicsMenu;
-import hashwork.client.content.common.demographics.forms.LanguageForm;
-import hashwork.client.content.common.demographics.model.LanguageModel;
-import hashwork.client.content.common.demographics.table.LanguageTable;
-import hashwork.domain.ui.demographics.Language;
-import hashwork.factories.ui.demographics.LanguageFactory;
-import hashwork.services.ui.demographics.Impl.LanguageServiceImpl;
-import hashwork.services.ui.demographics.LanguageService;
+import infoshare.app.facade.DemographicsFacade;
+import infoshare.app.util.DomainState;
+import infoshare.client.content.MainLayout;
+import infoshare.client.content.common.demographics.CommonDemographicsMenu;
+import infoshare.client.content.common.demographics.forms.LanguageForm;
+import infoshare.client.content.common.demographics.model.LanguageModel;
+import infoshare.client.content.common.demographics.table.LanguageTable;
+import infoshare.domain.demographics.Language;
+import infoshare.factories.common.LanguageFactory;
+
 
 /**
  * Created by hashcode on 2015/08/18.
  */
 public class LanguageTab extends VerticalLayout implements Button.ClickListener, Property.ValueChangeListener {
-    private final LanguageService languageService = new LanguageServiceImpl();
+
     private final MainLayout main;
     private final LanguageForm form;
     private final LanguageTable table;
@@ -56,7 +56,7 @@ public class LanguageTab extends VerticalLayout implements Button.ClickListener,
     public void valueChange(Property.ValueChangeEvent event) {
         final Property property = event.getProperty();
         if (property == table) {
-            final Language language = languageService.findById(table.getValue().toString());
+            final Language language = DemographicsFacade.languageService.findById(table.getValue().toString());
             final LanguageModel model = getModel(language);
             form.binder.setItemDataSource(new BeanItem<>(model));
             setReadFormProperties();
@@ -66,7 +66,7 @@ public class LanguageTab extends VerticalLayout implements Button.ClickListener,
     private void saveForm(FieldGroup binder) {
         try {
             binder.commit();
-            languageService.save(getNewEntity(binder));
+            DemographicsFacade.languageService.save(getNewEntity(binder));
             getHome();
             Notification.show("Record ADDED!", Notification.Type.TRAY_NOTIFICATION);
         } catch (FieldGroup.CommitException e) {
@@ -78,7 +78,7 @@ public class LanguageTab extends VerticalLayout implements Button.ClickListener,
     private void saveEditedForm(FieldGroup binder) {
         try {
             binder.commit();
-            languageService.update(getUpdateEntity(binder));
+            DemographicsFacade.languageService.update(getUpdateEntity(binder));
             getHome();
             Notification.show("Record UPDATED!", Notification.Type.TRAY_NOTIFICATION);
         } catch (FieldGroup.CommitException e) {
@@ -88,12 +88,12 @@ public class LanguageTab extends VerticalLayout implements Button.ClickListener,
     }
 
     private void deleteForm(FieldGroup binder) {
-        final Language language = languageService.findById(table.getValue().toString());
+        final Language language = DemographicsFacade.languageService.findById(table.getValue().toString());
         final Language updatedLanguage = new Language.Builder()
                 .copy(language)
                 .name(DomainState.RETIRED.name())
                 .build();
-        languageService.save(updatedLanguage);
+        DemographicsFacade.languageService.save(updatedLanguage);
         getHome();
     }
 
@@ -140,7 +140,7 @@ public class LanguageTab extends VerticalLayout implements Button.ClickListener,
 
     private Language getUpdateEntity(FieldGroup binder) {
         final LanguageModel bean = ((BeanItem<LanguageModel>) binder.getItemDataSource()).getBean();
-        final Language language = languageService.findById(table.getValue().toString());
+        final Language language = DemographicsFacade.languageService.findById(table.getValue().toString());
         final Language updatedLanguage = new Language.Builder()
                 .copy(language)
                 .name(bean.getName())

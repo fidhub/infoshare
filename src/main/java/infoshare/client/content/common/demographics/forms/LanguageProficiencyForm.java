@@ -6,9 +6,10 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.TextField;
-import hashwork.app.util.fields.ButtonsHelper;
-import hashwork.app.util.fields.UIComponentHelper;
-import hashwork.client.content.common.demographics.model.LanguageProficiencyModel;
+import infoshare.app.util.fields.ButtonsHelper;
+import infoshare.app.util.fields.UIComponentHelper;
+import infoshare.client.content.common.demographics.model.LanguageProficiencyModel;
+
 
 /**
  * Created by hashcode on 2015/08/18.

@@ -3,8 +3,10 @@ package infoshare.client.content.account.table;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.themes.ValoTheme;
+import infoshare.app.facade.OrganisationFacade;
 import infoshare.app.util.DomainState;
 import infoshare.client.content.MainLayout;
+import infoshare.client.content.account.AccountMenu;
 import infoshare.client.content.account.views.DisabledOrganisationTab;
 import infoshare.domain.organisation.Organisation;
 
@@ -41,13 +43,13 @@ public class DisabledOrganisationTable extends Table {
             enable.setStyleName(ValoTheme.BUTTON_LINK);
             enable.setData(item.getId());
             enable.addClickListener(event -> {
-                Organisation company = OfficeFacade.companyService.findById(item.getId());
-                Organisation updatedCompany = new Company
+                Organisation company = OrganisationFacade.companyService.findById(item.getId());
+                Organisation updatedCompany = new Organisation
                         .Builder()
                         .copy(company)
                         .state(DomainState.ACTIVE.name())
                         .build();
-                OfficeFacade.companyService.update(updatedCompany);
+                OrganisationFacade.companyService.update(updatedCompany);
                 getHome();
 
             });

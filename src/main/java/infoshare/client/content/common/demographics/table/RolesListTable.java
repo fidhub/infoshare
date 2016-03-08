@@ -1,10 +1,9 @@
 package infoshare.client.content.common.demographics.table;
 
 import com.vaadin.ui.Table;
-import hashwork.client.content.MainLayout;
-import hashwork.domain.ui.demographics.Role;
-import hashwork.services.ui.demographics.Impl.RolesListServiceImpl;
-import hashwork.services.ui.demographics.RolesListService;
+import infoshare.app.facade.DemographicsFacade;
+import infoshare.client.content.MainLayout;
+import infoshare.domain.demographics.Role;
 
 import java.util.Set;
 
@@ -13,7 +12,7 @@ import java.util.Set;
  */
 public class RolesListTable extends Table {
     private final MainLayout main;
-    private final RolesListService rolesListService = new RolesListServiceImpl();
+
 
     public RolesListTable(MainLayout main) {
         this.main = main;
@@ -23,7 +22,7 @@ public class RolesListTable extends Table {
         addContainerProperty("Description", String.class, null);
 
         // Add Data Columns
-        Set<Role> roles = rolesListService.findAll();
+        Set<Role> roles = DemographicsFacade.rolesListService.findAll();
         for (Role role : roles) {
             addItem(new Object[]{role.getName(), role.getDescription()}, role.getId());
         }

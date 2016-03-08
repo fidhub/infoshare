@@ -8,19 +8,21 @@ import com.vaadin.event.ShortcutListener;
 import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
-import hashwork.app.facade.OfficeFacade;
-import hashwork.client.content.MainLayout;
-import hashwork.client.content.account.AccountMenu;
-import hashwork.client.content.account.forms.CompanyForm;
-import hashwork.client.content.account.model.CompanyModel;
-import hashwork.client.content.account.table.CompanyTable;
-import hashwork.domain.company.Company;
-import hashwork.factories.company.CompanyFactory;
+import infoshare.app.facade.OrganisationFacade;
+import infoshare.client.content.MainLayout;
+import infoshare.client.content.account.AccountMenu;
+import infoshare.client.content.account.forms.OrganisationForm;
+import infoshare.client.content.account.model.OrganisationModel;
+import infoshare.client.content.account.table.OrganisationTable;
+import infoshare.domain.organisation.Organisation;
+import infoshare.factories.organasation.OrganisationFactory;
 
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+
+;
 
 /**
  * Created by hashcode on 2015/11/16.
@@ -29,15 +31,15 @@ public class ManageOrganisationTab extends VerticalLayout implements
         Button.ClickListener, Property.ValueChangeListener {
 
     final private MainLayout main;
-    private final CompanyForm form;
+    private final OrganisationForm form;
 
-    private CompanyTable table;
+    private OrganisationTable table;
     private final HorizontalLayout headerBar = new HorizontalLayout();
     public final VerticalLayout contentPanel = new VerticalLayout();
 
     private final Button addCompany = new Button("Add New Company");
     private final TextField companySearchBox = new TextField(" Company Search");
-    Set<Company> companies = OfficeFacade.companyService.getActiveCompanies();
+    Set<Organisation> companies = OrganisationFacade.companyService.getActiveOrganisations();
 
 
     public ManageOrganisationTab(MainLayout main) {
@@ -46,8 +48,8 @@ public class ManageOrganisationTab extends VerticalLayout implements
 
         companySearchBox.setInputPrompt("Use Name of the Company to Search");
         this.main = main;
-        form = new CompanyForm();
-        table = new CompanyTable(main, this, companies);
+        form = new OrganisationForm();
+        table = new OrganisationTable(main, this, companies);
         headerBar.setSizeFull();
         headerBar.addComponent(companySearchBox);
         headerBar.setExpandRatio(companySearchBox, 1);
@@ -90,15 +92,15 @@ public class ManageOrganisationTab extends VerticalLayout implements
     public void valueChange(Property.ValueChangeEvent event) {
         final Property property = event.getProperty();
         if (property == table) {
-            final Company company = OfficeFacade.companyService.findById(table.getValue().toString());
-            final CompanyModel model = getModel(company);
+            final Organisation company = OrganisationFacade.companyService.findById(table.getValue().toString());
+            final OrganisationModel model = getModel(company);
             form.binder.setItemDataSource(new BeanItem<>(model));
             setReadFormProperties();
         }
     }
 
-    private CompanyModel getModel(Company company) {
-        CompanyModel model = new CompanyModel();
+    private OrganisationModel getModel(Organisation company) {
+        OrganisationModel model = new OrganisationModel();
         model.setAddress(company.getDetails().get("address"));
         model.setContactphone(company.getDetails().get("contactphone"));
         model.setEmail(company.getDetails().get("email"));
@@ -111,7 +113,7 @@ public class ManageOrganisationTab extends VerticalLayout implements
     private void saveForm(FieldGroup binder) {
         try {
             binder.commit();
-            OfficeFacade.companyService.save(getNewEntity(binder));
+            OrganisationFacade.companyService.save(getNewEntity(binder));
             getHome();
             Notification.show("Record ADDED!", Notification.Type.TRAY_NOTIFICATION);
         } catch (FieldGroup.CommitException e) {
@@ -120,13 +122,13 @@ public class ManageOrganisationTab extends VerticalLayout implements
         }
     }
 
-    private Company getNewEntity(FieldGroup binder) {
-        final CompanyModel bean = ((BeanItem<CompanyModel>) binder.getItemDataSource()).getBean();
+    private Organisation getNewEntity(FieldGroup binder) {
+        final OrganisationModel bean = ((BeanItem<OrganisationModel>) binder.getItemDataSource()).getBean();
         Map<String, String> details = new HashMap<String, String>();
         details.put("address", bean.getAddress());
         details.put("contactphone", bean.getContactphone());
         details.put("email", bean.getEmail());
-        final Company company = CompanyFactory.getCompany(bean.getName(), bean.getCode(), details);
+        final Organisation company = OrganisationFactory.getOrganisation(bean.getName(), bean.getCode(), details);
         return company;
 
     }
@@ -134,7 +136,7 @@ public class ManageOrganisationTab extends VerticalLayout implements
     private void saveEditedForm(FieldGroup binder) {
         try {
             binder.commit();
-            OfficeFacade.companyService.update(getUpdateEntity(binder));
+            OrganisationFacade.companyService.update(getUpdateEntity(binder));
             getHome();
             Notification.show("Record UPDATED!", Notification.Type.TRAY_NOTIFICATION);
         } catch (FieldGroup.CommitException e) {
@@ -143,14 +145,14 @@ public class ManageOrganisationTab extends VerticalLayout implements
         }
     }
 
-    private Company getUpdateEntity(FieldGroup binder) {
-        final Company company = OfficeFacade.companyService.findById(table.getValue().toString());
-        final CompanyModel bean = ((BeanItem<CompanyModel>) binder.getItemDataSource()).getBean();
+    private Organisation getUpdateEntity(FieldGroup binder) {
+        final Organisation company = OrganisationFacade.companyService.findById(table.getValue().toString());
+        final OrganisationModel bean = ((BeanItem<OrganisationModel>) binder.getItemDataSource()).getBean();
         Map<String, String> details = new HashMap<String, String>();
         details.put("address", bean.getAddress());
         details.put("contactphone", bean.getContactphone());
         details.put("email", bean.getEmail());
-        final Company updatedCompany = new Company.Builder()
+        final Organisation updatedCompany = new Organisation.Builder()
                 .copy(company)
                 .details(details)
                 .name(bean.getName()).build();
@@ -158,11 +160,11 @@ public class ManageOrganisationTab extends VerticalLayout implements
     }
 
     private void deleteForm(FieldGroup binder) {
-        Company company = OfficeFacade.companyService.findById(table.getValue().toString());
+        Organisation company = OrganisationFacade.companyService.findById(table.getValue().toString());
         if (false) {
             Notification.show("CANNOT DELETE", "Object has related Items. Delete Related Items First", Notification.Type.ERROR_MESSAGE);
         } else {
-            OfficeFacade.companyService.delete(company);
+            OrganisationFacade.companyService.delete(company);
             getHome();
         }
     }
@@ -204,13 +206,13 @@ public class ManageOrganisationTab extends VerticalLayout implements
 
         companySearchBox.addTextChangeListener(event -> {
             table.removeAllItems();
-            Set<Company> list = new HashSet<>();
-            for (Company company : companies) {
+            Set<Organisation> list = new HashSet<>();
+            for (Organisation company : companies) {
                 if (company.getName().toLowerCase().contains(event.getText().toLowerCase())) {
                     list.add(company);
                 }
             }
-            table = new CompanyTable(main, ManageOrganisationTab.this, list);
+            table = new OrganisationTable(main, ManageOrganisationTab.this, list);
             contentPanel.removeAllComponents();
             contentPanel.addComponent(table);
         });
@@ -220,7 +222,7 @@ public class ManageOrganisationTab extends VerticalLayout implements
             @Override
             public void handleAction(Object sender, Object target) {
                 companySearchBox.setValue("");
-                table = new CompanyTable(main, ManageOrganisationTab.this, companies);
+                table = new OrganisationTable(main, ManageOrganisationTab.this, companies);
                 contentPanel.removeAllComponents();
                 contentPanel.addComponent(table);
             }

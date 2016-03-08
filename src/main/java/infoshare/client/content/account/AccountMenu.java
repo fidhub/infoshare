@@ -2,10 +2,10 @@ package infoshare.client.content.account;
 
 import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.VerticalLayout;
-import hashwork.client.content.MainLayout;
-import hashwork.client.content.account.views.CompanyAnalyticsTab;
-import hashwork.client.content.account.views.DisabledCompaniesTab;
-import hashwork.client.content.account.views.ManageCompaniesTab;
+import infoshare.client.content.MainLayout;
+import infoshare.client.content.account.views.DisabledOrganisationTab;
+import infoshare.client.content.account.views.ManageOrganisationTab;
+import infoshare.client.content.account.views.OrganisationAnalyticsTab;
 
 /**
  * Created by hashcode on 2015/09/15.
@@ -19,16 +19,16 @@ public class AccountMenu extends VerticalLayout {
 
         VerticalLayout manageCompaniesTab = new VerticalLayout();
         manageCompaniesTab.setMargin(true);
-        manageCompaniesTab.addComponent(new ManageCompaniesTab(main));
+        manageCompaniesTab.addComponent(new ManageOrganisationTab(main));
 
         VerticalLayout companyAnalyticsTab = new VerticalLayout();
         companyAnalyticsTab.setMargin(true);
-        companyAnalyticsTab.addComponent(new CompanyAnalyticsTab(main));
+        companyAnalyticsTab.addComponent(new OrganisationAnalyticsTab(main));
 
 
         VerticalLayout disabledCompaniesTab = new VerticalLayout();
         disabledCompaniesTab.setMargin(true);
-        disabledCompaniesTab.addComponent(new DisabledCompaniesTab(main));
+        disabledCompaniesTab.addComponent(new DisabledOrganisationTab(main));
 
         tab = new TabSheet();
         tab.setHeight("100%");

@@ -6,11 +6,14 @@ import com.vaadin.data.util.BeanItem;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.VerticalLayout;
+import infoshare.app.facade.LocationFacade;
 import infoshare.client.content.MainLayout;
+import infoshare.client.content.common.location.CommonLocationMenu;
 import infoshare.client.content.common.location.forms.AddressTypeForm;
 import infoshare.client.content.common.location.models.AddressTypeModel;
 import infoshare.client.content.common.location.tables.AddressTypeTable;
 import infoshare.domain.location.AddressType;
+import infoshare.factories.location.AddressTypeFactory;
 
 
 /**
@@ -136,7 +139,7 @@ public class AddContactsTab extends VerticalLayout implements
         final AddressType AddressType = LocationFacade.addressTypeService.findById(table.getValue().toString());
         final AddressType updatedAddressType = new AddressType
                 .Builder().copy(AddressType)
-                .addressTypeName(bean.getAddressTypeName())
+                .name(bean.getAddressTypeName())
                 .build();
         return updatedAddressType;
     }

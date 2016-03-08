@@ -11,27 +11,28 @@ import com.vaadin.ui.themes.ValoTheme;
 import de.steinwedel.messagebox.ButtonId;
 import de.steinwedel.messagebox.Icon;
 import de.steinwedel.messagebox.MessageBox;
-import hashwork.app.facade.DemographicsFacade;
-import hashwork.app.facade.OfficeFacade;
-import hashwork.app.facade.PeopleFacade;
-import hashwork.app.util.DomainState;
-import hashwork.app.util.ScreenMessages;
-import hashwork.app.util.security.RolesValues;
-import hashwork.app.util.security.SecurityService;
-import hashwork.client.content.MainLayout;
-import hashwork.client.content.account.AccountMenu;
-import hashwork.client.content.account.forms.CompanyAdminForm;
-import hashwork.client.content.account.forms.CompanyForm;
-import hashwork.client.content.account.model.CompanyModel;
-import hashwork.domain.company.Company;
-import hashwork.domain.people.Person;
-import hashwork.factories.company.CompanyFactory;
+import infoshare.app.facade.OrganisationFacade;
+import infoshare.app.facade.PeopleFacade;
+import infoshare.app.util.DomainState;
+import infoshare.app.util.ScreenMessages;
+import infoshare.app.util.security.RolesValues;
+import infoshare.app.util.security.SecurityService;
+import infoshare.client.content.MainLayout;
+import infoshare.client.content.account.AccountMenu;
+import infoshare.client.content.account.forms.OrganisationAdminForm;
+import infoshare.client.content.account.forms.OrganisationForm;
+import infoshare.client.content.account.model.OrganisationModel;
+import infoshare.domain.organisation.Organisation;
+import infoshare.domain.person.Person;
+import infoshare.factories.organasation.OrganisationFactory;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
+;
 
 /**
  * Created by hashcode on 2015/12/01.
@@ -41,22 +42,22 @@ public class OrganisationDetails extends VerticalLayout implements
 
     private final MainLayout main;
     private final GridLayout grid;
-    private final CompanyForm form;
+    private final OrganisationForm form;
     private final String tab;
     private String selectedUserId;
-    private final Company company;
+    private final Organisation company;
     private final String companyId;
 
 
-    public OrganisationDetails(MainLayout main, Company co, String tab) {
+    public OrganisationDetails(MainLayout main, Organisation co, String tab) {
         company = co;
         companyId = company.getId();
         Label heading = new Label("<h2>Details for " + company.getName() + "</H2>", ContentMode.HTML);
         heading.setStyleName(ValoTheme.LABEL_COLORED);
         heading.setSizeFull();
         heading.setSizeFull();
-        final CompanyModel model = getModel(company);
-        form = new CompanyForm();
+        final OrganisationModel model = getModel(company);
+        form = new OrganisationForm();
         this.tab = tab;
         form.binder.setItemDataSource(new BeanItem<>(model));
         setReadFormProperties();
@@ -128,7 +129,7 @@ public class OrganisationDetails extends VerticalLayout implements
             grid.addComponent(addAdmin, 0, 4, 3, 4);
             addAdmin.addClickListener(event -> {
                 removeAllComponents();
-                addComponent(new CompanyAdminForm(main, company));
+                addComponent(new OrganisationAdminForm(main, company));
             });
 
         }
@@ -137,7 +138,6 @@ public class OrganisationDetails extends VerticalLayout implements
 
             Table adminTable = new Table();
             adminTable.setSizeFull();
-            adminTable.addContainerProperty("Title", String.class, null);
             adminTable.addContainerProperty("Last Name", String.class, null);
             adminTable.addContainerProperty("First Name", String.class, null);
             adminTable.addContainerProperty("Email Address", String.class, null);
@@ -169,7 +169,6 @@ public class OrganisationDetails extends VerticalLayout implements
 
                 });
                 adminTable.addItem(new Object[]{
-                        getTitle(item.getTitle()),
                         item.getLastName(),
                         item.getFirstName(),
                         item.getEmailAddress(),
@@ -192,11 +191,6 @@ public class OrganisationDetails extends VerticalLayout implements
         SecurityService.resetValue(item);
     }
 
-    private String getTitle(String titleId) {
-
-        return DemographicsFacade.titleListService.findById(titleId).getName();
-
-    }
 
     private void setReadFormProperties() {
         form.binder.setReadOnly(true);
@@ -208,8 +202,8 @@ public class OrganisationDetails extends VerticalLayout implements
         form.update.setVisible(false);
     }
 
-    private CompanyModel getModel(Company company) {
-        CompanyModel model = new CompanyModel();
+    private OrganisationModel getModel(Organisation company) {
+        OrganisationModel model = new OrganisationModel();
         model.setAddress(company.getDetails().get("address"));
         model.setContactphone(company.getDetails().get("contactphone"));
         model.setEmail(company.getDetails().get("email"));
@@ -236,25 +230,25 @@ public class OrganisationDetails extends VerticalLayout implements
     }
 
     private void deleteForm(FieldGroup binder) {
-        Company updatedCompany = new Company
+        Organisation updatedCompany = new Organisation
                 .Builder()
                 .copy(company)
                 .state(DomainState.RETIRED.name())
                 .build();
-        OfficeFacade.companyService.update(updatedCompany);
+        OrganisationFacade.companyService.update(updatedCompany);
         getHome();
 
     }
 
     private void saveEditedForm(FieldGroup binder) {
-        Company updatedCompany = getUpdateEntity(binder);
-        OfficeFacade.companyService.update(updatedCompany);
+        Organisation updatedCompany = getUpdateEntity(binder);
+        OrganisationFacade.companyService.update(updatedCompany);
         getHome();
     }
 
     private void saveForm(FieldGroup binder) {
-        Company newcompany = getNewEntity(binder);
-        OfficeFacade.companyService.save(newcompany);
+        Organisation newcompany = getNewEntity(binder);
+        OrganisationFacade.companyService.save(newcompany);
         getHome();
     }
 
@@ -282,32 +276,32 @@ public class OrganisationDetails extends VerticalLayout implements
         main.content.setSecondComponent(new AccountMenu(main, tab));
     }
 
-    private Company getUpdateEntity(FieldGroup binder) {
+    private Organisation getUpdateEntity(FieldGroup binder) {
         try {
             binder.commit();
         } catch (FieldGroup.CommitException e) {
             e.printStackTrace();
         }
-        final Company company = OfficeFacade.companyService.findById(companyId);
-        final CompanyModel bean = ((BeanItem<CompanyModel>) binder.getItemDataSource()).getBean();
+        final Organisation company = OrganisationFacade.companyService.findById(companyId);
+        final OrganisationModel bean = ((BeanItem<OrganisationModel>) binder.getItemDataSource()).getBean();
         Map<String, String> details = new HashMap<String, String>();
         details.put("address", bean.getAddress());
         details.put("contactphone", bean.getContactphone());
         details.put("email", bean.getEmail());
-        final Company updatedCompany = new Company.Builder()
+        final Organisation updatedCompany = new Organisation.Builder()
                 .copy(company)
                 .details(details)
                 .name(bean.getName()).build();
         return updatedCompany;
     }
 
-    private Company getNewEntity(FieldGroup binder) {
-        final CompanyModel bean = ((BeanItem<CompanyModel>) binder.getItemDataSource()).getBean();
+    private Organisation getNewEntity(FieldGroup binder) {
+        final OrganisationModel bean = ((BeanItem<OrganisationModel>) binder.getItemDataSource()).getBean();
         Map<String, String> details = new HashMap<String, String>();
         details.put("address", bean.getAddress());
         details.put("contactphone", bean.getContactphone());
         details.put("email", bean.getEmail());
-        final Company company = CompanyFactory.getCompany(bean.getName(), bean.getCode(), details);
+        final Organisation company = OrganisationFactory.getOrganisation(bean.getName(), bean.getCode(), details);
         return company;
 
     }

@@ -3,11 +3,13 @@ package infoshare.client.content.account.table;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.themes.ValoTheme;
+import infoshare.app.facade.OrganisationFacade;
 import infoshare.app.util.DomainState;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.account.AccountMenu;
-import infoshare.client.content.account.forms.CompanyAdminForm;
+import infoshare.client.content.account.forms.OrganisationAdminForm;
 import infoshare.client.content.account.views.ManageOrganisationTab;
+import infoshare.client.content.account.views.OrganisationDetails;
 import infoshare.domain.organisation.Organisation;
 
 import java.util.Date;
@@ -41,7 +43,7 @@ public class OrganisationTable extends Table {
 
             addAdmin.addClickListener(event -> {
                 tab.contentPanel.removeAllComponents();
-                tab.contentPanel.addComponent(new CompanyAdminForm(main, item));
+                tab.contentPanel.addComponent(new OrganisationAdminForm(main, item));
 
             });
 
@@ -50,7 +52,7 @@ public class OrganisationTable extends Table {
             details.setData(item.getId());
             details.addClickListener(event -> {
                 tab.contentPanel.removeAllComponents();
-                tab.contentPanel.addComponent(new CompanyDetails(main, item, "LANDING"));
+                tab.contentPanel.addComponent(new OrganisationDetails(main, item, "LANDING"));
 
             });
 
@@ -58,13 +60,13 @@ public class OrganisationTable extends Table {
             disable.setStyleName(ValoTheme.BUTTON_LINK);
             disable.setData(item.getId());
             disable.addClickListener(event -> {
-                Company company = OfficeFacade.companyService.findById(item.getId());
-                Company updatedCompany = new Company
+                Organisation company = OrganisationFacade.companyService.findById(item.getId());
+                Organisation updatedCompany = new Organisation
                         .Builder()
                         .copy(company)
                         .state(DomainState.RETIRED.name())
                         .build();
-                OfficeFacade.companyService.update(updatedCompany);
+                OrganisationFacade.companyService.update(updatedCompany);
                 getHome();
             });
 

@@ -6,22 +6,22 @@ import com.vaadin.data.util.BeanItem;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.VerticalLayout;
-import hashwork.app.util.DomainState;
-import hashwork.client.content.MainLayout;
-import hashwork.client.content.common.demographics.CommonDemographicsMenu;
-import hashwork.client.content.common.demographics.forms.GenderListForm;
-import hashwork.client.content.common.demographics.model.GenderListModel;
-import hashwork.client.content.common.demographics.table.GenderListTable;
-import hashwork.domain.ui.demographics.Gender;
-import hashwork.factories.ui.demographics.GenderListFactory;
-import hashwork.services.ui.demographics.GenderListService;
-import hashwork.services.ui.demographics.Impl.GenderListServiceImpl;
+import infoshare.app.facade.DemographicsFacade;
+import infoshare.app.util.DomainState;
+import infoshare.client.content.MainLayout;
+import infoshare.client.content.common.demographics.CommonDemographicsMenu;
+import infoshare.client.content.common.demographics.forms.GenderListForm;
+import infoshare.client.content.common.demographics.model.GenderListModel;
+import infoshare.client.content.common.demographics.table.GenderListTable;
+import infoshare.domain.demographics.Gender;
+import infoshare.factories.common.GenderListFactory;
+
 
 /**
  * Created by hashcode on 2015/08/18.
  */
 public class GenderListTab extends VerticalLayout implements Button.ClickListener, Property.ValueChangeListener {
-    private final GenderListService genderListService = new GenderListServiceImpl();
+
     private final MainLayout main;
     private final GenderListForm form;
     private final GenderListTable table;
@@ -56,7 +56,7 @@ public class GenderListTab extends VerticalLayout implements Button.ClickListene
     public void valueChange(Property.ValueChangeEvent event) {
         final Property property = event.getProperty();
         if (property == table) {
-            final Gender gender = genderListService.findById(table.getValue().toString());
+            final Gender gender = DemographicsFacade.genderListService.findById(table.getValue().toString());
             final GenderListModel model = getModel(gender);
             form.binder.setItemDataSource(new BeanItem<>(model));
             setReadFormProperties();
@@ -66,7 +66,7 @@ public class GenderListTab extends VerticalLayout implements Button.ClickListene
     private void saveForm(FieldGroup binder) {
         try {
             binder.commit();
-            genderListService.save(getNewEntity(binder));
+            DemographicsFacade.genderListService.save(getNewEntity(binder));
             getHome();
             Notification.show("Record ADDED!", Notification.Type.TRAY_NOTIFICATION);
         } catch (FieldGroup.CommitException e) {
@@ -78,7 +78,7 @@ public class GenderListTab extends VerticalLayout implements Button.ClickListene
     private void saveEditedForm(FieldGroup binder) {
         try {
             binder.commit();
-            genderListService.update(getUpdateEntity(binder));
+            DemographicsFacade.genderListService.update(getUpdateEntity(binder));
             getHome();
             Notification.show("Record UPDATED!", Notification.Type.TRAY_NOTIFICATION);
         } catch (FieldGroup.CommitException e) {
@@ -88,13 +88,13 @@ public class GenderListTab extends VerticalLayout implements Button.ClickListene
     }
 
     private void deleteForm(FieldGroup binder) {
-        final Gender gender = genderListService.findById(table.getValue().toString());
+        final Gender gender = DemographicsFacade.genderListService.findById(table.getValue().toString());
         final Gender updatedGender = new Gender
                 .Builder()
                 .copy(gender)
                 .state(DomainState.RETIRED.name())
                 .build();
-        genderListService.save(updatedGender);
+        DemographicsFacade.genderListService.save(updatedGender);
         getHome();
     }
 
@@ -142,8 +142,8 @@ public class GenderListTab extends VerticalLayout implements Button.ClickListene
 
     private Gender getUpdateEntity(FieldGroup binder) {
         final GenderListModel bean = ((BeanItem<GenderListModel>) binder.getItemDataSource()).getBean();
-        final Gender gender = genderListService.findById(table.getValue().toString());
-        final Gender updatedGender = new Gender.Builder().copy(gender).gender(bean.getGender()).build();
+        final Gender gender = DemographicsFacade.genderListService.findById(table.getValue().toString());
+        final Gender updatedGender = new Gender.Builder().copy(gender).name(bean.getGender()).build();
         return updatedGender;
     }
 

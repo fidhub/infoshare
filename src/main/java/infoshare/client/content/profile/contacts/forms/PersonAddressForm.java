@@ -4,12 +4,12 @@ import com.vaadin.data.fieldgroup.FieldGroup;
 import com.vaadin.data.util.BeanItem;
 import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.*;
-import hashwork.app.facade.LocationFacade;
-import hashwork.app.util.fields.ButtonsHelper;
-import hashwork.app.util.fields.UIComboBoxHelper;
-import hashwork.app.util.fields.UIComponentHelper;
-import hashwork.client.content.profile.contacts.model.PersonAddressModel;
-import hashwork.domain.ui.location.AddressType;
+import infoshare.app.facade.LocationFacade;
+import infoshare.app.util.fields.ButtonsHelper;
+import infoshare.app.util.fields.UIComboBoxHelper;
+import infoshare.app.util.fields.UIComponentHelper;
+import infoshare.client.content.profile.contacts.model.PersonAddressModel;
+import infoshare.domain.location.AddressType;
 
 import java.util.Set;
 import java.util.function.Consumer;

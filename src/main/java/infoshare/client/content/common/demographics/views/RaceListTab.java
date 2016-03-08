@@ -6,22 +6,22 @@ import com.vaadin.data.util.BeanItem;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.VerticalLayout;
-import hashwork.app.util.DomainState;
-import hashwork.client.content.MainLayout;
-import hashwork.client.content.common.demographics.CommonDemographicsMenu;
-import hashwork.client.content.common.demographics.forms.RaceListForm;
-import hashwork.client.content.common.demographics.model.RaceListModel;
-import hashwork.client.content.common.demographics.table.RaceListTable;
-import hashwork.domain.ui.demographics.Race;
-import hashwork.factories.ui.demographics.RaceListFactory;
-import hashwork.services.ui.demographics.Impl.RaceListServiceImpl;
-import hashwork.services.ui.demographics.RaceListService;
+import infoshare.app.facade.DemographicsFacade;
+import infoshare.app.util.DomainState;
+import infoshare.client.content.MainLayout;
+import infoshare.client.content.common.demographics.CommonDemographicsMenu;
+import infoshare.client.content.common.demographics.forms.RaceListForm;
+import infoshare.client.content.common.demographics.model.RaceListModel;
+import infoshare.client.content.common.demographics.table.RaceListTable;
+import infoshare.domain.demographics.Race;
+import infoshare.factories.common.RaceListFactory;
+
 
 /**
  * Created by hashcode on 2015/08/18.
  */
 public class RaceListTab extends VerticalLayout implements Button.ClickListener, Property.ValueChangeListener {
-    private final RaceListService raceListService = new RaceListServiceImpl();
+
     private final MainLayout main;
     private final RaceListForm form;
     private final RaceListTable table;
@@ -56,7 +56,7 @@ public class RaceListTab extends VerticalLayout implements Button.ClickListener,
     public void valueChange(Property.ValueChangeEvent event) {
         final Property property = event.getProperty();
         if (property == table) {
-            final Race race = raceListService.findById(table.getValue().toString());
+            final Race race = DemographicsFacade.raceListService.findById(table.getValue().toString());
             final RaceListModel model = getModel(race);
             form.binder.setItemDataSource(new BeanItem<>(model));
             setReadFormProperties();
@@ -67,7 +67,7 @@ public class RaceListTab extends VerticalLayout implements Button.ClickListener,
     private void saveForm(FieldGroup binder) {
         try {
             binder.commit();
-            raceListService.save(getNewEntity(binder));
+            DemographicsFacade.raceListService.save(getNewEntity(binder));
             getHome();
             Notification.show("Record ADDED!", Notification.Type.TRAY_NOTIFICATION);
         } catch (FieldGroup.CommitException e) {
@@ -79,7 +79,7 @@ public class RaceListTab extends VerticalLayout implements Button.ClickListener,
     private void saveEditedForm(FieldGroup binder) {
         try {
             binder.commit();
-            raceListService.update(getUpdateEntity(binder));
+            DemographicsFacade.raceListService.update(getUpdateEntity(binder));
             getHome();
             Notification.show("Record UPDATED!", Notification.Type.TRAY_NOTIFICATION);
         } catch (FieldGroup.CommitException e) {
@@ -88,12 +88,12 @@ public class RaceListTab extends VerticalLayout implements Button.ClickListener,
         }
     }
     private void deleteForm(FieldGroup binder) {
-        final Race race = raceListService.findById(table.getValue().toString());
+        final Race race = DemographicsFacade.raceListService.findById(table.getValue().toString());
         final Race updatedRace = new Race.Builder()
                 .copy(race)
                 .state(DomainState.RETIRED.name())
                 .build();
-        raceListService.save(updatedRace);
+        DemographicsFacade.raceListService.save(updatedRace);
         getHome();
     }
 
@@ -140,7 +140,7 @@ public class RaceListTab extends VerticalLayout implements Button.ClickListener,
     }
 
     private Race getUpdateEntity(FieldGroup binder) {
-        final Race race = raceListService.findById(table.getValue().toString());
+        final Race race = DemographicsFacade.raceListService.findById(table.getValue().toString());
         final RaceListModel bean = ((BeanItem<RaceListModel>) binder.getItemDataSource()).getBean();
         final Race updatedRace = new Race.Builder()
                 .copy(race)

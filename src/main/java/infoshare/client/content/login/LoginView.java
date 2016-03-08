@@ -7,7 +7,6 @@ import com.vaadin.server.Responsive;
 import com.vaadin.shared.Position;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
-import infoshare.client.content.MainLayout;
 import infoshare.client.home.Index;
 
 /**
@@ -68,7 +67,7 @@ public class LoginView extends VerticalLayout {
         fields.addComponents(username, password, signin);
         fields.setComponentAlignment(signin, Alignment.BOTTOM_LEFT);
 
-        signin.addClickListener(event -> main.setContent(new MainLayout(main)));
+
         return fields;
     }
 

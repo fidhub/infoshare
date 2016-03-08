@@ -6,22 +6,22 @@ import com.vaadin.data.util.BeanItem;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.VerticalLayout;
-import hashwork.app.util.DomainState;
-import hashwork.client.content.MainLayout;
-import hashwork.client.content.common.demographics.CommonDemographicsMenu;
-import hashwork.client.content.common.demographics.forms.RolesListForm;
-import hashwork.client.content.common.demographics.model.RolesListModel;
-import hashwork.client.content.common.demographics.table.RolesListTable;
-import hashwork.domain.ui.demographics.Role;
-import hashwork.factories.ui.demographics.RolesListFactory;
-import hashwork.services.ui.demographics.Impl.RolesListServiceImpl;
-import hashwork.services.ui.demographics.RolesListService;
+import infoshare.app.facade.DemographicsFacade;
+import infoshare.app.util.DomainState;
+import infoshare.client.content.MainLayout;
+import infoshare.client.content.common.demographics.CommonDemographicsMenu;
+import infoshare.client.content.common.demographics.forms.RolesListForm;
+import infoshare.client.content.common.demographics.model.RolesListModel;
+import infoshare.client.content.common.demographics.table.RolesListTable;
+import infoshare.domain.demographics.Role;
+import infoshare.factories.common.RolesListFactory;
+
 
 /**
  * Created by hashcode on 2015/08/18.
  */
 public class RolesListTab extends VerticalLayout implements Button.ClickListener, Property.ValueChangeListener {
-    private final RolesListService rolesListService = new RolesListServiceImpl();
+
     private final MainLayout main;
     private final RolesListForm form;
     private final RolesListTable table;
@@ -58,7 +58,7 @@ public class RolesListTab extends VerticalLayout implements Button.ClickListener
         final Property property = event.getProperty();
         if (property == table) {
             id = table.getValue().toString();
-            final Role role = rolesListService.findById(table.getValue().toString());
+            final Role role = DemographicsFacade.rolesListService.findById(table.getValue().toString());
             final RolesListModel model = getModel(role);
             form.binder.setItemDataSource(new BeanItem<>(model));
             setReadFormProperties();
@@ -68,7 +68,7 @@ public class RolesListTab extends VerticalLayout implements Button.ClickListener
     private void saveForm(FieldGroup binder) {
         try {
             binder.commit();
-            rolesListService.save(getNewEntity(binder));
+            DemographicsFacade.rolesListService.save(getNewEntity(binder));
             getHome();
             Notification.show("Record ADDED!", Notification.Type.TRAY_NOTIFICATION);
         } catch (FieldGroup.CommitException e) {
@@ -80,7 +80,7 @@ public class RolesListTab extends VerticalLayout implements Button.ClickListener
     private void saveEditedForm(FieldGroup binder) {
         try {
             binder.commit();
-            rolesListService.update(getUpdateEntity(binder));
+            DemographicsFacade.rolesListService.update(getUpdateEntity(binder));
             getHome();
             Notification.show("Record UPDATED!", Notification.Type.TRAY_NOTIFICATION);
         } catch (FieldGroup.CommitException e) {
@@ -90,12 +90,12 @@ public class RolesListTab extends VerticalLayout implements Button.ClickListener
     }
 
     private void deleteForm(FieldGroup binder) {
-        final Role role = rolesListService.findById(table.getValue().toString());
+        final Role role = DemographicsFacade.rolesListService.findById(table.getValue().toString());
         final Role updatedRoleList = new Role
                 .Builder().copy(role)
                 .state(DomainState.RETIRED.name())
                 .build();
-        rolesListService.save(updatedRoleList);
+        DemographicsFacade.rolesListService.save(updatedRoleList);
         getHome();
     }
 
@@ -143,7 +143,7 @@ public class RolesListTab extends VerticalLayout implements Button.ClickListener
 
     private Role getUpdateEntity(FieldGroup binder) {
         final RolesListModel bean = ((BeanItem<RolesListModel>) binder.getItemDataSource()).getBean();
-        final Role role = rolesListService.findById(table.getValue().toString());
+        final Role role = DemographicsFacade.rolesListService.findById(table.getValue().toString());
         final Role updatedRoleList = new Role
                 .Builder().copy(role)
                 .description(bean.getDescription())

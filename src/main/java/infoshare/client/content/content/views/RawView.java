@@ -11,8 +11,8 @@ import infoshare.client.content.content.ContentMenu;
 import infoshare.client.content.content.forms.RawForm;
 import infoshare.client.content.content.models.ContentModel;
 import infoshare.client.content.content.tables.RawTable;
-import infoshare.domain.content.EditedContent;
 import infoshare.domain.content.RawContent;
+import infoshare.factories.content.RawContentFactory;
 import infoshare.filterSearch.RawContentFilter;
 import infoshare.services.Content.EditedContentService;
 import infoshare.services.Content.RawContentService;
@@ -109,7 +109,7 @@ public class RawView extends VerticalLayout implements Button.ClickListener,Prop
     private void saveEditedForm(FieldGroup binder) {
         try {
             binder.commit();
-            editedContentService.save(getNewEntity(binder));
+            rawContentService.save(getNewEntity(binder));
             rawContentService.update(getUpdateEntity(binder));
             popUp.setModal(false);
             table.setValue(null);
@@ -121,7 +121,7 @@ public class RawView extends VerticalLayout implements Button.ClickListener,Prop
             getHome();
         }
     }
-    private EditedContent getNewEntity(FieldGroup binder) {
+    private RawContent getNewEntity(FieldGroup binder) {
         try {
             final ContentModel bean = ((BeanItem<ContentModel>) binder.getItemDataSource()).getBean();
             bean.setDateCreated(rawContentService.findById(table.getValue().toString()).getDateCreated());
@@ -132,7 +132,7 @@ public class RawView extends VerticalLayout implements Button.ClickListener,Prop
             editedVals.put("contentType",bean.getContentType());
             editedVals.put("status",bean.getStatus());
             editedVals.put("source",bean.getStatus());
-            final EditedContent editedContent = EditedContentFacory.getEditedContent(editedVals,new Date());
+            final RawContent editedContent = RawContentFactory.getRawContent(editedVals, new Date());
             return editedContent;
         }catch (Exception e){
             return null;
@@ -143,7 +143,8 @@ public class RawView extends VerticalLayout implements Button.ClickListener,Prop
             final ContentModel bean = ((BeanItem<ContentModel>) binder.getItemDataSource()).getBean();
             bean.setDateCreated(rawContentService.findById(table.getValue().toString()).getDateCreated());
             final RawContent rawContent = new RawContent
-                    .Builder(bean.getTitle())
+                    .Builder()
+                    .title(bean.getTitle())
                     .category(bean.getCategory())
                     .content(bean.getContent())
                     .contentType(bean.getContentType())

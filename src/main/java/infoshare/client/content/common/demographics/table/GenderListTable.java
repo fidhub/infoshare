@@ -1,19 +1,20 @@
 package infoshare.client.content.common.demographics.table;
 
 import com.vaadin.ui.Table;
-import hashwork.client.content.MainLayout;
-import hashwork.domain.ui.demographics.Gender;
-import hashwork.services.ui.demographics.GenderListService;
-import hashwork.services.ui.demographics.Impl.GenderListServiceImpl;
+import infoshare.app.facade.DemographicsFacade;
+import infoshare.client.content.MainLayout;
+import infoshare.domain.demographics.Gender;
 
 import java.util.Set;
+
+
 
 /**
  * Created by hashcode on 2015/08/18.
  */
 public class GenderListTable extends Table {
     private final MainLayout main;
-    private final GenderListService genderListService = new GenderListServiceImpl();
+
 
     public GenderListTable(MainLayout main) {
         this.main = main;
@@ -22,7 +23,7 @@ public class GenderListTable extends Table {
         addContainerProperty("Gender ", String.class, null);
 
         // Add Data Columns
-        Set<Gender> genders = genderListService.findAll();
+        Set<Gender> genders = DemographicsFacade.genderListService.findAll();
         for (Gender gender : genders) {
             addItem(new Object[]{gender.getName()}, gender.getId());
         }

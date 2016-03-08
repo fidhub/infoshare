@@ -17,10 +17,11 @@ import infoshare.client.content.content.forms.EditForm;
 import infoshare.client.content.content.models.ContentModel;
 import infoshare.client.content.content.tables.EditTable;
 import infoshare.domain.content.*;
+import infoshare.factories.content.PublishedContentFactory;
 import infoshare.filterSearch.EditedContentFilter;
-import infoshare.services.ContentType.ContentTypeService;
 import infoshare.services.Content.EditedContentService;
 import infoshare.services.Content.PublishedContentService;
+import infoshare.services.ContentType.ContentTypeService;
 import infoshare.services.category.CategoryService;
 import infoshare.services.source.SourceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -239,7 +240,8 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
     private EditedContent getUpdateEntity(FieldGroup binder) {
         final ContentModel bean = ((BeanItem<ContentModel>) binder.getItemDataSource()).getBean();
         final EditedContent editedContent = new EditedContent
-                .Builder(bean.getTitle())
+                .Builder()
+                .title(bean.getTitle())
                 .category(categoryService.findById(bean.getCategory()).getId())
                 .content(bean.getContent())
                 .contentType(bean.getContentType())
@@ -255,7 +257,7 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
     private EditedContent getTrashEntity(String val) {
        EditedContent content = editedContentService.findById(val);
         final EditedContent editedContent = new EditedContent
-                .Builder(content.getTitle()).copy(content)
+                .Builder().copy(content)
                 .state("Deleted")
                 .build();
         return editedContent;

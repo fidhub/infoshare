@@ -1,10 +1,9 @@
 package infoshare.client.content.common.demographics.table;
 
 import com.vaadin.ui.Table;
-import hashwork.client.content.MainLayout;
-import hashwork.domain.ui.demographics.Language;
-import hashwork.services.ui.demographics.Impl.LanguageServiceImpl;
-import hashwork.services.ui.demographics.LanguageService;
+import infoshare.app.facade.DemographicsFacade;
+import infoshare.client.content.MainLayout;
+import infoshare.domain.demographics.Language;
 
 import java.util.Set;
 
@@ -12,7 +11,7 @@ import java.util.Set;
  * Created by hashcode on 2015/08/18.
  */
 public class LanguageTable extends Table {
-    private final LanguageService languageService = new LanguageServiceImpl();
+
     private final MainLayout main;
 
     public LanguageTable(MainLayout main) {
@@ -23,7 +22,7 @@ public class LanguageTable extends Table {
 
 
         // Add Data Columns
-        Set<Language> languages = languageService.findAll();
+        Set<Language> languages = DemographicsFacade.languageService.findAll();
         for (Language language : languages) {
             addItem(new Object[]{language.getName()}, language.getId());
         }
