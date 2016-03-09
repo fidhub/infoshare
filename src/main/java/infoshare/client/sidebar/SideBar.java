@@ -63,11 +63,6 @@ public class SideBar extends Accordion implements ItemClickEvent.ItemClickListen
         rawMenu.addComponent(contentTree);
         addTab(contentTree, CONTENT, null);
 
-        VerticalLayout courseMenu = new VerticalLayout();
-        CourseTree courseTree = new CourseTree(main);
-        courseMenu.addComponent(courseTree);
-        addTab(courseTree, COURSES, null);
-
         VerticalLayout setupMenu = new VerticalLayout();
         SetupTree setupTree = new SetupTree(main);
         setupMenu.addComponent(setupTree);

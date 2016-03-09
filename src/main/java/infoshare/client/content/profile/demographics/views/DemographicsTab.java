@@ -6,16 +6,17 @@ import com.vaadin.data.util.BeanItem;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.VerticalLayout;
-import hashwork.app.facade.PeopleFacade;
-import hashwork.app.util.DomainState;
-import hashwork.app.util.security.GetUserCredentials;
-import hashwork.client.content.MainLayout;
-import hashwork.client.content.profile.demographics.DemographicsMenu;
-import hashwork.client.content.profile.demographics.forms.PersonDemographicsForm;
-import hashwork.client.content.profile.demographics.model.PersonDemographicsModel;
-import hashwork.client.content.profile.demographics.table.PersonDemographicsTable;
-import hashwork.domain.people.PersonDemographics;
-import hashwork.factories.people.PersonDemographicsFactory;
+import infoshare.app.facade.PeopleFacade;
+import infoshare.app.util.DomainState;
+import infoshare.app.util.security.GetUserCredentials;
+import infoshare.client.content.MainLayout;
+import infoshare.client.content.profile.demographics.DemographicsMenu;
+import infoshare.client.content.profile.demographics.forms.PersonDemographicsForm;
+import infoshare.client.content.profile.demographics.model.PersonDemographicsModel;
+import infoshare.client.content.profile.demographics.table.PersonDemographicsTable;
+import infoshare.domain.person.PersonDemographics;
+import infoshare.factories.person.PersonDemographicsFactory;
+
 
 /**
  * Created by hashcode on 2015/12/07.
@@ -142,7 +143,7 @@ public class DemographicsTab extends VerticalLayout implements
         final PersonDemographicsModel model = ((BeanItem<PersonDemographicsModel>) binder.getItemDataSource()).getBean();
         final String personId = GetUserCredentials.getUser().getId();
         final PersonDemographics personDemographics = PersonDemographicsFactory
-                .getPersonDemographics(personId, model.getGenderId(), model.getDateOfBirth(), model.getMaritalStatusId(), model.getNumberOfDependencies());
+                .getPersonDemographics(personId, model.getGenderId(), model.getDateOfBirth());
         return personDemographics;
     }
 
@@ -155,9 +156,7 @@ public class DemographicsTab extends VerticalLayout implements
                 .Builder()
                 .copy(personAddress)
                 .dateOfBirth(model.getDateOfBirth())
-                .gender(model.getGenderId())
-                .maritalStatus(model.getMaritalStatusId())
-                .numberOfDependencies(model.getNumberOfDependencies())
+                .genderId(model.getGenderId())
                 .build();
         return updatedPersonAddress;
     }
@@ -166,8 +165,6 @@ public class DemographicsTab extends VerticalLayout implements
         final PersonDemographicsModel model = new PersonDemographicsModel();
         model.setDateOfBirth(personDemographics.getDateOfBirth());
         model.setGenderId(personDemographics.getGenderId());
-        model.setMaritalStatusId(personDemographics.getMaritalStatusId());
-        model.setNumberOfDependencies(personDemographics.getNumberOfDependencies());
         return model;
     }
 }

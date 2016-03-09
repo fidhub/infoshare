@@ -11,14 +11,10 @@ import infoshare.client.content.MainLayout;
 import infoshare.client.content.setup.forms.AddressForm;
 import infoshare.client.content.setup.models.AddressModel;
 import infoshare.client.content.setup.tables.AddressTable;
+import infoshare.domain.person.Person;
 import infoshare.domain.person.PersonAddress;
 import infoshare.services.Contact.AddressService;
 import infoshare.services.Contact.Impl.AddressServiceImpl;
-import infoshare.services.users.Impl.UserServiceImpl;
-import infoshare.services.users.UserService;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by codex on 2015/08/18.
@@ -28,7 +24,6 @@ public class AddressView extends Window implements Button.ClickListener, Propert
     private final AddressForm addressForm;
     private AddressTable addressTable;
     private AddressService addressService = new AddressServiceImpl();
-    private UserService userService = new UserServiceImpl();
     private MainLayout main;
 
     public AddressView(MainLayout main) {
@@ -90,39 +85,39 @@ public class AddressView extends Window implements Button.ClickListener, Propert
         }
     }
 
-    private User getUserUpdateEntity(String addressID) {
+    private Person getUserUpdateEntity(String addressID) {
 
-        final User bean = userService.findById(AddressTable.userID);
-        List<String> addresses = new ArrayList<>();
-
-        if (bean.getAddress()!= null) {
-            for (String ID : bean.getAddress()) {
-                PersonAddress personAddress = addressService.findById(ID);
-                if (personAddress != null) {
-                    addresses.add(personAddress.getId());
-                }
-            }
-        }
-        addresses.add(addressID);
-
-        final User user = new User.Builder(bean.getLastName())
-                .firstname(bean.getFirstName())
-                .role(bean.getRole())
-                .enable(bean.isEnable())
-                .password(bean.getPassword())
-                .username(bean.getUsername())
-                .othername(bean.getOtherName())
-                .address(addresses)//Todo : no route for entity yet
-                .contact(bean.getContact())//Todo : no route for entity yet
-                .id(AddressTable.userID)
-                .build();
-        return user;
+//        final Person bean = userService.findById(AddressTable.userID);
+//        List<String> addresses = new ArrayList<>();
+//
+//        if (bean.getAddress()!= null) {
+//            for (String ID : bean.getAddress()) {
+//                PersonAddress personAddress = addressService.findById(ID);
+//                if (personAddress != null) {
+//                    addresses.add(personAddress.getId());
+//                }
+//            }
+//        }
+//        addresses.add(addressID);
+//
+//        final User user = new User.Builder(bean.getLastName())
+//                .firstname(bean.getFirstName())
+//                .role(bean.getRole())
+//                .enable(bean.isEnable())
+//                .password(bean.getPassword())
+//                .username(bean.getUsername())
+//                .othername(bean.getOtherName())
+//                .address(addresses)//Todo : no route for entity yet
+//                .contact(bean.getContact())//Todo : no route for entity yet
+//                .id(AddressTable.userID)
+//                .build();
+        return null;
     }
     private void saveForm(FieldGroup binder) {
         try {
             binder.commit();
             PersonAddress personAddress = addressService.save(getAddressNewEntity(binder));
-            userService.update(getUserUpdateEntity(personAddress.getId()));
+//            userService.update(getUserUpdateEntity(personAddress.getId()));
             getHome();
             Notification.show("PersonAddress ADDED!", Notification.Type.HUMANIZED_MESSAGE);
         } catch (FieldGroup.CommitException e) {
@@ -135,12 +130,12 @@ public class AddressView extends Window implements Button.ClickListener, Propert
     }
     private PersonAddress getAddressNewEntity(FieldGroup binder) {
         final AddressModel bean = ((BeanItem<AddressModel>)binder.getItemDataSource()).getBean();
-        final PersonAddress personAddress = new PersonAddress.Builder(bean.getPhysicalAddress())
-                                .postalCode(bean.getPostalCode())
-                                .postalAddress(bean.getPostalAddress())
-                                .addressType(bean.getAddressType())
-                                .build();
-        return personAddress;
+//        final PersonAddress personAddress = new PersonAddress.Builder(bean.getPhysicalAddress())
+//                                .postalCode(bean.getPostalCode())
+//                                .postalAddress(bean.getPostalAddress())
+//                                .addressType(bean.getAddressType())
+//                                .build();
+        return null;
     }
 
     private void addListeners() {
@@ -153,10 +148,10 @@ public class AddressView extends Window implements Button.ClickListener, Propert
     }
     public AddressModel getAddressModel(PersonAddress personAddress){
         AddressModel model = new AddressModel();
-        model.setAddressType(personAddress.getAddressTypeId());
-        model.setPhysicalAddress(personAddress.getPhysicalAddress());
-        model.setPostalCode(personAddress.getPostalCode());
-        model.setPostalAddress(personAddress.getPostalAddress());
+//        model.setAddressType(personAddress.getAddressTypeId());
+//        model.setPhysicalAddress(personAddress.getPhysicalAddress());
+//        model.setPostalCode(personAddress.getPostalCode());
+//        model.setPostalAddress(personAddress.getPostalAddress());
         return model;
     }
 

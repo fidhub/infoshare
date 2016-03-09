@@ -52,6 +52,6 @@ public class HomeTree extends Tree implements ItemClickEvent.ItemClickListener {
     }
 
     private void messageView() {
-        main.content.setSecondComponent(new UserManagementMenu(main, LANDING_TAB));
+//        main.content.setSecondComponent(new UserManagementMenu(main, LANDING_TAB));
     }
 }

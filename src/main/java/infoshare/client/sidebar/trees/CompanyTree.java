@@ -3,6 +3,7 @@ package infoshare.client.sidebar.trees;
 import com.vaadin.event.ItemClickEvent;
 import com.vaadin.ui.Tree;
 import infoshare.client.content.MainLayout;
+import infoshare.client.content.organisation.places.OrganisationPlacesMenu;
 
 /**
  * Created by hashcode on 2015/12/28.
@@ -39,7 +40,7 @@ public class CompanyTree extends Tree implements ItemClickEvent.ItemClickListene
 
 
     private void placesView() {
-        main.content.setSecondComponent(new CompanyPlacesMenu(main, LANDING_TAB));
+        main.content.setSecondComponent(new OrganisationPlacesMenu(main, LANDING_TAB));
 
     }
 

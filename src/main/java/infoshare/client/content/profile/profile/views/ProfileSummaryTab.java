@@ -7,13 +7,11 @@ import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
-import hashwork.app.facade.DemographicsFacade;
-import hashwork.app.facade.PeopleFacade;
-import hashwork.app.util.security.GetUserCredentials;
-import hashwork.client.content.MainLayout;
-import hashwork.domain.people.Person;
-import hashwork.domain.ui.demographics.Role;
-import hashwork.domain.ui.demographics.Title;
+import infoshare.app.facade.PeopleFacade;
+import infoshare.app.util.security.GetUserCredentials;
+import infoshare.client.content.MainLayout;
+import infoshare.domain.demographics.Role;
+import infoshare.domain.person.Person;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -29,7 +27,7 @@ public class ProfileSummaryTab extends VerticalLayout implements
     public ProfileSummaryTab(MainLayout main) {
         final Person person = GetUserCredentials.getUser();
         Set<Role> userRoles = PeopleFacade.personService.getRoles(person.getId());
-        final Title titlevalue = DemographicsFacade.titleListService.findById(person.getTitle());
+
 
         this.main = main;
         setSizeFull();
@@ -46,8 +44,7 @@ public class ProfileSummaryTab extends VerticalLayout implements
         account.setStyleName(ValoTheme.BUTTON_FRIENDLY);
         account.setSizeFull();
 
-        Label title = new Label("Title", ContentMode.HTML);
-        Label titleV = new Label(getTitle(titlevalue), ContentMode.HTML);
+
 
         Label lastName = new Label("Last Name", ContentMode.HTML);
         Label lastNameV = new Label(person.getLastName(), ContentMode.HTML);
@@ -55,8 +52,8 @@ public class ProfileSummaryTab extends VerticalLayout implements
         Label firstName = new Label("First Name", ContentMode.HTML);
         Label firstNameV = new Label(person.getFirstName(), ContentMode.HTML);
 
-        Label company = new Label("Company", ContentMode.HTML);
-        Label companyV = new Label(person.getCompany(), ContentMode.HTML);
+        Label company = new Label("Organisation", ContentMode.HTML);
+        Label companyV = new Label(person.getOrg(), ContentMode.HTML);
 
         Label emailAddress = new Label("Email Address", ContentMode.HTML);
         Label emailAddressV = new Label(person.getEmailAddress(), ContentMode.HTML);
@@ -86,8 +83,7 @@ public class ProfileSummaryTab extends VerticalLayout implements
 
         grid.addComponent(header, 0, 0, 3, 0);
         // First Row
-        grid.addComponent(title, 0, 1);
-        grid.addComponent(titleV, 1, 1);
+
         grid.addComponent(lastName, 2, 1);
         grid.addComponent(lastNameV, 3, 1);
 
@@ -126,12 +122,6 @@ public class ProfileSummaryTab extends VerticalLayout implements
 
 
         addComponent(grid);
-    }
-
-    private String getTitle(Title titlevalue) {
-        if (titlevalue != null)
-            return titlevalue.getName();
-        return null;
     }
 
     private String getRoles(Set<Role> roles) {

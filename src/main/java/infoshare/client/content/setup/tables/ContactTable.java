@@ -5,8 +5,7 @@ import com.vaadin.ui.themes.ValoTheme;
 import infoshare.client.content.MainLayout;
 import infoshare.services.Contact.ContactService;
 import infoshare.services.Contact.Impl.ContactServiceImpl;
-import infoshare.services.users.Impl.UserServiceImpl;
-import infoshare.services.users.UserService;
+
 
 /**
  * Created by user9 on 2015/07/30.
@@ -15,7 +14,7 @@ public class ContactTable extends Table {
 
     private final MainLayout main;
     private ContactService contactService = new ContactServiceImpl();
-    private UserService userService = new UserServiceImpl();
+
 
     public ContactTable(MainLayout main) {
         this.main = main;
@@ -35,21 +34,7 @@ public class ContactTable extends Table {
     }
 
     public void loadTable() {
-        User user = userService.findById(AddressTable.userID);
-        if (user != null) {
-            for (int i = 0; i < user.getContact().size(); i++) {
-                Contact contact = contactService.findById(user.getContact().get(i));
-                try {
-                    this.addItem(new Object[]{
-                            contact.getPhone(),
-                            contact.getEmail(),
-                            contact.getContactType()
 
-                    }, contact.getId());
-                } catch (Exception e) {
-                }
-            }
-        }
     }
 
 }

@@ -19,7 +19,7 @@ import java.util.Set;
  * Created by hashcode on 2015/11/10.
  */
 public class RestUtil {
-    public static final String URL = "http://kujali.cput.ac.za";
+    public static final String URL = "http://localhost:9000";
 
     private static URLConnection openConnection(String fetchUrl) {
         URLConnection urlConnection = null;

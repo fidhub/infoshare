@@ -6,16 +6,16 @@ import com.vaadin.data.util.BeanItem;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.VerticalLayout;
-import hashwork.app.facade.PeopleFacade;
-import hashwork.app.util.DomainState;
-import hashwork.app.util.security.GetUserCredentials;
-import hashwork.client.content.MainLayout;
-import hashwork.client.content.profile.demographics.DemographicsMenu;
-import hashwork.client.content.profile.demographics.forms.PersonLanguagesForm;
-import hashwork.client.content.profile.demographics.model.PersonLanguageModel;
-import hashwork.client.content.profile.demographics.table.PersonLanguageTable;
-import hashwork.domain.people.PersonLanguage;
-import hashwork.factories.people.PersonLanguageFactory;
+import infoshare.app.facade.PeopleFacade;
+import infoshare.app.util.DomainState;
+import infoshare.app.util.security.GetUserCredentials;
+import infoshare.client.content.MainLayout;
+import infoshare.client.content.profile.demographics.DemographicsMenu;
+import infoshare.client.content.profile.demographics.forms.PersonLanguagesForm;
+import infoshare.client.content.profile.demographics.model.PersonLanguageModel;
+import infoshare.client.content.profile.demographics.table.PersonLanguageTable;
+import infoshare.domain.person.PersonLanguage;
+import infoshare.factories.person.PersonLanguageFactory;
 
 /**
  * Created by hashcode on 2015/12/07.

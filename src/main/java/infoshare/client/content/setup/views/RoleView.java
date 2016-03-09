@@ -14,6 +14,7 @@ import infoshare.client.content.setup.forms.RoleForm;
 import infoshare.client.content.setup.models.RoleModel;
 import infoshare.client.content.setup.tables.RoleTable;
 import infoshare.domain.demographics.Role;
+import infoshare.factories.common.RolesListFactory;
 import infoshare.services.roles.RoleService;
 
 import java.util.HashMap;
@@ -110,7 +111,7 @@ public class RoleView extends VerticalLayout implements
         rolevals.put("roleName",bean.getRoleName());
         rolevals.put("description",bean.getDescription());
         rolevals.put("state",DomainState.ACTIVE.name());
-        final Role role = RoleFactory.getRole(rolevals);
+        final Role role = RolesListFactory.getRolesList(bean.getRoleName(),bean.getDescription());
         return role;
     }
     private void getHome() {

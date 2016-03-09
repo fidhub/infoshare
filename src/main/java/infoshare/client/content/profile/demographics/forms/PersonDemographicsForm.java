@@ -4,13 +4,12 @@ import com.vaadin.data.fieldgroup.FieldGroup;
 import com.vaadin.data.util.BeanItem;
 import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.*;
-import hashwork.app.facade.DemographicsFacade;
-import hashwork.app.util.fields.ButtonsHelper;
-import hashwork.app.util.fields.UIComboBoxHelper;
-import hashwork.app.util.fields.UIComponentHelper;
-import hashwork.client.content.profile.demographics.model.PersonDemographicsModel;
-import hashwork.domain.ui.demographics.Gender;
-import hashwork.domain.ui.demographics.MaritalStatus;
+import infoshare.app.facade.DemographicsFacade;
+import infoshare.app.util.fields.ButtonsHelper;
+import infoshare.app.util.fields.UIComboBoxHelper;
+import infoshare.app.util.fields.UIComponentHelper;
+import infoshare.client.content.profile.demographics.model.PersonDemographicsModel;
+import infoshare.domain.demographics.Gender;
 
 import java.util.Set;
 import java.util.function.Consumer;
@@ -56,16 +55,6 @@ public class PersonDemographicsForm extends FormLayout {
             }
         });
 
-        //ComboBox Fields
-        final ComboBox maritalStatusId = UIComboBox.getComboBox("Marital Status :", "maritalStatusId", PersonDemographicsModel.class, binder, new Consumer<ComboBox>() {
-            public void accept(ComboBox comboBox) {
-                Set<MaritalStatus> maritalStatuses = DemographicsFacade.maritalStatusListService.findAll();
-                for (MaritalStatus maritalStatus : maritalStatuses) {
-                    comboBox.addItem(maritalStatus.getId());
-                    comboBox.setItemCaption(maritalStatus.getId(), maritalStatus.getName());
-                }
-            }
-        });
 
 
         // Create a field group and use it to bind the fields in the layout
@@ -75,7 +64,6 @@ public class PersonDemographicsForm extends FormLayout {
         // First ROW
         grid.addComponent(dateOfBirth, 0, 0);
         grid.addComponent(genderId, 1, 0);
-        grid.addComponent(maritalStatusId, 2, 0);
         grid.addComponent(numberOfDependencies, 0, 1);
 
         HorizontalLayout buttons = ButtonsHelper.getButtons(save, edit, cancel, update, delete);

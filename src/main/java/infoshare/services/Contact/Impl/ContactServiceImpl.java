@@ -1,5 +1,6 @@
 package infoshare.services.Contact.Impl;
 
+import infoshare.domain.location.ContactType;
 import infoshare.restapi.Contacts.ContactAPI;
 import infoshare.services.Contact.ContactService;
 
@@ -12,27 +13,27 @@ public class ContactServiceImpl implements ContactService {
 
 
     @Override
-    public Contact findById(String s) {
+    public ContactType findById(String s) {
         return ContactAPI.findById(s);
     }
 
     @Override
-    public Contact save(Contact entity) {
+    public ContactType save(ContactType entity) {
         return ContactAPI.save(entity);
     }
 
     @Override
-    public Contact update(Contact entity) {
+    public ContactType update(ContactType entity) {
         return ContactAPI.save(entity);
     }
 
     @Override
-    public void delete(Contact entity) {
+    public void delete(ContactType entity) {
          ContactAPI.save(entity);
     }
 
     @Override
-    public Set<Contact> findAll() {
+    public Set<ContactType> findAll() {
         return null;
     }
 }

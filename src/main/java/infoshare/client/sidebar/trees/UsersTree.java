@@ -34,7 +34,7 @@ public class UsersTree extends Tree implements ItemClickEvent.ItemClickListener 
     }
 
     private void manageUsersView() {
-        main.content.setSecondComponent(new UserManagementMenu(main, LANDING_TAB));
+//        main.content.setSecondComponent(new UserManagementMenu(main, LANDING_TAB));
 
     }
 

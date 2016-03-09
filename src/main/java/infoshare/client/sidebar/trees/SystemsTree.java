@@ -48,7 +48,7 @@ public class SystemsTree extends Tree implements ItemClickEvent.ItemClickListene
 
 
     private void locationView() {
-        main.content.setSecondComponent(new LocationMenu(main, LANDING_TAB));
+//        main.content.setSecondComponent(new LocationMenu(main, LANDING_TAB));
     }
 
     private void demographicsView() {
@@ -57,7 +57,7 @@ public class SystemsTree extends Tree implements ItemClickEvent.ItemClickListene
 
 
     private void utilsView() {
-        main.content.setSecondComponent(new UtilitiesMenu(main, LANDING_TAB));
+//        main.content.setSecondComponent(new UtilitiesMenu(main, LANDING_TAB));
     }
 
 

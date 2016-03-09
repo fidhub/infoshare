@@ -2,8 +2,9 @@ package infoshare.client.content.profile.profile;
 
 import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.VerticalLayout;
-import hashwork.client.content.MainLayout;
-import hashwork.client.content.profile.profile.views.ProfileSummaryTab;
+import infoshare.client.content.MainLayout;
+import infoshare.client.content.profile.profile.views.ProfileSummaryTab;
+
 
 /**
  * Created by hashcode on 2015/09/15.

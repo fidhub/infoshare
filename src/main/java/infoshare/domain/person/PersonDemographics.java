@@ -11,8 +11,6 @@ public class PersonDemographics implements Serializable, Comparable<PersonDemogr
     private String personId;
     private String genderId;
     private Date dateOfBirth;
-    private String maritalStatusId;
-    private int numberOfDependencies;
     private Date date;
     private String state;
 
@@ -23,8 +21,6 @@ public class PersonDemographics implements Serializable, Comparable<PersonDemogr
         this.personId = builder.personId;
         this.genderId = builder.genderId;
         this.dateOfBirth = builder.dateOfBirth;
-        this.maritalStatusId = builder.maritalStatusId;
-        this.numberOfDependencies = builder.numberOfDependencies;
         this.date = builder.date;
         this.state = builder.state;
     }
@@ -45,13 +41,6 @@ public class PersonDemographics implements Serializable, Comparable<PersonDemogr
         return dateOfBirth;
     }
 
-    public String getMaritalStatusId() {
-        return maritalStatusId;
-    }
-
-    public int getNumberOfDependencies() {
-        return numberOfDependencies;
-    }
 
     public Date getDate() {
         return date;
@@ -66,8 +55,6 @@ public class PersonDemographics implements Serializable, Comparable<PersonDemogr
         private String personId;
         private String genderId;
         private Date dateOfBirth;
-        private String maritalStatusId;
-        private int numberOfDependencies;
         private Date date;
         private String state;
 
@@ -91,15 +78,7 @@ public class PersonDemographics implements Serializable, Comparable<PersonDemogr
             return this;
         }
 
-        public Builder maritalStatusId(String maritalStatusId) {
-            this.maritalStatusId = maritalStatusId;
-            return this;
-        }
 
-        public Builder numberOfDependencies(int numberOfDependencies) {
-            this.numberOfDependencies = numberOfDependencies;
-            return this;
-        }
 
         public Builder date(Date date) {
             this.date = date;
@@ -116,8 +95,6 @@ public class PersonDemographics implements Serializable, Comparable<PersonDemogr
             this.personId = personDemographics.personId;
             this.genderId = personDemographics.genderId;
             this.dateOfBirth = personDemographics.dateOfBirth;
-            this.maritalStatusId = personDemographics.maritalStatusId;
-            this.numberOfDependencies = personDemographics.numberOfDependencies;
             this.date = personDemographics.date;
             this.state = personDemographics.state;
             return this;

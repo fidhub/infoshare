@@ -13,6 +13,7 @@ import infoshare.client.content.systemValues.forms.ContentSourceForm;
 import infoshare.client.content.systemValues.models.SourceModel;
 import infoshare.client.content.systemValues.tables.ContentSourceTable;
 import infoshare.domain.content.Source;
+import infoshare.factories.content.SourceFactory;
 import infoshare.services.source.SourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -104,7 +105,8 @@ public class ContentSourceView extends VerticalLayout implements Button.ClickLis
     }
     private Source getUpdateEntity(FieldGroup binder) {
         final SourceModel bean = ((BeanItem<SourceModel>) binder.getItemDataSource()).getBean();
-        final Source source = new Source.Builder(bean.getName())
+        final Source source = new Source.Builder()
+                .name(bean.getName())
                 .description(bean.getDescription())
                 .id(table.getValue().toString())
                 .build();

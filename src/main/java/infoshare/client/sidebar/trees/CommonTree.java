@@ -3,6 +3,9 @@ package infoshare.client.sidebar.trees;
 import com.vaadin.event.ItemClickEvent;
 import com.vaadin.ui.Tree;
 import infoshare.client.content.MainLayout;
+import infoshare.client.content.common.demographics.CommonDemographicsMenu;
+import infoshare.client.content.common.location.CommonLocationMenu;
+import infoshare.client.content.common.util.CommonUtilMenu;
 
 
 /**

@@ -1,8 +1,9 @@
 package infoshare.client.content.profile.password.util;
 
-import hashwork.app.util.security.GetUserCredentials;
-import hashwork.app.util.security.PasswordHash;
-import hashwork.domain.people.Person;
+
+import infoshare.app.util.security.GetUserCredentials;
+import infoshare.app.util.security.PasswordHash;
+import infoshare.domain.person.Person;
 
 import java.io.Serializable;
 

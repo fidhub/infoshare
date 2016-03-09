@@ -7,12 +7,13 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.VerticalLayout;
 import infoshare.app.facade.ContentTypeFacade;
+import infoshare.client.content.MainLayout;
+import infoshare.client.content.systemValues.SystemValues;
 import infoshare.client.content.systemValues.forms.ContentTypeForm;
 import infoshare.client.content.systemValues.models.ContentTypeModel;
-import infoshare.client.content.systemValues.SystemValues;
 import infoshare.client.content.systemValues.tables.ContentTypeTable;
-import infoshare.client.content.MainLayout;
 import infoshare.domain.content.ContentType;
+import infoshare.factories.content.ContentTypeFactory;
 import infoshare.services.ContentType.ContentTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -97,7 +98,8 @@ public class ContentTypeView extends VerticalLayout implements Button.ClickListe
     }
     private ContentType getUpdateEntity(FieldGroup binder) {
         final ContentTypeModel bean = ((BeanItem<ContentTypeModel>) binder.getItemDataSource()).getBean();
-        final ContentType contentType =  new ContentType.Builder(bean.getName())
+        final ContentType contentType =  new ContentType.Builder()
+                .name(bean.getName())
                 .description(bean.getDescription())
                 .id(table.getValue().toString())
                 .build();

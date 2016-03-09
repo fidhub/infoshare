@@ -13,6 +13,7 @@ import infoshare.client.content.systemValues.forms.CategoryForm;
 import infoshare.client.content.systemValues.models.CategoryModel;
 import infoshare.client.content.systemValues.tables.CategoryTable;
 import infoshare.domain.content.Category;
+import infoshare.factories.content.CategoryFactory;
 import infoshare.services.category.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -105,7 +106,8 @@ public class CategoryView extends VerticalLayout implements Button.ClickListener
     }
     private Category getUpdateEntity(FieldGroup binder) {
         final CategoryModel bean = ((BeanItem<CategoryModel>) binder.getItemDataSource()).getBean();
-        final Category category = new Category.Builder(bean.getName())
+        final Category category = new Category.Builder()
+                .name(bean.getName())
                 .description(bean.getDescription())
                 .id(table.getValue().toString())
                 .build();

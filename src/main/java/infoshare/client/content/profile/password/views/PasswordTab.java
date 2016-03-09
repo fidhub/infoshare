@@ -6,15 +6,15 @@ import com.vaadin.data.util.BeanItem;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.VerticalLayout;
-import hashwork.app.facade.PeopleFacade;
-import hashwork.app.util.security.GetUserCredentials;
-import hashwork.app.util.security.PasswordHash;
-import hashwork.client.content.MainLayout;
-import hashwork.client.content.profile.password.PasswordMenu;
-import hashwork.client.content.profile.password.forms.PasswordForm;
-import hashwork.client.content.profile.password.model.PasswordModel;
-import hashwork.client.content.profile.password.util.PasswordCheckUtil;
-import hashwork.domain.people.Person;
+import infoshare.app.facade.PeopleFacade;
+import infoshare.app.util.security.GetUserCredentials;
+import infoshare.app.util.security.PasswordHash;
+import infoshare.client.content.MainLayout;
+import infoshare.client.content.profile.password.PasswordMenu;
+import infoshare.client.content.profile.password.forms.PasswordForm;
+import infoshare.client.content.profile.password.model.PasswordModel;
+import infoshare.client.content.profile.password.util.PasswordCheckUtil;
+import infoshare.domain.person.Person;
 
 /**
  * Created by hashcode on 2015/12/07.

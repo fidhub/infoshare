@@ -1,15 +1,15 @@
 package infoshare.client.content.profile.demographics.table;
 
 import com.vaadin.ui.Table;
-import hashwork.app.facade.DemographicsFacade;
-import hashwork.app.facade.LocationFacade;
-import hashwork.app.facade.PeopleFacade;
-import hashwork.app.util.security.GetUserCredentials;
-import hashwork.client.content.MainLayout;
-import hashwork.domain.people.PersonLanguage;
-import hashwork.domain.ui.demographics.Language;
-import hashwork.domain.ui.demographics.LanguageProficiency;
-import hashwork.domain.ui.location.ContactType;
+import infoshare.app.facade.DemographicsFacade;
+import infoshare.app.facade.LocationFacade;
+import infoshare.app.facade.PeopleFacade;
+import infoshare.app.util.security.GetUserCredentials;
+import infoshare.client.content.MainLayout;
+import infoshare.domain.demographics.Language;
+import infoshare.domain.demographics.LanguageProficiency;
+import infoshare.domain.location.ContactType;
+import infoshare.domain.person.PersonLanguage;
 
 import java.util.Date;
 import java.util.Set;
@@ -31,7 +31,7 @@ public class PersonLanguageTable extends Table {
         addContainerProperty("Writing", String.class, null);
         addContainerProperty("Speaking", String.class, null);
 
-        Set<PersonLanguage> personLanguages = PeopleFacade.personLanguageService.findAll(personId);
+        Set<PersonLanguage> personLanguages = PeopleFacade.personLanguageService.getAllLanguages(personId);
 
         personLanguages.parallelStream().forEach(item -> {
             addItem(new Object[]{

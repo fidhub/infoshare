@@ -2,8 +2,9 @@ package infoshare.client.content.profile.password;
 
 import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.VerticalLayout;
-import hashwork.client.content.MainLayout;
-import hashwork.client.content.profile.password.views.PasswordTab;
+import infoshare.client.content.MainLayout;
+import infoshare.client.content.profile.password.views.PasswordTab;
+
 
 /**
  * Created by hashcode on 2015/12/07.

@@ -14,17 +14,13 @@ import infoshare.client.content.setup.forms.PersonForm;
 import infoshare.client.content.setup.models.PersonModel;
 import infoshare.client.content.setup.tables.PersonTable;
 import infoshare.domain.person.Person;
-import infoshare.domain.demographics.Role;
 import infoshare.factories.person.PersonFactory;
 import infoshare.services.people.PersonRoleService;
 import infoshare.services.people.PersonService;
 import infoshare.services.roles.RoleService;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * Created by hashcode on 2015/06/23.
@@ -126,45 +122,51 @@ public class PersonView extends VerticalLayout implements
     }
     private Person getPersonUpdateEntity(FieldGroup binder) {
 
-        final PersonModel bean = ((BeanItem<PersonModel>) binder.getItemDataSource()).getBean();
-        Set<String> userRoles = new HashSet<>();
+//        final PersonModel bean = ((BeanItem<PersonModel>) binder.getItemDataSource()).getBean();
+//        Set<String> userRoles = new HashSet<>();
+//
+//        if (bean.getRole()!= null) {
+//            for (String roleId : bean.getRole()) {
+//                Role role = roleService.findById(roleId);
+//                if (role != null) {
+//                    userRoles.add(role.getId());
+//                }
+//            }
+//        }
+//        final Person user = new User.Builder(bean.getLastName())
+//                .firstname(bean.getFirstName())
+//                .role(userRoles)
+//                .enable(bean.isEnable())
+//                .password(bean.getPassword())
+//                .username(bean.getUsername())
+//                .othername(bean.getOtherName())
+//                .address(bean.getAddress())//Todo : no route for entity yet
+//                .contact(bean.getContact())//Todo : no route for entity yet
+//                .id(table.getValue().toString())
+//                .build();
 
-        if (bean.getRole()!= null) {
-            for (String roleId : bean.getRole()) {
-                Role role = roleService.findById(roleId);
-                if (role != null) {
-                    userRoles.add(role.getId());
-                }
-            }
-        }
-        final Person user = new User.Builder(bean.getLastName())
-                .firstname(bean.getFirstName())
-                .role(userRoles)
-                .enable(bean.isEnable())
-                .password(bean.getPassword())
-                .username(bean.getUsername())
-                .othername(bean.getOtherName())
-                .address(bean.getAddress())//Todo : no route for entity yet
-                .contact(bean.getContact())//Todo : no route for entity yet
-                .id(table.getValue().toString())
-                .build();
-        return user;
+        final PersonModel bean = ((BeanItem<PersonModel>) binder.getItemDataSource()).getBean();
+        Map<String,Boolean> boolVals = new HashMap<>();
+        boolVals.put("enabled",bean.getEnabled());
+        boolVals.put("accountNonExpired",bean.getAccountNonExpired());
+        boolVals.put("accountNonLocked",bean.getAccountNonLocked());
+        boolVals.put("credentialsNonExpired",bean.getCredentialsNonExpired());
+        Map<String,String> stringVals = new HashMap<>();
+        stringVals.put("firstName",bean.getFirstName());
+        stringVals.put("middleName",bean.getMiddleName());
+        stringVals.put("lastName",bean.getMiddleName());
+        stringVals.put("authvalue",bean.getAuthvalue());
+        stringVals.put("emailAddress",bean.getEmailAddress());
+        final Person person = PersonFactory.getPerson(stringVals, boolVals);
+        return person;
+
     }
-    public PersonModel getModel(User user) {
-        Set<String> userRolesId = new HashSet<>();
-        if (user.getRole() != null) {
-            userRolesId.addAll(user.getRole().stream().collect(Collectors.toList()));
-        }
-        UserModel model = new UserModel();
+    public PersonModel getModel(Person user) {
+
+        PersonModel model = new PersonModel();
         model.setFirstName(user.getFirstName());
         model.setLastName(user.getLastName());
-        model.setOtherName(user.getOtherName());
-        model.setUsername(user.getUsername());
-        model.setEnable(user.isEnable());
-        model.setRole(userRolesId);
-        model.setAddress(user.getAddress()); //Todo : no route for entity yet
-        model.setContact(user.getContact()); //Todo : no route for entity yet
-        model.setPassword(user.getPassword());
+
         return model;
     }
     private void getHome() {

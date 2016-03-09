@@ -3,10 +3,10 @@ package infoshare.client.content.profile.password.forms;
 import com.vaadin.data.fieldgroup.FieldGroup;
 import com.vaadin.data.util.BeanItem;
 import com.vaadin.data.validator.BeanValidator;
-import com.vaadin.server.Sizeable;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
-import hashwork.client.content.profile.password.model.PasswordModel;
+import infoshare.client.content.password.models.PasswordModel;
+
 
 /**
  * Created by hashcode on 2015/12/07.

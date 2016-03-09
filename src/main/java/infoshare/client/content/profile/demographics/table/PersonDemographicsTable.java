@@ -1,13 +1,12 @@
 package infoshare.client.content.profile.demographics.table;
 
 import com.vaadin.ui.Table;
-import hashwork.app.facade.DemographicsFacade;
-import hashwork.app.facade.PeopleFacade;
-import hashwork.app.util.security.GetUserCredentials;
-import hashwork.client.content.MainLayout;
-import hashwork.domain.people.PersonDemographics;
-import hashwork.domain.ui.demographics.Gender;
-import hashwork.domain.ui.demographics.MaritalStatus;
+import infoshare.app.facade.DemographicsFacade;
+import infoshare.app.facade.PeopleFacade;
+import infoshare.app.util.security.GetUserCredentials;
+import infoshare.client.content.MainLayout;
+import infoshare.domain.demographics.Gender;
+import infoshare.domain.person.PersonDemographics;
 
 import java.util.Date;
 import java.util.Set;
@@ -27,18 +26,15 @@ public class PersonDemographicsTable extends Table {
         addContainerProperty("Date Created", Date.class, null);
         addContainerProperty("Gender", String.class, null);
         addContainerProperty("Date of Birth", Date.class, null);
-        addContainerProperty("Marital Status", String.class, null);
-        addContainerProperty("Dependants", Integer.class, null);
 
-        Set<PersonDemographics> personDemographicses = PeopleFacade.personDemographicsService.findAll(personId);
+
+        Set<PersonDemographics> personDemographicses = PeopleFacade.personDemographicsService.find_ALL(personId);
 
         personDemographicses.parallelStream().forEach(item -> {
             addItem(new Object[]{
                     item.getDate(),
                     gender(item.getGenderId()),
                     item.getDateOfBirth(),
-                    maritalStatus(item.getMaritalStatusId()),
-                    item.getNumberOfDependencies()
             }, item.getId());
 
         });
@@ -56,11 +52,6 @@ public class PersonDemographicsTable extends Table {
 
     }
 
-    private String maritalStatus(String maritalStatusId) {
-        MaritalStatus maritalStatus = DemographicsFacade.maritalStatusListService.findById(maritalStatusId);
-        if (maritalStatus != null)
-            return maritalStatus.getName();
-        return "Type Not Set";
-    }
+
 
 }
