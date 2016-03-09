@@ -9,6 +9,7 @@ import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.themes.ChameleonTheme;
 import com.vaadin.ui.themes.ValoTheme;
 import infoshare.app.facade.ContentFacade;
+import infoshare.app.util.security.GetUserCredentials;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.content.ContentMenu;
 import infoshare.client.content.content.views.RawView;
@@ -361,8 +362,8 @@ public class Header extends VerticalLayout implements Button.ClickListener {
         home.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
         home.addStyleName(ValoTheme.BUTTON_SMALL);
 
-        user.setCaption("Username");
-        user.setDescription("Your username)");
+        user.setCaption(GetUserCredentials.username());
+        user.setDescription(GetUserCredentials.username());
         user.setIcon(FontAwesome.USER_MD);
         user.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
         user.addStyleName(ValoTheme.BUTTON_SMALL);
@@ -376,6 +377,7 @@ public class Header extends VerticalLayout implements Button.ClickListener {
 
         layout.addComponent(home);
         layout.addComponent(notify);
+        layout.addComponent(logout());
 
         return layout;
     }
