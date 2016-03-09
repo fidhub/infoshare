@@ -24,13 +24,9 @@
         <processorPath useClasspath="true" />
       </profile>
       <profile default="false" name="Annotation profile for za.ac.cput.infoshare" enabled="true">
-<<<<<<< HEAD
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-=======
-        <sourceOutputDir name="target\generated-sources\annotations" />
-        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
->>>>>>> e5d284111b73c308d9cc6b33b7bed19f1a4d34b9
+
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
         <module name="za.ac.cput.infoshare" />

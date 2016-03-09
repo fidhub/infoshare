@@ -13,9 +13,6 @@ public interface LocationService {
     Location save(Location location);
     Location findById(String org ,String id);
     Set<Location> findAll(String org);
-<<<<<<< HEAD
-
     Location numberofChildred(String id);
-=======
->>>>>>> e5d284111b73c308d9cc6b33b7bed19f1a4d34b9
+
 }

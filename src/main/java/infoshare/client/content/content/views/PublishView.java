@@ -109,11 +109,7 @@ public class PublishView extends VerticalLayout implements Button.ClickListener,
         }
     }
     private PublishedContent getUpdateEntity(String val ) {
-<<<<<<< HEAD
         final PublishedContent bean = publishedContentService.findById(OrganisationUtil.getCompanyCode(),val);
-=======
-        final PublishedContent bean = publishedContentService.findById("",val);
->>>>>>> e5d284111b73c308d9cc6b33b7bed19f1a4d34b9
         final PublishedContent editedContent = new PublishedContent
                 .Builder().copy(bean)
                 .status("Edited")
@@ -133,12 +129,8 @@ public class PublishView extends VerticalLayout implements Button.ClickListener,
     }
     private void ViewContentButton(){
         try {
-<<<<<<< HEAD
             final PublishedContent publishedContent =
                     publishedContentService.findById(OrganisationUtil.getCompanyCode(),table.getValue().toString());
-=======
-            final PublishedContent publishedContent = publishedContentService.findById("",table.getValue().toString());
->>>>>>> e5d284111b73c308d9cc6b33b7bed19f1a4d34b9
             final ContentModel bean = getModel(publishedContent);
             form.binder.setItemDataSource(new BeanItem<>(bean));
             UI.getCurrent().addWindow(popUp);

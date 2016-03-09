@@ -6,10 +6,6 @@ import infoshare.app.facade.ContentFacade;
 import infoshare.app.util.organisation.OrganisationUtil;
 import infoshare.client.content.MainLayout;
 import infoshare.domain.content.RawContent;
-<<<<<<< HEAD
-=======
-
->>>>>>> e5d284111b73c308d9cc6b33b7bed19f1a4d34b9
 import infoshare.services.ContentFiles.content.RawContentService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -40,11 +36,8 @@ public class RawTable extends Table {
         addContainerProperty("Date Created",String.class,null);
 
         try {
-<<<<<<< HEAD
             rawContentService.findAll(OrganisationUtil.getCompanyCode()) //TODO
-=======
-            rawContentService.findAll("org")
->>>>>>> e5d284111b73c308d9cc6b33b7bed19f1a4d34b9
+
                     .stream()
                     .filter(cont -> cont!= null)
                     .collect(Collectors.toList())

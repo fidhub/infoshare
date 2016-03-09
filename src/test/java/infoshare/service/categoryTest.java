@@ -33,7 +33,7 @@ public class categoryTest extends TestCase{
     @Test
     public void testUpdate() throws Exception {
         Category category = categoryService.findById("cdda6c6fae79c7cd970b4ec297bc0bf1");
-        Category categoryUpdate = new Category.Builder(getName())
+        Category categoryUpdate = new Category.Builder()
                                     .copy(category).description("Feeding a child human breast milk. According to the" +
                           " American Academy of Pediatrics, human breast milk is preferred for all infants. ").build();
         categoryService.update(categoryUpdate);

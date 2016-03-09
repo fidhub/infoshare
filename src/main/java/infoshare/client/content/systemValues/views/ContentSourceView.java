@@ -14,10 +14,7 @@ import infoshare.client.content.systemValues.forms.ContentSourceForm;
 import infoshare.client.content.systemValues.models.SourceModel;
 import infoshare.client.content.systemValues.tables.ContentSourceTable;
 import infoshare.domain.content.Source;
-<<<<<<< HEAD
 import infoshare.factories.content.SourceFactory;
-=======
->>>>>>> e5d284111b73c308d9cc6b33b7bed19f1a4d34b9
 import infoshare.services.ContentFiles.source.SourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 

@@ -13,10 +13,7 @@ import infoshare.client.content.systemValues.forms.CategoryForm;
 import infoshare.client.content.systemValues.models.CategoryModel;
 import infoshare.client.content.systemValues.tables.CategoryTable;
 import infoshare.domain.content.Category;
-<<<<<<< HEAD
 import infoshare.factories.content.CategoryFactory;
-=======
->>>>>>> e5d284111b73c308d9cc6b33b7bed19f1a4d34b9
 import infoshare.services.ContentFiles.category.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 

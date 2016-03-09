@@ -1,13 +1,14 @@
 package infoshare.client.content.common.util.views;
 
 import com.vaadin.data.Property;
+import com.vaadin.data.fieldgroup.FieldGroup;
+import com.vaadin.data.util.BeanItem;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.VerticalLayout;
 import infoshare.app.facade.UtilFacade;
 import infoshare.app.util.DomainState;
 import infoshare.client.content.MainLayout;
-<<<<<<< HEAD:src/main/java/infoshare/client/content/common/util/views/StatusTab.java
 import infoshare.client.content.common.util.CommonUtilMenu;
 import infoshare.client.content.common.util.forms.StatusForm;
 import infoshare.client.content.common.util.models.StatusModel;
@@ -16,12 +17,6 @@ import infoshare.domain.util.Status;
 import infoshare.factories.util.StatusFactory;
 
 
-;
-=======
-import infoshare.client.content.courseSetup.forms.CoursesForm;
-import infoshare.client.content.courseSetup.tables.CoursesTable;
->>>>>>> e5d284111b73c308d9cc6b33b7bed19f1a4d34b9:src/main/java/infoshare/client/content/courseSetup/views/CourseView.java
-
 /**
  * Created by hashcode on 2015/10/12.
  */
@@ -29,7 +24,6 @@ public class StatusTab extends VerticalLayout implements
         Button.ClickListener, Property.ValueChangeListener {
 
     private final MainLayout main;
-<<<<<<< HEAD:src/main/java/infoshare/client/content/common/util/views/StatusTab.java
     private final StatusForm form;
     private final StatusTable table;
 
@@ -38,19 +32,6 @@ public class StatusTab extends VerticalLayout implements
         form = new StatusForm();
         table = new StatusTable(main);
         setSizeFull();
-=======
-    private final CoursesForm form;
-    private final CoursesTable table;
-   // private CourseService courseService = new Services();
-
-    public CourseView(MainLayout main) {
-        this.main = main;
-        form = new CoursesForm();
-        table = new CoursesTable();
->>>>>>> e5d284111b73c308d9cc6b33b7bed19f1a4d34b9:src/main/java/infoshare/client/content/courseSetup/views/CourseView.java
-        addComponent(form);
-        addComponent(table);
-    //    addListeners();
     }
 
     @Override
@@ -73,7 +54,6 @@ public class StatusTab extends VerticalLayout implements
     public void valueChange(Property.ValueChangeEvent event) {
         final Property property = event.getProperty();
         if (property == table) {
-<<<<<<< HEAD:src/main/java/infoshare/client/content/common/util/views/StatusTab.java
             final Status status = UtilFacade.statusService.findById(table.getValue().toString());
             final StatusModel model = getModel(status);
             form.binder.setItemDataSource(new BeanItem<>(model));
@@ -81,21 +61,9 @@ public class StatusTab extends VerticalLayout implements
         }
     }
 
+
     private void saveForm(FieldGroup binder) {
-=======
-            try {
-             //   final Course course = courseService.findById(table.getValue().toString());
-             //   final CourseModel bean = getModel(course);
-              //  form.binder.setItemDataSource(new BeanItem<>(bean));
-            }catch (Exception e){
-                Notification.show(e.toString(), Notification.Type.WARNING_MESSAGE);
-            }
-          //  setReadFormProperties();
-        }
-    }
-  /*  private void saveForm(FieldGroup binder) {
->>>>>>> e5d284111b73c308d9cc6b33b7bed19f1a4d34b9:src/main/java/infoshare/client/content/courseSetup/views/CourseView.java
-        try {
+      try {
             binder.commit();
             UtilFacade.statusService.save(getNewEntity(binder));
             getHome();
@@ -165,7 +133,7 @@ public class StatusTab extends VerticalLayout implements
 
     private Status getNewEntity(FieldGroup binder) {
         final StatusModel model = ((BeanItem<StatusModel>) binder.getItemDataSource()).getBean();
-        final Status status = StatusFactory.getStatus(model.getName(),model.getValue());
+        final Status status = StatusFactory.getStatus(model.getName(), model.getValue());
         return status;
     }
 
@@ -185,10 +153,7 @@ public class StatusTab extends VerticalLayout implements
         model.setName(currency.getName());
         model.setValue(currency.getName());
         return model;
-<<<<<<< HEAD:src/main/java/infoshare/client/content/common/util/views/StatusTab.java
+
     }
+
 }
-=======
-    }*/
-}
->>>>>>> e5d284111b73c308d9cc6b33b7bed19f1a4d34b9:src/main/java/infoshare/client/content/courseSetup/views/CourseView.java

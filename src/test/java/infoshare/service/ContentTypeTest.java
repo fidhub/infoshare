@@ -27,7 +27,7 @@ public class ContentTypeTest {
         ContentType contentType = contentTypeService.findById("7330628ddb3380d7ad0b24465a78d81f");
 
         //Updating the ContentFiles Type
-        ContentType contentTypeUpdate = new ContentType.Builder(contentType.getName())
+        ContentType contentTypeUpdate = new ContentType.Builder()
                 .copy(contentType).description("edited copy  of the raw content").build();
 
         //Merging the updated content Type to the old one

@@ -1,10 +1,6 @@
 package infoshare.restapi.Organisation;
 
 import infoshare.app.conf.RestUtil;
-<<<<<<< HEAD
-=======
-import infoshare.domain.organisation.Organisation;
->>>>>>> e5d284111b73c308d9cc6b33b7bed19f1a4d34b9
 import infoshare.domain.organisation.OrganisationLogo;
 
 import java.util.Set;

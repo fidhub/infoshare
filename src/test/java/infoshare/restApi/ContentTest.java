@@ -1,10 +1,6 @@
 package infoshare.restApi;
 
 import infoshare.client.content.content.models.ContentModel;
-<<<<<<< HEAD
-=======
-import infoshare.restapi.ContentFiles.content.ContentBaseUrl;
->>>>>>> e5d284111b73c308d9cc6b33b7bed19f1a4d34b9
 import org.junit.Test;
 
 import java.util.Date;
