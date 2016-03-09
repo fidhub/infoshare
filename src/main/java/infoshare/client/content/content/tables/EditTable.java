@@ -4,10 +4,11 @@ import com.vaadin.ui.Table;
 import com.vaadin.ui.themes.ValoTheme;
 import infoshare.app.facade.CategoryFacade;
 import infoshare.app.facade.ContentFacade;
+import infoshare.app.util.organisation.OrganisationUtil;
 import infoshare.client.content.MainLayout;
 import infoshare.domain.content.EditedContent;
-import infoshare.services.Content.EditedContentService;
-import infoshare.services.category.CategoryService;
+import infoshare.services.ContentFiles.category.CategoryService;
+import infoshare.services.ContentFiles.content.EditedContentService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.text.DateFormat;
@@ -37,7 +38,7 @@ public class EditTable extends Table{
                 addContainerProperty("Creator",String.class,null);
                 addContainerProperty("Date Created",String.class,null);
                 try {
-                    editedContentService.findAll()
+                    editedContentService.findAll(OrganisationUtil.getCompanyCode()) //TODO
                             .stream()
                             .filter(content -> content != null)
                             .collect(Collectors.toList())

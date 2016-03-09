@@ -1,11 +1,12 @@
 package infoshare.services.location;
 
-
 import infoshare.domain.location.AddressType;
 import infoshare.services.Services;
+import org.springframework.stereotype.Component;
 
 /**
- * Created by garran on 2015/09/06.
+ * Created by user9 on 2016/03/01.
  */
-public interface AddressTypeService extends Services<AddressType, String> {
+@Component
+public interface AddressTypeService extends Services<AddressType,String> {
 }

@@ -8,6 +8,7 @@ import infoshare.app.facade.LocationFacade;
 import infoshare.app.util.fields.ButtonsHelper;
 import infoshare.app.util.fields.UIComboBoxHelper;
 import infoshare.app.util.fields.UIComponentHelper;
+import infoshare.app.util.organisation.OrganisationUtil;
 import infoshare.client.content.system.locations.model.LocationModel;
 import infoshare.domain.location.LocationType;
 import infoshare.domain.organisation.Location;
@@ -62,7 +63,7 @@ public class LocationForm extends FormLayout {
         //ComboBox Fields
         final ComboBox parentId = UIComboBox.getComboBox("Parent Location  :", "parentId", LocationModel.class, binder, new Consumer<ComboBox>() {
             public void accept(ComboBox comboBox) {
-                Set<Location> locations = LocationFacade.locationService.findAll();
+                Set<Location> locations = LocationFacade.locationService.findAll(OrganisationUtil.getCompanyCode());
                 for (Location location : locations) {
                     comboBox.addItem(location.getId());
                     comboBox.setItemCaption(location.getId(), location.getName());

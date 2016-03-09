@@ -8,7 +8,6 @@ import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 import infoshare.client.content.content.models.ContentModel;
-import com.vaadin.ui.Button.ClickEvent;
 
 import java.io.File;
 /**

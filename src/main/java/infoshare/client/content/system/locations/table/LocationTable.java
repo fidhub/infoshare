@@ -2,6 +2,7 @@ package infoshare.client.content.system.locations.table;
 
 import com.vaadin.ui.Table;
 import infoshare.app.facade.LocationFacade;
+import infoshare.app.util.organisation.OrganisationUtil;
 import infoshare.client.content.MainLayout;
 import infoshare.domain.organisation.Location;
 
@@ -26,7 +27,7 @@ public class LocationTable extends Table {
         addContainerProperty("Parent", String.class, null);
         addContainerProperty("Children", Long.class, null);
         // Add Data Columns
-        Set<Location> locations = LocationFacade.locationService.findAll();
+        Set<Location> locations = LocationFacade.locationService.findAll(OrganisationUtil.getCompanyCode());
         for (Location location : locations) {
             addItem(new Object[]{location.getName(),
                     location.getCode(),
@@ -45,7 +46,7 @@ public class LocationTable extends Table {
 
     private String getParentName(String parentId) {
         if (parentId != null) {
-            return LocationFacade.locationService.findById(parentId).getName();
+            return LocationFacade.locationService.findById(OrganisationUtil.getCompanyCode(),parentId).getName();
         }
         return null;
     }

@@ -1,8 +1,6 @@
 package infoshare.restApi;
 
-import infoshare.app.conf.RestUtil;
 import infoshare.client.content.content.models.ContentModel;
-import infoshare.restapi.Content.ContentBaseUrl;
 import org.junit.Test;
 
 import java.util.Date;
@@ -30,7 +28,7 @@ public class ContentTest {
         model.setContentType("Text");
         model.setStatus("raw");
 
-        RestUtil.save(ContentBaseUrl.Raw.POST, model, ContentModel.class);
+      //  RestUtil.save(ContentBaseUrl.Raw.POST, model, ContentModel.class);
     }
   /*  @Test
     public void testPUT() throws Exception {

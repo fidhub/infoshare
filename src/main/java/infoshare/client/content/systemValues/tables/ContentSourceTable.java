@@ -4,9 +4,10 @@ import com.vaadin.server.Responsive;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.themes.ValoTheme;
 import infoshare.app.facade.SourceFacade;
+import infoshare.app.util.organisation.OrganisationUtil;
 import infoshare.client.content.MainLayout;
 import infoshare.domain.content.Source;
-import infoshare.services.source.SourceService;
+import infoshare.services.ContentFiles.source.SourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -29,7 +30,7 @@ public  class ContentSourceTable extends Table{
         addStyleName(ValoTheme.TABLE_SMALL);
         addContainerProperty("Name",String.class,null);
         addContainerProperty("Description",String.class,null);
-        for(Source source: sourceService.findAll()){
+        for(Source source: sourceService.findAll(OrganisationUtil.getCompanyCode())){
             addItem(new Object[]{
                     source.getName(),
                     source.getDescription()

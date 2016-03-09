@@ -1,11 +1,12 @@
 package infoshare.services.demographics;
 
-
 import infoshare.domain.demographics.Language;
 import infoshare.services.Services;
+import org.springframework.stereotype.Component;
 
 /**
- * Created by hashcode on 2015/08/18.
+ * Created by Songezo on 2016-03-03.
  */
-public interface LanguageService extends Services<Language, String> {
+@Component
+public interface LanguageService extends Services<Language, String>{
 }

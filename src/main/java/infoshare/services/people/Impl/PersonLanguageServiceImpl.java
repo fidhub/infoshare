@@ -1,14 +1,18 @@
 package infoshare.services.people.Impl;
 
+import com.vaadin.spring.annotation.SpringComponent;
 import infoshare.domain.person.PersonLanguage;
 import infoshare.restapi.people.PersonLanguageAPI;
 import infoshare.services.people.PersonLanguageService;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
 /**
  * Created by user9 on 2016/03/02.
  */
+@Service
+@SpringComponent
 public class PersonLanguageServiceImpl implements PersonLanguageService {
     @Override
     public PersonLanguage findById(String personId, String Id) {

@@ -4,10 +4,11 @@ import com.vaadin.ui.Table;
 import com.vaadin.ui.themes.ValoTheme;
 import infoshare.app.facade.CategoryFacade;
 import infoshare.app.facade.ContentFacade;
+import infoshare.app.util.organisation.OrganisationUtil;
 import infoshare.client.content.MainLayout;
 import infoshare.domain.content.PublishedContent;
-import infoshare.services.Content.PublishedContentService;
-import infoshare.services.category.CategoryService;
+import infoshare.services.ContentFiles.category.CategoryService;
+import infoshare.services.ContentFiles.content.PublishedContentService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.text.DateFormat;
@@ -38,7 +39,7 @@ public class PublishTable extends Table{
         addContainerProperty("Date Created",String.class,null);
 
         try {
-            publishedContentService.findAll()
+            publishedContentService.findAll(OrganisationUtil.getCompanyCode()) //TODO
                     .stream()
                     .filter(cont -> cont != null)
                     .collect(Collectors.toList())

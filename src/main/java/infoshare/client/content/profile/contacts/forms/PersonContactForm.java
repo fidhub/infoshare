@@ -61,8 +61,7 @@ public class PersonContactForm extends FormLayout {
         //ComboBox Fields
         final ComboBox status = UIComboBox.getComboBox("Contact Status :", "status", PersonAddressModel.class, binder, new Consumer<ComboBox>() {
             public void accept(ComboBox comboBox) {
-                Set<Status> statuses = UtilFacade.statusService
-                        .findAll()
+                Set<Status> statuses = UtilFacade.statusService.findAll()
                         .stream()
                         .filter(stat -> stat.getName().equalsIgnoreCase("CONTACT"))
                         .collect(Collectors.toSet());

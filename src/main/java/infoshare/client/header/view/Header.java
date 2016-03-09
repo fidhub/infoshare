@@ -9,6 +9,7 @@ import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.themes.ChameleonTheme;
 import com.vaadin.ui.themes.ValoTheme;
 import infoshare.app.facade.ContentFacade;
+import infoshare.app.util.organisation.OrganisationUtil;
 import infoshare.app.util.security.GetUserCredentials;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.content.ContentMenu;
@@ -16,7 +17,7 @@ import infoshare.client.content.content.views.RawView;
 import infoshare.client.header.Form.ProfilePopUp;
 import infoshare.client.header.landing_page.LandingHome;
 import infoshare.domain.content.RawContent;
-import infoshare.services.Content.RawContentService;
+import infoshare.services.ContentFiles.content.RawContentService;
 
 import java.io.File;
 import java.util.Calendar;
@@ -260,7 +261,7 @@ public class Header extends VerticalLayout implements Button.ClickListener {
 
     public  void refreshNotification() {
         int i = 0 ;
-            for (RawContent rawContent :rawContentService.findAll()
+            for (RawContent rawContent :rawContentService.findAll(OrganisationUtil.getCompanyCode())
                     .stream()
                     .filter(cont->cont.getStatus().equalsIgnoreCase("Raw"))
                     .collect(Collectors.toList())

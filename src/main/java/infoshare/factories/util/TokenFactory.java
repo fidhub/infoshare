@@ -3,8 +3,6 @@ package infoshare.factories.util;
 import infoshare.app.util.security.KeyGenerator;
 import infoshare.domain.util.Token;
 
-import java.util.Map;
-
 /**
  * Created by user9 on 2016/03/02.
  */

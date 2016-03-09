@@ -1,14 +1,18 @@
 package infoshare.services.people.Impl;
 
+import com.vaadin.spring.annotation.SpringComponent;
 import infoshare.domain.person.PersonContact;
 import infoshare.restapi.people.PersonContactAPI;
 import infoshare.services.people.PersonContactService;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
 /**
  * Created by user9 on 2016/03/02.
  */
+@Service
+@SpringComponent
 public class PersonContactServiceImpl implements PersonContactService {
     @Override
     public PersonContact save(PersonContact entity) {

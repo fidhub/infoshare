@@ -6,10 +6,6 @@
 package infoshare.app.facade;
 
 
-import infoshare.domain.person.PersonContact;
-import infoshare.domain.person.PersonDemographics;
-import infoshare.domain.person.PersonImages;
-import infoshare.domain.person.PersonLanguage;
 import infoshare.services.people.*;
 import infoshare.services.people.Impl.*;
 

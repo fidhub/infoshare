@@ -6,8 +6,8 @@ import com.vaadin.ui.themes.ValoTheme;
 import infoshare.app.facade.CategoryFacade;
 import infoshare.app.facade.ContentFacade;
 import infoshare.domain.content.PublishedContent;
-import infoshare.services.Content.PublishedContentService;
-import infoshare.services.category.CategoryService;
+import infoshare.services.ContentFiles.category.CategoryService;
+import infoshare.services.ContentFiles.content.PublishedContentService;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -30,7 +30,7 @@ public class PublishedContentFilter {
         DateFormat formatter = new SimpleDateFormat("dd MMMMMMM yyyy");
         ArrayList arrayList = new ArrayList();
         String cat;
-        for (PublishedContent publishedContent : publishedContentService.findAll().stream()
+        for (PublishedContent publishedContent : publishedContentService.findAll("org").stream()
                 .filter(cont -> cont.getState().equalsIgnoreCase("active"))
                 .collect(Collectors.toList())) {
             if(!publishedContent.getCategory().equalsIgnoreCase("uncategorized"))

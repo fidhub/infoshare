@@ -4,7 +4,6 @@ import infoshare.app.util.security.KeyGenerator;
 import infoshare.domain.person.PersonImages;
 import jdk.nashorn.internal.runtime.options.Option;
 
-import javax.security.auth.kerberos.KerberosKey;
 import java.util.Date;
 import java.util.Map;
 
