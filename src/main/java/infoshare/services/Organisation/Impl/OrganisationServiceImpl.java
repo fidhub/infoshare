@@ -20,6 +20,7 @@ public class OrganisationServiceImpl implements OrganisationService {
     }
 
     @Override
+<<<<<<< HEAD
     public Organisation update(Organisation entity) {
         return OrganisationAPI.save(entity);
     }
@@ -40,6 +41,8 @@ public class OrganisationServiceImpl implements OrganisationService {
     }
 
     @Override
+=======
+>>>>>>> e5d284111b73c308d9cc6b33b7bed19f1a4d34b9
     public Organisation findById(String org) {
         return OrganisationAPI.findById(org);
     }

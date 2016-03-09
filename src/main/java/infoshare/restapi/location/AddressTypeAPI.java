@@ -1,8 +1,16 @@
 package infoshare.restapi.location;
 
 import infoshare.app.conf.RestUtil;
+<<<<<<< HEAD
 import infoshare.domain.location.AddressType;
 
+=======
+import infoshare.app.util.DomainState;
+import infoshare.app.util.security.KeyGenerator;
+import infoshare.domain.location.AddressType;
+
+import java.util.Map;
+>>>>>>> e5d284111b73c308d9cc6b33b7bed19f1a4d34b9
 import java.util.Set;
 
 /**

@@ -3,7 +3,13 @@ package infoshare.services.location.Impl;
 import com.vaadin.spring.annotation.SpringComponent;
 import infoshare.domain.location.AddressType;
 import infoshare.restapi.location.AddressTypeAPI;
+<<<<<<< HEAD
 import infoshare.services.location.AddressTypeService;
+=======
+import infoshare.services.Services;
+import infoshare.services.location.AddressTypeService;
+import org.springframework.stereotype.Component;
+>>>>>>> e5d284111b73c308d9cc6b33b7bed19f1a4d34b9
 import org.springframework.stereotype.Service;
 
 import java.util.Set;

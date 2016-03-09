@@ -7,8 +7,13 @@ import infoshare.app.facade.ContentFacade;
 import infoshare.app.util.organisation.OrganisationUtil;
 import infoshare.client.content.MainLayout;
 import infoshare.domain.content.PublishedContent;
+<<<<<<< HEAD
 import infoshare.services.ContentFiles.category.CategoryService;
 import infoshare.services.ContentFiles.content.PublishedContentService;
+=======
+import infoshare.services.ContentFiles.content.PublishedContentService;
+import infoshare.services.ContentFiles.category.CategoryService;
+>>>>>>> e5d284111b73c308d9cc6b33b7bed19f1a4d34b9
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.text.DateFormat;
@@ -39,7 +44,11 @@ public class PublishTable extends Table{
         addContainerProperty("Date Created",String.class,null);
 
         try {
+<<<<<<< HEAD
             publishedContentService.findAll(OrganisationUtil.getCompanyCode()) //TODO
+=======
+            publishedContentService.findAll("org")
+>>>>>>> e5d284111b73c308d9cc6b33b7bed19f1a4d34b9
                     .stream()
                     .filter(cont -> cont != null)
                     .collect(Collectors.toList())

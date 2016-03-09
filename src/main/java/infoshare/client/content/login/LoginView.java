@@ -23,13 +23,12 @@ public class LoginView extends VerticalLayout {
         addComponent(loginForm);
         setComponentAlignment(loginForm, Alignment.MIDDLE_CENTER);
 
-        Notification notification = new Notification(
-                "Welcome to Info Share");
-        notification
-                .setDescription("<span>Application for Health Workers to Share Tips <a href=\"https://kujali.cput.ac.za/infoshare\">Info Share </a>.</span> <span>No username or password is required for now, just click the <b>Sign In</b> button to continue.</span>");
+        Notification notification = new Notification("Welcome to Info Share");
+        notification.setDescription("<span>Application for Health Workers to Share Tips <a href=\"https://kujali.cput.ac.za/infoshare\">Info Share </a>.</span> <span>No username or password is required for now, just click the <b>Sign In</b> button to continue.</span>");
         notification.setHtmlContentAllowed(true);
         notification.setStyleName("tray dark small closable login-help");
         notification.setPosition(Position.BOTTOM_CENTER);
+        notification.setDelayMsec(500);
         notification.show(Page.getCurrent());
     }
 
@@ -52,7 +51,7 @@ public class LoginView extends VerticalLayout {
         fields.addStyleName("fields");
 
         final TextField username = new TextField("Username");
-        username.setIcon(FontAwesome.USER);
+        username.setIcon(FontAwesome.GOOGLE);
         username.addStyleName(ValoTheme.TEXTFIELD_INLINE_ICON);
 
         final PasswordField password = new PasswordField("Password");

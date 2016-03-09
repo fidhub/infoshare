@@ -6,8 +6,13 @@ import com.vaadin.ui.themes.ValoTheme;
 import infoshare.app.facade.CategoryFacade;
 import infoshare.app.facade.ContentFacade;
 import infoshare.domain.content.EditedContent;
+<<<<<<< HEAD
 import infoshare.services.ContentFiles.category.CategoryService;
 import infoshare.services.ContentFiles.content.EditedContentService;
+=======
+import infoshare.services.ContentFiles.content.EditedContentService;
+import infoshare.services.ContentFiles.category.CategoryService;
+>>>>>>> e5d284111b73c308d9cc6b33b7bed19f1a4d34b9
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -59,7 +64,7 @@ public class EditedContentFilter {
         return arrayList;
     }
     private TextField getField(){
-        field.setInputPrompt("Filter Edited Content ...");
+        field.setInputPrompt("Filter Edited ContentFiles ...");
         field.setWidth("260px");
         field.setIcon(FontAwesome.FILTER);
         field.addStyleName(ValoTheme.TEXTFIELD_INLINE_ICON);

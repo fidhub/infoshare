@@ -175,7 +175,11 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
             form.popUpContentTypeCmb.addItem(contentType.getId());
             form.popUpContentTypeCmb.setItemCaption(contentType.getId(), contentType.getName());
         }
+<<<<<<< HEAD
         for (Source source : sourceService.findAll(OrganisationUtil.getCompanyCode())) {
+=======
+        for (Source source : sourceService.findAll("org")) {
+>>>>>>> e5d284111b73c308d9cc6b33b7bed19f1a4d34b9
             form.popUpSourceCmb.addItem(source.getId());
             form.popUpSourceCmb.setItemCaption(source.getId(), source.getName());
         }
@@ -198,7 +202,11 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
     private void getTrash(){
         try{
             table.removeAllItems();
+<<<<<<< HEAD
             editedContentService.findAll(OrganisationUtil.getCompanyCode()).stream()
+=======
+            editedContentService.findAll("org").stream()
+>>>>>>> e5d284111b73c308d9cc6b33b7bed19f1a4d34b9
                     .filter(cont -> cont.getState().equalsIgnoreCase("Deleted"))
                     .collect(Collectors.toList())
                     .stream().filter(cont -> cont.getStatus().equalsIgnoreCase("Edited"))
@@ -256,7 +264,11 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
         return editedContent;
     }
     private EditedContent getTrashEntity(String val) {
+<<<<<<< HEAD
         EditedContent content = editedContentService.findById(OrganisationUtil.getCompanyCode(),val);
+=======
+       EditedContent content = editedContentService.findById("",val);
+>>>>>>> e5d284111b73c308d9cc6b33b7bed19f1a4d34b9
         final EditedContent editedContent = new EditedContent
                 .Builder().copy(content)
                 .state("Deleted")
@@ -265,7 +277,11 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
     }
     private ContentModel getModel(String val) {
         final ContentModel model = new ContentModel();
+<<<<<<< HEAD
         final EditedContent editedContent = editedContentService.findById(OrganisationUtil.getCompanyCode(),val.toString());
+=======
+        final EditedContent editedContent = editedContentService.findById("",val.toString());
+>>>>>>> e5d284111b73c308d9cc6b33b7bed19f1a4d34b9
         model.setTitle(editedContent.getTitle());
         model.setCategory(editedContent.getCategory());
         model.setCreator(editedContent.getCreator());

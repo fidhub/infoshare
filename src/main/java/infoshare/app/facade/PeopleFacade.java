@@ -6,8 +6,12 @@
 package infoshare.app.facade;
 
 
+<<<<<<< HEAD
 import infoshare.services.people.*;
+=======
+>>>>>>> e5d284111b73c308d9cc6b33b7bed19f1a4d34b9
 import infoshare.services.people.Impl.*;
+import infoshare.services.people.*;
 
 public class PeopleFacade {
 
@@ -18,10 +22,5 @@ public class PeopleFacade {
     public final static PersonDemographicsService personDemographicsService = new PersonDemographicsServiceImpl();
     public final static PersonImagesService personImagesService = new PersonImagesServiceImpl();
     public final static PersonLanguageService personLanguageService = new PersonLanguageServiceImpl();
-
-
-
-
-
 
 }

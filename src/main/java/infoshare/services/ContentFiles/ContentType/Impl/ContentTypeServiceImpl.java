@@ -3,6 +3,10 @@ package infoshare.services.ContentFiles.ContentType.Impl;
 import infoshare.domain.content.ContentType;
 import infoshare.restapi.ContentFiles.ContentType.ContentTypeAPI;
 import infoshare.services.ContentFiles.ContentType.ContentTypeService;
+<<<<<<< HEAD:src/main/java/infoshare/services/ContentFiles/ContentType/Impl/ContentTypeServiceImpl.java
+=======
+import org.springframework.stereotype.Service;
+>>>>>>> e5d284111b73c308d9cc6b33b7bed19f1a4d34b9:src/main/java/infoshare/services/ContentFiles/ContentType/Impl/ContentTypeServiceImpl.java
 
 import java.util.Set;
 

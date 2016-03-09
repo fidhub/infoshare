@@ -28,9 +28,12 @@ public class LocationServiceImpl implements LocationService {
     public Set<Location> findAll(String org) {
         return LocationAPI.findAll(org);
     }
+<<<<<<< HEAD
 
     @Override
     public Location numberofChildred(String id) {
         return null;
     }
+=======
+>>>>>>> e5d284111b73c308d9cc6b33b7bed19f1a4d34b9
 }
