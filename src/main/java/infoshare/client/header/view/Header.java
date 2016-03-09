@@ -367,7 +367,6 @@ public class Header extends VerticalLayout implements Button.ClickListener {
         user.setIcon(FontAwesome.USER_MD);
         user.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
         user.addStyleName(ValoTheme.BUTTON_SMALL);
-
         notify.addStyleName("notifications");
         notify.addStyleName("unread");
         notify.setIcon( new FileResource(
