@@ -29,7 +29,7 @@ public class SideBar extends Accordion implements ItemClickEvent.ItemClickListen
         setSizeFull();
         this.main = main;
         this.addStyleName("accordion");
-        setHeight("320px");
+        setHeight("350px");
 
 
         //TODO CommonTree

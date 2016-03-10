@@ -8,6 +8,7 @@ import com.vaadin.ui.Notification;
 import com.vaadin.ui.VerticalLayout;
 import infoshare.app.facade.PeopleFacade;
 import infoshare.app.facade.RoleFacade;
+import infoshare.app.util.organisation.OrganisationUtil;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.setup.SetupMenu;
 import infoshare.client.content.setup.forms.PersonForm;
@@ -64,7 +65,7 @@ public class PersonView extends VerticalLayout implements
         final Property property = event.getProperty();
         if (property == table) {
             try {
-                final Person person = personService.getPersonById("campany",table.getValue().toString());
+                final Person person = personService.getPersonById(OrganisationUtil.getCompanyCode(),table.getValue().toString());
                 final PersonModel bean = getModel(person);
                 personForm.binder.setItemDataSource(new BeanItem<>(bean));
                 setReadFormProperties();

@@ -4,6 +4,7 @@ import com.vaadin.data.fieldgroup.FieldGroup;
 import com.vaadin.data.validator.BeanValidator;
 import com.vaadin.server.Sizeable;
 import com.vaadin.ui.ComboBox;
+import com.vaadin.ui.FormLayout;
 
 import java.io.Serializable;
 import java.util.function.Consumer;
@@ -11,7 +12,7 @@ import java.util.function.Consumer;
 /**
  * Created by hashcode on 2015/09/07.
  */
-public class UIComboBoxHelper<T> implements Serializable {
+public class UIComboBoxHelper<T> extends FormLayout implements Serializable {
 
     public ComboBox getComboBox(String fieldText, String fieldName, Class<T> fieldClass, FieldGroup binder, final Consumer<ComboBox> getData) {
         ComboBox comboBox = new ComboBox(fieldText);

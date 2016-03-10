@@ -1,13 +1,14 @@
 package infoshare.app.util.fields;
 
 import com.vaadin.ui.Button;
+import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 
 /**
  * Created by hashcode on 2015/09/08.
  */
-public class ButtonsHelper {
+public class ButtonsHelper extends FormLayout {
     // Style The Buttons
     public static HorizontalLayout getButtons(
             Button save,
