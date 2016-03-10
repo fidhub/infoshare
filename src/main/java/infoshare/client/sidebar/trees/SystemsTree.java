@@ -11,10 +11,10 @@ import infoshare.client.content.MainLayout;
 public class SystemsTree extends Tree implements ItemClickEvent.ItemClickListener {
     private final MainLayout main;
     private static final String LANDING_TAB = "LANDING";
-    public static final Object SETUP_LOCATIONS = "Setup LOCATIONS";
-    public static final Object SETUP_DEMOGRAPHICS = "Setup DEMOGRAPHICS";
-    public static final Object SETUP_UTILS = "Setup UTILITIES";
-    public static final Object SETUP_OFFICE = "Setup OFFICE";
+    public static final Object SETUP_LOCATIONS = "Setup Locations";
+    public static final Object SETUP_DEMOGRAPHICS = "Setup Demographics";
+    public static final Object SETUP_UTILS = "Setup Utilities";
+    public static final Object SETUP_OFFICE = "Setup Office";
 
 
 

@@ -2,7 +2,10 @@ package infoshare.client.header.view;
 
 import com.vaadin.event.LayoutEvents;
 import com.vaadin.event.ShortcutAction;
-import com.vaadin.server.*;
+import com.vaadin.server.FileResource;
+import com.vaadin.server.FontAwesome;
+import com.vaadin.server.Page;
+import com.vaadin.server.Responsive;
 import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.*;
 import com.vaadin.ui.Button.ClickEvent;
@@ -14,6 +17,7 @@ import infoshare.app.util.security.GetUserCredentials;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.content.ContentMenu;
 import infoshare.client.content.content.views.RawView;
+import infoshare.client.content.home.HomeMenu;
 import infoshare.client.header.Form.ProfilePopUp;
 import infoshare.client.header.landing_page.LandingHome;
 import infoshare.domain.content.RawContent;
@@ -204,10 +208,7 @@ public class Header extends VerticalLayout implements Button.ClickListener {
         signOut.setIcon(FontAwesome.SIGN_OUT);
         signOut.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
         signOut.setSizeFull();
-        signOut.addClickListener(clickEvent -> {
-            VaadinSession.getCurrent().close();
-            Page.getCurrent().reload();
-        });
+        signOut.addClickListener(clickEvent -> page.setLocation("/logout"));
 
         layout.addComponent(profile);
         layout.addComponent(signOut);
@@ -223,13 +224,11 @@ public class Header extends VerticalLayout implements Button.ClickListener {
         userProfile.setCloseShortcut(ShortcutAction.KeyCode.ESCAPE, null);
 
     }
-
     private void addListener(){
         home.addClickListener(this);
         notify.addClickListener(this);
         user.addClickListener(this);
     }
-
     private String differInTime(Date dateCreated){
         Date date1 = new Date();
         Calendar startCalendar = new GregorianCalendar();
@@ -258,7 +257,6 @@ public class Header extends VerticalLayout implements Button.ClickListener {
           else
             return diffSeconds + " seconds ago";
     }
-
     public  void refreshNotification() {
         int i = 0 ;
             for (RawContent rawContent :rawContentService.findAll(OrganisationUtil.getCompanyCode())
@@ -293,7 +291,6 @@ public class Header extends VerticalLayout implements Button.ClickListener {
             notify.setDescription("No new tips");
         }
     }
-
     private HorizontalLayout getLayout(){
         final HorizontalLayout layout = new HorizontalLayout();
         layout.addStyleName("dashboard-view");
@@ -316,7 +313,6 @@ public class Header extends VerticalLayout implements Button.ClickListener {
 
         return layout;
     }
-
     private Component getLogo(){
         final HorizontalLayout logo = new HorizontalLayout();
         FileResource resource = new FileResource(
@@ -329,21 +325,6 @@ public class Header extends VerticalLayout implements Button.ClickListener {
         Responsive.makeResponsive(logo);
         return logo;
     }
-
-    private Button logout() {
-        Button signout = new Button("Sign Out");
-        signout.addStyleName(ValoTheme.BUTTON_LINK);
-        signout.setIcon(FontAwesome.SIGN_OUT);
-        signout.addClickListener(new Button.ClickListener() {
-            @Override
-            public void buttonClick(Button.ClickEvent event) {
-                page.setLocation("/logout");
-            }
-        });
-
-        return signout;
-    }
-
     private TextField getSearch(){
 
         final TextField searchBox = new TextField();
@@ -362,6 +343,7 @@ public class Header extends VerticalLayout implements Button.ClickListener {
         home.setIcon(FontAwesome.HOME);
         home.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
         home.addStyleName(ValoTheme.BUTTON_SMALL);
+        home.addClickListener(event ->main.content.setSecondComponent( new HomeMenu(main,"LANDING")));
 
         user.setCaption(GetUserCredentials.username());
         user.setDescription(GetUserCredentials.username());
@@ -377,7 +359,6 @@ public class Header extends VerticalLayout implements Button.ClickListener {
 
         layout.addComponent(home);
         layout.addComponent(notify);
-        layout.addComponent(logout());
 
         return layout;
     }

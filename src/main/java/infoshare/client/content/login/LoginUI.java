@@ -72,7 +72,9 @@ public class LoginUI extends UI {
         notification.setHtmlContentAllowed(true);
         notification.setStyleName("tray dark small closable login-help");
         notification.setPosition(Position.BOTTOM_CENTER);
+
         notification.show(Page.getCurrent());
+        notification.setDelayMsec(10000);
     }
 
 
@@ -138,6 +140,9 @@ public class LoginUI extends UI {
 
     private void login() {
         try {
+            System.out.println(userName.getValue()+"\n");
+            System.out.println(passwordField.getValue()+"\n");
+            System.out.println(rememberMe.getValue()+"\n");
             vaadinSecurity.login(userName.getValue(), passwordField.getValue(), rememberMe.getValue());
             getPage().setLocation("/");
         } catch (AuthenticationException ex) {

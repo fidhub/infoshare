@@ -14,8 +14,8 @@ import infoshare.client.content.home.HomeMenu;
  */
 public class HomeTree extends Tree implements ItemClickEvent.ItemClickListener {
     private final MainLayout main;
-    private static final String MANAGE_COMPANIES = "Manage COMPANIES";
-    private static final String HOME_PAGE = "Home PAGE";
+    private static final String MANAGE_COMPANIES = "Manage Companies";
+    private static final String HOME_PAGE = "Home Page";
     private static final String LANDING_TAB = "LANDING";
 
 

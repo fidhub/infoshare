@@ -14,9 +14,9 @@ import infoshare.client.content.common.util.CommonUtilMenu;
 public class CommonTree extends Tree implements ItemClickEvent.ItemClickListener {
     private final MainLayout main;
     private static final String LANDING_TAB = "LANDING";
-    public static final Object SETUP_LOCATIONS = "Setup LOCATIONS";
-    public static final Object SETUP_DEMOGRAPHICS = "Setup DEMOGRAPHICS";
-    public static final Object SETUP_UTILS = "Setup UTILITIES";
+    public static final Object SETUP_LOCATIONS = "Setup Locations";
+    public static final Object SETUP_DEMOGRAPHICS = "Setup Demographics";
+    public static final Object SETUP_UTILS = "Setup Utilities";
 
 
     public CommonTree(MainLayout main) {

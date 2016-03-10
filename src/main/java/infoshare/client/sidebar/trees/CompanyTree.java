@@ -11,7 +11,7 @@ import infoshare.client.content.organisation.places.OrganisationPlacesMenu;
 public class CompanyTree extends Tree implements ItemClickEvent.ItemClickListener {
     private final MainLayout main;
     private static final String LANDING_TAB = "LANDING";
-    public static final Object MANAGE_PLACES = "Manage PLACES";
+    public static final Object MANAGE_PLACES = "Manage Places";
 
 
 
