@@ -13,16 +13,14 @@ import java.util.Set;
  */
 public class MailAPI {
     public static Mail save(Mail mail) {
-        RestUtil.save(CommonBaseURI.Mail.POST, mail, Mail.class);
-        return mail;
+        return RestUtil.save(CommonBaseURI.Mail.POST, mail, Mail.class);
     }
 
-    public static Mail findById(String id) {
-        return RestUtil.getById(CommonBaseURI.Mail.GET_ID, id, Mail.class);
+    public static Mail findById(String org ,String id) {
+        return RestUtil.getById(CommonBaseURI.Mail.GET_ID,org+"/"+ id, Mail.class);
 
     }
-
-    public static Set<Mail> findAll() {
-        return RestUtil.getAll(CommonBaseURI.Mail.GETALL, Mail.class);
+    public static Set<Mail> findAll(String org) {
+        return RestUtil.getAll(CommonBaseURI.Mail.GETALL+org, Mail.class);
     }
 }

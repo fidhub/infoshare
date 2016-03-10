@@ -26,12 +26,12 @@ public class AddressTypeServiceImpl implements AddressTypeService {
 
     @Override
     public AddressType update(AddressType entity) {
-        return null;
+        return AddressTypeAPI.save(entity);
     }
 
     @Override
     public void delete(AddressType entity) {
-
+        AddressTypeAPI.save(entity);
     }
 
     @Override

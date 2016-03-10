@@ -185,7 +185,6 @@ public class Header extends VerticalLayout implements Button.ClickListener {
         notifications.setCloseShortcut(ShortcutAction.KeyCode.ESCAPE, null);
 
     }
-
     private void buildUser(ClickEvent event) {
         userProfile = new Window();
         final VerticalLayout layout = new VerticalLayout();
@@ -326,7 +325,6 @@ public class Header extends VerticalLayout implements Button.ClickListener {
         return logo;
     }
     private TextField getSearch(){
-
         final TextField searchBox = new TextField();
         searchBox.setIcon(FontAwesome.SEARCH);
         searchBox.setInputPrompt("Search");
@@ -334,7 +332,6 @@ public class Header extends VerticalLayout implements Button.ClickListener {
         searchBox.addStyleName(ValoTheme.TEXTAREA_SMALL);
         return searchBox;
     }
-
     private HorizontalLayout getBar(){
         HorizontalLayout layout = new HorizontalLayout();
         layout.setSpacing(false);

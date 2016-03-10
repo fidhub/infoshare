@@ -3,9 +3,7 @@ package infoshare.services.location.Impl;
 import com.vaadin.spring.annotation.SpringComponent;
 import infoshare.domain.location.ContactType;
 import infoshare.restapi.location.ContactTypeAPI;
-import infoshare.services.Services;
 import infoshare.services.location.ContactTypeService;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
@@ -29,12 +27,12 @@ public class ContactTypeServiceImpl implements ContactTypeService {
 
     @Override
     public ContactType update(ContactType entity) {
-        return null;
+        return ContactTypeAPI.save(entity);
     }
 
     @Override
     public void delete(ContactType entity) {
-
+        ContactTypeAPI.save(entity);
     }
 
     @Override

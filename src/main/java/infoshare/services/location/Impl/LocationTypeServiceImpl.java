@@ -3,9 +3,7 @@ package infoshare.services.location.Impl;
 import com.vaadin.spring.annotation.SpringComponent;
 import infoshare.domain.location.LocationType;
 import infoshare.restapi.location.LocationTypeAPI;
-import infoshare.services.Services;
 import infoshare.services.location.LocationTypeService;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
@@ -29,12 +27,12 @@ public class LocationTypeServiceImpl implements LocationTypeService {
 
     @Override
     public LocationType update(LocationType entity) {
-        return null;
+        return LocationTypeAPI.save(entity);
     }
 
     @Override
     public void delete(LocationType entity) {
-
+        LocationTypeAPI.save(entity);
     }
 
     @Override

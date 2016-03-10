@@ -140,7 +140,11 @@ public class MailTab extends VerticalLayout implements
 
     private Mail getNewEntity(FieldGroup binder) {
         final MailModel model = ((BeanItem<MailModel>) binder.getItemDataSource()).getBean();
-        final Mail mail = MailFactory.createMailConf(model.getKey(), model.getValue(), model.getHost(), model.getPort());
+        Mail mail = MailFactory.createMailConf(model.getKey(), model.getValue(), model.getHost(), model.getPort());
+        System.out.println(mail.getId()+"\n");
+        System.out.println(mail.getDate()+"\n");
+        System.out.println(mail.getOrgId()+"\n");
+        System.out.println(mail.getState()+"\n");
         return mail;
     }
 
@@ -154,18 +158,21 @@ public class MailTab extends VerticalLayout implements
                 .value(model.getValue())
                 .port(model.getPort())
                 .host(model.getHost())
+                .orgId(model.getOrgId())
                 .build();
         return updateMail;
     }
 
     private MailModel getModel(Mail mail) {
         final MailModel model = new MailModel();
+        System.out.println(mail.getDate());
         model.setDate(mail.getDate());
         model.setHost(mail.getHost());
         model.setKey(mail.getKey());
         model.setPort(mail.getPort());
         model.setState(mail.getState());
         model.setValue(mail.getValue());
+        model.setOrgId(mail.getOrgId());
         return model;
     }
 }

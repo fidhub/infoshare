@@ -6,6 +6,7 @@ import infoshare.app.facade.PeopleFacade;
 import infoshare.app.facade.UtilFacade;
 import infoshare.app.util.email.ComposeEmail;
 import infoshare.app.util.email.EmailUtil;
+import infoshare.app.util.organisation.OrganisationUtil;
 import infoshare.domain.util.Mail;
 import infoshare.domain.person.Person;
 import infoshare.domain.demographics.Role;
@@ -99,7 +100,7 @@ public class SecurityService implements UserDetailsService {
     }
 
     public static void sendEmail(String password, Person companyAdmin) {
-        Mail props = UtilFacade.mailService.findAll().iterator().next();
+        Mail props = UtilFacade.mailService.findAll(OrganisationUtil.getCompanyCode()).iterator().next();
         ComposeEmail email = new ComposeEmail
                 .Builder()
                 .addressesTo(new HashSet<>(Arrays.asList(companyAdmin.getEmailAddress())))

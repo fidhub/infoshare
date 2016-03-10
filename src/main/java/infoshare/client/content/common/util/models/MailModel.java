@@ -7,13 +7,22 @@ import java.util.Date;
  * Created by hashcode on 2015/11/29.
  */
 public class MailModel implements Serializable {
+
     private String key;
     private String value;
     private String host;
     private String port;
     private String state;
     private Date date;
+    private String orgId;
 
+    public String getOrgId() {
+        return orgId;
+    }
+
+    public void setOrgId(String orgId) {
+        this.orgId = orgId;
+    }
 
     public String getKey() {
         return key;

@@ -12,7 +12,7 @@ public class ContentBaseUrl {
         public static final String POST    =RestUtil.URL+"/api/cont/raw/create";  //@controllers.RawContentController.create
         public static final String GET     =RestUtil.URL+"/api/cont/raw/";  //@controllers.RawContentController.getContent(id)
         public static final String PUT     =RestUtil.URL+"/api/cont/raw/update";  //@controllers.RawContentController.update
-        public static final String GET_ALL = RestUtil.URL+"/api/cont/raw/get/conts";  //@controllers.RawContentController.getAll
+        public static final String GET_ALL = RestUtil.URL+"/api/cont/raw/get/conts/";  //@controllers.RawContentController.getAll
     }
 
     public static class Edited {

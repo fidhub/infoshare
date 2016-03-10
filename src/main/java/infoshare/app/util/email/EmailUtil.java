@@ -2,6 +2,7 @@ package infoshare.app.util.email;
 
 
 import infoshare.app.facade.UtilFacade;
+import infoshare.app.util.organisation.OrganisationUtil;
 import infoshare.domain.util.Mail;
 
 import javax.activation.DataHandler;
@@ -23,7 +24,7 @@ import java.util.logging.Logger;
 public class EmailUtil {
 
     private static Properties getProperties() {
-        Set<Mail> mailprops = UtilFacade.mailService.findAll();
+        Set<Mail> mailprops = UtilFacade.mailService.findAll(OrganisationUtil.getCompanyCode());
         Mail properties = mailprops.iterator().next();
         Properties props = new Properties();
         props.put("mail.smtp.host", properties.getHost());
