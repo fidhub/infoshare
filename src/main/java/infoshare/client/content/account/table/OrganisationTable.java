@@ -87,6 +87,7 @@ public class OrganisationTable extends Table {
         setImmediate(true);
     }
 
+
     private void getHome() {
         main.content.setSecondComponent(new AccountMenu(main, "LANDING"));
     }

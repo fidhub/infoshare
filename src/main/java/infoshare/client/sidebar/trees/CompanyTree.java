@@ -3,7 +3,7 @@ package infoshare.client.sidebar.trees;
 import com.vaadin.event.ItemClickEvent;
 import com.vaadin.ui.Tree;
 import infoshare.client.content.MainLayout;
-import infoshare.client.content.organisation.places.OrganisationPlacesMenu;
+import infoshare.client.content.organisation.OrganisationMenu;
 
 /**
  * Created by hashcode on 2015/12/28.
@@ -11,17 +11,14 @@ import infoshare.client.content.organisation.places.OrganisationPlacesMenu;
 public class CompanyTree extends Tree implements ItemClickEvent.ItemClickListener {
     private final MainLayout main;
     private static final String LANDING_TAB = "LANDING";
-    public static final Object MANAGE_PLACES = "Manage Places";
+    public static final Object MANAGE_ORGANIZATION = "Manage Organisation";
 
 
 
     public CompanyTree(MainLayout main) {
         this.main = main;
         //add Items to Menu
-        addItem(MANAGE_PLACES);
-
-
-
+        addItem(MANAGE_ORGANIZATION);
         //Add Listeners
         addItemClickListener((ItemClickEvent.ItemClickListener) this);
 
@@ -32,15 +29,15 @@ public class CompanyTree extends Tree implements ItemClickEvent.ItemClickListene
     public void itemClick(ItemClickEvent event) {
         Object itemId = event.getItemId();
         if (itemId != null) {
-            if (MANAGE_PLACES.equals(itemId)) {
-                placesView();
+            if (MANAGE_ORGANIZATION.equals(itemId)) {
+                organisationView();
             }
         }
     }
 
 
-    private void placesView() {
-        main.content.setSecondComponent(new OrganisationPlacesMenu(main, LANDING_TAB));
+    private void organisationView() {
+        main.content.setSecondComponent(new OrganisationMenu(main, LANDING_TAB));
 
     }
 

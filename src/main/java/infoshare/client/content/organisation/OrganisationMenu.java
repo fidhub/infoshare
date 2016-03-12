@@ -3,8 +3,8 @@ package infoshare.client.content.organisation;
 import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.VerticalLayout;
 import infoshare.client.content.MainLayout;
-import infoshare.client.content.organisation.places.views.AddContactsTab;
-import infoshare.client.content.organisation.places.views.OrganisationProfileTab;
+import infoshare.client.content.organisation.view.OrganisationActiveView;
+import infoshare.client.content.organisation.view.OrganisationDisabledView;
 
 
 /**
@@ -18,30 +18,28 @@ public class OrganisationMenu extends VerticalLayout {
         this.main = main;
         setSizeFull();
 
-        VerticalLayout companyProfileTab = new VerticalLayout();
-        companyProfileTab.setMargin(true);
-        companyProfileTab.addComponent(new OrganisationProfileTab(main));
+        VerticalLayout activeCompany = new VerticalLayout();
+        activeCompany.setMargin(true);
+        activeCompany.addComponent(new OrganisationActiveView(main));
 
-
-
-        VerticalLayout addContactsTab = new VerticalLayout();
-        addContactsTab.setMargin(true);
-        addContactsTab.addComponent(new AddContactsTab(main));
+        VerticalLayout disabledCompany = new VerticalLayout();
+        disabledCompany.setMargin(true);
+        disabledCompany.addComponent(new OrganisationDisabledView(main));
 
 
         tab = new TabSheet();
         tab.setHeight("100%");
         tab.setWidth("100%");
 
-        tab.addTab(companyProfileTab, "Organisation PROFILE", null);
-
-        tab.addTab(addContactsTab, "Add CONTACTS", null);
+        tab.addTab(activeCompany, "Active Organisation ", null);
+        tab.addTab(disabledCompany, "Retired Organisation ", null);
+        tab.addTab(null, "Add Organisation Admin ", null);
 
 
         if (selectedTab.equals("LANDING")) {
-            tab.setSelectedTab(companyProfileTab);
-        } else if (selectedTab.equals("CONTACTS")) {
-            tab.setSelectedTab(addContactsTab);
+            tab.setSelectedTab(activeCompany);
+        } else if (selectedTab.equals("Retired")) {
+            tab.setSelectedTab(disabledCompany);
         }
 
         addComponent(tab);

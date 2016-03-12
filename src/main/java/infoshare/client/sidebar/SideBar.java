@@ -31,17 +31,17 @@ public class SideBar extends Accordion implements ItemClickEvent.ItemClickListen
         this.addStyleName("accordion");
         setHeight("350px");
 
+        //TODO CompanyTree
+        VerticalLayout companyMenu = new VerticalLayout();
+        CompanyTree companyTree = new CompanyTree(main);
+        companyMenu.addComponent(companyTree);
+        addTab(companyMenu,MANAGE_ORGANISATION,null);
 
         //TODO CommonTree
         VerticalLayout commonMenu = new VerticalLayout();
         CommonTree commonTree = new CommonTree(main);
         commonMenu.addComponent(commonTree);
         addTab(commonMenu, COMMON_SETTINGS, null);
-        //TODO CompanyTree
-        VerticalLayout companyMenu = new VerticalLayout();
-        CompanyTree companyTree = new CompanyTree(main);
-        companyMenu.addComponent(companyTree);
-        addTab(companyMenu,MANAGE_ORGANISATION,null);
 
         //TODO ContentTree
         VerticalLayout rawMenu = new VerticalLayout();
