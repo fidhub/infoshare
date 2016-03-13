@@ -81,7 +81,6 @@ public class OrganisationTable extends Table {
 
         });
 
-
         setNullSelectionAllowed(false);
         setSelectable(true);
         setImmediate(true);

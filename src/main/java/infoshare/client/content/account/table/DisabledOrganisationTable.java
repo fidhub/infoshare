@@ -30,13 +30,10 @@ public class DisabledOrganisationTable extends Table {
         addContainerProperty("Enable", Button.class, null);
 
         companies.parallelStream().forEach(item -> {
-
-
             Button details = new Button("Details");
             details.setStyleName(ValoTheme.BUTTON_LINK);
             details.setData(item.getId());
             details.addClickListener(event -> {
-
             });
 
             Button enable = new Button("Enable");
@@ -64,7 +61,6 @@ public class DisabledOrganisationTable extends Table {
 
         });
 
-
         setNullSelectionAllowed(false);
         setSelectable(true);
         setImmediate(true);
@@ -72,6 +68,6 @@ public class DisabledOrganisationTable extends Table {
     }
 
     private void getHome() {
-        main.content.setSecondComponent(new AccountMenu(main, "LANDING"));
+        main.content.setSecondComponent(new AccountMenu(main, "DISABLED"));
     }
 }

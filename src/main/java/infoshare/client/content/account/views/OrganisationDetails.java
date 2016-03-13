@@ -301,7 +301,8 @@ public class OrganisationDetails extends VerticalLayout implements
         details.put("address", bean.getAddress());
         details.put("contactphone", bean.getContactphone());
         details.put("email", bean.getEmail());
-        final Organisation company = OrganisationFactory.getOrganisation(bean.getName(), bean.getCode(), details);
+        final Organisation company =
+                OrganisationFactory.getOrganisation(bean.getName(), bean.getCode(), details);
         return company;
 
     }

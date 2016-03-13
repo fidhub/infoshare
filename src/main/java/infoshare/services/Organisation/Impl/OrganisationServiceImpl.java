@@ -1,12 +1,14 @@
 package infoshare.services.Organisation.Impl;
 
 import com.vaadin.spring.annotation.SpringComponent;
+import infoshare.app.util.DomainState;
 import infoshare.domain.organisation.Organisation;
 import infoshare.restapi.Organisation.OrganisationAPI;
 import infoshare.services.Organisation.OrganisationService;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Created by user9 on 2016/03/03.
@@ -26,12 +28,14 @@ public class OrganisationServiceImpl implements OrganisationService {
 
     @Override
     public Set<Organisation> getRetiredOrganisations() {
-        return null;
+        return OrganisationAPI.findAll().stream().filter(cont->cont.getState().equalsIgnoreCase(DomainState.RETIRED.name()))
+                .collect(Collectors.toSet());
     }
 
     @Override
     public Set<Organisation> getActiveOrganisations() {
-        return null;
+        return OrganisationAPI.findAll().stream().filter(cont->cont.getState().equalsIgnoreCase(DomainState.ACTIVE.name()))
+                .collect(Collectors.toSet());
     }
 
     @Override

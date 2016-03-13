@@ -13,4 +13,5 @@ public class ContentTypeBaseUrl {
       public static final String PUT     =RestUtil.URL+"/api/ctype/update";  //@controllers.ContntTypeController.update
       public static final String GET_ALL =RestUtil.URL+"/api/ctype/get/ctypes";  //@controllers.ContntTypeController.getAll
     }
+
 }

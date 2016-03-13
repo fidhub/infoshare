@@ -41,15 +41,6 @@ public class OrganisationAdminForm extends FormLayout implements Button.ClickLis
     public Button update = new Button("Update");
     public Button delete = new Button("Delete");
 
-//    private String firstName;
-//    private String middleName;
-//    @NotNull
-//    private String emailAddress;
-//    @NotNull
-//    private String lastName;
-//    @NotNull
-//    private String name;
-
     public OrganisationAdminForm(MainLayout main, Organisation company) {
         this.main = main;
         this.company = company;
@@ -158,9 +149,14 @@ public class OrganisationAdminForm extends FormLayout implements Button.ClickLis
 
     private Person createAccount(Map<String, String> stringVals, Map<String, Boolean> boolVals) {
         Person companyAdmin = PersonFactory.getPerson(stringVals, boolVals);
-        PeopleFacade.personService.save(companyAdmin);
+        try{
+            PeopleFacade.personService.save(companyAdmin);
+
         PersonRole role = PersonRoleFactory.getPersonRole(companyAdmin.getId(), RolesValues.ROLE_COMPANY_ADMIN.name());
         PeopleFacade.personRoleService.save(role);
+        }catch (Exception e){
+            e.fillInStackTrace();
+        }
         return companyAdmin;
     }
 

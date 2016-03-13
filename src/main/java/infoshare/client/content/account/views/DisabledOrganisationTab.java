@@ -28,7 +28,7 @@ public class DisabledOrganisationTab extends VerticalLayout implements
     private final HorizontalLayout headerBar = new HorizontalLayout();
     public final VerticalLayout contentPanel = new VerticalLayout();
 
-    private final TextField companySearchBox = new TextField(" Company Search");
+    private final TextField companySearchBox = new TextField("Company Search");
     Set<Organisation> companies = OrganisationFacade.companyService.getRetiredOrganisations();
 
     public DisabledOrganisationTab(MainLayout main) {
@@ -64,7 +64,6 @@ public class DisabledOrganisationTab extends VerticalLayout implements
     public void valueChange(Property.ValueChangeEvent event) {
         final Property property = event.getProperty();
         if (property == table) {
-
             setReadFormProperties();
         }
     }

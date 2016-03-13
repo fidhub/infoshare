@@ -3,6 +3,7 @@ package infoshare.client.sidebar.trees;
 import com.vaadin.event.ItemClickEvent;
 import com.vaadin.ui.Tree;
 import infoshare.client.content.MainLayout;
+import infoshare.client.content.account.AccountMenu;
 import infoshare.client.content.organisation.OrganisationMenu;
 
 /**
@@ -37,7 +38,7 @@ public class CompanyTree extends Tree implements ItemClickEvent.ItemClickListene
 
 
     private void organisationView() {
-        main.content.setSecondComponent(new OrganisationMenu(main, LANDING_TAB));
+        main.content.setSecondComponent(new AccountMenu(main, LANDING_TAB));
 
     }
 
