@@ -7,6 +7,7 @@ import com.vaadin.server.Page;
 import com.vaadin.server.Responsive;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.shared.Position;
+import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
@@ -129,7 +130,7 @@ public class LoginUI extends UI {
         welcome.addStyleName(ValoTheme.LABEL_LIGHT);
         labels.addComponent(welcome);
 
-        Label title = new Label(" Info Share");
+        Label title = new Label("&nbsp;&nbsp;&nbsp;Info Share", ContentMode.HTML);
         title.setSizeUndefined();
         title.addStyleName(ValoTheme.LABEL_H1);
         title.addStyleName(ValoTheme.LABEL_BOLD);
@@ -140,9 +141,6 @@ public class LoginUI extends UI {
 
     private void login() {
         try {
-            System.out.println(userName.getValue()+"\n");
-            System.out.println(passwordField.getValue()+"\n");
-            System.out.println(rememberMe.getValue()+"\n");
             vaadinSecurity.login(userName.getValue(), passwordField.getValue(), rememberMe.getValue());
             getPage().setLocation("/");
         } catch (AuthenticationException ex) {

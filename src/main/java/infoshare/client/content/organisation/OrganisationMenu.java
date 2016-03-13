@@ -3,6 +3,7 @@ package infoshare.client.content.organisation;
 import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.VerticalLayout;
 import infoshare.client.content.MainLayout;
+import infoshare.client.content.organisation.view.AddOrganisationAdminView;
 import infoshare.client.content.organisation.view.OrganisationActiveView;
 import infoshare.client.content.organisation.view.OrganisationDisabledView;
 
@@ -26,6 +27,10 @@ public class OrganisationMenu extends VerticalLayout {
         disabledCompany.setMargin(true);
         disabledCompany.addComponent(new OrganisationDisabledView(main));
 
+        VerticalLayout addCompanyAdmin = new VerticalLayout();
+        addCompanyAdmin.setMargin(true);
+        addCompanyAdmin.addComponent(new AddOrganisationAdminView(main));
+
 
         tab = new TabSheet();
         tab.setHeight("100%");
@@ -33,13 +38,15 @@ public class OrganisationMenu extends VerticalLayout {
 
         tab.addTab(activeCompany, "Active Organisation ", null);
         tab.addTab(disabledCompany, "Retired Organisation ", null);
-        tab.addTab(null, "Add Organisation Admin ", null);
+        tab.addTab(addCompanyAdmin, "Add Organisation Admin ", null);
 
 
         if (selectedTab.equals("LANDING")) {
             tab.setSelectedTab(activeCompany);
         } else if (selectedTab.equals("Retired")) {
             tab.setSelectedTab(disabledCompany);
+        }else if (selectedTab.equals("AddAdmin")) {
+            tab.setSelectedTab(addCompanyAdmin);
         }
 
         addComponent(tab);

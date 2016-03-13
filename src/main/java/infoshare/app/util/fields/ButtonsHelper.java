@@ -10,24 +10,29 @@ import com.vaadin.ui.themes.ValoTheme;
  */
 public class ButtonsHelper extends FormLayout {
     // Style The Buttons
-    public static HorizontalLayout getButtons(
-            Button save,
-            Button edit,
-            Button cancel,
-            Button update,
-            Button delete) {
+    public static HorizontalLayout getButtons(Button save, Button edit, Button cancel, Button update, Button delete) {
         HorizontalLayout buttons = new HorizontalLayout();
         buttons.setSpacing(true);
         save.setSizeFull();
         save.addStyleName(ValoTheme.BUTTON_FRIENDLY);
+        //save.addStyleName(ValoTheme.BUTTON_BORDERLESS);
+        save.addStyleName(ValoTheme.BUTTON_SMALL);
         edit.setSizeFull();
         edit.addStyleName(ValoTheme.BUTTON_FRIENDLY);
+        //edit.addStyleName(ValoTheme.BUTTON_BORDERLESS);
+        edit.addStyleName(ValoTheme.BUTTON_SMALL);
         cancel.setSizeFull();
         cancel.addStyleName(ValoTheme.BUTTON_PRIMARY);
+        //cancel.addStyleName(ValoTheme.BUTTON_BORDERLESS);
+        cancel.addStyleName(ValoTheme.BUTTON_SMALL);
         update.setSizeFull();
         update.addStyleName(ValoTheme.BUTTON_FRIENDLY);
+        //update.addStyleName(ValoTheme.BUTTON_BORDERLESS);
+        update.addStyleName(ValoTheme.BUTTON_SMALL);
         delete.setSizeFull();
         delete.addStyleName(ValoTheme.BUTTON_DANGER);
+        //delete.addStyleName(ValoTheme.BUTTON_BORDERLESS);
+        delete.addStyleName(ValoTheme.BUTTON_SMALL);
 
         buttons.addComponent(save);
         buttons.addComponent(edit);

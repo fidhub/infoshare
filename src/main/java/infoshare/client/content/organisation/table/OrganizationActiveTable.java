@@ -21,6 +21,9 @@ public class OrganizationActiveTable extends Table {
         addStyleName(ValoTheme.TABLE_NO_STRIPES);
         addStyleName(ValoTheme.TABLE_NO_VERTICAL_LINES);
         addStyleName(ValoTheme.TABLE_SMALL);
+        setNullSelectionAllowed(false);
+        setSelectable(true);
+        setImmediate(true);
         setSizeFull();
         this.setResponsive(true);
         OrganisationFacade.companyService.findAll()

@@ -23,6 +23,9 @@ public class OrganizationDisabledTable extends Table {
         addStyleName(ValoTheme.TABLE_NO_VERTICAL_LINES);
         addStyleName(ValoTheme.TABLE_SMALL);
         setSizeFull();
+        setNullSelectionAllowed(false);
+        setSelectable(true);
+        setImmediate(true);
         this.setResponsive(true);
         OrganisationFacade.companyService.findAll()
                 .stream()

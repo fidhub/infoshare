@@ -10,9 +10,9 @@ import java.util.Set;
 
 /**
  * Created by codex on 2015/06/27.
- */
+ *//*
 @Service
-@SpringComponent
+@SpringComponent*/
 public class SourceServiceImpl implements SourceService {
 
     @Override
