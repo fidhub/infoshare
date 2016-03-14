@@ -21,7 +21,7 @@ public class StorageUrlTable extends Table {
         addContainerProperty("Link URL", String.class, null);
 
         // Add Data Columns
-        Set<StorageUrl> storageUrls = UtilFacade.storageUrlService.getAllLinks();
+        Set<StorageUrl> storageUrls = UtilFacade.getStorageUrlServiceInstance().getAllLinks();
         for (StorageUrl storageUrl : storageUrls) {
             addItem(new Object[]{storageUrl.getName(), storageUrl.getUrl()}, storageUrl.getId());
         }

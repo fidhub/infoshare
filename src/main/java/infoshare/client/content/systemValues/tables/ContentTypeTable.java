@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class ContentTypeTable extends Table {
 
     @Autowired
-    private ContentTypeService contentTypeService = ContentTypeFacade.contentTypeService;
+    private ContentTypeService contentTypeService = ContentTypeFacade.getContentTypeInstance();
 
     private MainLayout main;
 

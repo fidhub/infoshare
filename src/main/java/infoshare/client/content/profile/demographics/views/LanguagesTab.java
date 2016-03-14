@@ -59,7 +59,7 @@ public class LanguagesTab extends VerticalLayout implements
         final Property property = event.getProperty();
         final String personId = GetUserCredentials.getUser().getId();
         if (property == table) {
-            final PersonLanguage personLanguage = PeopleFacade.personLanguageService.findById(personId, table.getValue().toString());
+            final PersonLanguage personLanguage = PeopleFacade.getPersonLanguageServiceInstance().findById(personId, table.getValue().toString());
             final PersonLanguageModel model = getModel(personLanguage);
             form.binder.setItemDataSource(new BeanItem<>(model));
             setReadFormProperties();
@@ -69,7 +69,7 @@ public class LanguagesTab extends VerticalLayout implements
     private void saveForm(FieldGroup binder) {
         try {
             binder.commit();
-            PeopleFacade.personLanguageService.save(getNewEntity(binder));
+            PeopleFacade.getPersonLanguageServiceInstance().save(getNewEntity(binder));
             getHome();
             Notification.show("Record ADDED!", Notification.Type.TRAY_NOTIFICATION);
         } catch (FieldGroup.CommitException e) {
@@ -81,7 +81,7 @@ public class LanguagesTab extends VerticalLayout implements
     private void saveEditedForm(FieldGroup binder) {
         try {
             binder.commit();
-            PeopleFacade.personLanguageService.save(getUpdateEntity(binder));
+            PeopleFacade.getPersonLanguageServiceInstance().save(getUpdateEntity(binder));
             getHome();
             Notification.show("Record UPDATED!", Notification.Type.TRAY_NOTIFICATION);
         } catch (FieldGroup.CommitException e) {
@@ -92,13 +92,13 @@ public class LanguagesTab extends VerticalLayout implements
 
     private void deleteForm(FieldGroup binder) {
         final String personId = GetUserCredentials.getUser().getId();
-        final PersonLanguage personLanguage = PeopleFacade.personLanguageService.findById(personId, table.getValue().toString());
+        final PersonLanguage personLanguage = PeopleFacade.getPersonLanguageServiceInstance().findById(personId, table.getValue().toString());
         final PersonLanguage updatedPersonAddress = new PersonLanguage
                 .Builder()
                 .copy(personLanguage)
                 .state(DomainState.RETIRED.name())
                 .build();
-        PeopleFacade.personLanguageService.save(updatedPersonAddress);
+        PeopleFacade.getPersonLanguageServiceInstance().save(updatedPersonAddress);
         getHome();
     }
 
@@ -150,7 +150,7 @@ public class LanguagesTab extends VerticalLayout implements
     private PersonLanguage getUpdateEntity(FieldGroup binder) {
         final String personId = GetUserCredentials.getUser().getId();
         final PersonLanguageModel model = ((BeanItem<PersonLanguageModel>) binder.getItemDataSource()).getBean();
-        final PersonLanguage personLanguage = PeopleFacade.personLanguageService.findById(personId, table.getValue().toString());
+        final PersonLanguage personLanguage = PeopleFacade.getPersonLanguageServiceInstance().findById(personId, table.getValue().toString());
         final PersonLanguage updatedPersonLanguage = new PersonLanguage
                 .Builder()
                 .copy(personLanguage)

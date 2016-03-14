@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public  class ContentSourceTable extends Table{
 
     @Autowired
-    private SourceService sourceService = SourceFacade.sourceService;
+    private SourceService sourceService = SourceFacade.getSourceServiceInstance();
 
     private MainLayout main;
 

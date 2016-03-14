@@ -26,7 +26,7 @@ public class MailTable extends Table {
 
 
         // Add Data Columns
-        Set<Mail> mails = UtilFacade.mailService.findAll(OrganisationUtil.getCompanyCode());
+        Set<Mail> mails = UtilFacade.getMailServiceInstance().findAll(OrganisationUtil.getCompanyCode());
         for (Mail mail : mails) {
             addItem(new Object[]{
                     mail.getDate(),

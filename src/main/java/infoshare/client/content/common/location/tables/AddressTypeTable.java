@@ -24,7 +24,7 @@ public class AddressTypeTable extends Table {
 
 
         // Add Data Columns
-        Set<AddressType> addressTypes = LocationFacade.addressTypeService.findAll();
+        Set<AddressType> addressTypes = LocationFacade.getAddressTypeServiceInstance().findAll();
         for (AddressType addressType : addressTypes) {
             addItem(new Object[]{addressType.getName()}, addressType.getId());
         }

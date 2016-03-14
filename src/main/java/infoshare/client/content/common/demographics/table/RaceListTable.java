@@ -22,7 +22,7 @@ public class RaceListTable extends Table {
 
 
         // Add Data Columns
-        Set<Race> races = DemographicsFacade.raceListService.findAll();
+        Set<Race> races = DemographicsFacade.getRaceServiceInstance().findAll();
         for (Race locationType : races) {
             addItem(new Object[]{locationType.getName()}, locationType.getId());
         }

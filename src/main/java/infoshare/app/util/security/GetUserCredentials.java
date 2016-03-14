@@ -42,10 +42,10 @@ public class GetUserCredentials {
     }
 
     public static String getRole(){
-        return PeopleFacade.personService.getPersonById(OrganisationUtil.getCompanyCode(),OrganisationUtil.getPersonID()).getAuthvalue();
+        return PeopleFacade.getPersonServiceInstance().getPersonById(OrganisationUtil.getCompanyCode(),OrganisationUtil.getPersonID()).getAuthvalue();
     }
 
     public static Person getUser() {
-        return PeopleFacade.personService.getUserByEmail(username());
+        return PeopleFacade.getPersonServiceInstance().getUserByEmail(username());
     }
 }

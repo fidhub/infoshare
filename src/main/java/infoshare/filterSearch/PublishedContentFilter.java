@@ -19,8 +19,8 @@ import java.util.stream.Collectors;
  * Created by user9 on 2016/02/12.
  */
 public class PublishedContentFilter {
-    private PublishedContentService publishedContentService = ContentFacade.publishedContentService;
-    private CategoryService categoryService = CategoryFacade.categoryService;
+    private PublishedContentService publishedContentService = ContentFacade.getPublishedInstance();
+    private CategoryService categoryService = CategoryFacade.getCategoryInstance();
     public TextField field = new TextField();
     public PublishedContentFilter() {
         getField();

@@ -11,8 +11,11 @@ import infoshare.services.Organisation.OrganisationService;
  */
 public class OrganisationFacade {
 
-    public final static OrganisationService companyService = new OrganisationServiceImpl();
-    public final static OrganisationLogoService companyLogosService = new OrganisationLogoServiceImpl();
+    private static OrganisationService companyService = new OrganisationServiceImpl();
+    private static OrganisationLogoService companyLogosService = new OrganisationLogoServiceImpl();
+
+    public static OrganisationService getOrganisationServiceInstance(){return companyService ;}
+    public static OrganisationLogoService getOrganisationLogoServiceInstance(){return companyLogosService ;}
 
 
 }

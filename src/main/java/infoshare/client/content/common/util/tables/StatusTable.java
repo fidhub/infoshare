@@ -25,7 +25,7 @@ public class StatusTable extends Table {
         addContainerProperty("Status Value", String.class, null);
 
         // Add Data Columns
-        Set<Status> statuses = UtilFacade.statusService.findAll();
+        Set<Status> statuses = UtilFacade.getStatusServiceInstance().findAll();
         for (Status status : statuses) {
             addItem(new Object[]{status.getName(), status.getValue()}, status.getId());
         }

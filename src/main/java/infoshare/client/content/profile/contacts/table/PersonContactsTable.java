@@ -30,17 +30,14 @@ public class PersonContactsTable extends Table {
         addContainerProperty("Contact", String.class, null);
         addContainerProperty("Status", String.class, null);
 
-        Set<PersonContact> personContacts = PeopleFacade.personContactService.findAll(personId);
+        Set<PersonContact> personContacts = PeopleFacade.getPersonContactServiceInstance().findAll(personId);
 
-        personContacts.parallelStream().forEach(item -> {
-            addItem(new Object[]{
-                    item.getDate(),
-                    contactType(item.getAddressTypeId()),
-                    item.getContactValue(),
-                    getStatus(item.getStatus()),
-            }, item.getId());
-
-        });
+        personContacts.parallelStream().forEach(item -> addItem(new Object[]{
+                item.getDate(),
+                contactType(item.getAddressTypeId()),
+                item.getContactValue(),
+                getStatus(item.getStatus()),
+        }, item.getId()));
         setNullSelectionAllowed(false);
         setSelectable(true);
         setImmediate(true);
@@ -48,7 +45,7 @@ public class PersonContactsTable extends Table {
     }
 
     private String getStatus(String statusId) {
-        Status status = UtilFacade.statusService.findById(statusId);
+        Status status = UtilFacade.getStatusServiceInstance().findById(statusId);
         if (status != null)
             return status.getValue();
         return "Type Not Set";
@@ -56,7 +53,7 @@ public class PersonContactsTable extends Table {
     }
 
     private String contactType(String addressTypeId) {
-        ContactType contactType = LocationFacade.contactListService.findById(addressTypeId);
+        ContactType contactType = LocationFacade.getContactTypeServiceInstance().findById(addressTypeId);
         if (contactType != null)
             return contactType.getName();
         return "Type Not Set";

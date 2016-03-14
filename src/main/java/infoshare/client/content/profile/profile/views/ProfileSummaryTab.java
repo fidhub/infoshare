@@ -26,7 +26,7 @@ public class ProfileSummaryTab extends VerticalLayout implements
 
     public ProfileSummaryTab(MainLayout main) {
         final Person person = GetUserCredentials.getUser();
-        Set<Role> userRoles = PeopleFacade.personService.getRoles(person.getId());
+        Set<Role> userRoles = PeopleFacade.getPersonServiceInstance().getRoles(person.getId());
 
 
         this.main = main;

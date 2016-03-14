@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class CategoryTable extends Table {
 
     @Autowired
-    private CategoryService categoryService = CategoryFacade.categoryService;
+    private CategoryService categoryService = CategoryFacade.getCategoryInstance();
 
     private MainLayout mainLayout;
 

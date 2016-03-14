@@ -26,7 +26,7 @@ import java.util.Map;
 public class ContentTypeView extends VerticalLayout implements Button.ClickListener, Property.ValueChangeListener {
 
     @Autowired
-    private ContentTypeService contentTypeService = ContentTypeFacade.contentTypeService;
+    private ContentTypeService contentTypeService = ContentTypeFacade.getContentTypeInstance();
 
     private final MainLayout main;
     private final ContentTypeForm form;

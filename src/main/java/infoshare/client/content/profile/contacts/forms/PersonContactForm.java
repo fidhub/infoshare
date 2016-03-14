@@ -50,7 +50,7 @@ public class PersonContactForm extends FormLayout {
         //ComboBox Fields
         final ComboBox addressTypeId = UIComboBox.getComboBox("Contact Type :", "addressTypeId", PersonAddressModel.class, binder, new Consumer<ComboBox>() {
             public void accept(ComboBox comboBox) {
-                Set<ContactType> contactTypes = LocationFacade.contactListService.findAll();
+                Set<ContactType> contactTypes = LocationFacade.getContactTypeServiceInstance().findAll();
                 for (ContactType contactType : contactTypes) {
                     comboBox.addItem(contactType.getId());
                     comboBox.setItemCaption(contactType.getId(), contactType.getName());
@@ -61,7 +61,7 @@ public class PersonContactForm extends FormLayout {
         //ComboBox Fields
         final ComboBox status = UIComboBox.getComboBox("Contact Status :", "status", PersonAddressModel.class, binder, new Consumer<ComboBox>() {
             public void accept(ComboBox comboBox) {
-                Set<Status> statuses = UtilFacade.statusService.findAll()
+                Set<Status> statuses = UtilFacade.getStatusServiceInstance().findAll()
                         .stream()
                         .filter(stat -> stat.getName().equalsIgnoreCase("CONTACT"))
                         .collect(Collectors.toSet());

@@ -22,7 +22,7 @@ public class RolesListTable extends Table {
         addContainerProperty("Description", String.class, null);
 
         // Add Data Columns
-        Set<Role> roles = DemographicsFacade.rolesListService.findAll();
+        Set<Role> roles = DemographicsFacade.getRolesListServiceInstance().findAll();
         for (Role role : roles) {
             addItem(new Object[]{role.getName(), role.getDescription()}, role.getId());
         }

@@ -78,7 +78,7 @@ public class OrganisationDetails extends VerticalLayout implements
         companyAdmin.setSizeFull();
         grid.addComponent(companyAdmin, 0, 2, 3, 2);
 
-        Set<Person> admins = PeopleFacade.personService.getPersonsWithRole(organisation.getId(), RolesValues.ORG_ADMIN.name());
+        Set<Person> admins = PeopleFacade.getPersonServiceInstance().getPersonsWithRole(organisation.getId(), RolesValues.ORG_ADMIN.name());
 
 
         if (admins.size() > 0) {
@@ -233,20 +233,20 @@ public class OrganisationDetails extends VerticalLayout implements
                 .copy(organisation)
                 .state(DomainState.RETIRED.name())
                 .build();
-        OrganisationFacade.companyService.update(updatedCompany);
+        OrganisationFacade.getOrganisationServiceInstance().update(updatedCompany);
         getHome();
 
     }
 
     private void saveEditedForm(FieldGroup binder) {
         Organisation updatedCompany = getUpdateEntity(binder);
-        OrganisationFacade.companyService.update(updatedCompany);
+        OrganisationFacade.getOrganisationServiceInstance().update(updatedCompany);
         getHome();
     }
 
     private void saveForm(FieldGroup binder) {
         Organisation newcompany = getNewEntity(binder);
-        OrganisationFacade.companyService.save(newcompany);
+        OrganisationFacade.getOrganisationServiceInstance().save(newcompany);
         getHome();
     }
 
@@ -280,7 +280,7 @@ public class OrganisationDetails extends VerticalLayout implements
         } catch (FieldGroup.CommitException e) {
             e.printStackTrace();
         }
-        final Organisation company = OrganisationFacade.companyService.findById(orgId);
+        final Organisation company = OrganisationFacade.getOrganisationServiceInstance().findById(orgId);
         final OrganisationModel bean = ((BeanItem<OrganisationModel>) binder.getItemDataSource()).getBean();
         Map<String, String> details = new HashMap<String, String>();
         details.put("address", bean.getAddress());

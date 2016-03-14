@@ -23,7 +23,7 @@ public class GenderListTable extends Table {
         addContainerProperty("Gender ", String.class, null);
 
         // Add Data Columns
-        Set<Gender> genders = DemographicsFacade.genderListService.findAll();
+        Set<Gender> genders = DemographicsFacade.getGenderInstance().findAll();
         for (Gender gender : genders) {
             addItem(new Object[]{gender.getName()}, gender.getId());
         }

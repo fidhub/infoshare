@@ -39,7 +39,7 @@ public class ManageOrganisationTab extends VerticalLayout implements
 
     private final Button addOrg = new Button("Add New Organisation");
     private final TextField orgSearchBox = new TextField(" Organisation Search");
-    Set<Organisation> companies = OrganisationFacade.companyService.getActiveOrganisations();
+    Set<Organisation> companies = OrganisationFacade.getOrganisationServiceInstance().getActiveOrganisations();
 
 
     public ManageOrganisationTab(MainLayout main) {
@@ -91,7 +91,7 @@ public class ManageOrganisationTab extends VerticalLayout implements
     public void valueChange(Property.ValueChangeEvent event) {
         final Property property = event.getProperty();
         if (property == table) {
-            final Organisation company = OrganisationFacade.companyService.findById(table.getValue().toString());
+            final Organisation company = OrganisationFacade.getOrganisationServiceInstance().findById(table.getValue().toString());
             final OrganisationModel model = getModel(company);
             form.binder.setItemDataSource(new BeanItem<>(model));
             setReadFormProperties();
@@ -112,7 +112,7 @@ public class ManageOrganisationTab extends VerticalLayout implements
     private void saveForm(FieldGroup binder) {
         try {
             binder.commit();
-            OrganisationFacade.companyService.save(getNewEntity(binder));
+            OrganisationFacade.getOrganisationServiceInstance().save(getNewEntity(binder));
             getHome();
             Notification.show("Record ADDED!", Notification.Type.TRAY_NOTIFICATION);
         } catch (FieldGroup.CommitException e) {
@@ -135,7 +135,7 @@ public class ManageOrganisationTab extends VerticalLayout implements
     private void saveEditedForm(FieldGroup binder) {
         try {
             binder.commit();
-            OrganisationFacade.companyService.update(getUpdateEntity(binder));
+            OrganisationFacade.getOrganisationServiceInstance().update(getUpdateEntity(binder));
             getHome();
             Notification.show("Record UPDATED!", Notification.Type.TRAY_NOTIFICATION);
         } catch (FieldGroup.CommitException e) {
@@ -145,7 +145,7 @@ public class ManageOrganisationTab extends VerticalLayout implements
     }
 
     private Organisation getUpdateEntity(FieldGroup binder) {
-        final Organisation company = OrganisationFacade.companyService.findById(table.getValue().toString());
+        final Organisation company = OrganisationFacade.getOrganisationServiceInstance().findById(table.getValue().toString());
         final OrganisationModel bean = ((BeanItem<OrganisationModel>) binder.getItemDataSource()).getBean();
         Map<String, String> details = new HashMap<String, String>();
         details.put("address", bean.getAddress());
@@ -159,11 +159,11 @@ public class ManageOrganisationTab extends VerticalLayout implements
     }
 
     private void deleteForm(FieldGroup binder) {
-        Organisation company = OrganisationFacade.companyService.findById(table.getValue().toString());
+        Organisation company = OrganisationFacade.getOrganisationServiceInstance().findById(table.getValue().toString());
         if (false) {
             Notification.show("CANNOT DELETE", "Object has related Items. Delete Related Items First", Notification.Type.ERROR_MESSAGE);
         } else {
-            OrganisationFacade.companyService.delete(company);
+            OrganisationFacade.getOrganisationServiceInstance().delete(company);
             getHome();
         }
     }

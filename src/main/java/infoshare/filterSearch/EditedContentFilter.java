@@ -20,8 +20,8 @@ import java.util.stream.Collectors;
  * Created by user9 on 2016/02/12.
  */
 public class EditedContentFilter {
-    private EditedContentService editedContentService = ContentFacade.editedContentService;
-    private CategoryService categoryService = CategoryFacade.categoryService;
+    private EditedContentService editedContentService = ContentFacade.getEditedInstance();
+    private CategoryService categoryService = CategoryFacade.getCategoryInstance();
     public TextField field = new TextField();
     public EditedContentFilter() {
         getField();

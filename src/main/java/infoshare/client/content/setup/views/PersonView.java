@@ -7,7 +7,6 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.VerticalLayout;
 import infoshare.app.facade.PeopleFacade;
-import infoshare.app.facade.RoleFacade;
 import infoshare.app.util.organisation.OrganisationUtil;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.setup.SetupMenu;
@@ -16,9 +15,7 @@ import infoshare.client.content.setup.models.PersonModel;
 import infoshare.client.content.setup.tables.PersonTable;
 import infoshare.domain.person.Person;
 import infoshare.factories.person.PersonFactory;
-import infoshare.services.people.PersonRoleService;
 import infoshare.services.people.PersonService;
-import infoshare.services.roles.RoleService;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,9 +29,7 @@ public class PersonView extends VerticalLayout implements
     private final MainLayout main;
     private final PersonForm personForm;
     private final PersonTable table;
-    private PersonService personService = PeopleFacade.personService;
-    private RoleService roleService = RoleFacade.roleService;
-    private PersonRoleService rolesListService = PeopleFacade.personRoleService;
+    private PersonService personService = PeopleFacade.getPersonServiceInstance();
     public PersonView(MainLayout app) {
         main = app;
         personForm = new PersonForm();

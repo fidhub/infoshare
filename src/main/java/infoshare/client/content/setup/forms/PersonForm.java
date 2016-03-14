@@ -21,7 +21,7 @@ public class PersonForm extends FormLayout {
     public final BeanItem<PersonModel> item;
     public final FieldGroup binder;
 
-    private RoleService roleService = RoleFacade.roleService;
+    private RoleService roleService = RoleFacade.getRoleServiceInstance();
     public ListSelect rolesList = new ListSelect();
 
 

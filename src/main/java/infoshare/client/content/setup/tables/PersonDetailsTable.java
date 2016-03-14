@@ -5,9 +5,7 @@ import com.vaadin.ui.Table;
 import com.vaadin.ui.themes.ValoTheme;
 import infoshare.app.facade.PeopleFacade;
 import infoshare.app.util.organisation.OrganisationUtil;
-import infoshare.app.util.security.GetUserCredentials;
 import infoshare.client.content.MainLayout;
-import infoshare.domain.organisation.Organisation;
 import infoshare.domain.person.Person;
 import infoshare.services.people.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class PersonDetailsTable extends Table{
     private final MainLayout main;
     @Autowired
-    private PersonService personService = PeopleFacade.personService;
+    private PersonService personService = PeopleFacade.getPersonServiceInstance();
 
     public PersonDetailsTable(MainLayout main) {
         this.main = main;

@@ -123,7 +123,7 @@ public class OrganisationAdminForm extends FormLayout implements Button.ClickLis
                 .copy(company)
                 .adminattached(DomainState.WITH_ADMIN.name())
                 .build();
-        OrganisationFacade.companyService.save(updateCompany);
+        OrganisationFacade.getOrganisationServiceInstance().save(updateCompany);
 
 
         final String password = SecurityService.generateRandomPassword();
@@ -149,9 +149,9 @@ public class OrganisationAdminForm extends FormLayout implements Button.ClickLis
     private Person createAccount(Map<String, String> stringVals, Map<String, Boolean> boolVals) {
         Person companyAdmin = PersonFactory.getPerson(stringVals, boolVals);
         try {
-            PeopleFacade.personService.save(companyAdmin);
+            PeopleFacade.getPersonServiceInstance().save(companyAdmin);
             PersonRole role = PersonRoleFactory.getPersonRole(companyAdmin.getId(), RolesValues.ORG_ADMIN.name());
-            PeopleFacade.personRoleService.save(role);
+            PeopleFacade.getPersonRoleServiceInstance().save(role);
         }catch (Exception e){
             e.fillInStackTrace();
         }

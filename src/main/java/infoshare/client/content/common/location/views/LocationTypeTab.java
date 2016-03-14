@@ -57,7 +57,7 @@ public class LocationTypeTab extends VerticalLayout implements
     public void valueChange(Property.ValueChangeEvent event) {
         final Property property = event.getProperty();
         if (property == table) {
-            final LocationType locationType = LocationFacade.locationTypeService.findById(table.getValue().toString());
+            final LocationType locationType = LocationFacade.getLocationTypeServiceInstance().findById(table.getValue().toString());
             final LocationTypeModel model = getModel(locationType);
             form.binder.setItemDataSource(new BeanItem<>(model));
             setReadFormProperties();
@@ -67,7 +67,7 @@ public class LocationTypeTab extends VerticalLayout implements
     private void saveForm(FieldGroup binder) {
         try {
             binder.commit();
-            LocationFacade.locationTypeService.save(getNewEntity(binder));
+            LocationFacade.getLocationTypeServiceInstance().save(getNewEntity(binder));
             getHome();
             Notification.show("Record ADDED!", Notification.Type.TRAY_NOTIFICATION);
         } catch (FieldGroup.CommitException e) {
@@ -79,7 +79,7 @@ public class LocationTypeTab extends VerticalLayout implements
     private void saveEditedForm(FieldGroup binder) {
         try {
             binder.commit();
-            LocationFacade.locationTypeService.update(getUpdateEntity(binder));
+            LocationFacade.getLocationTypeServiceInstance().update(getUpdateEntity(binder));
             getHome();
             Notification.show("Record UPDATED!", Notification.Type.TRAY_NOTIFICATION);
         } catch (FieldGroup.CommitException e) {
@@ -89,12 +89,12 @@ public class LocationTypeTab extends VerticalLayout implements
     }
 
     private void deleteForm(FieldGroup binder) {
-        LocationType locationType = LocationFacade.locationTypeService.findById(table.getValue().toString());
+        LocationType locationType = LocationFacade.getLocationTypeServiceInstance().findById(table.getValue().toString());
         final LocationType updatedRoleList = new LocationType
                 .Builder().copy(locationType)
                 .state(DomainState.RETIRED.name())
                 .build();
-        LocationFacade.locationTypeService.save(updatedRoleList);
+        LocationFacade.getLocationTypeServiceInstance().save(updatedRoleList);
         getHome();
     }
 
@@ -143,7 +143,7 @@ public class LocationTypeTab extends VerticalLayout implements
 
     private LocationType getUpdateEntity(FieldGroup binder) {
         final LocationTypeModel bean = ((BeanItem<LocationTypeModel>) binder.getItemDataSource()).getBean();
-        final LocationType LocationType = LocationFacade.locationTypeService.findById(table.getValue().toString());
+        final LocationType LocationType = LocationFacade.getLocationTypeServiceInstance().findById(table.getValue().toString());
         final LocationType updatedRoleList = new LocationType
                 .Builder().copy(LocationType)
                 .name(bean.getName())

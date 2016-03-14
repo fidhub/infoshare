@@ -87,6 +87,6 @@ public class PasswordTab extends VerticalLayout implements
                 .copy(user)
                 .authvalue(password)
                 .build();
-        PeopleFacade.personService.update(updatedUser);
+        PeopleFacade.getPersonServiceInstance().update(updatedUser);
     }
 }

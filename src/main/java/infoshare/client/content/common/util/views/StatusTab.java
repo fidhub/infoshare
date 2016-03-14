@@ -40,15 +40,13 @@ public class StatusTab extends VerticalLayout implements
     public void buttonClick(Button.ClickEvent event) {
         final Button source = event.getButton();
         if (source == form.save) {
-          //  saveForm(form.binder);
-        } else if (source == form.edit) {
-          //  setEditFormProperties();
+           saveForm(form.binder);
+        } else if (source == form.edit) {setEditFormProperties();
         } else if (source == form.cancel) {
-          //  getHome();
+           getHome();
         } else if (source == form.update) {
-          //  saveEditedForm(form.binder);
-        } else if (source == form.delete) {
-         //   deleteForm(form.binder);
+            saveEditedForm(form.binder);
+        } else if (source == form.delete) {deleteForm(form.binder);
         }
     }
 
@@ -56,7 +54,7 @@ public class StatusTab extends VerticalLayout implements
     public void valueChange(Property.ValueChangeEvent event) {
         final Property property = event.getProperty();
         if (property == table) {
-            final Status status = UtilFacade.statusService.findById(table.getValue().toString());
+            final Status status = UtilFacade.getStatusServiceInstance().findById(table.getValue().toString());
             final StatusModel model = getModel(status);
             form.binder.setItemDataSource(new BeanItem<>(model));
             setReadFormProperties();
@@ -67,7 +65,7 @@ public class StatusTab extends VerticalLayout implements
     private void saveForm(FieldGroup binder) {
       try {
             binder.commit();
-            UtilFacade.statusService.save(getNewEntity(binder));
+            UtilFacade.getStatusServiceInstance().save(getNewEntity(binder));
             getHome();
             Notification.show("Record ADDED!", Notification.Type.TRAY_NOTIFICATION);
         } catch (FieldGroup.CommitException e) {
@@ -79,7 +77,7 @@ public class StatusTab extends VerticalLayout implements
     private void saveEditedForm(FieldGroup binder) {
         try {
             binder.commit();
-            UtilFacade.statusService.save(getUpdateEntity(binder));
+            UtilFacade.getStatusServiceInstance().save(getUpdateEntity(binder));
             getHome();
             Notification.show("Record UPDATED!", Notification.Type.TRAY_NOTIFICATION);
         } catch (FieldGroup.CommitException e) {
@@ -124,12 +122,12 @@ public class StatusTab extends VerticalLayout implements
     }
 
     private void deleteForm(FieldGroup binder) {
-        final Status status = UtilFacade.statusService.findById(table.getValue().toString());
+        final Status status = UtilFacade.getStatusServiceInstance().findById(table.getValue().toString());
         final Status updateStatus = new Status
                 .Builder().copy(status)
                 .state(DomainState.RETIRED.name())
                 .build();
-        UtilFacade.statusService.save(updateStatus);
+        UtilFacade.getStatusServiceInstance().save(updateStatus);
         getHome();
     }
 
@@ -141,7 +139,7 @@ public class StatusTab extends VerticalLayout implements
 
     private Status getUpdateEntity(FieldGroup binder) {
         final StatusModel model = ((BeanItem<StatusModel>) binder.getItemDataSource()).getBean();
-        final Status status = UtilFacade.statusService.findById(table.getValue().toString());
+        final Status status = UtilFacade.getStatusServiceInstance().findById(table.getValue().toString());
         final Status updateStatus = new Status
                 .Builder().copy(status)
                 .name(model.getName())

@@ -28,17 +28,14 @@ public class PersonAddressTable extends Table {
         addContainerProperty("Address", String.class, null);
         addContainerProperty("Postal Code", String.class, null);
 
-        Set<PersonAddress> personAddresses = PeopleFacade.personAddressService.findAll(personId);
+        Set<PersonAddress> personAddresses = PeopleFacade.getPersonAddressServiceInstance().findAll(personId);
 
-        personAddresses.parallelStream().forEach(item -> {
-            addItem(new Object[]{
-                    item.getDate(),
-                    addressType(item.getAddressTypeId()),
-                    item.getDescription(),
-                    item.getPostalCode(),
-            }, item.getId());
-
-        });
+        personAddresses.parallelStream().forEach(item -> addItem(new Object[]{
+                item.getDate(),
+                addressType(item.getAddressTypeId()),
+                item.getDescription(),
+                item.getPostalCode(),
+        }, item.getId()));
 
 
         setNullSelectionAllowed(false);
@@ -48,7 +45,7 @@ public class PersonAddressTable extends Table {
     }
 
     private String addressType(String addressTypeId) {
-        AddressType addressType = LocationFacade.addressTypeService.findById(addressTypeId);
+        AddressType addressType = LocationFacade.getAddressTypeServiceInstance().findById(addressTypeId);
         if (addressType != null)
             return addressType.getName();
         return "Type Not Set";

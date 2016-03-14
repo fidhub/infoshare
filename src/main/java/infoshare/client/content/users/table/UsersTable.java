@@ -29,7 +29,7 @@ public class UsersTable extends Table {
         addContainerProperty("Reset Credentials", Button.class, null);
         addContainerProperty("Disable Account", Button.class, null);
 
-        Set<Person> applicants = PeopleFacade.personService.getPersonsWithRole(OrganisationUtil.getPersonID(), RolesValues.ORG_ADMIN.name());
+        Set<Person> applicants = PeopleFacade.getPersonServiceInstance().getPersonsWithRole(OrganisationUtil.getPersonID(), RolesValues.ORG_ADMIN.name());
 
         applicants.parallelStream().forEach(item -> {
             Button details = new Button("Details");

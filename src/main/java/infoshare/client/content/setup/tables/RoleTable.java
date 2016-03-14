@@ -16,7 +16,7 @@ public class RoleTable extends Table {
 
     private final MainLayout main;
     @Autowired
-    private RoleService roleService = RoleFacade.roleService;
+    private RoleService roleService = RoleFacade.getRoleServiceInstance();
 
     public RoleTable(MainLayout main) {
         this.main = main;

@@ -27,7 +27,7 @@ import java.util.Map;
 public class ContentSourceView extends VerticalLayout implements Button.ClickListener, Property.ValueChangeListener {
 
     @Autowired
-    private SourceService sourceService = SourceFacade.sourceService;
+    private SourceService sourceService = SourceFacade.getSourceServiceInstance();
 
     private final MainLayout main;
     private final ContentSourceForm form;

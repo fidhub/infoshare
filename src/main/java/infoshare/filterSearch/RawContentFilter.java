@@ -20,8 +20,8 @@ import java.util.stream.Collectors;
  * Created by codex on 2015/07/14.
  */
 public class RawContentFilter {
-    private RawContentService rawContentService = ContentFacade.rawContentService;
-    private CategoryService categoryService = CategoryFacade.categoryService;
+    private RawContentService rawContentService = ContentFacade.getRawInstance();
+    private CategoryService categoryService = CategoryFacade.getCategoryInstance();
     public TextField field = new TextField();
     public RawContentFilter() {
         getField();

@@ -6,5 +6,6 @@ import infoshare.services.ContentFiles.ContentType.Impl.ContentTypeServiceImpl;
  * Created by user9 on 2016/02/23.
  */
 public class ContentTypeFacade {
-    public final static ContentTypeService contentTypeService = new ContentTypeServiceImpl();
+    private final static ContentTypeService contentTypeService = new ContentTypeServiceImpl();
+    public  static ContentTypeService getContentTypeInstance(){return contentTypeService;}
 }

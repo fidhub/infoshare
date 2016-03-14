@@ -28,7 +28,7 @@ public class PersonDemographicsTable extends Table {
         addContainerProperty("Date of Birth", Date.class, null);
 
 
-        Set<PersonDemographics> personDemographicses = PeopleFacade.personDemographicsService.find_ALL(personId);
+        Set<PersonDemographics> personDemographicses = PeopleFacade.getPersonDemographicsServiceInstance().find_ALL(personId);
 
         personDemographicses.parallelStream().forEach(item -> {
             addItem(new Object[]{
@@ -45,7 +45,7 @@ public class PersonDemographicsTable extends Table {
     }
 
     private String gender(String genderId) {
-        Gender gender = DemographicsFacade.genderListService.findById(genderId);
+        Gender gender = DemographicsFacade.getGenderInstance().findById(genderId);
         if (gender != null)
             return gender.getName();
         return "Type Not Set";
