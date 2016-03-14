@@ -14,7 +14,7 @@ import infoshare.client.content.systemValues.models.ContentTypeModel;
 import infoshare.client.content.systemValues.tables.ContentTypeTable;
 import infoshare.domain.content.ContentType;
 import infoshare.factories.content.ContentTypeFactory;
-import infoshare.services.ContentType.ContentTypeService;
+import infoshare.services.ContentFiles.ContentType.ContentTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashMap;

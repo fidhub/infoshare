@@ -9,6 +9,9 @@ public class OrganisationUtil {
     public static final String getCompanyCode() {
         return GetUserCredentials.getUser().getOrg();
     }
+    public static final String getPersonID() {
+        return GetUserCredentials.getUser().getId();
+    }
 }
 
 

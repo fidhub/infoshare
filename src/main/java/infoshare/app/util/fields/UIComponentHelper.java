@@ -11,7 +11,7 @@ import java.io.Serializable;
 /**
  * Created by hashcode on 2015/09/07.
  */
-public class UIComponentHelper<T> implements Serializable {
+public class UIComponentHelper<T> extends FormLayout implements Serializable {
 
     private Label createNewLabel(String value) {
         Label label = new Label(value);

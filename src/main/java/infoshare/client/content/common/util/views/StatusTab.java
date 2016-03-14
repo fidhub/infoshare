@@ -17,8 +17,6 @@ import infoshare.domain.util.Status;
 import infoshare.factories.util.StatusFactory;
 
 
-;
-
 /**
  * Created by hashcode on 2015/10/12.
  */
@@ -36,22 +34,21 @@ public class StatusTab extends VerticalLayout implements
         setSizeFull();
         addComponent(form);
         addComponent(table);
-        addListeners();
     }
 
     @Override
     public void buttonClick(Button.ClickEvent event) {
         final Button source = event.getButton();
         if (source == form.save) {
-            saveForm(form.binder);
+          //  saveForm(form.binder);
         } else if (source == form.edit) {
-            setEditFormProperties();
+          //  setEditFormProperties();
         } else if (source == form.cancel) {
-            getHome();
+          //  getHome();
         } else if (source == form.update) {
-            saveEditedForm(form.binder);
+          //  saveEditedForm(form.binder);
         } else if (source == form.delete) {
-            deleteForm(form.binder);
+         //   deleteForm(form.binder);
         }
     }
 
@@ -66,8 +63,9 @@ public class StatusTab extends VerticalLayout implements
         }
     }
 
+
     private void saveForm(FieldGroup binder) {
-        try {
+      try {
             binder.commit();
             UtilFacade.statusService.save(getNewEntity(binder));
             getHome();
@@ -137,7 +135,7 @@ public class StatusTab extends VerticalLayout implements
 
     private Status getNewEntity(FieldGroup binder) {
         final StatusModel model = ((BeanItem<StatusModel>) binder.getItemDataSource()).getBean();
-        final Status status = StatusFactory.getStatus(model.getName(),model.getValue());
+        final Status status = StatusFactory.getStatus(model.getName(), model.getValue());
         return status;
     }
 
@@ -157,5 +155,7 @@ public class StatusTab extends VerticalLayout implements
         model.setName(currency.getName());
         model.setValue(currency.getName());
         return model;
+
     }
+
 }

@@ -1,5 +1,6 @@
 package infoshare.app.util.fields;
 
+import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
 
@@ -8,7 +9,7 @@ import java.io.Serializable;
 /**
  * Created by hashcode on 2015/09/07.
  */
-public class UIDialogBoxHelper<T> implements Serializable {
+public class UIDialogBoxHelper<T>  extends FormLayout implements Serializable {
 
     private DialobBoxWindow dialobBoxWindow;
 

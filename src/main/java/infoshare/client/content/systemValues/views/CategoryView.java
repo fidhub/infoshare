@@ -14,7 +14,7 @@ import infoshare.client.content.systemValues.models.CategoryModel;
 import infoshare.client.content.systemValues.tables.CategoryTable;
 import infoshare.domain.content.Category;
 import infoshare.factories.content.CategoryFactory;
-import infoshare.services.category.CategoryService;
+import infoshare.services.ContentFiles.category.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashMap;

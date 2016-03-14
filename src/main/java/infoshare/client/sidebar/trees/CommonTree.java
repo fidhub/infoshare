@@ -6,6 +6,7 @@ import infoshare.client.content.MainLayout;
 import infoshare.client.content.common.demographics.CommonDemographicsMenu;
 import infoshare.client.content.common.location.CommonLocationMenu;
 import infoshare.client.content.common.util.CommonUtilMenu;
+import infoshare.client.content.systemValues.SystemValues;
 
 
 /**
@@ -14,9 +15,11 @@ import infoshare.client.content.common.util.CommonUtilMenu;
 public class CommonTree extends Tree implements ItemClickEvent.ItemClickListener {
     private final MainLayout main;
     private static final String LANDING_TAB = "LANDING";
-    public static final Object SETUP_LOCATIONS = "Setup LOCATIONS";
-    public static final Object SETUP_DEMOGRAPHICS = "Setup DEMOGRAPHICS";
-    public static final Object SETUP_UTILS = "Setup UTILITIES";
+    public static final Object SETUP_LOCATIONS = "Setup Locations";
+    public static final Object SETUP_DEMOGRAPHICS = "Setup Demographics";
+    public static final Object SETUP_UTILS = "Setup Utilities";
+    private static final Object SYSTEM_VALUES ="System Values";
+
 
 
     public CommonTree(MainLayout main) {
@@ -25,6 +28,7 @@ public class CommonTree extends Tree implements ItemClickEvent.ItemClickListener
         addItem(SETUP_LOCATIONS);
         addItem(SETUP_DEMOGRAPHICS);
         addItem(SETUP_UTILS);
+        addItem(SYSTEM_VALUES);
 
 
         //Add Listeners
@@ -43,6 +47,8 @@ public class CommonTree extends Tree implements ItemClickEvent.ItemClickListener
                 demographicsView();
             }else if (SETUP_UTILS.equals(itemId)) {
                 utilsView();
+            }else if (SYSTEM_VALUES.equals(itemId)) {
+                utilsValues();
             }
         }
     }
@@ -60,6 +66,9 @@ public class CommonTree extends Tree implements ItemClickEvent.ItemClickListener
 
     private void utilsView() {
         main.content.setSecondComponent(new CommonUtilMenu(main, LANDING_TAB));
+    }
+    private void utilsValues() {
+        main.content.setSecondComponent(new SystemValues(main, LANDING_TAB));
     }
 
 }

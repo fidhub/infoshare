@@ -20,6 +20,7 @@ public class Person implements Serializable, Comparable<Person> {
     private Boolean accountNonLocked;
     private String state;
 
+
     public String getState() {
         return state;
     }

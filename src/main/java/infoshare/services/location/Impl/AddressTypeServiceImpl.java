@@ -1,21 +1,22 @@
 package infoshare.services.location.Impl;
 
-
+import com.vaadin.spring.annotation.SpringComponent;
 import infoshare.domain.location.AddressType;
-import infoshare.restapi.common.location.AddressTypeAPI;
+import infoshare.restapi.location.AddressTypeAPI;
 import infoshare.services.location.AddressTypeService;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
 /**
- * Created by garran on 2015/09/06.
+ * Created by user9 on 2016/03/01.
  */
+@SpringComponent
+@Service
 public class AddressTypeServiceImpl implements AddressTypeService {
-
-
     @Override
-    public AddressType findById(String id) {
-        return AddressTypeAPI.findById(id);
+    public AddressType findById(String s) {
+        return AddressTypeAPI.findById(s);
     }
 
     @Override
@@ -31,12 +32,10 @@ public class AddressTypeServiceImpl implements AddressTypeService {
     @Override
     public void delete(AddressType entity) {
         AddressTypeAPI.save(entity);
-
     }
 
     @Override
     public Set<AddressType> findAll() {
         return AddressTypeAPI.findAll();
     }
-
 }

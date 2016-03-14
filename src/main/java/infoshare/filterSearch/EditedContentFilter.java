@@ -6,8 +6,9 @@ import com.vaadin.ui.themes.ValoTheme;
 import infoshare.app.facade.CategoryFacade;
 import infoshare.app.facade.ContentFacade;
 import infoshare.domain.content.EditedContent;
-import infoshare.services.Content.EditedContentService;
-import infoshare.services.category.CategoryService;
+import infoshare.services.ContentFiles.category.CategoryService;
+import infoshare.services.ContentFiles.content.EditedContentService;
+
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -29,7 +30,7 @@ public class EditedContentFilter {
         DateFormat formatter = new SimpleDateFormat("dd MMMMMMM yyyy");
         ArrayList arrayList = new ArrayList();
         String cat;
-        for (EditedContent EditedContent : editedContentService.findAll().stream()
+        for (EditedContent EditedContent : editedContentService.findAll("org").stream()
                 .filter(cont -> cont.getState().equalsIgnoreCase(state))
                 .collect(Collectors.toList()).stream()
                 .filter(cont -> cont.getStatus().equalsIgnoreCase("Edited"))
@@ -59,7 +60,7 @@ public class EditedContentFilter {
         return arrayList;
     }
     private TextField getField(){
-        field.setInputPrompt("Filter Edited Content ...");
+        field.setInputPrompt("Filter Edited ContentFiles ...");
         field.setWidth("260px");
         field.setIcon(FontAwesome.FILTER);
         field.addStyleName(ValoTheme.TEXTFIELD_INLINE_ICON);

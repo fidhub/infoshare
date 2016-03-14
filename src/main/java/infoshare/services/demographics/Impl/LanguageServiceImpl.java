@@ -1,17 +1,19 @@
 package infoshare.services.demographics.Impl;
 
-
+import com.vaadin.spring.annotation.SpringComponent;
 import infoshare.domain.demographics.Language;
-import infoshare.restapi.common.demographics.LanguageAPI;
+import infoshare.restapi.demographics.LanguageAPI;
 import infoshare.services.demographics.LanguageService;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
 /**
- * Created by hashcode on 2015/08/18.
+ * Created by Songezo on 2016-03-04.
  */
+@SpringComponent
+@Service
 public class LanguageServiceImpl implements LanguageService {
-
     @Override
     public Language findById(String s) {
         return LanguageAPI.findById(s);
@@ -29,7 +31,6 @@ public class LanguageServiceImpl implements LanguageService {
 
     @Override
     public void delete(Language entity) {
-        LanguageAPI.save(entity);
 
     }
 

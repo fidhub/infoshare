@@ -29,10 +29,10 @@ public class EditForm extends FormLayout {
         model = new ContentModel();
         item = new BeanItem<>(model);
         binder = new FieldGroup(item);
-        popUpContentTypeCmb = getComboBox("Content Type","contentType");
+        popUpContentTypeCmb = getComboBox("ContentFiles Type","contentType");
         popUpCategoryCmb = getComboBox("Category","category");
         popUpSourceCmb = getComboBox("source","source");
-        final RichTextArea textEditor = getRichTextArea("Content","content");
+        final RichTextArea textEditor = getRichTextArea("ContentFiles","content");
 
         final HorizontalLayout buttons = new HorizontalLayout();
         buttons.setSpacing(true);

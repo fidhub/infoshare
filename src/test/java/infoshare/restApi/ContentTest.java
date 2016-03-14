@@ -2,7 +2,7 @@ package infoshare.restApi;
 
 import infoshare.app.conf.RestUtil;
 import infoshare.client.content.content.models.ContentModel;
-import infoshare.restapi.Content.ContentBaseUrl;
+import infoshare.restapi.ContentFiles.content.ContentBaseUrl;
 import org.junit.Test;
 
 import java.util.Date;
@@ -30,13 +30,13 @@ public class ContentTest {
         model.setContentType("Text");
         model.setStatus("raw");
 
-        RestUtil.save(ContentBaseUrl.Raw.POST, model, ContentModel.class);
+       RestUtil.save(ContentBaseUrl.Raw.POST, model, ContentModel.class);
     }
   /*  @Test
     public void testPUT() throws Exception {
-        Content content = RestApiConnectorClass.read(UrlPath.ContentLinks.GET_ID, "d592b8cd7f48b0eee1e1f8e8f5988ab5",
-                Content.class);
-        Content content1 = new Content.Builder(content.getTitle()).copy(content)
+        ContentFiles content = RestApiConnectorClass.read(UrlPath.ContentLinks.GET_ID, "d592b8cd7f48b0eee1e1f8e8f5988ab5",
+                ContentFiles.class);
+        ContentFiles content1 = new ContentFiles.Builder(content.getTitle()).copy(content)
                 .source("9d57cca65eaf056735157f119f2a467b")
                 .category("3699255c536bcff9348f0de806866847")
                 .contentType("edited").build();
@@ -45,15 +45,15 @@ public class ContentTest {
 
     @Test
     public  void testGet() throws Exception {
-        Content content = RestApiConnectorClass.read(UrlPath.ContentLinks.GET_ID, "1054c0771746780c91b6a2217f6236b1",
-                Content.class);
+        ContentFiles content = RestApiConnectorClass.read(UrlPath.ContentLinks.GET_ID, "1054c0771746780c91b6a2217f6236b1",
+                ContentFiles.class);
         System.out.println(content.getId());
 
     }
 
     @Test
     public void testGetAll() throws Exception {
-        List<Content> contents = RestApiConnectorClass.readAll(UrlPath.ContentLinks.GETALL,Content.class);
+        List<ContentFiles> contents = RestApiConnectorClass.readAll(UrlPath.ContentLinks.GETALL,ContentFiles.class);
         System.out.println(contents);
         Assert.assertFalse(contents.isEmpty());
     }

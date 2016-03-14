@@ -3,7 +3,6 @@ package infoshare.restapi.people;
 
 import infoshare.app.conf.RestUtil;
 import infoshare.domain.person.PersonAddress;
-import infoshare.domain.person.PersonRole;
 
 import java.util.Set;
 

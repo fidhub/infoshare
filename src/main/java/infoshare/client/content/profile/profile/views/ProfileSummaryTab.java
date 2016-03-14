@@ -45,7 +45,6 @@ public class ProfileSummaryTab extends VerticalLayout implements
         account.setSizeFull();
 
 
-
         Label lastName = new Label("Last Name", ContentMode.HTML);
         Label lastNameV = new Label(person.getLastName(), ContentMode.HTML);
 

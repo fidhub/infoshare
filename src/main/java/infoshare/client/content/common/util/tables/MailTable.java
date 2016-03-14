@@ -2,6 +2,7 @@ package infoshare.client.content.common.util.tables;
 
 import com.vaadin.ui.Table;
 import infoshare.app.facade.UtilFacade;
+import infoshare.app.util.organisation.OrganisationUtil;
 import infoshare.domain.util.Mail;
 
 import java.util.Date;
@@ -25,7 +26,7 @@ public class MailTable extends Table {
 
 
         // Add Data Columns
-        Set<Mail> mails = UtilFacade.mailService.findAll();
+        Set<Mail> mails = UtilFacade.mailService.findAll(OrganisationUtil.getCompanyCode());
         for (Mail mail : mails) {
             addItem(new Object[]{
                     mail.getDate(),

@@ -1,6 +1,5 @@
 package infoshare.services.utililties.Impl;
 
-
 import infoshare.domain.util.Status;
 import infoshare.restapi.common.util.StatusAPI;
 import infoshare.services.utililties.StatusService;
@@ -8,29 +7,17 @@ import infoshare.services.utililties.StatusService;
 import java.util.Set;
 
 /**
- * Created by garran on 2015/09/14.
+ * Created by user9 on 2016/03/09.
  */
 public class StatusServiceImpl implements StatusService {
-
     @Override
-    public Status findById(String id) {
-        return StatusAPI.findById(id);
+    public Status findById(String s) {
+        return StatusAPI.findById(s);
     }
 
     @Override
-    public Status save(Status entity) {
-        return StatusAPI.save(entity);
-    }
-
-    @Override
-    public Status update(Status entity) {
-        return StatusAPI.save(entity);
-    }
-
-    @Override
-    public void delete(Status entity) {
-        StatusAPI.save(entity);
-
+    public Status save(Status newEntity) {
+        return StatusAPI.save(newEntity);
     }
 
     @Override

@@ -10,7 +10,7 @@ import infoshare.client.content.content.ContentMenu;
  */
 public class ContentTree extends Tree implements ItemClickEvent.ItemClickListener {
     private final MainLayout main;
-    private static final Object CONTENT = "Content";
+    private static final Object CONTENT = "Content Files";
     private static final String LANDING_TAB = "LANDING";
 
     public ContentTree(MainLayout main) {

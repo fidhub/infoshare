@@ -7,14 +7,15 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
+import infoshare.app.util.organisation.OrganisationUtil;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.setup.forms.AddressForm;
 import infoshare.client.content.setup.models.AddressModel;
 import infoshare.client.content.setup.tables.AddressTable;
 import infoshare.domain.person.Person;
 import infoshare.domain.person.PersonAddress;
-import infoshare.services.Contact.AddressService;
-import infoshare.services.Contact.Impl.AddressServiceImpl;
+import infoshare.services.people.Impl.PersonAddressServiceImpl;
+import infoshare.services.people.PersonAddressService;
 
 /**
  * Created by codex on 2015/08/18.
@@ -23,7 +24,7 @@ public class AddressView extends Window implements Button.ClickListener, Propert
 
     private final AddressForm addressForm;
     private AddressTable addressTable;
-    private AddressService addressService = new AddressServiceImpl();
+    private PersonAddressService addressService = new PersonAddressServiceImpl();
     private MainLayout main;
 
     public AddressView(MainLayout main) {
@@ -77,7 +78,7 @@ public class AddressView extends Window implements Button.ClickListener, Propert
         final Property property = valueChangeEvent.getProperty();
         if (property == addressTable){
             try {
-                final PersonAddress personAddress = addressService.findById(addressTable.getValue().toString());
+                final PersonAddress personAddress = addressService.findById(OrganisationUtil.getPersonID(),addressTable.getValue().toString());
                 final AddressModel bean = getAddressModel(personAddress);
                 addressForm.binder.setItemDataSource(new BeanItem<>(bean));
                 setReadContactFormProperties();

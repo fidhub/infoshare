@@ -3,6 +3,7 @@ package infoshare.client.sidebar.trees;
 import com.vaadin.event.ItemClickEvent;
 import com.vaadin.ui.Tree;
 import infoshare.client.content.MainLayout;
+import infoshare.client.content.users.UserManagementMenu;
 
 
 /**
@@ -10,15 +11,13 @@ import infoshare.client.content.MainLayout;
  */
 public class UsersTree extends Tree implements ItemClickEvent.ItemClickListener {
     private final MainLayout main;
-    public static final Object MANAGE_USERS = "Manage System USERS";
+    public static final Object MANAGE_USERS = "Manage System Users";
     private static final String LANDING_TAB = "LANDING";
 
     public UsersTree(MainLayout main) {
         this.main = main;
         //add Items to Menu
         addItem(MANAGE_USERS);
-        
-
         //Add Listeners
         addItemClickListener((ItemClickEvent.ItemClickListener) this);
     }
@@ -34,8 +33,7 @@ public class UsersTree extends Tree implements ItemClickEvent.ItemClickListener 
     }
 
     private void manageUsersView() {
-//        main.content.setSecondComponent(new UserManagementMenu(main, LANDING_TAB));
-
+       main.content.setSecondComponent(new UserManagementMenu(main, LANDING_TAB));
     }
 
 }

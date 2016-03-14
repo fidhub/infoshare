@@ -11,6 +11,7 @@ import infoshare.app.facade.CategoryFacade;
 import infoshare.app.facade.ContentFacade;
 import infoshare.app.facade.ContentTypeFacade;
 import infoshare.app.facade.SourceFacade;
+import infoshare.app.util.organisation.OrganisationUtil;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.content.ContentMenu;
 import infoshare.client.content.content.forms.EditForm;
@@ -19,11 +20,11 @@ import infoshare.client.content.content.tables.EditTable;
 import infoshare.domain.content.*;
 import infoshare.factories.content.PublishedContentFactory;
 import infoshare.filterSearch.EditedContentFilter;
-import infoshare.services.Content.EditedContentService;
-import infoshare.services.Content.PublishedContentService;
-import infoshare.services.ContentType.ContentTypeService;
-import infoshare.services.category.CategoryService;
-import infoshare.services.source.SourceService;
+import infoshare.services.ContentFiles.ContentType.ContentTypeService;
+import infoshare.services.ContentFiles.content.EditedContentService;
+import infoshare.services.ContentFiles.content.PublishedContentService;
+import infoshare.services.ContentFiles.category.CategoryService;
+import infoshare.services.ContentFiles.source.SourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.vaadin.dialogs.ConfirmDialog;
 
@@ -56,26 +57,26 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
 
     public  EditView( MainLayout mainApp) {
 
-       this.main = mainApp;
-       this.table = new EditTable(main);
-       this.form = new EditForm();
-       this.popUp = modelWindow();
-       viewActive.setVisible(false);
-       deleteCont.setVisible(true);
-       state ="active";
-       setSizeFull();
-       setSpacing(true);
-       addComponent(getLayout());
-       addComponent(table);
-       addListeners();
-   }
+        this.main = mainApp;
+        this.table = new EditTable(main);
+        this.form = new EditForm();
+        this.popUp = modelWindow();
+        viewActive.setVisible(false);
+        deleteCont.setVisible(true);
+        state ="active";
+        setSizeFull();
+        setSpacing(true);
+        addComponent(getLayout());
+        addComponent(table);
+        addListeners();
+    }
     private HorizontalLayout getLayout(){
         final HorizontalLayout layout = new HorizontalLayout();
         layout.setSpacing(false);
         deleteCont.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
         deleteCont.addStyleName(ValoTheme.BUTTON_SMALL);
         deleteCont.setCaption("Remove");
-        deleteCont.setDescription("Delete Content");
+        deleteCont.setDescription("Delete ContentFiles");
         deleteCont.setIcon(FontAwesome.REMOVE);
 
         viewTrash.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
@@ -121,49 +122,48 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
         popup.setContent(form);
         return popup;
     }
-   @Override
+    @Override
     public void buttonClick(Button.ClickEvent clickEvent) {
-       final Button source = clickEvent.getButton();
-       if (source ==form.popUpUpdateBtn){
-           saveEditedForm(form.binder);
-       }else if (source ==form.popUpCancelBtn){
-           popUp.setModal(false);
-           UI.getCurrent().removeWindow(popUp);
-           table.setValue(null);
-           if(state.equalsIgnoreCase("Active")){
-           getHome();
-           }else {
-               getTrash();
-           }
-       }else if(source==viewTrash){
-           viewTrash.setVisible(false);
-           state="Deleted";
-           deleteCont.setVisible(false);
-           viewActive.setVisible(true);
-           getTrash();
-       }else if(source==viewActive){
-           getHome();
-           viewActive.setVisible(false);
-           state="Active";
-       }else if (source ==deleteCont){
-           if(table.getValue().toString()!=null) {
-               ConfirmDialog.show(this.getUI(),"Are you sure you Wanna delete ?",
-                       (ConfirmDialog.Listener) dialog -> {
-                           if (dialog.isConfirmed()) {
-                               editedContentService.update(getTrashEntity(table.getValue().toString()));
-                               getHome();
-                           } else getHome();
+        final Button source = clickEvent.getButton();
+        if (source ==form.popUpUpdateBtn){
+            saveEditedForm(form.binder);
+        }else if (source ==form.popUpCancelBtn){
+            popUp.setModal(false);
+            UI.getCurrent().removeWindow(popUp);
+            table.setValue(null);
+            if(state.equalsIgnoreCase("Active")){
+                getHome();
+            }else {
+                getTrash();
+            }
+        }else if(source==viewTrash){
+            viewTrash.setVisible(false);
+            state="Deleted";
+            deleteCont.setVisible(false);
+            viewActive.setVisible(true);
+            getTrash();
+        }else if(source==viewActive){
+            getHome();
+            viewActive.setVisible(false);
+            state="Active";
+        }else if (source ==deleteCont){
+            if(table.getValue().toString()!=null) {
+                ConfirmDialog.show(this.getUI(),"Are you sure you Wanna delete ?",
+                        (ConfirmDialog.Listener) dialog -> {
+                            if (dialog.isConfirmed()) {
+                                editedContentService.update(getTrashEntity(table.getValue().toString()));
+                                getHome();
+                            } else getHome();
 
-                       });
-           }else{
-              Notification.show("Select content you wanna delete", Notification.Type.HUMANIZED_MESSAGE);
-           }
-       }
+                        });
+            }else{
+                Notification.show("Select content you wanna delete", Notification.Type.HUMANIZED_MESSAGE);
+            }
+        }
     }
     @Override
     public void valueChange(Property.ValueChangeEvent valueChangeEvent) {
         final Property property = valueChangeEvent.getProperty();
-
     }
     private void loadComboBoxs() {
         for (Category category : categoryService.findAll()) {
@@ -175,7 +175,7 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
             form.popUpContentTypeCmb.addItem(contentType.getId());
             form.popUpContentTypeCmb.setItemCaption(contentType.getId(), contentType.getName());
         }
-        for (Source source : sourceService.findAll()) {
+        for (Source source : sourceService.findAll(OrganisationUtil.getCompanyCode())) {
             form.popUpSourceCmb.addItem(source.getId());
             form.popUpSourceCmb.setItemCaption(source.getId(), source.getName());
         }
@@ -198,7 +198,7 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
     private void getTrash(){
         try{
             table.removeAllItems();
-            editedContentService.findAll().stream()
+            editedContentService.findAll(OrganisationUtil.getCompanyCode()).stream()
                     .filter(cont -> cont.getState().equalsIgnoreCase("Deleted"))
                     .collect(Collectors.toList())
                     .stream().filter(cont -> cont.getStatus().equalsIgnoreCase("Edited"))
@@ -234,7 +234,7 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
         publishedVals.put("contentType",bean.getContentType());
         publishedVals.put("status",bean.getStatus());
         publishedVals.put("source",bean.getStatus());
-        final PublishedContent publishedContent = PublishedContentFactory.getPublishedContent(publishedVals,new Date());
+        final PublishedContent publishedContent = PublishedContentFactory.getPublishedContent(publishedVals, new Date());
         return publishedContent;
     }
     private EditedContent getUpdateEntity(FieldGroup binder) {
@@ -249,13 +249,15 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
                 .dateCreated(bean.getDateCreated())
                 .source(bean.getSource())
                 .state(bean.getState())
+                .org(bean.getOrg())
                 .status("Published")
                 .id(table.getValue().toString())
                 .build();
         return editedContent;
     }
     private EditedContent getTrashEntity(String val) {
-       EditedContent content = editedContentService.findById(val);
+        EditedContent content = editedContentService.findById(OrganisationUtil.getCompanyCode(),val);
+
         final EditedContent editedContent = new EditedContent
                 .Builder().copy(content)
                 .state("Deleted")
@@ -264,7 +266,8 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
     }
     private ContentModel getModel(String val) {
         final ContentModel model = new ContentModel();
-        final EditedContent editedContent = editedContentService.findById(val.toString());
+
+        final EditedContent editedContent = editedContentService.findById(OrganisationUtil.getCompanyCode(),val.toString());
         model.setTitle(editedContent.getTitle());
         model.setCategory(editedContent.getCategory());
         model.setCreator(editedContent.getCreator());
@@ -273,6 +276,7 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
         model.setSource(editedContent.getSource());
         model.setStatus(editedContent.getStatus());
         model.setState(editedContent.getState());
+        model.setOrg(editedContent.getOrg());
         return model;
     }
     public void addListeners(){

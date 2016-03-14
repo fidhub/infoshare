@@ -14,10 +14,10 @@ import infoshare.client.content.profile.profile.ProfileMenu;
  */
 public class ProfileTree extends Tree implements ItemClickEvent.ItemClickListener {
     private final MainLayout main;
-    public static final Object PROFILE = "Profile SUMMARY";
-    public static final Object CONTACTS = "Your CONTACTS";
-    public static final Object DEMOGRAOHICS = "Your DEMOGRAPHICS";
-    public static final Object CHANGE_PASSSWORD = "Change PASSWORD";
+    public static final Object PROFILE = "Profile Summary";
+    public static final Object CONTACTS = "Your Contacts";
+    public static final Object DEMOGRAOHICS = "Your Demographics";
+    public static final Object CHANGE_PASSSWORD = "Change Password";
     private static final String LANDING_TAB = "LANDING";
 
     public ProfileTree(MainLayout main) {

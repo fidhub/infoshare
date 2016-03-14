@@ -81,11 +81,11 @@ public class OrganisationTable extends Table {
 
         });
 
-
         setNullSelectionAllowed(false);
         setSelectable(true);
         setImmediate(true);
     }
+
 
     private void getHome() {
         main.content.setSecondComponent(new AccountMenu(main, "LANDING"));

@@ -1,5 +1,6 @@
 package infoshare.client.content.common.location.models;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
@@ -7,6 +8,7 @@ import java.io.Serializable;
  */
 public class ContactTypeModel implements Serializable {
 
+    @NotNull
     private String name;
 
     public String getName() {

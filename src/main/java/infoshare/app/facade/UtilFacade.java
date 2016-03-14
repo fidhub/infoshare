@@ -13,7 +13,6 @@ import infoshare.services.utililties.StorageUrlService;
  */
 public class UtilFacade {
 
-
     public final static MailService mailService = new MailServiceImpl();
     public final static StorageUrlService storageUrlService = new StorageUrlServiceImpl();
     public final static StatusService statusService = new StatusServiceImpl();

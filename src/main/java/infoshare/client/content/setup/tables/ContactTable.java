@@ -3,8 +3,8 @@ package infoshare.client.content.setup.tables;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.themes.ValoTheme;
 import infoshare.client.content.MainLayout;
-import infoshare.services.Contact.ContactService;
-import infoshare.services.Contact.Impl.ContactServiceImpl;
+import infoshare.services.location.ContactTypeService;
+import infoshare.services.location.Impl.ContactTypeServiceImpl;
 
 
 /**
@@ -13,7 +13,7 @@ import infoshare.services.Contact.Impl.ContactServiceImpl;
 public class ContactTable extends Table {
 
     private final MainLayout main;
-    private ContactService contactService = new ContactServiceImpl();
+    private ContactTypeService contactService = new ContactTypeServiceImpl();
 
 
     public ContactTable(MainLayout main) {

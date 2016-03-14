@@ -7,6 +7,7 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.VerticalLayout;
 import infoshare.app.facade.SourceFacade;
+import infoshare.app.util.organisation.OrganisationUtil;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.systemValues.SystemValues;
 import infoshare.client.content.systemValues.forms.ContentSourceForm;
@@ -14,7 +15,7 @@ import infoshare.client.content.systemValues.models.SourceModel;
 import infoshare.client.content.systemValues.tables.ContentSourceTable;
 import infoshare.domain.content.Source;
 import infoshare.factories.content.SourceFactory;
-import infoshare.services.source.SourceService;
+import infoshare.services.ContentFiles.source.SourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashMap;
@@ -61,7 +62,7 @@ public class ContentSourceView extends VerticalLayout implements Button.ClickLis
         final Property property = event.getProperty();
         if (property == table) {
             try {
-                final Source source = sourceService.findById(table.getValue().toString());
+                final Source source = sourceService.findById(OrganisationUtil.getCompanyCode(),table.getValue().toString());
                 final SourceModel bean = getModel(source);
                 form.binder.setItemDataSource(new BeanItem<>(bean));
                 setReadFormProperties();

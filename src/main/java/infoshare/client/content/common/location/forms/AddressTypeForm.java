@@ -32,11 +32,12 @@ public class AddressTypeForm extends FormLayout {
 
         final UIComponentHelper UIComponent = new UIComponentHelper();
 
-        TextField addressTypeName = UIComponent.getTextField("Address Type Name :", "addressTypeName", AddressTypeModel.class, binder);
+        TextField addressTypeName = UIComponent.getTextField("Address Type Name", "addressTypeName", AddressTypeModel.class, binder);
         addComponent(addressTypeName);
 
         HorizontalLayout buttons = ButtonsHelper.getButtons(save, edit, cancel, update, delete);
         buttons.setSizeFull();
         addComponent(buttons);
     }
+
 }

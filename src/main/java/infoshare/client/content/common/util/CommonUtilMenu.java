@@ -24,14 +24,13 @@ public class CommonUtilMenu extends VerticalLayout {
         statusTab.setMargin(true);
         statusTab.addComponent(new StatusTab(main));
 
-        VerticalLayout mailTab = new VerticalLayout();
-        mailTab.setMargin(true);
-        mailTab.addComponent(new MailTab(main));
-
         VerticalLayout linksTab = new VerticalLayout();
         linksTab.setMargin(true);
         linksTab.addComponent(new StorageUrlTab(main));
 
+        VerticalLayout mailTab = new VerticalLayout();
+        mailTab.setMargin(true);
+        mailTab.addComponent(new MailTab(main));
 
         tab = new TabSheet();
         tab.setHeight("100%");
@@ -42,9 +41,9 @@ public class CommonUtilMenu extends VerticalLayout {
         tab.addTab(linksTab, "System LINKS", null);
 
 
-        if (selectedTab.equals("LANDING")) {
+        if (selectedTab.equals("STATUS")) {
             tab.setSelectedTab(statusTab);
-        } else if (selectedTab.equals("MAIL")) {
+        } else if (selectedTab.equals("LANDING")) {
             tab.setSelectedTab(mailTab);
         } else if (selectedTab.equals("LINKS")) {
             tab.setSelectedTab(linksTab);

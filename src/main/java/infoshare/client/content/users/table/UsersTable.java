@@ -4,6 +4,7 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.themes.ValoTheme;
 import infoshare.app.facade.PeopleFacade;
+import infoshare.app.util.organisation.OrganisationUtil;
 import infoshare.app.util.security.RolesValues;
 import infoshare.client.content.MainLayout;
 import infoshare.domain.person.Person;
@@ -28,8 +29,7 @@ public class UsersTable extends Table {
         addContainerProperty("Reset Credentials", Button.class, null);
         addContainerProperty("Disable Account", Button.class, null);
 
-        Set<Person> applicants = PeopleFacade.personService.getPersonsWithRole("HASHCODE", RolesValues.ROLE_EMPLOYEE.name());
-
+        Set<Person> applicants = PeopleFacade.personService.getPersonsWithRole(OrganisationUtil.getPersonID(), RolesValues.ORG_ADMIN.name());
 
         applicants.parallelStream().forEach(item -> {
             Button details = new Button("Details");

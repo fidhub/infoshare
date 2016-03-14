@@ -14,8 +14,7 @@ import java.util.Date;
  * Created by hashcode on 2015/11/28.
  */
 public class MailFactory {
-    public static
-    Mail createMailConf(String key, String value, String host, String port) {
+    public static Mail createMailConf(String key, String value, String host, String port) {
         Mail mail = new Mail.Builder()
                 .orgId(GetUserCredentials.getUser().getOrg())
                 .date(new Date())

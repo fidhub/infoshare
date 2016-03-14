@@ -1,3 +1,4 @@
+
 package infoshare.client.footer;
 
 import com.vaadin.shared.ui.label.ContentMode;

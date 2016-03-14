@@ -5,13 +5,8 @@ package infoshare.app.util.security;
  */
 public enum RolesValues {
     ROLE_ADMIN,
-    ROLE_PROSPECT,
-    ROLE_HRMANAGER,
-    ROLE_HRSTAFF,
-    ROLE_MANAGER,
-    ROLE_EMPLOYEE,
-    ROLE_TRAINER,
-    ROLE_PANELIST,
-    ROLE_COMPANY_ADMIN
+    ORG_ADMIN,
+    ROLE_EDITOR,
+    ROLE_PUBLISHER
 
 }

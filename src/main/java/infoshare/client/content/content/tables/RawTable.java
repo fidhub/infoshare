@@ -3,10 +3,10 @@ package infoshare.client.content.content.tables;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.themes.ValoTheme;
 import infoshare.app.facade.ContentFacade;
+import infoshare.app.util.organisation.OrganisationUtil;
 import infoshare.client.content.MainLayout;
 import infoshare.domain.content.RawContent;
-
-import infoshare.services.Content.RawContentService;
+import infoshare.services.ContentFiles.content.RawContentService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.text.DateFormat;
@@ -36,7 +36,8 @@ public class RawTable extends Table {
         addContainerProperty("Date Created",String.class,null);
 
         try {
-            rawContentService.findAll()
+            rawContentService.findAll(OrganisationUtil.getCompanyCode()) //TODO
+
                     .stream()
                     .filter(cont -> cont!= null)
                     .collect(Collectors.toList())

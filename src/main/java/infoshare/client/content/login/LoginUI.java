@@ -7,6 +7,7 @@ import com.vaadin.server.Page;
 import com.vaadin.server.Responsive;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.shared.Position;
+import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
@@ -72,7 +73,9 @@ public class LoginUI extends UI {
         notification.setHtmlContentAllowed(true);
         notification.setStyleName("tray dark small closable login-help");
         notification.setPosition(Position.BOTTOM_CENTER);
+
         notification.show(Page.getCurrent());
+        notification.setDelayMsec(10000);
     }
 
 
@@ -127,7 +130,7 @@ public class LoginUI extends UI {
         welcome.addStyleName(ValoTheme.LABEL_LIGHT);
         labels.addComponent(welcome);
 
-        Label title = new Label(" Info Share");
+        Label title = new Label("&nbsp;&nbsp;&nbsp;Info Share", ContentMode.HTML);
         title.setSizeUndefined();
         title.addStyleName(ValoTheme.LABEL_H1);
         title.addStyleName(ValoTheme.LABEL_BOLD);

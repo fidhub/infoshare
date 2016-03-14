@@ -20,9 +20,11 @@ public class ContentModel implements Serializable {
     @NotNull
     private String contentType;
     @NotNull
-    private String status     ;
+    private String status;
     @NotNull
-    private String state      ;
+    private String state;
+    @NotNull
+    private String org;
 
     public String getCategory() {
         return category;
@@ -87,4 +89,13 @@ public class ContentModel implements Serializable {
     public void setState(String state) {
         this.state = state;
     }
+
+    public void setOrg(String org) {
+        this.org = org;
+    }
+
+    public String getOrg() {
+        return org;
+    }
+
 }

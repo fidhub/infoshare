@@ -7,7 +7,7 @@ import com.vaadin.ui.VerticalLayout;
 import infoshare.app.util.security.GetUserCredentials;
 import infoshare.client.content.home.HomeMenu;
 import infoshare.client.footer.Footer;
-import infoshare.client.header.view.Header;
+import infoshare.client.header.Header;
 import infoshare.client.home.Index;
 import infoshare.client.sidebar.SideBar;
 

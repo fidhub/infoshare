@@ -1,14 +1,15 @@
 package infoshare.app.facade;
 
-import infoshare.services.Contact.AddressService;
-import infoshare.services.Contact.ContactService;
-import infoshare.services.Contact.Impl.AddressServiceImpl;
-import infoshare.services.Contact.Impl.ContactServiceImpl;
+
+import infoshare.services.location.AddressTypeService;
+import infoshare.services.location.ContactTypeService;
+import infoshare.services.location.Impl.AddressTypeServiceImpl;
+import infoshare.services.location.Impl.ContactTypeServiceImpl;
 
 /**
  * Created by user9 on 2016/02/23.
  */
 public class ContactFacade {
-    public final static AddressService addressService = new AddressServiceImpl();
-    public final static ContactService contactService = new ContactServiceImpl();
+    public final static AddressTypeService addressService = new AddressTypeServiceImpl();
+    public final static ContactTypeService contactService = new ContactTypeServiceImpl();
 }

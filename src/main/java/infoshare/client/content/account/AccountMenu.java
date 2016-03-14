@@ -34,9 +34,9 @@ public class AccountMenu extends VerticalLayout {
         tab.setHeight("100%");
         tab.setWidth("100%");
 
-        tab.addTab(manageCompaniesTab, "Manage COMPANIES", null);
-        tab.addTab(disabledCompaniesTab, "Disabled COMPANIES", null);
-        tab.addTab(companyAnalyticsTab, "Company ANALYTICS", null);
+        tab.addTab(manageCompaniesTab, "Manage Organisation", null);
+        tab.addTab(disabledCompaniesTab, "Disabled Organisation", null);
+        tab.addTab(companyAnalyticsTab, "Organisation Analytics", null);
 
         if (selectedTab.equals("LANDING")) {
             tab.setSelectedTab(manageCompaniesTab);
