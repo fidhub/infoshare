@@ -19,17 +19,7 @@ public class Person implements Serializable, Comparable<Person> {
     private Boolean credentialsNonExpired;
     private Boolean accountNonLocked;
     private String state;
-    /*
-                  firstName: String,
-                  emailAddress: String,
-                  lastName: String,
-                  authvalue: String,
-                  enabled: Boolean,
-                  accountNonExpired: Boolean,
-                  credentialsNonExpired: Boolean,
-                  accountNonLocked: Boolean,
-                  state: String
-     */
+
 
     public String getState() {
         return state;

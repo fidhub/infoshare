@@ -146,14 +146,12 @@ public class OrganisationAdminForm extends FormLayout implements Button.ClickLis
 
     }
 
-
     private Person createAccount(Map<String, String> stringVals, Map<String, Boolean> boolVals) {
         Person companyAdmin = PersonFactory.getPerson(stringVals, boolVals);
-        try{
+        try {
             PeopleFacade.personService.save(companyAdmin);
-
-        PersonRole role = PersonRoleFactory.getPersonRole(companyAdmin.getId(), RolesValues.ROLE_COMPANY_ADMIN.name());
-        PeopleFacade.personRoleService.save(role);
+            PersonRole role = PersonRoleFactory.getPersonRole(companyAdmin.getId(), RolesValues.ORG_ADMIN.name());
+            PeopleFacade.personRoleService.save(role);
         }catch (Exception e){
             e.fillInStackTrace();
         }

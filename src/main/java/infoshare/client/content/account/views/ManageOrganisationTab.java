@@ -37,28 +37,28 @@ public class ManageOrganisationTab extends VerticalLayout implements
     private final HorizontalLayout headerBar = new HorizontalLayout();
     public final VerticalLayout contentPanel = new VerticalLayout();
 
-    private final Button addCompany = new Button("Add New Company");
-    private final TextField companySearchBox = new TextField(" Company Search");
+    private final Button addOrg = new Button("Add New Organisation");
+    private final TextField orgSearchBox = new TextField(" Organisation Search");
     Set<Organisation> companies = OrganisationFacade.companyService.getActiveOrganisations();
 
 
     public ManageOrganisationTab(MainLayout main) {
         contentPanel.setSizeFull();
-        addCompany.setStyleName(ValoTheme.BUTTON_FRIENDLY);
+        addOrg.setStyleName(ValoTheme.BUTTON_FRIENDLY);
 
-        companySearchBox.setInputPrompt("Use Name of the Company to Search");
+        orgSearchBox.setInputPrompt("Use Name of the Organisation to Search");
         this.main = main;
         form = new OrganisationForm();
         table = new OrganisationTable(main, this, companies);
         headerBar.setSizeFull();
-        headerBar.addComponent(companySearchBox);
-        headerBar.setExpandRatio(companySearchBox, 1);
-        headerBar.setComponentAlignment(companySearchBox, Alignment.MIDDLE_LEFT);
-        headerBar.addComponent(addCompany);
-        headerBar.setComponentAlignment(addCompany, Alignment.MIDDLE_RIGHT);
-        headerBar.setComponentAlignment(companySearchBox, Alignment.MIDDLE_LEFT);
-        addCompany.setWidth("200px");
-        companySearchBox.setWidth("400px");
+        headerBar.addComponent(orgSearchBox);
+        headerBar.setExpandRatio(orgSearchBox, 1);
+        headerBar.setComponentAlignment(orgSearchBox, Alignment.MIDDLE_LEFT);
+        headerBar.addComponent(addOrg);
+        headerBar.setComponentAlignment(addOrg, Alignment.MIDDLE_RIGHT);
+        headerBar.setComponentAlignment(orgSearchBox, Alignment.MIDDLE_LEFT);
+        addOrg.setWidth("200px");
+        orgSearchBox.setWidth("400px");
         addComponent(headerBar);
         addComponent(new Label("<HR/>", ContentMode.HTML));
         contentPanel.removeAllComponents();
@@ -81,7 +81,7 @@ public class ManageOrganisationTab extends VerticalLayout implements
             saveEditedForm(form.binder);
         } else if (source == form.delete) {
             deleteForm(form.binder);
-        } else if (source == addCompany) {
+        } else if (source == addOrg) {
             contentPanel.removeAllComponents();
             contentPanel.addComponent(form);
         }
@@ -201,9 +201,9 @@ public class ManageOrganisationTab extends VerticalLayout implements
         form.delete.addClickListener(this);
         //Register Table Listeners
         table.addValueChangeListener(this);
-        addCompany.addClickListener(this);
+        addOrg.addClickListener(this);
 
-        companySearchBox.addTextChangeListener(event -> {
+        orgSearchBox.addTextChangeListener(event -> {
             table.removeAllItems();
             Set<Organisation> list = new HashSet<>();
             for (Organisation company : companies) {
@@ -216,11 +216,11 @@ public class ManageOrganisationTab extends VerticalLayout implements
             contentPanel.addComponent(table);
         });
 
-        companySearchBox.addShortcutListener(new ShortcutListener("Clear",
+        orgSearchBox.addShortcutListener(new ShortcutListener("Clear",
                 ShortcutAction.KeyCode.ESCAPE, null) {
             @Override
             public void handleAction(Object sender, Object target) {
-                companySearchBox.setValue("");
+                orgSearchBox.setValue("");
                 table = new OrganisationTable(main, ManageOrganisationTab.this, companies);
                 contentPanel.removeAllComponents();
                 contentPanel.addComponent(table);

@@ -1,4 +1,4 @@
-package infoshare.client.content.system.locations.table;
+package infoshare.client.content.system.table;
 
 import com.vaadin.ui.Table;
 import infoshare.app.facade.LocationFacade;

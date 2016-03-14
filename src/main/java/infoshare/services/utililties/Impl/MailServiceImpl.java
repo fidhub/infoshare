@@ -13,8 +13,8 @@ import java.util.Set;
  */
 public class MailServiceImpl implements MailService {
     @Override
-    public Mail findById(String s,String id) {
-        return MailAPI.findById(s,id);
+    public Mail findById(String org,String id) {
+        return MailAPI.findById(org,id);
     }
 
     @Override

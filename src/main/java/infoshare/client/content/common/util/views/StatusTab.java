@@ -32,6 +32,8 @@ public class StatusTab extends VerticalLayout implements
         form = new StatusForm();
         table = new StatusTable(main);
         setSizeFull();
+        addComponent(form);
+        addComponent(table);
     }
 
     @Override

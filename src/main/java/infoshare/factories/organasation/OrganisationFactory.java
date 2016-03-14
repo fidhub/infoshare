@@ -1,7 +1,6 @@
 package infoshare.factories.organasation;
 
 import infoshare.app.util.DomainState;
-import infoshare.app.util.security.KeyGenerator;
 import infoshare.domain.organisation.Organisation;
 
 import java.util.Date;
@@ -17,7 +16,7 @@ public class OrganisationFactory {
                 .id(code)
                 .name(name)
                 .details(details)
-                .adminattached("ROLE_ORG_ADMIN")
+                .adminattached(DomainState.NO_ADMIN.name())//todo ?? what goes here.
                 .date(new Date())
                 .state(DomainState.ACTIVE.name())
                 .build();

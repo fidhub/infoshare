@@ -8,6 +8,7 @@ import com.vaadin.ui.Notification;
 import com.vaadin.ui.VerticalLayout;
 import infoshare.app.facade.UtilFacade;
 import infoshare.app.util.DomainState;
+import infoshare.app.util.organisation.OrganisationUtil;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.common.util.CommonUtilMenu;
 import infoshare.client.content.common.util.forms.MailForm;
@@ -60,7 +61,7 @@ public class MailTab extends VerticalLayout implements
     public void valueChange(Property.ValueChangeEvent event) {
         final Property property = event.getProperty();
         if (property == table) {
-            final Mail mail = UtilFacade.mailService.findById(table.getValue().toString());
+            final Mail mail = UtilFacade.mailService.findById(OrganisationUtil.getCompanyCode(),table.getValue().toString());
             final MailModel model = getModel(mail);
             form.binder.setItemDataSource(new BeanItem<>(model));
             setReadFormProperties();
@@ -141,16 +142,12 @@ public class MailTab extends VerticalLayout implements
     private Mail getNewEntity(FieldGroup binder) {
         final MailModel model = ((BeanItem<MailModel>) binder.getItemDataSource()).getBean();
         Mail mail = MailFactory.createMailConf(model.getKey(), model.getValue(), model.getHost(), model.getPort());
-        System.out.println(mail.getId()+"\n");
-        System.out.println(mail.getDate()+"\n");
-        System.out.println(mail.getOrgId()+"\n");
-        System.out.println(mail.getState()+"\n");
         return mail;
     }
 
     private Mail getUpdateEntity(FieldGroup binder) {
         final MailModel model = ((BeanItem<MailModel>) binder.getItemDataSource()).getBean();
-        final Mail mail = UtilFacade.mailService.findById(table.getValue().toString());
+        final Mail mail = UtilFacade.mailService.findById(OrganisationUtil.getCompanyCode(),table.getValue().toString());
         final Mail updateMail = new Mail
                 .Builder().copy(mail)
                 .date(new Date())
@@ -165,14 +162,15 @@ public class MailTab extends VerticalLayout implements
 
     private MailModel getModel(Mail mail) {
         final MailModel model = new MailModel();
-        System.out.println(mail.getDate());
-        model.setDate(mail.getDate());
-        model.setHost(mail.getHost());
-        model.setKey(mail.getKey());
-        model.setPort(mail.getPort());
-        model.setState(mail.getState());
-        model.setValue(mail.getValue());
-        model.setOrgId(mail.getOrgId());
+        try {
+            model.setDate(mail.getDate());
+            model.setHost(mail.getHost());
+            model.setKey(mail.getKey());
+            model.setPort(mail.getPort());
+            model.setState(mail.getState());
+            model.setValue(mail.getValue());
+            model.setOrgId(mail.getOrgId());
+        }catch (Exception e){e.printStackTrace();}
         return model;
     }
 }

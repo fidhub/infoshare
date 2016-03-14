@@ -28,22 +28,22 @@ public class DisabledOrganisationTab extends VerticalLayout implements
     private final HorizontalLayout headerBar = new HorizontalLayout();
     public final VerticalLayout contentPanel = new VerticalLayout();
 
-    private final TextField companySearchBox = new TextField("Company Search");
+    private final TextField orgSearchBox = new TextField("Organisation Search");
     Set<Organisation> companies = OrganisationFacade.companyService.getRetiredOrganisations();
 
     public DisabledOrganisationTab(MainLayout main) {
         contentPanel.setSizeFull();
 
-        companySearchBox.setInputPrompt("Use Name of the Company to Search");
+        orgSearchBox.setInputPrompt("Use Name of the Organisation to Search");
         this.main = main;
 
         table = new DisabledOrganisationTable(main, this, companies);
         headerBar.setSizeFull();
-        headerBar.addComponent(companySearchBox);
-        headerBar.setExpandRatio(companySearchBox, 1);
-        headerBar.setComponentAlignment(companySearchBox, Alignment.MIDDLE_LEFT);
-        headerBar.setComponentAlignment(companySearchBox, Alignment.MIDDLE_LEFT);
-        companySearchBox.setWidth("400px");
+        headerBar.addComponent(orgSearchBox);
+        headerBar.setExpandRatio(orgSearchBox, 1);
+        headerBar.setComponentAlignment(orgSearchBox, Alignment.MIDDLE_LEFT);
+        headerBar.setComponentAlignment(orgSearchBox, Alignment.MIDDLE_LEFT);
+        orgSearchBox.setWidth("400px");
         addComponent(headerBar);
         addComponent(new Label("<HR/>", ContentMode.HTML));
         contentPanel.removeAllComponents();
@@ -96,7 +96,7 @@ public class DisabledOrganisationTab extends VerticalLayout implements
 
         //Register Table Listeners
         table.addValueChangeListener(this);
-        companySearchBox.addTextChangeListener(event -> {
+        orgSearchBox.addTextChangeListener(event -> {
             table.removeAllItems();
             Set<Organisation> list = new HashSet<>();
             for (Organisation company : companies) {
@@ -109,11 +109,11 @@ public class DisabledOrganisationTab extends VerticalLayout implements
             contentPanel.addComponent(table);
         });
 
-        companySearchBox.addShortcutListener(new ShortcutListener("Clear",
+        orgSearchBox.addShortcutListener(new ShortcutListener("Clear",
                 ShortcutAction.KeyCode.ESCAPE, null) {
             @Override
             public void handleAction(Object sender, Object target) {
-                companySearchBox.setValue("");
+                orgSearchBox.setValue("");
                 table = new DisabledOrganisationTable(main, DisabledOrganisationTab.this, companies);
                 contentPanel.removeAllComponents();
                 contentPanel.addComponent(table);

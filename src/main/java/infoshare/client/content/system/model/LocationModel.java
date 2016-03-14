@@ -1,4 +1,4 @@
-package infoshare.client.content.system.locations.model;
+package infoshare.client.content.system.model;
 
 import java.io.Serializable;
 import java.util.List;

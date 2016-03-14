@@ -12,11 +12,11 @@ import infoshare.client.content.MainLayout;
 /**
  * Created by hashcode on 2015/08/16.
  */
-public class LandindPageTab extends VerticalLayout {
+public class LandingPageTab extends VerticalLayout {
     private final MainLayout main;
     GraphJSComponent graphJSComponent;
 
-    public LandindPageTab(MainLayout main) {
+    public LandingPageTab(MainLayout main) {
         this.main = main;
         setSizeFull();
 

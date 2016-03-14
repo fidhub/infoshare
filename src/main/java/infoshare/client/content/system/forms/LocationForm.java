@@ -1,4 +1,4 @@
-package infoshare.client.content.system.locations.forms;
+package infoshare.client.content.system.forms;
 
 import com.vaadin.data.fieldgroup.FieldGroup;
 import com.vaadin.data.util.BeanItem;
@@ -9,7 +9,7 @@ import infoshare.app.util.fields.ButtonsHelper;
 import infoshare.app.util.fields.UIComboBoxHelper;
 import infoshare.app.util.fields.UIComponentHelper;
 import infoshare.app.util.organisation.OrganisationUtil;
-import infoshare.client.content.system.locations.model.LocationModel;
+import infoshare.client.content.system.model.LocationModel;
 import infoshare.domain.location.LocationType;
 import infoshare.domain.organisation.Location;
 

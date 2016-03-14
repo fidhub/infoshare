@@ -4,7 +4,7 @@ import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.VerticalLayout;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.home.views.OrganisationInformationTab;
-import infoshare.client.content.home.views.LandindPageTab;
+import infoshare.client.content.home.views.LandingPageTab;
 import infoshare.client.content.home.views.MessageBoardTab;
 
 
@@ -20,7 +20,7 @@ public class HomeMenu extends VerticalLayout {
 
         VerticalLayout homePageTab = new VerticalLayout();
         homePageTab.setMargin(true);
-        homePageTab.addComponent(new LandindPageTab(main));
+        homePageTab.addComponent(new LandingPageTab(main));
 
         VerticalLayout messageBoardTab = new VerticalLayout();
         messageBoardTab.setMargin(true);

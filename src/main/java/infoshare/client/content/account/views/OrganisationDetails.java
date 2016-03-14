@@ -45,18 +45,18 @@ public class OrganisationDetails extends VerticalLayout implements
     private final OrganisationForm form;
     private final String tab;
     private String selectedUserId;
-    private final Organisation company;
-    private final String companyId;
+    private final Organisation organisation;
+    private final String orgId;
 
 
     public OrganisationDetails(MainLayout main, Organisation co, String tab) {
-        company = co;
-        companyId = company.getId();
-        Label heading = new Label("<h2>Details for " + company.getName() + "</H2>", ContentMode.HTML);
+        organisation = co;
+        orgId = organisation.getId();
+        Label heading = new Label("<h2>Details for " + organisation.getName() + "</H2>", ContentMode.HTML);
         heading.setStyleName(ValoTheme.LABEL_COLORED);
         heading.setSizeFull();
         heading.setSizeFull();
-        final OrganisationModel model = getModel(company);
+        final OrganisationModel model = getModel(organisation);
         form = new OrganisationForm();
         this.tab = tab;
         form.binder.setItemDataSource(new BeanItem<>(model));
@@ -72,20 +72,19 @@ public class OrganisationDetails extends VerticalLayout implements
         grid.addComponent(form, 0, 1, 3, 1);
 
 
-        Label companyAdmin = new Label("<h2>Company Administrators </H2>", ContentMode.HTML);
+        Label companyAdmin = new Label("<h2>Organisation Administrators </H2>", ContentMode.HTML);
         companyAdmin.setStyleName(ValoTheme.LABEL_COLORED);
         companyAdmin.setSizeFull();
         companyAdmin.setSizeFull();
         grid.addComponent(companyAdmin, 0, 2, 3, 2);
 
-        Set<Person> admins = PeopleFacade.personService.getPersonsWithRole(company.getId(), RolesValues.ROLE_COMPANY_ADMIN.name());
+        Set<Person> admins = PeopleFacade.personService.getPersonsWithRole(organisation.getId(), RolesValues.ORG_ADMIN.name());
 
 
         if (admins.size() > 0) {
 
-
             ComboBox adminsCombobox = new ComboBox();
-            adminsCombobox.setInputPrompt("Select " + company.getName() + " Current Employee");
+            adminsCombobox.setInputPrompt("Select " + organisation.getName() + " Current Employee");
             adminsCombobox.setInvalidAllowed(false);
 
             adminsCombobox.setSizeFull();
@@ -121,7 +120,7 @@ public class OrganisationDetails extends VerticalLayout implements
 
 
         if (admins.size() == 0) {
-            Button addAdmin = new Button("Add Company Administrator", FontAwesome.USER);
+            Button addAdmin = new Button("Add Organisation Administrator", FontAwesome.USER);
             addAdmin.setWidth(100, Unit.PERCENTAGE);
             addAdmin.setHeight(50, Unit.PIXELS);
             addAdmin.setIcon(FontAwesome.USER);
@@ -129,7 +128,7 @@ public class OrganisationDetails extends VerticalLayout implements
             grid.addComponent(addAdmin, 0, 4, 3, 4);
             addAdmin.addClickListener(event -> {
                 removeAllComponents();
-                addComponent(new OrganisationAdminForm(main, company));
+                addComponent(new OrganisationAdminForm(main, organisation));
             });
 
         }
@@ -152,7 +151,7 @@ public class OrganisationDetails extends VerticalLayout implements
 
                     MessageBox.showPlain(Icon.WARN,
                             "Password Reset",
-                            "Do you really want to RESET " + company.getName() + " Administrator Password?",
+                            "Do you really want to RESET " + organisation.getName() + " Administrator Password?",
                             buttonId -> {
                                 if (buttonId == ButtonId.YES) {
                                     ExecutorService executorService = Executors.newSingleThreadExecutor();
@@ -190,7 +189,6 @@ public class OrganisationDetails extends VerticalLayout implements
     private void reset(Person item) {
         SecurityService.resetValue(item);
     }
-
 
     private void setReadFormProperties() {
         form.binder.setReadOnly(true);
@@ -232,7 +230,7 @@ public class OrganisationDetails extends VerticalLayout implements
     private void deleteForm(FieldGroup binder) {
         Organisation updatedCompany = new Organisation
                 .Builder()
-                .copy(company)
+                .copy(organisation)
                 .state(DomainState.RETIRED.name())
                 .build();
         OrganisationFacade.companyService.update(updatedCompany);
@@ -282,7 +280,7 @@ public class OrganisationDetails extends VerticalLayout implements
         } catch (FieldGroup.CommitException e) {
             e.printStackTrace();
         }
-        final Organisation company = OrganisationFacade.companyService.findById(companyId);
+        final Organisation company = OrganisationFacade.companyService.findById(orgId);
         final OrganisationModel bean = ((BeanItem<OrganisationModel>) binder.getItemDataSource()).getBean();
         Map<String, String> details = new HashMap<String, String>();
         details.put("address", bean.getAddress());

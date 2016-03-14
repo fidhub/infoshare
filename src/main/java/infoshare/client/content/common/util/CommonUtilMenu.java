@@ -41,9 +41,9 @@ public class CommonUtilMenu extends VerticalLayout {
         tab.addTab(linksTab, "System LINKS", null);
 
 
-        if (selectedTab.equals("LANDING")) {
+        if (selectedTab.equals("STATUS")) {
             tab.setSelectedTab(statusTab);
-        } else if (selectedTab.equals("MAIL")) {
+        } else if (selectedTab.equals("LANDING")) {
             tab.setSelectedTab(mailTab);
         } else if (selectedTab.equals("LINKS")) {
             tab.setSelectedTab(linksTab);

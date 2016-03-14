@@ -11,12 +11,12 @@ import infoshare.client.content.users.table.UsersTable;
  */
 public class UserTab extends VerticalLayout implements
         Property.ValueChangeListener {
-
+    private UsersTable table;
     private final MainLayout main;
-
     public UserTab(MainLayout main) {
         this.main = main;
-        addComponent(new UsersTable(main));
+        this.table = new UsersTable(main);
+        addComponent(table);
     }
 
     @Override

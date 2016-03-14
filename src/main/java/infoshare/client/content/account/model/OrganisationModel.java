@@ -20,8 +20,6 @@ public class OrganisationModel implements Serializable {
     private String state;
 
 
-
-
     public String getName() {
         return name;
     }

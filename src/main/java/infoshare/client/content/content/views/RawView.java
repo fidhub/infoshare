@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 /**
  * Created by hashcode on 2015/06/24.
  */
-public class RawView extends VerticalLayout implements Button.ClickListener,Property.ValueChangeListener{
+public class  RawView extends VerticalLayout implements Button.ClickListener,Property.ValueChangeListener{
 
     private RawContentService rawContentService = ContentFacade.rawContentService;
     private EditedContentService editedContentService = ContentFacade.editedContentService;
@@ -37,7 +37,7 @@ public class RawView extends VerticalLayout implements Button.ClickListener,Prop
     private final RawForm form;
     private Window popUp ;
     private RawContentFilter rawContentFilter = new RawContentFilter();
-    public String tableId;
+    public static String tableId;
 
     public RawView( MainLayout mainApp) {
 
@@ -93,6 +93,9 @@ public class RawView extends VerticalLayout implements Button.ClickListener,Prop
     }
     private void getHome() {
         main.content.setSecondComponent(new ContentMenu(main, "LANDING"));
+    }
+    public static void getme(){
+
     }
     public void EditButton(){
         try {

@@ -1,5 +1,6 @@
-package infoshare.client.header.view;
+package infoshare.client.header;
 
+import com.vaadin.event.ItemClickEvent;
 import com.vaadin.event.LayoutEvents;
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.server.FileResource;
@@ -18,8 +19,6 @@ import infoshare.client.content.MainLayout;
 import infoshare.client.content.content.ContentMenu;
 import infoshare.client.content.content.views.RawView;
 import infoshare.client.content.home.HomeMenu;
-import infoshare.client.header.Form.ProfilePopUp;
-import infoshare.client.header.landing_page.LandingHome;
 import infoshare.domain.content.RawContent;
 import infoshare.services.ContentFiles.content.RawContentService;
 
@@ -32,7 +31,7 @@ import java.util.stream.Collectors;
 /**
  * Created by hashcode on 2015/06/23.
  */
-public class Header extends VerticalLayout implements Button.ClickListener {
+public class Header extends VerticalLayout implements Button.ClickListener , ItemClickEvent.ItemClickListener{
 
     private RawContentService rawContentService = ContentFacade.rawContentService;
     private MainLayout main ;
@@ -42,12 +41,11 @@ public class Header extends VerticalLayout implements Button.ClickListener {
     public Button notify = new Button();
     public Button user = new Button();
     private Table notificationTable = new Table();
-    private RawView rawView ;
     private final Page page;
+
     public Header(MainLayout main,Page page) {
         this.main = main;
         this.page = page;
-        rawView = new RawView(main);
         setSizeFull();
         setSpacing(true);
         addComponent(getHeaderPanel());
@@ -78,7 +76,7 @@ public class Header extends VerticalLayout implements Button.ClickListener {
             if (userProfile != null && userProfile.getUI() !=null) {
                 userProfile.close();
             }
-            main.content.setSecondComponent(new LandingHome(main));
+            main.content.setSecondComponent(new HomeMenu(main,"LANDING"));
             home.getUI();
         }else if(source == notify){
           notificationButton(clickEvent);
@@ -143,7 +141,6 @@ public class Header extends VerticalLayout implements Button.ClickListener {
         footer.addComponent(more);
         footer.setComponentAlignment(more, Alignment.TOP_CENTER);
 
-
         notificationTable.setWidth("100%");
         notificationTable.setHeight(360.0f, Unit.PIXELS);
         notificationTable.addContainerProperty("Notifications", Label.class, null);
@@ -162,8 +159,8 @@ public class Header extends VerticalLayout implements Button.ClickListener {
             if (event1.isDoubleClick()) {
                if(flag) {
                    notifications.close();
-                   rawView.tableId = notificationTable.getValue().toString();
-                   rawView.EditButton();
+                   RawView.tableId = notificationTable.getValue().toString();
+                   new RawView(main).EditButton();
                    flag=false;
                }
             }
@@ -191,17 +188,6 @@ public class Header extends VerticalLayout implements Button.ClickListener {
         layout.setMargin(true);
         layout.setSpacing(true);
 
-        Button profile = new Button("Your profile");
-        profile.addStyleName(ValoTheme.BUTTON_TINY);
-        profile.setIcon(FontAwesome.USER);
-        profile.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
-        profile.setSizeFull();
-        profile.addClickListener(clickEvent -> {
-            ProfilePopUp popup3 = new ProfilePopUp();
-            UI.getCurrent().addWindow(popup3);
-            userProfile.close();
-        });
-
         Button signOut = new Button( "Sign out");
         signOut.addStyleName(ValoTheme.BUTTON_TINY);
         signOut.setIcon(FontAwesome.SIGN_OUT);
@@ -209,7 +195,6 @@ public class Header extends VerticalLayout implements Button.ClickListener {
         signOut.setSizeFull();
         signOut.addClickListener(clickEvent -> page.setLocation("/logout"));
 
-        layout.addComponent(profile);
         layout.addComponent(signOut);
 
         userProfile.setContent(layout);
@@ -304,9 +289,7 @@ public class Header extends VerticalLayout implements Button.ClickListener {
         barMenu.setSpacing(true);
 
         barMenu.addComponent(getBar());
-        final TextField textField = getSearch();
         barMenu.addComponent(user);
-        barMenu.addComponent(textField);
         layout.addComponent(barMenu);
         layout.setComponentAlignment(barMenu, Alignment.MIDDLE_RIGHT);
 
@@ -324,14 +307,6 @@ public class Header extends VerticalLayout implements Button.ClickListener {
         Responsive.makeResponsive(logo);
         return logo;
     }
-    private TextField getSearch(){
-        final TextField searchBox = new TextField();
-        searchBox.setIcon(FontAwesome.SEARCH);
-        searchBox.setInputPrompt("Search");
-        searchBox.addStyleName(ValoTheme.TEXTFIELD_INLINE_ICON);
-        searchBox.addStyleName(ValoTheme.TEXTAREA_SMALL);
-        return searchBox;
-    }
     private HorizontalLayout getBar(){
         HorizontalLayout layout = new HorizontalLayout();
         layout.setSpacing(false);
@@ -340,7 +315,6 @@ public class Header extends VerticalLayout implements Button.ClickListener {
         home.setIcon(FontAwesome.HOME);
         home.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
         home.addStyleName(ValoTheme.BUTTON_SMALL);
-        home.addClickListener(event ->main.content.setSecondComponent( new HomeMenu(main,"LANDING")));
 
         user.setCaption(GetUserCredentials.username());
         user.setDescription(GetUserCredentials.username());
@@ -360,4 +334,8 @@ public class Header extends VerticalLayout implements Button.ClickListener {
         return layout;
     }
 
+    @Override
+    public void itemClick(ItemClickEvent event) {
+
+    }
 }

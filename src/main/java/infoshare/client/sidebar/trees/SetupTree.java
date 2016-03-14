@@ -29,7 +29,6 @@ public class SetupTree extends Tree implements ItemClickEvent.ItemClickListener 
         if (USERS.equals(event.getItemId())) {
             main.content.setSecondComponent(new SetupMenu(main, LANDING_TAB));
         }
-
         if (SYSTEM_VALUES.equals(event.getItemId())) {
             main.content.setSecondComponent(new SystemValues(main, LANDING_TAB));
         }

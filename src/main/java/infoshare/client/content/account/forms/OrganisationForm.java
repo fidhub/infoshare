@@ -5,7 +5,6 @@ import com.vaadin.data.util.BeanItem;
 import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.*;
 import infoshare.app.util.fields.ButtonsHelper;
-import infoshare.app.util.fields.UIComboBoxHelper;
 import infoshare.app.util.fields.UIComponentHelper;
 import infoshare.client.content.account.model.OrganisationModel;
 
@@ -29,15 +28,12 @@ public class OrganisationForm extends FormLayout {
         item = new BeanItem<>(bean);
         binder = new FieldGroup(item);
         final UIComponentHelper UIComponent = new UIComponentHelper();
-        final UIComboBoxHelper UIComboBox = new UIComboBoxHelper();
 
-
-        TextField name = UIComponent.getGridTextField("Company Name :", "name", OrganisationModel.class, binder);
-        TextField code = UIComponent.getGridTextField("Company Code Name :", "code", OrganisationModel.class, binder);
-        TextArea address = UIComponent.getGridTextArea("Company Address :", "address", OrganisationModel.class, binder);
+        TextField name = UIComponent.getGridTextField("Organisation Name :", "name", OrganisationModel.class, binder);
+        TextField code = UIComponent.getGridTextField("Organisation Code Name :", "code", OrganisationModel.class, binder);
+        TextArea address = UIComponent.getGridTextArea("Organisation Address :", "address", OrganisationModel.class, binder);
         TextField email = UIComponent.getGridTextField("Contact Email :", "email", OrganisationModel.class, binder);
         TextField contactphone = UIComponent.getGridTextField("Contact number :", "contactphone", OrganisationModel.class, binder);
-
 
         // Create a field group and use it to bind the fields in the layout
         GridLayout grid = new GridLayout(4, 10);
@@ -47,15 +43,12 @@ public class OrganisationForm extends FormLayout {
         grid.addComponent(name, 0, 0);
         grid.addComponent(code, 1, 0);
 
-
         //Second ROW
         grid.addComponent(email, 0, 1);
         grid.addComponent(contactphone, 1, 1);
 
-
         //Second ROW
         grid.addComponent(address, 2, 0, 2, 1);
-
 
         //SPAN ROW 1 and 2
 //        grid.addComponent(description, 2, 0, 2, 1);
