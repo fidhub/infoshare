@@ -22,7 +22,7 @@ public class LanguageProficiencyTable extends Table {
 
 
         // Add Data Columns
-        Set<LanguageProficiency> languageProficiencys = DemographicsFacade.languageProficiencyService.findAll();
+        Set<LanguageProficiency> languageProficiencys = DemographicsFacade.getLanguageProficiencyServiceInstance().findAll();
         for (LanguageProficiency proficiency : languageProficiencys) {
             addItem(new Object[]{proficiency.getName()}, proficiency.getId());
         }

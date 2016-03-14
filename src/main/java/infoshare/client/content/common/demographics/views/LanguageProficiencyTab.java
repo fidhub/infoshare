@@ -57,7 +57,7 @@ public class LanguageProficiencyTab extends VerticalLayout implements Button.Cli
         final Property property = event.getProperty();
         if (property == table) {
 
-            final LanguageProficiency languageProficiency = DemographicsFacade.languageProficiencyService.findById(table.getValue().toString());
+            final LanguageProficiency languageProficiency = DemographicsFacade.getLanguageProficiencyServiceInstance().findById(table.getValue().toString());
             final LanguageProficiencyModel model = getModel(languageProficiency);
             form.binder.setItemDataSource(new BeanItem<>(model));
             setReadFormProperties();
@@ -67,7 +67,7 @@ public class LanguageProficiencyTab extends VerticalLayout implements Button.Cli
     private void saveForm(FieldGroup binder) {
         try {
             binder.commit();
-            DemographicsFacade.languageProficiencyService.save(getNewEntity(binder));
+            DemographicsFacade.getLanguageProficiencyServiceInstance().save(getNewEntity(binder));
             getHome();
             Notification.show("Record ADDED!", Notification.Type.TRAY_NOTIFICATION);
         } catch (FieldGroup.CommitException e) {
@@ -79,7 +79,7 @@ public class LanguageProficiencyTab extends VerticalLayout implements Button.Cli
     private void saveEditedForm(FieldGroup binder) {
         try {
             binder.commit();
-            DemographicsFacade.languageProficiencyService.save(getUpdateEntity(binder));
+            DemographicsFacade.getLanguageProficiencyServiceInstance().save(getUpdateEntity(binder));
             getHome();
             Notification.show("Record UPDATED!", Notification.Type.TRAY_NOTIFICATION);
         } catch (FieldGroup.CommitException e) {
@@ -89,13 +89,13 @@ public class LanguageProficiencyTab extends VerticalLayout implements Button.Cli
     }
 
     private void deleteForm(FieldGroup binder) {
-        final LanguageProficiency languageProficiency = DemographicsFacade.languageProficiencyService.findById(table.getValue().toString());
+        final LanguageProficiency languageProficiency = DemographicsFacade.getLanguageProficiencyServiceInstance().findById(table.getValue().toString());
         final LanguageProficiency updatedLanguageProficiency = new LanguageProficiency
                 .Builder()
                 .copy(languageProficiency)
                 .state(DomainState.RETIRED.name())
                 .build();
-        DemographicsFacade.languageProficiencyService.save(updatedLanguageProficiency);
+        DemographicsFacade.getLanguageProficiencyServiceInstance().save(updatedLanguageProficiency);
         getHome();
     }
 
@@ -143,7 +143,7 @@ public class LanguageProficiencyTab extends VerticalLayout implements Button.Cli
 
     private LanguageProficiency getUpdateEntity(FieldGroup binder) {
         final LanguageProficiencyModel bean = ((BeanItem<LanguageProficiencyModel>) binder.getItemDataSource()).getBean();
-        final LanguageProficiency languageProficiency = DemographicsFacade.languageProficiencyService.findById(table.getValue().toString());
+        final LanguageProficiency languageProficiency = DemographicsFacade.getLanguageProficiencyServiceInstance().findById(table.getValue().toString());
         final LanguageProficiency updatedLanguageProficiency = new LanguageProficiency
                 .Builder()
                 .copy(languageProficiency)

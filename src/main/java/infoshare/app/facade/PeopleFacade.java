@@ -12,12 +12,21 @@ import infoshare.services.people.*;
 
 public class PeopleFacade {
 
-    public final static PersonRoleService personRoleService = new PersonRoleServiceImpl();
-    public final static PersonService personService = new PersonServiceImpl();
-    public final static PersonAddressService personAddressService = new PersonAddressServiceImpl();
-    public final static PersonContactService personContactService = new PersonContactServiceImpl();
-    public final static PersonDemographicsService personDemographicsService = new PersonDemographicsServiceImpl();
-    public final static PersonImagesService personImagesService = new PersonImagesServiceImpl();
-    public final static PersonLanguageService personLanguageService = new PersonLanguageServiceImpl();
+    private static PersonRoleService personRoleService = new PersonRoleServiceImpl();
+    private static PersonService personService = new PersonServiceImpl();
+    private static PersonAddressService personAddressService = new PersonAddressServiceImpl();
+    private static PersonContactService personContactService = new PersonContactServiceImpl();
+    private static PersonDemographicsService personDemographicsService = new PersonDemographicsServiceImpl();
+    private static PersonImagesService personImagesService = new PersonImagesServiceImpl();
+    private static PersonLanguageService personLanguageService = new PersonLanguageServiceImpl();
+
+    public static PersonRoleService getPersonRoleServiceInstance(){return personRoleService ;}
+    public static PersonService getPersonServiceInstance(){return personService;}
+    public static PersonAddressService getPersonAddressServiceInstance(){return personAddressService ;}
+    public static PersonContactService getPersonContactServiceInstance(){return personContactService;}
+    public static PersonDemographicsService getPersonDemographicsServiceInstance(){return personDemographicsService;}
+    public static PersonImagesService getPersonImagesServiceInstance(){return personImagesService;}
+    public static PersonLanguageService getPersonLanguageServiceInstance(){return personLanguageService;}
+
 
 }

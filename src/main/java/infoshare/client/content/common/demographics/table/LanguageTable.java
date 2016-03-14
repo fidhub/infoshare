@@ -22,7 +22,7 @@ public class LanguageTable extends Table {
 
 
         // Add Data Columns
-        Set<Language> languages = DemographicsFacade.languageService.findAll();
+        Set<Language> languages = DemographicsFacade.getLanguageServiceInstance().findAll();
         for (Language language : languages) {
             addItem(new Object[]{language.getName()}, language.getId());
         }

@@ -26,7 +26,7 @@ import java.util.*;
  */
 @Service
 public class SecurityService implements UserDetailsService {
-    private final PersonService personService = PeopleFacade.personService;
+    private final PersonService personService = PeopleFacade.getPersonServiceInstance();
 
     @Override
     public UserDetails loadUserByUsername(String emailAddress) throws UsernameNotFoundException {
@@ -64,11 +64,11 @@ public class SecurityService implements UserDetailsService {
 
     public static Set<Role> getUserRoles() {
         Person person = GetUserCredentials.getUser();
-        return PeopleFacade.personService.getRoles(person.getId());
+        return PeopleFacade.getPersonServiceInstance().getRoles(person.getId());
     }
 
     public static boolean securityCheck(String ro) {
-        Role role = DemographicsFacade.rolesListService.getRole(ro);
+        Role role = DemographicsFacade.getRolesListServiceInstance().getRole(ro);
         return getUserRoles().contains(role);
     }
 
@@ -94,13 +94,13 @@ public class SecurityService implements UserDetailsService {
                 .copy(person)
                 .authvalue(PasswordHash.createEncryptedPassword(newvalue))
                 .build();
-        PeopleFacade.personService.update(user);
+        PeopleFacade.getPersonServiceInstance().update(user);
         sendEmail(newvalue, person);
 
     }
 
     public static void sendEmail(String password, Person companyAdmin) {
-        Mail props = UtilFacade.mailService.findAll(OrganisationUtil.getCompanyCode()).iterator().next();
+        Mail props = UtilFacade.getMailServiceInstance().findAll(OrganisationUtil.getCompanyCode()).iterator().next();
         ComposeEmail email = new ComposeEmail
                 .Builder()
                 .addressesTo(new HashSet<>(Arrays.asList(companyAdmin.getEmailAddress())))

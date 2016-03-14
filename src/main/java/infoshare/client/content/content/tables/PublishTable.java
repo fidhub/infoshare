@@ -21,8 +21,8 @@ import java.util.stream.Collectors;
 public class PublishTable extends Table{
 
     @Autowired
-    private PublishedContentService publishedContentService = ContentFacade.publishedContentService;
-    private CategoryService categoryService = CategoryFacade.categoryService;
+    private PublishedContentService publishedContentService = ContentFacade.getPublishedInstance();
+    private CategoryService categoryService = CategoryFacade.getCategoryInstance();
 
     private final MainLayout main;
 

@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 public class RawTable extends Table {
 
     @Autowired
-    private RawContentService rawContentService = ContentFacade.rawContentService;
+    private RawContentService rawContentService = ContentFacade.getRawInstance();
     private final MainLayout main;
 
     public RawTable(MainLayout mainApp){

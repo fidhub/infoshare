@@ -31,8 +31,8 @@ import java.util.stream.Collectors;
 public class PublishView extends VerticalLayout implements Button.ClickListener,
         Property.ValueChangeListener {
     @Autowired
-    private PublishedContentService publishedContentService = ContentFacade.publishedContentService;
-    private EditedContentService editedContentService = ContentFacade.editedContentService;
+    private PublishedContentService publishedContentService = ContentFacade.getPublishedInstance();
+    private EditedContentService editedContentService = ContentFacade.getEditedInstance();
 
     private final MainLayout main;
     private final PublishTable table;

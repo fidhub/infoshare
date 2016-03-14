@@ -57,8 +57,8 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public Set<Role> getRoles(String userId) {
         Set<Role> rolesList = new HashSet<>();
-        Set<PersonRole> roles = PeopleFacade.personRoleService.findPersonRoles(userId);
-        rolesList.addAll(roles.stream().map(role -> DemographicsFacade.rolesListService.findById(role.getRoleId())).collect(Collectors.toList()));
+        Set<PersonRole> roles = PeopleFacade.getPersonRoleServiceInstance().findPersonRoles(userId);
+        rolesList.addAll(roles.stream().map(role -> DemographicsFacade.getRolesListServiceInstance().findById(role.getRoleId())).collect(Collectors.toList()));
         return rolesList;
     }
 
@@ -77,8 +77,8 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public boolean isThisPersonInThis(String personId, String role) {
-        Role roleList = DemographicsFacade.rolesListService.getRole(role);
-        Set<PersonRole> personRoles = PeopleFacade.personRoleService.findPersonRoles(personId);
+        Role roleList = DemographicsFacade.getRolesListServiceInstance().getRole(role);
+        Set<PersonRole> personRoles = PeopleFacade.getPersonRoleServiceInstance().findPersonRoles(personId);
         Set<String> roleIds = personRoles.parallelStream().map(r -> r.getRoleId()).collect(Collectors.toSet());
         return roleIds.contains(roleList.getId());
     }

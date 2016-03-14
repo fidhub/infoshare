@@ -57,7 +57,7 @@ public class StorageUrlTab extends VerticalLayout implements
     public void valueChange(Property.ValueChangeEvent event) {
         final Property property = event.getProperty();
         if (property == table) {
-            final StorageUrl StorageUrl = UtilFacade.storageUrlService.getById(table.getValue().toString());
+            final StorageUrl StorageUrl = UtilFacade.getStorageUrlServiceInstance().getById(table.getValue().toString());
             final StorageUrlModel model = getModel(StorageUrl);
             form.binder.setItemDataSource(new BeanItem<>(model));
             setReadFormProperties();
@@ -67,7 +67,7 @@ public class StorageUrlTab extends VerticalLayout implements
     private void saveForm(FieldGroup binder) {
         try {
             binder.commit();
-            UtilFacade.storageUrlService.save(getNewEntity(binder));
+            UtilFacade.getStorageUrlServiceInstance().save(getNewEntity(binder));
             getHome();
             Notification.show("Record ADDED!", Notification.Type.TRAY_NOTIFICATION);
         } catch (FieldGroup.CommitException e) {
@@ -79,7 +79,7 @@ public class StorageUrlTab extends VerticalLayout implements
     private void saveEditedForm(FieldGroup binder) {
         try {
             binder.commit();
-            UtilFacade.storageUrlService.save(getUpdateEntity(binder));
+            UtilFacade.getStorageUrlServiceInstance().save(getUpdateEntity(binder));
             getHome();
             Notification.show("Record UPDATED!", Notification.Type.TRAY_NOTIFICATION);
         } catch (FieldGroup.CommitException e) {
@@ -124,12 +124,12 @@ public class StorageUrlTab extends VerticalLayout implements
     }
 
     private void deleteForm(FieldGroup binder) {
-        final StorageUrl StorageUrl = UtilFacade.storageUrlService.getById(table.getValue().toString());
+        final StorageUrl StorageUrl = UtilFacade.getStorageUrlServiceInstance().getById(table.getValue().toString());
         final StorageUrl updateStorageUrl = new StorageUrl
                 .Builder().copy(StorageUrl)
                 .url(DomainState.RETIRED.name())
                 .build();
-        UtilFacade.storageUrlService.save(updateStorageUrl);
+        UtilFacade.getStorageUrlServiceInstance().save(updateStorageUrl);
         getHome();
     }
 
@@ -142,7 +142,7 @@ public class StorageUrlTab extends VerticalLayout implements
 
     private StorageUrl getUpdateEntity(FieldGroup binder) {
         final StorageUrlModel model = ((BeanItem<StorageUrlModel>) binder.getItemDataSource()).getBean();
-        final StorageUrl StorageUrl = UtilFacade.storageUrlService.getById(table.getValue().toString());
+        final StorageUrl StorageUrl = UtilFacade.getStorageUrlServiceInstance().getById(table.getValue().toString());
         final StorageUrl updateStorageUrl = new StorageUrl
                 .Builder().copy(StorageUrl)
                 .name(model.getName())

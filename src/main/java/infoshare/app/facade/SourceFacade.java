@@ -7,5 +7,6 @@ import infoshare.services.ContentFiles.source.Impl.SourceServiceImpl;
  * Created by user9 on 2016/02/23.
  */
 public class SourceFacade {
-    public final static SourceService sourceService = new SourceServiceImpl();
+    private static SourceService sourceService = new SourceServiceImpl();
+    public static SourceService getSourceServiceInstance(){return sourceService;}
 }

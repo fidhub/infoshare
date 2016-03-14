@@ -61,7 +61,7 @@ public class DemographicsTab extends VerticalLayout implements
         final String personId = GetUserCredentials.getUser().getId();
         if (property == table) {
             System.out.println(" Person ID is " + personId + " The ID ");
-            final PersonDemographics personDemographics = PeopleFacade.personDemographicsService.findById(personId, table.getValue().toString());
+            final PersonDemographics personDemographics = PeopleFacade.getPersonDemographicsServiceInstance().findById(personId, table.getValue().toString());
             final PersonDemographicsModel model = getModel(personDemographics);
             form.binder.setItemDataSource(new BeanItem<>(model));
             setReadFormProperties();
@@ -71,7 +71,7 @@ public class DemographicsTab extends VerticalLayout implements
     private void saveForm(FieldGroup binder) {
         try {
             binder.commit();
-            PeopleFacade.personDemographicsService.save(getNewEntity(binder));
+            PeopleFacade.getPersonDemographicsServiceInstance().save(getNewEntity(binder));
             getHome();
             Notification.show("Record ADDED!", Notification.Type.TRAY_NOTIFICATION);
         } catch (FieldGroup.CommitException e) {
@@ -83,7 +83,7 @@ public class DemographicsTab extends VerticalLayout implements
     private void saveEditedForm(FieldGroup binder) {
         try {
             binder.commit();
-            PeopleFacade.personDemographicsService.save(getUpdateEntity(binder));
+            PeopleFacade.getPersonDemographicsServiceInstance().save(getUpdateEntity(binder));
             getHome();
             Notification.show("Record UPDATED!", Notification.Type.TRAY_NOTIFICATION);
         } catch (FieldGroup.CommitException e) {
@@ -94,12 +94,12 @@ public class DemographicsTab extends VerticalLayout implements
 
     private void deleteForm(FieldGroup binder) {
         final String personId = GetUserCredentials.getUser().getId();
-        final PersonDemographics personDemographic = PeopleFacade.personDemographicsService.findById(personId, table.getValue().toString());
+        final PersonDemographics personDemographic = PeopleFacade.getPersonDemographicsServiceInstance().findById(personId, table.getValue().toString());
         final PersonDemographics updatedPersonDemographics = new PersonDemographics
                 .Builder().copy(personDemographic)
                 .state(DomainState.RETIRED.name())
                 .build();
-        PeopleFacade.personDemographicsService.save(updatedPersonDemographics);
+        PeopleFacade.getPersonDemographicsServiceInstance().save(updatedPersonDemographics);
         getHome();
     }
 
@@ -151,7 +151,7 @@ public class DemographicsTab extends VerticalLayout implements
     private PersonDemographics getUpdateEntity(FieldGroup binder) {
         final String personId = GetUserCredentials.getUser().getId();
         final PersonDemographicsModel model = ((BeanItem<PersonDemographicsModel>) binder.getItemDataSource()).getBean();
-        final PersonDemographics personAddress = PeopleFacade.personDemographicsService.findById(personId, table.getValue().toString());
+        final PersonDemographics personAddress = PeopleFacade.getPersonDemographicsServiceInstance().findById(personId, table.getValue().toString());
         final PersonDemographics updatedPersonAddress = new PersonDemographics
                 .Builder()
                 .copy(personAddress)

@@ -16,7 +16,7 @@ public class PersonTable extends Table {
 
     private final MainLayout main;
     @Autowired
-    private PersonService personService = PeopleFacade.personService;
+    private PersonService personService = PeopleFacade.getPersonServiceInstance();
 
     public PersonTable(MainLayout main) {
         this.main = main;

@@ -47,7 +47,7 @@ public class PersonDemographicsForm extends FormLayout {
         //ComboBox Fields
         final ComboBox genderId = UIComboBox.getComboBox("Gender :", "genderId", PersonDemographicsModel.class, binder, new Consumer<ComboBox>() {
             public void accept(ComboBox comboBox) {
-                Set<Gender> genders = DemographicsFacade.genderListService.findAll();
+                Set<Gender> genders = DemographicsFacade.getGenderInstance().findAll();
                 for (Gender gender : genders) {
                     comboBox.addItem(gender.getId());
                     comboBox.setItemCaption(gender.getId(), gender.getName());

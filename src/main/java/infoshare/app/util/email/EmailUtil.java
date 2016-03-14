@@ -24,7 +24,7 @@ import java.util.logging.Logger;
 public class EmailUtil {
 
     private static Properties getProperties() {
-        Set<Mail> mailprops = UtilFacade.mailService.findAll(OrganisationUtil.getCompanyCode());
+        Set<Mail> mailprops = UtilFacade.getMailServiceInstance().findAll(OrganisationUtil.getCompanyCode());
         Mail properties = mailprops.iterator().next();
         Properties props = new Properties();
         props.put("mail.smtp.host", properties.getHost());

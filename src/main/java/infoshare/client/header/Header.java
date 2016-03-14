@@ -33,7 +33,7 @@ import java.util.stream.Collectors;
  */
 public class Header extends VerticalLayout implements Button.ClickListener , ItemClickEvent.ItemClickListener{
 
-    private RawContentService rawContentService = ContentFacade.rawContentService;
+    private RawContentService rawContentService = ContentFacade.getRawInstance();
     private MainLayout main ;
     private Window notifications;
     private Window userProfile;

@@ -52,7 +52,7 @@ public class LocationForm extends FormLayout {
         //ComboBox Fields
         final ComboBox locationTypeId = UIComboBox.getComboBox("Location Type :", "locationTypeId", LocationModel.class, binder, new Consumer<ComboBox>() {
             public void accept(ComboBox comboBox) {
-                Set<LocationType> locationTypes = LocationFacade.locationTypeService.findAll();
+                Set<LocationType> locationTypes = LocationFacade.getLocationTypeServiceInstance().findAll();
                 for (LocationType locationType : locationTypes) {
                     comboBox.addItem(locationType.getId());
                     comboBox.setItemCaption(locationType.getId(), locationType.getName());
@@ -63,7 +63,7 @@ public class LocationForm extends FormLayout {
         //ComboBox Fields
         final ComboBox parentId = UIComboBox.getComboBox("Parent Location  :", "parentId", LocationModel.class, binder, new Consumer<ComboBox>() {
             public void accept(ComboBox comboBox) {
-                Set<Location> locations = LocationFacade.locationService.findAll(OrganisationUtil.getCompanyCode());
+                Set<Location> locations = LocationFacade.getLocationServiceInstance().findAll(OrganisationUtil.getCompanyCode());
                 for (Location location : locations) {
                     comboBox.addItem(location.getId());
                     comboBox.setItemCaption(location.getId(), location.getName());

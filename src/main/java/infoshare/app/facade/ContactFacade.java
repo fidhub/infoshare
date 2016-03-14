@@ -10,6 +10,9 @@ import infoshare.services.location.Impl.ContactTypeServiceImpl;
  * Created by user9 on 2016/02/23.
  */
 public class ContactFacade {
-    public final static AddressTypeService addressService = new AddressTypeServiceImpl();
-    public final static ContactTypeService contactService = new ContactTypeServiceImpl();
+    private final static AddressTypeService addressService = new AddressTypeServiceImpl();
+    private final static ContactTypeService contactService = new ContactTypeServiceImpl();
+    public static AddressTypeService getAddressInstance(){return addressService;}
+    public static ContactTypeService getContactInstance(){return contactService;}
+
 }

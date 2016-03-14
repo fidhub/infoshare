@@ -56,7 +56,7 @@ public class RaceListTab extends VerticalLayout implements Button.ClickListener,
     public void valueChange(Property.ValueChangeEvent event) {
         final Property property = event.getProperty();
         if (property == table) {
-            final Race race = DemographicsFacade.raceListService.findById(table.getValue().toString());
+            final Race race = DemographicsFacade.getRaceServiceInstance().findById(table.getValue().toString());
             final RaceListModel model = getModel(race);
             form.binder.setItemDataSource(new BeanItem<>(model));
             setReadFormProperties();
@@ -67,7 +67,7 @@ public class RaceListTab extends VerticalLayout implements Button.ClickListener,
     private void saveForm(FieldGroup binder) {
         try {
             binder.commit();
-            DemographicsFacade.raceListService.save(getNewEntity(binder));
+            DemographicsFacade.getRaceServiceInstance().save(getNewEntity(binder));
             getHome();
             Notification.show("Record ADDED!", Notification.Type.TRAY_NOTIFICATION);
         } catch (FieldGroup.CommitException e) {
@@ -79,7 +79,7 @@ public class RaceListTab extends VerticalLayout implements Button.ClickListener,
     private void saveEditedForm(FieldGroup binder) {
         try {
             binder.commit();
-            DemographicsFacade.raceListService.update(getUpdateEntity(binder));
+            DemographicsFacade.getRaceServiceInstance().update(getUpdateEntity(binder));
             getHome();
             Notification.show("Record UPDATED!", Notification.Type.TRAY_NOTIFICATION);
         } catch (FieldGroup.CommitException e) {
@@ -88,12 +88,12 @@ public class RaceListTab extends VerticalLayout implements Button.ClickListener,
         }
     }
     private void deleteForm(FieldGroup binder) {
-        final Race race = DemographicsFacade.raceListService.findById(table.getValue().toString());
+        final Race race = DemographicsFacade.getRaceServiceInstance().findById(table.getValue().toString());
         final Race updatedRace = new Race.Builder()
                 .copy(race)
                 .state(DomainState.RETIRED.name())
                 .build();
-        DemographicsFacade.raceListService.save(updatedRace);
+        DemographicsFacade.getRaceServiceInstance().save(updatedRace);
         getHome();
     }
 
@@ -140,7 +140,7 @@ public class RaceListTab extends VerticalLayout implements Button.ClickListener,
     }
 
     private Race getUpdateEntity(FieldGroup binder) {
-        final Race race = DemographicsFacade.raceListService.findById(table.getValue().toString());
+        final Race race = DemographicsFacade.getRaceServiceInstance().findById(table.getValue().toString());
         final RaceListModel bean = ((BeanItem<RaceListModel>) binder.getItemDataSource()).getBean();
         final Race updatedRace = new Race.Builder()
                 .copy(race)

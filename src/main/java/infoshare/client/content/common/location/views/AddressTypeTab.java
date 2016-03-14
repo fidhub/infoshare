@@ -56,7 +56,7 @@ public class AddressTypeTab extends VerticalLayout implements
     public void valueChange(Property.ValueChangeEvent event) {
         final Property property = event.getProperty();
         if (property == table) {
-            final AddressType addressType = LocationFacade.addressTypeService.findById(table.getValue().toString());
+            final AddressType addressType = LocationFacade.getAddressTypeServiceInstance().findById(table.getValue().toString());
             final AddressTypeModel model = getModel(addressType);
             form.binder.setItemDataSource(new BeanItem<>(model));
             setReadFormProperties();
@@ -66,7 +66,7 @@ public class AddressTypeTab extends VerticalLayout implements
     private void saveForm(FieldGroup binder) {
         try {
             binder.commit();
-            LocationFacade.addressTypeService.save(getNewEntity(binder));
+            LocationFacade.getAddressTypeServiceInstance().save(getNewEntity(binder));
             getHome();
             Notification.show("Record ADDED!", Notification.Type.TRAY_NOTIFICATION);
         } catch (FieldGroup.CommitException e) {
@@ -78,7 +78,7 @@ public class AddressTypeTab extends VerticalLayout implements
     private void saveEditedForm(FieldGroup binder) {
         try {
             binder.commit();
-            LocationFacade.addressTypeService.update(getUpdateEntity(binder));
+            LocationFacade.getAddressTypeServiceInstance().update(getUpdateEntity(binder));
             getHome();
             Notification.show("Record UPDATED!", Notification.Type.TRAY_NOTIFICATION);
         } catch (FieldGroup.CommitException e) {
@@ -88,8 +88,8 @@ public class AddressTypeTab extends VerticalLayout implements
     }
 
     private void deleteForm(FieldGroup binder) {
-        AddressType addressType = LocationFacade.addressTypeService.findById(table.getValue().toString());
-        LocationFacade.addressTypeService.delete(addressType);
+        AddressType addressType = LocationFacade.getAddressTypeServiceInstance().findById(table.getValue().toString());
+        LocationFacade.getAddressTypeServiceInstance().delete(addressType);
         getHome();
     }
 
@@ -137,7 +137,7 @@ public class AddressTypeTab extends VerticalLayout implements
 
     private AddressType getUpdateEntity(FieldGroup binder) {
         final AddressTypeModel bean = ((BeanItem<AddressTypeModel>) binder.getItemDataSource()).getBean();
-        final AddressType AddressType = LocationFacade.addressTypeService.findById(table.getValue().toString());
+        final AddressType AddressType = LocationFacade.getAddressTypeServiceInstance().findById(table.getValue().toString());
         final AddressType updatedAddressType = new AddressType
                 .Builder().copy(AddressType)
                 .name(bean.getAddressTypeName())

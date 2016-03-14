@@ -40,13 +40,13 @@ public class DisabledOrganisationTable extends Table {
             enable.setStyleName(ValoTheme.BUTTON_LINK);
             enable.setData(item.getId());
             enable.addClickListener(event -> {
-                Organisation company = OrganisationFacade.companyService.findById(item.getId());
+                Organisation company = OrganisationFacade.getOrganisationServiceInstance().findById(item.getId());
                 Organisation updatedCompany = new Organisation
                         .Builder()
                         .copy(company)
                         .state(DomainState.ACTIVE.name())
                         .build();
-                OrganisationFacade.companyService.update(updatedCompany);
+                OrganisationFacade.getOrganisationServiceInstance().update(updatedCompany);
                 getHome();
 
             });

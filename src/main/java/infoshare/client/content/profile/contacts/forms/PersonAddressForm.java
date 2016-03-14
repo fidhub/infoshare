@@ -45,7 +45,7 @@ public class PersonAddressForm extends FormLayout {
         //ComboBox Fields
         final ComboBox addressTypeId = UIComboBox.getComboBox("Address Type :", "addressTypeId", PersonAddressModel.class, binder, new Consumer<ComboBox>() {
             public void accept(ComboBox comboBox) {
-                Set<AddressType> addressTypes = LocationFacade.addressTypeService.findAll();
+                Set<AddressType> addressTypes = LocationFacade.getAddressTypeServiceInstance().findAll();
                 for (AddressType addressType : addressTypes) {
                     comboBox.addItem(addressType.getId());
                     comboBox.setItemCaption(addressType.getId(), addressType.getName());

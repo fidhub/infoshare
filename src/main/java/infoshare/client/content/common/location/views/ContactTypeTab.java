@@ -57,7 +57,7 @@ public class ContactTypeTab extends VerticalLayout implements
     public void valueChange(Property.ValueChangeEvent event) {
         final Property property = event.getProperty();
         if (property == table) {
-            final ContactType contactype = LocationFacade.contactListService.findById(table.getValue().toString());
+            final ContactType contactype = LocationFacade.getContactTypeServiceInstance().findById(table.getValue().toString());
             final ContactTypeModel model = getModel(contactype);
             form.binder.setItemDataSource(new BeanItem<>(model));
             setReadFormProperties();
@@ -67,7 +67,7 @@ public class ContactTypeTab extends VerticalLayout implements
     private void saveForm(FieldGroup binder) {
         try {
             binder.commit();
-            LocationFacade.contactListService.save(getNewEntity(binder));
+            LocationFacade.getContactTypeServiceInstance().save(getNewEntity(binder));
             getHome();
             Notification.show("Record ADDED!", Notification.Type.TRAY_NOTIFICATION);
         } catch (FieldGroup.CommitException e) {
@@ -79,7 +79,7 @@ public class ContactTypeTab extends VerticalLayout implements
     private void saveEditedForm(FieldGroup binder) {
         try {
             binder.commit();
-            LocationFacade.contactListService.update(getUpdateEntity(binder));
+            LocationFacade.getContactTypeServiceInstance().update(getUpdateEntity(binder));
             getHome();
             Notification.show("Record UPDATED!", Notification.Type.TRAY_NOTIFICATION);
         } catch (FieldGroup.CommitException e) {
@@ -89,8 +89,8 @@ public class ContactTypeTab extends VerticalLayout implements
     }
 
     private void deleteForm(FieldGroup binder) {
-        ContactType contactype = LocationFacade.contactListService.findById(table.getValue().toString());
-        LocationFacade.contactListService.delete(contactype);
+        ContactType contactype = LocationFacade.getContactTypeServiceInstance().findById(table.getValue().toString());
+        LocationFacade.getContactTypeServiceInstance().delete(contactype);
         getHome();
     }
 
@@ -138,9 +138,9 @@ public class ContactTypeTab extends VerticalLayout implements
 
     private ContactType getUpdateEntity(FieldGroup binder) {
         final ContactTypeModel bean = ((BeanItem<ContactTypeModel>) binder.getItemDataSource()).getBean();
-        final ContactType Contactype = LocationFacade.contactListService.findById(table.getValue().toString());
+        final ContactType contactType = LocationFacade.getContactTypeServiceInstance().findById(table.getValue().toString());
         final ContactType updatedContactype = new ContactType
-                .Builder().copy(Contactype)
+                .Builder().copy(contactType)
                 .name(bean.getName())
                 .build();
         return updatedContactype;

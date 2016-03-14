@@ -26,7 +26,7 @@ import java.util.Map;
 public class RoleView extends VerticalLayout implements
         Button.ClickListener, Property.ValueChangeListener {
 
-    private RoleService roleService = RoleFacade.roleService;
+    private RoleService roleService = RoleFacade.getRoleServiceInstance();
 
     private final MainLayout main;
     private final RoleForm form;

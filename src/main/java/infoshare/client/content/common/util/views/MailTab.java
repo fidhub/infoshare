@@ -61,7 +61,7 @@ public class MailTab extends VerticalLayout implements
     public void valueChange(Property.ValueChangeEvent event) {
         final Property property = event.getProperty();
         if (property == table) {
-            final Mail mail = UtilFacade.mailService.findById(OrganisationUtil.getCompanyCode(),table.getValue().toString());
+            final Mail mail = UtilFacade.getMailServiceInstance().findById(OrganisationUtil.getCompanyCode(),table.getValue().toString());
             final MailModel model = getModel(mail);
             form.binder.setItemDataSource(new BeanItem<>(model));
             setReadFormProperties();
@@ -71,7 +71,7 @@ public class MailTab extends VerticalLayout implements
     private void saveForm(FieldGroup binder) {
         try {
             binder.commit();
-            UtilFacade.mailService.save(getNewEntity(binder));
+            UtilFacade.getMailServiceInstance().save(getNewEntity(binder));
             getHome();
             Notification.show("Record ADDED!", Notification.Type.TRAY_NOTIFICATION);
         } catch (FieldGroup.CommitException e) {
@@ -83,7 +83,7 @@ public class MailTab extends VerticalLayout implements
     private void saveEditedForm(FieldGroup binder) {
         try {
             binder.commit();
-            UtilFacade.mailService.update(getUpdateEntity(binder));
+            UtilFacade.getMailServiceInstance().update(getUpdateEntity(binder));
             getHome();
             Notification.show("Record UPDATED!", Notification.Type.TRAY_NOTIFICATION);
         } catch (FieldGroup.CommitException e) {
@@ -130,12 +130,12 @@ public class MailTab extends VerticalLayout implements
     }
 
     private void deleteForm(FieldGroup binder) {
-        final Mail mail = UtilFacade.mailService.findById(table.getValue().toString());
+        final Mail mail = UtilFacade.getMailServiceInstance().findById(table.getValue().toString());
         final Mail updateMail = new Mail
                 .Builder().copy(mail)
                 .state(DomainState.RETIRED.name())
                 .build();
-        UtilFacade.mailService.save(updateMail);
+        UtilFacade.getMailServiceInstance().save(updateMail);
         getHome();
     }
 
@@ -147,7 +147,7 @@ public class MailTab extends VerticalLayout implements
 
     private Mail getUpdateEntity(FieldGroup binder) {
         final MailModel model = ((BeanItem<MailModel>) binder.getItemDataSource()).getBean();
-        final Mail mail = UtilFacade.mailService.findById(OrganisationUtil.getCompanyCode(),table.getValue().toString());
+        final Mail mail = UtilFacade.getMailServiceInstance().findById(OrganisationUtil.getCompanyCode(),table.getValue().toString());
         final Mail updateMail = new Mail
                 .Builder().copy(mail)
                 .date(new Date())

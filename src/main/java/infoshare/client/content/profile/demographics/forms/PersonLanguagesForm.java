@@ -46,7 +46,7 @@ public class PersonLanguagesForm extends FormLayout {
         //ComboBox Fields
         final ComboBox languageId = UIComboBox.getComboBox("Language :", "languageId", PersonLanguageModel.class, binder, new Consumer<ComboBox>() {
             public void accept(ComboBox comboBox) {
-                Set<Language> languages = DemographicsFacade.languageService.findAll();
+                Set<Language> languages = DemographicsFacade.getLanguageServiceInstance().findAll();
                 for (Language language : languages) {
                     comboBox.addItem(language.getId());
                     comboBox.setItemCaption(language.getId(), language.getName());
@@ -57,7 +57,7 @@ public class PersonLanguagesForm extends FormLayout {
         //ComboBox Fields
         final ComboBox reading = UIComboBox.getComboBox("Reading :", "reading", PersonLanguageModel.class, binder, new Consumer<ComboBox>() {
             public void accept(ComboBox comboBox) {
-                Set<LanguageProficiency> languageProficiencies = DemographicsFacade.languageProficiencyService.findAll();
+                Set<LanguageProficiency> languageProficiencies = DemographicsFacade.getLanguageProficiencyServiceInstance().findAll();
                 for (LanguageProficiency languageProficiency : languageProficiencies) {
                     comboBox.addItem(languageProficiency.getId());
                     comboBox.setItemCaption(languageProficiency.getId(), languageProficiency.getName());
@@ -68,7 +68,7 @@ public class PersonLanguagesForm extends FormLayout {
         //ComboBox Fields
         final ComboBox writing = UIComboBox.getComboBox("Writing :", "writing", PersonLanguageModel.class, binder, new Consumer<ComboBox>() {
             public void accept(ComboBox comboBox) {
-                Set<LanguageProficiency> languageProficiencies = DemographicsFacade.languageProficiencyService.findAll();
+                Set<LanguageProficiency> languageProficiencies = DemographicsFacade.getLanguageProficiencyServiceInstance().findAll();
                 for (LanguageProficiency languageProficiency : languageProficiencies) {
                     comboBox.addItem(languageProficiency.getId());
                     comboBox.setItemCaption(languageProficiency.getId(), languageProficiency.getName());
@@ -79,7 +79,7 @@ public class PersonLanguagesForm extends FormLayout {
         //ComboBox Fields
         final ComboBox speaking = UIComboBox.getComboBox("Speaking :", "speaking", PersonLanguageModel.class, binder, new Consumer<ComboBox>() {
             public void accept(ComboBox comboBox) {
-                Set<LanguageProficiency> languageProficiencies = DemographicsFacade.languageProficiencyService.findAll();
+                Set<LanguageProficiency> languageProficiencies = DemographicsFacade.getLanguageProficiencyServiceInstance().findAll();
                 for (LanguageProficiency languageProficiency : languageProficiencies) {
                     comboBox.addItem(languageProficiency.getId());
                     comboBox.setItemCaption(languageProficiency.getId(), languageProficiency.getName());

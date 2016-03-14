@@ -22,8 +22,8 @@ public class ContactTypeTable extends Table {
 
 
         // Add Data Columns
-        Set<ContactType> locationTypes = LocationFacade.contactListService.findAll();
-        for (ContactType locationType : locationTypes) {
+        Set<ContactType> contactTypes = LocationFacade.getContactTypeServiceInstance().findAll();
+        for (ContactType locationType : contactTypes) {
             addItem(new Object[]{locationType.getName()}, locationType.getId());
         }
         // Allow selecting items from the table.

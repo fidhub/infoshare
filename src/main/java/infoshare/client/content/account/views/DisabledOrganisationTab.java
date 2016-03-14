@@ -29,7 +29,7 @@ public class DisabledOrganisationTab extends VerticalLayout implements
     public final VerticalLayout contentPanel = new VerticalLayout();
 
     private final TextField orgSearchBox = new TextField("Organisation Search");
-    Set<Organisation> companies = OrganisationFacade.companyService.getRetiredOrganisations();
+    Set<Organisation> companies = OrganisationFacade.getOrganisationServiceInstance().getRetiredOrganisations();
 
     public DisabledOrganisationTab(MainLayout main) {
         contentPanel.setSizeFull();

@@ -31,7 +31,7 @@ public class PersonLanguageTable extends Table {
         addContainerProperty("Writing", String.class, null);
         addContainerProperty("Speaking", String.class, null);
 
-        Set<PersonLanguage> personLanguages = PeopleFacade.personLanguageService.getAllLanguages(personId);
+        Set<PersonLanguage> personLanguages = PeopleFacade.getPersonLanguageServiceInstance().getAllLanguages(personId);
 
         personLanguages.parallelStream().forEach(item -> {
             addItem(new Object[]{
@@ -51,21 +51,21 @@ public class PersonLanguageTable extends Table {
 
     private String language(String languageId) {
 
-        Language language = DemographicsFacade.languageService.findById(languageId);
+        Language language = DemographicsFacade.getLanguageServiceInstance().findById(languageId);
         if (language != null)
             return language.getName();
         return "Not Set";
     }
 
     private String languageProficiency(String languageProficiencId) {
-        LanguageProficiency language = DemographicsFacade.languageProficiencyService.findById(languageProficiencId);
+        LanguageProficiency language = DemographicsFacade.getLanguageProficiencyServiceInstance().findById(languageProficiencId);
         if (language != null)
             return language.getName();
         return "Type Not Set";
     }
 
     private String contactType(String addressTypeId) {
-        ContactType contactType = LocationFacade.contactListService.findById(addressTypeId);
+        ContactType contactType = LocationFacade.getContactTypeServiceInstance().findById(addressTypeId);
         if (contactType != null)
             return contactType.getName();
         return "Type Not Set";

@@ -59,7 +59,7 @@ public class PersonContactsTab extends VerticalLayout implements
         final Property property = event.getProperty();
         final String personId = GetUserCredentials.getUser().getId();
         if (property == table) {
-            final PersonContact personContact = PeopleFacade.personContactService.findById(personId, table.getValue().toString());
+            final PersonContact personContact = PeopleFacade.getPersonContactServiceInstance().findById(personId, table.getValue().toString());
             final PersonContactsModel model = getModel(personContact);
             form.binder.setItemDataSource(new BeanItem<>(model));
             setReadFormProperties();
@@ -69,7 +69,7 @@ public class PersonContactsTab extends VerticalLayout implements
     private void saveForm(FieldGroup binder) {
         try {
             binder.commit();
-            PeopleFacade.personContactService.save(getNewEntity(binder));
+            PeopleFacade.getPersonContactServiceInstance().save(getNewEntity(binder));
             getHome();
             Notification.show("Record ADDED!", Notification.Type.TRAY_NOTIFICATION);
         } catch (FieldGroup.CommitException e) {
@@ -81,7 +81,7 @@ public class PersonContactsTab extends VerticalLayout implements
     private void saveEditedForm(FieldGroup binder) {
         try {
             binder.commit();
-            PeopleFacade.personContactService.save(getUpdateEntity(binder));
+            PeopleFacade.getPersonContactServiceInstance().save(getUpdateEntity(binder));
             getHome();
             Notification.show("Record UPDATED!", Notification.Type.TRAY_NOTIFICATION);
         } catch (FieldGroup.CommitException e) {
@@ -92,12 +92,12 @@ public class PersonContactsTab extends VerticalLayout implements
 
     private void deleteForm(FieldGroup binder) {
         final String personId = GetUserCredentials.getUser().getId();
-        final PersonContact personContact = PeopleFacade.personContactService.findById(personId, table.getValue().toString());
+        final PersonContact personContact = PeopleFacade.getPersonContactServiceInstance().findById(personId, table.getValue().toString());
         final PersonContact updatedPersonAddress = new PersonContact
                 .Builder().copy(personContact)
                 .state(DomainState.RETIRED.name())
                 .build();
-        PeopleFacade.personContactService.save(updatedPersonAddress);
+        PeopleFacade.getPersonContactServiceInstance().save(updatedPersonAddress);
         getHome();
     }
 
@@ -148,7 +148,7 @@ public class PersonContactsTab extends VerticalLayout implements
     private PersonContact getUpdateEntity(FieldGroup binder) {
         final String personId = GetUserCredentials.getUser().getId();
         final PersonContactsModel model = ((BeanItem<PersonContactsModel>) binder.getItemDataSource()).getBean();
-        final PersonContact personContact = PeopleFacade.personContactService.findById(personId, table.getValue().toString());
+        final PersonContact personContact = PeopleFacade.getPersonContactServiceInstance().findById(personId, table.getValue().toString());
         final PersonContact updatedPersonAddress = new PersonContact
                 .Builder()
                 .copy(personContact)

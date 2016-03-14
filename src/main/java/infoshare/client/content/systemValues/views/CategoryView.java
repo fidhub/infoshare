@@ -26,7 +26,7 @@ import java.util.Map;
 public class CategoryView extends VerticalLayout implements Button.ClickListener, Property.ValueChangeListener {
 
     @Autowired
-    private CategoryService categoryService = CategoryFacade.categoryService;
+    private CategoryService categoryService = CategoryFacade.getCategoryInstance();
 
     private final MainLayout main;
     private final CategoryForm form;

@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  * Created by user9 on 2016/02/11.
  */
 public class UserFilter {
-    private PersonService personService = PeopleFacade.personService;
+    private PersonService personService = PeopleFacade.getPersonServiceInstance();
     public TextField field = new TextField();
     public UserFilter() {
         getField();

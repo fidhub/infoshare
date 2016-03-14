@@ -56,7 +56,7 @@ public class LanguageTab extends VerticalLayout implements Button.ClickListener,
     public void valueChange(Property.ValueChangeEvent event) {
         final Property property = event.getProperty();
         if (property == table) {
-            final Language language = DemographicsFacade.languageService.findById(table.getValue().toString());
+            final Language language = DemographicsFacade.getLanguageServiceInstance().findById(table.getValue().toString());
             final LanguageModel model = getModel(language);
             form.binder.setItemDataSource(new BeanItem<>(model));
             setReadFormProperties();
@@ -66,7 +66,7 @@ public class LanguageTab extends VerticalLayout implements Button.ClickListener,
     private void saveForm(FieldGroup binder) {
         try {
             binder.commit();
-            DemographicsFacade.languageService.save(getNewEntity(binder));
+            DemographicsFacade.getLanguageServiceInstance().save(getNewEntity(binder));
             getHome();
             Notification.show("Record ADDED!", Notification.Type.TRAY_NOTIFICATION);
         } catch (FieldGroup.CommitException e) {
@@ -78,7 +78,7 @@ public class LanguageTab extends VerticalLayout implements Button.ClickListener,
     private void saveEditedForm(FieldGroup binder) {
         try {
             binder.commit();
-            DemographicsFacade.languageService.update(getUpdateEntity(binder));
+            DemographicsFacade.getLanguageServiceInstance().update(getUpdateEntity(binder));
             getHome();
             Notification.show("Record UPDATED!", Notification.Type.TRAY_NOTIFICATION);
         } catch (FieldGroup.CommitException e) {
@@ -88,12 +88,12 @@ public class LanguageTab extends VerticalLayout implements Button.ClickListener,
     }
 
     private void deleteForm(FieldGroup binder) {
-        final Language language = DemographicsFacade.languageService.findById(table.getValue().toString());
+        final Language language = DemographicsFacade.getLanguageServiceInstance().findById(table.getValue().toString());
         final Language updatedLanguage = new Language.Builder()
                 .copy(language)
                 .name(DomainState.RETIRED.name())
                 .build();
-        DemographicsFacade.languageService.save(updatedLanguage);
+        DemographicsFacade.getLanguageServiceInstance().save(updatedLanguage);
         getHome();
     }
 
@@ -140,7 +140,7 @@ public class LanguageTab extends VerticalLayout implements Button.ClickListener,
 
     private Language getUpdateEntity(FieldGroup binder) {
         final LanguageModel bean = ((BeanItem<LanguageModel>) binder.getItemDataSource()).getBean();
-        final Language language = DemographicsFacade.languageService.findById(table.getValue().toString());
+        final Language language = DemographicsFacade.getLanguageServiceInstance().findById(table.getValue().toString());
         final Language updatedLanguage = new Language.Builder()
                 .copy(language)
                 .name(bean.getName())

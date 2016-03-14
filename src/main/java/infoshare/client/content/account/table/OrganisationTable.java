@@ -60,13 +60,13 @@ public class OrganisationTable extends Table {
             disable.setStyleName(ValoTheme.BUTTON_LINK);
             disable.setData(item.getId());
             disable.addClickListener(event -> {
-                Organisation company = OrganisationFacade.companyService.findById(item.getId());
+                Organisation company = OrganisationFacade.getOrganisationServiceInstance().findById(item.getId());
                 Organisation updatedCompany = new Organisation
                         .Builder()
                         .copy(company)
                         .state(DomainState.RETIRED.name())
                         .build();
-                OrganisationFacade.companyService.update(updatedCompany);
+                OrganisationFacade.getOrganisationServiceInstance().update(updatedCompany);
                 getHome();
             });
 

@@ -39,11 +39,11 @@ import java.util.stream.Collectors;
 public class EditView extends VerticalLayout implements Button.ClickListener, Property.ValueChangeListener{
 
     @Autowired
-    private EditedContentService editedContentService = ContentFacade.editedContentService;
-    private PublishedContentService publishedContentService = ContentFacade.publishedContentService;
-    private CategoryService categoryService = CategoryFacade.categoryService;
-    private ContentTypeService contentTypeService = ContentTypeFacade.contentTypeService;
-    private SourceService sourceService = SourceFacade.sourceService;
+    private EditedContentService editedContentService = ContentFacade.getEditedInstance();
+    private PublishedContentService publishedContentService = ContentFacade.getPublishedInstance();
+    private CategoryService categoryService = CategoryFacade.getCategoryInstance();
+    private ContentTypeService contentTypeService = ContentTypeFacade.getContentTypeInstance();
+    private SourceService sourceService = SourceFacade.getSourceServiceInstance();
 
     private final MainLayout main;
     private final EditTable table;

@@ -22,8 +22,8 @@ import java.util.stream.Collectors;
 public class EditTable extends Table{
 
     @Autowired
-    private EditedContentService editedContentService = ContentFacade.editedContentService;
-    private CategoryService categoryService = CategoryFacade.categoryService;
+    private EditedContentService editedContentService = ContentFacade.getEditedInstance();
+    private CategoryService categoryService = CategoryFacade.getCategoryInstance();
             private final MainLayout main;
 
             public EditTable(MainLayout mainApp){

@@ -23,7 +23,7 @@ public class LocationTypeTable extends Table {
         addContainerProperty("Name Code", String.class, null);
 
         // Add Data Columns
-        Set<LocationType> locationTypes = LocationFacade.locationTypeService.findAll();
+        Set<LocationType> locationTypes = LocationFacade.getLocationTypeServiceInstance().findAll();
         for (LocationType locationType : locationTypes) {
             addItem(new Object[]{locationType.getName(), locationType.getCode()}, locationType.getId());
         }
