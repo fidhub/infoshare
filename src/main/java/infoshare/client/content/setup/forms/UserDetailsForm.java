@@ -7,8 +7,8 @@ import com.vaadin.server.FontAwesome;
 import com.vaadin.server.Responsive;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
+import infoshare.app.facade.RoleFacade;
 import infoshare.client.content.setup.models.PersonModel;
-import infoshare.services.roles.Impl.RoleServiceImpl;
 import infoshare.services.roles.RoleService;
 
 /**
@@ -21,7 +21,7 @@ public class UserDetailsForm extends FormLayout {
     public final FieldGroup binder;
 
     public TextField field = new TextField();
-    private RoleService roleService = new RoleServiceImpl();
+    private RoleService roleService = RoleFacade.roleService;
     public ListSelect rolesList = new ListSelect();
 
     public Button popUpBackBtn = new Button("Back");

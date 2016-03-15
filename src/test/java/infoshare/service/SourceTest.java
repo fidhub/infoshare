@@ -1,6 +1,6 @@
 package infoshare.service;
 
-import infoshare.services.ContentFiles.source.Impl.SourceServiceImpl;
+import infoshare.app.facade.SourceFacade;
 import infoshare.services.ContentFiles.source.SourceService;
 import junit.framework.TestCase;
 
@@ -8,7 +8,7 @@ import junit.framework.TestCase;
  * Created by Songezo on 2015-10-02.
  */
 public class SourceTest extends TestCase {
-    private SourceService sourceService = new SourceServiceImpl();
+    private SourceService sourceService = SourceFacade.sourceService;
 
     /*@Test
     public void testReadAll() throws Exception {

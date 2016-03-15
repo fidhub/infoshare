@@ -7,6 +7,7 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
+import infoshare.app.facade.PeopleFacade;
 import infoshare.app.util.organisation.OrganisationUtil;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.setup.forms.AddressForm;
@@ -14,7 +15,6 @@ import infoshare.client.content.setup.models.AddressModel;
 import infoshare.client.content.setup.tables.AddressTable;
 import infoshare.domain.person.Person;
 import infoshare.domain.person.PersonAddress;
-import infoshare.services.people.Impl.PersonAddressServiceImpl;
 import infoshare.services.people.PersonAddressService;
 
 /**
@@ -24,7 +24,7 @@ public class AddressView extends Window implements Button.ClickListener, Propert
 
     private final AddressForm addressForm;
     private AddressTable addressTable;
-    private PersonAddressService addressService = new PersonAddressServiceImpl();
+    private PersonAddressService addressService = PeopleFacade.personAddressService;
     private MainLayout main;
 
     public AddressView(MainLayout main) {

@@ -1,7 +1,7 @@
 package infoshare.service;
 
+import infoshare.app.facade.RoleFacade;
 import infoshare.domain.demographics.Role;
-import infoshare.services.roles.Impl.RoleServiceImpl;
 import infoshare.services.roles.RoleService;
 import junit.framework.TestCase;
 import org.junit.Assert;
@@ -16,7 +16,7 @@ import java.util.Set;
  */
 public class RoleTest extends TestCase{
 
-    private RoleService roleService = new RoleServiceImpl();
+    private RoleService roleService = RoleFacade.roleService;
 
     @Test
     public void testCreate() throws Exception {

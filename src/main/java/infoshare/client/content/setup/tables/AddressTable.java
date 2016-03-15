@@ -4,15 +4,11 @@ import com.vaadin.ui.Table;
 import infoshare.app.facade.PeopleFacade;
 import infoshare.app.util.organisation.OrganisationUtil;
 import infoshare.domain.person.Person;
-import infoshare.services.location.AddressTypeService;
-import infoshare.services.location.Impl.AddressTypeServiceImpl;
 
 /**
  * Created by codex on 2015/07/30.
  */
 public class AddressTable extends Table {
-
-    private AddressTypeService service = new AddressTypeServiceImpl();
     public static String userID;
 
     public AddressTable() {

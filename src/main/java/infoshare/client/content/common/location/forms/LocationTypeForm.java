@@ -9,8 +9,6 @@ import com.vaadin.ui.TextField;
 import infoshare.app.util.fields.ButtonsHelper;
 import infoshare.app.util.fields.UIComponentHelper;
 import infoshare.client.content.common.location.models.LocationTypeModel;
-import infoshare.services.location.Impl.LocationTypeServiceImpl;
-import infoshare.services.location.LocationTypeService;
 
 
 
@@ -19,7 +17,6 @@ import infoshare.services.location.LocationTypeService;
  */
 public class LocationTypeForm extends FormLayout {
     private final LocationTypeModel bean;
-    private final LocationTypeService locationTypeService = new LocationTypeServiceImpl();
 
     public final BeanItem<LocationTypeModel> item;
     public final FieldGroup binder;
