@@ -8,10 +8,10 @@ import infoshare.services.demographics.Impl.*;
  */
 public class DemographicsFacade {
 
-    public static final GenderService genderListService = new GenderServiceImpl();
-    public static final LanguageService languageService = new LanguageServiceImpl();
-    public static final LanguageProficiencyService languageProficiencyService = new LanguageProficiencyServiceImpl();
-    public static final RaceService raceListService = new RaceServiceImpl();
-    public static final RolesListService rolesListService = new RolesListServiceImpl();
+    public static final GenderService genderListService =  GenderServiceImpl.getInstance();
+    public static final LanguageService languageService =  LanguageServiceImpl.getInstance();
+    public static final LanguageProficiencyService languageProficiencyService =  LanguageProficiencyServiceImpl.getInstance();
+    public static final RaceService raceListService =  RaceServiceImpl.getInstance();
+    public static final RolesListService rolesListService =  RolesListServiceImpl.getInstance();
 
 }

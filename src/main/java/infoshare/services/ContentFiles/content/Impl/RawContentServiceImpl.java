@@ -15,7 +15,16 @@ import java.util.Set;
 @SpringComponent
 public class RawContentServiceImpl implements RawContentService {
 
+    private static RawContentServiceImpl rawContentService=null;
 
+    private RawContentServiceImpl(){}
+
+    public  static RawContentServiceImpl getInstance(){
+        if(rawContentService==null) {
+            return new RawContentServiceImpl();
+        }
+        return rawContentService;
+    }
     @Override
     public RawContent save(RawContent entity) {
         return RawContentAPI.save(entity);

@@ -14,6 +14,16 @@ import java.util.Set;
 @SpringComponent
 @Service
 public class LanguageServiceImpl implements LanguageService {
+    private static LanguageServiceImpl languageService=null;
+
+    private LanguageServiceImpl(){}
+
+    public  static LanguageServiceImpl getInstance(){
+        if(languageService==null) {
+            return new LanguageServiceImpl();
+        }
+        return  languageService;
+    }
     @Override
     public Language findById(String s) {
         return LanguageAPI.findById(s);

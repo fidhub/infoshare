@@ -16,6 +16,17 @@ import java.util.stream.Collectors;
 @Service
 @SpringComponent
 public class OrganisationServiceImpl implements OrganisationService {
+
+    private static OrganisationServiceImpl organisationService =null;
+
+    private OrganisationServiceImpl(){}
+
+    public  static OrganisationServiceImpl getInstance(){
+        if(organisationService ==null) {
+            return new OrganisationServiceImpl();
+        }
+        return organisationService;
+    }
     @Override
     public Organisation save(Organisation entity) {
         return OrganisationAPI.save(entity);

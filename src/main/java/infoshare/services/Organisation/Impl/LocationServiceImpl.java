@@ -14,6 +14,16 @@ import java.util.Set;
 @Service
 @SpringComponent
 public class LocationServiceImpl implements LocationService {
+    private static LocationServiceImpl locationService =null;
+
+    private LocationServiceImpl(){}
+
+    public  static LocationServiceImpl getInstance(){
+        if(locationService ==null) {
+            return new LocationServiceImpl();
+        }
+        return locationService;
+    }
     @Override
     public Location save(Location location) {
         return LocationAPI.save(location);

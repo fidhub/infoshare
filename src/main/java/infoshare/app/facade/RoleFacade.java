@@ -7,5 +7,5 @@ import infoshare.services.roles.RoleService;
  * Created by user9 on 2016/02/23.
  */
 public class RoleFacade {
-    public final static RoleService roleService = new RoleServiceImpl();
+    public final static RoleService roleService =  RoleServiceImpl.getInstance();
 }

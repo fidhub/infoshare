@@ -12,12 +12,12 @@ import infoshare.services.people.*;
 
 public class PeopleFacade {
 
-    public final static PersonRoleService personRoleService = new PersonRoleServiceImpl();
-    public final static PersonService personService = new PersonServiceImpl();
-    public final static PersonAddressService personAddressService = new PersonAddressServiceImpl();
-    public final static PersonContactService personContactService = new PersonContactServiceImpl();
-    public final static PersonDemographicsService personDemographicsService = new PersonDemographicsServiceImpl();
-    public final static PersonImagesService personImagesService = new PersonImagesServiceImpl();
-    public final static PersonLanguageService personLanguageService = new PersonLanguageServiceImpl();
+    public final static PersonRoleService personRoleService =  PersonRoleServiceImpl.getInstance();
+    public final static PersonService personService =  PersonServiceImpl.getInstance();
+    public final static PersonAddressService personAddressService =  PersonAddressServiceImpl.getInstance();
+    public final static PersonContactService personContactService =  PersonContactServiceImpl.getInstance();
+    public final static PersonDemographicsService personDemographicsService =  PersonDemographicsServiceImpl.getInstance();
+    public final static PersonImagesService personImagesService =  PersonImagesServiceImpl.getInstance();
+    public final static PersonLanguageService personLanguageService =  PersonLanguageServiceImpl.getInstance();
 
 }

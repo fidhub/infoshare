@@ -14,6 +14,16 @@ import java.util.Set;
 @Service
 @SpringComponent
 public class OrganisationLogoServiceImpl implements OrganisationLogoService {
+    private static OrganisationLogoServiceImpl logoService=null;
+
+    private OrganisationLogoServiceImpl(){}
+
+    public  static OrganisationLogoServiceImpl getInstance(){
+        if(logoService==null) {
+            return new OrganisationLogoServiceImpl();
+        }
+        return logoService;
+    }
     @Override
     public OrganisationLogo save(OrganisationLogo entity) {
         return OrganisationLogoAPI.save(entity);

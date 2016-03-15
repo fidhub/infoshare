@@ -14,6 +14,16 @@ import java.util.Set;
 @Service
 @SpringComponent
 public class MediaServiceImpl implements MediaService {
+    private static MediaServiceImpl mediaService=null;
+
+    private MediaServiceImpl(){}
+
+    public  static MediaServiceImpl getInstance(){
+        if(mediaService==null) {
+            return new MediaServiceImpl();
+        }
+        return  mediaService;
+    }
     @Override
     public Media findById(String org, String id) {
         return MediaAPI.findById(org, id);

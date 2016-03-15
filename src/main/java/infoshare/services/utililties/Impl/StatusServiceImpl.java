@@ -10,6 +10,16 @@ import java.util.Set;
  * Created by user9 on 2016/03/09.
  */
 public class StatusServiceImpl implements StatusService {
+    private static StatusServiceImpl statusService =null;
+
+    private StatusServiceImpl(){}
+
+    public  static StatusServiceImpl getInstance(){
+        if(statusService ==null) {
+            return new StatusServiceImpl();
+        }
+        return statusService;
+    }
     @Override
     public Status findById(String s) {
         return StatusAPI.findById(s);

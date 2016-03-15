@@ -2,12 +2,8 @@ package infoshare.services.people.Impl;
 
 import com.vaadin.spring.annotation.SpringComponent;
 import infoshare.domain.person.PersonAddress;
-import infoshare.domain.person.PersonContact;
 import infoshare.restapi.people.PersonAddressAPI;
-import infoshare.restapi.people.PersonBaseURI;
-import infoshare.restapi.people.PersonContactAPI;
 import infoshare.services.people.PersonAddressService;
-import infoshare.services.people.PersonContactService;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
@@ -18,6 +14,16 @@ import java.util.Set;
 @Service
 @SpringComponent
 public class PersonAddressServiceImpl implements PersonAddressService {
+    private static PersonAddressServiceImpl personAddressService=null;
+
+    private PersonAddressServiceImpl(){}
+
+    public  static PersonAddressServiceImpl getInstance(){
+        if(personAddressService==null) {
+            return new PersonAddressServiceImpl();
+        }
+        return personAddressService;
+    }
     @Override
     public PersonAddress save(PersonAddress entity) {
         return PersonAddressAPI.save(entity);

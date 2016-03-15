@@ -1,10 +1,8 @@
 package infoshare.services.ContentFiles.source.Impl;
 
-import com.vaadin.spring.annotation.SpringComponent;
 import infoshare.domain.content.Source;
 import infoshare.restapi.ContentFiles.Source.SourceAPI;
 import infoshare.services.ContentFiles.source.SourceService;
-import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
@@ -14,6 +12,17 @@ import java.util.Set;
 @Service
 @SpringComponent*/
 public class SourceServiceImpl implements SourceService {
+
+    private static SourceServiceImpl sourceService=null;
+
+    private SourceServiceImpl(){}
+
+    public  static SourceServiceImpl getInstance(){
+        if(sourceService==null) {
+            return new SourceServiceImpl();
+        }
+        return sourceService;
+    }
 
     @Override
     public Source findById(String org, String id) {

@@ -11,8 +11,8 @@ import infoshare.services.Organisation.OrganisationService;
  */
 public class OrganisationFacade {
 
-    public final static OrganisationService companyService = new OrganisationServiceImpl();
-    public final static OrganisationLogoService companyLogosService = new OrganisationLogoServiceImpl();
+    public final static OrganisationService companyService =  OrganisationServiceImpl.getInstance();
+    public final static OrganisationLogoService companyLogosService =  OrganisationLogoServiceImpl.getInstance();
 
 
 }

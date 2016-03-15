@@ -14,6 +14,16 @@ import java.util.Set;
 @Service
 @SpringComponent
 public class PublishedContentServiceImpl implements PublishedContentService {
+    private static PublishedContentServiceImpl publishedContentService=null;
+
+    private PublishedContentServiceImpl(){}
+
+    public  static PublishedContentServiceImpl getInstance(){
+        if(publishedContentService==null) {
+            return new PublishedContentServiceImpl();
+        }
+        return publishedContentService;
+    }
 
     @Override
     public PublishedContent save(PublishedContent entity) {

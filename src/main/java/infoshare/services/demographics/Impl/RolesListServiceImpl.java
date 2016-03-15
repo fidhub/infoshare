@@ -15,6 +15,16 @@ import java.util.Set;
 @SpringComponent
 @Service
 public class RolesListServiceImpl implements RolesListService {
+    private static RolesListServiceImpl rolesListService=null;
+
+    private RolesListServiceImpl(){}
+
+    public  static RolesListServiceImpl getInstance(){
+        if(rolesListService==null) {
+            return new RolesListServiceImpl();
+        }
+        return rolesListService;
+    }
 
     @Override
     public Role getRole(String role) {

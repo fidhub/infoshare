@@ -27,7 +27,16 @@ import java.util.stream.Collectors;
 @Service
 @SpringComponent
 public class PersonServiceImpl implements PersonService {
+    private static PersonServiceImpl personService =null;
 
+    private PersonServiceImpl(){}
+
+    public  static PersonServiceImpl getInstance(){
+        if(personService ==null) {
+            return new PersonServiceImpl();
+        }
+        return personService;
+    }
     @Override
     public Person save(Person entity) {
         return PersonAPI.save(entity);

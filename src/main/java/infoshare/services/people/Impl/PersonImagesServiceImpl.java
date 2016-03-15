@@ -14,6 +14,16 @@ import java.util.Set;
 @Service
 @SpringComponent
 public class PersonImagesServiceImpl implements PersonImagesService {
+    private static PersonImagesServiceImpl personImagesService =null;
+
+    private PersonImagesServiceImpl(){}
+
+    public  static PersonImagesServiceImpl getInstance(){
+        if(personImagesService ==null) {
+            return new PersonImagesServiceImpl();
+        }
+        return personImagesService;
+    }
     @Override
     public PersonImages save(PersonImages entity) {
         return PersonImagesAPI.save(entity);

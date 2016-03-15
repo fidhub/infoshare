@@ -12,6 +12,16 @@ import java.util.Set;
  * Created by hashcode on 2015/11/28.
  */
 public class MailServiceImpl implements MailService {
+    private static MailServiceImpl mailService =null;
+
+    private MailServiceImpl(){}
+
+    public  static MailServiceImpl getInstance(){
+        if(mailService ==null) {
+            return new MailServiceImpl();
+        }
+        return mailService;
+    }
     @Override
     public Mail findById(String org,String id) {
         return MailAPI.findById(org,id);

@@ -14,6 +14,16 @@ import java.util.Set;
 @Service
 @SpringComponent
 public class PersonContactServiceImpl implements PersonContactService {
+    private static PersonContactServiceImpl personContactService =null;
+
+    private PersonContactServiceImpl(){}
+
+    public  static PersonContactServiceImpl getInstance(){
+        if(personContactService ==null) {
+            return new PersonContactServiceImpl();
+        }
+        return personContactService;
+    }
     @Override
     public PersonContact save(PersonContact entity) {
         return PersonContactAPI.save(entity);

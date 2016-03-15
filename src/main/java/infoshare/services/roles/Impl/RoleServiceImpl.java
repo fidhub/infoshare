@@ -16,7 +16,16 @@ import java.util.Set;
 @SpringComponent
 public class RoleServiceImpl implements RoleService {
 
+    private static RoleServiceImpl roleService =null;
 
+    private RoleServiceImpl(){}
+
+    public  static RoleServiceImpl getInstance(){
+        if(roleService ==null) {
+            return new RoleServiceImpl();
+        }
+        return roleService;
+    }
     @Override
     public Role findById(String s) {
         return RolesAPI.findById(s);

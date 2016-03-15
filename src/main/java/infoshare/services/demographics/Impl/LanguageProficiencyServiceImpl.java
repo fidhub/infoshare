@@ -14,6 +14,17 @@ import java.util.Set;
 @SpringComponent
 @Service
 public class LanguageProficiencyServiceImpl implements LanguageProficiencyService {
+    private static LanguageProficiencyServiceImpl languageProficiencyService=null;
+
+    private LanguageProficiencyServiceImpl(){}
+
+    public  static LanguageProficiencyServiceImpl getInstance(){
+        if(languageProficiencyService==null) {
+            return new LanguageProficiencyServiceImpl();
+        }
+        return  languageProficiencyService;
+    }
+
     @Override
     public LanguageProficiency findById(String s) {
         return LanguageProfiencyAPI.findById(s);
