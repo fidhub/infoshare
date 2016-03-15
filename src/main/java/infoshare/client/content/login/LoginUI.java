@@ -124,13 +124,13 @@ public class LoginUI extends UI {
     private Component buildLabels() {
         CssLayout labels = new CssLayout();
         labels.addStyleName("labels");
-        Label welcome = new Label("Welcome to ");
+        Label welcome = new Label("&nbsp;Welcome to ", ContentMode.HTML);
         welcome.setSizeUndefined();
         welcome.addStyleName(ValoTheme.LABEL_H4);
         welcome.addStyleName(ValoTheme.LABEL_LIGHT);
         labels.addComponent(welcome);
 
-        Label title = new Label("&nbsp;&nbsp;&nbsp;Info Share", ContentMode.HTML);
+        Label title = new Label("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Info Share", ContentMode.HTML);
         title.setSizeUndefined();
         title.addStyleName(ValoTheme.LABEL_H1);
         title.addStyleName(ValoTheme.LABEL_BOLD);
