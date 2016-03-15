@@ -8,5 +8,4 @@ public enum RolesValues {
     ORG_ADMIN,
     ROLE_EDITOR,
     ROLE_PUBLISHER
-
 }

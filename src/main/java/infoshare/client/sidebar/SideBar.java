@@ -3,8 +3,12 @@ package infoshare.client.sidebar;
 import com.vaadin.event.ItemClickEvent;
 import com.vaadin.ui.Accordion;
 import com.vaadin.ui.VerticalLayout;
+import infoshare.app.util.organisation.OrganisationUtil;
+import infoshare.app.util.security.GetUserCredentials;
+import infoshare.app.util.security.RolesValues;
 import infoshare.client.content.MainLayout;
 import infoshare.client.sidebar.trees.*;
+import infoshare.domain.organisation.Organisation;
 
 /**
  * Created by hashcode on 2015/06/23.
@@ -23,50 +27,32 @@ public class SideBar extends Accordion implements ItemClickEvent.ItemClickListen
         setSizeFull();
         this.main = main;
         this.addStyleName("accordion");
-        setHeight("350px");
+        setHeight("250px");
 
         //TODO OrganisationTree
         VerticalLayout companyMenu = new VerticalLayout();
         OrganisationTree organisationTree = new OrganisationTree(main);
         companyMenu.addComponent(organisationTree);
-        addTab(companyMenu,MANAGE_ORGANISATION,null);
-
         //TODO CommonTree
         VerticalLayout commonMenu = new VerticalLayout();
         CommonTree commonTree = new CommonTree(main);
         commonMenu.addComponent(commonTree);
-        addTab(commonMenu, COMMON_SETTINGS, null);
-
+        //TODO DISABLE IF NOT ROLE_ADMIN
+        if(GetUserCredentials.getRole().equals(RolesValues.ROLE_ADMIN)){
+            setHeight("350px");
+            addTab(companyMenu,MANAGE_ORGANISATION,null);
+            addTab(commonMenu, COMMON_SETTINGS, null);
+        }
         //TODO ContentTree
         VerticalLayout rawMenu = new VerticalLayout();
         ContentTree contentTree = new ContentTree(main);
         rawMenu.addComponent(contentTree);
         addTab(contentTree, CONTENT, null);
-        //TODO HomeTree
-        //VerticalLayout homeMenu = new VerticalLayout();
-        //HomeTree homeTree = new HomeTree(main);
-        //homeMenu.addComponent(homeTree);
-        //addTab(homeMenu, HOME_CONTENT, null);
-        //TODO PasswordTree
-       // VerticalLayout changePasswordMenu = new VerticalLayout();
-       // PasswordTree passwordTree = new PasswordTree(main);
-       // changePasswordMenu.addComponent(passwordTree);
-       // addTab(passwordTree, PASSWORD, null);
-        //TODO ProfileTree
+        //TODO PROFILE
         VerticalLayout profileMenu = new VerticalLayout();
         ProfileTree profileTree = new ProfileTree(main);
         profileMenu.addComponent(profileTree);
         addTab(profileTree,YOUR_PROFILE,null);
-       /* //TODO SetupTree
-        VerticalLayout setupMenu = new VerticalLayout();
-        SetupTree setupTree = new SetupTree(main);
-        setupMenu.addComponent(setupTree);
-        //addTab(setupTree, SETUP, null);
-        //TODO SystemsTree
-        VerticalLayout systemsMenu = new VerticalLayout();
-        SystemsTree systemsTree = new SystemsTree(main);
-        systemsMenu.addComponent(systemsTree);
-        //addTab(systemsMenu,COMMON_SETTINGS,null);*/
        //TODO UsersTree
         VerticalLayout usersMenu = new VerticalLayout();
         UsersTree usersTree = new UsersTree(main);
