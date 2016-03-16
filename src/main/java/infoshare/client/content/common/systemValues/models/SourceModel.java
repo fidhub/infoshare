@@ -1,18 +1,17 @@
-package infoshare.client.content.systemValues.models;
+package infoshare.client.content.common.systemValues.models;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
- * Created by codex on 2015/06/26.
+ * Created by codex on 2015/06/25.
  */
-public class CategoryModel implements Serializable {
+public class SourceModel implements Serializable {
 
     @NotNull
     private String name;
     @NotNull
     private String description;
-
 
     public String getName() {
         return name;
@@ -22,7 +21,7 @@ public class CategoryModel implements Serializable {
         this.name = name;
     }
 
-   public String getDescription() {
+    public String getDescription() {
         return description;
     }
 

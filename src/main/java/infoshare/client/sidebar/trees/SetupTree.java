@@ -4,7 +4,7 @@ import com.vaadin.event.ItemClickEvent;
 import com.vaadin.ui.Tree;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.setup.SetupMenu;
-import infoshare.client.content.systemValues.SystemValues;
+import infoshare.client.content.common.systemValues.SystemValues;
 
 /**
  * Created by hashcode on 2015/06/23.

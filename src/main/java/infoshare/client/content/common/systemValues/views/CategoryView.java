@@ -1,4 +1,4 @@
-package infoshare.client.content.systemValues.views;
+package infoshare.client.content.common.systemValues.views;
 
 import com.vaadin.data.Property;
 import com.vaadin.data.fieldgroup.FieldGroup;
@@ -8,10 +8,10 @@ import com.vaadin.ui.Notification;
 import com.vaadin.ui.VerticalLayout;
 import infoshare.app.facade.CategoryFacade;
 import infoshare.client.content.MainLayout;
-import infoshare.client.content.systemValues.SystemValues;
-import infoshare.client.content.systemValues.forms.CategoryForm;
-import infoshare.client.content.systemValues.models.CategoryModel;
-import infoshare.client.content.systemValues.tables.CategoryTable;
+import infoshare.client.content.common.systemValues.SystemValues;
+import infoshare.client.content.common.systemValues.forms.CategoryForm;
+import infoshare.client.content.common.systemValues.models.CategoryModel;
+import infoshare.client.content.common.systemValues.tables.CategoryTable;
 import infoshare.domain.content.Category;
 import infoshare.factories.content.CategoryFactory;
 import infoshare.services.ContentFiles.category.CategoryService;

@@ -1,32 +1,35 @@
-package infoshare.client.content.systemValues.forms;
+package infoshare.client.content.common.systemValues.forms;
 
 import com.vaadin.data.fieldgroup.FieldGroup;
 import com.vaadin.data.util.BeanItem;
 import com.vaadin.data.validator.BeanValidator;
 import com.vaadin.ui.*;
-import infoshare.client.content.systemValues.models.SourceModel;
+import infoshare.client.content.common.systemValues.models.ContentTypeModel;
+
 
 /**
- * Created by codex on 2015/06/26.
+ * Created by codex on 2015/06/25.
  */
-public class ContentSourceForm extends FormLayout {
 
-    private final SourceModel model;
-    public final BeanItem<SourceModel> item;
+public class ContentTypeForm extends FormLayout {
+
+    private final ContentTypeModel model;
+    public final BeanItem<ContentTypeModel> item;
     public final FieldGroup binder;
+
     public Button save = new Button("Save");
     public Button edit = new Button("Edit");
     public Button cancel = new Button("Cancel");
     public Button update = new Button("Update");
     public Button delete = new Button("Delete");
 
-    public ContentSourceForm(){
+    public ContentTypeForm(){
 
-        model = new SourceModel();
+        model = new ContentTypeModel();
         item = new BeanItem<>(model);
         binder = new FieldGroup(item);
 
-        TextField name = getTextField("Source Name", "name");
+        TextField name = getTextField("ContentFiles Type", "name");
         TextArea description = getTextArea("Description", "description");
         GridLayout grid = new GridLayout(4, 8);
         grid.setSizeFull();
@@ -45,9 +48,9 @@ public class ContentSourceForm extends FormLayout {
     private TextField getTextField(String label, String field) {
         TextField textField = new TextField(label);
         textField.setWidth(250, Unit.PIXELS);
-        textField.setNullRepresentation("");
-        textField.addValidator(new BeanValidator(SourceModel.class, field));
+        textField.addValidator(new BeanValidator(ContentTypeModel.class, field));
         textField.setImmediate(true);
+        textField.setNullRepresentation("");
         binder.bind(textField, field);
         return textField;
     }
@@ -55,7 +58,7 @@ public class ContentSourceForm extends FormLayout {
         TextArea textArea = new TextArea(label);
         textArea.setWidth(250, Unit.PIXELS);
         textArea.setNullRepresentation("");
-        textArea.addValidator(new BeanValidator(SourceModel.class, field));
+        textArea.addValidator(new BeanValidator(ContentTypeModel.class, field));
         textArea.setImmediate(true);
         binder.bind(textArea, field);
         return textArea;

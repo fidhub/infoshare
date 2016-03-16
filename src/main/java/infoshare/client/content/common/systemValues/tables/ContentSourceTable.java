@@ -1,4 +1,4 @@
-package infoshare.client.content.systemValues.tables;
+package infoshare.client.content.common.systemValues.tables;
 
 import com.vaadin.server.Responsive;
 import com.vaadin.ui.Table;

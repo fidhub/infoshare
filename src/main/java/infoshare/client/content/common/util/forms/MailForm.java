@@ -42,7 +42,7 @@ public class MailForm extends FormLayout {
 
 
         TextField key = UIComponent.getGridTextField("Email Key :", "key", MailModel.class, binder);
-        TextField value = UIComponent.getGridTextField("Email Value :", "value", MailModel.class, binder);
+        PasswordField value = UIComponent.getPasswordField("Email Value :", "value", MailModel.class, binder);
         TextField host = UIComponent.getGridTextField("SMTP Host :", "host", MailModel.class, binder);
         TextField port = UIComponent.getGridTextField("SMTP Port :", "port", MailModel.class, binder);
 

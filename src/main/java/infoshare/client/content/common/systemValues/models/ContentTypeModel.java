@@ -1,12 +1,12 @@
-package infoshare.client.content.systemValues.models;
+package infoshare.client.content.common.systemValues.models;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
- * Created by codex on 2015/06/25.
+ * Created by codex on 2015/06/27.
  */
-public class SourceModel implements Serializable {
+public class ContentTypeModel implements Serializable {
 
     @NotNull
     private String name;

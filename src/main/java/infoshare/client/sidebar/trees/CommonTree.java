@@ -6,7 +6,7 @@ import infoshare.client.content.MainLayout;
 import infoshare.client.content.common.demographics.CommonDemographicsMenu;
 import infoshare.client.content.common.location.CommonLocationMenu;
 import infoshare.client.content.common.util.CommonUtilMenu;
-import infoshare.client.content.systemValues.SystemValues;
+import infoshare.client.content.common.systemValues.SystemValues;
 
 
 /**

@@ -1,10 +1,10 @@
-package infoshare.client.content.systemValues;
+package infoshare.client.content.common.systemValues;
 
 import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.VerticalLayout;
-import infoshare.client.content.systemValues.views.CategoryView;
-import infoshare.client.content.systemValues.views.ContentSourceView;
-import infoshare.client.content.systemValues.views.ContentTypeView;
+import infoshare.client.content.common.systemValues.views.CategoryView;
+import infoshare.client.content.common.systemValues.views.ContentSourceView;
+import infoshare.client.content.common.systemValues.views.ContentTypeView;
 import infoshare.client.content.MainLayout;
 
 /**
