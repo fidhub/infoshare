@@ -59,14 +59,10 @@ public class EditTable extends Table{
 
         public void loadTable(EditedContent editedContent) {
             DateFormat formatter = new SimpleDateFormat("dd MMMMMMM yyyy");
-            String cat;
-            if(!editedContent.getCategory().toLowerCase().equalsIgnoreCase("uncategorized")) {
-                cat = categoryService.findById(editedContent.getCategory().toString().trim()).getName();
-        }else cat = editedContent.getCategory().toString().toLowerCase();
         try {
             addItem(new Object[]{
                     editedContent.getTitle(),
-                    cat,
+                    categoryService.findById(editedContent.getCategory()).getName(),
                     editedContent.getCreator(),
                     formatter.format(editedContent.getDateCreated())
             }, editedContent.getId());

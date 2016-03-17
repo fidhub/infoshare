@@ -37,9 +37,7 @@ public class PublishTable extends Table{
         addContainerProperty("Category",String.class,null);
         addContainerProperty("Creator",String.class,null);
         addContainerProperty("Date Created",String.class,null);
-
         try {
-
             publishedContentService.findAll(OrganisationUtil.getCompanyCode()) //TODO
                     .stream()
                     .filter(cont -> cont != null)
@@ -60,16 +58,16 @@ public class PublishTable extends Table{
     }
     public void loadTable(PublishedContent content) {
         DateFormat formatter = new SimpleDateFormat("dd MMMMMMM yyyy");
-           String category = categoryService.findById(content.getCategory()).getName();
-              try{
-                  addItem(new Object[]{
-                            content.getTitle(),
-                            category,
-                            content.getCreator(),
-                            formatter.format(content.getDateCreated())
-                    }, content.getId());
-                } catch (Exception r) {
-                }
+        String category = categoryService.findById(content.getCategory()).getName();
+        try {
+            addItem(new Object[]{
+                    content.getTitle(),
+                    category,
+                    content.getCreator(),
+                    formatter.format(content.getDateCreated())
+            }, content.getId());
+        } catch (Exception r) {
+        }
 
     }
 

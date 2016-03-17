@@ -60,9 +60,8 @@ public class PublishView extends VerticalLayout implements Button.ClickListener,
                     .filter(cont ->cont.getStatus().equalsIgnoreCase("Published"))
                     .collect(Collectors.toList())
                     .stream()
-                    .filter(cont ->cont.getState().equalsIgnoreCase("active"))
-                    .collect(Collectors.toList())
-                    .forEach(table::loadTable);
+                    .filter(cont -> cont.getState().equalsIgnoreCase("active"))
+                    .collect(Collectors.toList()).forEach(table::loadTable);
         }catch (Exception e){
         }
     }

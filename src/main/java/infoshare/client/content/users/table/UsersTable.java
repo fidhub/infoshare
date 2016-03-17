@@ -5,6 +5,7 @@ import com.vaadin.ui.Table;
 import com.vaadin.ui.themes.ValoTheme;
 import infoshare.app.facade.PeopleFacade;
 import infoshare.app.util.organisation.OrganisationUtil;
+import infoshare.app.util.security.GetUserCredentials;
 import infoshare.app.util.security.RolesValues;
 import infoshare.client.content.MainLayout;
 import infoshare.domain.person.Person;
@@ -29,7 +30,17 @@ public class UsersTable extends Table {
         addContainerProperty("Reset Credentials", Button.class, null);
         addContainerProperty("Disable Account", Button.class, null);
 
-        Set<Person> applicants = PeopleFacade.personService.getPersonsWithRole(OrganisationUtil.getPersonID(), RolesValues.ORG_ADMIN.name());
+        Set<Person> applicants;
+        if(GetUserCredentials.isUserWithRole(RolesValues.ROLE_ADMIN.name())) {
+
+            applicants = PeopleFacade.personService.getPersonsWithRole(OrganisationUtil.getPersonID(), RolesValues.ORG_ADMIN.name());
+        }else if(GetUserCredentials.isUserWithRole(RolesValues.ORG_ADMIN.name())) {
+            applicants = PeopleFacade.personService.getPersonByCompany(OrganisationUtil.getCompanyCode());
+        } else if(GetUserCredentials.isUserWithRole(RolesValues.ROLE_EDITOR.name())) {
+            applicants = PeopleFacade.personService.getPersonsWithRole(OrganisationUtil.getPersonID(), RolesValues.ROLE_EDITOR.name());
+        } else {
+            applicants = PeopleFacade.personService.getPersonsWithRole(OrganisationUtil.getPersonID(), RolesValues.ROLE_PUBLISHER.name());
+        }
 
         applicants.parallelStream().forEach(item -> {
             Button details = new Button("Details");
@@ -52,7 +63,6 @@ public class UsersTable extends Table {
             details.addClickListener(event -> {
 
             });
-
 
             addItem(new Object[]{
                     item.getLastName(),

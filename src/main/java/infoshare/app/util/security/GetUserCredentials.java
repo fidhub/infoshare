@@ -2,7 +2,6 @@ package infoshare.app.util.security;
 
 
 import infoshare.app.facade.PeopleFacade;
-import infoshare.app.util.organisation.OrganisationUtil;
 import infoshare.domain.person.Person;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -35,14 +34,8 @@ public class GetUserCredentials {
             if (authorities.contains(authority)) {
                 return true;
             }
-        } else {
-            return false;
         }
         return false;
-    }
-
-    public static String getRole(){
-        return PeopleFacade.personService.getPersonById(OrganisationUtil.getCompanyCode(),OrganisationUtil.getPersonID()).getAuthvalue();
     }
 
     public static Person getUser() {

@@ -35,9 +35,9 @@ public class HomeMenu extends VerticalLayout {
         tab.setHeight("100%");
         tab.setWidth("100%");
 
-        tab.addTab(homePageTab, "Home PAGE", null);
-        tab.addTab(messageBoardTab, "Message BOARD", null);
-        tab.addTab(structureTab, "Company STRUCTURE", null);
+        tab.addTab(homePageTab, "Home Page", null);
+        tab.addTab(messageBoardTab, "Message Board", null);
+        tab.addTab(structureTab, "Company Structure", null);
 
         if (selectedTab.equals("LANDING")) {
             tab.setSelectedTab(homePageTab);

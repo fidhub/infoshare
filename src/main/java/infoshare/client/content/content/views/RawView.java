@@ -59,10 +59,10 @@ public class  RawView extends VerticalLayout implements Button.ClickListener,Pro
                     .filter(cont -> cont!= null)
                     .collect(Collectors.toList())
                     .stream()
-                    .filter(cont->cont.getStatus().equalsIgnoreCase("raw"))
+                    .filter(cont -> cont.getStatus().equalsIgnoreCase("raw"))
                     .collect(Collectors.toList())
                     .stream()
-                    .filter(cont->cont.getState().equalsIgnoreCase("active"))
+                    .filter(cont -> cont.getState().equalsIgnoreCase("active"))
                     .collect(Collectors.toList()).forEach(table::loadTable);
         }catch (Exception e){
         }
@@ -94,9 +94,7 @@ public class  RawView extends VerticalLayout implements Button.ClickListener,Pro
     private void getHome() {
         main.content.setSecondComponent(new ContentMenu(main, "LANDING"));
     }
-    public static void getme(){
 
-    }
     public void EditButton(){
         try {
             tableId = table.getValue().toString();
@@ -124,8 +122,7 @@ public class  RawView extends VerticalLayout implements Button.ClickListener,Pro
             Notification.show("Record edited!!", Notification.Type.HUMANIZED_MESSAGE);
         } catch (FieldGroup.CommitException e) {
             Notification.show("Fill in all Fields!!", Notification.Type.HUMANIZED_MESSAGE);
-            getHome();
-        }
+        }catch (Exception e){getHome();}
     }
     private EditedContent getNewEntity(FieldGroup binder) {
         try {
@@ -133,14 +130,15 @@ public class  RawView extends VerticalLayout implements Button.ClickListener,Pro
             bean.setDateCreated(rawContentService.findById(OrganisationUtil.getCompanyCode(),table.getValue().toString()).getDateCreated());
             Map<String,String> editedVals = new HashMap<>();
             editedVals.put("content",bean.getContent());
-            editedVals.put("category",bean.getCategory());
+            editedVals.put("category",form.popUpCategoryCmb.getValue().toString());
             editedVals.put("creator",bean.getCreator());
-            editedVals.put("contentType",bean.getContentType());
+            editedVals.put("contentType",form.popUpContentTypeCmb.getValue().toString());
             editedVals.put("status",bean.getStatus());
-            editedVals.put("source",bean.getStatus());
+            editedVals.put("source",form.popUpSourceCmb.getValue().toString());
             final EditedContent editedContent = EditedContentFactory.getEditedContent(editedVals, new Date());
             return editedContent;
-        }catch (Exception e){
+        }catch (Exception exception) {
+            Notification.show("Missing Value", Notification.Type.HUMANIZED_MESSAGE);
             return null;
         }
     }

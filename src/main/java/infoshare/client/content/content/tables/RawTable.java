@@ -37,7 +37,6 @@ public class RawTable extends Table {
 
         try {
             rawContentService.findAll(OrganisationUtil.getCompanyCode()) //TODO
-
                     .stream()
                     .filter(cont -> cont!= null)
                     .collect(Collectors.toList())

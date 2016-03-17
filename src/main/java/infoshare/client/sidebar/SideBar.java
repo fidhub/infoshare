@@ -3,12 +3,10 @@ package infoshare.client.sidebar;
 import com.vaadin.event.ItemClickEvent;
 import com.vaadin.ui.Accordion;
 import com.vaadin.ui.VerticalLayout;
-import infoshare.app.util.organisation.OrganisationUtil;
 import infoshare.app.util.security.GetUserCredentials;
 import infoshare.app.util.security.RolesValues;
 import infoshare.client.content.MainLayout;
 import infoshare.client.sidebar.trees.*;
-import infoshare.domain.organisation.Organisation;
 
 /**
  * Created by hashcode on 2015/06/23.
@@ -38,7 +36,7 @@ public class SideBar extends Accordion implements ItemClickEvent.ItemClickListen
         CommonTree commonTree = new CommonTree(main);
         commonMenu.addComponent(commonTree);
         //TODO DISABLE IF NOT ROLE_ADMIN
-        if(GetUserCredentials.getRole().equals(RolesValues.ROLE_ADMIN)){
+        if(GetUserCredentials.isUserWithRole(RolesValues.ROLE_ADMIN.name())){
             setHeight("350px");
             addTab(companyMenu,MANAGE_ORGANISATION,null);
             addTab(commonMenu, COMMON_SETTINGS, null);
