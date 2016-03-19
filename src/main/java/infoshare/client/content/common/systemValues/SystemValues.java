@@ -35,9 +35,9 @@ public class SystemValues extends VerticalLayout {
         tab.setHeight("100%");
         tab.setWidth("100%");
 
-        tab.addTab(contentTypeView, "Add ContentFiles Type", null);
-        tab.addTab(contentSourceView, "Add content Source", null);
-        tab.addTab(categoryView, "Add ContentFiles Category", null);
+        tab.addTab(contentTypeView, "Content Type", null);
+        tab.addTab(contentSourceView, "Content Source", null);
+        tab.addTab(categoryView, "Content Category", null);
 
         if (selectedTab.equalsIgnoreCase("LANDING")) {
             tab.setSelectedTab(contentTypeView);

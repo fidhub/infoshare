@@ -107,7 +107,7 @@ public class SecurityService implements UserDetailsService {
                 .body(" Your Username is : " + companyAdmin.getEmailAddress() + " And Your Password is : " + password + " Login in at https://hashwork.hash-code.com")
                 .from(props.getKey())
                 .password(props.getValue())
-                .subject("Your Hashwork Details")
+                .subject("Your Infoshare Details")
                 .build();
         EmailUtil.sendSimpleEmail(email);
     }

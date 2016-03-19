@@ -2,10 +2,7 @@ package infoshare.client.content.common.demographics.forms;
 
 import com.vaadin.data.fieldgroup.FieldGroup;
 import com.vaadin.data.util.BeanItem;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.FormLayout;
-import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.TextField;
+import com.vaadin.ui.*;
 import infoshare.app.util.fields.ButtonsHelper;
 import infoshare.app.util.fields.UIComponentHelper;
 import infoshare.client.content.common.demographics.model.LanguageProficiencyModel;
@@ -34,7 +31,10 @@ public class LanguageProficiencyForm extends FormLayout {
 
         // Create a field group and use it to bind the fields in the layout
         TextField proficiency = UIComponent.getTextField("Language Proficiency :", "name", LanguageProficiencyModel.class, binder);
-        addComponent(proficiency);
+        GridLayout layout = new GridLayout(2,2);
+        layout.setSizeFull();
+        layout.addComponent(proficiency,0,0,1,0);
+        addComponent(layout);
 
 
         HorizontalLayout buttons = ButtonsHelper.getButtons(save, edit, cancel, update, delete);

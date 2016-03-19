@@ -2,10 +2,7 @@ package infoshare.client.content.common.util.forms;
 
 import com.vaadin.data.fieldgroup.FieldGroup;
 import com.vaadin.data.util.BeanItem;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.FormLayout;
-import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.TextField;
+import com.vaadin.ui.*;
 import infoshare.app.util.fields.ButtonsHelper;
 import infoshare.app.util.fields.UIComboBoxHelper;
 import infoshare.app.util.fields.UIComponentHelper;
@@ -40,12 +37,11 @@ public class StorageUrlForm extends FormLayout {
 
         TextField linkname = UIComponent.getTextField("Link Name :", "name", StorageUrlModel.class, binder);
         TextField linkurl = UIComponent.getTextField("Link URL :", "url", StorageUrlModel.class, binder);
-
-        // Create a field group and use it to bind the fields in the layout
-
-
-        addComponent(linkname);
-        addComponent(linkurl);
+        GridLayout layout = new GridLayout(2,2);
+        layout.setSizeFull();
+        layout.addComponent(linkname,0,0,1,0);
+        layout.addComponent(linkurl,0,1,1,1);
+        addComponent(layout);
 
         // Create a field group and use it to bind the fields in the layout
 

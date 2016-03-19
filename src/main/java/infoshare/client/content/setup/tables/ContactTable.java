@@ -13,7 +13,7 @@ public class ContactTable extends Table {
     private final MainLayout main;
     public ContactTable(MainLayout main) {
         this.main = main;
-        setWidth("100%");
+        setSizeFull();
         addStyleName(ValoTheme.TABLE_BORDERLESS);
         addStyleName(ValoTheme.TABLE_NO_STRIPES);
         addStyleName(ValoTheme.TABLE_NO_VERTICAL_LINES);

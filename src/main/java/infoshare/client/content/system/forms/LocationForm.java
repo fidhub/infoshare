@@ -48,7 +48,6 @@ public class LocationForm extends FormLayout {
         TextField latitude = UIComponent.getGridTextField("Latitude :", "latitude", LocationModel.class, binder);
         TextField longitude = UIComponent.getGridTextField("Longitude :", "longitude", LocationModel.class, binder);
 
-
         //ComboBox Fields
         final ComboBox locationTypeId = UIComboBox.getComboBox("Location Type :", "locationTypeId", LocationModel.class, binder, new Consumer<ComboBox>() {
             public void accept(ComboBox comboBox) {
@@ -70,16 +69,13 @@ public class LocationForm extends FormLayout {
                 }
             }
         });
-
         // Create a field group and use it to bind the fields in the layout
         GridLayout grid = new GridLayout(4, 10);
         grid.setSizeFull();
-
         // First ROW
         grid.addComponent(parentId, 0, 0);
         grid.addComponent(name, 1, 0);
         grid.addComponent(code, 2, 0);
-
         //Second ROW
         grid.addComponent(locationTypeId, 0, 1);
         grid.addComponent(latitude, 1, 1);

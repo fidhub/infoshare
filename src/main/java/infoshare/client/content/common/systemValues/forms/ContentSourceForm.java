@@ -26,7 +26,7 @@ public class ContentSourceForm extends FormLayout {
         item = new BeanItem<>(model);
         binder = new FieldGroup(item);
 
-        TextField name = getTextField("Source Name", "name");
+        TextField name = getTextField("Source ", "name");
         TextArea description = getTextArea("Description", "description");
         GridLayout grid = new GridLayout(4, 8);
         grid.setSizeFull();

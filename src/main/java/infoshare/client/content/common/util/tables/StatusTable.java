@@ -1,6 +1,7 @@
 package infoshare.client.content.common.util.tables;
 
 import com.vaadin.ui.Table;
+import com.vaadin.ui.themes.ValoTheme;
 import infoshare.app.facade.UtilFacade;
 import infoshare.client.content.MainLayout;
 import infoshare.domain.util.Status;
@@ -18,9 +19,10 @@ public class StatusTable extends Table {
     public StatusTable(MainLayout main) {
         this.main = main;
         setSizeFull();
-//    private String name;
-//    private String statusValues;
-
+        addStyleName(ValoTheme.TABLE_BORDERLESS);
+        addStyleName(ValoTheme.TABLE_NO_STRIPES);
+        addStyleName(ValoTheme.TABLE_SMALL);
+        addStyleName(ValoTheme.TABLE_NO_VERTICAL_LINES);
         addContainerProperty("Status Type", String.class, null);
         addContainerProperty("Status Value", String.class, null);
 

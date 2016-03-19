@@ -2,10 +2,7 @@ package infoshare.client.content.common.demographics.forms;
 
 import com.vaadin.data.fieldgroup.FieldGroup;
 import com.vaadin.data.util.BeanItem;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.FormLayout;
-import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.TextField;
+import com.vaadin.ui.*;
 import infoshare.app.util.fields.ButtonsHelper;
 import infoshare.app.util.fields.UIComponentHelper;
 import infoshare.client.content.common.demographics.model.RolesListModel;
@@ -34,8 +31,11 @@ public class RolesListForm extends FormLayout {
 
         TextField roleName = UIComponent.getTextField("Role Name :", "roleName", RolesListModel.class, binder);
         TextField description = UIComponent.getTextField("Description :", "description", RolesListModel.class, binder);
-        addComponent(roleName);
-        addComponent(description);
+        GridLayout layout = new GridLayout(2,2);
+        layout.setSizeFull();
+        layout.addComponent(roleName,0,0,1,0);
+        layout.addComponent(description,0,1,1,1);
+        addComponent(layout);
 
 
         HorizontalLayout buttons = ButtonsHelper.getButtons(save, edit, cancel, update, delete);

@@ -1,6 +1,7 @@
 package infoshare.client.content.profile.demographics.table;
 
 import com.vaadin.ui.Table;
+import com.vaadin.ui.themes.ValoTheme;
 import infoshare.app.facade.DemographicsFacade;
 import infoshare.app.facade.LocationFacade;
 import infoshare.app.facade.PeopleFacade;
@@ -23,7 +24,10 @@ public class PersonLanguageTable extends Table {
     public PersonLanguageTable(MainLayout main) {
         this.main = main;
         setSizeFull();
-
+        addStyleName(ValoTheme.TABLE_BORDERLESS);
+        addStyleName(ValoTheme.TABLE_NO_STRIPES);
+        addStyleName(ValoTheme.TABLE_NO_VERTICAL_LINES);
+        addStyleName(ValoTheme.TABLE_SMALL);
         final String personId = GetUserCredentials.getUser().getId();
         addContainerProperty("Date Created", Date.class, null);
         addContainerProperty("Language", String.class, null);

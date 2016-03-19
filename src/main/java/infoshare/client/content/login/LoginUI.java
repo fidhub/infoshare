@@ -130,7 +130,7 @@ public class LoginUI extends UI {
         welcome.addStyleName(ValoTheme.LABEL_LIGHT);
         labels.addComponent(welcome);
 
-        Label title = new Label("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Info Share", ContentMode.HTML);
+        Label title = new Label("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Info Share", ContentMode.HTML);
         title.setSizeUndefined();
         title.addStyleName(ValoTheme.LABEL_H1);
         title.addStyleName(ValoTheme.LABEL_BOLD);
@@ -147,7 +147,7 @@ public class LoginUI extends UI {
             userName.focus();
             userName.selectAll();
             passwordField.setValue("");
-            loginFailedLabel.setValue(String.format("Login failed: %s", ex.getMessage()));
+            loginFailedLabel.setValue(String.format("Login failed: %s", "Wrong Email Or Password"));
             loginFailedLabel.setVisible(true);
             if (loggedOutLabel != null) {
                 loggedOutLabel.setVisible(false);

@@ -23,6 +23,10 @@ public class DisabledOrganisationTable extends Table {
     public DisabledOrganisationTable(MainLayout main, DisabledOrganisationTab tab, Set<Organisation> companies) {
         this.main = main;
         setSizeFull();
+        addStyleName(ValoTheme.TABLE_BORDERLESS);
+        addStyleName(ValoTheme.TABLE_NO_STRIPES);
+        addStyleName(ValoTheme.TABLE_NO_VERTICAL_LINES);
+        addStyleName(ValoTheme.TABLE_SMALL);
         addContainerProperty("Date", Date.class, null);
         addContainerProperty("Name", String.class, null);
         addContainerProperty("Code", String.class, null);

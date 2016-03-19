@@ -2,10 +2,7 @@ package infoshare.client.content.common.location.forms;
 
 import com.vaadin.data.fieldgroup.FieldGroup;
 import com.vaadin.data.util.BeanItem;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.FormLayout;
-import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.TextField;
+import com.vaadin.ui.*;
 import infoshare.app.util.fields.ButtonsHelper;
 import infoshare.app.util.fields.UIComponentHelper;
 import infoshare.client.content.common.location.models.ContactTypeModel;
@@ -32,8 +29,10 @@ public class ContactTypeForm extends FormLayout {
         final UIComponentHelper UIComponent = new UIComponentHelper();
 
         TextField name = UIComponent.getTextField("Contact Name :", "name", ContactTypeModel.class, binder);
-
-        addComponent(name);
+        GridLayout layout = new GridLayout(2,2);
+        layout.setSizeFull();
+        layout.addComponent(name,0,0,1,0);
+        addComponent(layout);
 
         HorizontalLayout buttons = ButtonsHelper.getButtons(save, edit, cancel, update, delete);
         buttons.setSizeFull();

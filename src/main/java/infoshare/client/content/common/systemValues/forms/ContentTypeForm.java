@@ -29,7 +29,7 @@ public class ContentTypeForm extends FormLayout {
         item = new BeanItem<>(model);
         binder = new FieldGroup(item);
 
-        TextField name = getTextField("ContentFiles Type", "name");
+        TextField name = getTextField("Content Type", "name");
         TextArea description = getTextArea("Description", "description");
         GridLayout grid = new GridLayout(4, 8);
         grid.setSizeFull();

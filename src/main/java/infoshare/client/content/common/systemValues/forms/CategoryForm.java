@@ -28,12 +28,10 @@ public class CategoryForm extends FormLayout {
         item = new BeanItem<>(model);
         binder = new FieldGroup(item);
 
-        TextField textF = getTextField("Tip Category", "name");
+        TextField textF = getTextField("Category", "name");
         TextArea description = getTextArea("Description", "description");
-
         GridLayout grid = new GridLayout(4, 4);
         grid.setSizeFull();
-
         HorizontalLayout buttons = getButtons();
         update.setVisible(false);
         delete.setVisible(false);

@@ -36,13 +36,6 @@ public class PersonLanguagesForm extends FormLayout {
         final UIComponentHelper UIComponent = new UIComponentHelper();
         final UIComboBoxHelper UIComboBox = new UIComboBoxHelper();
 
-
-//        private String languageId;
-//        private String reading;
-//        private String writing;
-//        private String speaking;
-
-
         //ComboBox Fields
         final ComboBox languageId = UIComboBox.getComboBox("Language :", "languageId", PersonLanguageModel.class, binder, new Consumer<ComboBox>() {
             public void accept(ComboBox comboBox) {

@@ -47,8 +47,8 @@ public class PersonRoleServiceImpl implements PersonRoleService {
     }
 
     @Override
-    public PersonRole findById(String personId,String id) {
-        return PersonRoleAPI.findById(personId,id);
+    public PersonRole findById(String personId, String roleId) {
+        return PersonRoleAPI.findById(personId,roleId);
     }
 
     @Override

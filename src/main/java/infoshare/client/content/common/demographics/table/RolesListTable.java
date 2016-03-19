@@ -1,6 +1,7 @@
 package infoshare.client.content.common.demographics.table;
 
 import com.vaadin.ui.Table;
+import com.vaadin.ui.themes.ValoTheme;
 import infoshare.app.facade.DemographicsFacade;
 import infoshare.client.content.MainLayout;
 import infoshare.domain.demographics.Role;
@@ -17,7 +18,10 @@ public class RolesListTable extends Table {
     public RolesListTable(MainLayout main) {
         this.main = main;
         setSizeFull();
-
+        addStyleName(ValoTheme.TABLE_BORDERLESS);
+        addStyleName(ValoTheme.TABLE_NO_STRIPES);
+        addStyleName(ValoTheme.TABLE_NO_VERTICAL_LINES);
+        addStyleName(ValoTheme.TABLE_SMALL);
         addContainerProperty("Role Name", String.class, null);
         addContainerProperty("Description", String.class, null);
 

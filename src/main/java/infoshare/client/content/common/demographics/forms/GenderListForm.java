@@ -2,10 +2,7 @@ package infoshare.client.content.common.demographics.forms;
 
 import com.vaadin.data.fieldgroup.FieldGroup;
 import com.vaadin.data.util.BeanItem;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.FormLayout;
-import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.TextField;
+import com.vaadin.ui.*;
 import infoshare.app.util.fields.ButtonsHelper;
 import infoshare.app.util.fields.UIComponentHelper;
 import infoshare.client.content.common.demographics.model.GenderListModel;
@@ -34,7 +31,10 @@ public class GenderListForm extends FormLayout {
 
 
         TextField gender = UIComponent.getTextField("Gender :", "gender", GenderListModel.class, binder);
-        addComponent(gender);
+        GridLayout layout = new GridLayout(2,2);
+        layout.setSizeFull();
+        layout.addComponent(gender,0,0,1,0);
+        addComponent(layout);
 
         HorizontalLayout buttons = ButtonsHelper.getButtons(save, edit, cancel, update, delete);
         buttons.setSizeFull();

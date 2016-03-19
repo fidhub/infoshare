@@ -1,6 +1,7 @@
 package infoshare.client.content.common.demographics.table;
 
 import com.vaadin.ui.Table;
+import com.vaadin.ui.themes.ValoTheme;
 import infoshare.app.facade.DemographicsFacade;
 import infoshare.client.content.MainLayout;
 import infoshare.domain.demographics.LanguageProficiency;
@@ -17,9 +18,11 @@ public class LanguageProficiencyTable extends Table {
     public LanguageProficiencyTable(MainLayout main) {
         this.main = main;
         setSizeFull();
-
+        addStyleName(ValoTheme.TABLE_BORDERLESS);
+        addStyleName(ValoTheme.TABLE_NO_STRIPES);
+        addStyleName(ValoTheme.TABLE_NO_VERTICAL_LINES);
+        addStyleName(ValoTheme.TABLE_SMALL);
         addContainerProperty("Language Proficiency", String.class, null);
-
 
         // Add Data Columns
         Set<LanguageProficiency> languageProficiencys = DemographicsFacade.languageProficiencyService.findAll();

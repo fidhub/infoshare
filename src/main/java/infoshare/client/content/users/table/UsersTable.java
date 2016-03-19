@@ -1,16 +1,22 @@
 package infoshare.client.content.users.table;
 
 import com.vaadin.ui.Button;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.themes.ValoTheme;
+import infoshare.app.facade.OrganisationFacade;
 import infoshare.app.facade.PeopleFacade;
 import infoshare.app.util.organisation.OrganisationUtil;
 import infoshare.app.util.security.GetUserCredentials;
 import infoshare.app.util.security.RolesValues;
 import infoshare.client.content.MainLayout;
+import infoshare.domain.organisation.Organisation;
 import infoshare.domain.person.Person;
+import infoshare.domain.person.PersonRole;
+import org.apache.poi.ss.formula.functions.T;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Created by hashcode on 2015/10/22.
@@ -22,6 +28,10 @@ public class UsersTable extends Table {
     public UsersTable(MainLayout main) {
         this.main = main;
         setSizeFull();
+        addStyleName(ValoTheme.TABLE_BORDERLESS);
+        addStyleName(ValoTheme.TABLE_NO_STRIPES);
+        addStyleName(ValoTheme.TABLE_NO_VERTICAL_LINES);
+        addStyleName(ValoTheme.TABLE_SMALL);
         addContainerProperty("Last Name", String.class, null);
         addContainerProperty("First Name", String.class, null);
         addContainerProperty("Email Address", String.class, null);
@@ -29,19 +39,21 @@ public class UsersTable extends Table {
         addContainerProperty("Details", Button.class, null);
         addContainerProperty("Reset Credentials", Button.class, null);
         addContainerProperty("Disable Account", Button.class, null);
-
+        try {
         Set<Person> applicants;
         if(GetUserCredentials.isUserWithRole(RolesValues.ROLE_ADMIN.name())) {
 
-            applicants = PeopleFacade.personService.getPersonsWithRole(OrganisationUtil.getPersonID(), RolesValues.ORG_ADMIN.name());
+                applicants = getUsers(RolesValues.ORG_ADMIN.name());
+
         }else if(GetUserCredentials.isUserWithRole(RolesValues.ORG_ADMIN.name())) {
             applicants = PeopleFacade.personService.getPersonByCompany(OrganisationUtil.getCompanyCode());
-        } else if(GetUserCredentials.isUserWithRole(RolesValues.ROLE_EDITOR.name())) {
-            applicants = PeopleFacade.personService.getPersonsWithRole(OrganisationUtil.getPersonID(), RolesValues.ROLE_EDITOR.name());
         } else {
-            applicants = PeopleFacade.personService.getPersonsWithRole(OrganisationUtil.getPersonID(), RolesValues.ROLE_PUBLISHER.name());
+            applicants = PeopleFacade.personService.getPersonByCompany(OrganisationUtil.getCompanyCode()).stream()
+                    .filter(person -> GetUserCredentials.isUserWithRole(PeopleFacade.personRoleService
+                            .findPersonRoles(OrganisationUtil.getPersonID())
+                            .iterator().next().getRoleId()))
+                    .collect(Collectors.toSet());
         }
-
         applicants.parallelStream().forEach(item -> {
             Button details = new Button("Details");
             details.setStyleName(ValoTheme.BUTTON_LINK);
@@ -75,10 +87,17 @@ public class UsersTable extends Table {
             }, item.getId());
 
         });
-
+        }catch (Exception e){
+            Notification.show("They are no users", Notification.Type.HUMANIZED_MESSAGE);}
         setNullSelectionAllowed(false);
         setSelectable(true);
         setImmediate(true);
 
+    }
+
+    private Set<Person> getUsers(String role){
+        return PeopleFacade.personService.getPersonByCompany(OrganisationFacade.companyService.getActiveOrganisations().iterator().next().getId())
+                .stream().filter(per-> PeopleFacade.personRoleService.findPersonRoles(per.getId()).contains(role))
+                .collect(Collectors.toSet());
     }
 }

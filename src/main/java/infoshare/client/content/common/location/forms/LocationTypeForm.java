@@ -2,10 +2,7 @@ package infoshare.client.content.common.location.forms;
 
 import com.vaadin.data.fieldgroup.FieldGroup;
 import com.vaadin.data.util.BeanItem;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.FormLayout;
-import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.TextField;
+import com.vaadin.ui.*;
 import infoshare.app.util.fields.ButtonsHelper;
 import infoshare.app.util.fields.UIComponentHelper;
 import infoshare.client.content.common.location.models.LocationTypeModel;
@@ -35,8 +32,11 @@ public class LocationTypeForm extends FormLayout {
 
         TextField name = UIComponent.getTextField("Location Type:", "name", LocationTypeModel.class, binder);
         TextField code = UIComponent.getTextField("Type Code :", "code", LocationTypeModel.class, binder);
-        addComponent(name);
-        addComponent(code);
+        GridLayout layout = new GridLayout(2,2);
+        layout.setSizeFull();
+        layout.addComponent(name,0,0,1,0);
+        layout.addComponent(code,0,1,1,1);
+        addComponent(layout);
 
 
         HorizontalLayout buttons = ButtonsHelper.getButtons(save, edit, cancel, update, delete);

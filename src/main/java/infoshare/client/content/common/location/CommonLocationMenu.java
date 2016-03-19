@@ -34,9 +34,9 @@ public class CommonLocationMenu extends VerticalLayout {
         tab.setHeight("100%");
         tab.setWidth("100%");
 
-        tab.addTab(locationTypeTab, "Location TYPES ", null);
-        tab.addTab(addressTypeTab, "Address TYPES", null);
-        tab.addTab(contactTypeTab, "Contact TYPES", null);
+        tab.addTab(locationTypeTab, "Location Types ", null);
+        tab.addTab(addressTypeTab, "Address Types", null);
+        tab.addTab(contactTypeTab, "Contact Types", null);
 
         if (selectedTab.equals("LANDING")) {
             tab.setSelectedTab(locationTypeTab);

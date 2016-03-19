@@ -27,7 +27,7 @@ public class CategoryTable extends Table {
         addStyleName(ValoTheme.TABLE_NO_STRIPES);
         addStyleName(ValoTheme.TABLE_NO_VERTICAL_LINES);
         addStyleName(ValoTheme.TABLE_SMALL);
-        addContainerProperty("Tip Category", String.class, null);
+        addContainerProperty("Category", String.class, null);
         addContainerProperty("Description", String.class,null);
 
         for (Category category:  categoryService.findAll()){

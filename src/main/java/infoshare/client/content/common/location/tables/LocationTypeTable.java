@@ -1,6 +1,7 @@
 package infoshare.client.content.common.location.tables;
 
 import com.vaadin.ui.Table;
+import com.vaadin.ui.themes.ValoTheme;
 import infoshare.app.facade.LocationFacade;
 import infoshare.client.content.MainLayout;
 import infoshare.domain.location.LocationType;
@@ -18,7 +19,10 @@ public class LocationTypeTable extends Table {
     public LocationTypeTable(MainLayout main) {
         this.main = main;
         setSizeFull();
-
+        addStyleName(ValoTheme.TABLE_BORDERLESS);
+        addStyleName(ValoTheme.TABLE_NO_STRIPES);
+        addStyleName(ValoTheme.TABLE_NO_VERTICAL_LINES);
+        addStyleName(ValoTheme.TABLE_SMALL);
         addContainerProperty("Name Type", String.class, null);
         addContainerProperty("Name Code", String.class, null);
 

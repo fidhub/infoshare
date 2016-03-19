@@ -1,6 +1,7 @@
 package infoshare.client.content.profile.contacts.table;
 
 import com.vaadin.ui.Table;
+import com.vaadin.ui.themes.ValoTheme;
 import infoshare.app.facade.LocationFacade;
 import infoshare.app.facade.PeopleFacade;
 import infoshare.app.facade.UtilFacade;
@@ -22,7 +23,10 @@ public class PersonContactsTable extends Table {
     public PersonContactsTable(MainLayout main) {
         this.main = main;
         setSizeFull();
-
+        addStyleName(ValoTheme.TABLE_BORDERLESS);
+        addStyleName(ValoTheme.TABLE_NO_STRIPES);
+        addStyleName(ValoTheme.TABLE_NO_VERTICAL_LINES);
+        addStyleName(ValoTheme.TABLE_SMALL);
         final String personId = GetUserCredentials.getUser().getId();
 
         addContainerProperty("Date Created", Date.class, null);

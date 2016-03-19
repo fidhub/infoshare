@@ -1,6 +1,7 @@
 package infoshare.client.content.common.util.tables;
 
 import com.vaadin.ui.Table;
+import com.vaadin.ui.themes.ValoTheme;
 import infoshare.app.facade.UtilFacade;
 import infoshare.app.util.organisation.OrganisationUtil;
 import infoshare.domain.util.Mail;
@@ -16,7 +17,10 @@ public class MailTable extends Table {
     public MailTable() {
 
         setSizeFull();
-
+        addStyleName(ValoTheme.TABLE_BORDERLESS);
+        addStyleName(ValoTheme.TABLE_NO_STRIPES);
+        addStyleName(ValoTheme.TABLE_SMALL);
+        addStyleName(ValoTheme.TABLE_NO_VERTICAL_LINES);
         addContainerProperty("Date", Date.class, null);
         addContainerProperty("Key", String.class, null);
         addContainerProperty("Value", String.class, null);
