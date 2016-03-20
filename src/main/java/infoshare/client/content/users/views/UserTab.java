@@ -21,6 +21,10 @@ public class UserTab extends VerticalLayout implements
 
     @Override
     public void valueChange(Property.ValueChangeEvent valueChangeEvent) {
+        Property property = valueChangeEvent.getProperty();
+        if (property==table){
+
+        }
 
     }
 }

@@ -1,5 +1,6 @@
 package infoshare.client.content.users.table;
 
+import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.Table;
@@ -57,22 +58,32 @@ public class UsersTable extends Table {
         applicants.parallelStream().forEach(item -> {
             Button details = new Button("Details");
             details.setStyleName(ValoTheme.BUTTON_LINK);
+            //details.setStyleName(ValoTheme.BUTTON_BORDERLESS);
+            //details.setStyleName(ValoTheme.BUTTON_FRIENDLY);
             details.setData(item.getId());
+           // details.setIcon(FontAwesome.ENVELOPE_O);
             details.addClickListener(event -> {
 
             });
 
             Button reset = new Button("Reset Account");
-            details.setStyleName(ValoTheme.BUTTON_LINK);
-            details.setData(item.getId());
-            details.addClickListener(event -> {
+            reset.setStyleName(ValoTheme.BUTTON_LINK);
+            //reset.setStyleName(ValoTheme.BUTTON_FRIENDLY);
+            //reset.setStyleName(ValoTheme.BUTTON_BORDERLESS);
+            //reset.setIcon(FontAwesome.REFRESH);
+            reset.setData(item.getId());
+            reset.addClickListener(event -> {
 
             });
 
             Button disable = new Button("Disable");
-            details.setStyleName(ValoTheme.BUTTON_LINK);
-            details.setData(item.getId());
-            details.addClickListener(event -> {
+            disable.setStyleName(ValoTheme.BUTTON_LINK);
+            //disable.setStyleName(ValoTheme.BUTTON_BORDERLESS);
+            //disable.setIcon(FontAwesome.REMOVE);
+            //disable.setStyleName(ValoTheme.BUTTON_DANGER);
+
+            disable.setData(item.getId());
+            disable.addClickListener(event -> {
 
             });
 
@@ -96,8 +107,9 @@ public class UsersTable extends Table {
     }
 
     private Set<Person> getUsers(String role){
-        return PeopleFacade.personService.getPersonByCompany(OrganisationFacade.companyService.getActiveOrganisations().iterator().next().getId())
+        return PeopleFacade.personService.getPersonByCompany(OrganisationUtil.getCompanyCode());
+       /* return PeopleFacade.personService.getPersonByCompany(OrganisationFacade.companyService.getActiveOrganisations().iterator().next().getId())
                 .stream().filter(per-> PeopleFacade.personRoleService.findPersonRoles(per.getId()).contains(role))
-                .collect(Collectors.toSet());
+                .collect(Collectors.toSet());*/
     }
 }
