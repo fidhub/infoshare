@@ -12,6 +12,7 @@ import infoshare.client.content.content.ContentMenu;
 import infoshare.client.content.content.forms.RawForm;
 import infoshare.client.content.content.models.ContentModel;
 import infoshare.client.content.content.tables.RawTable;
+import infoshare.client.header.Header;
 import infoshare.domain.content.EditedContent;
 import infoshare.domain.content.RawContent;
 import infoshare.factories.content.EditedContentFactory;
@@ -97,13 +98,17 @@ public class  RawView extends VerticalLayout implements Button.ClickListener,Pro
 
     public void EditButton(){
         try {
-            tableId = table.getValue().toString();
+
             final RawContent rawContent = rawContentService.findById(OrganisationUtil.getCompanyCode(),tableId);
 
             final ContentModel bean = getModel(rawContent);
+            if (popUp != null && popUp.getUI() !=null) {
+                popUp.close();
+            }
             form.binder.setItemDataSource(new BeanItem<>(bean));
             UI.getCurrent().addWindow(popUp);
             popUp.setModal(true);
+
             getHome();
         }catch (Exception e){
             Notification.show("Select the row you wanna edit",
@@ -117,6 +122,7 @@ public class  RawView extends VerticalLayout implements Button.ClickListener,Pro
             rawContentService.update(getUpdateEntity(binder));
             popUp.setModal(false);
             table.setValue(null);
+            Header.refreshNotification();
             UI.getCurrent().removeWindow(popUp);
             getHome();
             Notification.show("Record edited!!", Notification.Type.HUMANIZED_MESSAGE);
@@ -189,6 +195,7 @@ public class  RawView extends VerticalLayout implements Button.ClickListener,Pro
             boolean flag = true;
             if (item.isDoubleClick()) {
                 if(flag) {
+                    tableId = table.getValue().toString();
                     EditButton();
                     flag=false;
                 }

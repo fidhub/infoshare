@@ -12,10 +12,11 @@ import java.util.Map;
  */
 public class RawContentFactory {
 
-    public static RawContent getRawContent(Map<String,String> rawContentVals,Date date){
+    public static RawContent getRawContent(Map<String,String> rawContentVals){
         RawContent rawContent = new RawContent.Builder()
                 .id(KeyGenerator.getEntityId())
-                .dateCreated(date)
+                .dateCreated(new Date())
+                .creator(rawContentVals.get("creator"))
                 .source(rawContentVals.get("source"))
                 .category(rawContentVals.get("category"))
                 .title(rawContentVals.get("title"))

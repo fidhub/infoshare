@@ -31,17 +31,19 @@ import java.util.stream.Collectors;
 /**
  * Created by hashcode on 2015/06/23.
  */
+//@PreserveOnRefresh
 public class Header extends VerticalLayout implements Button.ClickListener , ItemClickEvent.ItemClickListener{
 
-    private RawContentService rawContentService = ContentFacade.rawContentService;
-    private MainLayout main ;
-    private Window notifications;
-    private Window userProfile;
-    public Button home = new Button();
-    public Button notify = new Button();
-    public Button user = new Button();
-    private Table notificationTable = new Table();
-    private final Page page;
+    private static RawContentService rawContentService = ContentFacade.rawContentService;
+    private static MainLayout main ;
+    private static Window notifications;
+    private static Window userProfile;
+    public static Button home = new Button();
+    public static Button notify = new Button();
+    public static Button user = new Button();
+    private static Table notificationTable = new Table();
+    private  final Page page;
+    private static  boolean flag =true;
 
     public Header(MainLayout main,Page page) {
         this.main = main;
@@ -54,7 +56,7 @@ public class Header extends VerticalLayout implements Button.ClickListener , Ite
         refreshNotification();
     }
 
-    private Panel getHeaderPanel(){
+    private static Panel getHeaderPanel(){
         final Panel headerPanel = new Panel();
         headerPanel.setSizeFull();
         headerPanel.setHeight(150.0f, Unit.PIXELS);
@@ -84,7 +86,7 @@ public class Header extends VerticalLayout implements Button.ClickListener , Ite
           userButton(clickEvent);
         }
     }
-    private void notificationButton(ClickEvent clickEvent ){
+    private void notificationButton(ClickEvent clickEvent){
         if (userProfile != null && userProfile.getUI() !=null) {
             userProfile.close();
         }
@@ -123,7 +125,7 @@ public class Header extends VerticalLayout implements Button.ClickListener , Ite
             });
         }
     }
-    public  void buildNotifications( ClickEvent event) {
+    public static void buildNotifications( ClickEvent event) {
         notifications = new Window();
         final VerticalLayout layout = new VerticalLayout();
         layout.setHeight(100.0f, Unit.PERCENTAGE);
@@ -155,14 +157,14 @@ public class Header extends VerticalLayout implements Button.ClickListener , Ite
         refreshNotification();
 
         notificationTable.addItemClickListener(event1 -> {
-            boolean flag =true;
             if (event1.isDoubleClick()) {
                if(flag) {
+                   flag=false;
                    notifications.close();
                    RawView.tableId = notificationTable.getValue().toString();
                    new RawView(main).EditButton();
-                   flag=false;
                }
+                flag= true;
             }
         });
         layout.addComponent(notificationTable);
@@ -213,7 +215,7 @@ public class Header extends VerticalLayout implements Button.ClickListener , Ite
         notify.addClickListener(this);
         user.addClickListener(this);
     }
-    private String differInTime(Date dateCreated){
+    private static String differInTime(Date dateCreated){
         Date date1 = new Date();
         Calendar startCalendar = new GregorianCalendar();
         startCalendar.setTime(dateCreated);
@@ -241,7 +243,8 @@ public class Header extends VerticalLayout implements Button.ClickListener , Ite
           else
             return diffSeconds + " seconds ago";
     }
-    public  void refreshNotification() {
+
+    public static void refreshNotification() {
         int i = 0 ;
             for (RawContent rawContent :rawContentService.findAll(OrganisationUtil.getCompanyCode())
                     .stream()
@@ -249,8 +252,7 @@ public class Header extends VerticalLayout implements Button.ClickListener , Ite
                     .collect(Collectors.toList())
                     .stream()
                     .filter(cont ->cont.getState().equalsIgnoreCase("active"))
-                    .collect(Collectors.toList())) {
-
+                    .collect(Collectors.toList())){
                 try {
                     i++;
                     notify.addStyleName("notifications");
@@ -259,7 +261,7 @@ public class Header extends VerticalLayout implements Button.ClickListener , Ite
                     notify.setDescription(i + " un-edited tips content");
                     notificationTable.addItem(new Object[]{new Label(
                             "<b>" + rawContent.getCreator().toUpperCase()
-                                    + "</b> created a new tip <br><span><i>"
+                                    + "<br><span><i>"
                                     + differInTime(rawContent.getDateCreated())
                                     + "</i></span><br>"
                                     + "<b> TITLE: </b><i>" + rawContent.getTitle()
@@ -275,7 +277,7 @@ public class Header extends VerticalLayout implements Button.ClickListener , Ite
             notify.setDescription("No new tips");
         }
     }
-    private HorizontalLayout getLayout(){
+    private static HorizontalLayout getLayout(){
         final HorizontalLayout layout = new HorizontalLayout();
         layout.addStyleName("dashboard-view");
         layout.setSpacing(true);
@@ -295,7 +297,7 @@ public class Header extends VerticalLayout implements Button.ClickListener , Ite
 
         return layout;
     }
-    private Component getLogo(){
+    private static Component getLogo(){
         final HorizontalLayout logo = new HorizontalLayout();
         FileResource resource = new FileResource(
                 new File("src/main/webapp/VAADIN/themes/dashboard/Kujali Logo.png"));
@@ -307,7 +309,7 @@ public class Header extends VerticalLayout implements Button.ClickListener , Ite
         Responsive.makeResponsive(logo);
         return logo;
     }
-    private HorizontalLayout getBar(){
+    private static HorizontalLayout getBar(){
         HorizontalLayout layout = new HorizontalLayout();
         layout.setSpacing(false);
         home.setCaption("Home");

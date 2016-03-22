@@ -99,7 +99,8 @@ public class UsersTable extends Table {
 
         });
         }catch (Exception e){
-            Notification.show("They are no users", Notification.Type.HUMANIZED_MESSAGE);}
+            //Notification.show("They are no users", Notification.Type.HUMANIZED_MESSAGE);
+        }
         setNullSelectionAllowed(false);
         setSelectable(true);
         setImmediate(true);
@@ -107,9 +108,9 @@ public class UsersTable extends Table {
     }
 
     private Set<Person> getUsers(String role){
-        return PeopleFacade.personService.getPersonByCompany(OrganisationUtil.getCompanyCode());
-       /* return PeopleFacade.personService.getPersonByCompany(OrganisationFacade.companyService.getActiveOrganisations().iterator().next().getId())
+       // return PeopleFacade.personService.getPersonByCompany(OrganisationUtil.getCompanyCode());
+        return PeopleFacade.personService.getPersonByCompany(OrganisationFacade.companyService.getActiveOrganisations().iterator().next().getId())
                 .stream().filter(per-> PeopleFacade.personRoleService.findPersonRoles(per.getId()).contains(role))
-                .collect(Collectors.toSet());*/
+                .collect(Collectors.toSet());
     }
 }
