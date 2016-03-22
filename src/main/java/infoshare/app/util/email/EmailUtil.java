@@ -28,9 +28,10 @@ public class EmailUtil {
         Mail properties = mailprops.iterator().next();
         Properties props = new Properties();
         props.put("mail.smtp.host", properties.getHost());
-        props.put("mail.smtp.auth", "true");
+        props.put("mail.user", properties.getKey());
+        props.put("mail.smtp.auth", "false"); // TODO set it to true once its live
         props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.debug", "false");
+        props.put("mail.debug", "true");
         props.put("mail.smtp.port", properties.getPort());
         return props;
     }
@@ -38,26 +39,28 @@ public class EmailUtil {
 
     public static void sendSimpleEmail(ComposeEmail email) {// Recipient's email ID needs to be mentioned.
         // Sender's email ID needs to be mentioned
-        final String from = email.getFrom();
-        final String password = email.getPassword();
-
+        //final String from = email.getFrom();
+        //final String password = email.getPassword();
+        Set<Mail> mailprops = UtilFacade.mailService.findAll(OrganisationUtil.getCompanyCode());
+        Mail properties = mailprops.iterator().next();
         // -- Attaching to default Session, or we could start a new one --
-        Session session = Session.getDefaultInstance(getProperties(), new Authenticator() {
+        Session session = Session.getInstance(getProperties());
+       /* Session session = Session.getDefaultInstance(getProperties(), new Authenticator() {TODO use Authenticator once it's live
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(from, password);
             }
-        });
+        });*/
 
         try {
             // Create a default MimeMessage object.
             MimeMessage message = new MimeMessage(session);
             try {
                 // Set From: header field of the header.
-                message.setFrom(new InternetAddress(from, "Hashwork HR"));
+                message.setFrom(new InternetAddress(properties.getKey(), "Infoshare Team"));
             } catch (UnsupportedEncodingException ex) {
                 Logger.getLogger(EmailUtil.class.getName()).log(Level.SEVERE, null, ex);
-                message.setFrom(new InternetAddress(from));
+                message.setFrom(new InternetAddress(properties.getKey()));
             }
 
 
@@ -112,6 +115,7 @@ public class EmailUtil {
 
         } catch (MessagingException mex) {
             mex.printStackTrace();
+
         }
     }
 

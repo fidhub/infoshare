@@ -117,13 +117,6 @@ public class OrganisationAdminForm extends FormLayout implements Button.ClickLis
         }
 
         final AdminModel bean = ((BeanItem<AdminModel>) binder.getItemDataSource()).getBean();
-        final Organisation updateCompany = new Organisation
-                .Builder()
-                .copy(company)
-                .adminattached(DomainState.WITH_ADMIN.name())
-                .build();
-        OrganisationFacade.companyService.save(updateCompany);
-
 
         final String password = SecurityService.generateRandomPassword();
         Map<String, String> stringVals = new HashMap<>();
@@ -141,6 +134,14 @@ public class OrganisationAdminForm extends FormLayout implements Button.ClickLis
         boolVals.put("credentialsNonExpired", Boolean.TRUE);
         Person companyAdmin = createAccount(stringVals, boolVals);
         SecurityService.sendEmail(password, companyAdmin);
+
+        final Organisation updateCompany = new Organisation
+                .Builder()
+                .copy(company)
+                .adminattached(DomainState.WITH_ADMIN.name())
+                .build();
+        OrganisationFacade.companyService.save(updateCompany);
+
         getHome();
 
     }

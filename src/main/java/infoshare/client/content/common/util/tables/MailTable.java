@@ -23,7 +23,6 @@ public class MailTable extends Table {
         addStyleName(ValoTheme.TABLE_NO_VERTICAL_LINES);
         addContainerProperty("Date", Date.class, null);
         addContainerProperty("Key", String.class, null);
-        addContainerProperty("Value", String.class, null);
         addContainerProperty("Host", String.class, null);
         addContainerProperty("Port", String.class, null);
         addContainerProperty("DomainState", String.class, null);
@@ -35,7 +34,6 @@ public class MailTable extends Table {
             addItem(new Object[]{
                     mail.getDate(),
                     mail.getKey(),
-                    mail.getValue(),
                     mail.getHost(),
                     mail.getPort(),
                     mail.getState()}, mail.getId());
