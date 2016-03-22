@@ -16,6 +16,7 @@ public class EditedContentFactory {
         EditedContent editedContent = new EditedContent.Builder()
                 .id(KeyGenerator.getEntityId())
                 .dateCreated(date)
+                .creator(editedContentVals.get("creator"))
                 .source(editedContentVals.get("source"))
                 .category(editedContentVals.get("category"))
                 .title(editedContentVals.get("title"))

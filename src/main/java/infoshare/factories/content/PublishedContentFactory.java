@@ -16,6 +16,7 @@ public class PublishedContentFactory {
                 PublishedContent publishedContent = new PublishedContent.Builder()
                         .id(KeyGenerator.getEntityId())
                         .dateCreated(date)
+                        .creator(publishedContentVals.get("creator"))
                         .source(publishedContentVals.get("source"))
                         .category(publishedContentVals.get("category"))
                         .title(publishedContentVals.get("title"))
