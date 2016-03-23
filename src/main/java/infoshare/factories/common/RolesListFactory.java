@@ -12,7 +12,7 @@ public class RolesListFactory {
     public static Role getRolesList(String roleName, String description) {
         Role role = new Role
                 .Builder()
-                .id(KeyGenerator.getEntityId())
+                .id(roleName)//TODO
                 .roleName(roleName)
                 .state(DomainState.ACTIVE.name())
                 .description(description)

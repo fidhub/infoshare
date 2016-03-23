@@ -18,6 +18,7 @@ public class PersonModel implements Serializable{
     private Boolean credentialsNonExpired;
     private Boolean accountNonLocked;
     private String state;
+    private String org;
 
     public String getId() {
         return id;
@@ -105,5 +106,13 @@ public class PersonModel implements Serializable{
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    public String getOrg() {
+        return org;
+    }
+
+    public void setOrg(String org) {
+        this.org = org;
     }
 }
