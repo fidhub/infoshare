@@ -41,6 +41,7 @@ public class EmailUtil {
         // Sender's email ID needs to be mentioned
         //final String from = email.getFrom();
         //final String password = email.getPassword();
+
         Set<Mail> mailprops = UtilFacade.mailService.findAll(OrganisationUtil.getCompanyCode());
         Mail properties = mailprops.iterator().next();
         // -- Attaching to default Session, or we could start a new one --

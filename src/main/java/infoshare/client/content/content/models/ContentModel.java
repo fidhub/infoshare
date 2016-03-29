@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class ContentModel implements Serializable {
+    private String id;
     @NotNull
     private Date dateCreated;
     @NotNull
@@ -98,4 +99,11 @@ public class ContentModel implements Serializable {
         return org;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 }

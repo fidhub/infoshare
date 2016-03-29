@@ -43,7 +43,6 @@ public class Header extends VerticalLayout implements Button.ClickListener , Ite
     public static Button user = new Button();
     private static Table notificationTable = new Table();
     private  final Page page;
-    private static  boolean flag =true;
 
     public Header(MainLayout main,Page page) {
         this.main = main;
@@ -158,13 +157,9 @@ public class Header extends VerticalLayout implements Button.ClickListener , Ite
 
         notificationTable.addItemClickListener(event1 -> {
             if (event1.isDoubleClick()) {
-               if(flag) {
-                   flag=false;
-                   notifications.close();
-                   RawView.tableId = notificationTable.getValue().toString();
-                   new RawView(main).EditButton();
-               }
-                flag= true;
+                notifications.close();
+                RawView.tableId = notificationTable.getValue().toString();
+                new RawView(main).EditButton();
             }
         });
         layout.addComponent(notificationTable);

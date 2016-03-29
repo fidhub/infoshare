@@ -22,11 +22,13 @@ public class RawForm extends FormLayout {
     public final ComboBox popUpContentTypeCmb;
     public final ComboBox popUpCategoryCmb;
     public final ComboBox popUpSourceCmb;
+    private UploadPicture picture;
 
     public RawForm() {
         model = new ContentModel();
         item = new BeanItem<>(model);
         binder = new FieldGroup(item);
+        picture = new UploadPicture();
 
         popUpContentTypeCmb = getComboBox("ContentFiles Type","contentType");
         popUpCategoryCmb = getComboBox("Category","category");
@@ -53,6 +55,7 @@ public class RawForm extends FormLayout {
         combo.setSpacing(true);
         combo.addComponent(popUpContentTypeCmb);
         combo.addComponent(popUpCategoryCmb);
+        combo.addComponent(picture.upload);
 
         GridLayout gridLayout = new  GridLayout(4,7);
         gridLayout.setSpacing(true);
