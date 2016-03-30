@@ -61,6 +61,7 @@ public class RawTable extends Table {
          setNullSelectionAllowed(false);
          setSelectable(true);
          setImmediate(true);
+         setPageLength(10);
     }
 
     public void loadTable(RawContent rawContent) {

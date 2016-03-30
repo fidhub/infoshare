@@ -3,28 +3,20 @@ package infoshare.client.content.content.tables;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.themes.ValoTheme;
-import infoshare.app.facade.ContactFacade;
 import infoshare.app.facade.ContentFacade;
-import infoshare.app.facade.PeopleFacade;
 import infoshare.app.util.DomainState;
 import infoshare.app.util.organisation.OrganisationUtil;
-import infoshare.app.util.security.GetUserCredentials;
-import infoshare.app.util.security.RolesValues;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.content.ContentMenu;
-import infoshare.client.content.content.models.ContentModel;
 import infoshare.client.header.Header;
 import infoshare.domain.content.EditedContent;
 import infoshare.domain.content.PublishedContent;
 import infoshare.domain.content.RawContent;
-import infoshare.domain.person.Person;
 import infoshare.restapi.ContentFiles.content.EditedContentAPI;
 import infoshare.restapi.ContentFiles.content.PublishedContentAPI;
 import infoshare.restapi.ContentFiles.content.RawContentAPI;
-import org.apache.poi.ss.formula.functions.T;
 
 import java.util.Date;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -54,7 +46,7 @@ public class DisabledContentTable extends Table {
                  .collect(Collectors.toList())
                  .stream()
                  .filter(cont->!cont.getState().equalsIgnoreCase("active"))
-                 .collect(Collectors.toList()).forEach(this::loadrawTable);
+                 .collect(Collectors.toList()).forEach(this::loadRawTable);
          ContentFacade.editedContentService.findAll(OrganisationUtil.getCompanyCode())
                  .stream()
                  .filter(cont -> cont!= null)
@@ -75,9 +67,11 @@ public class DisabledContentTable extends Table {
         setNullSelectionAllowed(false);
         setSelectable(true);
         setImmediate(true);
+        setPageLength(10);
+
     }
 
-    public void loadrawTable(RawContent item ){
+    public void loadRawTable(RawContent item ){
 
         enable.setData(item.getId());
         enable.addClickListener(event -> {

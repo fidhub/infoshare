@@ -152,6 +152,8 @@ public class Header extends VerticalLayout implements Button.ClickListener , Ite
         notificationTable.setSelectable(true);
         notificationTable.setNullSelectionAllowed(false);
         notificationTable.setImmediate(true);
+        notificationTable.setPageLength(5);
+
 
         refreshNotification();
 

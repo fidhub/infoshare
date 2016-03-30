@@ -108,7 +108,7 @@ public class ContentTypeView extends VerticalLayout implements Button.ClickListe
     private ContentType getNewEntity(FieldGroup binder) {
         final ContentTypeModel bean = ((BeanItem<ContentTypeModel>) binder.getItemDataSource()).getBean();
         Map<String,String> contentTypeVals = new HashMap<>();
-        contentTypeVals.put("contentName",bean.getName());
+        contentTypeVals.put("name",bean.getName());
         contentTypeVals.put("description",bean.getDescription());
         final ContentType contentType = ContentTypeFactory.getContentType(contentTypeVals);
         return contentType;

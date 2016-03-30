@@ -13,8 +13,7 @@ import infoshare.client.content.content.forms.RawForm;
 import infoshare.client.content.content.models.ContentModel;
 import infoshare.client.content.content.tables.RawTable;
 import infoshare.client.header.Header;
-import infoshare.domain.content.EditedContent;
-import infoshare.domain.content.RawContent;
+import infoshare.domain.content.*;
 import infoshare.factories.content.EditedContentFactory;
 import infoshare.filterSearch.RawContentFilter;
 import infoshare.services.ContentFiles.content.EditedContentService;
@@ -24,6 +23,10 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+import static infoshare.app.facade.CategoryFacade.categoryService;
+import static infoshare.app.facade.ContentTypeFacade.contentTypeService;
+import static infoshare.app.facade.SourceFacade.sourceService;
 
 /**
  * Created by hashcode on 2015/06/24.
@@ -73,7 +76,6 @@ public class  RawView extends VerticalLayout implements Button.ClickListener,Pro
         final Button source = clickEvent.getButton();
         if (source ==form.saveBtn){
             saveEditedForm(form.binder);
-
         }else if (source ==form.backBtn){
             popUp.setModal(false);
             UI.getCurrent().removeWindow(popUp);
@@ -81,6 +83,7 @@ public class  RawView extends VerticalLayout implements Button.ClickListener,Pro
             getHome();
         }
     }
+
     @Override
     public void valueChange(Property.ValueChangeEvent event) {
         final Property property = event.getProperty();
@@ -90,8 +93,24 @@ public class  RawView extends VerticalLayout implements Button.ClickListener,Pro
         popup.setWidth(80.0f, Unit.PERCENTAGE);
         popup.setClosable(false);
         popup.setResizable(false);
+        loadComboBoxs();
         popup.setContent(form);
         return popup;
+    }
+    private void loadComboBoxs() {
+        for (Category category : categoryService.findAll()) {
+            form.popUpCategoryCmb.addItem(category.getId());
+            form.popUpCategoryCmb.setItemCaption(category.getId(), category.getName());
+        }
+
+        for (ContentType contentType : contentTypeService.findAll()) {
+            form.popUpContentTypeCmb.addItem(contentType.getId());
+            form.popUpContentTypeCmb.setItemCaption(contentType.getId(), contentType.getName());
+        }
+        for (Source source : sourceService.findAll(OrganisationUtil.getCompanyCode())) {
+            form.popUpSourceCmb.addItem(source.getId());
+            form.popUpSourceCmb.setItemCaption(source.getId(), source.getName());
+        }
     }
     private void getHome() {
         main.content.setSecondComponent(new ContentMenu(main, "LANDING"));
@@ -99,9 +118,7 @@ public class  RawView extends VerticalLayout implements Button.ClickListener,Pro
 
     public void EditButton(){
         try {
-
             final RawContent rawContent = rawContentService.findById(OrganisationUtil.getCompanyCode(),tableId);
-
             final ContentModel bean = getModel(rawContent);
             if (popUp != null && popUp.getUI() !=null) {
                 popUp.close();
@@ -123,8 +140,8 @@ public class  RawView extends VerticalLayout implements Button.ClickListener,Pro
             rawContentService.update(getUpdateEntity(binder));
             popUp.setModal(false);
             table.setValue(null);
-            Header.refreshNotification();
             UI.getCurrent().removeWindow(popUp);
+            Header.refreshNotification();
             getHome();
             Notification.show("Record edited!!", Notification.Type.HUMANIZED_MESSAGE);
         } catch (FieldGroup.CommitException e) {

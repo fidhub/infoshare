@@ -63,6 +63,7 @@ public class PublishTable extends Table{
         setNullSelectionAllowed(false);
         setSelectable(true);
         setImmediate(true);
+        setPageLength(10);
     }
     public void loadTable(PublishedContent content) {
         DateFormat formatter = new SimpleDateFormat("dd MMMMMMM yyyy");

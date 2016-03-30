@@ -64,6 +64,7 @@ public class EditTable extends Table{
         setNullSelectionAllowed(false);
         setSelectable(true);
         setImmediate(true);
+        setPageLength(10);
     }
     public void loadTable(EditedContent editedContent) {
         DateFormat formatter = new SimpleDateFormat("dd MMMMMMM yyyy");
