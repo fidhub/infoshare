@@ -13,9 +13,13 @@ import infoshare.app.util.security.RolesValues;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.content.ContentMenu;
 import infoshare.client.content.content.models.ContentModel;
+import infoshare.client.header.Header;
 import infoshare.domain.content.EditedContent;
+import infoshare.domain.content.PublishedContent;
 import infoshare.domain.content.RawContent;
 import infoshare.domain.person.Person;
+import infoshare.restapi.ContentFiles.content.EditedContentAPI;
+import infoshare.restapi.ContentFiles.content.PublishedContentAPI;
 import infoshare.restapi.ContentFiles.content.RawContentAPI;
 import org.apache.poi.ss.formula.functions.T;
 
@@ -29,7 +33,7 @@ import java.util.stream.Collectors;
 public class DisabledContentTable extends Table {
 
     private final MainLayout main;
-
+    private Button enable = new Button("Enable");
     public DisabledContentTable(MainLayout main) {
         this.main = main;
         setSizeFull();
@@ -50,26 +54,81 @@ public class DisabledContentTable extends Table {
                  .collect(Collectors.toList())
                  .stream()
                  .filter(cont->!cont.getState().equalsIgnoreCase("active"))
-                 .collect(Collectors.toList()).forEach(this::loadTable);
+                 .collect(Collectors.toList()).forEach(this::loadrawTable);
+         ContentFacade.editedContentService.findAll(OrganisationUtil.getCompanyCode())
+                 .stream()
+                 .filter(cont -> cont!= null)
+                 .collect(Collectors.toList())
+                 .stream()
+                 .filter(cont->!cont.getState().equalsIgnoreCase("active"))
+                 .collect(Collectors.toList()).forEach(this::loadEditedTable);
+         ContentFacade.publishedContentService.findAll(OrganisationUtil.getCompanyCode())
+                 .stream()
+                 .filter(cont -> cont!= null)
+                 .collect(Collectors.toList())
+                 .stream()
+                 .filter(cont->!cont.getState().equalsIgnoreCase("active"))
+                 .collect(Collectors.toList()).forEach(this::loadPublishedTable);
 
 
-
+        enable.setStyleName(ValoTheme.BUTTON_LINK);
         setNullSelectionAllowed(false);
         setSelectable(true);
         setImmediate(true);
     }
 
-    public void loadTable(RawContent item ){
+    public void loadrawTable(RawContent item ){
 
-            Button enable = new Button("Enable");
-            enable.setStyleName(ValoTheme.BUTTON_LINK);
+        enable.setData(item.getId());
+        enable.addClickListener(event -> {
+            RawContent raw = new RawContent.Builder()
+                    .copy(item)
+                    .state(DomainState.ACTIVE.name()).build();
+            RawContentAPI.save(raw);
+            Header.refreshNotification();
+            getHome();
+        });
+
+        addItem(new Object[]{
+                item.getTitle(),
+                item.getCategory(),
+                item.getCreator(),
+                item.getStatus(),
+                item.getDateCreated(),
+                enable
+        }, item.getId());
+    }
+    public void loadEditedTable(EditedContent item ){
+
             enable.setData(item.getId());
-            enable.setImmediate(true);
             enable.addClickListener(event -> {
-                RawContent raw = new RawContent.Builder().copy(item)
+                EditedContent raw = new EditedContent.Builder()
+                        .copy(item)
                         .state(DomainState.ACTIVE.name()).build();
-               this.main.content.setSecondComponent(new ContentMenu(main, "Deleted"));
-                RawContentAPI.save(raw);
+                EditedContentAPI.save(raw);
+                Header.refreshNotification();
+                getHome();
+            });
+
+            addItem(new Object[]{
+                    item.getTitle(),
+                    item.getCategory(),
+                    item.getCreator(),
+                    item.getStatus(),
+                    item.getDateCreated(),
+                    enable
+            }, item.getId());
+    }
+    public void loadPublishedTable(PublishedContent item ){
+
+            enable.setData(item.getId());
+            enable.addClickListener(event -> {
+                PublishedContent raw = new PublishedContent.Builder()
+                        .copy(item)
+                        .state(DomainState.ACTIVE.name()).build();
+                PublishedContentAPI.save(raw);
+                Header.refreshNotification();
+                getHome();
             });
 
             addItem(new Object[]{
@@ -81,7 +140,8 @@ public class DisabledContentTable extends Table {
                     enable
             }, item.getId());
 
-
-
+    }
+    private void getHome(){
+        main.content.setSecondComponent(new ContentMenu(main, "Deleted"));
     }
 }

@@ -73,6 +73,7 @@ public class  RawView extends VerticalLayout implements Button.ClickListener,Pro
         final Button source = clickEvent.getButton();
         if (source ==form.saveBtn){
             saveEditedForm(form.binder);
+
         }else if (source ==form.backBtn){
             popUp.setModal(false);
             UI.getCurrent().removeWindow(popUp);

@@ -1,12 +1,19 @@
 package infoshare.client.content.content.tables;
 
+import com.vaadin.ui.Button;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.themes.ValoTheme;
 import infoshare.app.facade.CategoryFacade;
 import infoshare.app.facade.ContentFacade;
+import infoshare.app.util.DomainState;
 import infoshare.app.util.organisation.OrganisationUtil;
 import infoshare.client.content.MainLayout;
+import infoshare.client.content.content.ContentMenu;
+import infoshare.client.header.Header;
+import infoshare.domain.content.EditedContent;
 import infoshare.domain.content.PublishedContent;
+import infoshare.restapi.ContentFiles.content.EditedContentAPI;
+import infoshare.restapi.ContentFiles.content.PublishedContentAPI;
 import infoshare.services.ContentFiles.category.CategoryService;
 import infoshare.services.ContentFiles.content.PublishedContentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +30,7 @@ public class PublishTable extends Table{
     @Autowired
     private PublishedContentService publishedContentService = ContentFacade.publishedContentService;
     private CategoryService categoryService = CategoryFacade.categoryService;
-
+    private Button delete = new Button("Delete");
     private final MainLayout main;
 
     public PublishTable(MainLayout mainApp){
@@ -37,6 +44,7 @@ public class PublishTable extends Table{
         addContainerProperty("Category",String.class,null);
         addContainerProperty("Creator",String.class,null);
         addContainerProperty("Date Created",String.class,null);
+        addContainerProperty("Delete", Button.class, null);
         try {
             publishedContentService.findAll(OrganisationUtil.getCompanyCode()) //TODO
                     .stream()
@@ -58,13 +66,25 @@ public class PublishTable extends Table{
     }
     public void loadTable(PublishedContent content) {
         DateFormat formatter = new SimpleDateFormat("dd MMMMMMM yyyy");
+        delete.setData(content.getId());
+        delete.setImmediate(true);
+        delete.addClickListener(event -> {
+            PublishedContent raw = new PublishedContent.Builder()
+                    .copy(content)
+                    .state(DomainState.RETIRED.name())
+                    .build();
+            PublishedContentAPI.save(raw);
+            Header.refreshNotification();
+            getHome();
+        });
         String category = categoryService.findById(content.getCategory()).getName();
         try {
             addItem(new Object[]{
                     content.getTitle(),
                     category,
                     content.getCreator(),
-                    formatter.format(content.getDateCreated())
+                    formatter.format(content.getDateCreated()),
+                    delete
             }, content.getId());
         } catch (Exception r) {
         }
@@ -72,4 +92,7 @@ public class PublishTable extends Table{
     }
 
 
+    public void getHome() {
+        main.content.setSecondComponent(new ContentMenu(main, "PUBLISHER"));
+    }
 }

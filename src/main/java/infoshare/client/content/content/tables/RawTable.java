@@ -28,7 +28,7 @@ public class RawTable extends Table {
     @Autowired
     private RawContentService rawContentService = ContentFacade.rawContentService;
     private final MainLayout main;
-
+    private  Button delete = new Button("Delete");
     public RawTable(MainLayout mainApp){
 
         this.main = mainApp;
@@ -57,6 +57,7 @@ public class RawTable extends Table {
                     .forEach(this::loadTable);
         }catch (Exception e){
         }
+        delete.setStyleName(ValoTheme.BUTTON_LINK);
          setNullSelectionAllowed(false);
          setSelectable(true);
          setImmediate(true);
@@ -64,18 +65,16 @@ public class RawTable extends Table {
 
     public void loadTable(RawContent rawContent) {
         DateFormat formatter = new SimpleDateFormat("dd MMMMMMM yyyy");
-        Button delete = new Button("Delete");
-        delete.setStyleName(ValoTheme.BUTTON_LINK);
-        delete.setIcon(FontAwesome.TRASH_O);
         delete.setData(rawContent.getId());
         delete.setImmediate(true);
         delete.addClickListener(event -> {
-            Header.refreshNotification();
-            this.main.content.setSecondComponent(new ContentMenu(main, "LANDING"));
-            RawContent raw = new RawContent.Builder().copy(rawContent)
-                    .state(DomainState.RETIRED.name()).build();
-
+            RawContent raw = new RawContent.Builder()
+                    .copy(rawContent)
+                    .state(DomainState.RETIRED.name())
+                    .build();
             RawContentAPI.save(raw);
+            Header.refreshNotification();
+            getHome();
         });
         try {
             addItem(new Object[]{
@@ -87,6 +86,10 @@ public class RawTable extends Table {
             }, rawContent.getId());
         } catch (Exception r) {
         }
+    }
+
+    private void getHome(){
+        main.content.setSecondComponent(new ContentMenu(main, "LANDING"));
     }
 
 }

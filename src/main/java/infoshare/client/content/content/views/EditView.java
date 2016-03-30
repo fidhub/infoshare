@@ -17,6 +17,7 @@ import infoshare.client.content.content.ContentMenu;
 import infoshare.client.content.content.forms.EditForm;
 import infoshare.client.content.content.models.ContentModel;
 import infoshare.client.content.content.tables.EditTable;
+import infoshare.client.header.Header;
 import infoshare.domain.content.*;
 import infoshare.factories.content.PublishedContentFactory;
 import infoshare.filterSearch.EditedContentFilter;
@@ -50,9 +51,6 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
     private final EditForm form;
     private Window popUp ;
     private EditedContentFilter editedContentFilter = new EditedContentFilter();
-    private Button deleteCont = new Button();
-    private Button viewTrash = new Button();
-    private Button viewActive = new Button();
     private String state;
 
     public  EditView( MainLayout mainApp) {
@@ -61,42 +59,14 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
         this.table = new EditTable(main);
         this.form = new EditForm();
         this.popUp = modelWindow();
-        viewActive.setVisible(false);
-        deleteCont.setVisible(true);
         state ="active";
         setSizeFull();
         setSpacing(true);
-        addComponent(getLayout());
+        addComponent(editedContentFilter.field);
         addComponent(table);
         addListeners();
     }
-    private HorizontalLayout getLayout(){
-        final HorizontalLayout layout = new HorizontalLayout();
-        layout.setSpacing(false);
-        deleteCont.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
-        deleteCont.addStyleName(ValoTheme.BUTTON_SMALL);
-        deleteCont.setCaption("Remove");
-        deleteCont.setDescription("Delete ContentFiles");
-        deleteCont.setIcon(FontAwesome.REMOVE);
 
-        viewTrash.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
-        viewTrash.addStyleName(ValoTheme.BUTTON_SMALL);
-        viewTrash.setCaption("Trash");
-        viewTrash.setDescription("Show Deleted content");
-        viewTrash.setIcon(FontAwesome.TRASH_O);
-
-        viewActive.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
-        viewActive.addStyleName(ValoTheme.BUTTON_SMALL);
-        viewActive.setCaption("Show Active");
-        viewActive.setDescription("Show Active content");
-        viewActive.setIcon(FontAwesome.EDIT);
-
-        layout.addComponent(editedContentFilter.field);
-        layout.addComponent(deleteCont);
-        layout.addComponent(viewTrash);
-        layout.addComponent(viewActive);
-        return layout;
-    }
     private void refreshContacts(String stringFilter ) {
         try {
             table.removeAllItems();
@@ -130,35 +100,7 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
         }else if (source ==form.popUpCancelBtn){
             popUp.setModal(false);
             UI.getCurrent().removeWindow(popUp);
-            table.setValue(null);
-            if(state.equalsIgnoreCase("Active")){
-                getHome();
-            }else {
-                getTrash();
-            }
-        }else if(source==viewTrash){
-            viewTrash.setVisible(false);
-            state="Deleted";
-            deleteCont.setVisible(false);
-            viewActive.setVisible(true);
-            getTrash();
-        }else if(source==viewActive){
             getHome();
-            viewActive.setVisible(false);
-            state="Active";
-        }else if (source ==deleteCont){
-            if(table.getValue().toString()!=null) {
-                ConfirmDialog.show(this.getUI(),"Are you sure you Wanna delete ?",
-                        (ConfirmDialog.Listener) dialog -> {
-                            if (dialog.isConfirmed()) {
-                                editedContentService.update(getTrashEntity(table.getValue().toString()));
-                                getHome();
-                            } else getHome();
-
-                        });
-            }else{
-                Notification.show("Select content you wanna delete", Notification.Type.HUMANIZED_MESSAGE);
-            }
         }
     }
     @Override
@@ -195,17 +137,6 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
             System.out.println(e.getMessage());
         }
     }
-    private void getTrash(){
-        try{
-            table.removeAllItems();
-            editedContentService.findAll(OrganisationUtil.getCompanyCode()).stream()
-                    .filter(cont -> cont.getState().equalsIgnoreCase("Deleted"))
-                    .collect(Collectors.toList())
-                    .stream().filter(cont -> cont.getStatus().equalsIgnoreCase("Edited"))
-                    .collect(Collectors.toList()).forEach(table::loadTable);
-        }catch (Exception e){
-        }
-    }
     private void saveEditedForm(FieldGroup binder) {
         try {
             binder.commit();
@@ -214,6 +145,7 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
                 editedContentService.update(getUpdateEntity(binder));
                 popUp.setModal(false);
                 table.setValue(null);
+                Header.refreshNotification();
                 UI.getCurrent().removeWindow(popUp);
                 getHome();
                 Notification.show("Record EDITED!", Notification.Type.HUMANIZED_MESSAGE);
@@ -255,15 +187,7 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
                 .build();
         return editedContent;
     }
-    private EditedContent getTrashEntity(String val) {
-        EditedContent content = editedContentService.findById(OrganisationUtil.getCompanyCode(),val);
 
-        final EditedContent editedContent = new EditedContent
-                .Builder().copy(content)
-                .state("Deleted")
-                .build();
-        return editedContent;
-    }
     private ContentModel getModel(String val) {
         final ContentModel model = new ContentModel();
 
@@ -282,9 +206,6 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
     public void addListeners(){
         form.popUpUpdateBtn.addClickListener(this);
         form.popUpCancelBtn.addClickListener(this);
-        deleteCont.addClickListener(this);
-        viewTrash.addClickListener(this);
-        viewActive.addClickListener(this);
         table.addValueChangeListener(this);
         table.addItemClickListener(item ->{
             boolean flag = true;
