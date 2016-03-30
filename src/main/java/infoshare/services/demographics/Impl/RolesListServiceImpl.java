@@ -27,11 +27,6 @@ public class RolesListServiceImpl implements RolesListService {
     }
 
     @Override
-    public Role getRole(String role) {
-        return null;
-    }
-
-    @Override
     public Role findById(String s) {
         return RoleAPI.findById(s);
     }

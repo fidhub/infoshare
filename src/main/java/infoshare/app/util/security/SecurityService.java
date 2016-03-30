@@ -68,7 +68,7 @@ public class SecurityService implements UserDetailsService {
     }
 
     public static boolean securityCheck(String ro) {
-        Role role = DemographicsFacade.rolesListService.getRole(ro);
+        Role role = DemographicsFacade.rolesListService.findById(ro);
         return getUserRoles().contains(role);
     }
 

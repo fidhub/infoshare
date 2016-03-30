@@ -51,7 +51,6 @@ public class RestUtil {
         }
         return list;
     }
-
     public static <T> T getById(String fetchUrl, String ID, Class<T> classType) {
         try {
             JsonParser jsonParser = new JsonParser();
@@ -68,7 +67,6 @@ public class RestUtil {
             return null;
         }
     }
-
     public static <T> T save(String url, T classTypeObject, Class<T> classType) {
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
@@ -76,8 +74,7 @@ public class RestUtil {
         HttpEntity<T> body = new HttpEntity<>(classTypeObject, headers);
         JsonElement element = new JsonParser().parse(restTemplate.postForObject(url, body, String.class))
                 .getAsJsonObject();
-        Gson gson = new GsonBuilder()
-                .registerTypeAdapter(Date.class,
+        Gson gson = new GsonBuilder().registerTypeAdapter(Date.class,
                    (JsonDeserializer<Date>)
                    (jsonElement, type, jsonDeserializationContext) ->
                     new Date(jsonElement.getAsJsonPrimitive().getAsLong()))

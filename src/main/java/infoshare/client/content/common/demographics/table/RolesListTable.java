@@ -3,10 +3,13 @@ package infoshare.client.content.common.demographics.table;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.themes.ValoTheme;
 import infoshare.app.facade.DemographicsFacade;
+import infoshare.app.util.DomainState;
 import infoshare.client.content.MainLayout;
 import infoshare.domain.demographics.Role;
 
+import java.util.Collections;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Created by hashcode on 2015/08/18.
@@ -26,7 +29,9 @@ public class RolesListTable extends Table {
         addContainerProperty("Description", String.class, null);
 
         // Add Data Columns
-        Set<Role> roles = DemographicsFacade.rolesListService.findAll();
+        Set<Role> roles = DemographicsFacade.rolesListService.findAll().stream()
+                .filter(role->role.getState().equalsIgnoreCase(DomainState.ACTIVE.name()))
+                .collect(Collectors.toSet());
         for (Role role : roles) {
             addItem(new Object[]{role.getName(), role.getDescription()}, role.getId());
         }

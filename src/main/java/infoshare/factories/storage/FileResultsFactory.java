@@ -5,12 +5,13 @@ import infoshare.domain.storage.FileResults;
 import jdk.nashorn.internal.runtime.options.Option;
 
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by user9 on 2016/03/02.
  */
 public class FileResultsFactory {
-    public static FileResults getFileResults(Map<String, String> fileResultsVals, Option<String> size){
+    public static FileResults getFileResults(Map<String, String> fileResultsVals, Set<String> size){
         FileResults fileResults = new FileResults.Builder()
                 .id(KeyGenerator.getEntityId())
                 .url(fileResultsVals.get("url"))

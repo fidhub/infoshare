@@ -1,11 +1,18 @@
 package infoshare.client.content.content.tables;
 
+import com.vaadin.server.FontAwesome;
+import com.vaadin.server.FontIcon;
+import com.vaadin.ui.Button;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.themes.ValoTheme;
 import infoshare.app.facade.ContentFacade;
+import infoshare.app.util.DomainState;
 import infoshare.app.util.organisation.OrganisationUtil;
 import infoshare.client.content.MainLayout;
+import infoshare.client.content.content.ContentMenu;
+import infoshare.client.header.Header;
 import infoshare.domain.content.RawContent;
+import infoshare.restapi.ContentFiles.content.RawContentAPI;
 import infoshare.services.ContentFiles.content.RawContentService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -34,6 +41,7 @@ public class RawTable extends Table {
         addContainerProperty("Category",String.class,null);
         addContainerProperty("Creator",String.class,null);
         addContainerProperty("Date Created",String.class,null);
+        addContainerProperty("Delete",Button.class,null);
 
         try {
             rawContentService.findAll(OrganisationUtil.getCompanyCode()) //TODO
@@ -56,12 +64,26 @@ public class RawTable extends Table {
 
     public void loadTable(RawContent rawContent) {
         DateFormat formatter = new SimpleDateFormat("dd MMMMMMM yyyy");
+        Button delete = new Button("Delete");
+        delete.setStyleName(ValoTheme.BUTTON_LINK);
+        delete.setIcon(FontAwesome.TRASH_O);
+        delete.setData(rawContent.getId());
+        delete.setImmediate(true);
+        delete.addClickListener(event -> {
+            Header.refreshNotification();
+            this.main.content.setSecondComponent(new ContentMenu(main, "LANDING"));
+            RawContent raw = new RawContent.Builder().copy(rawContent)
+                    .state(DomainState.RETIRED.name()).build();
+
+            RawContentAPI.save(raw);
+        });
         try {
             addItem(new Object[]{
                     rawContent.getTitle(),
                     rawContent.getCategory(),
                     rawContent.getCreator(),
-                    formatter.format(rawContent.getDateCreated())
+                    formatter.format(rawContent.getDateCreated()),
+                    delete
             }, rawContent.getId());
         } catch (Exception r) {
         }

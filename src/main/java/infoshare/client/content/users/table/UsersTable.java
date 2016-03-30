@@ -43,9 +43,7 @@ public class UsersTable extends Table {
         try {
         Set<Person> applicants;
         if(GetUserCredentials.isUserWithRole(RolesValues.ROLE_ADMIN.name())) {
-
                 applicants = getUsers(RolesValues.ORG_ADMIN.name());
-
         }else if(GetUserCredentials.isUserWithRole(RolesValues.ORG_ADMIN.name())) {
             applicants = PeopleFacade.personService.getPersonByCompany(OrganisationUtil.getCompanyCode());
         } else {

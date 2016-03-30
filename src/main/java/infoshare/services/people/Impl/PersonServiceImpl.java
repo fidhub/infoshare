@@ -86,7 +86,8 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public boolean isThisPersonInThis(String personId, String role) {
-        Role roleList = DemographicsFacade.rolesListService.getRole(role);
+        System.out.print(role);
+        Role roleList = DemographicsFacade.rolesListService.findById(role);
         Set<PersonRole> personRoles = PeopleFacade.personRoleService.findPersonRoles(personId);
         Set<String> roleIds = personRoles.parallelStream().map(r -> r.getRoleId()).collect(Collectors.toSet());
         return roleIds.contains(roleList.getId());

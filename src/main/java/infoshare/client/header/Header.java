@@ -43,7 +43,6 @@ public class Header extends VerticalLayout implements Button.ClickListener , Ite
     public static Button user = new Button();
     private static Table notificationTable = new Table();
     private  final Page page;
-    private static  boolean flag =true;
 
     public Header(MainLayout main,Page page) {
         this.main = main;
@@ -158,13 +157,9 @@ public class Header extends VerticalLayout implements Button.ClickListener , Ite
 
         notificationTable.addItemClickListener(event1 -> {
             if (event1.isDoubleClick()) {
-               if(flag) {
-                   flag=false;
-                   notifications.close();
-                   RawView.tableId = notificationTable.getValue().toString();
-                   new RawView(main).EditButton();
-               }
-                flag= true;
+                notifications.close();
+                RawView.tableId = notificationTable.getValue().toString();
+                new RawView(main).EditButton();
             }
         });
         layout.addComponent(notificationTable);
@@ -248,17 +243,13 @@ public class Header extends VerticalLayout implements Button.ClickListener , Ite
         int i = 0 ;
             for (RawContent rawContent :rawContentService.findAll(OrganisationUtil.getCompanyCode())
                     .stream()
-                    .filter(cont->cont.getStatus().equalsIgnoreCase("Raw"))
+                    .filter(cont ->cont.getState().equalsIgnoreCase("Active"))
                     .collect(Collectors.toList())
                     .stream()
-                    .filter(cont ->cont.getState().equalsIgnoreCase("active"))
-                    .collect(Collectors.toList())){
+                .filter(cont -> cont.getStatus().equalsIgnoreCase("Raw"))
+                .collect(Collectors.toList())){
                 try {
-                    i++;
-                    notify.addStyleName("notifications");
-                    notify.addStyleName("unread");
-                    notify.setCaption(i + "");
-                    notify.setDescription(i + " un-edited tips content");
+
                     notificationTable.addItem(new Object[]{new Label(
                             "<b>" + rawContent.getCreator().toUpperCase()
                                     + "<br><span><i>"
@@ -267,6 +258,11 @@ public class Header extends VerticalLayout implements Button.ClickListener , Ite
                                     + "<b> TITLE: </b><i>" + rawContent.getTitle()
                                     + "</i>", ContentMode.HTML)
                     }, rawContent.getId());
+                    i++;
+                    notify.addStyleName("notifications");
+                    notify.addStyleName("unread");
+                    notify.setCaption(i + "");
+                    notify.setDescription(i + " un-edited tips content");
                 } catch (Exception r) {
                 }
             }
@@ -275,6 +271,7 @@ public class Header extends VerticalLayout implements Button.ClickListener , Ite
             notify.removeStyleName("unread");
             notify.setCaption("");
             notify.setDescription("No new tips");
+            notificationTable.removeAllItems();
         }
     }
     private static HorizontalLayout getLayout(){

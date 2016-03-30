@@ -125,7 +125,7 @@ public class OrganisationAdminForm extends FormLayout implements Button.ClickLis
         stringVals.put("lastName", bean.getLastName());
         stringVals.put("authvalue", PasswordHash.createEncryptedPassword(password));
         stringVals.put("emailAddress", bean.getEmailAddress());
-        stringVals.put("company", company.getId());
+        stringVals.put("org", company.getId());
 
         Map<String, Boolean> boolVals = new HashMap<>();
         boolVals.put("enabled", Boolean.TRUE);

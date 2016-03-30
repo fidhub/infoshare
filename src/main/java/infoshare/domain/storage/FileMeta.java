@@ -11,6 +11,7 @@ public class FileMeta implements Serializable, Comparable<FileMeta>{
     private String contentType;
 
     private FileMeta(){}
+
     public FileMeta(Builder builder) {
         this.fileName = builder.fileName;
         this.contentType = builder.contentType;

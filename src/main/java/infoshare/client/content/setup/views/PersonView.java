@@ -118,6 +118,7 @@ public class PersonView extends VerticalLayout implements
         stringVals.put("lastName",bean.getMiddleName());
         stringVals.put("authvalue",bean.getAuthvalue());
         stringVals.put("emailAddress",bean.getEmailAddress());
+        stringVals.put("org",bean.getOrg());
         final Person person = PersonFactory.getPerson(stringVals, boolVals);
         return person;
     }
@@ -158,6 +159,7 @@ public class PersonView extends VerticalLayout implements
         stringVals.put("lastName",bean.getMiddleName());
         stringVals.put("authvalue",bean.getAuthvalue());
         stringVals.put("emailAddress",bean.getEmailAddress());
+        stringVals.put("org",bean.getOrg());
         final Person person = PersonFactory.getPerson(stringVals, boolVals);
         return person;
 
