@@ -10,6 +10,7 @@ import infoshare.app.util.DomainState;
 import infoshare.app.util.organisation.OrganisationUtil;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.content.ContentMenu;
+import infoshare.client.header.Header;
 import infoshare.domain.content.RawContent;
 import infoshare.restapi.ContentFiles.content.RawContentAPI;
 import infoshare.services.ContentFiles.content.RawContentService;
@@ -69,6 +70,7 @@ public class RawTable extends Table {
         delete.setData(rawContent.getId());
         delete.setImmediate(true);
         delete.addClickListener(event -> {
+            Header.refreshNotification();
             this.main.content.setSecondComponent(new ContentMenu(main, "LANDING"));
             RawContent raw = new RawContent.Builder().copy(rawContent)
                     .state(DomainState.RETIRED.name()).build();

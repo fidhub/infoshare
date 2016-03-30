@@ -29,13 +29,13 @@ import java.util.logging.Logger;
 public class CreateUserTest {
     private static Properties getProperties() {
         Properties props = new Properties();
-        props.put("mail.smtp.host", "smtp.gmail.com");
-       // props.put("mail.smtp.user", "infoshare@cput.ac.za"); //TODo get user
-        props.put("mail.smtp.auth", "true"); // TODO set it to true once its live
+        props.put("mail.smtp.host", "10.68.1.7");
+        props.put("mail.user", "infoshare@cput.ac.za"); //TODo get user
+        props.put("mail.smtp.auth", "false"); // TODO set it to true once its live
         props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.debug", "true");
-        props.put("mail.smtp.port", "465");
-        props.put("mail.smtp.socketFactory.port", "465");
+        props.put("mail.smtp.port", "25");
+        props.put("mail.smtp.socketFactory.port", "25");
         props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
         props.put("mail.smtp.socketFactory.fallback", "false");
         return props;
@@ -66,14 +66,14 @@ public class CreateUserTest {
     public void testEmail() throws Exception {
         final String password = SecurityService.generateRandomPassword();
         Set<String> emails = new HashSet<>();
-        emails.add("thulehadebe@outlook.com");
+        emails.add("2leradebe@gmail.com");
         ComposeEmail email = new ComposeEmail
                 .Builder()
                 .addressesTo(new HashSet<>(emails))
                 .body(" Your Username is : " + emails + " And Your Password is : "
                         + PasswordHash.createEncryptedPassword(password) + " Login in at https://hashwork.hash-code.com")
-                .from("2leradebe@gmail.com"/*props.getKey()*/)
-                .password("2lehadebe")
+                .from("infoshare@cput.ac.za"/*props.getKey()*/)
+                .password("")
                 .subject("Your Infoshare Details")
                 .build();
         sendSimpleEmail(email);
@@ -111,23 +111,23 @@ public class CreateUserTest {
      /*   Set<Mail> mailprops = UtilFacade.mailService.findAll("dut");
         Mail properties = mailprops.iterator().next();*/
         // -- Attaching to default Session, or we could start a new one --
-       // Session session = Session.getInstance(getProperties());
-        Session session = Session.getDefaultInstance(getProperties(), new Authenticator() {//TODO use Authenticator once it's live
+        Session session = Session.getInstance(getProperties());
+       /* Session session = Session.getDefaultInstance(getProperties(), new Authenticator() {//TODO use Authenticator once it's live
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(from, password);
             }
-        });
+        });*/
 
         try {
             // Create a default MimeMessage object.
             MimeMessage message = new MimeMessage(session);
             try {
                 // Set From: header field of the header.
-                message.setFrom(new InternetAddress("2leradebe@gmail.com", "Infoshare Team"));
+                message.setFrom(new InternetAddress("infoshare@cput.ac.za", "Infoshare Team"));
             } catch (UnsupportedEncodingException ex) {
                 Logger.getLogger(EmailUtil.class.getName()).log(Level.SEVERE, null, ex);
-                message.setFrom(new InternetAddress("2leradebe@gmail.com"));
+                message.setFrom(new InternetAddress("infoshare@cput.ac.za"));
             }
 
 

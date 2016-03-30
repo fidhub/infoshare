@@ -96,10 +96,11 @@ public class CategoryView extends VerticalLayout implements Button.ClickListener
         categoryService.delete(category);
         getHome();
     }
+
     private Category getNewEntity(FieldGroup binder) {
         final CategoryModel bean = ((BeanItem<CategoryModel>) binder.getItemDataSource()).getBean();
         Map<String,String> categoryVals = new HashMap<>();
-        categoryVals.put("name",bean.getName());
+        categoryVals.put("name", bean.getName());
         categoryVals.put("description",bean.getDescription());
         final Category category = CategoryFactory.getCategory(categoryVals);
         return category;
