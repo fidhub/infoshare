@@ -44,7 +44,7 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public Person update(Person entity) {
-        return PersonAPI.save(entity);
+        return PersonAPI.update(entity);
     }
 
     @Override

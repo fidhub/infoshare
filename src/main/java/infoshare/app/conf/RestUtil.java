@@ -79,8 +79,6 @@ public class RestUtil {
                    (jsonElement, type, jsonDeserializationContext) ->
                     new Date(jsonElement.getAsJsonPrimitive().getAsLong()))
                 .create();
-
-
         return gson.fromJson(element, classType);
     }
 

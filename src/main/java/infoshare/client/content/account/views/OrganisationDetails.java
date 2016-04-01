@@ -61,12 +61,10 @@ public class OrganisationDetails extends VerticalLayout implements
         this.tab = tab;
         form.binder.setItemDataSource(new BeanItem<>(model));
         setReadFormProperties();
-
         this.main = main;
 
         grid = new GridLayout(4, 10);
         grid.setSizeFull();
-
         // First ROW
         grid.addComponent(heading, 0, 0, 3, 0);
         grid.addComponent(form, 0, 1, 3, 1);
@@ -80,25 +78,25 @@ public class OrganisationDetails extends VerticalLayout implements
         Set<Person> admins = PeopleFacade.personService.getPersonsWithRole(organisation.getId(), RolesValues.ORG_ADMIN.name());
 
         if (admins.size() > 0) {
-            ComboBox adminsCombobox = new ComboBox();
-            adminsCombobox.setInputPrompt("Select " + organisation.getName() + " Current Employee");
-            adminsCombobox.setInvalidAllowed(false);
+            ComboBox adminsComboBox = new ComboBox();
+            adminsComboBox.setInputPrompt("Select " + organisation.getName() + " Current Employee");
+            adminsComboBox.setInvalidAllowed(false);
 
-            adminsCombobox.setSizeFull();
-            adminsCombobox.setNullSelectionAllowed(false);
+            adminsComboBox.setSizeFull();
+            adminsComboBox.setNullSelectionAllowed(false);
             // Set the filtering mode
-            adminsCombobox.setFilteringMode(FilteringMode.CONTAINS);
-            adminsCombobox.setPageLength(5);
-            adminsCombobox.setImmediate(true);
+            adminsComboBox.setFilteringMode(FilteringMode.CONTAINS);
+            adminsComboBox.setPageLength(5);
+            adminsComboBox.setImmediate(true);
 
             admins.parallelStream().forEach(item -> {
-                adminsCombobox.addItem(item.getId());
-                adminsCombobox.setItemCaption(item.getId(), item.getLastName() + " " + item.getFirstName());
+                adminsComboBox.addItem(item.getId());
+                adminsComboBox.setItemCaption(item.getId(), item.getLastName() + " " + item.getFirstName());
 
             });
 
-            adminsCombobox.addValueChangeListener(event -> {
-                selectedUserId = adminsCombobox.getConvertedValue().toString();
+            adminsComboBox.addValueChangeListener(event -> {
+                selectedUserId = adminsComboBox.getConvertedValue().toString();
             });
             Button addAnotherAdmin = new Button("Add Administrator", FontAwesome.USER);
             addAnotherAdmin.setStyleName(ValoTheme.BUTTON_FRIENDLY);
@@ -107,7 +105,7 @@ public class OrganisationDetails extends VerticalLayout implements
                 Notification.show(" We are Adding Another User" + selectedUserId, Notification.Type.HUMANIZED_MESSAGE);
             });
 
-            grid.addComponent(adminsCombobox, 0, 3, 2, 3);
+            grid.addComponent(adminsComboBox, 0, 3, 2, 3);
             grid.addComponent(addAnotherAdmin, 3, 3);
         }
 
@@ -126,6 +124,11 @@ public class OrganisationDetails extends VerticalLayout implements
         }
         if (admins.size() > 0) {
             Table adminTable = new Table();
+            adminTable.addStyleName(ValoTheme.TABLE_BORDERLESS);
+            adminTable.addStyleName(ValoTheme.TABLE_NO_STRIPES);
+            adminTable.addStyleName(ValoTheme.TABLE_NO_VERTICAL_LINES);
+            adminTable.addStyleName(ValoTheme.TABLE_SMALL);
+            adminTable.setPageLength(8);
             adminTable.setSizeFull();
             adminTable.addContainerProperty("Last Name", String.class, null);
             adminTable.addContainerProperty("First Name", String.class, null);

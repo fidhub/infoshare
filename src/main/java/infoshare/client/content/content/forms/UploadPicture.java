@@ -1,39 +1,16 @@
 package infoshare.client.content.content.forms;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
-import com.vaadin.ui.Embedded;
 import com.vaadin.ui.Upload;
-import infoshare.app.conf.RestUtil;
-import infoshare.domain.storage.FileResults;
-import infoshare.factories.storage.FileResultsFactory;
-import infoshare.restapi.ContentFiles.Media.MediaBaseURL;
-import infoshare.restapi.storage.FileResultsAPI;
 import infoshare.restapi.storage.UploadBaseURL;
-import org.apache.commons.io.FileUtils;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.poi.ss.formula.functions.T;
-import org.atmosphere.util.FilterConfigImpl;
-import org.mozilla.javascript.tools.idswitch.FileBody;
-import org.springframework.core.io.ByteArrayResource;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.FileSystemResource;
-import org.springframework.core.io.Resource;
 import org.springframework.http.*;
 import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
-import sun.swing.ImageIconUIResource;
 
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletContext;
-import java.awt.*;
-import java.io.*;
-import java.net.URL;
-import java.util.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 
 /**
  * Created by THULEH on 2016/03/24.

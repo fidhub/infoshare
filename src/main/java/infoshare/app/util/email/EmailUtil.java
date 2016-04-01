@@ -121,11 +121,9 @@ public class EmailUtil {
     }
 
     public static void sendWithAttachments(ComposeEmail email, DataSource attachment, String filename) {
-
         // Sender's email ID needs to be mentioned
         final String from = email.getFrom();
         final String password = email.getPassword();
-
         // -- Attaching to default Session, or we could start a new one --
         Session session = Session.getDefaultInstance(getProperties(), new Authenticator() {
             @Override
@@ -140,8 +138,6 @@ public class EmailUtil {
 
             // Set From: header field of the header.
             message.setFrom(new InternetAddress(from));
-
-
             // Set To: header field of the header. Compulsary
             if (email.getAddressesTo() != null) {
                 if (!email.getAddressesTo().isEmpty()) {
@@ -154,7 +150,6 @@ public class EmailUtil {
                     message.addRecipients(Message.RecipientType.TO, addressTo);
                 }
             }
-
             //Set CC: header filed of the header. Not compulsary
             if (email.getAddressesCC() != null) {
                 if (!email.getAddressesCC().isEmpty()) {

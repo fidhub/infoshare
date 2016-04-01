@@ -18,8 +18,6 @@ import java.util.Set;
  */
 public class DisabledOrganisationTable extends Table {
     private final MainLayout main;
-
-
     public DisabledOrganisationTable(MainLayout main, DisabledOrganisationTab tab, Set<Organisation> companies) {
         this.main = main;
         setSizeFull();

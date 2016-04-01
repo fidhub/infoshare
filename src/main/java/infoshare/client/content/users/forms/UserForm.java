@@ -1,21 +1,29 @@
-package infoshare.client.content.account.forms;
+package infoshare.client.content.users.forms;
 
 import com.vaadin.data.fieldgroup.FieldGroup;
 import com.vaadin.data.util.BeanItem;
 import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.*;
+import infoshare.app.facade.DemographicsFacade;
 import infoshare.app.facade.OrganisationFacade;
 import infoshare.app.facade.PeopleFacade;
 import infoshare.app.util.DomainState;
 import infoshare.app.util.fields.ButtonsHelper;
 import infoshare.app.util.fields.UIComboBoxHelper;
 import infoshare.app.util.fields.UIComponentHelper;
+import infoshare.app.util.fields.UIListSelectHelper;
+import infoshare.app.util.organisation.OrganisationUtil;
+import infoshare.app.util.security.GetUserCredentials;
 import infoshare.app.util.security.PasswordHash;
 import infoshare.app.util.security.RolesValues;
 import infoshare.app.util.security.SecurityService;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.account.AccountMenu;
 import infoshare.client.content.account.model.AdminModel;
+import infoshare.client.content.setup.models.RoleModel;
+import infoshare.client.content.users.UserManagementMenu;
+import infoshare.client.content.users.model.UserModel;
+import infoshare.domain.demographics.Role;
 import infoshare.domain.organisation.Organisation;
 import infoshare.domain.person.Person;
 import infoshare.domain.person.PersonRole;
@@ -24,16 +32,17 @@ import infoshare.factories.person.PersonRoleFactory;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 /**
- * Created by hashcode on 2015/11/24.
+ * Created by THULEH on 2016/03/31.
  */
-public class OrganisationAdminForm extends FormLayout implements Button.ClickListener {
-    private final AdminModel bean;
-    public final BeanItem<AdminModel> item;
+public class UserForm extends FormLayout implements Button.ClickListener  {
+    public final BeanItem<UserModel> item;
     public final FieldGroup binder;
-    final private MainLayout main;
-    private final Organisation company;
+    private final  MainLayout main;
+    private UserModel bean;
     // Define Buttons
     public Button save = new Button("Save");
     public Button edit = new Button("Edit");
@@ -41,21 +50,27 @@ public class OrganisationAdminForm extends FormLayout implements Button.ClickLis
     public Button update = new Button("Update");
     public Button delete = new Button("Delete");
 
-    public OrganisationAdminForm(MainLayout main, Organisation company) {
+    public UserForm(MainLayout main) {
         this.main = main;
-        this.company = company;
-        bean = new AdminModel();
+        bean = new UserModel();
         item = new BeanItem<>(bean);
         binder = new FieldGroup(item);
         final UIComponentHelper UIComponent = new UIComponentHelper();
         final UIComboBoxHelper UIComboBox = new UIComboBoxHelper();
+        final UIListSelectHelper UIListSelect = new UIListSelectHelper();
 
-        TextField firstName = UIComponent.getGridTextField("First Name :", "firstName", AdminModel.class, binder);
-        TextField middlename = UIComponent.getGridTextField("Middle Name :", "middleName", AdminModel.class, binder);
-        TextField lastname = UIComponent.getGridTextField("Last Name:", "lastName", AdminModel.class, binder);
-        TextField emailAddress = UIComponent.getGridTextField("Email Address :", "emailAddress", AdminModel.class, binder);
-
-
+        TextField firstName = UIComponent.getGridTextField("First Name :", "firstName", UserModel.class, binder);
+        TextField middlename = UIComponent.getGridTextField("Middle Name :", "middleName", UserModel.class, binder);
+        TextField lastname = UIComponent.getGridTextField("Last Name:", "lastName", UserModel.class, binder);
+        TextField emailAddress = UIComponent.getGridTextField("Email Address :", "emailAddress", UserModel.class, binder);
+        ComboBox role = UIComboBox.getUploadComboBox("Select Role :", "role", UserModel.class, binder);
+        role.setPageLength(4);
+        for (Role role1: DemographicsFacade.rolesListService.findAll().stream()
+                .filter(rol -> rol.getState().equalsIgnoreCase(DomainState.ACTIVE.name())).collect(Collectors.toSet())){
+            role.addItem(role1.getId());
+            role.setDescription(role1.getName());
+        }
+        //ListSelect role = UIListSelect.getMultSelector("Select Role :", "role", UserModel.class, binder);
 
         // Create a field group and use it to bind the fields in the layout
         GridLayout grid = new GridLayout(4, 10);
@@ -68,9 +83,8 @@ public class OrganisationAdminForm extends FormLayout implements Button.ClickLis
         //Second ROW
         grid.addComponent(middlename, 0, 1);
         grid.addComponent(emailAddress, 1, 1);
-
-        //SPAN ROW 1 and 2
-//        grid.addComponent(description, 2, 0, 2, 1);
+        //3rd ROW
+        grid.addComponent(role, 0, 2);
 
         HorizontalLayout buttons = ButtonsHelper.getButtons(save, edit, cancel, update, delete);
         buttons.setSizeFull();
@@ -79,8 +93,6 @@ public class OrganisationAdminForm extends FormLayout implements Button.ClickLis
         addComponent(grid);
         addListeners();
     }
-
-
     @Override
     public void buttonClick(Button.ClickEvent event) {
         final Button source = event.getButton();
@@ -96,7 +108,6 @@ public class OrganisationAdminForm extends FormLayout implements Button.ClickLis
             deleteForm(binder);
         }
     }
-
     private void deleteForm(FieldGroup binder) {
 
     }
@@ -105,8 +116,8 @@ public class OrganisationAdminForm extends FormLayout implements Button.ClickLis
 
     }
 
-    private void getHome() {
-        main.content.setSecondComponent(new AccountMenu(main, "LANDING"));
+    private void getHome(){
+        main.content.setSecondComponent(new UserManagementMenu(main,"LANDING"));
     }
 
     private void saveForm(FieldGroup binder) {
@@ -116,7 +127,7 @@ public class OrganisationAdminForm extends FormLayout implements Button.ClickLis
             e.printStackTrace();
         }
 
-        final AdminModel bean = ((BeanItem<AdminModel>) binder.getItemDataSource()).getBean();
+        final UserModel bean = ((BeanItem<UserModel>) binder.getItemDataSource()).getBean();
 
         final String password = SecurityService.generateRandomPassword();
         Map<String, String> stringVals = new HashMap<>();
@@ -125,7 +136,8 @@ public class OrganisationAdminForm extends FormLayout implements Button.ClickLis
         stringVals.put("lastName", bean.getLastName());
         stringVals.put("authvalue", PasswordHash.createEncryptedPassword(password));
         stringVals.put("emailAddress", bean.getEmailAddress());
-        stringVals.put("org", company.getId());
+        stringVals.put("org", OrganisationUtil.getCompanyCode());
+        stringVals.put("role",bean.getRole());
 
         Map<String, Boolean> boolVals = new HashMap<>();
         boolVals.put("enabled", Boolean.TRUE);
@@ -134,13 +146,6 @@ public class OrganisationAdminForm extends FormLayout implements Button.ClickLis
         boolVals.put("credentialsNonExpired", Boolean.TRUE);
         Person companyAdmin = createAccount(stringVals, boolVals);
         SecurityService.sendEmail(password, companyAdmin);
-
-        final Organisation updateCompany = new Organisation
-                .Builder()
-                .copy(company)
-                .adminattached(DomainState.WITH_ADMIN.name())
-                .build();
-        OrganisationFacade.companyService.save(updateCompany);
         getHome();
 
     }
@@ -149,14 +154,13 @@ public class OrganisationAdminForm extends FormLayout implements Button.ClickLis
         Person companyAdmin = PersonFactory.getPerson(stringVals, boolVals);
         try {
             PeopleFacade.personService.save(companyAdmin);
-            PersonRole role = PersonRoleFactory.getPersonRole(companyAdmin.getId(), RolesValues.ORG_ADMIN.name());
+            PersonRole role = PersonRoleFactory.getPersonRole(companyAdmin.getId(), stringVals.get("role"));
             PeopleFacade.personRoleService.save(role);
         }catch (Exception e){
             e.fillInStackTrace();
         }
         return companyAdmin;
     }
-
     private void setEditFormProperties() {
         binder.setReadOnly(false);
         save.setVisible(false);
@@ -174,5 +178,6 @@ public class OrganisationAdminForm extends FormLayout implements Button.ClickLis
         update.addClickListener(this);
         delete.addClickListener(this);
     }
+
 
 }
