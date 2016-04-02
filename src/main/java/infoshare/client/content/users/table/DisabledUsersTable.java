@@ -1,12 +1,17 @@
 package infoshare.client.content.users.table;
 
+import com.vaadin.server.Page;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.themes.ValoTheme;
+import de.steinwedel.messagebox.ButtonId;
+import de.steinwedel.messagebox.Icon;
+import de.steinwedel.messagebox.MessageBox;
 import infoshare.app.facade.OrganisationFacade;
 import infoshare.app.facade.PeopleFacade;
 import infoshare.app.util.DomainState;
+import infoshare.app.util.ScreenMessages;
 import infoshare.app.util.organisation.OrganisationUtil;
 import infoshare.app.util.security.GetUserCredentials;
 import infoshare.app.util.security.PasswordHash;
@@ -14,12 +19,15 @@ import infoshare.app.util.security.RolesValues;
 import infoshare.app.util.security.SecurityService;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.users.UserManagementMenu;
+import infoshare.client.content.users.views.UserDetails;
 import infoshare.domain.organisation.Organisation;
 import infoshare.domain.person.Person;
 import infoshare.restapi.people.PersonAPI;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
 /**
@@ -27,7 +35,7 @@ import java.util.stream.Collectors;
  */
 public class DisabledUsersTable extends Table {
     private final MainLayout main;
-
+    public Set<Person> applicants;
     public DisabledUsersTable(MainLayout main) {
         this.main = main;
         setSizeFull();
@@ -40,7 +48,7 @@ public class DisabledUsersTable extends Table {
         addContainerProperty("Email Address", String.class, null);
         addContainerProperty("Enable Account", Button.class, null);
         try {
-            Set<Person> applicants;
+
             if(GetUserCredentials.isUserWithRole(RolesValues.ROLE_ADMIN.name())) {
                 applicants = getUsers(RolesValues.ORG_ADMIN.name());
             }else if(GetUserCredentials.isUserWithRole(RolesValues.ORG_ADMIN.name())) {
@@ -50,27 +58,7 @@ public class DisabledUsersTable extends Table {
             } else {
                 applicants = getAll();
             }
-            applicants.parallelStream().forEach(item -> {
-                               Button disable = new Button("Enable");
-                disable.setStyleName(ValoTheme.BUTTON_LINK);
-                disable.setData(item.getId());
-                disable.addClickListener(event -> {
-                    Person person = new Person.Builder()
-                            .copy(item)
-                            .state(DomainState.ACTIVE.name())
-                            .build();
-                    PeopleFacade.personService.update(person);
-                    getHome();
-                });
-
-                addItem(new Object[]{
-                        item.getLastName(),
-                        item.getFirstName(),
-                        item.getEmailAddress(),
-                        disable
-                }, item.getId());
-
-            });
+            applicants.forEach(this::loadTable);
         }catch (Exception e){
             //Notification.show("They are no users"+e.getMessage(), Notification.Type.HUMANIZED_MESSAGE);
         }
@@ -79,7 +67,28 @@ public class DisabledUsersTable extends Table {
         setImmediate(true);
 
     }
+    public  void loadTable(Person item){
+        Button disable = new Button("Enable");
+        disable.setStyleName(ValoTheme.BUTTON_LINK);
+        disable.setData(item.getId());
+        disable.addClickListener(event -> {
+            Person person = new Person.Builder()
+                    .copy(item)
+                    .state(DomainState.ACTIVE.name())
+                    .build();
+            PeopleFacade.personService.update(person);
+            getHome();
+        });
 
+        addItem(new Object[]{
+                item.getLastName(),
+                item.getFirstName(),
+                item.getEmailAddress(),
+                disable
+        }, item.getId());
+
+
+    }
 
     private Set<Person> getUsers(String role) {
         Set<Person> persons = new HashSet<>();
@@ -94,7 +103,6 @@ public class DisabledUsersTable extends Table {
                 }
             }
         } catch (Exception e) {
-            Notification.show(e.getMessage());
             e.printStackTrace();
         }
         return persons;

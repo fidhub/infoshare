@@ -8,6 +8,8 @@ import infoshare.client.content.users.forms.UserForm;
 import infoshare.client.content.users.table.UsersTable;
 import infoshare.filterSearch.UserFilter;
 
+import java.util.stream.Collectors;
+
 
 /**
  * Created by hashcode on 2015/10/22.
@@ -39,8 +41,12 @@ public class ActiveUsersTab extends VerticalLayout implements Button.ClickListen
         contentPanel.addComponent(table);
         addComponent(contentPanel);
         addNewUser.addClickListener(this);
-
-
+        search.field.addTextChangeListener(textChangeEvent -> {
+            table.removeAllItems();
+            table.applicants.stream()
+                    .filter(user -> user.getEmailAddress().contains(textChangeEvent.getText()))
+                    .collect(Collectors.toSet()).forEach(table::loadTable);
+        });
     }
      @Override
     public void buttonClick(Button.ClickEvent clickEvent) {
