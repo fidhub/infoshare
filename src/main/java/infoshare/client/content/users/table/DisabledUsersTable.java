@@ -1,6 +1,7 @@
 package infoshare.client.content.users.table;
 
 import com.vaadin.ui.Button;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.themes.ValoTheme;
 import infoshare.app.facade.OrganisationFacade;
@@ -80,7 +81,7 @@ public class DisabledUsersTable extends Table {
 
             });
         }catch (Exception e){
-            //Notification.show("They are no users", Notification.Type.HUMANIZED_MESSAGE);
+            //Notification.show("They are no users"+e.getMessage(), Notification.Type.HUMANIZED_MESSAGE);
         }
         setNullSelectionAllowed(false);
         setSelectable(true);
@@ -89,16 +90,21 @@ public class DisabledUsersTable extends Table {
     }
 
 
-    private Set<Person> getUsers(String role){
+    private Set<Person> getUsers(String role) {
         Set<Person> persons = new HashSet<>();
-        for (Organisation org : OrganisationFacade.companyService.getActiveOrganisations()) {
-            for (Person person : PeopleFacade.personService.getPersonByCompany(org.getId()) .stream()
-                    .filter(per -> per.getState().equalsIgnoreCase(DomainState.RETIRED.name()))
-                    .collect(Collectors.toSet())) {
-                persons.addAll(PeopleFacade.personRoleService.findPersonRoles(person.getId())
-                        .stream().filter(personRole -> personRole.getRoleId().equalsIgnoreCase(role))
-                        .map(personRole -> person).collect(Collectors.toList()));
+        try {
+            for (Organisation org : OrganisationFacade.companyService.getActiveOrganisations()) {
+                for (Person person : PeopleFacade.personService.getPersonByCompany(org.getId()).stream()
+                        .filter(per -> per.getState().equalsIgnoreCase(DomainState.RETIRED.name()))
+                        .collect(Collectors.toSet())) {
+                    persons.addAll(PeopleFacade.personRoleService.findPersonRoles(person.getId())
+                            .stream().filter(personRole -> personRole.getRoleId().equalsIgnoreCase(role))
+                            .map(personRole -> person).collect(Collectors.toList()));
+                }
             }
+        } catch (Exception e) {
+            Notification.show(e.getMessage());
+            e.printStackTrace();
         }
         return persons;
     }

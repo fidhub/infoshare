@@ -3,10 +3,7 @@ package infoshare.client.content.users.views;
 import com.vaadin.data.fieldgroup.FieldGroup;
 import com.vaadin.data.util.BeanItem;
 import com.vaadin.shared.ui.label.ContentMode;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.GridLayout;
-import com.vaadin.ui.Label;
-import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 import infoshare.app.facade.PeopleFacade;
 import infoshare.app.util.DomainState;
@@ -33,18 +30,19 @@ public class UserDetails extends VerticalLayout implements Button.ClickListener 
     private String selectedUserId;
     private String selectedUserOrgId;
     private final Person person;
+
     public UserDetails(MainLayout main,Person per, String tab) {
+        this.tab = tab;
         this.main = main;
         form = new UserForm(main);
         person = per;
         selectedUserId = person.getId();
         selectedUserOrgId = person.getOrg();
-        this.tab = tab;
+
         final UserModel model = getModel(person);
         form.binder.setItemDataSource(new BeanItem<>(model));
-        Label heading = new Label("<center><font color = \"40E0D0\"><h1>Details for " + person.getFirstName() +" "+person.getLastName()+"</h1></center>", ContentMode.HTML);
+        Label heading = new Label("<center><h2>Details for " + person.getFirstName() + " " + person.getLastName() + "</h2></center>", ContentMode.HTML);
         heading.setStyleName(ValoTheme.LABEL_COLORED);
-        heading.setSizeFull();
         heading.setSizeFull();
 
         grid = new GridLayout(4, 10);
@@ -57,8 +55,6 @@ public class UserDetails extends VerticalLayout implements Button.ClickListener 
         addListeners();
     }
 
-
-
     @Override
     public void buttonClick(Button.ClickEvent event) {
         final Button source = event.getButton();
@@ -69,10 +65,10 @@ public class UserDetails extends VerticalLayout implements Button.ClickListener 
         } else if (source == form.update) {
             saveEditedForm(form.binder);
         } else if (source == form.delete) {
-            deleteForm(form.binder);
+            deleteForm();
         }
     }
-    private void deleteForm(FieldGroup binder) {
+    private void deleteForm() {
         Person updatedPerson = new Person
                 .Builder()
                 .copy(person)

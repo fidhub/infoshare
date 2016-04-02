@@ -3,6 +3,7 @@ package infoshare.app.util.email;
 
 import infoshare.app.facade.UtilFacade;
 import infoshare.app.util.organisation.OrganisationUtil;
+import infoshare.app.util.security.GetUserCredentials;
 import infoshare.domain.util.Mail;
 
 import javax.activation.DataHandler;
@@ -24,7 +25,7 @@ import java.util.logging.Logger;
 public class EmailUtil {
 
     private static Properties getProperties() {
-        Set<Mail> mailprops = UtilFacade.mailService.findAll(OrganisationUtil.getCompanyCode());
+        Set<Mail> mailprops = UtilFacade.mailService.findAll(GetUserCredentials.getUser().getOrg());
         Mail properties = mailprops.iterator().next();
         Properties props = new Properties();
         props.put("mail.smtp.host", properties.getHost());
@@ -42,7 +43,7 @@ public class EmailUtil {
         //final String from = email.getFrom();
         //final String password = email.getPassword();
 
-        Set<Mail> mailprops = UtilFacade.mailService.findAll(OrganisationUtil.getCompanyCode());
+        Set<Mail> mailprops = UtilFacade.mailService.findAll(GetUserCredentials.getUser().getOrg());
         Mail properties = mailprops.iterator().next();
         // -- Attaching to default Session, or we could start a new one --
         Session session = Session.getInstance(getProperties());
@@ -63,8 +64,6 @@ public class EmailUtil {
                 Logger.getLogger(EmailUtil.class.getName()).log(Level.SEVERE, null, ex);
                 message.setFrom(new InternetAddress(properties.getKey()));
             }
-
-
             // Set To: header field of the header. Compulsary
             if (email.getAddressesTo() != null) {
                 if (!email.getAddressesTo().isEmpty()) {
@@ -77,7 +76,6 @@ public class EmailUtil {
                     message.addRecipients(Message.RecipientType.TO, addressTo);
                 }
             }
-
             //Set CC: header filed of the header. Not compulsary
             if (email.getAddressesCC() != null) {
                 if (!email.getAddressesCC().isEmpty()) {
@@ -90,7 +88,6 @@ public class EmailUtil {
                     message.addRecipients(Message.RecipientType.CC, addressCC);
                 }
             }
-
             //Set BCC: header filed of the header. Not compulsary
             if (email.getAddressesBCC() != null) {
                 if (!email.getAddressesBCC().isEmpty()) {
@@ -103,17 +100,12 @@ public class EmailUtil {
                     message.addRecipients(Message.RecipientType.BCC, addressBCC);
                 }
             }
-
-
             // Set Subject: header field
             message.setSubject(email.getSubject());
-
             // Now set the actual message
             message.setText(email.getBody());
-
             // Send message
             Transport.send(message);
-
         } catch (MessagingException mex) {
             mex.printStackTrace();
 

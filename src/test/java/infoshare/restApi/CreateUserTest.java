@@ -30,7 +30,7 @@ public class CreateUserTest {
     private static Properties getProperties() {
         Properties props = new Properties();
         props.put("mail.smtp.host", "10.68.1.7");
-        props.put("mail.user", "infoshare@cput.ac.za"); //TODo get user
+        props.put("mail.smtp.user", "infoshare@cput.ac.za"); //TODo get user
         props.put("mail.smtp.auth", "false"); // TODO set it to true once its live
         props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.debug", "true");

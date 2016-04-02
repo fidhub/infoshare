@@ -25,7 +25,6 @@ public class AccountMenu extends VerticalLayout {
         companyAnalyticsTab.setMargin(true);
         companyAnalyticsTab.addComponent(new OrganisationAnalyticsTab(main));
 
-
         VerticalLayout disabledCompaniesTab = new VerticalLayout();
         disabledCompaniesTab.setMargin(true);
         disabledCompaniesTab.addComponent(new DisabledOrganisationTab(main));

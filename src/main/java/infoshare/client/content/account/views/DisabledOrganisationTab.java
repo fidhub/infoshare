@@ -33,10 +33,8 @@ public class DisabledOrganisationTab extends VerticalLayout implements
 
     public DisabledOrganisationTab(MainLayout main) {
         contentPanel.setSizeFull();
-
         orgSearchBox.setInputPrompt("Use Name of the Organisation to Search");
         this.main = main;
-
         table = new DisabledOrganisationTable(main, this, companies);
         headerBar.setSizeFull();
         headerBar.addComponent(orgSearchBox);

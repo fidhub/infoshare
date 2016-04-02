@@ -52,7 +52,7 @@ public class OrganisationDetails extends VerticalLayout implements
     public OrganisationDetails(MainLayout main, Organisation co, String tab) {
         organisation = co;
         orgId = organisation.getId();
-        Label heading = new Label("<h2>Details for " + organisation.getName() + "</H2>", ContentMode.HTML);
+        Label heading = new Label("<center><h2>Details for " + organisation.getName() + "</H2></center>", ContentMode.HTML);
         heading.setStyleName(ValoTheme.LABEL_COLORED);
         heading.setSizeFull();
         heading.setSizeFull();
@@ -149,8 +149,7 @@ public class OrganisationDetails extends VerticalLayout implements
                                     ExecutorService executorService = Executors.newSingleThreadExecutor();
                                     executorService.execute(() -> reset(item));
                                     executorService.shutdown();
-                                    ScreenMessages.
-                                            getMessage("The Password has been Reset")
+                                    ScreenMessages.getMessage("The Password has been Reset")
                                             .show(Page.getCurrent());
                                 }
                             },

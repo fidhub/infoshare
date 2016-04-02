@@ -1,13 +1,18 @@
 package infoshare.client.content.users.table;
 
 import com.vaadin.server.FontAwesome;
+import com.vaadin.server.Page;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.themes.ValoTheme;
+import de.steinwedel.messagebox.ButtonId;
+import de.steinwedel.messagebox.Icon;
+import de.steinwedel.messagebox.MessageBox;
 import infoshare.app.facade.OrganisationFacade;
 import infoshare.app.facade.PeopleFacade;
 import infoshare.app.util.DomainState;
+import infoshare.app.util.ScreenMessages;
 import infoshare.app.util.organisation.OrganisationUtil;
 import infoshare.app.util.security.GetUserCredentials;
 import infoshare.app.util.security.PasswordHash;
@@ -29,6 +34,8 @@ import org.apache.poi.ss.formula.functions.T;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
@@ -76,19 +83,20 @@ public class UsersTable extends Table {
             reset.setStyleName(ValoTheme.BUTTON_LINK);
             reset.setData(item.getId());
             reset.addClickListener(event -> {
-                final String password = SecurityService.generateRandomPassword();
-                Person person = new Person.Builder()
-                        .copy(item)
-                        .state(DomainState.ACTIVE.name())
-                        .authvalue(PasswordHash.createEncryptedPassword(password))
-                        .accountNonExpired(true)
-                        .accountNonLocked(true)
-                        .credentialsNonExpired(true)
-                        .enabled(true)
-                        .build();
-                PeopleFacade.personService.update(person);
-                SecurityService.sendEmail(password,person);
-                getHome();
+                MessageBox.showPlain(Icon.WARN,
+                        "Password Reset",
+                        "Do you really want to RESET " + item.getFirstName() + " Account ?",
+                        buttonId -> {
+                            if (buttonId == ButtonId.YES) {
+                                ExecutorService executorService = Executors.newSingleThreadExecutor();
+                                executorService.execute(() -> resetAccount(item));
+                                executorService.shutdown();
+                                ScreenMessages.getMessage(" Account has been Reset")
+                                        .show(Page.getCurrent());
+                            }
+                        },
+                        ButtonId.YES,
+                        ButtonId.NO);
             });
 
             Button disable = new Button("Disable");
@@ -121,7 +129,21 @@ public class UsersTable extends Table {
         setImmediate(true);
 
     }
-
+    private void resetAccount(Person item) {
+        final String password = SecurityService.generateRandomPassword();
+        Person person = new Person.Builder()
+                .copy(item)
+                .state(DomainState.ACTIVE.name())
+                .authvalue(PasswordHash.createEncryptedPassword(password))
+                .accountNonExpired(true)
+                .accountNonLocked(true)
+                .credentialsNonExpired(true)
+                .enabled(true)
+                .build();
+        PeopleFacade.personService.update(person);
+        SecurityService.sendEmail(password,person);
+        getHome();
+    }
     private void getHome(){
         main.content.setSecondComponent(new UserManagementMenu(main,"LANDING"));
     }

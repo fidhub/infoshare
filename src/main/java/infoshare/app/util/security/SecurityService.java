@@ -100,7 +100,7 @@ public class SecurityService implements UserDetailsService {
     }
 
     public static void sendEmail(String password, Person companyAdmin) {
-        Mail props = UtilFacade.mailService.findAll(OrganisationUtil.getCompanyCode()).iterator().next();
+        Mail props = UtilFacade.mailService.findAll(GetUserCredentials.getUser().getOrg()).iterator().next();
         ComposeEmail email = new ComposeEmail
                 .Builder()
                 .addressesTo(new HashSet<>(Arrays.asList(companyAdmin.getEmailAddress())))
