@@ -38,7 +38,6 @@ public class DisabledUsersTable extends Table {
         addContainerProperty("Last Name", String.class, null);
         addContainerProperty("First Name", String.class, null);
         addContainerProperty("Email Address", String.class, null);
-        addContainerProperty("Details", Button.class, null);
         addContainerProperty("Enable Account", Button.class, null);
         try {
             Set<Person> applicants;
@@ -52,14 +51,7 @@ public class DisabledUsersTable extends Table {
                 applicants = getAll();
             }
             applicants.parallelStream().forEach(item -> {
-                Button details = new Button("Details");
-                details.setStyleName(ValoTheme.BUTTON_LINK);
-                details.setData(item.getId());
-                details.addClickListener(event -> {
-                    getHome();
-                });
-
-                Button disable = new Button("Enable");
+                               Button disable = new Button("Enable");
                 disable.setStyleName(ValoTheme.BUTTON_LINK);
                 disable.setData(item.getId());
                 disable.addClickListener(event -> {
@@ -75,7 +67,6 @@ public class DisabledUsersTable extends Table {
                         item.getLastName(),
                         item.getFirstName(),
                         item.getEmailAddress(),
-                        details,
                         disable
                 }, item.getId());
 
