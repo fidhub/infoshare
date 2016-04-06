@@ -2,7 +2,6 @@ package infoshare.app.conf;
 
 import com.google.gson.*;
 import com.google.gson.stream.JsonReader;
-import infoshare.domain.storage.FileResults;
 import org.apache.http.conn.ssl.NoopHostnameVerifier;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
@@ -61,10 +60,10 @@ public class RestUtil {
         }
         return list;
     }
-    public static <T> Set<T> getFileResults(String fetchUrl,Class<T> tClass) throws IOException {
+    public static <T> Set<T> getFileResults(String fetchUrl,String fileUrl,Class<T> tClass) throws IOException {
         Set<T> fileResults = new HashSet<>();
         MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-        map.add("upload", new FileSystemResource("/home/user9/upload.png"));
+        map.add("upload", new FileSystemResource(fileUrl));
 
         CloseableHttpClient httpClient = HttpClients.custom()
                 .setSSLHostnameVerifier(new NoopHostnameVerifier())
@@ -83,10 +82,17 @@ public class RestUtil {
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_OCTET_STREAM));
         HttpEntity<MultiValueMap<String, Object>> request = new HttpEntity<>(map, headers);
 
-        ResponseEntity<FileResults[]> result = restTemplate.exchange(fetchUrl, HttpMethod.POST, request, FileResults[].class);
+        ResponseEntity<String> result = restTemplate.exchange(fetchUrl, HttpMethod.POST, request, String.class);
+        Gson gson = new Gson();
+        JsonParser jsonParser = new JsonParser();
+        JsonArray jsonArray = (JsonArray) jsonParser.parse(result.getBody().toString());
 
+        for (JsonElement element : jsonArray) {
+            fileResults.add(gson.fromJson(element, tClass));
+        }
         return fileResults;
     }
+
     public static <T> T getById(String fetchUrl, String ID, Class<T> classType) {
         try {
             JsonParser jsonParser = new JsonParser();

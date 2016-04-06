@@ -25,6 +25,8 @@ public class EditForm extends FormLayout {
     public final ComboBox popUpContentTypeCmb;
     public final ComboBox popUpCategoryCmb;
     public final ComboBox popUpSourceCmb;
+
+    ImmediateUploadExample example = new ImmediateUploadExample();
     public EditForm() {
         model = new ContentModel();
         item = new BeanItem<>(model);
@@ -47,6 +49,7 @@ public class EditForm extends FormLayout {
         combo.setSpacing(true);
         combo.addComponent(popUpContentTypeCmb);
         combo.addComponent(popUpCategoryCmb);
+        combo.addComponent(example.getUI());
 
         GridLayout gridLayout = new  GridLayout(4,7);
         gridLayout.setSpacing(true);

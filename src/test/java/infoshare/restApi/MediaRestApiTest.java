@@ -1,6 +1,10 @@
 package infoshare.restApi;
 
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import infoshare.app.conf.RestUtil;
 import infoshare.domain.storage.FileResults;
 import infoshare.restapi.storage.UploadBaseURL;
@@ -18,7 +22,9 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by hashcode on 2016/01/04.
@@ -33,8 +39,6 @@ public class MediaRestApiTest {
 
         MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
         map.add("upload", new FileSystemResource("/home/user9/upload.png"));
-
-
 
         CloseableHttpClient httpClient = HttpClients.custom()
                 .setSSLHostnameVerifier(new NoopHostnameVerifier())
@@ -54,13 +58,25 @@ public class MediaRestApiTest {
         HttpEntity<MultiValueMap<String, Object>> request = new HttpEntity<>(map, headers);
 
         ResponseEntity<String> result = restTemplate.exchange(UploadBaseURL.Media.POST, HttpMethod.POST, request, String.class);
-        System.out.println("The results is " + result.getBody());
+        Gson gson = new Gson();
+        JsonParser jsonParser = new JsonParser();
+        JsonArray jsonArray = (JsonArray) jsonParser.parse(result.getBody().toString());
+        List<FileResults> list = new ArrayList<>();
+        for (JsonElement element : jsonArray) {
+            list.add(gson.fromJson(element, FileResults.class));
+        }
+        for (FileResults fileResults: list){
+            System.out.println("The results is " + fileResults.getId());
+            System.out.println("The results is " + fileResults.getUrl());
+        }
+
     }
+
 
     @Test
     public void testRest() throws Exception {
 
-       for (FileResults fileResults : RestUtil.getFileResults(UploadBaseURL.Media.POST, FileResults.class))
+       for (FileResults fileResults : RestUtil.getFileResults(UploadBaseURL.Media.POST,"/home/user9/upload.png", FileResults.class))
        {
            System.out.println("The results is " + fileResults.getId());
            System.out.println("The results is " + fileResults.getUrl());

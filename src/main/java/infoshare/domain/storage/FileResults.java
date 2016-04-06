@@ -1,9 +1,6 @@
 package infoshare.domain.storage;
 
-import jdk.nashorn.internal.runtime.options.Option;
-
 import java.io.Serializable;
-import java.util.Set;
 
 /**
  * Created by hashcode on 2016/01/04.
@@ -11,7 +8,7 @@ import java.util.Set;
 public class FileResults implements Serializable, Comparable<FileResults> {
     private String id;
     private String url;
-    private Set<String> size;
+    private String size;
     private String mime;
 
     private FileResults() {
@@ -32,7 +29,7 @@ public class FileResults implements Serializable, Comparable<FileResults> {
         return url;
     }
 
-    public Set<String> getSize() {
+    public String getSize() {
         return size;
     }
 
@@ -43,7 +40,7 @@ public class FileResults implements Serializable, Comparable<FileResults> {
     public static class Builder{
         private String id;
         private String url;
-        private Set<String> size;
+        private String size;
         private String mime;
 
 
@@ -57,7 +54,7 @@ public class FileResults implements Serializable, Comparable<FileResults> {
             return this;
         }
 
-        public Builder size(Set<String> size) {
+        public Builder size(String size) {
             this.size = size;
             return this;
         }
