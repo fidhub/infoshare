@@ -151,14 +151,15 @@ public class  RawView extends VerticalLayout implements Button.ClickListener,Pro
     private EditedContent getNewEntity(FieldGroup binder) {
         try {
             final ContentModel bean = ((BeanItem<ContentModel>) binder.getItemDataSource()).getBean();
-            bean.setDateCreated(rawContentService.findById(OrganisationUtil.getCompanyCode(),table.getValue().toString()).getDateCreated());
+           // bean.setDateCreated(rawContentService.findById(GetUserCredentials.getUser().getOrg(), table.getValue().toString()).getDateCreated());
             Map<String,String> editedVals = new HashMap<>();
             editedVals.put("content",bean.getContent());
             editedVals.put("category",form.popUpCategoryCmb.getValue().toString());
             editedVals.put("creator",bean.getCreator());
             editedVals.put("contentType",form.popUpContentTypeCmb.getValue().toString());
             editedVals.put("status",bean.getStatus());
-            editedVals.put("source",form.popUpSourceCmb.getValue().toString());
+            editedVals.put("source",bean.getSource());
+            editedVals.put("org","CPUT");
             final EditedContent editedContent = EditedContentFactory.getEditedContent(editedVals, new Date());
             return editedContent;
         }catch (Exception exception) {

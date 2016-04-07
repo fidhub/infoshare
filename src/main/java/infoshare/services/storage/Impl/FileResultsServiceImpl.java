@@ -4,6 +4,8 @@ import infoshare.domain.storage.FileResults;
 import infoshare.restapi.storage.FileResultsAPI;
 import infoshare.services.storage.FileResultsService;
 
+import java.util.Set;
+
 /**
  * Created by THULEH on 2016/03/24.
  */
@@ -19,13 +21,9 @@ public class FileResultsServiceImpl implements FileResultsService {
         }
         return fileResultsService;
     }
-    @Override
-    public FileResults findById(String s) {
-        return FileResultsAPI.findById(s);
-    }
 
     @Override
-    public FileResults save(FileResults entity) {
+    public Set<FileResults> save(String entity) {
         return FileResultsAPI.save(entity);
     }
 

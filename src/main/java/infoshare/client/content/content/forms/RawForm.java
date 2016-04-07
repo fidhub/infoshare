@@ -1,5 +1,6 @@
 package infoshare.client.content.content.forms;
 
+import com.google.common.io.Files;
 import com.vaadin.data.fieldgroup.FieldGroup;
 import com.vaadin.data.util.BeanItem;
 import com.vaadin.data.validator.BeanValidator;
@@ -7,12 +8,22 @@ import com.vaadin.server.FontAwesome;
 import com.vaadin.server.Responsive;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
+import infoshare.app.conf.RestUtil;
+import infoshare.app.facade.FileResultsFacade;
 import infoshare.client.content.content.models.ContentModel;
+import infoshare.domain.storage.FileResults;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Created by user9 on 2016/02/16.
  */
-public class RawForm extends FormLayout {
+public class RawForm extends FormLayout implements Upload.Receiver, Upload.SucceededListener {
 
     private final ContentModel model;
     public final BeanItem<ContentModel> item;
@@ -22,12 +33,16 @@ public class RawForm extends FormLayout {
     public final ComboBox popUpContentTypeCmb;
     public final ComboBox popUpCategoryCmb;
     public final ComboBox popUpSourceCmb;
-    ImmediateUploadExample example = new ImmediateUploadExample();
+    public Upload upload;
+    private File file;
+    private  RichTextArea textEditor;
+
     public RawForm() {
         model = new ContentModel();
         item = new BeanItem<>(model);
         binder = new FieldGroup(item);
-
+        upload = new Upload("Upload",this);
+        upload.addSucceededListener(this);
         popUpContentTypeCmb = getComboBox("ContentFiles Type","contentType");
         popUpCategoryCmb = getComboBox("Category","category");
         popUpSourceCmb = getComboBox("source","source");
@@ -39,7 +54,7 @@ public class RawForm extends FormLayout {
         backBtn.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
         backBtn.setIcon(FontAwesome.ARROW_LEFT);
 
-        RichTextArea textEditor = getRichTextArea("ContentFiles","content");
+         textEditor = getRichTextArea("ContentFiles","content");
         final HorizontalLayout layout = new HorizontalLayout();
         layout.setSpacing(true);
         layout.addComponent(saveBtn);
@@ -53,7 +68,7 @@ public class RawForm extends FormLayout {
         combo.setSpacing(true);
         combo.addComponent(popUpContentTypeCmb);
         combo.addComponent(popUpCategoryCmb);
-        combo.addComponent(example);
+        combo.addComponent(upload);
 
         GridLayout gridLayout = new  GridLayout(4,7);
         gridLayout.setSpacing(true);
@@ -86,5 +101,29 @@ public class RawForm extends FormLayout {
         comboBox.setNullSelectionAllowed(false);
         binder.bind(comboBox,field);
         return comboBox;
+    }
+
+    @Override
+    public OutputStream receiveUpload(String filename, String mimeType) {
+        try {
+            file = new File(Files.createTempDir(), filename);
+            //file.deleteOnExit();
+            return new FileOutputStream(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    @Override
+    public void uploadSucceeded(Upload.SucceededEvent event) {
+        Set<FileResults> set = FileResultsFacade.fileResultsService.save(file.getAbsoluteFile().toString());
+        String url="";
+        for (FileResults fileResults: set.stream().filter(file -> file.getSize().equalsIgnoreCase("Standard")).collect(Collectors.toSet()))
+        {
+            url =RestUtil.URL+fileResults.getUrl();
+        }
+        textEditor.setValue(textEditor.getValue()+" "+"<img src="+url+">");
     }
 }

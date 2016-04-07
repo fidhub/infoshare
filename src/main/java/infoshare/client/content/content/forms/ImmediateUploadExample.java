@@ -1,16 +1,53 @@
 package infoshare.client.content.content.forms;
 
-import com.vaadin.server.FontAwesome;
-import com.vaadin.ui.*;
-import com.vaadin.ui.themes.ValoTheme;
+import com.google.common.io.Files;
+import com.vaadin.ui.Upload;
+import com.vaadin.ui.VerticalLayout;
+import infoshare.app.conf.RestUtil;
+import infoshare.domain.storage.FileResults;
+import infoshare.restapi.storage.UploadBaseURL;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Set;
 
 /**
  * Created by THULEH on 2016/03/24.
  */
+public class ImmediateUploadExample extends VerticalLayout  implements Upload.Receiver, Upload.SucceededListener {
+
+    public Upload upload;
+    private File file;
+    public ImmediateUploadExample() {
+        upload = new Upload("Upload",this);
+        upload.addSucceededListener(this);
+    }
+
+    @Override
+    public OutputStream receiveUpload(String filename, String mimeType) {
+        try {
+            file = new File(Files.createTempDir(), filename);
+            //file.deleteOnExit();
+            return new FileOutputStream(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    @Override
+    public void uploadSucceeded(Upload.SucceededEvent event) {
+        try {
+          Set<FileResults> set=  RestUtil.getFileResults(UploadBaseURL.Media.POST, file.getAbsoluteFile().toString(), FileResults.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        // System.out.print(VaadinService.getCurrent().getBaseDirectory().getAbsolutePath());
+    }
+}
 /*public class UploadPicture extends Component {
 
 
@@ -25,6 +62,7 @@ import java.io.OutputStream;
     }
 }*/
 
+/*
 @SuppressWarnings("serial")
  public class ImmediateUploadExample extends VerticalLayout  implements Upload.Receiver{
 
@@ -36,7 +74,7 @@ import java.io.OutputStream;
     public ImmediateUploadExample() {
         setSpacing(true);
         upload = new Upload(null, this);
-
+        System.out.print(VaadinService.getCurrent().getBaseDirectory().getAbsolutePath());
         // Make uploading start immediately when file is selected
         upload.setImmediate(true);
         upload.setButtonCaption("Select file");
@@ -58,12 +96,15 @@ import java.io.OutputStream;
         addComponent(bar);
         addComponent(cancelProcessing);
 
-        /**
+        */
+/**
          * =========== Add needed listener for the upload component: start,
          * progress, finish, success, fail ===========
-         */
+         *//*
+
 
         upload.addStartedListener(event -> {
+
             upload.setVisible(false);
             cancelProcessing.setVisible(true);
             bar.setVisible(true);
@@ -76,7 +117,9 @@ import java.io.OutputStream;
             upload.addSucceededListener(event -> {
                 try {
                     File file = new File(event.getFilename());
-                    System.out.print(file.getCanonicalFile().toString());
+                    event.getUpload();
+                    VaadinService.getCurrent().getBaseDirectory().getAbsolutePath();
+                    System.out.print(VaadinService.getCurrent().getBaseDirectory().getAbsolutePath());
                    // RestUtil.getFileResults(UploadBaseURL.Media.POST, file.getPath().toString(), FileResults.class);
                     status.setValue("Uploading file " + event.getFilename() + " succeeded");
                 }catch(Exception e){
@@ -114,6 +157,7 @@ import java.io.OutputStream;
             }
         };
     }
+*/
 
 
    /* public static class MyReceiver implements Upload.Receiver{
@@ -157,6 +201,6 @@ import java.io.OutputStream;
 
     }*/
 
-    }
+
 
 

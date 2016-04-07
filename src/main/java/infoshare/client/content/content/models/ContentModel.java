@@ -1,30 +1,29 @@
 package infoshare.client.content.content.models;
 
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 
 public class ContentModel implements Serializable {
     private String id;
-    @NotNull
+   // @NotNull
     private Date dateCreated;
-    @NotNull
+   // @NotNull
     private String creator;
-    @NotNull
+   // @NotNull
     private String source;
-    @NotNull
+   // @NotNull
     private String category;
-    @NotNull
+    //@NotNull
     private String title;
-    @NotNull
+   // @NotNull
     private String content;
-    @NotNull
+   // @NotNull
     private String contentType;
-    @NotNull
+   // @NotNull
     private String status;
-    @NotNull
+   // @NotNull
     private String state;
-    @NotNull
+    //@NotNull
     private String org;
 
     public String getCategory() {
