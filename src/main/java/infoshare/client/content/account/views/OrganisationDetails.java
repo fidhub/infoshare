@@ -237,7 +237,7 @@ public class OrganisationDetails extends VerticalLayout implements
     private void saveEditedForm(FieldGroup binder) {
         Organisation updatedCompany = getUpdateEntity(binder);
         Set<FileResults> set = FileResultsFacade.fileResultsService.save(form.imageUploader.path);
-        for (FileResults fileResults: set.stream().filter(file -> file.getSize().equalsIgnoreCase("Standard")).collect(Collectors.toSet())) {
+        for (FileResults fileResults: set.stream().filter(file -> file.getSize().equalsIgnoreCase("original")).collect(Collectors.toSet())) {
             OrganisationFacade.companyLogosService.save(getNewLogo(fileResults));
         }
         OrganisationFacade.companyService.update(updatedCompany);
@@ -247,7 +247,7 @@ public class OrganisationDetails extends VerticalLayout implements
     private void saveForm(FieldGroup binder) {
         Organisation newcompany = getNewEntity(binder);
         Set<FileResults> set = FileResultsFacade.fileResultsService.save(form.imageUploader.path);
-        for (FileResults fileResults: set.stream().filter(file -> file.getSize().equalsIgnoreCase("Standard")).collect(Collectors.toSet())) {
+        for (FileResults fileResults: set.stream().filter(file -> file.getSize().equalsIgnoreCase("original")).collect(Collectors.toSet())) {
             OrganisationFacade.companyLogosService.save(getNewLogo(fileResults));
         }
         OrganisationFacade.companyService.save(newcompany);

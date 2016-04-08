@@ -120,7 +120,7 @@ public class ManageOrganisationTab extends VerticalLayout implements
         try {
             binder.commit();
             Set<FileResults> set = FileResultsFacade.fileResultsService.save(form.imageUploader.path);
-            for (FileResults fileResults: set.stream().filter(file -> file.getSize().equalsIgnoreCase("Standard")).collect(Collectors.toSet())) {
+            for (FileResults fileResults: set.stream().filter(file -> file.getSize().equalsIgnoreCase("original")).collect(Collectors.toSet())) {
                 OrganisationFacade.companyLogosService.save(getNewLogo(fileResults));
             }
             OrganisationFacade.companyService.save(getNewEntity(binder));
@@ -156,7 +156,7 @@ public class ManageOrganisationTab extends VerticalLayout implements
         try {
             binder.commit();
             Set<FileResults> set = FileResultsFacade.fileResultsService.save(form.imageUploader.path);
-            for (FileResults fileResults: set.stream().filter(file -> file.getSize().equalsIgnoreCase("Standard")).collect(Collectors.toSet())) {
+            for (FileResults fileResults: set.stream().filter(file -> file.getSize().equalsIgnoreCase("original")).collect(Collectors.toSet())) {
                 OrganisationFacade.companyLogosService.save(getNewLogo(fileResults));
             }
             OrganisationFacade.companyService.update(getUpdateEntity(binder));
