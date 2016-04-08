@@ -8,19 +8,26 @@ import com.vaadin.event.ShortcutListener;
 import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
+import infoshare.app.conf.RestUtil;
+import infoshare.app.facade.FileResultsFacade;
 import infoshare.app.facade.OrganisationFacade;
+import infoshare.app.util.organisation.OrganisationUtil;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.account.AccountMenu;
 import infoshare.client.content.account.forms.OrganisationForm;
 import infoshare.client.content.account.model.OrganisationModel;
 import infoshare.client.content.account.table.OrganisationTable;
 import infoshare.domain.organisation.Organisation;
+import infoshare.domain.organisation.OrganisationLogo;
+import infoshare.domain.storage.FileResults;
 import infoshare.factories.organasation.OrganisationFactory;
+import infoshare.factories.organasation.OrganisationLogoFactory;
 
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 ;
 
@@ -112,6 +119,10 @@ public class ManageOrganisationTab extends VerticalLayout implements
     private void saveForm(FieldGroup binder) {
         try {
             binder.commit();
+            Set<FileResults> set = FileResultsFacade.fileResultsService.save(form.imageUploader.path);
+            for (FileResults fileResults: set.stream().filter(file -> file.getSize().equalsIgnoreCase("Standard")).collect(Collectors.toSet())) {
+                OrganisationFacade.companyLogosService.save(getNewLogo(fileResults));
+            }
             OrganisationFacade.companyService.save(getNewEntity(binder));
             getHome();
             Notification.show("Record ADDED!", Notification.Type.TRAY_NOTIFICATION);
@@ -120,7 +131,16 @@ public class ManageOrganisationTab extends VerticalLayout implements
             getHome();
         }
     }
-
+    private OrganisationLogo getNewLogo(FileResults fileResults){
+        Map<String, String> stringMap = new HashMap<>();
+        stringMap.put("id",fileResults.getId());
+        stringMap.put("url", RestUtil.URL+fileResults.getUrl());
+        stringMap.put("size",fileResults.getSize());
+        stringMap.put("description", OrganisationUtil.getCompanyCode()+"Logo");
+        stringMap.put("mime",fileResults.getMime());
+        OrganisationLogo logo = OrganisationLogoFactory.getOrganisationLogo(stringMap);
+        return logo;
+    }
     private Organisation getNewEntity(FieldGroup binder) {
         final OrganisationModel bean = ((BeanItem<OrganisationModel>) binder.getItemDataSource()).getBean();
         Map<String, String> details = new HashMap<String, String>();
@@ -135,6 +155,10 @@ public class ManageOrganisationTab extends VerticalLayout implements
     private void saveEditedForm(FieldGroup binder) {
         try {
             binder.commit();
+            Set<FileResults> set = FileResultsFacade.fileResultsService.save(form.imageUploader.path);
+            for (FileResults fileResults: set.stream().filter(file -> file.getSize().equalsIgnoreCase("Standard")).collect(Collectors.toSet())) {
+                OrganisationFacade.companyLogosService.save(getNewLogo(fileResults));
+            }
             OrganisationFacade.companyService.update(getUpdateEntity(binder));
             getHome();
             Notification.show("Record UPDATED!", Notification.Type.TRAY_NOTIFICATION);

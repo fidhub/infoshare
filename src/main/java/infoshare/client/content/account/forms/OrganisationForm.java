@@ -22,7 +22,7 @@ public class OrganisationForm extends FormLayout {
     public Button cancel = new Button("Cancel");
     public Button update = new Button("Update");
     public Button delete = new Button("Delete");
-
+    public ImageUploader imageUploader = new ImageUploader();
     public OrganisationForm() {
         bean = new OrganisationModel();
         item = new BeanItem<>(bean);
@@ -51,8 +51,7 @@ public class OrganisationForm extends FormLayout {
         grid.addComponent(address, 2, 0, 2, 1);
 
         //SPAN ROW 1 and 2
-//        grid.addComponent(description, 2, 0, 2, 1);
-
+        grid.addComponent(imageUploader,0,3);
 
         HorizontalLayout buttons = ButtonsHelper.getButtons(save, edit, cancel, update, delete);
         buttons.setSizeFull();
@@ -61,4 +60,5 @@ public class OrganisationForm extends FormLayout {
 
         addComponent(grid);
     }
+
 }

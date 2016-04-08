@@ -11,10 +11,13 @@ import com.vaadin.ui.themes.ValoTheme;
 import de.steinwedel.messagebox.ButtonId;
 import de.steinwedel.messagebox.Icon;
 import de.steinwedel.messagebox.MessageBox;
+import infoshare.app.conf.RestUtil;
+import infoshare.app.facade.FileResultsFacade;
 import infoshare.app.facade.OrganisationFacade;
 import infoshare.app.facade.PeopleFacade;
 import infoshare.app.util.DomainState;
 import infoshare.app.util.ScreenMessages;
+import infoshare.app.util.organisation.OrganisationUtil;
 import infoshare.app.util.security.RolesValues;
 import infoshare.app.util.security.SecurityService;
 import infoshare.client.content.MainLayout;
@@ -23,14 +26,18 @@ import infoshare.client.content.account.forms.OrganisationAdminForm;
 import infoshare.client.content.account.forms.OrganisationForm;
 import infoshare.client.content.account.model.OrganisationModel;
 import infoshare.domain.organisation.Organisation;
+import infoshare.domain.organisation.OrganisationLogo;
 import infoshare.domain.person.Person;
+import infoshare.domain.storage.FileResults;
 import infoshare.factories.organasation.OrganisationFactory;
+import infoshare.factories.organasation.OrganisationLogoFactory;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.stream.Collectors;
 
 ;
 
@@ -229,16 +236,33 @@ public class OrganisationDetails extends VerticalLayout implements
 
     private void saveEditedForm(FieldGroup binder) {
         Organisation updatedCompany = getUpdateEntity(binder);
+        Set<FileResults> set = FileResultsFacade.fileResultsService.save(form.imageUploader.path);
+        for (FileResults fileResults: set.stream().filter(file -> file.getSize().equalsIgnoreCase("Standard")).collect(Collectors.toSet())) {
+            OrganisationFacade.companyLogosService.save(getNewLogo(fileResults));
+        }
         OrganisationFacade.companyService.update(updatedCompany);
         getHome();
     }
 
     private void saveForm(FieldGroup binder) {
         Organisation newcompany = getNewEntity(binder);
+        Set<FileResults> set = FileResultsFacade.fileResultsService.save(form.imageUploader.path);
+        for (FileResults fileResults: set.stream().filter(file -> file.getSize().equalsIgnoreCase("Standard")).collect(Collectors.toSet())) {
+            OrganisationFacade.companyLogosService.save(getNewLogo(fileResults));
+        }
         OrganisationFacade.companyService.save(newcompany);
         getHome();
     }
-
+    private OrganisationLogo getNewLogo(FileResults fileResults){
+        Map<String, String> stringMap = new HashMap<>();
+        stringMap.put("id",fileResults.getId());
+        stringMap.put("url", RestUtil.URL+fileResults.getUrl());
+        stringMap.put("size",fileResults.getSize());
+        stringMap.put("description", OrganisationUtil.getCompanyCode()+"Logo");
+        stringMap.put("mime",fileResults.getMime());
+        OrganisationLogo logo = OrganisationLogoFactory.getOrganisationLogo(stringMap);
+        return logo;
+    }
     private void setEditFormProperties() {
         form.binder.setReadOnly(false);
         form.save.setVisible(false);

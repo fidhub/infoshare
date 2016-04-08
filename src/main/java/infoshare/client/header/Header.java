@@ -3,16 +3,14 @@ package infoshare.client.header;
 import com.vaadin.event.ItemClickEvent;
 import com.vaadin.event.LayoutEvents;
 import com.vaadin.event.ShortcutAction;
-import com.vaadin.server.FileResource;
-import com.vaadin.server.FontAwesome;
-import com.vaadin.server.Page;
-import com.vaadin.server.Responsive;
+import com.vaadin.server.*;
 import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.*;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.themes.ChameleonTheme;
 import com.vaadin.ui.themes.ValoTheme;
 import infoshare.app.facade.ContentFacade;
+import infoshare.app.facade.OrganisationFacade;
 import infoshare.app.util.organisation.OrganisationUtil;
 import infoshare.app.util.security.GetUserCredentials;
 import infoshare.client.content.MainLayout;
@@ -85,6 +83,7 @@ public class Header extends VerticalLayout implements Button.ClickListener , Ite
           userButton(clickEvent);
         }
     }
+
     private void notificationButton(ClickEvent clickEvent){
         if (userProfile != null && userProfile.getUI() !=null) {
             userProfile.close();
@@ -105,6 +104,7 @@ public class Header extends VerticalLayout implements Button.ClickListener , Ite
             });
         }
     }
+
     private void userButton(ClickEvent clickEvent){
         if (notifications != null && notifications.getUI() != null) {
             notifications.close();
@@ -124,6 +124,7 @@ public class Header extends VerticalLayout implements Button.ClickListener , Ite
             });
         }
     }
+
     public static void buildNotifications( ClickEvent event) {
         notifications = new Window();
         final VerticalLayout layout = new VerticalLayout();
@@ -154,7 +155,6 @@ public class Header extends VerticalLayout implements Button.ClickListener , Ite
         notificationTable.setImmediate(true);
         notificationTable.setPageLength(5);
 
-
         refreshNotification();
 
         notificationTable.addItemClickListener(event1 -> {
@@ -181,6 +181,7 @@ public class Header extends VerticalLayout implements Button.ClickListener , Ite
         notifications.setCloseShortcut(ShortcutAction.KeyCode.ESCAPE, null);
 
     }
+
     private void buildUser(ClickEvent event) {
         userProfile = new Window();
         final VerticalLayout layout = new VerticalLayout();
@@ -207,11 +208,13 @@ public class Header extends VerticalLayout implements Button.ClickListener , Ite
         userProfile.setCloseShortcut(ShortcutAction.KeyCode.ESCAPE, null);
 
     }
+
     private void addListener(){
         home.addClickListener(this);
         notify.addClickListener(this);
         user.addClickListener(this);
     }
+
     private static String differInTime(Date dateCreated){
         Date date1 = new Date();
         Calendar startCalendar = new GregorianCalendar();
@@ -276,6 +279,7 @@ public class Header extends VerticalLayout implements Button.ClickListener , Ite
             notificationTable.removeAllItems();
         }
     }
+
     private static HorizontalLayout getLayout(){
         final HorizontalLayout layout = new HorizontalLayout();
         layout.addStyleName("dashboard-view");
@@ -296,11 +300,22 @@ public class Header extends VerticalLayout implements Button.ClickListener , Ite
 
         return layout;
     }
+
     private static Component getLogo(){
         final HorizontalLayout logo = new HorizontalLayout();
-        FileResource resource = new FileResource(
-                new File("src/main/webapp/VAADIN/themes/dashboard/Kujali Logo.png"));
-        Image logoImage = new Image(null,resource);
+        Image logoImage;
+        try {
+
+            ExternalResource resource = new ExternalResource(OrganisationFacade.companyLogosService
+                            .findAll(OrganisationUtil.getCompanyCode())
+                            .iterator().next().getUrl());
+           logoImage = new Image(null,resource);
+        }catch (Exception e) {
+            FileResource resource = new FileResource(
+                    new File("src/main/webapp/VAADIN/themes/dashboard/Kujali Logo.png"));
+            logoImage= new Image(null,resource);
+        }
+
         logoImage.addStyleName("logo-header-image");
         logoImage.setHeight(80.0f, Unit.PIXELS);
         logoImage.setWidth(40.0f, Unit.PERCENTAGE);
@@ -308,6 +323,7 @@ public class Header extends VerticalLayout implements Button.ClickListener , Ite
         Responsive.makeResponsive(logo);
         return logo;
     }
+
     private static HorizontalLayout getBar(){
         HorizontalLayout layout = new HorizontalLayout();
         layout.setSpacing(false);

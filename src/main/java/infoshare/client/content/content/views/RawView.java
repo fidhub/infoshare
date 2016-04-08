@@ -7,6 +7,7 @@ import com.vaadin.event.FieldEvents;
 import com.vaadin.ui.*;
 import infoshare.app.facade.ContentFacade;
 import infoshare.app.util.organisation.OrganisationUtil;
+import infoshare.app.util.security.GetUserCredentials;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.content.ContentMenu;
 import infoshare.client.content.content.forms.RawForm;
@@ -151,7 +152,7 @@ public class  RawView extends VerticalLayout implements Button.ClickListener,Pro
     private EditedContent getNewEntity(FieldGroup binder) {
         try {
             final ContentModel bean = ((BeanItem<ContentModel>) binder.getItemDataSource()).getBean();
-           // bean.setDateCreated(rawContentService.findById(GetUserCredentials.getUser().getOrg(), table.getValue().toString()).getDateCreated());
+            bean.setDateCreated(rawContentService.findById(GetUserCredentials.getUser().getOrg(), table.getValue().toString()).getDateCreated());
             Map<String,String> editedVals = new HashMap<>();
             editedVals.put("content",bean.getContent());
             editedVals.put("category",form.popUpCategoryCmb.getValue().toString());
@@ -159,7 +160,7 @@ public class  RawView extends VerticalLayout implements Button.ClickListener,Pro
             editedVals.put("contentType",form.popUpContentTypeCmb.getValue().toString());
             editedVals.put("status",bean.getStatus());
             editedVals.put("source",bean.getSource());
-            editedVals.put("org","CPUT");
+            editedVals.put("org",bean.getOrg());
             final EditedContent editedContent = EditedContentFactory.getEditedContent(editedVals, new Date());
             return editedContent;
         }catch (Exception exception) {

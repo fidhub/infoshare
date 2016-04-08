@@ -25,8 +25,6 @@ public class EditForm extends FormLayout {
     public final ComboBox popUpContentTypeCmb;
     public final ComboBox popUpCategoryCmb;
     public final ComboBox popUpSourceCmb;
-
-    ImmediateUploadExample example = new ImmediateUploadExample();
     public EditForm() {
         model = new ContentModel();
         item = new BeanItem<>(model);

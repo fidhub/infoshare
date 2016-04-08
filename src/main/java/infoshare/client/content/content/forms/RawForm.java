@@ -112,7 +112,6 @@ public class RawForm extends FormLayout implements Upload.Receiver, Upload.Succe
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return null;
     }
 
@@ -121,9 +120,8 @@ public class RawForm extends FormLayout implements Upload.Receiver, Upload.Succe
         Set<FileResults> set = FileResultsFacade.fileResultsService.save(file.getAbsoluteFile().toString());
         String url="";
         for (FileResults fileResults: set.stream().filter(file -> file.getSize().equalsIgnoreCase("Standard")).collect(Collectors.toSet()))
-        {
             url =RestUtil.URL+fileResults.getUrl();
-        }
+
         textEditor.setValue(textEditor.getValue()+" "+"<img src="+url+">");
     }
 }
