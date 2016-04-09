@@ -307,8 +307,7 @@ public class Header extends VerticalLayout implements Button.ClickListener , Ite
         try {
 
             ExternalResource resource = new ExternalResource(OrganisationFacade.companyLogosService
-                            .findAll(OrganisationUtil.getCompanyCode())
-                            .iterator().next().getUrl());
+                            .findById(OrganisationUtil.getCompanyCode(),OrganisationUtil.getCompanyCode()).getUrl());
            logoImage = new Image(null,resource);
         }catch (Exception e) {
             FileResource resource = new FileResource(

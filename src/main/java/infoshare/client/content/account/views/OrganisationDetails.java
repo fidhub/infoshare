@@ -2,6 +2,7 @@ package infoshare.client.content.account.views;
 
 import com.vaadin.data.fieldgroup.FieldGroup;
 import com.vaadin.data.util.BeanItem;
+import com.vaadin.server.ExternalResource;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.server.Page;
 import com.vaadin.shared.ui.combobox.FilteringMode;
@@ -64,9 +65,19 @@ public class OrganisationDetails extends VerticalLayout implements
         heading.setSizeFull();
         heading.setSizeFull();
         final OrganisationModel model = getModel(organisation);
+
         form = new OrganisationForm();
         this.tab = tab;
         form.binder.setItemDataSource(new BeanItem<>(model));
+        try {
+            form.imageUploader.image.setSource(
+                    new ExternalResource(OrganisationFacade.companyLogosService
+                            .findById(orgId
+                                    , orgId).getUrl()));
+        }catch (Exception e){
+            form.imageUploader.image.setVisible(false);
+        }
+
         setReadFormProperties();
         this.main = main;
 
@@ -99,7 +110,6 @@ public class OrganisationDetails extends VerticalLayout implements
             admins.parallelStream().forEach(item -> {
                 adminsComboBox.addItem(item.getId());
                 adminsComboBox.setItemCaption(item.getId(), item.getLastName() + " " + item.getFirstName());
-
             });
 
             adminsComboBox.addValueChangeListener(event -> {
@@ -108,9 +118,7 @@ public class OrganisationDetails extends VerticalLayout implements
             Button addAnotherAdmin = new Button("Add Administrator", FontAwesome.USER);
             addAnotherAdmin.setStyleName(ValoTheme.BUTTON_FRIENDLY);
             addAnotherAdmin.setSizeFull();
-            addAnotherAdmin.addClickListener(event -> {
-                Notification.show(" We are Adding Another User" + selectedUserId, Notification.Type.HUMANIZED_MESSAGE);
-            });
+            addAnotherAdmin.addClickListener(event -> Notification.show(" We are Adding Another User" + selectedUserId, Notification.Type.HUMANIZED_MESSAGE));
 
             grid.addComponent(adminsComboBox, 0, 3, 2, 3);
             grid.addComponent(addAnotherAdmin, 3, 3);
@@ -181,7 +189,6 @@ public class OrganisationDetails extends VerticalLayout implements
         addListeners();
     }
 
-
     private void reset(Person item) {
         SecurityService.resetValue(item);
     }
@@ -189,6 +196,10 @@ public class OrganisationDetails extends VerticalLayout implements
     private void setReadFormProperties() {
         form.binder.setReadOnly(true);
         //Buttons Behaviour
+        form.imageUploader.upload.setVisible(false);
+        form.imageUploader.image.setVisible(true);
+        form.imageUploader.image.setHeight(175.0f, Unit.PIXELS);
+        form.imageUploader.image.setWidth(100.0f, Unit.PERCENTAGE);
         form.save.setVisible(false);
         form.edit.setVisible(true);
         form.cancel.setVisible(true);
@@ -236,9 +247,11 @@ public class OrganisationDetails extends VerticalLayout implements
 
     private void saveEditedForm(FieldGroup binder) {
         Organisation updatedCompany = getUpdateEntity(binder);
-        Set<FileResults> set = FileResultsFacade.fileResultsService.save(form.imageUploader.path);
-        for (FileResults fileResults: set.stream().filter(file -> file.getSize().equalsIgnoreCase("original")).collect(Collectors.toSet())) {
-            OrganisationFacade.companyLogosService.save(getNewLogo(fileResults));
+        if(form.imageUploader.path.length()>2) {
+            Set<FileResults> set = FileResultsFacade.fileResultsService.save(form.imageUploader.path);
+            for (FileResults fileResults : set.stream().filter(file -> file.getSize().equalsIgnoreCase("original")).collect(Collectors.toSet())) {
+                OrganisationFacade.companyLogosService.save(getNewLogo(fileResults));
+            }
         }
         OrganisationFacade.companyService.update(updatedCompany);
         getHome();
@@ -249,13 +262,15 @@ public class OrganisationDetails extends VerticalLayout implements
         Set<FileResults> set = FileResultsFacade.fileResultsService.save(form.imageUploader.path);
         for (FileResults fileResults: set.stream().filter(file -> file.getSize().equalsIgnoreCase("original")).collect(Collectors.toSet())) {
             OrganisationFacade.companyLogosService.save(getNewLogo(fileResults));
+
         }
         OrganisationFacade.companyService.save(newcompany);
         getHome();
     }
+
     private OrganisationLogo getNewLogo(FileResults fileResults){
         Map<String, String> stringMap = new HashMap<>();
-        stringMap.put("id",fileResults.getId());
+        stringMap.put("id",OrganisationUtil.getCompanyCode());
         stringMap.put("url", RestUtil.URL+fileResults.getUrl());
         stringMap.put("size",fileResults.getSize());
         stringMap.put("description", OrganisationUtil.getCompanyCode()+"Logo");
@@ -263,8 +278,10 @@ public class OrganisationDetails extends VerticalLayout implements
         OrganisationLogo logo = OrganisationLogoFactory.getOrganisationLogo(stringMap);
         return logo;
     }
+
     private void setEditFormProperties() {
         form.binder.setReadOnly(false);
+        form.imageUploader.upload.setVisible(false);
         form.save.setVisible(false);
         form.edit.setVisible(false);
         form.cancel.setVisible(true);
@@ -285,6 +302,7 @@ public class OrganisationDetails extends VerticalLayout implements
 
     private void getHome() {
         main.content.setSecondComponent(new AccountMenu(main, tab));
+        form.imageUploader.path="";
     }
 
     private Organisation getUpdateEntity(FieldGroup binder) {

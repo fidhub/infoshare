@@ -152,13 +152,14 @@ public class  RawView extends VerticalLayout implements Button.ClickListener,Pro
     private EditedContent getNewEntity(FieldGroup binder) {
         try {
             final ContentModel bean = ((BeanItem<ContentModel>) binder.getItemDataSource()).getBean();
-            bean.setDateCreated(rawContentService.findById(GetUserCredentials.getUser().getOrg(), table.getValue().toString()).getDateCreated());
+            //\   bean.setDateCreated(rawContentService.findById(GetUserCredentials.getUser().getOrg(), table.getValue().toString()).getDateCreated());
             Map<String,String> editedVals = new HashMap<>();
             editedVals.put("content",bean.getContent());
             editedVals.put("category",form.popUpCategoryCmb.getValue().toString());
             editedVals.put("creator",bean.getCreator());
+            editedVals.put("title",bean.getTitle());
             editedVals.put("contentType",form.popUpContentTypeCmb.getValue().toString());
-            editedVals.put("status",bean.getStatus());
+            editedVals.put("status","Edited");
             editedVals.put("source",bean.getSource());
             editedVals.put("org",bean.getOrg());
             final EditedContent editedContent = EditedContentFactory.getEditedContent(editedVals, new Date());
@@ -173,6 +174,7 @@ public class  RawView extends VerticalLayout implements Button.ClickListener,Pro
             final ContentModel bean = ((BeanItem<ContentModel>) binder.getItemDataSource()).getBean();
             bean.setDateCreated(rawContentService.findById(OrganisationUtil.getCompanyCode(),table.getValue().toString()).getDateCreated());
             final RawContent rawContent = new RawContent.Builder()
+                    .id(table.getValue().toString())
                     .title(bean.getTitle())
                     .category(bean.getCategory())
                     .content(bean.getContent())
@@ -183,7 +185,6 @@ public class  RawView extends VerticalLayout implements Button.ClickListener,Pro
                     .state(bean.getState())
                     .org(bean.getOrg())
                     .status("Edited")
-                    .id(table.getValue().toString())
                     .build();
             return rawContent;
         }catch (Exception e){

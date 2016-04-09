@@ -23,7 +23,7 @@ public class ImageUploader extends VerticalLayout implements Upload.Receiver, Up
     public Panel panel;
 
     public ImageUploader() {
-        image.setVisible(false);
+        //image.setVisible(false);
         upload = new Upload(null, this);
         upload.setButtonCaption("Select File");
         upload.setImmediate(true);

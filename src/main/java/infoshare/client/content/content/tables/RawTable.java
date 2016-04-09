@@ -28,7 +28,7 @@ public class RawTable extends Table {
     @Autowired
     private RawContentService rawContentService = ContentFacade.rawContentService;
     private final MainLayout main;
-    private  Button delete = new Button("Delete");
+
     public RawTable(MainLayout mainApp){
 
         this.main = mainApp;
@@ -57,7 +57,7 @@ public class RawTable extends Table {
                     .forEach(this::loadTable);
         }catch (Exception e){
         }
-        delete.setStyleName(ValoTheme.BUTTON_LINK);
+
          setNullSelectionAllowed(false);
          setSelectable(true);
          setImmediate(true);
@@ -66,6 +66,8 @@ public class RawTable extends Table {
 
     public void loadTable(RawContent rawContent) {
         DateFormat formatter = new SimpleDateFormat("dd MMMMMMM yyyy");
+        Button delete = new Button("Delete");
+        delete.setStyleName(ValoTheme.BUTTON_LINK);
         delete.setData(rawContent.getId());
         delete.setImmediate(true);
         delete.addClickListener(event -> {

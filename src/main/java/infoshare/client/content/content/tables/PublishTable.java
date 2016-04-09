@@ -30,7 +30,6 @@ public class PublishTable extends Table{
     @Autowired
     private PublishedContentService publishedContentService = ContentFacade.publishedContentService;
     private CategoryService categoryService = CategoryFacade.categoryService;
-    private Button delete = new Button("Delete");
     private final MainLayout main;
 
     public PublishTable(MainLayout mainApp){
@@ -67,6 +66,8 @@ public class PublishTable extends Table{
     }
     public void loadTable(PublishedContent content) {
         DateFormat formatter = new SimpleDateFormat("dd MMMMMMM yyyy");
+        Button delete = new Button("Delete");
+        delete.setStyleName(ValoTheme.BUTTON_LINK);
         delete.setData(content.getId());
         delete.setImmediate(true);
         delete.addClickListener(event -> {
@@ -75,7 +76,6 @@ public class PublishTable extends Table{
                     .state(DomainState.RETIRED.name())
                     .build();
             PublishedContentAPI.save(raw);
-            Header.refreshNotification();
             getHome();
         });
         String category = categoryService.findById(content.getCategory()).getName();

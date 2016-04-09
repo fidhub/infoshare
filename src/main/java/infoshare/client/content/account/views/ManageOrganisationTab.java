@@ -121,7 +121,7 @@ public class ManageOrganisationTab extends VerticalLayout implements
             binder.commit();
             Set<FileResults> set = FileResultsFacade.fileResultsService.save(form.imageUploader.path);
             for (FileResults fileResults: set.stream().filter(file -> file.getSize().equalsIgnoreCase("original")).collect(Collectors.toSet())) {
-                OrganisationFacade.companyLogosService.save(getNewLogo(fileResults));
+                OrganisationFacade.companyLogosService.save(getNewLogo(fileResults,binder));
             }
             OrganisationFacade.companyService.save(getNewEntity(binder));
             getHome();
@@ -131,12 +131,13 @@ public class ManageOrganisationTab extends VerticalLayout implements
             getHome();
         }
     }
-    private OrganisationLogo getNewLogo(FileResults fileResults){
+    private OrganisationLogo getNewLogo(FileResults fileResults,FieldGroup binder){
         Map<String, String> stringMap = new HashMap<>();
-        stringMap.put("id",fileResults.getId());
+        final OrganisationModel bean = ((BeanItem<OrganisationModel>) binder.getItemDataSource()).getBean();
+        stringMap.put("id",bean.getCode());
         stringMap.put("url", RestUtil.URL+fileResults.getUrl());
         stringMap.put("size",fileResults.getSize());
-        stringMap.put("description", OrganisationUtil.getCompanyCode()+"Logo");
+        stringMap.put("description", bean.getName()+"Logo");
         stringMap.put("mime",fileResults.getMime());
         OrganisationLogo logo = OrganisationLogoFactory.getOrganisationLogo(stringMap);
         return logo;
@@ -157,7 +158,7 @@ public class ManageOrganisationTab extends VerticalLayout implements
             binder.commit();
             Set<FileResults> set = FileResultsFacade.fileResultsService.save(form.imageUploader.path);
             for (FileResults fileResults: set.stream().filter(file -> file.getSize().equalsIgnoreCase("original")).collect(Collectors.toSet())) {
-                OrganisationFacade.companyLogosService.save(getNewLogo(fileResults));
+                OrganisationFacade.companyLogosService.save(getNewLogo(fileResults,binder));
             }
             OrganisationFacade.companyService.update(getUpdateEntity(binder));
             getHome();
@@ -200,6 +201,7 @@ public class ManageOrganisationTab extends VerticalLayout implements
     private void setEditFormProperties() {
         form.binder.setReadOnly(false);
         form.save.setVisible(false);
+        form.imageUploader.upload.setVisible(true);
         form.edit.setVisible(false);
         form.cancel.setVisible(true);
         form.delete.setVisible(false);
@@ -208,6 +210,7 @@ public class ManageOrganisationTab extends VerticalLayout implements
 
     private void setReadFormProperties() {
         form.binder.setReadOnly(true);
+        form.imageUploader.upload.setVisible(false);
         //Buttons Behaviour
         form.save.setVisible(false);
         form.edit.setVisible(true);

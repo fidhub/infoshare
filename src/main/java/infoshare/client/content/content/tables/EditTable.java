@@ -32,8 +32,6 @@ public class EditTable extends Table{
     private EditedContentService editedContentService = ContentFacade.editedContentService;
     private CategoryService categoryService = CategoryFacade.categoryService;
     private final MainLayout main;
-    private Button delete = new Button("Delete");
-
     public EditTable(MainLayout mainApp) {
         this.main = mainApp;
 
@@ -46,7 +44,7 @@ public class EditTable extends Table{
         addContainerProperty("Category", String.class, null);
         addContainerProperty("Creator", String.class, null);
         addContainerProperty("Date Created", String.class, null);
-
+        addContainerProperty("Delete",Button.class,null);
         try {
             editedContentService.findAll(OrganisationUtil.getCompanyCode()) //TODO
                     .stream()
@@ -68,15 +66,16 @@ public class EditTable extends Table{
     }
     public void loadTable(EditedContent editedContent) {
         DateFormat formatter = new SimpleDateFormat("dd MMMMMMM yyyy");
+        Button delete = new Button("Delete");
         delete.setData(editedContent.getId());
         delete.setImmediate(true);
+        delete.setStyleName(ValoTheme.BUTTON_LINK);
         delete.addClickListener(event -> {
             EditedContent raw = new EditedContent.Builder()
                     .copy(editedContent)
                     .state(DomainState.RETIRED.name())
                     .build();
             EditedContentAPI.save(raw);
-            Header.refreshNotification();
             getHome();
         });
         try {

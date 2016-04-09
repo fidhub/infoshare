@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 public class DisabledContentTable extends Table {
 
     private final MainLayout main;
-    private Button enable = new Button("Enable");
+
     public DisabledContentTable(MainLayout main) {
         this.main = main;
         setSizeFull();
@@ -62,8 +62,6 @@ public class DisabledContentTable extends Table {
                  .filter(cont->!cont.getState().equalsIgnoreCase("active"))
                  .collect(Collectors.toList()).forEach(this::loadPublishedTable);
 
-
-        enable.setStyleName(ValoTheme.BUTTON_LINK);
         setNullSelectionAllowed(false);
         setSelectable(true);
         setImmediate(true);
@@ -72,7 +70,8 @@ public class DisabledContentTable extends Table {
     }
 
     public void loadRawTable(RawContent item ){
-
+        Button enable = new Button("Enable");
+        enable.setStyleName(ValoTheme.BUTTON_LINK);
         enable.setData(item.getId());
         enable.addClickListener(event -> {
             RawContent raw = new RawContent.Builder()
@@ -93,7 +92,8 @@ public class DisabledContentTable extends Table {
         }, item.getId());
     }
     public void loadEditedTable(EditedContent item ){
-
+        Button enable = new Button("Enable");
+        enable.setStyleName(ValoTheme.BUTTON_LINK);
             enable.setData(item.getId());
             enable.addClickListener(event -> {
                 EditedContent raw = new EditedContent.Builder()
@@ -113,8 +113,10 @@ public class DisabledContentTable extends Table {
                     enable
             }, item.getId());
     }
-    public void loadPublishedTable(PublishedContent item ){
-
+    public void loadPublishedTable(PublishedContent item )
+    {
+        Button enable = new Button("Enable");
+        enable.setStyleName(ValoTheme.BUTTON_LINK);
             enable.setData(item.getId());
             enable.addClickListener(event -> {
                 PublishedContent raw = new PublishedContent.Builder()

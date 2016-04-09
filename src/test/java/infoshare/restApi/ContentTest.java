@@ -35,43 +35,5 @@ public class ContentTest {
         RawContent  model = RawContentFactory.getRawContent(stringStringMap);
         RawContentAPI.save(model);
     }
-  /*  @Test
-    public void testPUT() throws Exception {
-        ContentFiles content = RestApiConnectorClass.read(UrlPath.ContentLinks.GET_ID, "d592b8cd7f48b0eee1e1f8e8f5988ab5",
-                ContentFiles.class);
-        ContentFiles content1 = new ContentFiles.Builder(content.getTitle()).copy(content)
-                .source("9d57cca65eaf056735157f119f2a467b")
-                .category("3699255c536bcff9348f0de806866847")
-                .contentType("edited").build();
-        RestApiConnectorClass.update(UrlPath.ContentLinks.PUT, content1);
-    }
 
-    @Test
-    public  void testGet() throws Exception {
-        ContentFiles content = RestApiConnectorClass.read(UrlPath.ContentLinks.GET_ID, "1054c0771746780c91b6a2217f6236b1",
-                ContentFiles.class);
-        System.out.println(content.getId());
-
-    }
-
-    @Test
-    public void testGetAll() throws Exception {
-        List<ContentFiles> contents = RestApiConnectorClass.readAll(UrlPath.ContentLinks.GETALL,ContentFiles.class);
-        System.out.println(contents);
-        Assert.assertFalse(contents.isEmpty());
-    }
-
-    @Test
-    public void testUpdateAll() throws Exception {
-        EditedContentService contentService = new EditedContentServiceImpl();
-        for(EditedContent content:contentService.findAll().stream()
-                .filter(cont -> cont.getState().equalsIgnoreCase("active"))
-                .collect(Collectors.toList()).stream()
-                .filter(cont -> cont.getStatus().equalsIgnoreCase("Edited"))
-                .collect(Collectors.toList())){
-            EditedContent content1 = new EditedContent.Builder(content.getTitle()).copy(content)
-                    .category("uncategorized").build();
-            RestApiConnectorClass.update(UrlPath.EditedLinks.PUT, content1);
-        }
-    }*/
 }
