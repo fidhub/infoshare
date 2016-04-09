@@ -36,14 +36,14 @@ public class SystemValues extends VerticalLayout {
         tab.setWidth("100%");
 
         tab.addTab(contentTypeView, "Content Type", null);
-        tab.addTab(contentSourceView, "Content Source", null);
+       // tab.addTab(contentSourceView, "Content Source", null);
         tab.addTab(categoryView, "Content Category", null);
 
         if (selectedTab.equalsIgnoreCase("LANDING")) {
             tab.setSelectedTab(contentTypeView);
-        }else if(selectedTab.equalsIgnoreCase("SOURCE")){
+        }/*else if(selectedTab.equalsIgnoreCase("SOURCE")){
             tab.setSelectedTab(contentSourceView);
-        }else if(selectedTab.equalsIgnoreCase("CATEGORY")){
+        }*/else if(selectedTab.equalsIgnoreCase("CATEGORY")){
             tab.setSelectedTab(categoryView);
         }
 

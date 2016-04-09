@@ -41,17 +41,32 @@ public class CreateUserTest {
         return props;
     }
 
+    /*TODO USERS LIST
+         user:thulehadebe@outlook.com;
+         authval:FQE0kcW3
+         role:role_admin
 
+         user:2leradebe@gmail.com;
+         authval:PJHV2u8X
+         role:Org_Admin
+
+         user:2lehadebe@gmail.com;
+         authval:7YWPbIbn
+         role:Role_Editor
+
+
+     */
     @Test
     public void testUser() throws Exception {
         final String password = SecurityService.generateRandomPassword();
+        System.out.println(password);
         Map<String, String> stringVals = new HashMap<>();
-        stringVals.put("firstName", "camagu");
-        stringVals.put("middleName", "gugu");
-        stringVals.put("lastName", "dlisani");
-        stringVals.put("authvalue", PasswordHash.createEncryptedPassword(password));
-        stringVals.put("emailAddress", "thulehadebe@outlook.com");
-        stringVals.put("org", "dut");
+        stringVals.put("firstName", "Sanele");
+        stringVals.put("middleName", "");
+        stringVals.put("lastName", "Hadebe");
+            stringVals.put("authvalue", PasswordHash.createEncryptedPassword(password));
+        stringVals.put("emailAddress", "2lehadebe@gmail.com");
+        stringVals.put("org", "CPUT");
 
         Map<String, Boolean> boolVals = new HashMap<>();
         boolVals.put("enabled", Boolean.TRUE);
@@ -59,7 +74,7 @@ public class CreateUserTest {
         boolVals.put("accountNonLocked", Boolean.TRUE);
         boolVals.put("credentialsNonExpired", Boolean.TRUE);
         Person companyAdmin = createAccount(stringVals, boolVals);
-        sendEmail(password, companyAdmin);
+        PeopleFacade.personService.save(companyAdmin);
     }
 
     @Test
@@ -84,7 +99,7 @@ public class CreateUserTest {
         Person companyAdmin = PersonFactory.getPerson(stringVals, boolVals);
         try {
             PeopleFacade.personService.save(companyAdmin);
-            PersonRole role = PersonRoleFactory.getPersonRole(companyAdmin.getId(), RolesValues.ORG_ADMIN.name());
+            PersonRole role = PersonRoleFactory.getPersonRole(companyAdmin.getId(), RolesValues.ROLE_EDITOR.name());
             PeopleFacade.personRoleService.save(role);
         }catch (Exception e){
             e.fillInStackTrace();

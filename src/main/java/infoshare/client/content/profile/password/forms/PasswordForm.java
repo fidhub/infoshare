@@ -5,7 +5,7 @@ import com.vaadin.data.util.BeanItem;
 import com.vaadin.data.validator.BeanValidator;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
-import infoshare.client.content.password.models.PasswordModel;
+import infoshare.client.content.profile.password.model.PasswordModel;
 
 
 /**

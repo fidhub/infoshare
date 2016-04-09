@@ -147,6 +147,7 @@ public class EditedContent implements Serializable, Comparable<EditedContent> {
             this.contentType = editedContent.contentType;
             this.state = editedContent.state;
             this.status = editedContent.status;
+            this.org = editedContent.org;
 
             return this;
         }
