@@ -43,7 +43,7 @@ public class CreateUserTest {
 
     /*TODO USERS LIST
          user:thulehadebe@outlook.com;
-         authval:FQE0kcW3
+         authval:FQE0kcW3 // test
          role:role_admin
 
          user:2leradebe@gmail.com;
