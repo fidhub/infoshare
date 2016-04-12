@@ -1,7 +1,5 @@
 package infoshare.client.content.content.tables;
 
-import com.vaadin.server.FontAwesome;
-import com.vaadin.server.FontIcon;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.themes.ValoTheme;

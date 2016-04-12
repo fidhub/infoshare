@@ -36,6 +36,7 @@ public class DemographicsTab extends VerticalLayout implements
         setSizeFull();
         addComponent(form);
         addComponent(table);
+
         addListeners();
     }
 
@@ -43,7 +44,10 @@ public class DemographicsTab extends VerticalLayout implements
     public void buttonClick(Button.ClickEvent event) {
         final Button source = event.getButton();
         if (source == form.save) {
-            saveForm(form.binder);
+            if (table.getPageLength()<1){
+                saveForm(form.binder);
+            }else Notification.show("Demographic already added, Edit existing", Notification.Type.HUMANIZED_MESSAGE);
+
         } else if (source == form.edit) {
             setEditFormProperties();
         } else if (source == form.cancel) {
@@ -117,6 +121,7 @@ public class DemographicsTab extends VerticalLayout implements
         form.update.setVisible(true);
     }
 
+
     private void setReadFormProperties() {
         form.binder.setReadOnly(true);
         //Buttons Behaviour
@@ -143,7 +148,7 @@ public class DemographicsTab extends VerticalLayout implements
         final PersonDemographicsModel model = ((BeanItem<PersonDemographicsModel>) binder.getItemDataSource()).getBean();
         final String personId = GetUserCredentials.getUser().getId();
         final PersonDemographics personDemographics = PersonDemographicsFactory
-                .getPersonDemographics(personId, model.getGenderId(), model.getDateOfBirth());
+                .getPersonDemographics(personId, model.getGenderId(), model.getDateOfBirth(), model.getRace());
         return personDemographics;
     }
 
@@ -157,6 +162,7 @@ public class DemographicsTab extends VerticalLayout implements
                 .copy(personAddress)
                 .dateOfBirth(model.getDateOfBirth())
                 .genderId(model.getGenderId())
+                .personraceid(model.getRace())
                 .build();
         return updatedPersonAddress;
     }
@@ -165,6 +171,9 @@ public class DemographicsTab extends VerticalLayout implements
         final PersonDemographicsModel model = new PersonDemographicsModel();
         model.setDateOfBirth(personDemographics.getDateOfBirth());
         model.setGenderId(personDemographics.getGenderId());
+        model.setNumberOfDependencies(personDemographics.getNumberOfDependencies());
+        model.setMaritalStatusId(personDemographics.getMaritalStatusId());
+        model.setRace(personDemographics.getPersonRaceId());
         return model;
     }
 }

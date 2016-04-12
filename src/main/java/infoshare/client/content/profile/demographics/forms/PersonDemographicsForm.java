@@ -10,6 +10,7 @@ import infoshare.app.util.fields.UIComboBoxHelper;
 import infoshare.app.util.fields.UIComponentHelper;
 import infoshare.client.content.profile.demographics.model.PersonDemographicsModel;
 import infoshare.domain.demographics.Gender;
+import infoshare.domain.demographics.Race;
 
 import java.util.Set;
 import java.util.function.Consumer;
@@ -44,6 +45,7 @@ public class PersonDemographicsForm extends FormLayout {
         DateField dateOfBirth = UIComponent.getGridDateField("Date of Birth :", "dateOfBirth", PersonDemographicsModel.class, binder);
 
         TextField numberOfDependencies = UIComponent.getGridTextField("Dependencies :", "numberOfDependencies", PersonDemographicsModel.class, binder);
+        TextField maritalStatusId = UIComponent.getGridTextField("Marital Status :", "maritalStatusId", PersonDemographicsModel.class, binder);
         //ComboBox Fields
         final ComboBox genderId = UIComboBox.getComboBox("Gender :", "genderId", PersonDemographicsModel.class, binder, new Consumer<ComboBox>() {
             public void accept(ComboBox comboBox) {
@@ -54,8 +56,15 @@ public class PersonDemographicsForm extends FormLayout {
                 }
             }
         });
-
-
+        final ComboBox race = UIComboBox.getComboBox("Race :", "race", PersonDemographicsModel.class, binder, new Consumer<ComboBox>() {
+            public void accept(ComboBox comboBox) {
+                Set<Race> race = DemographicsFacade.raceListService.findAll();
+                for (Race race1 : race) {
+                    comboBox.addItem(race1.getId());
+                    comboBox.setItemCaption(race1.getId(), race1.getName());
+                }
+            }
+        });
 
         // Create a field group and use it to bind the fields in the layout
         GridLayout grid = new GridLayout(4, 10);
@@ -65,6 +74,8 @@ public class PersonDemographicsForm extends FormLayout {
         grid.addComponent(dateOfBirth, 0, 0);
         grid.addComponent(genderId, 1, 0);
         grid.addComponent(numberOfDependencies, 0, 1);
+        grid.addComponent(maritalStatusId, 1, 1);
+        grid.addComponent(race, 0, 2);
 
         HorizontalLayout buttons = ButtonsHelper.getButtons(save, edit, cancel, update, delete);
         buttons.setSizeFull();

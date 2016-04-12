@@ -3,6 +3,7 @@ package infoshare.client.content.content.tables;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.themes.ValoTheme;
+import infoshare.app.facade.CategoryFacade;
 import infoshare.app.facade.ContentFacade;
 import infoshare.app.util.DomainState;
 import infoshare.app.util.organisation.OrganisationUtil;
@@ -69,7 +70,7 @@ public class DisabledContentTable extends Table {
 
     }
 
-    public void loadRawTable(RawContent item ){
+    public void loadRawTable(RawContent item ) {
         Button enable = new Button("Enable");
         enable.setStyleName(ValoTheme.BUTTON_LINK);
         enable.setData(item.getId());
@@ -81,37 +82,46 @@ public class DisabledContentTable extends Table {
             Header.refreshNotification();
             getHome();
         });
-
+        String cat;
+        if (item.getCategory().equalsIgnoreCase("uncategorized"))
+            cat = "uncategorized";
+        else
+            cat = CategoryFacade.categoryService.findById(item.getCategory()).getName();
         addItem(new Object[]{
                 item.getTitle(),
-                item.getCategory(),
+                cat,
                 item.getCreator(),
                 item.getStatus(),
                 item.getDateCreated(),
                 enable
         }, item.getId());
     }
-    public void loadEditedTable(EditedContent item ){
+    public void loadEditedTable(EditedContent item ) {
         Button enable = new Button("Enable");
-        enable.setStyleName(ValoTheme.BUTTON_LINK);
-            enable.setData(item.getId());
-            enable.addClickListener(event -> {
-                EditedContent raw = new EditedContent.Builder()
-                        .copy(item)
-                        .state(DomainState.ACTIVE.name()).build();
-                EditedContentAPI.save(raw);
-                Header.refreshNotification();
-                getHome();
-            });
 
-            addItem(new Object[]{
-                    item.getTitle(),
-                    item.getCategory(),
-                    item.getCreator(),
-                    item.getStatus(),
-                    item.getDateCreated(),
-                    enable
-            }, item.getId());
+        enable.setStyleName(ValoTheme.BUTTON_LINK);
+        enable.setData(item.getId());
+        enable.addClickListener(event -> {
+            EditedContent raw = new EditedContent.Builder()
+                    .copy(item)
+                    .state(DomainState.ACTIVE.name()).build();
+            EditedContentAPI.save(raw);
+            Header.refreshNotification();
+            getHome();
+        });
+        String cat;
+        if (item.getCategory().equalsIgnoreCase("uncategorized"))
+            cat = "uncategorized";
+        else
+            cat = CategoryFacade.categoryService.findById(item.getCategory()).getName();
+        addItem(new Object[]{
+                item.getTitle(),
+                cat,
+                item.getCreator(),
+                item.getStatus(),
+                item.getDateCreated(),
+                enable
+        }, item.getId());
     }
     public void loadPublishedTable(PublishedContent item )
     {
@@ -126,10 +136,14 @@ public class DisabledContentTable extends Table {
                 Header.refreshNotification();
                 getHome();
             });
-
+        String cat;
+        if (item.getCategory().equalsIgnoreCase("uncategorized"))
+            cat = "uncategorized";
+        else
+            cat = CategoryFacade.categoryService.findById(item.getCategory()).getName();
             addItem(new Object[]{
                     item.getTitle(),
-                    item.getCategory(),
+                     cat,
                     item.getCreator(),
                     item.getStatus(),
                     item.getDateCreated(),

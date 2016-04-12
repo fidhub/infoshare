@@ -93,7 +93,8 @@ public class PublishView extends VerticalLayout implements Button.ClickListener,
         try {
             binder.commit();
             try {
-                editedContentService.save(getNewEntity(publishedContentService.update(getUpdateEntity(table.getValue().toString()))));
+                editedContentService.save(getNewEntity(binder));
+                publishedContentService.update(getUpdateEntity(table.getValue().toString()));
                 popUp.setModal(false);
                 table.setValue(null);
                 UI.getCurrent().removeWindow(popUp);
@@ -109,22 +110,28 @@ public class PublishView extends VerticalLayout implements Button.ClickListener,
     }
     private PublishedContent getUpdateEntity(String val ) {
         final PublishedContent bean = publishedContentService.findById(OrganisationUtil.getCompanyCode(),val);
-        final PublishedContent editedContent = new PublishedContent
+        final PublishedContent publishedContent = new PublishedContent
                 .Builder().copy(bean)
                 .status("Edited")
+                .id(table.getValue().toString())
                 .build();
-        return editedContent;
+        return publishedContent;
     }
-    private EditedContent getNewEntity(PublishedContent bean) {
+    private EditedContent getNewEntity(FieldGroup binder) {
+        final ContentModel bean = ((BeanItem<ContentModel>) binder.getItemDataSource()).getBean();
+        //EditedContent editedContent = editedContentService.findById(OrganisationUtil.getCompanyCode(),table.getValue().toString());
+        //bean.setDateCreated(editedContentService.findById(OrganisationUtil.getCompanyCode(), table.getValue().toString()).getDateCreated());
         Map<String,String> editedVals = new HashMap<>();
         editedVals.put("content",bean.getContent());
-        editedVals.put("category",bean.getCategory());
+        editedVals.put("category", bean.getCategory());
         editedVals.put("creator",bean.getCreator());
-        editedVals.put("contentType",bean.getContentType());
-        editedVals.put("status",bean.getStatus());
-        editedVals.put("source",bean.getStatus());
-        final EditedContent editedContent = EditedContentFactory.getEditedContent(editedVals, new Date());
-        return editedContent;
+        editedVals.put("title",bean.getTitle());
+        editedVals.put("contentType", bean.getContentType());
+        editedVals.put("status","Edited");
+        editedVals.put("source",bean.getSource());
+        editedVals.put("org",OrganisationUtil.getCompanyCode());
+        final EditedContent content = EditedContentFactory.getEditedContent(editedVals, new Date());
+        return content;
     }
     private void ViewContentButton(){
         try {
@@ -141,7 +148,7 @@ public class PublishView extends VerticalLayout implements Button.ClickListener,
     }
     private ContentModel getModel(PublishedContent val) {
         final ContentModel model = new ContentModel();
-        final PublishedContent publishedContent = publishedContentService.findById("",val.getId());
+        final PublishedContent publishedContent = publishedContentService.findById(OrganisationUtil.getCompanyCode(),val.getId());
         model.setTitle(publishedContent.getTitle());
         model.setCategory(publishedContent.getCategory());
         model.setCreator(publishedContent.getCreator());

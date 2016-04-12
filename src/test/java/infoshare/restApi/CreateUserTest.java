@@ -1,16 +1,13 @@
 package infoshare.restApi;
 
 import infoshare.app.facade.PeopleFacade;
-import infoshare.app.facade.UtilFacade;
 import infoshare.app.util.email.ComposeEmail;
 import infoshare.app.util.email.EmailUtil;
-import infoshare.app.util.organisation.OrganisationUtil;
 import infoshare.app.util.security.PasswordHash;
 import infoshare.app.util.security.RolesValues;
 import infoshare.app.util.security.SecurityService;
 import infoshare.domain.person.Person;
 import infoshare.domain.person.PersonRole;
-import infoshare.domain.util.Mail;
 import infoshare.factories.person.PersonFactory;
 import infoshare.factories.person.PersonRoleFactory;
 import org.junit.Test;
@@ -30,14 +27,14 @@ public class CreateUserTest {
     private static Properties getProperties() {
         Properties props = new Properties();
         props.put("mail.smtp.host", "10.68.1.7");
-        props.put("mail.smtp.user", "infoshare@cput.ac.za"); //TODo get user
+        props.put("mail.user", "infoshare@cput.ac.za"); //TODo get user
         props.put("mail.smtp.auth", "false"); // TODO set it to true once its live
         props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.debug", "true");
         props.put("mail.smtp.port", "25");
         props.put("mail.smtp.socketFactory.port", "25");
         props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-        props.put("mail.smtp.socketFactory.fallback", "false");
+        props.put("mail.smtp.socketFactory.fallback", "true");
         return props;
     }
 
@@ -84,7 +81,7 @@ public class CreateUserTest {
         emails.add("2leradebe@gmail.com");
         ComposeEmail email = new ComposeEmail
                 .Builder()
-                .addressesTo(new HashSet<>(emails))
+                .addressesTo(emails)
                 .body(" Your Username is : " + emails + " And Your Password is : "
                         + PasswordHash.createEncryptedPassword(password) + " Login in at https://hashwork.hash-code.com")
                 .from("infoshare@cput.ac.za"/*props.getKey()*/)
@@ -119,32 +116,15 @@ public class CreateUserTest {
         sendSimpleEmail(email);
     }
     public static void sendSimpleEmail(ComposeEmail email) {// Recipient's email ID needs to be mentioned.
-        // Sender's email ID needs to be mentioned
-        final String from = email.getFrom();
-        final String password = email.getPassword();
-
-     /*   Set<Mail> mailprops = UtilFacade.mailService.findAll("dut");
-        Mail properties = mailprops.iterator().next();*/
-        // -- Attaching to default Session, or we could start a new one --
         Session session = Session.getInstance(getProperties());
-       /* Session session = Session.getDefaultInstance(getProperties(), new Authenticator() {//TODO use Authenticator once it's live
-            @Override
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(from, password);
-            }
-        });*/
-
         try {
-            // Create a default MimeMessage object.
             MimeMessage message = new MimeMessage(session);
             try {
-                // Set From: header field of the header.
                 message.setFrom(new InternetAddress("infoshare@cput.ac.za", "Infoshare Team"));
             } catch (UnsupportedEncodingException ex) {
                 Logger.getLogger(EmailUtil.class.getName()).log(Level.SEVERE, null, ex);
                 message.setFrom(new InternetAddress("infoshare@cput.ac.za"));
             }
-
 
             if (email.getAddressesTo() != null) {
                 if (!email.getAddressesTo().isEmpty()) {

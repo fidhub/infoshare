@@ -1,6 +1,5 @@
 package infoshare.client.content.users.table;
 
-import com.vaadin.event.FieldEvents;
 import com.vaadin.server.Page;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Table;
@@ -23,7 +22,6 @@ import infoshare.client.content.users.views.ActiveUsersTab;
 import infoshare.client.content.users.views.UserDetails;
 import infoshare.domain.organisation.Organisation;
 import infoshare.domain.person.Person;
-import infoshare.filterSearch.UserFilter;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -142,7 +140,7 @@ public class UsersTable extends Table {
                 .enabled(true)
                 .build();
         PeopleFacade.personService.update(person);
-        SecurityService.sendEmail(password,person);
+       // SecurityService.sendEmail(password,person);
         getHome();
     }
     private void getHome(){
@@ -162,13 +160,6 @@ public class UsersTable extends Table {
             }
         }
         return persons;
-       /* return  PeopleFacade.personService.getPersonByCompany(OrganisationFacade.companyService.getActiveOrganisations().iterator().next().getId())
-                .stream().filter(person ->
-                        PeopleFacade.personRoleService.findPersonRoles(person.getId())
-                                .iterator()
-                                .next()
-                                .getRoleId().equalsIgnoreCase(role))
-                .collect(Collectors.toSet());*/
     }
     private Set<Person> getAll(){
         return  PeopleFacade.personService.getPersonByCompany(OrganisationUtil.getCompanyCode()).stream()

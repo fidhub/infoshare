@@ -18,24 +18,24 @@ public class PublishForm extends FormLayout{
     private final ContentModel model;
     public final BeanItem<ContentModel> item;
     public final FieldGroup binder;
-    public Button popUpCloseBtn =new Button("Back");
-    public Button putToEdit =new Button("Send To Edited");
+    public Button popUpCloseBtn =new Button("CANCEL");
+    public Button putToEdit =new Button("Re-Edited");
 
     public PublishForm() {
         model = new ContentModel();
         item = new BeanItem<>(model);
         binder = new FieldGroup(item);
 
-        final RichTextArea richTextArea = getTextArea("ContentFiles","content");
+        final RichTextArea richTextArea = getTextArea("Content","content");
         final HorizontalLayout buttons = new HorizontalLayout();
         buttons.setSpacing(true);
-        popUpCloseBtn.setIcon(FontAwesome.ARROW_CIRCLE_O_LEFT);
+        popUpCloseBtn.setIcon(FontAwesome.ARROW_CIRCLE_LEFT);
         popUpCloseBtn.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
-        buttons.addComponent(popUpCloseBtn);
+
         putToEdit.setIcon(FontAwesome.EDIT);
         putToEdit.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
         buttons.addComponent(putToEdit);
-
+        buttons.addComponent(popUpCloseBtn);
         GridLayout gridLayout = new  GridLayout(4,7);
         gridLayout.setSizeFull();
         gridLayout.setSpacing(true);

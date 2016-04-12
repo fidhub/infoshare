@@ -7,7 +7,6 @@ import com.vaadin.event.FieldEvents;
 import com.vaadin.ui.*;
 import infoshare.app.facade.ContentFacade;
 import infoshare.app.util.organisation.OrganisationUtil;
-import infoshare.app.util.security.GetUserCredentials;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.content.ContentMenu;
 import infoshare.client.content.content.forms.RawForm;
@@ -20,7 +19,6 @@ import infoshare.filterSearch.RawContentFilter;
 import infoshare.services.ContentFiles.content.EditedContentService;
 import infoshare.services.ContentFiles.content.RawContentService;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -152,7 +150,7 @@ public class  RawView extends VerticalLayout implements Button.ClickListener,Pro
     private EditedContent getNewEntity(FieldGroup binder) {
         try {
             final ContentModel bean = ((BeanItem<ContentModel>) binder.getItemDataSource()).getBean();
-            //\   bean.setDateCreated(rawContentService.findById(GetUserCredentials.getUser().getOrg(), table.getValue().toString()).getDateCreated());
+            bean.setDateCreated(rawContentService.findById(OrganisationUtil.getCompanyCode(), table.getValue().toString()).getDateCreated());
             Map<String,String> editedVals = new HashMap<>();
             editedVals.put("content",bean.getContent());
             editedVals.put("category",form.popUpCategoryCmb.getValue().toString());
@@ -162,7 +160,7 @@ public class  RawView extends VerticalLayout implements Button.ClickListener,Pro
             editedVals.put("status","Edited");
             editedVals.put("source",bean.getSource());
             editedVals.put("org",bean.getOrg());
-            final EditedContent editedContent = EditedContentFactory.getEditedContent(editedVals, new Date());
+            final EditedContent editedContent = EditedContentFactory.getEditedContent(editedVals, bean.getDateCreated());
             return editedContent;
         }catch (Exception exception) {
             Notification.show("Missing Value", Notification.Type.HUMANIZED_MESSAGE);
@@ -171,19 +169,10 @@ public class  RawView extends VerticalLayout implements Button.ClickListener,Pro
     }
     private RawContent getUpdateEntity(FieldGroup binder) {
         try {
-            final ContentModel bean = ((BeanItem<ContentModel>) binder.getItemDataSource()).getBean();
-            bean.setDateCreated(rawContentService.findById(OrganisationUtil.getCompanyCode(),table.getValue().toString()).getDateCreated());
+            final RawContent bean = rawContentService.findById(OrganisationUtil.getCompanyCode(),table.getValue().toString());
             final RawContent rawContent = new RawContent.Builder()
                     .id(table.getValue().toString())
-                    .title(bean.getTitle())
-                    .category(bean.getCategory())
-                    .content(bean.getContent())
-                    .contentType(bean.getContentType())
-                    .creator(bean.getCreator())
-                    .dateCreated(bean.getDateCreated())
-                    .source(bean.getSource())
-                    .state(bean.getState())
-                    .org(bean.getOrg())
+                    .copy(bean)
                     .status("Edited")
                     .build();
             return rawContent;

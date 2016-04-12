@@ -2,6 +2,8 @@ package infoshare.client.content.content;
 
 import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.VerticalLayout;
+import infoshare.app.util.security.GetUserCredentials;
+import infoshare.app.util.security.RolesValues;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.content.views.DisabledContentView;
 import infoshare.client.content.content.views.EditView;
@@ -38,9 +40,11 @@ public class ContentMenu extends VerticalLayout {
         tab.setHeight("100%");
         tab.setWidth("100%");
         tab.addTab(rawView,"Raw Content",null);
-        tab.addTab(editorView,"Edited Content",null);
-        tab.addTab(publisherView,"Published Content",null);
-        tab.addTab(disabledContentView,"Deleted Content",null);
+        if (!GetUserCredentials.isUserWithRole(RolesValues.ROLE_EDITOR.name())) {
+            tab.addTab(editorView, "Edited Content", null);
+            tab.addTab(publisherView, "Published Content", null);
+            tab.addTab(disabledContentView, "Deleted Content", null);
+        }
 
 
         if(selectedTab.equalsIgnoreCase("LANDING")){

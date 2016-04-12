@@ -4,9 +4,7 @@ import com.vaadin.data.Property;
 import com.vaadin.data.fieldgroup.FieldGroup;
 import com.vaadin.data.util.BeanItem;
 import com.vaadin.event.FieldEvents;
-import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.*;
-import com.vaadin.ui.themes.ValoTheme;
 import infoshare.app.facade.CategoryFacade;
 import infoshare.app.facade.ContentFacade;
 import infoshare.app.facade.ContentTypeFacade;
@@ -22,12 +20,11 @@ import infoshare.domain.content.*;
 import infoshare.factories.content.PublishedContentFactory;
 import infoshare.filterSearch.EditedContentFilter;
 import infoshare.services.ContentFiles.ContentType.ContentTypeService;
+import infoshare.services.ContentFiles.category.CategoryService;
 import infoshare.services.ContentFiles.content.EditedContentService;
 import infoshare.services.ContentFiles.content.PublishedContentService;
-import infoshare.services.ContentFiles.category.CategoryService;
 import infoshare.services.ContentFiles.source.SourceService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.vaadin.dialogs.ConfirmDialog;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -150,38 +147,36 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
                 getHome();
                 Notification.show("Record EDITED!", Notification.Type.HUMANIZED_MESSAGE);
             }catch (Exception e){
-                Notification.show("Please select the Category",Notification.Type.HUMANIZED_MESSAGE);
+                Notification.show("Please select the Category"+e.getMessage(),Notification.Type.HUMANIZED_MESSAGE);
             }
         } catch (FieldGroup.CommitException e) {
             Notification.show("Fill in all Fields!!", Notification.Type.HUMANIZED_MESSAGE);
             getHome();
         }
     }
+
     private PublishedContent getNewEntity(FieldGroup binder) {
         final ContentModel bean = ((BeanItem<ContentModel>) binder.getItemDataSource()).getBean();
+        //bean.setDateCreated(ContentFacade.rawContentService.findById(OrganisationUtil.getCompanyCode(), table.getValue().toString()).getDateCreated());
         Map<String,String> publishedVals = new HashMap<>();
         publishedVals.put("content",bean.getContent());
         publishedVals.put("category",bean.getCategory());
         publishedVals.put("creator",bean.getCreator());
         publishedVals.put("contentType",bean.getContentType());
-        publishedVals.put("status",bean.getStatus());
-        publishedVals.put("source",bean.getStatus());
+        publishedVals.put("status","Published");
+        publishedVals.put("title",bean.getTitle());
+        publishedVals.put("source",table.getValue().toString());
+        publishedVals.put("org",bean.getOrg());
         final PublishedContent publishedContent = PublishedContentFactory.getPublishedContent(publishedVals, new Date());
         return publishedContent;
     }
     private EditedContent getUpdateEntity(FieldGroup binder) {
         final ContentModel bean = ((BeanItem<ContentModel>) binder.getItemDataSource()).getBean();
+        EditedContent content =
+                ContentFacade.editedContentService.findById(bean.getOrg(),table.getValue().toString());
         final EditedContent editedContent = new EditedContent
                 .Builder()
-                .title(bean.getTitle())
-                .category(categoryService.findById(bean.getCategory()).getId())
-                .content(bean.getContent())
-                .contentType(bean.getContentType())
-                .creator(bean.getCreator())
-                .dateCreated(bean.getDateCreated())
-                .source(bean.getSource())
-                .state(bean.getState())
-                .org(bean.getOrg())
+                .copy(content)
                 .status("Published")
                 .id(table.getValue().toString())
                 .build();

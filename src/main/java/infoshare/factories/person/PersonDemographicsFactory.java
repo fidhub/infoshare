@@ -11,11 +11,12 @@ import java.util.Date;
  */
 public class PersonDemographicsFactory {
     public static PersonDemographics getPersonDemographics(
-            String personId, String genderId, Date dateOfBirth){
+            String personId, String genderId, Date dateOfBirth, String raceId){
         PersonDemographics personDemographics = new PersonDemographics.Builder()
                 .id(KeyGenerator.getEntityId())
                 .genderId(genderId)
                 .personId(personId)
+                .personraceid(raceId)
                 .dateOfBirth(dateOfBirth)
                 .date(new Date())
                 .state(DomainState.ACTIVE.name())

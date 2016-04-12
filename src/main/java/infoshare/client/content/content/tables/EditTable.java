@@ -9,14 +9,10 @@ import infoshare.app.util.DomainState;
 import infoshare.app.util.organisation.OrganisationUtil;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.content.ContentMenu;
-import infoshare.client.header.Header;
 import infoshare.domain.content.EditedContent;
-import infoshare.domain.content.RawContent;
 import infoshare.restapi.ContentFiles.content.EditedContentAPI;
-import infoshare.restapi.ContentFiles.content.RawContentAPI;
 import infoshare.services.ContentFiles.category.CategoryService;
 import infoshare.services.ContentFiles.content.EditedContentService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.text.DateFormat;

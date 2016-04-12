@@ -29,7 +29,9 @@ public class PersonDemographicsTable extends Table {
 
         addContainerProperty("Date Created", Date.class, null);
         addContainerProperty("Gender", String.class, null);
-        addContainerProperty("Date of Birth", Date.class, null);
+        addContainerProperty("Date Of Birth", Date.class, null);
+        addContainerProperty("Marital StatusId", String.class, null);
+        addContainerProperty("Number Of Dependencies", Integer.class, null);
 
 
         Set<PersonDemographics> personDemographicses = PeopleFacade.personDemographicsService.find_ALL(personId);
@@ -39,6 +41,8 @@ public class PersonDemographicsTable extends Table {
                     item.getDate(),
                     gender(item.getGenderId()),
                     item.getDateOfBirth(),
+                    item.getMaritalStatusId(),
+                    item.getNumberOfDependencies()
             }, item.getId());
 
         });

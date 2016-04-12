@@ -32,6 +32,7 @@ public class StatusTab extends VerticalLayout implements
         form = new StatusForm();
         table = new StatusTable(main);
         setSizeFull();
+        addListeners();
         addComponent(form);
         addComponent(table);
     }
@@ -40,15 +41,15 @@ public class StatusTab extends VerticalLayout implements
     public void buttonClick(Button.ClickEvent event) {
         final Button source = event.getButton();
         if (source == form.save) {
-          //  saveForm(form.binder);
+           saveForm(form.binder);
         } else if (source == form.edit) {
-          //  setEditFormProperties();
+            setEditFormProperties();
         } else if (source == form.cancel) {
-          //  getHome();
+            getHome();
         } else if (source == form.update) {
-          //  saveEditedForm(form.binder);
+            saveEditedForm(form.binder);
         } else if (source == form.delete) {
-         //   deleteForm(form.binder);
+            deleteForm(form.binder);
         }
     }
 
@@ -153,7 +154,7 @@ public class StatusTab extends VerticalLayout implements
     private StatusModel getModel(Status currency) {
         final StatusModel model = new StatusModel();
         model.setName(currency.getName());
-        model.setValue(currency.getName());
+        model.setValue(currency.getValue());
         return model;
 
     }
