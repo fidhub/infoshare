@@ -47,8 +47,16 @@ public class CreateUserTest {
          authval:PJHV2u8X
          role:Org_Admin
 
+         user:ca@test.com;
+         authval:tcK9aIy8
+         role:Org_Admin
+
          user:2lehadebe@gmail.com;
          authval:7YWPbIbn
+         role:Role_Editor
+
+         user:songz@test.com;
+         authval:20SKEOse
          role:Role_Editor
 
 
@@ -58,12 +66,12 @@ public class CreateUserTest {
         final String password = SecurityService.generateRandomPassword();
         System.out.println(password);
         Map<String, String> stringVals = new HashMap<>();
-        stringVals.put("firstName", "Sanele");
+        stringVals.put("firstName", "camagu");
         stringVals.put("middleName", "");
-        stringVals.put("lastName", "Hadebe");
+        stringVals.put("lastName", "dlisani");
             stringVals.put("authvalue", PasswordHash.createEncryptedPassword(password));
-        stringVals.put("emailAddress", "2lehadebe@gmail.com");
-        stringVals.put("org", "CPUT");
+        stringVals.put("emailAddress", "ca@test.com");
+        stringVals.put("org", "dut");
 
         Map<String, Boolean> boolVals = new HashMap<>();
         boolVals.put("enabled", Boolean.TRUE);
@@ -96,7 +104,7 @@ public class CreateUserTest {
         Person companyAdmin = PersonFactory.getPerson(stringVals, boolVals);
         try {
             PeopleFacade.personService.save(companyAdmin);
-            PersonRole role = PersonRoleFactory.getPersonRole(companyAdmin.getId(), RolesValues.ROLE_EDITOR.name());
+            PersonRole role = PersonRoleFactory.getPersonRole(companyAdmin.getId(), RolesValues.ORG_ADMIN.name());
             PeopleFacade.personRoleService.save(role);
         }catch (Exception e){
             e.fillInStackTrace();
