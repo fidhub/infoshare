@@ -95,7 +95,7 @@ public class UserDetails extends VerticalLayout implements Button.ClickListener 
                         ExecutorService executorService = Executors.newSingleThreadExecutor();
                         executorService.execute(() -> deleteUser(updatedPerson));
                         executorService.shutdown();
-                        ScreenMessages.getMessage(person.getFirstName() + "Account has been Deleted")
+                        ScreenMessages.getMessage(person.getFirstName() + "'s Account has been Deleted")
                                 .show(Page.getCurrent());
                     }
                 },
