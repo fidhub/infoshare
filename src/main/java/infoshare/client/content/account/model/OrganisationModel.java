@@ -19,7 +19,6 @@ public class OrganisationModel implements Serializable {
     private String contactphone;
     private String state;
 
-
     public String getName() {
         return name;
     }

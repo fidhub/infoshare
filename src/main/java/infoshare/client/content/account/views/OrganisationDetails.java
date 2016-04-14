@@ -58,28 +58,18 @@ public class OrganisationDetails extends VerticalLayout implements
 
 
     public OrganisationDetails(MainLayout main, Organisation co, String tab) {
+        this.main = main;
+        this.tab = tab;
+        form = new OrganisationForm();
         organisation = co;
         orgId = organisation.getId();
+        final OrganisationModel model = getModel(organisation);
+        form.binder.setItemDataSource(new BeanItem<>(model));
         Label heading = new Label("<center><h2>Details for " + organisation.getName() + "</H2></center>", ContentMode.HTML);
         heading.setStyleName(ValoTheme.LABEL_COLORED);
         heading.setSizeFull();
-        heading.setSizeFull();
-        final OrganisationModel model = getModel(organisation);
-
-        form = new OrganisationForm();
-        this.tab = tab;
-        form.binder.setItemDataSource(new BeanItem<>(model));
-        try {
-            form.imageUploader.image.setSource(
-                    new ExternalResource(OrganisationFacade.companyLogosService
-                            .findById(orgId
-                                    , orgId).getUrl()));
-        }catch (Exception e){
-            form.imageUploader.image.setVisible(false);
-        }
 
         setReadFormProperties();
-        this.main = main;
 
         grid = new GridLayout(4, 10);
         grid.setSizeFull();
@@ -155,7 +145,6 @@ public class OrganisationDetails extends VerticalLayout implements
                 reset.setStyleName(ValoTheme.BUTTON_LINK);
                 reset.setData(item.getId());
                 reset.addClickListener(event -> {
-
                     MessageBox.showPlain(Icon.WARN,
                             "Password Reset",
                             "Do you really want to RESET " + organisation.getName() + " Administrator Password?",
@@ -215,6 +204,15 @@ public class OrganisationDetails extends VerticalLayout implements
         model.setState(company.getState());
         model.setCode(company.getId());
         model.setName(company.getName());
+        try {
+            form.imageUploader.image.setSource(
+                    new ExternalResource(OrganisationFacade.companyLogosService
+                            .findById(company.getId()
+                                    , company.getId()).getUrl()));
+        }catch (Exception e){
+            form.imageUploader.image.setVisible(false);
+        }
+
         return model;
     }
 
@@ -247,41 +245,51 @@ public class OrganisationDetails extends VerticalLayout implements
 
     private void saveEditedForm(FieldGroup binder) {
         Organisation updatedCompany = getUpdateEntity(binder);
-        if(form.imageUploader.path.length()>2) {
+        if(form.imageUploader.path.length()>1) {
             Set<FileResults> set = FileResultsFacade.fileResultsService.save(form.imageUploader.path);
-            for (FileResults fileResults : set.stream().filter(file -> file.getSize().equalsIgnoreCase("original")).collect(Collectors.toSet())) {
-                OrganisationFacade.companyLogosService.save(getNewLogo(fileResults));
+            for (FileResults fileResult : set.stream().filter(file -> file.getSize().equalsIgnoreCase("original")).collect(Collectors.toSet())) {
+                OrganisationFacade.companyLogosService.save(getNewLogo(fileResult));
+                OrganisationFacade.companyService.update(updatedCompany);
+                form.imageUploader.path = "";
             }
         }
-        OrganisationFacade.companyService.update(updatedCompany);
+
         getHome();
     }
 
     private void saveForm(FieldGroup binder) {
-        Organisation newcompany = getNewEntity(binder);
-        Set<FileResults> set = FileResultsFacade.fileResultsService.save(form.imageUploader.path);
-        for (FileResults fileResults: set.stream().filter(file -> file.getSize().equalsIgnoreCase("original")).collect(Collectors.toSet())) {
-            OrganisationFacade.companyLogosService.save(getNewLogo(fileResults));
-
+        Organisation newCompany = getNewEntity(binder);
+        if (form.imageUploader.path.length() > 1) {
+            try {
+                Set<FileResults> set = FileResultsFacade.fileResultsService.save(form.imageUploader.path);
+                for (FileResults fileResults : set.stream().filter(file -> file.getSize().equalsIgnoreCase("original")).collect(Collectors.toSet())) {
+                    OrganisationFacade.companyLogosService.save(getNewLogo(fileResults));
+                    OrganisationFacade.companyService.save(newCompany);
+                    form.imageUploader.path = "";
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            getHome();
         }
-        OrganisationFacade.companyService.save(newcompany);
-        getHome();
     }
 
     private OrganisationLogo getNewLogo(FileResults fileResults){
         Map<String, String> stringMap = new HashMap<>();
-        stringMap.put("id",OrganisationUtil.getCompanyCode());
+        stringMap.put("id",orgId);
         stringMap.put("url", RestUtil.URL+fileResults.getUrl());
         stringMap.put("size",fileResults.getSize());
-        stringMap.put("description", OrganisationUtil.getCompanyCode()+"Logo");
+        stringMap.put("description", OrganisationUtil.getCompanyCode()+" Logo");
         stringMap.put("mime",fileResults.getMime());
+        stringMap.put("org",orgId);
         OrganisationLogo logo = OrganisationLogoFactory.getOrganisationLogo(stringMap);
         return logo;
+
     }
 
     private void setEditFormProperties() {
         form.binder.setReadOnly(false);
-        form.imageUploader.upload.setVisible(false);
+        form.imageUploader.upload.setVisible(true);
         form.save.setVisible(false);
         form.edit.setVisible(false);
         form.cancel.setVisible(true);
@@ -302,7 +310,6 @@ public class OrganisationDetails extends VerticalLayout implements
 
     private void getHome() {
         main.content.setSecondComponent(new AccountMenu(main, tab));
-        form.imageUploader.path="";
     }
 
     private Organisation getUpdateEntity(FieldGroup binder) {

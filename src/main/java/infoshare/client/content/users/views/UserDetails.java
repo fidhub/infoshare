@@ -2,13 +2,19 @@ package infoshare.client.content.users.views;
 
 import com.vaadin.data.fieldgroup.FieldGroup;
 import com.vaadin.data.util.BeanItem;
+import com.vaadin.server.Page;
 import com.vaadin.shared.ui.label.ContentMode;
-import com.vaadin.ui.*;
+import com.vaadin.ui.Button;
+import com.vaadin.ui.GridLayout;
+import com.vaadin.ui.Label;
+import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
+import de.steinwedel.messagebox.ButtonId;
+import de.steinwedel.messagebox.Icon;
+import de.steinwedel.messagebox.MessageBox;
 import infoshare.app.facade.PeopleFacade;
 import infoshare.app.util.DomainState;
-import infoshare.app.util.organisation.OrganisationUtil;
-import infoshare.app.util.security.GetUserCredentials;
+import infoshare.app.util.ScreenMessages;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.users.UserManagementMenu;
 import infoshare.client.content.users.forms.UserForm;
@@ -17,6 +23,8 @@ import infoshare.domain.person.Person;
 import infoshare.domain.person.PersonRole;
 
 import java.util.Set;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * Created by THULEH on 2016/04/01.
@@ -72,11 +80,33 @@ public class UserDetails extends VerticalLayout implements Button.ClickListener 
         Person updatedPerson = new Person
                 .Builder()
                 .copy(person)
-                .state(DomainState.RETIRED.name())
+                .state(DomainState.DELETED.name())
+                .accountNonExpired(Boolean.FALSE)
+                .accountNonLocked(Boolean.FALSE)
+                .credentialsNonExpired(Boolean.FALSE)
+                .enabled(Boolean.FALSE)
+                .accountNonExpired(Boolean.FALSE)
                 .build();
-        PeopleFacade.personService.update(updatedPerson);
+        MessageBox.showPlain(Icon.WARN,
+                "Delete User Account",
+                "Do you really want to Delete " + person.getFirstName() + " " + person.getLastName() + "'s Account?",
+                buttonId -> {
+                    if (buttonId == ButtonId.YES) {
+                        ExecutorService executorService = Executors.newSingleThreadExecutor();
+                        executorService.execute(() -> deleteUser(updatedPerson));
+                        executorService.shutdown();
+                        ScreenMessages.getMessage(person.getFirstName() + "Account has been Deleted")
+                                .show(Page.getCurrent());
+                    }
+                },
+                ButtonId.YES,
+                ButtonId.NO);
+
         getHome();
 
+    }
+    private void deleteUser(Person updatedPerson ){
+        PeopleFacade.personService.update(updatedPerson);
     }
 
     private void saveEditedForm(FieldGroup binder) {

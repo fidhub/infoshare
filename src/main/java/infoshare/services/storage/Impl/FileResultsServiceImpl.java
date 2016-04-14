@@ -17,7 +17,7 @@ public class FileResultsServiceImpl implements FileResultsService {
 
     public  static FileResultsServiceImpl getInstance(){
         if(fileResultsService ==null) {
-            return new FileResultsServiceImpl();
+            fileResultsService = new FileResultsServiceImpl();
         }
         return fileResultsService;
     }

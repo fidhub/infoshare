@@ -11,7 +11,6 @@ import com.vaadin.ui.themes.ValoTheme;
 import infoshare.app.conf.RestUtil;
 import infoshare.app.facade.FileResultsFacade;
 import infoshare.app.facade.OrganisationFacade;
-import infoshare.app.util.organisation.OrganisationUtil;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.account.AccountMenu;
 import infoshare.client.content.account.forms.OrganisationForm;
@@ -119,16 +118,18 @@ public class ManageOrganisationTab extends VerticalLayout implements
     private void saveForm(FieldGroup binder) {
         try {
             binder.commit();
-            Set<FileResults> set = FileResultsFacade.fileResultsService.save(form.imageUploader.path);
-            for (FileResults fileResults: set.stream().filter(file -> file.getSize().equalsIgnoreCase("original")).collect(Collectors.toSet())) {
-                OrganisationFacade.companyLogosService.save(getNewLogo(fileResults,binder));
+            if (form.imageUploader.path.length() > 1) {
+                Set<FileResults> set = FileResultsFacade.fileResultsService.save(form.imageUploader.path);
+                for (FileResults fileResults : set.stream().filter(file -> file.getSize().equalsIgnoreCase("original")).collect(Collectors.toSet())) {
+                    OrganisationFacade.companyLogosService.save(getNewLogo(fileResults, binder));
+                    form.imageUploader.path = "";
+                }
             }
             OrganisationFacade.companyService.save(getNewEntity(binder));
             getHome();
             Notification.show("Record ADDED!", Notification.Type.TRAY_NOTIFICATION);
         } catch (FieldGroup.CommitException e) {
             Notification.show("Values MISSING!", Notification.Type.TRAY_NOTIFICATION);
-            getHome();
         }
     }
     private OrganisationLogo getNewLogo(FileResults fileResults,FieldGroup binder){
@@ -154,18 +155,21 @@ public class ManageOrganisationTab extends VerticalLayout implements
     }
 
     private void saveEditedForm(FieldGroup binder) {
+
         try {
             binder.commit();
-            Set<FileResults> set = FileResultsFacade.fileResultsService.save(form.imageUploader.path);
-            for (FileResults fileResults: set.stream().filter(file -> file.getSize().equalsIgnoreCase("original")).collect(Collectors.toSet())) {
-                OrganisationFacade.companyLogosService.save(getNewLogo(fileResults,binder));
+            if (form.imageUploader.path.length() > 1) {
+                Set<FileResults> set = FileResultsFacade.fileResultsService.save(form.imageUploader.path);
+                for (FileResults fileResults : set.stream().filter(file -> file.getSize().equalsIgnoreCase("original")).collect(Collectors.toSet())) {
+                    OrganisationFacade.companyLogosService.save(getNewLogo(fileResults, binder));
+                    form.imageUploader.path = "";
+                }
             }
             OrganisationFacade.companyService.update(getUpdateEntity(binder));
             getHome();
             Notification.show("Record UPDATED!", Notification.Type.TRAY_NOTIFICATION);
         } catch (FieldGroup.CommitException e) {
             Notification.show("Values MISSING!", Notification.Type.TRAY_NOTIFICATION);
-            getHome();
         }
     }
 
