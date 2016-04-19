@@ -14,8 +14,8 @@ public class ProfileModel implements Serializable {
     private String lastName;
     private String title;
     private Boolean enabled;
-    private Boolean accountNonExpired;
     private Boolean credentialsNonExpired;
+    private Boolean accountNonExpired;
     private Boolean accountNonLocked;
 
     public String getCompany() {

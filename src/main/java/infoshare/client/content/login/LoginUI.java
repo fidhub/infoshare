@@ -111,7 +111,6 @@ public class LoginUI extends UI {
         signin.setClickShortcut(ShortcutAction.KeyCode.ENTER);
         signin.setDisableOnClick(true);
 
-
         signin.focus();
 
         fields.addComponents(userName, passwordField, signin);

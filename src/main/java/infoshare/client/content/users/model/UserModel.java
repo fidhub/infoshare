@@ -7,7 +7,6 @@ import java.io.Serializable;
  * Created by THULEH on 2016/03/31.
  */
 public class UserModel implements Serializable {
-    private String org;
     @NotNull
     private String firstName;
     private String middleName;
@@ -17,7 +16,7 @@ public class UserModel implements Serializable {
     private String lastName;
     @NotNull
     private String role;
-
+    private String org;
     private Boolean enabled;
     private Boolean accountNonExpired;
     private Boolean credentialsNonExpired;

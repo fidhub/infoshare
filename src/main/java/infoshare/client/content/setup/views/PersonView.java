@@ -123,30 +123,6 @@ public class PersonView extends VerticalLayout implements
         return person;
     }
     private Person getPersonUpdateEntity(FieldGroup binder) {
-
-//        final PersonModel bean = ((BeanItem<PersonModel>) binder.getItemDataSource()).getBean();
-//        Set<String> userRoles = new HashSet<>();
-//
-//        if (bean.getRole()!= null) {
-//            for (String roleId : bean.getRole()) {
-//                Role role = roleService.findById(roleId);
-//                if (role != null) {
-//                    userRoles.add(role.getId());
-//                }
-//            }
-//        }
-//        final Person user = new User.Builder(bean.getLastName())
-//                .firstname(bean.getFirstName())
-//                .role(userRoles)
-//                .enable(bean.isEnable())
-//                .password(bean.getPassword())
-//                .username(bean.getUsername())
-//                .othername(bean.getOtherName())
-//                .address(bean.getAddress())//Todo : no route for entity yet
-//                .contact(bean.getContact())//Todo : no route for entity yet
-//                .id(table.getValue().toString())
-//                .build();
-
         final PersonModel bean = ((BeanItem<PersonModel>) binder.getItemDataSource()).getBean();
         Map<String,Boolean> boolVals = new HashMap<>();
         boolVals.put("enabled",bean.getEnabled());
