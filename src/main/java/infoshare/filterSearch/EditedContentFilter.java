@@ -5,10 +5,10 @@ import com.vaadin.ui.TextField;
 import com.vaadin.ui.themes.ValoTheme;
 import infoshare.app.facade.CategoryFacade;
 import infoshare.app.facade.ContentFacade;
+import infoshare.app.util.organisation.OrganisationUtil;
 import infoshare.domain.content.EditedContent;
 import infoshare.services.ContentFiles.category.CategoryService;
 import infoshare.services.ContentFiles.content.EditedContentService;
-
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -26,13 +26,11 @@ public class EditedContentFilter {
     public EditedContentFilter() {
         getField();
     }
-    public synchronized List<EditedContent> findAll(String stringFilter,String state) {
+    public synchronized List<EditedContent> findAll(String stringFilter) {
         DateFormat formatter = new SimpleDateFormat("dd MMMMMMM yyyy");
         ArrayList arrayList = new ArrayList();
         String cat;
-        for (EditedContent EditedContent : editedContentService.findAll("org").stream()
-                .filter(cont -> cont.getState().equalsIgnoreCase(state))
-                .collect(Collectors.toList()).stream()
+        for (EditedContent EditedContent : editedContentService.findAll(OrganisationUtil.getCompanyCode()).stream()
                 .filter(cont -> cont.getStatus().equalsIgnoreCase("Edited"))
                 .collect(Collectors.toList())) {
             if(!EditedContent.getCategory().toLowerCase().equalsIgnoreCase("uncategorized")) {

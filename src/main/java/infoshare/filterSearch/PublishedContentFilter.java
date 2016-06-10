@@ -5,6 +5,7 @@ import com.vaadin.ui.TextField;
 import com.vaadin.ui.themes.ValoTheme;
 import infoshare.app.facade.CategoryFacade;
 import infoshare.app.facade.ContentFacade;
+import infoshare.app.util.organisation.OrganisationUtil;
 import infoshare.domain.content.PublishedContent;
 import infoshare.services.ContentFiles.category.CategoryService;
 import infoshare.services.ContentFiles.content.PublishedContentService;
@@ -29,7 +30,7 @@ public class PublishedContentFilter {
         DateFormat formatter = new SimpleDateFormat("dd MMMMMMM yyyy");
         ArrayList arrayList = new ArrayList();
         String cat;
-        for (PublishedContent publishedContent : publishedContentService.findAll("org").stream()
+        for (PublishedContent publishedContent : publishedContentService.findAll(OrganisationUtil.getCompanyCode()).stream()
                 .filter(cont -> cont.getState().equalsIgnoreCase("active"))
                 .collect(Collectors.toList())) {
             if(!publishedContent.getCategory().equalsIgnoreCase("uncategorized"))

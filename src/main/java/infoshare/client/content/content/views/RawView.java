@@ -82,7 +82,6 @@ public class  RawView extends VerticalLayout implements Button.ClickListener,Pro
             getHome();
         }
     }
-
     @Override
     public void valueChange(Property.ValueChangeEvent event) {
         final Property property = event.getProperty();
@@ -114,7 +113,6 @@ public class  RawView extends VerticalLayout implements Button.ClickListener,Pro
     private void getHome() {
         main.content.setSecondComponent(new ContentMenu(main, "LANDING"));
     }
-
     public void EditButton(){
         try {
             final RawContent rawContent = rawContentService.findById(OrganisationUtil.getCompanyCode(),tableId);

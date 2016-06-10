@@ -5,7 +5,6 @@ import com.vaadin.data.util.BeanItem;
 import com.vaadin.server.ExternalResource;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.server.Page;
-import com.vaadin.shared.ui.combobox.FilteringMode;
 import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
@@ -77,42 +76,10 @@ public class OrganisationDetails extends VerticalLayout implements
         grid.addComponent(heading, 0, 0, 3, 0);
         grid.addComponent(form, 0, 1, 3, 1);
 
-        Label companyAdmin = new Label("<h2>Organisation Administrators </H2>", ContentMode.HTML);
-        companyAdmin.setStyleName(ValoTheme.LABEL_COLORED);
-        companyAdmin.setSizeFull();
-        companyAdmin.setSizeFull();
-        grid.addComponent(companyAdmin, 0, 2, 3, 2);
+
 
         Set<Person> admins = PeopleFacade.personService.getPersonsWithRole(organisation.getId(), RolesValues.ORG_ADMIN.name());
 
-        if (admins.size() > 0) {
-            ComboBox adminsComboBox = new ComboBox();
-            adminsComboBox.setInputPrompt("Select " + organisation.getName() + " Current Employee");
-            adminsComboBox.setInvalidAllowed(false);
-
-            adminsComboBox.setSizeFull();
-            adminsComboBox.setNullSelectionAllowed(false);
-            // Set the filtering mode
-            adminsComboBox.setFilteringMode(FilteringMode.CONTAINS);
-            adminsComboBox.setPageLength(5);
-            adminsComboBox.setImmediate(true);
-
-            admins.parallelStream().forEach(item -> {
-                adminsComboBox.addItem(item.getId());
-                adminsComboBox.setItemCaption(item.getId(), item.getLastName() + " " + item.getFirstName());
-            });
-
-            adminsComboBox.addValueChangeListener(event -> {
-                selectedUserId = adminsComboBox.getConvertedValue().toString();
-            });
-            Button addAnotherAdmin = new Button("Add Administrator", FontAwesome.USER);
-            addAnotherAdmin.setStyleName(ValoTheme.BUTTON_FRIENDLY);
-            addAnotherAdmin.setSizeFull();
-            addAnotherAdmin.addClickListener(event -> Notification.show(" We are Adding Another User" + selectedUserId, Notification.Type.HUMANIZED_MESSAGE));
-
-            grid.addComponent(adminsComboBox, 0, 3, 2, 3);
-            grid.addComponent(addAnotherAdmin, 3, 3);
-        }
 
         if (admins.size() == 0) {
             Button addAdmin = new Button("Add Organisation Administrator", FontAwesome.USER);
@@ -128,6 +95,12 @@ public class OrganisationDetails extends VerticalLayout implements
 
         }
         if (admins.size() > 0) {
+            Label companyAdmin = new Label("<h2>"+organisation.getName().toUpperCase()+" CURRENT EMPLOYEES</H2>", ContentMode.HTML);
+            companyAdmin.setStyleName(ValoTheme.LABEL_COLORED);
+            companyAdmin.setSizeFull();
+            companyAdmin.setSizeFull();
+            grid.addComponent(companyAdmin, 0, 2, 3, 2);
+
             Table adminTable = new Table();
             adminTable.addStyleName(ValoTheme.TABLE_BORDERLESS);
             adminTable.addStyleName(ValoTheme.TABLE_NO_STRIPES);

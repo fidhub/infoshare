@@ -30,7 +30,8 @@ public class RawContentFilter {
         DateFormat formatter = new SimpleDateFormat("dd MMMMMMM yyyy");
         ArrayList arrayList = new ArrayList();
         String cat;
-        for (RawContent rawContent : rawContentService.findAll(OrganisationUtil.getCompanyCode()).stream()
+        for (RawContent rawContent : rawContentService.findAll(OrganisationUtil.getCompanyCode())
+                .stream()
                 .filter(cont -> cont.getState().equalsIgnoreCase("active"))
                 .collect(Collectors.toList()).stream()
                 .filter(cont -> cont.getStatus().equalsIgnoreCase("raw"))

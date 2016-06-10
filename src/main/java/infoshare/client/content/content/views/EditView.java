@@ -48,7 +48,6 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
     private final EditForm form;
     private Window popUp ;
     private EditedContentFilter editedContentFilter = new EditedContentFilter();
-    private String state;
 
     public  EditView( MainLayout mainApp) {
 
@@ -56,7 +55,6 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
         this.table = new EditTable(main);
         this.form = new EditForm();
         this.popUp = modelWindow();
-        state ="active";
         setSizeFull();
         setSpacing(true);
         addComponent(editedContentFilter.field);
@@ -67,19 +65,22 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
     private void refreshContacts(String stringFilter ) {
         try {
             table.removeAllItems();
-            editedContentFilter.findAll(stringFilter,state).stream()
-                    .filter(content -> content != null)
-                    .collect(Collectors.toList())
+            table.removeAllItems();
+            editedContentFilter.findAll(stringFilter)
                     .stream()
-                    .filter(cont -> cont.getState().equalsIgnoreCase(state))
+                    .filter(cont -> cont!= null)
                     .collect(Collectors.toList())
                     .stream()
                     .filter(cont -> cont.getStatus().equalsIgnoreCase("Edited"))
                     .collect(Collectors.toList())
-                    .forEach(table::loadTable);
+                    .stream()
+                    .filter(cont -> cont.getState().equalsIgnoreCase("active"))
+                    .collect(Collectors.toList()).forEach(table::loadTable);
+
         }catch (Exception e){
         }
     }
+
     private Window modelWindow(){
         final Window popup = new Window();
         popup.setWidth(80.0f,Unit.PERCENTAGE);
@@ -154,7 +155,6 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
             getHome();
         }
     }
-
     private PublishedContent getNewEntity(FieldGroup binder) {
         final ContentModel bean = ((BeanItem<ContentModel>) binder.getItemDataSource()).getBean();
         //bean.setDateCreated(ContentFacade.rawContentService.findById(OrganisationUtil.getCompanyCode(), table.getValue().toString()).getDateCreated());
@@ -182,7 +182,6 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
                 .build();
         return editedContent;
     }
-
     private ContentModel getModel(String val) {
         final ContentModel model = new ContentModel();
 
@@ -211,7 +210,10 @@ public class EditView extends VerticalLayout implements Button.ClickListener, Pr
                 }
             }
         });
-        editedContentFilter.field.addTextChangeListener((FieldEvents.TextChangeListener) textChangeEvent -> refreshContacts(textChangeEvent.getText()));
+        editedContentFilter.field
+                .addTextChangeListener((FieldEvents.TextChangeListener)
+                        textChangeEvent ->
+                                refreshContacts(textChangeEvent.getText()));
     }
 
 }
