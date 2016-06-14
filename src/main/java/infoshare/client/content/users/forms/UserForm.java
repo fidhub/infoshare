@@ -57,7 +57,6 @@ public class UserForm extends FormLayout implements Button.ClickListener  {
         binder = new FieldGroup(item);
         final UIComponentHelper UIComponent = new UIComponentHelper();
         final UIComboBoxHelper UIComboBox = new UIComboBoxHelper();
-        final UIListSelectHelper UIListSelect = new UIListSelectHelper();
 
         TextField firstName = UIComponent.getGridTextField("First Name :", "firstName", UserModel.class, binder);
         TextField middlename = UIComponent.getGridTextField("Middle Name :", "middleName", UserModel.class, binder);
@@ -70,7 +69,6 @@ public class UserForm extends FormLayout implements Button.ClickListener  {
             role.addItem(role1.getId());
             role.setDescription(role1.getName());
         }
-        //ListSelect role = UIListSelect.getMultSelector("Select Role :", "role", UserModel.class, binder);
 
         // Create a field group and use it to bind the fields in the layout
         GridLayout grid = new GridLayout(4, 10);

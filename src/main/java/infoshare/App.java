@@ -91,23 +91,5 @@ public class App{
 
     }
 
-    /* TODO how to past a picture on the click board
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
-    OpenFileDialog1.Filter = "All files |*.*"
-    OpenFileDialog1.Multiselect = True
-    Dim orgdata = Clipboard.GetDataObject
-
-    If OpenFileDialog1.ShowDialog = Windows.Forms.DialogResult.OK Then
-        For Each fname As String In OpenFileDialog1.FileNames
-            Dim img As Image = Image.FromFile(fname)
-            Clipboard.SetImage(img)
-            RichTextBox1.Paste()
-
-        Next
-    End If
-    Clipboard.SetDataObject(orgdata)
-End Sub
-     */
-
 }
 

@@ -6,7 +6,7 @@ import com.vaadin.ui.themes.ValoTheme;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.users.forms.UserForm;
 import infoshare.client.content.users.table.UsersTable;
-import infoshare.filterSearch.UserFilter;
+import infoshare.app.util.filterSearch.UserFilter;
 
 import java.util.stream.Collectors;
 

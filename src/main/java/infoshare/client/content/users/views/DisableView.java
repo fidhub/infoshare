@@ -5,7 +5,7 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.VerticalLayout;
 import infoshare.client.content.MainLayout;
 import infoshare.client.content.users.table.DisabledUsersTable;
-import infoshare.filterSearch.UserFilter;
+import infoshare.app.util.filterSearch.UserFilter;
 
 import java.util.stream.Collectors;
 

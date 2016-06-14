@@ -15,7 +15,7 @@ import infoshare.client.content.content.tables.RawTable;
 import infoshare.client.header.Header;
 import infoshare.domain.content.*;
 import infoshare.factories.content.EditedContentFactory;
-import infoshare.filterSearch.RawContentFilter;
+import infoshare.app.util.filterSearch.RawContentFilter;
 import infoshare.services.ContentFiles.content.EditedContentService;
 import infoshare.services.ContentFiles.content.RawContentService;
 

@@ -18,7 +18,7 @@ import infoshare.client.content.content.tables.EditTable;
 import infoshare.client.header.Header;
 import infoshare.domain.content.*;
 import infoshare.factories.content.PublishedContentFactory;
-import infoshare.filterSearch.EditedContentFilter;
+import infoshare.app.util.filterSearch.EditedContentFilter;
 import infoshare.services.ContentFiles.ContentType.ContentTypeService;
 import infoshare.services.ContentFiles.category.CategoryService;
 import infoshare.services.ContentFiles.content.EditedContentService;
