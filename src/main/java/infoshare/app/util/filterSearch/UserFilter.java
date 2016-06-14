@@ -1,4 +1,4 @@
-package infoshare.filterSearch;
+package infoshare.app.util.filterSearch;
 
 import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.TextField;

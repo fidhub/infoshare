@@ -1,4 +1,4 @@
-package infoshare.filterSearch;
+package infoshare.app.util.filterSearch;
 
 import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.TextField;
@@ -6,65 +6,64 @@ import com.vaadin.ui.themes.ValoTheme;
 import infoshare.app.facade.CategoryFacade;
 import infoshare.app.facade.ContentFacade;
 import infoshare.app.util.organisation.OrganisationUtil;
-import infoshare.domain.content.PublishedContent;
+import infoshare.domain.content.EditedContent;
 import infoshare.services.ContentFiles.category.CategoryService;
-import infoshare.services.ContentFiles.content.PublishedContentService;
+import infoshare.services.ContentFiles.content.EditedContentService;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 /**
  * Created by user9 on 2016/02/12.
  */
-public class PublishedContentFilter {
-    private PublishedContentService publishedContentService = ContentFacade.publishedContentService;
+public class EditedContentFilter {
+    private EditedContentService editedContentService = ContentFacade.editedContentService;
     private CategoryService categoryService = CategoryFacade.categoryService;
     public TextField field = new TextField();
-    public PublishedContentFilter() {
+    public EditedContentFilter() {
         getField();
     }
-    public synchronized List<PublishedContent> findAll(String stringFilter) {
+    public synchronized List<EditedContent> findAll(String stringFilter) {
         DateFormat formatter = new SimpleDateFormat("dd MMMMMMM yyyy");
         ArrayList arrayList = new ArrayList();
         String cat;
-        for (PublishedContent publishedContent : publishedContentService.findAll(OrganisationUtil.getCompanyCode()).stream()
-                .filter(cont -> cont.getState().equalsIgnoreCase("active"))
+        for (EditedContent EditedContent : editedContentService.findAll(OrganisationUtil.getCompanyCode()).stream()
+                .filter(cont -> cont.getStatus().equalsIgnoreCase("Edited"))
                 .collect(Collectors.toList())) {
-            if(!publishedContent.getCategory().equalsIgnoreCase("uncategorized"))
-                cat = categoryService.findById(publishedContent.getCategory().toString()).getName().toLowerCase();
-            else cat = publishedContent.getCategory().toString().toLowerCase();
-
+            if(!EditedContent.getCategory().toLowerCase().equalsIgnoreCase("uncategorized")) {
+                cat = categoryService.findById(EditedContent.getCategory().toString().trim()).getName();
+            }else cat = EditedContent.getCategory().toString().toLowerCase();
             try {
                 boolean passesFilter = (stringFilter == null || stringFilter.isEmpty())
-                        || publishedContent.getTitle().toString().toLowerCase()
+                        || EditedContent.getTitle().toString().toLowerCase()
                         .contains(stringFilter.toLowerCase())
                         ||cat.contains(stringFilter.toLowerCase())
-                        || publishedContent.getCreator().toString().toLowerCase()
+                        || EditedContent.getCreator().toString().toLowerCase()
                         .contains(stringFilter.toLowerCase())
-                        || publishedContent.getSource().toString().toLowerCase()
+                        || EditedContent.getSource().toString().toLowerCase()
                         .contains(stringFilter.toLowerCase())
-                        ||formatter.format(publishedContent.getDateCreated()).toString().toLowerCase()
+                        ||formatter.format(EditedContent.getDateCreated()).toString().toLowerCase()
                         .contains(stringFilter.toLowerCase());
-
                 if (passesFilter) {
-                    arrayList.add(publishedContent);
+                    arrayList.add(EditedContent);
                 }
             } catch (Exception ex) {
-                Logger.getLogger(ex.getLocalizedMessage());
+                System.out.println(ex.getMessage());
             }
         }
 
         return arrayList;
     }
     private TextField getField(){
-        field.setInputPrompt("Filter EditedContent ...");
+        field.setInputPrompt("Filter Edited ContentFiles ...");
         field.setWidth("260px");
         field.setIcon(FontAwesome.FILTER);
         field.addStyleName(ValoTheme.TEXTFIELD_INLINE_ICON);
         field.addStyleName(ValoTheme.TEXTFIELD_SMALL);
         return field;
     }
+
 }

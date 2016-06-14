@@ -1,4 +1,4 @@
-package infoshare.filterSearch;
+package infoshare.app.util.filterSearch;
 
 import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.TextField;
@@ -6,9 +6,9 @@ import com.vaadin.ui.themes.ValoTheme;
 import infoshare.app.facade.CategoryFacade;
 import infoshare.app.facade.ContentFacade;
 import infoshare.app.util.organisation.OrganisationUtil;
-import infoshare.domain.content.RawContent;
+import infoshare.domain.content.PublishedContent;
 import infoshare.services.ContentFiles.category.CategoryService;
-import infoshare.services.ContentFiles.content.RawContentService;
+import infoshare.services.ContentFiles.content.PublishedContentService;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -17,43 +17,40 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 /**
- * Created by codex on 2015/07/14.
+ * Created by user9 on 2016/02/12.
  */
-public class RawContentFilter {
-    private RawContentService rawContentService = ContentFacade.rawContentService;
+public class PublishedContentFilter {
+    private PublishedContentService publishedContentService = ContentFacade.publishedContentService;
     private CategoryService categoryService = CategoryFacade.categoryService;
     public TextField field = new TextField();
-    public RawContentFilter() {
+    public PublishedContentFilter() {
         getField();
     }
-    public synchronized List<RawContent> findAll(String stringFilter) {
+    public synchronized List<PublishedContent> findAll(String stringFilter) {
         DateFormat formatter = new SimpleDateFormat("dd MMMMMMM yyyy");
         ArrayList arrayList = new ArrayList();
         String cat;
-        for (RawContent rawContent : rawContentService.findAll(OrganisationUtil.getCompanyCode())
-                .stream()
+        for (PublishedContent publishedContent : publishedContentService.findAll(OrganisationUtil.getCompanyCode()).stream()
                 .filter(cont -> cont.getState().equalsIgnoreCase("active"))
-                .collect(Collectors.toList()).stream()
-                .filter(cont -> cont.getStatus().equalsIgnoreCase("raw"))
                 .collect(Collectors.toList())) {
-            if(!rawContent.getCategory().toLowerCase().equalsIgnoreCase("uncategorized"))
-                cat = categoryService.findById(rawContent.getCategory().toString().trim()).getName();
-                else cat = rawContent.getCategory().toString().toLowerCase();
+            if(!publishedContent.getCategory().equalsIgnoreCase("uncategorized"))
+                cat = categoryService.findById(publishedContent.getCategory().toString()).getName().toLowerCase();
+            else cat = publishedContent.getCategory().toString().toLowerCase();
 
             try {
                 boolean passesFilter = (stringFilter == null || stringFilter.isEmpty())
-                        || rawContent.getTitle().toString().toLowerCase()
+                        || publishedContent.getTitle().toString().toLowerCase()
                         .contains(stringFilter.toLowerCase())
                         ||cat.contains(stringFilter.toLowerCase())
-                        || rawContent.getCreator().toString().toLowerCase()
+                        || publishedContent.getCreator().toString().toLowerCase()
                         .contains(stringFilter.toLowerCase())
-                        || rawContent.getSource().toString().toLowerCase()
+                        || publishedContent.getSource().toString().toLowerCase()
                         .contains(stringFilter.toLowerCase())
-                        ||formatter.format(rawContent.getDateCreated()).toString().toLowerCase()
+                        ||formatter.format(publishedContent.getDateCreated()).toString().toLowerCase()
                         .contains(stringFilter.toLowerCase());
 
                 if (passesFilter) {
-                    arrayList.add(rawContent);
+                    arrayList.add(publishedContent);
                 }
             } catch (Exception ex) {
                 Logger.getLogger(ex.getLocalizedMessage());
@@ -63,13 +60,11 @@ public class RawContentFilter {
         return arrayList;
     }
     private TextField getField(){
-        field.setInputPrompt("Filter rawContent ...");
+        field.setInputPrompt("Filter EditedContent ...");
         field.setWidth("260px");
         field.setIcon(FontAwesome.FILTER);
         field.addStyleName(ValoTheme.TEXTFIELD_INLINE_ICON);
         field.addStyleName(ValoTheme.TEXTFIELD_SMALL);
         return field;
     }
-
- //
 }
