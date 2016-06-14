@@ -178,7 +178,6 @@ public class Header extends VerticalLayout implements Button.ClickListener , Ite
         notifications.setDraggable(false);
         notifications.setPositionX(event.getClientX() - (event.getRelativeX() + 150));
         notifications.setPositionY((event.getClientY() + 40) - event.getRelativeY());
-        notifications.setCloseShortcut(ShortcutAction.KeyCode.ESCAPE, null);
 
     }
 
@@ -205,7 +204,6 @@ public class Header extends VerticalLayout implements Button.ClickListener , Ite
         userProfile.setDraggable(false);
         userProfile.setPositionX(event.getClientX() - event.getRelativeX() );
         userProfile.setPositionY((event.getClientY() + 40) - event.getRelativeY());
-        userProfile.setCloseShortcut(ShortcutAction.KeyCode.ESCAPE, null);
 
     }
 
