@@ -95,7 +95,7 @@ public class OrganisationDetails extends VerticalLayout implements
 
         }
         if (admins.size() > 0) {
-            Label companyAdmin = new Label("<h2>"+organisation.getName().toUpperCase()+" CURRENT EMPLOYEES</H2>", ContentMode.HTML);
+            Label companyAdmin = new Label("<h2>"+organisation.getName().toUpperCase()+"'S CURRENT EMPLOYEES</H2>", ContentMode.HTML);
             companyAdmin.setStyleName(ValoTheme.LABEL_COLORED);
             companyAdmin.setSizeFull();
             companyAdmin.setSizeFull();

@@ -51,7 +51,7 @@ public class OrganisationForm extends FormLayout {
         grid.addComponent(address, 2, 0, 2, 1);
 
         //SPAN ROW 1 and 2
-        grid.addComponent(imageUploader,0,3);
+        grid.addComponent(imageUploader,0,3,0,3);
 
         HorizontalLayout buttons = ButtonsHelper.getButtons(save, edit, cancel, update, delete);
         buttons.setSizeFull();

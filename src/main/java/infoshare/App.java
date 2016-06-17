@@ -88,7 +88,6 @@ public class App{
             services.setAlwaysRemember(true);
             return services;
         }
-
     }
 
 }

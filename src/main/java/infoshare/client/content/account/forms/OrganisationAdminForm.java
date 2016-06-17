@@ -55,8 +55,6 @@ public class OrganisationAdminForm extends FormLayout implements Button.ClickLis
         TextField lastname = UIComponent.getGridTextField("Last Name:", "lastName", AdminModel.class, binder);
         TextField emailAddress = UIComponent.getGridTextField("Email Address :", "emailAddress", AdminModel.class, binder);
 
-
-
         // Create a field group and use it to bind the fields in the layout
         GridLayout grid = new GridLayout(4, 10);
         grid.setSizeFull();

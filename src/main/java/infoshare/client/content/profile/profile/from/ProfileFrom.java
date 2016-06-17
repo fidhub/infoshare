@@ -104,12 +104,14 @@ public class ProfileFrom extends FormLayout {
         Image logoImage;
         try {
 
-            ExternalResource resource = new ExternalResource(OrganisationFacade.companyLogosService
-                    .findById(OrganisationUtil.getCompanyCode(),OrganisationUtil.getCompanyCode()).getUrl());
+            ExternalResource resource = new ExternalResource(PeopleFacade.personImagesService
+                    .findByPersonId(OrganisationUtil.getCompanyCode(),GetUserCredentials.getUser().getId())
+                    .iterator().next().getUrl());
             logoImage = new Image(null,resource);
         }catch (Exception e) {
             FileResource resource = new FileResource(
-                    new File("src/main/webapp/VAADIN/themes/dashboard/Kujali Logo.png"));
+
+                    new File("src/main/webapp/VAADIN/themes/dashboard/profile.png"));
             logoImage= new Image(null,resource);
         }
 

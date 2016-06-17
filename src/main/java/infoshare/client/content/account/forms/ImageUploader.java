@@ -31,6 +31,7 @@ public class ImageUploader extends VerticalLayout implements Upload.Receiver, Up
         upload.addStyleName(ValoTheme.BUTTON_TINY);
         upload.addSucceededListener(this);
         panel = new Panel("Organization Logo");
+        panel.setWidth(250.0f, Unit.PIXELS);
         VerticalLayout panelContent = new VerticalLayout();
         panelContent.setSpacing(true);
         panelContent.addComponents(upload);
