@@ -163,8 +163,28 @@
     padding-top: 10%;
     padding-bottom: 20px;
     height: 60%;
+    position: relative;
+    cursor: pointer;
+    text-decoration: none;
+
+    .v-accordion-item{
+    }
+    .v-accordion-item-caption{
+    }
+    .v-accordion-item-content span:active{
+      color:blue;
+    }
+    .v-accordion-item-content span:focus{
+      color:blue;
+    }
+    .v-accordion-item-open{
+    }
+    .v-accordion-item-caption:active{
+
+    }
 
   }
+
   .avatar{
     width: 175px;
     height: 170px;
@@ -182,6 +202,7 @@
     margin-left: -15%;
     margin-top: -15% ;
   }
+
   .panel{
     box-sizing: border-box;
     padding: 7px;

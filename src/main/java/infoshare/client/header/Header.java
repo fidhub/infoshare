@@ -1,5 +1,6 @@
 package infoshare.client.header;
 
+import com.vaadin.annotations.PreserveOnRefresh;
 import com.vaadin.event.ItemClickEvent;
 import com.vaadin.event.LayoutEvents;
 import com.vaadin.event.ShortcutAction;
@@ -29,7 +30,6 @@ import java.util.stream.Collectors;
 /**
  * Created by hashcode on 2015/06/23.
  */
-//@PreserveOnRefresh
 public class Header extends VerticalLayout implements Button.ClickListener , ItemClickEvent.ItemClickListener{
 
     private static RawContentService rawContentService = ContentFacade.rawContentService;

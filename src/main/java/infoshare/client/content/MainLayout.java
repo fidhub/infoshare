@@ -10,6 +10,9 @@ import infoshare.client.content.home.Index;
 import infoshare.client.footer.Footer;
 import infoshare.client.header.Header;
 import infoshare.client.sidebar.SideBar;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 /**
  * Created by hashcode on 2015/06/22.

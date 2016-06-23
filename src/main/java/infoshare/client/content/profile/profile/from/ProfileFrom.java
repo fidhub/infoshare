@@ -81,7 +81,7 @@ public class ProfileFrom extends FormLayout {
         grid.addComponent(credentialsNonExpired,1,3);
         grid.addComponent(accountNonExpired,2,3);
         grid.addComponent(accountNonLocked,0,4);
-        Panel panel = new Panel(person.getFirstName().toUpperCase()+" 'S PROFILE SUMMARY");
+        Panel panel = new Panel(person.getFirstName().toUpperCase()+" "+person.getFirstName().toUpperCase()+" 'S PROFILE SUMMARY");
         panel.addStyleName("panel");
         panel.setSizeFull();
         panel.setContent(grid);

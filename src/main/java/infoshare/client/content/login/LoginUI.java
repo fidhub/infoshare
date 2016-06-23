@@ -146,7 +146,7 @@ public class LoginUI extends UI {
             userName.focus();
             userName.selectAll();
             passwordField.setValue("");
-            loginFailedLabel.setValue(String.format("Login failed: %s", "Wrong Email Or Password"));
+            loginFailedLabel.setValue(String.format("Login failed: %s", "Wrong Credentials "));
             loginFailedLabel.setVisible(true);
             if (loggedOutLabel != null) {
                 loggedOutLabel.setVisible(false);

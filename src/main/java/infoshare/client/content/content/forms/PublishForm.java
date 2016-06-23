@@ -18,8 +18,8 @@ public class PublishForm extends FormLayout{
     private final ContentModel model;
     public final BeanItem<ContentModel> item;
     public final FieldGroup binder;
-    public Button popUpCloseBtn =new Button("CANCEL");
-    public Button putToEdit =new Button("Re-Edited");
+    public Button popUpCloseBtn =new Button("Back");
+    public Button putToEdit =new Button("Re edited");
 
     public PublishForm() {
         model = new ContentModel();

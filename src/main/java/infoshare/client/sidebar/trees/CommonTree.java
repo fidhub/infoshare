@@ -25,6 +25,7 @@ public class CommonTree extends Tree implements ItemClickEvent.ItemClickListener
     public CommonTree(MainLayout main) {
         this.main = main;
         //add Items to Menu
+
         addItem(SETUP_LOCATIONS);
         addItem(SETUP_DEMOGRAPHICS);
         addItem(SETUP_UTILS);

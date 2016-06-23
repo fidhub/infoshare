@@ -31,8 +31,8 @@ public class EditForm extends FormLayout implements Upload.Receiver, Upload.Succ
     public final FieldGroup binder;
 
 
-    public Button popUpUpdateBtn = new Button("UPDATE");
-    public Button popUpCancelBtn = new Button("CANCEL");
+    public Button popUpUpdateBtn = new Button("Save");
+    public Button popUpCancelBtn = new Button("Back");
     public final ComboBox popUpContentTypeCmb;
     public final ComboBox popUpCategoryCmb;
     public final ComboBox popUpSourceCmb;
