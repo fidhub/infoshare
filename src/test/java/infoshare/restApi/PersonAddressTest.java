@@ -1,6 +1,6 @@
 package infoshare.restApi;
 
-import infoshare.client.content.setup.models.AddressModel;
+import infoshare.viewUI.container.setup.models.AddressModel;
 import org.junit.Test;
 
 /**

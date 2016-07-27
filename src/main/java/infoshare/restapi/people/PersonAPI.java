@@ -27,7 +27,8 @@ public class PersonAPI {
     }
 
     public static Person findByEmail(String param) {
-        return RestUtil.getById(PersonBaseURI.Person.GET_BY_EMAIL, param, Person.class);
+
+       return RestUtil.getById(PersonBaseURI.Person.GET_BY_EMAIL, param, Person.class);
     }
 
 

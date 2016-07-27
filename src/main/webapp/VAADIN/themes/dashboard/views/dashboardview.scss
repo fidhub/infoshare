@@ -176,6 +176,8 @@
     }
     .v-accordion-item-content span:focus{
       color:blue;
+      text-decoration: underline;
+      font-weight: bold;
     }
     .v-accordion-item-open{
     }
@@ -187,7 +189,7 @@
 
   .avatar{
     width: 175px;
-    height: 170px;
+    height: 160px;
     box-sizing: border-box;
     padding: 7px;
     background-color: white;
@@ -209,7 +211,7 @@
     background-color: white;
     overflow: hidden;
     border-radius: 10px;
-    background-color: rgba(208, 247, 255, 0.83);
+    //background-color: rgba(1, 255, 237, 0.2);
     box-shadow: 2px 2px 1px 2px rgba(0, 0, 0, 0.49);
     position: relative;
     text-align: center;
