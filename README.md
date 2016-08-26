@@ -28,8 +28,9 @@ InfoShare is working with the Grabouw community at the moment in terms of unders
 
 More Infomation about InfoShare with be noted as the project continues to grow
 
+
+
 How InfoShare is Envisioned
 
 ![untitled](https://cloud.githubusercontent.com/assets/20682492/17886211/07a227a8-6921-11e6-9646-d4feb7987bc6.jpg)
 
- uykhdgjkfghc
