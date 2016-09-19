@@ -5,3 +5,7 @@
   // Output the actual theme selectors
   @include dashboard;
 }
+.v-table-row.v-table-row-highlight-green,
+.v-table-row-odd.v-table-row-highlight-green {
+  background-color: #00ff00;
+}
