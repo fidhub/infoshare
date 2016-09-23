@@ -10,5 +10,4 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public interface RolesListService extends Services<Role, String> {
-    Role getRole(String role);
 }

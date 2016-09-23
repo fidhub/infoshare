@@ -163,6 +163,61 @@
     padding-top: 10%;
     padding-bottom: 20px;
     height: 60%;
+    position: relative;
+    cursor: pointer;
+    text-decoration: none;
+
+    .v-accordion-item{
+    }
+    .v-accordion-item-caption{
+    }
+    .v-accordion-item-content span:active{
+      color:blue;
+    }
+    .v-accordion-item-content span:focus{
+      color:blue;
+      text-decoration: underline;
+      font-weight: bold;
+    }
+    .v-accordion-item-open{
+    }
+    .v-accordion-item-caption:active{
+
+    }
+
+  }
+
+  .avatar{
+    width: 175px;
+    height: 160px;
+    box-sizing: border-box;
+    padding: 7px;
+    background-color: white;
+    overflow: hidden;
+    border: 2px;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: rgba(255,255,255,1);
+    box-shadow: 2px 2px 1px 2px rgba(0,0,0,0.3);
+    position: relative;
+    text-align: center;
+    margin-left: -15%;
+    margin-top: -15% ;
+  }
+
+  .panel{
+    box-sizing: border-box;
+    padding: 7px;
+    background-color: white;
+    overflow: hidden;
+    border-radius: 10px;
+    //background-color: rgba(1, 255, 237, 0.2);
+    box-shadow: 2px 2px 1px 2px rgba(0, 0, 0, 0.49);
+    position: relative;
+    text-align: center;
+    height: 450px;
+    margin-left: -3%;
+    padding: 2%;
 
   }
   .logo-header-image{

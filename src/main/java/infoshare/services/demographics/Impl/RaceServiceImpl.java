@@ -14,6 +14,16 @@ import java.util.Set;
 @SpringComponent
 @Service
 public class RaceServiceImpl implements RaceService {
+    private static RaceServiceImpl raceService=null;
+
+    private RaceServiceImpl(){}
+
+    public  static RaceServiceImpl getInstance(){
+        if(raceService==null) {
+            return new RaceServiceImpl();
+        }
+        return  raceService;
+    }
     @Override
     public Race findById(String s) {
         return RaceAPI.findById(s);

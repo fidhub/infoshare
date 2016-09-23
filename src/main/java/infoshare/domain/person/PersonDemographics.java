@@ -13,6 +13,9 @@ public class PersonDemographics implements Serializable, Comparable<PersonDemogr
     private Date dateOfBirth;
     private Date date;
     private String state;
+    private String maritalStatusId;
+    private int numberOfDependencies;
+    private String personRaceId;
 
     private PersonDemographics(){
     }
@@ -23,6 +26,13 @@ public class PersonDemographics implements Serializable, Comparable<PersonDemogr
         this.dateOfBirth = builder.dateOfBirth;
         this.date = builder.date;
         this.state = builder.state;
+        this.maritalStatusId = builder.maritalStatusId;
+        this.numberOfDependencies = builder.numberOfDependencies;
+        this.personRaceId = builder.personRaceId;
+    }
+
+    public String getPersonRaceId() {
+        return personRaceId;
     }
 
     public String getId() {
@@ -50,6 +60,14 @@ public class PersonDemographics implements Serializable, Comparable<PersonDemogr
         return state;
     }
 
+    public String getMaritalStatusId() {
+        return maritalStatusId;
+    }
+
+    public int getNumberOfDependencies() {
+        return numberOfDependencies;
+    }
+
     public static class Builder{
         private String id;
         private String personId;
@@ -57,10 +75,18 @@ public class PersonDemographics implements Serializable, Comparable<PersonDemogr
         private Date dateOfBirth;
         private Date date;
         private String state;
+        private String maritalStatusId;
+        private int numberOfDependencies;
+        private String personRaceId;
 
         public Builder id(String id) {
             this.id = id;
             return  this;
+        }
+
+        public Builder personraceid(String personRaceId) {
+            this.personRaceId = personRaceId;
+            return this;
         }
 
         public Builder personId(String personId) {
@@ -79,6 +105,15 @@ public class PersonDemographics implements Serializable, Comparable<PersonDemogr
         }
 
 
+        public Builder numberofdependencies(int numberOfDependencies) {
+            this.numberOfDependencies = numberOfDependencies;
+            return this;
+        }
+
+        public Builder maritalstatusid(String maritalStatusId) {
+            this.maritalStatusId = maritalStatusId;
+            return this;
+        }
 
         public Builder date(Date date) {
             this.date = date;
@@ -97,6 +132,8 @@ public class PersonDemographics implements Serializable, Comparable<PersonDemogr
             this.dateOfBirth = personDemographics.dateOfBirth;
             this.date = personDemographics.date;
             this.state = personDemographics.state;
+            this.maritalStatusId = personDemographics.maritalStatusId;
+            this.numberOfDependencies = personDemographics.numberOfDependencies;
             return this;
         }
         public PersonDemographics build(){return new PersonDemographics(this);}

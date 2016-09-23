@@ -11,8 +11,10 @@ import java.util.Set;
  */
 public class PersonAPI {
     public static Person save(Person person) {
-        RestUtil.save(PersonBaseURI.Person.POST, person, Person.class);
-        return person;
+        return RestUtil.save(PersonBaseURI.Person.POST, person, Person.class);
+    }
+    public static Person update(Person person) {
+        return RestUtil.save(PersonBaseURI.Person.POST, person,Person.class);
     }
 
     public static Person findById(String company, String id) {
@@ -25,7 +27,8 @@ public class PersonAPI {
     }
 
     public static Person findByEmail(String param) {
-        return RestUtil.getById(PersonBaseURI.Person.GET_BY_EMAIL, param, Person.class);
+
+       return RestUtil.getById(PersonBaseURI.Person.GET_BY_EMAIL, param, Person.class);
     }
 
 

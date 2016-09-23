@@ -14,7 +14,16 @@ import java.util.Set;
 @Service
 @SpringComponent
 public class CategoryServiceImpl implements CategoryService {
+    private static CategoryServiceImpl categoryService=null;
 
+    private CategoryServiceImpl(){}
+
+    public  static CategoryServiceImpl getInstance(){
+        if(categoryService==null) {
+            return new CategoryServiceImpl();
+        }
+        return categoryService;
+    }
     @Override
     public Category findById(String s) {
         return CategoryAPI.findById(s);

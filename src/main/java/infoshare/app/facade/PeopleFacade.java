@@ -12,21 +12,12 @@ import infoshare.services.people.*;
 
 public class PeopleFacade {
 
-    private static PersonRoleService personRoleService = new PersonRoleServiceImpl();
-    private static PersonService personService = new PersonServiceImpl();
-    private static PersonAddressService personAddressService = new PersonAddressServiceImpl();
-    private static PersonContactService personContactService = new PersonContactServiceImpl();
-    private static PersonDemographicsService personDemographicsService = new PersonDemographicsServiceImpl();
-    private static PersonImagesService personImagesService = new PersonImagesServiceImpl();
-    private static PersonLanguageService personLanguageService = new PersonLanguageServiceImpl();
-
-    public static PersonRoleService getPersonRoleServiceInstance(){return personRoleService ;}
-    public static PersonService getPersonServiceInstance(){return personService;}
-    public static PersonAddressService getPersonAddressServiceInstance(){return personAddressService ;}
-    public static PersonContactService getPersonContactServiceInstance(){return personContactService;}
-    public static PersonDemographicsService getPersonDemographicsServiceInstance(){return personDemographicsService;}
-    public static PersonImagesService getPersonImagesServiceInstance(){return personImagesService;}
-    public static PersonLanguageService getPersonLanguageServiceInstance(){return personLanguageService;}
-
+    public final static PersonRoleService personRoleService =  PersonRoleServiceImpl.getInstance();
+    public final static PersonService personService =  PersonServiceImpl.getInstance();
+    public final static PersonAddressService personAddressService =  PersonAddressServiceImpl.getInstance();
+    public final static PersonContactService personContactService =  PersonContactServiceImpl.getInstance();
+    public final static PersonDemographicsService personDemographicsService =  PersonDemographicsServiceImpl.getInstance();
+    public final static PersonImagesService personImagesService =  PersonImagesServiceImpl.getInstance();
+    public final static PersonLanguageService personLanguageService =  PersonLanguageServiceImpl.getInstance();
 
 }

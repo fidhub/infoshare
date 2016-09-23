@@ -1,8 +1,8 @@
 package infoshare.service;
 
+import infoshare.app.facade.CategoryFacade;
 import infoshare.domain.content.Category;
 import infoshare.services.ContentFiles.category.CategoryService;
-import infoshare.services.ContentFiles.category.Impl.CategoryServiceImpl;
 import junit.framework.TestCase;
 import org.junit.Assert;
 import org.junit.Test;
@@ -14,7 +14,7 @@ import java.util.Set;
  */
 public class categoryTest extends TestCase{
 
-    private CategoryService categoryService = new CategoryServiceImpl();
+    private CategoryService categoryService = CategoryFacade.categoryService;
 
 
     @Test

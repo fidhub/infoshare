@@ -26,7 +26,7 @@ import java.util.*;
  */
 @Service
 public class SecurityService implements UserDetailsService {
-    private final PersonService personService = PeopleFacade.getPersonServiceInstance();
+    private final PersonService personService = PeopleFacade.personService;
 
     @Override
     public UserDetails loadUserByUsername(String emailAddress) throws UsernameNotFoundException {
@@ -64,11 +64,11 @@ public class SecurityService implements UserDetailsService {
 
     public static Set<Role> getUserRoles() {
         Person person = GetUserCredentials.getUser();
-        return PeopleFacade.getPersonServiceInstance().getRoles(person.getId());
+        return PeopleFacade.personService.getRoles(person.getId());
     }
 
     public static boolean securityCheck(String ro) {
-        Role role = DemographicsFacade.getRolesListServiceInstance().getRole(ro);
+        Role role = DemographicsFacade.rolesListService.findById(ro);
         return getUserRoles().contains(role);
     }
 
@@ -94,20 +94,20 @@ public class SecurityService implements UserDetailsService {
                 .copy(person)
                 .authvalue(PasswordHash.createEncryptedPassword(newvalue))
                 .build();
-        PeopleFacade.getPersonServiceInstance().update(user);
+        PeopleFacade.personService.update(user);
         sendEmail(newvalue, person);
 
     }
 
     public static void sendEmail(String password, Person companyAdmin) {
-        Mail props = UtilFacade.getMailServiceInstance().findAll(OrganisationUtil.getCompanyCode()).iterator().next();
+        Mail props = UtilFacade.mailService.findAll(GetUserCredentials.getUser().getOrg()).iterator().next();
         ComposeEmail email = new ComposeEmail
                 .Builder()
                 .addressesTo(new HashSet<>(Arrays.asList(companyAdmin.getEmailAddress())))
                 .body(" Your Username is : " + companyAdmin.getEmailAddress() + " And Your Password is : " + password + " Login in at https://hashwork.hash-code.com")
                 .from(props.getKey())
                 .password(props.getValue())
-                .subject("Your Hashwork Details")
+                .subject("Your Infoshare Details")
                 .build();
         EmailUtil.sendSimpleEmail(email);
     }

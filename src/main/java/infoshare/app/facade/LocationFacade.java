@@ -15,14 +15,9 @@ import infoshare.services.location.LocationTypeService;
  */
 public class LocationFacade {
 
-    private static ContactTypeService contactListService = new ContactTypeServiceImpl();
-    private static LocationTypeService locationTypeService = new LocationTypeServiceImpl();
-    private static LocationService locationService = new LocationServiceImpl();
-    private static AddressTypeService addressTypeService = new AddressTypeServiceImpl();
-
-    public static ContactTypeService getContactTypeServiceInstance(){return contactListService ;}
-    public static LocationTypeService getLocationTypeServiceInstance(){return locationTypeService  ;}
-    public static LocationService getLocationServiceInstance(){return  locationService;}
-    public static AddressTypeService getAddressTypeServiceInstance(){return addressTypeService ;}
+    public final static ContactTypeService contactListService =  ContactTypeServiceImpl.getInstance();
+    public final static LocationTypeService locationTypeService =  LocationTypeServiceImpl.getInstance();
+    public final static LocationService locationService =  LocationServiceImpl.getInstance();
+    public final static AddressTypeService addressTypeService =  AddressTypeServiceImpl.getInstance();
 
 }

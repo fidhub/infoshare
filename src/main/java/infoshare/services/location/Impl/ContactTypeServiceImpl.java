@@ -14,7 +14,16 @@ import java.util.Set;
 @SpringComponent
 @Service
 public class ContactTypeServiceImpl implements ContactTypeService {
+    private static ContactTypeServiceImpl contactTypeService=null;
 
+    private ContactTypeServiceImpl(){}
+
+    public  static ContactTypeServiceImpl getInstance(){
+        if(contactTypeService==null) {
+            return new ContactTypeServiceImpl();
+        }
+        return contactTypeService;
+    }
     @Override
     public ContactType findById(String s) {
         return ContactTypeAPI.findById(s);

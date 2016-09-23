@@ -10,7 +10,7 @@ import java.util.Map;
  */
 public class CategoryFactory {
 
-    public static Category getCategory(Map<String,String> categoryVals){
+    public static Category getCategory(Map<String,String > categoryVals){
         Category category = new Category.Builder()
                 .id(KeyGenerator.getEntityId())
                 .name(categoryVals.get("name"))
