@@ -45,6 +45,9 @@
     line-height: 1.2;
   }
 
+  .test{
+    color: blue;
+  }
   .v-menubar-user-menu:after {
     display: none;
   }
@@ -123,6 +126,7 @@
         padding-left: round($v-layout-margin-left / 2);
         padding-right: round($v-layout-margin-left / 2);
       }
+
       .v-formlayout > table,
       .v-formlayout > table > tbody,
       .v-formlayout-row {

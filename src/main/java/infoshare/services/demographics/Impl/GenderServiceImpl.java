@@ -14,6 +14,16 @@ import java.util.Set;
 @SpringComponent
 @Service
 public class GenderServiceImpl implements GenderService {
+    private static GenderServiceImpl genderService=null;
+
+    private GenderServiceImpl(){}
+
+    public  static GenderServiceImpl getInstance(){
+        if(genderService==null) {
+            return new GenderServiceImpl();
+        }
+        return genderService;
+    }
 
     @Override
     public Gender findById(String s) {

@@ -14,6 +14,16 @@ import java.util.Set;
 @Service
 @SpringComponent
 public class EditedContentServiceImpl implements EditedContentService {
+    private static EditedContentServiceImpl editedContentService=null;
+
+    private EditedContentServiceImpl(){}
+
+    public  static EditedContentServiceImpl getInstance(){
+        if(editedContentService==null) {
+            return new EditedContentServiceImpl();
+        }
+        return editedContentService;
+    }
 
     @Override
     public EditedContent save(EditedContent entity) {

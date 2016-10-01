@@ -14,6 +14,7 @@ import java.util.Set;
 
 @Component
 public interface PersonRoleService {
+    PersonRole findById(String personId, String roleId);
     Set<PersonRole> findPersonRoles(String personId);
 
     PersonRole save(PersonRole entity);

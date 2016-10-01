@@ -21,7 +21,16 @@ import java.util.Set;
 @Service
 @SpringComponent
 public class PersonRoleServiceImpl implements PersonRoleService {
+    private static PersonRoleServiceImpl personRoleService =null;
 
+    private PersonRoleServiceImpl(){}
+
+    public  static PersonRoleServiceImpl getInstance(){
+        if(personRoleService ==null) {
+            return new PersonRoleServiceImpl();
+        }
+        return personRoleService;
+    }
     @Override
     public PersonRole save(PersonRole entity) {
         return PersonRoleAPI.save(entity);
@@ -35,6 +44,11 @@ public class PersonRoleServiceImpl implements PersonRoleService {
     @Override
     public void delete(PersonRole entity) {
         PersonRoleAPI.save(entity);
+    }
+
+    @Override
+    public PersonRole findById(String personId, String roleId) {
+        return PersonRoleAPI.findById(personId,roleId);
     }
 
     @Override

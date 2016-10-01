@@ -14,6 +14,16 @@ import java.util.Set;
 @SpringComponent
 @Service
 public class AddressTypeServiceImpl implements AddressTypeService {
+    private static AddressTypeServiceImpl addressTypeService=null;
+
+    private AddressTypeServiceImpl(){}
+
+    public  static AddressTypeServiceImpl getInstance(){
+        if(addressTypeService==null) {
+            return new AddressTypeServiceImpl();
+        }
+        return addressTypeService;
+    }
     @Override
     public AddressType findById(String s) {
         return AddressTypeAPI.findById(s);

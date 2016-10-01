@@ -16,7 +16,13 @@ import infoshare.domain.person.PersonRole;
 public class PersonRoleFactory {
 
     public static PersonRole getPersonRole(String personId, String roleId) {
+        /*
+     private String personId;
+    private String roleId;
+    private String state;
+         */
         PersonRole personRole = new PersonRole.Builder()
+
                 .state(DomainState.ACTIVE.name())
                 .personId(personId)
                 .roleId(roleId)               

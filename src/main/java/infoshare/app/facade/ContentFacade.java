@@ -12,13 +12,7 @@ import infoshare.services.ContentFiles.content.RawContentService;
  * Created by user9 on 2016/02/23.
  */
 public class ContentFacade {
-    private static RawContentService rawContentService = new RawContentServiceImpl();
-    private static EditedContentService editedContentService = new EditedContentServiceImpl();
-    private static PublishedContentService publishedContentService = new PublishedContentServiceImpl();
-
-    public static RawContentService getRawInstance(){return rawContentService;}
-    public static EditedContentService getEditedInstance(){return editedContentService;}
-    public static PublishedContentService getPublishedInstance(){return publishedContentService;}
-
-
+    public final static RawContentService rawContentService =  RawContentServiceImpl.getInstance();
+    public final static EditedContentService editedContentService =  EditedContentServiceImpl.getInstance();
+    public final static PublishedContentService publishedContentService =  PublishedContentServiceImpl.getInstance();
 }

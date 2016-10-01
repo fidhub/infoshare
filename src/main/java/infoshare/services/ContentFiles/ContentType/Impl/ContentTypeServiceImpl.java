@@ -10,6 +10,16 @@ import java.util.Set;
  */
 
 public class ContentTypeServiceImpl implements ContentTypeService{
+    private static ContentTypeServiceImpl contentTypeService=null;
+
+    private ContentTypeServiceImpl(){}
+
+    public  static ContentTypeServiceImpl getInstance(){
+        if(contentTypeService==null) {
+            return new ContentTypeServiceImpl();
+        }
+        return contentTypeService;
+    }
 
     @Override
     public ContentType findById(String s) {

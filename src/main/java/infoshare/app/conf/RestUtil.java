@@ -2,15 +2,24 @@ package infoshare.app.conf;
 
 import com.google.gson.*;
 import com.google.gson.stream.JsonReader;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
+import org.apache.http.conn.ssl.NoopHostnameVerifier;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.http.*;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.http.converter.ByteArrayHttpMessageConverter;
+import org.springframework.http.converter.FormHttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -51,6 +60,38 @@ public class RestUtil {
         }
         return list;
     }
+    public static <T> Set<T> getFileResults(String fetchUrl,String fileUrl,Class<T> tClass) throws IOException {
+        Set<T> fileResults = new HashSet<>();
+        MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+        map.add("upload", new FileSystemResource(fileUrl));
+
+        CloseableHttpClient httpClient = HttpClients.custom()
+                .setSSLHostnameVerifier(new NoopHostnameVerifier())
+                .build();
+        HttpComponentsClientHttpRequestFactory requestFactory =
+                new HttpComponentsClientHttpRequestFactory();
+        requestFactory.setHttpClient(httpClient);
+
+        RestTemplate restTemplate = new RestTemplate(requestFactory);
+        restTemplate.getMessageConverters().add(new ByteArrayHttpMessageConverter());
+        restTemplate.getMessageConverters().add(new FormHttpMessageConverter());
+        restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+        headers.setAccept(Arrays.asList(MediaType.APPLICATION_OCTET_STREAM));
+        HttpEntity<MultiValueMap<String, Object>> request = new HttpEntity<>(map, headers);
+
+        ResponseEntity<String> result = restTemplate.exchange(fetchUrl, HttpMethod.POST, request, String.class);
+        Gson gson = new Gson();
+        JsonParser jsonParser = new JsonParser();
+        JsonArray jsonArray = (JsonArray) jsonParser.parse(result.getBody().toString());
+
+        for (JsonElement element : jsonArray) {
+            fileResults.add(gson.fromJson(element, tClass));
+        }
+        return fileResults;
+    }
 
     public static <T> T getById(String fetchUrl, String ID, Class<T> classType) {
         try {
@@ -68,23 +109,18 @@ public class RestUtil {
             return null;
         }
     }
-
     public static <T> T save(String url, T classTypeObject, Class<T> classType) {
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<T> body = new HttpEntity<>(classTypeObject, headers);
-        JsonElement element = new JsonParser()
-                .parse(restTemplate.postForObject(url, body, String.class))
+        JsonElement element = new JsonParser().parse(restTemplate.postForObject(url, body, String.class))
                 .getAsJsonObject();
-        Gson gson = new GsonBuilder()
-                .registerTypeAdapter(Date.class,
-                        (JsonDeserializer<Date>)
-                                (jsonElement, type, jsonDeserializationContext) ->
-                                        new Date(jsonElement.getAsJsonPrimitive().getAsLong()))
+        Gson gson = new GsonBuilder().registerTypeAdapter(Date.class,
+                   (JsonDeserializer<Date>)
+                   (jsonElement, type, jsonDeserializationContext) ->
+                    new Date(jsonElement.getAsJsonPrimitive().getAsLong()))
                 .create();
-
-
         return gson.fromJson(element, classType);
     }
 
@@ -96,6 +132,8 @@ public class RestUtil {
         restTemplate.put(url, body);
         return classType;
     }
+
+
 
 
 }

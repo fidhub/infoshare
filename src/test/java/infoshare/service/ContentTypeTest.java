@@ -1,9 +1,9 @@
 package infoshare.service;
 
 
+import infoshare.app.facade.ContentTypeFacade;
 import infoshare.domain.content.ContentType;
 import infoshare.services.ContentFiles.ContentType.ContentTypeService;
-import infoshare.services.ContentFiles.ContentType.Impl.ContentTypeServiceImpl;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -14,7 +14,7 @@ import java.util.Set;
  */
 public class ContentTypeTest {
 
-    ContentTypeService contentTypeService = new ContentTypeServiceImpl();
+    ContentTypeService contentTypeService = ContentTypeFacade.contentTypeService;
     @Test
     public void testReadAll() throws Exception {
         Set<ContentType> contentType = contentTypeService.findAll();

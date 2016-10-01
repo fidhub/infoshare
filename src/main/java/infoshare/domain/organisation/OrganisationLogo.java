@@ -1,8 +1,6 @@
 package infoshare.domain.organisation;
 
 
-import jdk.nashorn.internal.runtime.options.Option;
-
 import java.io.Serializable;
 import java.util.Date;
 
@@ -14,7 +12,7 @@ public class OrganisationLogo implements Serializable, Comparable<OrganisationLo
     private String org;
     private String id;
     private String url;
-    private Option<String> size;
+    private String size;
     private String description;
     private String mime;
     private Date date;
@@ -44,7 +42,7 @@ public class OrganisationLogo implements Serializable, Comparable<OrganisationLo
         return url;
     }
 
-    public Option<String> getSize() {
+    public String getSize() {
         return size;
     }
 
@@ -64,7 +62,7 @@ public class OrganisationLogo implements Serializable, Comparable<OrganisationLo
         private String org;
         private String id;
         private String url;
-        private Option<String> size;
+        private String size;
         private String description;
         private String mime;
         private Date date;
@@ -84,7 +82,7 @@ public class OrganisationLogo implements Serializable, Comparable<OrganisationLo
             return this;
         }
 
-        public Builder size(Option<String> size) {
+        public Builder size(String size) {
             this.size = size;
             return this;
         }

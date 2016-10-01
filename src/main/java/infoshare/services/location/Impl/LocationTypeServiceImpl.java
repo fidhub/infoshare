@@ -14,7 +14,16 @@ import java.util.Set;
 @SpringComponent
 @Service
 public class LocationTypeServiceImpl implements LocationTypeService {
+    private static LocationTypeServiceImpl locationTypeService =null;
 
+    private LocationTypeServiceImpl(){}
+
+    public  static LocationTypeServiceImpl getInstance(){
+        if(locationTypeService ==null) {
+            return new LocationTypeServiceImpl();
+        }
+        return locationTypeService;
+    }
     @Override
     public LocationType findById(String s) {
         return LocationTypeAPI.findById(s);

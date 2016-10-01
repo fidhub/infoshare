@@ -83,12 +83,11 @@ public class App{
 
         @Bean
         public RememberMeServices rememberMeServices() {
-            // TODO Is there some way of exposing the RememberMeServices instance that the remember me configurer creates by default?
+            //TODO Is there some way of exposing the RememberMeServices instance that the remember me configurer creates by default?
             TokenBasedRememberMeServices services = new TokenBasedRememberMeServices("myAppKey", userDetailsService());
             services.setAlwaysRemember(true);
             return services;
         }
-
     }
 
 }
