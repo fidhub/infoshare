@@ -5,7 +5,6 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-import infoshare.app.conf.RestUtil;
 import infoshare.domain.storage.FileResults;
 import infoshare.restapi.storage.UploadBaseURL;
 import org.apache.http.conn.ssl.NoopHostnameVerifier;
@@ -73,14 +72,14 @@ public class MediaRestApiTest {
     }
 
 
-    @Test
-    public void testRest() throws Exception {
-
-       for (FileResults fileResults : RestUtil.getFileResults(UploadBaseURL.Media.POST,"/home/user9/upload.png", FileResults.class))
-       {
-           System.out.println("The results is " + fileResults.getId());
-           System.out.println("The results is " + fileResults.getUrl());
-       }
-
-    }
+//    @Test
+//    public void testRest() throws Exception {
+//
+//       for (FileResults fileResults : RestUtil.getFileResults(UploadBaseURL.Media.POST,"/home/user9/upload.png", FileResults.class))
+//       {
+//           System.out.println("The results is " + fileResults.getId());
+//           System.out.println("The results is " + fileResults.getUrl());
+//       }
+//
+//    }
 }

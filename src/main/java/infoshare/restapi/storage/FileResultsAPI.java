@@ -4,6 +4,7 @@ import infoshare.app.conf.RestUtil;
 import infoshare.domain.storage.FileResults;
 
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -12,8 +13,8 @@ import java.util.Set;
 public class FileResultsAPI {
     public static Set<FileResults> save(String url){
         try {
-            return RestUtil.getFileResults(UploadBaseURL.Media.POST, url, FileResults.class);
-        } catch (IOException e) {
+            return  new HashSet<FileResults>();
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }

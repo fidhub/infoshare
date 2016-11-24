@@ -10,6 +10,7 @@ import com.vaadin.ui.themes.ChameleonTheme;
 import com.vaadin.ui.themes.ValoTheme;
 import infoshare.app.facade.ContentFacade;
 import infoshare.app.facade.OrganisationFacade;
+import infoshare.app.util.AboutText;
 import infoshare.app.util.organisation.OrganisationUtil;
 import infoshare.app.util.security.GetUserCredentials;
 import infoshare.viewUI.container.MainLayout;
@@ -76,9 +77,9 @@ public class Header extends VerticalLayout implements Button.ClickListener , Ite
             main.content.setSecondComponent(new HomeMenu(main,"LANDING"));
             home.getUI();
         }else if(source == notify){
-          notificationButton(clickEvent);
+            notificationButton(clickEvent);
         }else if(source ==user){
-          userButton(clickEvent);
+            userButton(clickEvent);
         }
     }
 
@@ -192,7 +193,27 @@ public class Header extends VerticalLayout implements Button.ClickListener , Ite
         signOut.setSizeFull();
         signOut.addClickListener(clickEvent -> page.setLocation("/logout"));
 
+        Button settings = new Button("About");
+        settings.addStyleName(ValoTheme.BUTTON_TINY);
+        settings.setIcon(FontAwesome.INFO_CIRCLE);
+        settings.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
+        settings.setSizeFull();
+        settings.addClickListener( ClickEvent ->{
+            HorizontalLayout layout1 = new HorizontalLayout();
+            Label label = new Label(AboutText.about.toString(),ContentMode.HTML);
+            label.setWidth("900px");
+            layout1.addComponent(label);
+            Window window = new Window();
+            UI.getCurrent().addWindow(window);
+            window.setContent(layout1);
+            window.setWidth("950px");
+            window.setHeight("600px");
+            window.setModal(true);
+        });
+
+
         layout.addComponent(signOut);
+        layout.addComponent(settings);
 
         userProfile.setContent(layout);
         userProfile.setWidth("80px");
@@ -232,41 +253,41 @@ public class Header extends VerticalLayout implements Button.ClickListener , Ite
             return diffMonth +" Month(s) ago";
         else if(diffDays > 0)
             return diffDays +" Days ago";
-         if(diffHours > 0)
+        if(diffHours > 0)
             return diffHours +" Hours ago";
-         else if(diffMinutes > 0)
+        else if(diffMinutes > 0)
             return diffMinutes + " Minutes ago";
-          else
+        else
             return diffSeconds + " seconds ago";
     }
 
     public static void refreshNotification() {
         int i = 0 ;
-            for (RawContent rawContent :rawContentService.findAll(OrganisationUtil.getCompanyCode())
-                    .stream()
-                    .filter(cont ->cont.getState().equalsIgnoreCase("Active"))
-                    .collect(Collectors.toList())
-                    .stream()
+        for (RawContent rawContent :rawContentService.findAll(OrganisationUtil.getCompanyCode())
+                .stream()
+                .filter(cont ->cont.getState().equalsIgnoreCase("Active"))
+                .collect(Collectors.toList())
+                .stream()
                 .filter(cont -> cont.getStatus().equalsIgnoreCase("Raw"))
                 .collect(Collectors.toList())){
-                try {
+            try {
 
-                    notificationTable.addItem(new Object[]{new Label(
-                            "<b>" + rawContent.getCreator().toUpperCase()
-                                    + "<br><span><i>"
-                                    + differInTime(rawContent.getDateCreated())
-                                    + "</i></span><br>"
-                                    + "<b> TITLE: </b><i>" + rawContent.getTitle()
-                                    + "</i>", ContentMode.HTML)
-                    }, rawContent.getId());
-                    i++;
-                    notify.addStyleName("notifications");
-                    notify.addStyleName("unread");
-                    notify.setCaption(i + "");
-                    notify.setDescription(i + " un-edited tips content");
-                } catch (Exception r) {
-                }
+                notificationTable.addItem(new Object[]{new Label(
+                        "<b>" + rawContent.getCreator().toUpperCase()
+                                + "<br><span><i>"
+                                + differInTime(rawContent.getDateCreated())
+                                + "</i></span><br>"
+                                + "<b> TITLE: </b><i>" + rawContent.getTitle()
+                                + "</i>", ContentMode.HTML)
+                }, rawContent.getId());
+                i++;
+                notify.addStyleName("notifications");
+                notify.addStyleName("unread");
+                notify.setCaption(i + "");
+                notify.setDescription(i + " un-edited tips content");
+            } catch (Exception r) {
             }
+        }
 
         if(i==0){
             notify.removeStyleName("unread");
@@ -303,8 +324,8 @@ public class Header extends VerticalLayout implements Button.ClickListener , Ite
         try {
 
             ExternalResource resource = new ExternalResource(OrganisationFacade.companyLogosService
-                            .findById(OrganisationUtil.getCompanyCode(),OrganisationUtil.getCompanyCode()).getUrl());
-           logoImage = new Image(null,resource);
+                    .findById(OrganisationUtil.getCompanyCode(),OrganisationUtil.getCompanyCode()).getUrl());
+            logoImage = new Image(null,resource);
         }catch (Exception e) {
             FileResource resource = new FileResource(
                     new File("src/main/webapp/VAADIN/themes/dashboard/Kujali Logo.png"));
