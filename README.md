@@ -38,4 +38,4 @@ How InfoShare is Envisioned
 
 # Mobile App
 
-https://cloud.githubusercontent.com/assets/20682492/20562687/94a9b5e4-b18d-11e6-8c4c-ea64be5e13db.jpg
+![untitled](https://cloud.githubusercontent.com/assets/20682492/20562687/94a9b5e4-b18d-11e6-8c4c-ea64be5e13db.jpg)
