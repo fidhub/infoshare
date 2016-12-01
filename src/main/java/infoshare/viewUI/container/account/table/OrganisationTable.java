@@ -4,7 +4,11 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.themes.ValoTheme;
 import infoshare.app.facade.OrganisationFacade;
+import infoshare.app.facade.PeopleFacade;
 import infoshare.app.util.DomainState;
+import infoshare.app.util.organisation.OrganisationUtil;
+import infoshare.app.util.security.GetUserCredentials;
+import infoshare.domain.person.Person;
 import infoshare.viewUI.container.MainLayout;
 import infoshare.viewUI.container.account.AccountMenu;
 import infoshare.viewUI.container.account.forms.OrganisationAdminForm;
@@ -13,7 +17,9 @@ import infoshare.viewUI.container.account.views.OrganisationDetails;
 import infoshare.domain.organisation.Organisation;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Created by hashcode on 2015/11/15.
@@ -90,8 +96,32 @@ public class OrganisationTable extends Table {
         setImmediate(true);
     }
 
-
     private void getHome() {
         main.content.setSecondComponent(new AccountMenu(main, "LANDING"));
+    }
+
+    public Set<Person> getUsers(String role){
+        Set<Person> persons = new HashSet<>();
+        for (Organisation org : OrganisationFacade.companyService.getActiveOrganisations()) {
+            for (Person person : PeopleFacade.personService.getPersonByCompany(org.getId())
+                    .stream()
+                    .filter(per -> per.getState().equalsIgnoreCase(DomainState.ACTIVE.name()))
+                    .collect(Collectors.toSet())) {
+                persons.addAll(PeopleFacade.personRoleService.findPersonRoles(person.getId())
+                        .stream().filter(personRole -> personRole.getRoleId().equalsIgnoreCase(role))
+                        .map(personRole -> person).collect(Collectors.toList()));
+            }
+        }
+        return persons;
+    }
+    public Set<Person> getAll(){
+        return  PeopleFacade.personService.getPersonByCompany(OrganisationUtil.getCompanyCode()).stream()
+                .filter(person
+                        -> GetUserCredentials.isUserWithRole(PeopleFacade.personRoleService
+                        .findPersonRoles(OrganisationUtil.getPersonID())
+                        .iterator().next().getRoleId()))
+                .collect(Collectors.toSet()).stream()
+                .filter(person -> person.getState().equalsIgnoreCase(DomainState.ACTIVE.name()))
+                .collect(Collectors.toSet());
     }
 }

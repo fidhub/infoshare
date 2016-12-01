@@ -75,7 +75,7 @@ public class PersonServiceImpl implements PersonService {
     public Set<Person> getPersonsWithRole(String company, String role) {
         return PersonAPI.findAll(company)
                 .parallelStream()
-                .filter(person -> isThisPersonInThis(person.getId(), role))
+                //.filter(person -> isThisPersonInThis(person.getId(), role))
                 .collect(Collectors.toSet());
     }
 
