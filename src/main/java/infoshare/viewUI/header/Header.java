@@ -3,6 +3,7 @@ package infoshare.viewUI.header;
 import com.vaadin.event.ItemClickEvent;
 import com.vaadin.event.LayoutEvents;
 import com.vaadin.server.*;
+import com.vaadin.event.MouseEvents;
 import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.*;
 import com.vaadin.ui.Button.ClickEvent;
@@ -331,6 +332,22 @@ public class Header extends VerticalLayout implements Button.ClickListener , Ite
                     new File("src/main/webapp/VAADIN/themes/dashboard/Kujali Logo.png"));
             logoImage= new Image(null,resource);
         }
+
+      logoImage.addClickListener(new MouseEvents.ClickListener() {
+            @Override
+            public void click(MouseEvents.ClickEvent clickEvent) {
+
+                if (notifications != null && notifications.getUI() != null) {
+                    notifications.close();
+                }
+
+                if (userProfile != null && userProfile.getUI() != null) {
+                    userProfile.close();
+                }
+                main.content.setSecondComponent(new HomeMenu(main, "LANDING"));
+                home.getUI();
+            }
+        });
 
         logoImage.addStyleName("logo-header-image");
         logoImage.setHeight(80.0f, Unit.PIXELS);
