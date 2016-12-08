@@ -10,6 +10,7 @@ public class AdminModel implements Serializable {
     @NotNull
     private String firstName;
     private String middleName;
+    private String password;
     @NotNull
     private String emailAddress;
     @NotNull
@@ -23,6 +24,12 @@ public class AdminModel implements Serializable {
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {this.password = password;}
 
     public String getMiddleName() {
         return middleName;

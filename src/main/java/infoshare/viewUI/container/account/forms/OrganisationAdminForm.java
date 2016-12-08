@@ -55,6 +55,8 @@ public class OrganisationAdminForm extends FormLayout implements Button.ClickLis
         TextField lastname = UIComponent.getGridTextField("Last Name:", "lastName", AdminModel.class, binder);
         TextField emailAddress = UIComponent.getGridTextField("Email Address :", "emailAddress", AdminModel.class, binder);
 
+
+
         // Create a field group and use it to bind the fields in the layout
         GridLayout grid = new GridLayout(4, 10);
         grid.setSizeFull();
@@ -67,8 +69,8 @@ public class OrganisationAdminForm extends FormLayout implements Button.ClickLis
         grid.addComponent(middlename, 0, 1);
         grid.addComponent(emailAddress, 1, 1);
 
-        //SPAN ROW 1 and 2
-//        grid.addComponent(description, 2, 0, 2, 1);
+
+
 
         HorizontalLayout buttons = ButtonsHelper.getButtons(save, edit, cancel, update, delete);
         buttons.setSizeFull();
@@ -84,14 +86,14 @@ public class OrganisationAdminForm extends FormLayout implements Button.ClickLis
         final Button source = event.getButton();
         if (source == save) {
             saveForm(binder);
-        } else if (source == edit) {
-            setEditFormProperties();
+        //} else if (source == edit) {
+         //   setEditFormProperties();
         } else if (source == cancel) {
             getHome();
-        } else if (source == update) {
-            saveEditedForm(binder);
-        } else if (source == delete) {
-            deleteForm(binder);
+        //} else if (source == update) {
+        //    saveEditedForm(binder);
+        //} else if (source == delete) {
+         //   deleteForm(binder);
         }
     }
 
@@ -99,9 +101,9 @@ public class OrganisationAdminForm extends FormLayout implements Button.ClickLis
 
     }
 
-    private void saveEditedForm(FieldGroup binder) {
+    //private void saveForm(FieldGroup binder) {
 
-    }
+    //}
 
     private void getHome() {
         main.content.setSecondComponent(new AccountMenu(main, "LANDING"));
@@ -116,12 +118,14 @@ public class OrganisationAdminForm extends FormLayout implements Button.ClickLis
 
         final AdminModel bean = ((BeanItem<AdminModel>) binder.getItemDataSource()).getBean();
 
-        final String password = SecurityService.generateRandomPassword();
+
+        //final String password = SecurityService.generateRandomPassword();
         Map<String, String> stringVals = new HashMap<>();
+        String password = "admin";
         stringVals.put("firstName", bean.getFirstName());
         stringVals.put("middleName", bean.getMiddleName());
         stringVals.put("lastName", bean.getLastName());
-        stringVals.put("authvalue", PasswordHash.createEncryptedPassword(password));
+        stringVals.put("authvalue", password);
         stringVals.put("emailAddress", bean.getEmailAddress());
         stringVals.put("org", company.getId());
 
@@ -131,7 +135,9 @@ public class OrganisationAdminForm extends FormLayout implements Button.ClickLis
         boolVals.put("accountNonLocked", Boolean.TRUE);
         boolVals.put("credentialsNonExpired", Boolean.TRUE);
         Person companyAdmin = createAccount(stringVals, boolVals);
-        SecurityService.sendEmail(password, companyAdmin);
+//        SecurityService.sendEmail(password, companyAdmin);
+
+
 
         final Organisation updateCompany = new Organisation
                 .Builder()
@@ -152,6 +158,8 @@ public class OrganisationAdminForm extends FormLayout implements Button.ClickLis
         }catch (Exception e){
             e.fillInStackTrace();
         }
+
+
         return companyAdmin;
     }
 

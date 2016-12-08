@@ -15,6 +15,7 @@ import de.steinwedel.messagebox.MessageBox;
 import infoshare.app.facade.PeopleFacade;
 import infoshare.app.util.DomainState;
 import infoshare.app.util.ScreenMessages;
+import infoshare.app.util.security.PasswordHash;
 import infoshare.viewUI.container.MainLayout;
 import infoshare.viewUI.container.users.UserManagementMenu;
 import infoshare.viewUI.container.users.forms.UserForm;
@@ -37,6 +38,8 @@ public class UserDetails extends VerticalLayout implements Button.ClickListener 
     private final String tab;
     private String selectedUserId;
     private String selectedUserOrgId;
+    private String pass;
+
     private final Person person;
 
     public UserDetails(MainLayout main,Person per, String tab) {
@@ -46,6 +49,10 @@ public class UserDetails extends VerticalLayout implements Button.ClickListener 
         person = per;
         selectedUserId = person.getId();
         selectedUserOrgId = person.getOrg();
+       // pass = person.getPassword();
+
+       // pass = toString();
+
 
         final UserModel model = getModel(person);
         form.binder.setItemDataSource(new BeanItem<>(model));
@@ -133,6 +140,7 @@ public class UserDetails extends VerticalLayout implements Button.ClickListener 
         model.setFirstName(user.getFirstName());
         model.setLastName(user.getLastName());
         model.setMiddleName(user.getMiddleName());
+        model.setPassword("admin");
         model.setOrg(user.getOrg());
         model.setRole(PeopleFacade.personRoleService.findPersonRoles(person.getId()).iterator().next().getRoleId());
         return model;
@@ -149,6 +157,7 @@ public class UserDetails extends VerticalLayout implements Button.ClickListener 
                     .lastName(bean.getLastName())
                     .emailAddress(bean.getEmailAddress())
                     .middleName(bean.getMiddleName())
+                    //.password("admin")
                     .build();
             return updatedPerson;
         } catch (FieldGroup.CommitException e) {

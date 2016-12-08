@@ -44,8 +44,7 @@ import java.util.stream.Collectors;
 /**
  * Created by hashcode on 2015/12/01.
  */
-public class OrganisationDetails extends VerticalLayout implements
-        Button.ClickListener {
+public class OrganisationDetails extends VerticalLayout implements Button.ClickListener {
 
     private final MainLayout main;
     private final GridLayout grid;
@@ -67,6 +66,7 @@ public class OrganisationDetails extends VerticalLayout implements
         heading.setStyleName(ValoTheme.LABEL_COLORED);
         heading.setSizeFull();
 
+
         setReadFormProperties();
 
         grid = new GridLayout(4, 10);
@@ -77,7 +77,7 @@ public class OrganisationDetails extends VerticalLayout implements
 
 
 
-        Set<Person> admins = PeopleFacade.personService.getPersonsWithRole(organisation.getId(), RolesValues.ORG_ADMIN.name());
+        Set<Person> admins = PeopleFacade.personService.getPersonsWithRole(organisation.getId(),RolesValues.ORG_ADMIN.name());
 
 
         if (admins.size() == 0) {
@@ -91,6 +91,7 @@ public class OrganisationDetails extends VerticalLayout implements
                 removeAllComponents();
                 addComponent(new OrganisationAdminForm(main, organisation));
             });
+
 
         }
         if (admins.size() > 0) {
@@ -161,7 +162,7 @@ public class OrganisationDetails extends VerticalLayout implements
         form.imageUploader.image.setVisible(true);
         form.imageUploader.image.setHeight(175.0f, Unit.PIXELS);
         form.imageUploader.image.setWidth(100.0f, Unit.PERCENTAGE);
-        form.save.setVisible(false);
+        form.save.setVisible(true);
         form.edit.setVisible(true);
         form.cancel.setVisible(true);
         form.delete.setVisible(true);

@@ -14,6 +14,7 @@ import infoshare.app.util.organisation.OrganisationUtil;
 import infoshare.app.util.security.PasswordHash;
 import infoshare.app.util.security.SecurityService;
 import infoshare.viewUI.container.MainLayout;
+import infoshare.viewUI.container.account.model.AdminModel;
 import infoshare.viewUI.container.users.UserManagementMenu;
 import infoshare.viewUI.container.users.model.UserModel;
 import infoshare.domain.demographics.Role;
@@ -51,9 +52,12 @@ public class UserForm extends FormLayout implements Button.ClickListener  {
 
         TextField firstName = UIComponent.getGridTextField("First Name :", "firstName", UserModel.class, binder);
         TextField middlename = UIComponent.getGridTextField("Middle Name :", "middleName", UserModel.class, binder);
+        TextField password = UIComponent.getGridTextField("Password :", "password", AdminModel.class, binder);
         TextField lastname = UIComponent.getGridTextField("Last Name:", "lastName", UserModel.class, binder);
         TextField emailAddress = UIComponent.getGridTextField("Email Address :", "emailAddress", UserModel.class, binder);
+
         ComboBox role = UIComboBox.getUploadComboBox("Select Role :", "role", UserModel.class, binder);
+
         role.setPageLength(4);
         for (Role role1: DemographicsFacade.rolesListService.findAll().stream()
                 .filter(rol -> rol.getState().equalsIgnoreCase(DomainState.ACTIVE.name())).collect(Collectors.toSet())){
@@ -74,6 +78,7 @@ public class UserForm extends FormLayout implements Button.ClickListener  {
         grid.addComponent(emailAddress, 1, 1);
         //3rd ROW
         grid.addComponent(role, 0, 2);
+        grid.addComponent(password,1,2);
 
         HorizontalLayout buttons = ButtonsHelper.getButtons(save, edit, cancel, update, delete);
         buttons.setSizeFull();
@@ -118,12 +123,16 @@ public class UserForm extends FormLayout implements Button.ClickListener  {
 
         final UserModel bean = ((BeanItem<UserModel>) binder.getItemDataSource()).getBean();
 
-        final String password = SecurityService.generateRandomPassword();
+
+        //final String password = SecurityService.generateRandomPassword();
         Map<String, String> stringVals = new HashMap<>();
+
+        String password = "admin";
         stringVals.put("firstName", bean.getFirstName());
         stringVals.put("middleName", bean.getMiddleName());
         stringVals.put("lastName", bean.getLastName());
-        stringVals.put("authvalue", PasswordHash.createEncryptedPassword(password));
+        stringVals.put("authvalue", password);
+        //stringVals.put("password", bean.getPassword());
         stringVals.put("emailAddress", bean.getEmailAddress());
         stringVals.put("org", OrganisationUtil.getCompanyCode());
         stringVals.put("role",bean.getRole());

@@ -14,6 +14,7 @@ public class Person implements Serializable, Comparable<Person> {
     private String emailAddress;
     private String lastName;
     private String authvalue;
+    private String password;
     private Boolean enabled;
     private Boolean accountNonExpired;
     private Boolean credentialsNonExpired;
@@ -53,6 +54,8 @@ public class Person implements Serializable, Comparable<Person> {
         return authvalue;
     }
 
+    public String getPassword() {return password;}
+
     public Boolean getEnabled() {
         return enabled;
     }
@@ -81,6 +84,7 @@ public class Person implements Serializable, Comparable<Person> {
         this.lastName = builder.lastName;
         this.emailAddress = builder.emailAddress;
         this.authvalue = builder.authvalue;
+        this.password = builder.password;
         this.enabled = builder.enabled;
         this.accountNonExpired = builder.accountNonExpired;
         this.accountNonLocked = builder.accountNonLocked;
@@ -96,6 +100,7 @@ public class Person implements Serializable, Comparable<Person> {
         private String lastName;
         private String emailAddress;
         private String authvalue;
+        private String password;
         private Boolean enabled;
         private Boolean accountNonExpired;
         private Boolean credentialsNonExpired;
@@ -163,6 +168,12 @@ public class Person implements Serializable, Comparable<Person> {
 
         }
 
+        public Builder password(String value) {
+            this.password = value;
+            return this;
+
+        }
+
         public Builder copy(Person value) {
             this.enabled = value.enabled;
             this.accountNonExpired = value.accountNonExpired;
@@ -175,6 +186,7 @@ public class Person implements Serializable, Comparable<Person> {
             this.lastName = value.lastName;
             this.emailAddress = value.emailAddress;
             this.authvalue = value.authvalue;
+            this.password = value.password;
             this.state = value.state;
             return this;
         }

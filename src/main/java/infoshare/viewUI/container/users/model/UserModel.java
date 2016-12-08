@@ -10,6 +10,7 @@ public class UserModel implements Serializable {
     @NotNull
     private String firstName;
     private String middleName;
+    private String password;
     @NotNull
     private String emailAddress;
     @NotNull
@@ -46,6 +47,14 @@ public class UserModel implements Serializable {
 
     public void setMiddleName(String middleName) {
         this.middleName = middleName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getEmailAddress() {
